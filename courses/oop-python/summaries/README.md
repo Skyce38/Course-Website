@@ -5,3 +5,5 @@
 [เปิดหมวดนี้บน GitHub](https://github.com/Skyce38/learning/tree/main/courses/oop-python/summaries) · [กลับหน้าเว็บวิชา](https://skyce38.github.io/learning/#course/oop-python/summaries)
 
 เพิ่มไฟล์ประเภทนี้ไว้ในโฟลเดอร์เดียวกับ README นี้
+
+- [สรุป Final Python · ไฟล์ต้นฉบับจาก python-final](./original-notes.md)

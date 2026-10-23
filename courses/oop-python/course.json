@@ -1,6 +1,6 @@
 {
   "id": "oop-python",
-  "name": "OOP & Data Structures",
+  "name": "Python Final · OOP & Data Structures",
   "thai": "การเขียนโปรแกรมเชิงวัตถุและโครงสร้างข้อมูล",
   "short": "PY",
   "repo": "learning",
@@ -9,6 +9,7 @@
   "tags": [
     "Python",
     "OOP",
+    "Final",
     "Data Structures"
   ],
   "description": "จากคลาสและออบเจกต์ สู่ Linked List, Stack, Queue, Sorting และ Hash Table",

@@ -43,7 +43,7 @@ learning/
 
 ## เนื้อหาที่นำเข้าแล้ว
 
-- OOP/Python: สรุป Week 10–15 และข้อฝึกปรนัย 20 ข้อ
+- Python Final / OOP: สรุป Week 10–15, โน้ตต้นฉบับจาก python-final และข้อฝึกปรนัย 20 ข้อ
 - AI: สรุป Midterm + Final และชีททวนเร็ว
 - Unix Tools: สรุป Midterm/Final บทวิเคราะห์การบ้าน และข้อฝึกปรนัย 40 ข้อ
 - Database, IoT และ Statistics/R: เตรียมโครงสร้างหมวดไว้แล้ว

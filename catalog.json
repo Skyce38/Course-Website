@@ -4,7 +4,7 @@
   "courses": [
     {
       "id": "oop-python",
-      "name": "OOP & Data Structures",
+      "name": "Python Final · OOP & Data Structures",
       "thai": "การเขียนโปรแกรมเชิงวัตถุและโครงสร้างข้อมูล",
       "short": "PY",
       "repo": "learning",
@@ -13,6 +13,7 @@
       "tags": [
         "Python",
         "OOP",
+        "Final",
         "Data Structures"
       ],
       "description": "จากคลาสและออบเจกต์ สู่ Linked List, Stack, Queue, Sorting และ Hash Table",
@@ -234,6 +235,16 @@
       "format": "MD",
       "reader": "read/unix-tools/practice-40.html",
       "github": "https://github.com/Skyce38/learning/blob/main/courses/unix-tools/exams/practice-40.md"
+    },
+    {
+      "id": "oop-python-original-notes",
+      "course": "oop-python",
+      "category": "summaries",
+      "title": "สรุป Final Python · ไฟล์ต้นฉบับจาก python-final",
+      "scope": "Final",
+      "path": "summaries/original-notes.md",
+      "format": "MD",
+      "github": "https://github.com/Skyce38/learning/blob/main/courses/oop-python/summaries/original-notes.md"
     }
   ]
 }
