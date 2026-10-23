@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ตั้งค่า · Course Website</title>
+  <link rel="stylesheet" href="assets/foundation.css"><link rel="stylesheet" href="assets/preferences.css">
+  <script src="assets/preferences.js"></script><script src="assets/i18n.js"></script><script src="assets/settings.js" defer></script>
+</head>
+<body class="foundation">
+  <header class="foundation-header"><a class="brand" href="./"><span class="brand-symbol">AAI</span><strong>Course Website</strong></a><button class="icon-button" id="theme">◐</button></header>
+  <main class="foundation-content settings-content">
+    <a class="back-link" href="./" data-i18n="backLibrary">← กลับคลังเรียน</a>
+    <p class="eyebrow">MAKE ROOM FOR LEARNING</p>
+    <h1 data-i18n="settings">ตั้งค่า</h1>
+    <p class="small-note" data-i18n="savedAutomatically">บันทึกอัตโนมัติในเบราว์เซอร์นี้ ใช้ร่วมกันทุกหน้าอ่าน</p>
+    <section class="settings-card" aria-labelledby="appearance-heading">
+      <h2 id="appearance-heading" data-i18n="appearance">รูปลักษณ์</h2>
+      <label class="setting-row"><span data-i18n="colorMode">โหมดสี</span><select id="setting-theme" data-preference="theme"><option value="light" data-i18n="light">สว่าง</option><option value="dark" data-i18n="dark">มืด</option></select></label>
+      <div class="theme-tools"><h3 id="theme-gallery-heading" data-i18n="themeGallery">แกลเลอรีธีม</h3><button type="button" class="icon-button" id="theme-reset" data-i18n="resetTheme">คืนค่าธีมเริ่มต้น</button></div>
+      <p class="small-note" data-i18n="themeGalleryNote">เลือกชุดสีสำหรับทั้งเว็บไซต์และหน้าอ่านเอกสาร</p>
+      <div id="theme-gallery" class="theme-gallery" role="group" aria-labelledby="theme-gallery-heading"></div>
+      <details class="custom-theme" id="custom-theme">
+        <summary data-i18n="customTheme">กำหนดธีมเอง</summary>
+        <p class="small-note" data-i18n="customContrastNote">สีจะปรับตามโหมดและความคมชัด เพื่อให้อ่านได้ชัดเจน สีหลักและพื้นผิวที่แสดงอาจต่างจากสีที่เลือก</p>
+        <label class="setting-row"><span data-i18n="primaryColor">สีหลัก</span><output id="custom-primary-value" for="custom-primary"></output><input type="color" id="custom-primary" data-custom="primary" value="#285f4b"></label>
+        <label class="setting-row"><span data-i18n="backgroundColor">สีพื้นหลัง</span><output id="custom-background-value" for="custom-background"></output><input type="color" id="custom-background" data-custom="background" value="#f5f5ee"></label>
+        <label class="setting-row"><span data-i18n="surfaceColor">สีพื้นผิว</span><output id="custom-surface-value" for="custom-surface"></output><input type="color" id="custom-surface" data-custom="surface" value="#fffefa"></label>
+      </details>
+      <label class="setting-row"><span data-i18n="fontSize">ขนาดตัวอักษรอ่าน</span><select id="setting-font" data-preference="font"><option value="14">14 px</option><option value="15">15 px</option><option value="16">16 px</option><option value="17">17 px</option><option value="18">18 px</option><option value="19">19 px</option><option value="20">20 px</option><option value="21">21 px</option><option value="22">22 px</option></select></label>
+      <label class="setting-row"><span data-i18n="readingWidth">ความกว้างหน้าอ่าน</span><select id="setting-width" data-preference="width"><option value="narrow" data-i18n="narrow">แคบ</option><option value="comfortable" data-i18n="comfortable">พอดี</option><option value="wide" data-i18n="wide">กว้าง</option></select></label>
+      <div class="settings-preview prose"><strong data-i18n="preview">ตัวอย่างการอ่าน</strong><p data-i18n="previewText">พื้นที่อ่านที่สบาย ช่วยให้โฟกัสกับสิ่งที่กำลังเรียน</p><a href="read/unix-tools/midterm.html" data-i18n="tryReader">ลองเปิดหน้าอ่าน →</a></div>
+    </section>
+    <section class="settings-card" aria-labelledby="language-heading">
+      <h2 id="language-heading" data-i18n="language">ภาษา</h2>
+      <label class="setting-row"><span data-i18n="language">ภาษา</span><select id="setting-language" data-preference="language"><option value="th">ไทย</option><option value="en">English</option></select></label>
+      <p class="small-note" data-i18n="uiOnly">เปลี่ยนเฉพาะภาษาเมนู เนื้อหารายวิชาใช้ภาษาต้นฉบับ</p>
+    </section>
+    <section class="settings-card" aria-labelledby="documents-heading">
+      <h2 id="documents-heading" data-i18n="documents">เอกสาร</h2>
+      <label class="setting-row"><span data-i18n="defaultZoom">ซูม PDF เริ่มต้น</span><select id="setting-pdfZoom" data-preference="pdfZoom"><option value="page-width" data-i18n="fitWidth">พอดีความกว้าง</option><option value="100">100%</option><option value="125">125%</option><option value="150">150%</option></select></label>
+      <label class="setting-row"><span data-i18n="nativeToolbar">แสดงแถบเครื่องมือ PDF</span><input type="checkbox" id="setting-pdfToolbar" data-preference="pdfToolbar"></label>
+      <p class="small-note" data-i18n="nativePDFNote">ใช้ตัวอ่าน PDF ของเบราว์เซอร์ การซูมและเปลี่ยนหน้าขึ้นอยู่กับเบราว์เซอร์ หากปุ่มไม่ตอบสนอง ให้ใช้แถบเครื่องมือในเอกสาร</p>
+    </section>
+    <section class="settings-card" aria-labelledby="data-heading">
+      <h2 id="data-heading" data-i18n="data">จัดการการตั้งค่า</h2>
+      <p class="small-note" data-i18n="dataNote">ส่งออกเฉพาะการตั้งค่า ไม่รวมรายการบันทึกหรือความคืบหน้าแบบทดสอบ การคืนค่าจะไม่ลบข้อมูลเหล่านี้</p>
+      <div class="settings-actions">
+        <button id="settings-export" class="icon-button" data-i18n="export">ส่งออกการตั้งค่า</button>
+        <button id="settings-import" class="icon-button" data-i18n="import">นำเข้าการตั้งค่า</button>
+        <button id="settings-reset" class="icon-button" data-i18n="reset">คืนค่าเริ่มต้น</button>
+        <input type="file" id="settings-file" accept=".json,application/json" aria-label="Import preferences JSON" hidden>
+      </div>
+    </section>
+    <p id="settings-status" class="small-note" role="status" aria-live="polite"></p>
+  </main>
+</body>
+</html>

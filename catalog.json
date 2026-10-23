@@ -156,7 +156,7 @@
       "scope": "Final",
       "path": "exams/practice-20.md",
       "format": "QUIZ",
-      "url": "https://skyce38.github.io/Course-Website/courses/oop-python/#quiz",
+      "url": "./courses/oop-python/#quiz",
       "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/exams/practice-20.md"
     },
     {
@@ -167,7 +167,7 @@
       "scope": "Final",
       "path": "tutoring/README.md",
       "format": "WEB",
-      "url": "https://skyce38.github.io/Course-Website/courses/oop-python/",
+      "url": "./courses/oop-python/",
       "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/tutoring/README.md"
     },
     {
@@ -237,14 +237,130 @@
       "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/unix-tools/exams/practice-40.md"
     },
     {
-      "id": "oop-python-original-notes",
+      "id": "oop-python-slides/Week1.pdf",
       "course": "oop-python",
-      "category": "summaries",
-      "title": "สรุป Final Python · ไฟล์ต้นฉบับจาก python-final",
-      "scope": "Final",
-      "path": "summaries/original-notes.md",
-      "format": "MD",
-      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/summaries/original-notes.md"
+      "category": "slides",
+      "title": "Week1",
+      "path": "slides/Week1.pdf",
+      "format": "PDF",
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/slides/Week1.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week2.pdf",
+      "course": "oop-python",
+      "category": "slides",
+      "title": "Week2",
+      "path": "slides/Week2.pdf",
+      "format": "PDF",
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/slides/Week2.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week3.pdf",
+      "course": "oop-python",
+      "category": "slides",
+      "title": "Week3",
+      "path": "slides/Week3.pdf",
+      "format": "PDF",
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/slides/Week3.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week4.pdf",
+      "course": "oop-python",
+      "category": "slides",
+      "title": "Week4",
+      "path": "slides/Week4.pdf",
+      "format": "PDF",
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/slides/Week4.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week5.pdf",
+      "course": "oop-python",
+      "category": "slides",
+      "title": "Week5",
+      "path": "slides/Week5.pdf",
+      "format": "PDF",
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/slides/Week5.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week6.pdf",
+      "course": "oop-python",
+      "category": "slides",
+      "title": "Week6",
+      "path": "slides/Week6.pdf",
+      "format": "PDF",
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/slides/Week6.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week7.pdf",
+      "course": "oop-python",
+      "category": "slides",
+      "title": "Week7",
+      "path": "slides/Week7.pdf",
+      "format": "PDF",
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/slides/Week7.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week8.pdf",
+      "course": "oop-python",
+      "category": "slides",
+      "title": "Week8",
+      "path": "slides/Week8.pdf",
+      "format": "PDF",
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/slides/Week8.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week10.pdf",
+      "course": "oop-python",
+      "category": "slides",
+      "title": "Week10",
+      "path": "slides/Week10.pdf",
+      "format": "PDF",
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/slides/Week10.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week11.pdf",
+      "course": "oop-python",
+      "category": "slides",
+      "title": "Week11",
+      "path": "slides/Week11.pdf",
+      "format": "PDF",
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/slides/Week11.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week12.pdf",
+      "course": "oop-python",
+      "category": "slides",
+      "title": "Week12",
+      "path": "slides/Week12.pdf",
+      "format": "PDF",
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/slides/Week12.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week13.pdf",
+      "course": "oop-python",
+      "category": "slides",
+      "title": "Week13",
+      "path": "slides/Week13.pdf",
+      "format": "PDF",
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/slides/Week13.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week14.pdf",
+      "course": "oop-python",
+      "category": "slides",
+      "title": "Week14",
+      "path": "slides/Week14.pdf",
+      "format": "PDF",
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/slides/Week14.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week15.pdf",
+      "course": "oop-python",
+      "category": "slides",
+      "title": "Week15",
+      "path": "slides/Week15.pdf",
+      "format": "PDF",
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/slides/Week15.pdf"
     }
   ]
 }
