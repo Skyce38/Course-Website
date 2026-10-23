@@ -1,6 +1,6 @@
 # ชื่อวิชา
 
-[กลับคลังเรียน](https://skyce38.github.io/learning/)
+[กลับคลังเรียน](https://skyce38.github.io/Course-Website/)
 
 ## หมวด
 

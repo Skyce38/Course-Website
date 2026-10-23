@@ -1,6 +1,6 @@
-# Python Final · OOP & Data Structures
+# Python · OOP & Data Structures
 
-คลังวิชาอยู่ใน repository กลาง: [เปิดโฟลเดอร์วิชานี้บน GitHub](https://github.com/Skyce38/learning/tree/main/courses/oop-python) · [เปิดเว็บอ่าน](https://skyce38.github.io/learning/#course/oop-python)
+คลังวิชาอยู่ใน repository กลาง: [เปิดโฟลเดอร์วิชานี้บน GitHub](https://github.com/Skyce38/Course-Website/tree/main/courses/oop-python) · [เปิดเว็บอ่าน](https://skyce38.github.io/Course-Website/#course/oop-python)
 
 เอกสารทั้งหมดจัดตามประเภทไว้ในโฟลเดอร์ด้านล่าง
 

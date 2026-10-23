@@ -1,6 +1,6 @@
 # Database Management
 
-คลังวิชาอยู่ใน repository กลาง: [เปิดโฟลเดอร์วิชานี้บน GitHub](https://github.com/Skyce38/learning/tree/main/courses/database-management) · [เปิดเว็บอ่าน](https://skyce38.github.io/learning/#course/database-management)
+คลังวิชาอยู่ใน repository กลาง: [เปิดโฟลเดอร์วิชานี้บน GitHub](https://github.com/Skyce38/Course-Website/tree/main/courses/database-management) · [เปิดเว็บอ่าน](https://skyce38.github.io/Course-Website/#course/database-management)
 
 เอกสารทั้งหมดจัดตามประเภทไว้ในโฟลเดอร์ด้านล่าง
 

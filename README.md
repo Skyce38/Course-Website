@@ -1,22 +1,22 @@
-# คลังเรียน · Skyce38
+# คลังCourse Website
 
-[เปิดเว็บคลังเรียน](https://skyce38.github.io/learning/)
+[เปิดเว็บคลังเรียน](https://skyce38.github.io/Course-Website/)
 
 คลังทุกวิชาอยู่ใน repository นี้ จัดตามวิชาและประเภทเอกสาร เปิดอ่านหรือเพิ่มไฟล์ได้จากที่เดียว
 
 ## วิชา
 
-- [OOP & Data Structures](courses/oop-python/README.md) · [เปิดหน้าอ่าน](https://skyce38.github.io/learning/#course/oop-python)
-- [Artificial Intelligence](courses/artificial-intelligence/README.md) · [เปิดหน้าอ่าน](https://skyce38.github.io/learning/#course/artificial-intelligence)
-- [Unix Tools & Programming](courses/unix-tools/README.md) · [เปิดหน้าอ่าน](https://skyce38.github.io/learning/#course/unix-tools)
-- [Database Management](courses/database-management/README.md) · [เปิดหน้าอ่าน](https://skyce38.github.io/learning/#course/database-management)
-- [Electronics & Internet of Things](courses/internet-of-things/README.md) · [เปิดหน้าอ่าน](https://skyce38.github.io/learning/#course/internet-of-things)
-- [Statistics & R](courses/statistics-r/README.md) · [เปิดหน้าอ่าน](https://skyce38.github.io/learning/#course/statistics-r)
+- [OOP & Data Structures](courses/oop-python/README.md) · [เปิดหน้าอ่าน](https://skyce38.github.io/Course-Website/#course/oop-python)
+- [Artificial Intelligence](courses/artificial-intelligence/README.md) · [เปิดหน้าอ่าน](https://skyce38.github.io/Course-Website/#course/artificial-intelligence)
+- [Unix Tools & Programming](courses/unix-tools/README.md) · [เปิดหน้าอ่าน](https://skyce38.github.io/Course-Website/#course/unix-tools)
+- [Database Management](courses/database-management/README.md) · [เปิดหน้าอ่าน](https://skyce38.github.io/Course-Website/#course/database-management)
+- [Electronics & Internet of Things](courses/internet-of-things/README.md) · [เปิดหน้าอ่าน](https://skyce38.github.io/Course-Website/#course/internet-of-things)
+- [Statistics & R](courses/statistics-r/README.md) · [เปิดหน้าอ่าน](https://skyce38.github.io/Course-Website/#course/statistics-r)
 
 ## โครงสร้าง
 
 ```text
-learning/
+Course-Website/
 ├── index.html
 ├── catalog.json
 ├── courses/

@@ -1,6 +1,6 @@
 # Artificial Intelligence
 
-คลังวิชาอยู่ใน repository กลาง: [เปิดโฟลเดอร์วิชานี้บน GitHub](https://github.com/Skyce38/learning/tree/main/courses/artificial-intelligence) · [เปิดเว็บอ่าน](https://skyce38.github.io/learning/#course/artificial-intelligence)
+คลังวิชาอยู่ใน repository กลาง: [เปิดโฟลเดอร์วิชานี้บน GitHub](https://github.com/Skyce38/Course-Website/tree/main/courses/artificial-intelligence) · [เปิดเว็บอ่าน](https://skyce38.github.io/Course-Website/#course/artificial-intelligence)
 
 เอกสารทั้งหมดจัดตามประเภทไว้ในโฟลเดอร์ด้านล่าง
 

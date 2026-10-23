@@ -1,13 +1,13 @@
 {
-  "title": "เรียน · Skyce38",
+  "title": "Course Website",
   "owner": "Skyce38",
   "courses": [
     {
       "id": "oop-python",
-      "name": "Python Final · OOP & Data Structures",
+      "name": "Python · OOP & Data Structures",
       "thai": "การเขียนโปรแกรมเชิงวัตถุและโครงสร้างข้อมูล",
       "short": "PY",
-      "repo": "learning",
+      "repo": "Course-Website",
       "code": "89022367",
       "color": "#265d4d",
       "tags": [
@@ -25,7 +25,7 @@
       "name": "Artificial Intelligence",
       "thai": "ปัญญาประดิษฐ์",
       "short": "AI",
-      "repo": "learning",
+      "repo": "Course-Website",
       "code": "",
       "color": "#796042",
       "tags": [
@@ -42,7 +42,7 @@
       "name": "Unix Tools & Programming",
       "thai": "เครื่องมือและการเขียนโปรแกรม Unix",
       "short": "$_",
-      "repo": "learning",
+      "repo": "Course-Website",
       "code": "88624159",
       "color": "#4e6478",
       "tags": [
@@ -59,7 +59,7 @@
       "name": "Database Management",
       "thai": "การจัดการฐานข้อมูล",
       "short": "DB",
-      "repo": "learning",
+      "repo": "Course-Website",
       "code": "",
       "color": "#795d71",
       "tags": [
@@ -75,7 +75,7 @@
       "name": "Electronics & Internet of Things",
       "thai": "อิเล็กทรอนิกส์พื้นฐานและอินเทอร์เน็ตของสรรพสิ่ง",
       "short": "IoT",
-      "repo": "learning",
+      "repo": "Course-Website",
       "code": "",
       "color": "#96703e",
       "tags": [
@@ -92,7 +92,7 @@
       "name": "Statistics & R",
       "thai": "สถิติและภาษา R",
       "short": "R",
-      "repo": "learning",
+      "repo": "Course-Website",
       "code": "",
       "color": "#54705f",
       "tags": [
@@ -146,7 +146,7 @@
       "path": "summaries/final-week10-15.md",
       "format": "MD",
       "reader": "read/oop-python/final-week10-15.html",
-      "github": "https://github.com/Skyce38/learning/blob/main/courses/oop-python/summaries/final-week10-15.md"
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/summaries/final-week10-15.md"
     },
     {
       "id": "oop-python-practice",
@@ -156,8 +156,8 @@
       "scope": "Final",
       "path": "exams/practice-20.md",
       "format": "QUIZ",
-      "url": "https://skyce38.github.io/python-final/#quiz",
-      "github": "https://github.com/Skyce38/learning/blob/main/courses/oop-python/exams/practice-20.md"
+      "url": "https://skyce38.github.io/Course-Website/courses/oop-python/#quiz",
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/exams/practice-20.md"
     },
     {
       "id": "oop-python-web",
@@ -167,8 +167,8 @@
       "scope": "Final",
       "path": "tutoring/README.md",
       "format": "WEB",
-      "url": "https://skyce38.github.io/python-final/",
-      "github": "https://github.com/Skyce38/learning/blob/main/courses/oop-python/tutoring/README.md"
+      "url": "https://skyce38.github.io/Course-Website/courses/oop-python/",
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/tutoring/README.md"
     },
     {
       "id": "artificial-intelligence-midterm-final",
@@ -179,7 +179,7 @@
       "path": "summaries/midterm-final.md",
       "format": "MD",
       "reader": "read/artificial-intelligence/midterm-final.html",
-      "github": "https://github.com/Skyce38/learning/blob/main/courses/artificial-intelligence/summaries/midterm-final.md"
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/artificial-intelligence/summaries/midterm-final.md"
     },
     {
       "id": "artificial-intelligence-quick-review",
@@ -190,7 +190,7 @@
       "path": "tutoring/quick-review.md",
       "format": "MD",
       "reader": "read/artificial-intelligence/quick-review.html",
-      "github": "https://github.com/Skyce38/learning/blob/main/courses/artificial-intelligence/tutoring/quick-review.md"
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/artificial-intelligence/tutoring/quick-review.md"
     },
     {
       "id": "unix-tools-midterm",
@@ -201,7 +201,7 @@
       "path": "summaries/midterm.md",
       "format": "MD",
       "reader": "read/unix-tools/midterm.html",
-      "github": "https://github.com/Skyce38/learning/blob/main/courses/unix-tools/summaries/midterm.md"
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/unix-tools/summaries/midterm.md"
     },
     {
       "id": "unix-tools-final",
@@ -212,7 +212,7 @@
       "path": "summaries/final.md",
       "format": "MD",
       "reader": "read/unix-tools/final.html",
-      "github": "https://github.com/Skyce38/learning/blob/main/courses/unix-tools/summaries/final.md"
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/unix-tools/summaries/final.md"
     },
     {
       "id": "unix-tools-final-homework-analysis",
@@ -223,7 +223,7 @@
       "path": "assignments/final-homework-analysis.md",
       "format": "MD",
       "reader": "read/unix-tools/final-homework-analysis.html",
-      "github": "https://github.com/Skyce38/learning/blob/main/courses/unix-tools/assignments/final-homework-analysis.md"
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/unix-tools/assignments/final-homework-analysis.md"
     },
     {
       "id": "unix-tools-practice-40",
@@ -234,7 +234,7 @@
       "path": "exams/practice-40.md",
       "format": "MD",
       "reader": "read/unix-tools/practice-40.html",
-      "github": "https://github.com/Skyce38/learning/blob/main/courses/unix-tools/exams/practice-40.md"
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/unix-tools/exams/practice-40.md"
     },
     {
       "id": "oop-python-original-notes",
@@ -244,7 +244,7 @@
       "scope": "Final",
       "path": "summaries/original-notes.md",
       "format": "MD",
-      "github": "https://github.com/Skyce38/learning/blob/main/courses/oop-python/summaries/original-notes.md"
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/summaries/original-notes.md"
     }
   ]
 }

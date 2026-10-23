@@ -1,9 +1,9 @@
 {
   "id": "oop-python",
-  "name": "Python Final · OOP & Data Structures",
+  "name": "Python · OOP & Data Structures",
   "thai": "การเขียนโปรแกรมเชิงวัตถุและโครงสร้างข้อมูล",
   "short": "PY",
-  "repo": "learning",
+  "repo": "Course-Website",
   "code": "89022367",
   "color": "#265d4d",
   "tags": [
