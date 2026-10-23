@@ -120,6 +120,12 @@
       button.setAttribute('aria-pressed', String(root.dataset.theme === 'dark'));
       button.title = button.getAttribute('aria-label');
     });
+    document.querySelectorAll('#language-toggle').forEach(button => {
+      button.textContent = value.language.toUpperCase();
+      button.setAttribute('aria-pressed',String(value.language === 'en'));
+      button.setAttribute('aria-label',value.language === 'th' ? 'เปลี่ยนภาษาเป็นอังกฤษ' : 'Switch to Thai');
+      button.title = button.getAttribute('aria-label');
+    });
     document.querySelectorAll('#font-value, #font-size').forEach(node => node.textContent = value.font);
     document.dispatchEvent(new CustomEvent('preferenceschange', {detail: {...value}}));
   }
@@ -151,7 +157,14 @@
         toolbar.append(link);
       }
     }
-    document.querySelectorAll('#theme, #theme-toggle').forEach(button => button.onclick = cycleTheme);
+    document.querySelectorAll('#theme, #theme-toggle').forEach(button => {
+      button.onclick = cycleTheme;
+      const language = document.createElement('button');
+      language.id = 'language-toggle'; language.type = 'button'; language.className = button.className;
+      language.onclick = () => update({language:value.language === 'th' ? 'en' : 'th'});
+      const group = document.createElement('span'); group.className = 'quick-preferences';
+      button.before(group); group.append(button,language);
+    });
     apply();
   });
 })();

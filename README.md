@@ -57,7 +57,7 @@ Course-Website/
 - PDF ที่เพิ่มในหมวดวิชาจะแสดงผ่าน `pdf.html` มีปุ่มเปลี่ยนหน้า ซูม เปิดโดยตรง ดาวน์โหลด และลองใหม่เมื่อโหลดไม่ได้
 - ส่งออก/นำเข้าการตั้งค่าเป็น JSON ที่ตรวจสอบรูปแบบก่อนใช้งาน คืนค่าเริ่มต้นได้โดยไม่ลบบุ๊กมาร์กหรือความคืบหน้าแบบทดสอบ
 
-การตั้งค่าบันทึกด้วย `localStorage` ในเบราว์เซอร์ ไม่ส่งข้อมูลออกไป หากปิดการจัดเก็บจะใช้การตั้งค่าได้เฉพาะแท็บนั้น GitHub sync ใช้ public API พร้อมแคช 10 นาทีและรายการเดิมเมื่อเชื่อมต่อไม่ได้ บุ๊กมาร์กไฟล์ที่ค้นพบจาก GitHub เรียกคืนจากแคชได้หลังรีโหลด
+การตั้งค่าบันทึกด้วย `localStorage` ในเบราว์เซอร์ ไม่ส่งข้อมูลออกไป หากปิดการจัดเก็บจะใช้การตั้งค่าได้เฉพาะแท็บนั้น GitHub sync ใช้ public API แสดงแคชทันที แล้วตรวจรายการล่าสุดทั้งคลังหนึ่งครั้งต่อการเปิดหน้า โดยใช้รายการเดิมเมื่อเชื่อมต่อไม่ได้ บุ๊กมาร์กไฟล์ที่ค้นพบจาก GitHub เรียกคืนจากแคชได้หลังรีโหลด
 
 OOP → Slides มี PDF จริง 14 ไฟล์: Week1–Week8 และ Week10–Week15 (ไม่มี Week9) เพิ่มไฟล์ `.pdf` ใน `courses/<วิชา>/<หมวด>/` แล้วรัน `node scripts/build.cjs` เพื่อค้นหาไฟล์และเพิ่มเข้า catalog โดยไม่เปลี่ยนชื่อหรือแก้ PDF; หลังเผยแพร่ GitHub sync ยังดึงไฟล์ใหม่ได้ตามเดิมและไม่แสดงซ้ำ ตัวอ่านใช้ PDF.js ที่จัดเก็บในเว็บไซต์ เพื่อบันทึกหน้า ซูม และตำแหน่งเลื่อนอัตโนมัติ พร้อมแสดงจำนวนหน้าจริง เปิดตัวอ่านของเบราว์เซอร์หรือดาวน์โหลดได้เสมอ หากใช้ตัวอ่านสำรองจะบันทึกได้เฉพาะคำสั่งหน้า/ซูมจากปุ่มของเว็บไซต์
 
@@ -94,3 +94,5 @@ node scripts/check.cjs
 Recent documents resume PDF page, zoom and scroll position, or an HTML section and scroll offset. Positions are local to this browser, saved every 400 ms and flushed on leaving; use **Reset reading position** in a reader to start over without changing completion. PDF.js 6.4.299 is bundled locally under `assets/vendor/pdfjs/` (Apache-2.0 and included asset licenses); no CDN, build step or paid service is required. Native viewer and download remain available. Native internal scrolling/page changes are unavailable to the site; only site controls can save position in that fallback.
 
 Synced PDFs use local files first. If a file is absent in local preview, the reader fetches only its validated PDF path from `Skyce38/Course-Website` on GitHub `main`, checks HTTP status, CORS, MIME type and the PDF signature, and uses a PDF Blob for viewing/download. The canonical document ID and reading position remain the same. Remote-only files require internet; blocked/unavailable files retain direct-open/download links and Retry.
+
+Shared UI scripts/styles use `?v=phase2-hotfix-1` to prevent cached dictionaries from mixing with newer markup. Bump the shared release version in HTML and its check when changing these assets. The category-tab ↻ button forces a library-wide file refresh; the header TH/EN button shares the existing language preference.

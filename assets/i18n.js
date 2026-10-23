@@ -2,6 +2,7 @@
 (() => {
   'use strict';
   const strings = {
+    refreshFiles: ['รีเฟรชรายการไฟล์', 'Refresh files'],
     resetReadingPosition: ['เริ่มอ่านใหม่', 'Reset reading position'],
     resetReadingPositionLabel: ['เริ่มอ่าน {title} ใหม่', 'Reset reading position: {title}'],
     markCompleteLabel: ['ทำเครื่องหมายว่าอ่านจบ: {title}', 'Mark completed: {title}'],
@@ -13,9 +14,9 @@
     pdfDocument: ['เอกสาร PDF', 'PDF document'], pdfPageLabel: ['หน้า {page}', 'Page {page}'],
     nativeViewer: ['ตัวอ่านของเบราว์เซอร์', 'Use native viewer'],
     trackedPDFNote: ['บันทึกหน้า ตำแหน่ง และซูมอัตโนมัติ ตัวอ่านของเบราว์เซอร์บันทึกได้เฉพาะปุ่มด้านบน', 'Page, position and zoom save automatically. Native fallback tracks only the controls above.'],
-    recentReading: ['เอกสารที่เปิดล่าสุด', 'Recently opened'], continueReading: ['อ่านต่อ →', 'Continue reading →'],
+    recentReading: ['เอกสารที่เปิดล่าสุด', 'Recently Opened'], continueReading: ['อ่านต่อ →', 'Continue reading →'],
     historyEmpty: ['เปิดเอกสารเพื่อเริ่มรายการอ่านล่าสุด', 'Open a document to start your reading history.'],
-    studyProgress: ['ความคืบหน้ารายวิชา', 'Study progress'], completedCount: ['เอกสารที่อ่านจบ', 'documents completed'],
+    studyProgress: ['ความคืบหน้ารายวิชา', 'Study Progress'], completedCount: ['เอกสารที่อ่านจบ', 'documents completed'],
     markComplete: ['ทำเครื่องหมายว่าอ่านจบ', 'Mark completed'], documentCompleted: ['✓ อ่านจบแล้ว', '✓ Completed'], markIncomplete: ['ยกเลิกสถานะอ่านจบ', 'Mark not completed'],
     colorMode: ['โหมดสี', 'Color mode'], themeGallery: ['แกลเลอรีธีม', 'Theme gallery'],
     themeGalleryNote: ['เลือกชุดสีสำหรับทั้งเว็บไซต์และหน้าอ่านเอกสาร', 'Choose a palette for the entire website and HTML readers.'],
@@ -73,6 +74,8 @@
   const valuesFor = node => ({title:node.dataset.documentTitle || '',page:node.dataset.page,completed:node.dataset.completed,total:node.dataset.total});
   function translate(text, lang = LearningPreferences.value.language) {
     const clean = text.trim();
+    // Repair legacy DOM text produced by an older bundle; leave document text protected.
+    if (Object.hasOwn(strings,clean)) return text.replace(clean,strings[clean][lang === 'en' ? 1 : 0]);
     const pair = pairs.find(p => p[0] === clean);
     if (pair) return text.replace(clean, pair[lang === 'en' ? 1 : 0]);
     const english = englishLabels.find(p => p[0] === clean);
@@ -113,7 +116,7 @@
       if (result !== node.textContent) node.textContent = result;
     }
     document.querySelectorAll('[aria-label],[title],[placeholder],[aria-valuetext],'+localizedAttributes.map(attr => '[data-i18n-'+attr+']').join(',')).forEach(node => {
-      if ((isProtected(node) && !localizedAttributes.some(attr => node.hasAttribute('data-i18n-'+attr))) || ['theme','theme-toggle'].includes(node.id)) return;
+      if ((isProtected(node) && !localizedAttributes.some(attr => node.hasAttribute('data-i18n-'+attr))) || ['theme','theme-toggle','language-toggle'].includes(node.id)) return;
       let saved = attributes.get(node) || {};
       for (const attr of localizedAttributes) {
         const key = node.getAttribute('data-i18n-'+attr);
