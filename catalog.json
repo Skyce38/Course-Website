@@ -361,6 +361,15 @@
       "path": "slides/Week15.pdf",
       "format": "PDF",
       "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/slides/Week15.pdf"
+    },
+    {
+      "id": "artificial-intelligence-slides/01_intro.pdf",
+      "course": "artificial-intelligence",
+      "category": "slides",
+      "title": "01_intro",
+      "path": "slides/01_intro.pdf",
+      "format": "PDF",
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/artificial-intelligence/slides/01_intro.pdf"
     }
   ]
 }

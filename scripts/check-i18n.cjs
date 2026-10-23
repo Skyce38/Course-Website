@@ -27,7 +27,11 @@ const context = {window:{},document:{addEventListener(){}},LearningPreferences:{
 vm.runInNewContext(source,context);
 assert.equal(context.window.LearningI18n.t('markComplete'),'ทำเครื่องหมายว่าอ่านจบ');
 assert.equal(context.window.LearningI18n.t('resetReadingPosition'),'เริ่มอ่านใหม่');
+assert.equal(context.window.LearningI18n.translate('studyProgress'),'ความคืบหน้ารายวิชา');
+assert.equal(context.window.LearningI18n.translate('recentReading'),'เอกสารที่เปิดล่าสุด');
 assert.equal(context.window.LearningI18n.t('continueReadingLabel',{title:'Week1'}),'อ่านต่อ: Week1');
 context.LearningPreferences.value.language = 'en';
+assert.equal(context.window.LearningI18n.t('recentReading'),'Recently Opened');
+assert.equal(context.window.LearningI18n.t('studyProgress'),'Study Progress');
 assert.equal(context.window.LearningI18n.t('markCompleteLabel',{title:'Week1'}),'Mark completed: Week1');
 console.log(`PASS: ${Object.keys(strings).length} bilingual UI keys, ${count} authored key references, matching placeholders and parameterized accessibility labels`);
