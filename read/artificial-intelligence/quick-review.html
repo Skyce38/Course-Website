@@ -1,0 +1,199 @@
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ชีททวนเร็ว AI ก่อนสอบ · เรียน</title><style>
+:root{--bg:#f5f5ee;--paper:#fffefa;--ink:#243e36;--muted:#748177;--line:#dfe5d8;--accent:#285f4b;--soft:#e8efdd;--gold:#e8d496;--text-size:17px;color-scheme:light}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.8 Tahoma,'Leelawadee UI',sans-serif}button,input,select{font:inherit}a{color:var(--accent);text-underline-offset:4px}button{cursor:pointer;color:inherit}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #b29440;outline-offset:4px}[hidden]{display:none!important}::selection{background:var(--gold);color:#203e31}.sidebar{position:fixed;inset:0 auto 0 0;width:246px;border-right:1px solid var(--line);background:var(--paper);padding:28px 18px;display:flex;flex-direction:column;z-index:60;overflow:auto}.brand{display:flex;gap:11px;align-items:center;text-decoration:none;color:var(--ink);padding:0 11px}.brand-symbol{background:var(--accent);color:#fff;width:40px;height:40px;display:grid;place-items:center;border-radius:12px;font:25px Georgia,serif}.brand strong{display:block;font-size:20px;line-height:1.3}.brand small{display:block;color:var(--muted);font:9px/1.8 monospace;letter-spacing:1.6px}.nav-label,.eyebrow{font:10px/1.6 monospace;letter-spacing:1.8px;color:var(--muted)}.nav-label{margin:35px 12px 12px}.side-link{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--muted);padding:11px 12px;border-radius:9px;font-size:12px;line-height:1.6;margin:3px 0}.side-link:hover,.side-link.active{background:var(--soft);color:var(--accent)}.side-link.active{font-weight:bold}.side-icon{font:12px monospace;width:25px;flex-shrink:0}.side-bottom{margin-top:auto;padding:28px 12px 0;font-size:10px;color:var(--muted)}.side-bottom a{display:block;font-size:11px;margin-top:12px}.workspace{margin-left:246px}.topbar{position:sticky;top:0;z-index:40;height:72px;background:var(--bg);border-bottom:1px solid var(--line);padding:0 42px;display:flex;align-items:center;justify-content:space-between;gap:15px}.breadcrumbs{font-size:11px;color:var(--muted)}.breadcrumbs a{text-decoration:none;color:inherit}.breadcrumbs span{color:var(--ink);margin-left:10px}.top-actions{display:flex;gap:8px;align-items:center}.icon-button{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:7px 12px;min-height:36px;font-size:12px}.menu-button{display:none}.content{max-width:1240px;margin:auto;padding:43px 50px 55px}.eyebrow{color:var(--accent);font-weight:bold}.hero{display:grid;grid-template-columns:1fr 180px;align-items:center;gap:30px;margin:10px 0 29px}.hero h1{font-size:clamp(34px,3.6vw,48px);line-height:1.35;letter-spacing:-1.5px;margin:13px 0 16px}.hero h1 em{font-style:normal;color:var(--accent)}.hero p{max-width:650px;color:var(--muted);font-size:13px;line-height:2}.book-art{height:150px;position:relative;display:flex;align-items:center;justify-content:center}.book-art div{position:absolute;width:100px;height:128px;background:var(--paper);border:1px solid #739077;border-radius:10px;transform:rotate(12deg)}.book-art div+div{transform:rotate(-10deg);background:var(--soft);padding:19px;display:flex;flex-direction:column;justify-content:space-between;font:11px monospace;color:var(--accent)}.book-art b{font:26px Georgia,serif}.book-art small{font:9px/1.6 monospace;letter-spacing:1px}.hero-facts{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.pill{border:1px solid var(--line);background:var(--paper);padding:4px 10px;border-radius:6px;color:var(--muted);font-size:10px}.section-heading{display:flex;justify-content:space-between;align-items:end;margin:30px 0 17px;gap:20px}.section-heading h2{font-size:22px;letter-spacing:-.5px;margin:0}.section-heading p{font-size:11px;color:var(--muted);margin:2px 0}.search-row{display:flex;gap:10px;align-items:center;margin:27px 0}.search-wrap{flex:1;position:relative}.search-wrap span{position:absolute;left:16px;top:11px;color:var(--muted)}#search{width:100%;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:12px 16px 12px 41px;color:var(--ink);font-size:12px}.search-help{color:var(--muted);font-size:10px}.course-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.course-card{display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px;text-decoration:none;color:var(--ink);transition:transform .15s,border-color .15s;min-height:235px}.course-card:hover{transform:translateY(-3px);border-color:var(--accent)}.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}.course-symbol{display:grid;place-items:center;width:44px;height:44px;border-radius:11px;background:color-mix(in srgb,var(--course-color) 11%,var(--paper));color:var(--course-color);font:bold 15px monospace}.card-number{font:10px monospace;color:var(--muted)}.course-card h3{font-size:17px;line-height:1.5;margin:0 0 5px;letter-spacing:-.3px}.course-thai{font-size:10px;color:var(--muted);line-height:1.7;margin:0 0 16px}.card-tags{display:flex;gap:5px;flex-wrap:wrap}.tag{background:var(--bg);border-radius:5px;padding:2px 7px;color:var(--muted);font-size:9px}.card-footer{margin-top:auto;padding-top:20px;display:flex;justify-content:space-between;gap:8px;font-size:10px;color:var(--muted)}.ready{color:var(--accent)}.quick-banner{background:var(--accent);color:white;border-radius:15px;padding:23px 27px;display:flex;align-items:center;justify-content:space-between;gap:20px;margin:28px 0}.quick-banner small{font:9px monospace;letter-spacing:1.5px;opacity:.65}.quick-banner h3{font-size:17px;margin:4px 0}.quick-banner p{font-size:11px;opacity:.75;margin:0}.quick-banner a{background:#ffffffed;color:#285f4b;padding:10px 16px;border-radius:8px;text-decoration:none;font-size:11px;white-space:nowrap}.resource-list{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden}.resource-row{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:15px}.resource-row:last-child{border-bottom:0}.file-icon{height:39px;width:39px;border-radius:9px;background:var(--soft);color:var(--accent);display:grid;place-items:center;font:10px monospace;flex-shrink:0}.resource-main{flex:1;min-width:0}.resource-main>a{color:var(--ink);font-weight:bold;font-size:13px;text-decoration:none;line-height:1.7}.resource-main>a:hover{text-decoration:underline}.resource-meta{color:var(--muted);font-size:10px;margin-top:4px;display:flex;flex-wrap:wrap;gap:9px}.resource-buttons{display:flex;gap:7px;align-items:center}.bookmark{background:none;border:0;padding:6px 8px;color:var(--muted);font-size:20px}.bookmark[aria-pressed=true]{color:#b28d2d}.read-link{font-size:11px;border:1px solid var(--line);border-radius:7px;padding:7px 11px;text-decoration:none;white-space:nowrap}.read-link:hover{background:var(--soft)}.course-header{display:flex;gap:20px;align-items:center;padding:15px 0 25px}.course-header .course-symbol{width:67px;height:72px;font-size:25px}.course-header h1{font-size:31px;line-height:1.5;letter-spacing:-.8px;margin:4px 0}.course-header p{font-size:12px;color:var(--muted);margin:5px 0}.course-toolbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin:10px 0 25px;font-size:11px;color:var(--muted)}.course-toolbar a{font-size:11px}.category-tabs{display:flex;gap:7px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:22px;margin-bottom:23px}.category-tab{border:1px solid var(--line);background:var(--paper);padding:9px 12px;border-radius:9px;font-size:11px;text-decoration:none;color:var(--muted)}.category-tab.active{border-color:var(--accent);background:var(--soft);color:var(--accent);font-weight:bold}.category-tab span{font:10px monospace;margin-left:6px;opacity:.6}.empty{padding:45px 25px;text-align:center;border:1px dashed var(--line);background:var(--paper);border-radius:15px}.empty-symbol{font-size:28px;color:var(--muted)}.empty h3{font-size:17px;margin:10px 0}.empty p{font-size:12px;color:var(--muted);max-width:440px;margin:9px auto 20px}.empty a{font-size:12px}.small-note{font-size:10px;color:var(--muted);margin-top:14px;line-height:1.9}.overview-counts{display:flex;gap:23px;font-size:10px;color:var(--muted);margin-top:24px}.overview-counts strong{font:21px Georgia,serif;color:var(--accent);margin-right:6px}.footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-size:10px;color:var(--muted);display:flex;justify-content:space-between;gap:15px}.footer a{color:inherit}.toast{position:fixed;bottom:24px;left:calc(50% + 100px);transform:translateX(-50%);border-radius:9px;background:var(--accent);color:white;padding:10px 17px;z-index:100;font-size:11px}.overlay{display:none}.result-label{font-size:12px;color:var(--muted);margin:18px 0}.back-link{font-size:11px;text-decoration:none;display:inline-block;margin-bottom:14px}.prose{font-size:var(--text-size);line-height:2.05;overflow-wrap:anywhere}.prose h1{font-size:30px;line-height:1.5;margin:15px 0 28px;letter-spacing:-.5px}.prose h2{font-size:23px;line-height:1.6;margin:38px 0 18px;padding-top:18px;border-top:1px solid var(--line);scroll-margin-top:90px}.prose h3{font-size:19px;margin:30px 0 15px;scroll-margin-top:90px}.prose h4{font-size:17px;margin:24px 0 12px}.prose p{margin:16px 0}.prose li{margin:8px 0}.prose ul,.prose ol{padding-left:25px}.prose code{font:.85em/1.7 Consolas,monospace;padding:2px 5px;border-radius:4px;background:var(--soft);color:var(--accent)}.prose pre{background:#213a34;color:#e7eedf;border-radius:11px;padding:20px;overflow:auto;line-height:1.8}.prose pre code{font-size:13px;color:inherit;background:none;padding:0;white-space:pre}.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:9px;margin:24px 0}.prose table{border-collapse:collapse;width:100%;font-size:.8em;min-width:420px;line-height:1.8}.prose th{background:var(--soft);color:var(--accent);text-align:left;padding:12px 15px}.prose td{padding:11px 15px;border-top:1px solid var(--line);vertical-align:top}.prose blockquote{border-left:3px solid #b5a368;background:var(--bg);padding:2px 19px;margin:22px 0;color:var(--muted)}.reading-page{max-width:950px;margin:0 auto;background:var(--paper);padding:32px 42px;border:1px solid var(--line);border-radius:16px}.reader-nav{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 20px}.reader-toc{max-height:calc(100vh - 180px);overflow:auto;margin-top:25px}.reader-toc a{display:block;padding:7px 10px;font-size:10px;color:var(--muted);text-decoration:none;border-radius:7px}.reader-toc a:hover{background:var(--soft);color:var(--accent)}.reader-toc a.sub{padding-left:20px;font-size:9px}.reader-content{max-width:1050px}.reader-font{display:flex;gap:5px;align-items:center}.reader-font span{font-size:10px;color:var(--muted)}.reader-top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:18px}
+html[data-theme=dark]{--bg:#172722;--paper:#1f322b;--ink:#e5ebdf;--muted:#a2b4a7;--line:#354b3f;--accent:#b7d19b;--soft:#304738;--gold:#a78b42;color-scheme:dark}html[data-theme=dark] .brand-symbol,html[data-theme=dark] .quick-banner,html[data-theme=dark] .toast{background:#355f47;color:#fff}html[data-theme=dark] .course-symbol{color:#d3dfca}
+@media(max-width:1200px){.content{padding:32px}.course-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sidebar{width:224px}.workspace{margin-left:224px}.topbar{padding:0 32px}.course-card{min-height:230px}}
+@media(max-width:800px){.sidebar{transform:translateX(-100%);width:270px;transition:transform .18s}.sidebar.open{transform:translateX(0)}.workspace{margin-left:0}.menu-button{display:inline-block}.topbar{padding:0 20px;height:65px}.content{padding:27px 23px}.hero h1{font-size:38px}.hero{grid-template-columns:1fr 120px;gap:10px}.book-art{transform:scale(.85)}.overlay.visible{display:block;position:fixed;inset:0;background:#12302166;z-index:55}.toast{left:50%}.reading-page{padding:28px}.reader-toc{max-height:65vh}}
+@media(max-width:480px){.topbar{padding:0 13px}.top-actions{gap:5px}.icon-button{padding:7px 9px;font-size:10px}.breadcrumbs{font-size:10px}.content{padding:24px 15px 35px}.hero{grid-template-columns:1fr}.book-art{display:none}.hero h1{font-size:36px}.hero p{font-size:12px}.course-grid{gap:11px}.course-card{padding:16px;min-height:230px}.course-card h3{font-size:14px}.course-thai{font-size:9px}.course-symbol{height:38px;width:38px;font-size:13px}.card-top{margin-bottom:15px}.card-footer{font-size:9px;flex-wrap:wrap;gap:4px}.card-tags{gap:4px}.tag{font-size:8px;padding:2px 5px}.section-heading h2{font-size:20px}.quick-banner{padding:20px;align-items:start;flex-direction:column;gap:14px}.quick-banner h3{font-size:16px}.resource-row{padding:15px 13px;gap:10px}.resource-main>a{font-size:12px}.resource-meta{font-size:9px;gap:6px}.file-icon{width:32px;height:35px;font-size:9px}.resource-buttons{gap:2px}.read-link{padding:6px 8px;font-size:10px}.bookmark{padding:5px;font-size:18px}.search-help{display:none}.course-header{gap:13px;align-items:start}.course-header h1{font-size:24px}.course-header .course-symbol{width:49px;height:56px;font-size:19px}.course-header p{font-size:11px}.course-toolbar{flex-wrap:wrap;font-size:10px}.category-tab{padding:8px 10px;font-size:10px}.category-tabs{gap:6px}.reading-page{padding:23px 18px;border-radius:12px}.prose{font-size:16px;line-height:1.95}.prose h1{font-size:25px}.prose h2{font-size:21px}.prose h3{font-size:18px}.prose pre code{font-size:11px}.reader-top{align-items:start;flex-wrap:wrap}.reader-content{padding:20px 12px}.footer{font-size:9px}.overview-counts{gap:16px}.reader-nav .read-link{font-size:10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media print{.sidebar,.topbar,.reader-nav,.reader-top,.footer,.overlay{display:none!important}.workspace{margin:0}.content,.reading-page{padding:0;max-width:none;border:0}.prose{font-size:12px;color:black}.prose h1{font-size:25px}.prose h2{font-size:20px;break-after:avoid}.prose h3{font-size:16px;break-after:avoid}.prose pre{background:#eee;color:black}.prose pre code{white-space:pre-wrap;font-size:10px}.table-scroll{overflow:visible}.prose table{min-width:0;font-size:10px}}
+</style></head><body><aside class="sidebar" id="sidebar" aria-label="สารบัญเอกสาร"><a href="https://skyce38.github.io/learning/" class="brand"><span class="brand-symbol">ร</span><span><strong>เรียน</strong><small>SKYCE38 / LEARNING</small></span></a><div class="reader-toc"><a href="../../#course/artificial-intelligence">← Artificial Intelligence</a><a class="" href="#midterm">Midterm</a><a class="sub" href="#logic-และการพิสูจน์">Logic และการพิสูจน์</a><a class="" href="#final">Final</a><a class="sub" href="#regression-และ-correlation">Regression และ Correlation</a><a class="sub" href="#knn--naive-bayes--decision-tree">KNN / Naive Bayes / Decision Tree</a><a class="sub" href="#clustering">Clustering</a><a class="sub" href="#ann-และ-backpropagation">ANN และ Backpropagation</a><a class="sub" href="#deep-learning-และ-cnn">Deep Learning และ CNN</a><a class="" href="#เช็กตัวเองก่อนสอบ">เช็กตัวเองก่อนสอบ</a></div></aside><div class="overlay" id="overlay"></div><div class="workspace"><header class="topbar"><div style="display:flex;align-items:center;gap:12px"><button class="icon-button menu-button" id="menu" aria-label="เปิดสารบัญวิชา" aria-expanded="false">☰</button><div class="breadcrumbs"><a href="https://skyce38.github.io/learning/">เรียน</a><span id="breadcrumbs">คลังเรียนทั้งหมด</span></div></div><div class="top-actions"><a class="icon-button" href="https://github.com/Skyce38/learning" target="_blank" rel="noopener" style="text-decoration:none">GitHub ↗</a><button class="icon-button" id="theme" aria-label="เปลี่ยนเป็นโหมดมืด">☾</button></div></header><main class="content reader-content"><div class="reader-top"><a class="back-link" href="../../#course/artificial-intelligence/tutoring">← Artificial Intelligence / ไฟล์ติว</a><div class="reader-font"><button class="icon-button" id="font-less" aria-label="ลดตัวอักษร">A−</button><span id="font-value">17</span><button class="icon-button" id="font-more" aria-label="เพิ่มตัวอักษร">A+</button><button class="icon-button" id="print">พิมพ์</button></div></div><div class="reader-nav"><span class="pill">Midterm + Final</span><a class="read-link" href="https://github.com/Skyce38/course-artificial-intelligence/blob/main/tutoring/quick-review.md" target="_blank" rel="noopener">เปิด Markdown บน GitHub ↗</a></div><article class="reading-page prose"><h1>ชีททวนเร็ว AI: Midterm + Final</h1>
+<p>อ่านหลังเข้าใจบทหลักแล้ว ใช้เวลาประมาณ 10–15 นาที รายละเอียด ตัวอย่าง และแหล่งอ้างอิงอยู่ใน สรุปฉบับเต็ม</p>
+<h2 id="midterm">Midterm</h2>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>หัวข้อ</th>
+<th>จำให้ได้</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AI/ML/DL</td>
+<td>DL ⊂ ML ⊂ AI; AI รวม search และ logic ด้วย</td>
+</tr>
+<tr>
+<td>4 มุมมอง AI</td>
+<td>Think human, Act human, Think rational, Act rational</td>
+</tr>
+<tr>
+<td>Agent</td>
+<td>Percept → ตัดสินใจ → Action เพื่อ Objective</td>
+</tr>
+<tr>
+<td>Rational</td>
+<td>เลือกให้เหมาะกับเป้าหมายและข้อมูลที่มี; bounded rationality มีข้อจำกัดทรัพยากร</td>
+</tr>
+<tr>
+<td>Bias</td>
+<td>Pre-existing=อคติเดิม, Technical=ด้านเทคนิค, Emergent=บริบทใช้ใหม่</td>
+</tr>
+<tr>
+<td>Reward hacking</td>
+<td>คะแนนดีแต่ไม่บรรลุเจตนาของงาน</td>
+</tr>
+<tr>
+<td>Search problem</td>
+<td>State space, start, actions/successors, costs, goal test</td>
+</tr>
+<tr>
+<td>Complete/optimal</td>
+<td>หาเจอถ้ามีคำตอบ / ได้ต้นทุนต่ำสุด</td>
+</tr>
+<tr>
+<td>BFS</td>
+<td>Queue/FIFO; ตื้นก่อน; complete เมื่อเงื่อนไขเหมาะสม; optimal เมื่อ cost เท่ากัน; เวลา/พื้นที่ O(b^d) ตามสไลด์</td>
+</tr>
+<tr>
+<td>DFS</td>
+<td>Stack/LIFO; ลึกก่อน; ไม่ optimal; อาจไม่ complete ถ้าลึกไม่สิ้นสุด; เวลา O(b^m), frontier O(bm)</td>
+</tr>
+<tr>
+<td>8-Puzzle</td>
+<td>0=ช่องว่าง; tuple ใช้เป็น key/set ได้; row=i//3,col=i%3</td>
+</tr>
+<tr>
+<td>A*</td>
+<td>f=g+h; เลือก f ต่ำสุด; เก็บ best g ของแต่ละสถานะ</td>
+</tr>
+<tr>
+<td>Heuristic</td>
+<td>Admissible: h ไม่เกินต้นทุนจริงที่เหลือ</td>
+</tr>
+<tr>
+<td>Manhattan</td>
+<td>รวมระยะต่างแถวและคอลัมน์แบบค่าสัมบูรณ์; แบบมาตรฐานไม่นับ 0; สไลด์นี้สั่งนับ 0 ซึ่งอาจเกินต้นทุนจริง</td>
+</tr>
+<tr>
+<td>Minimax</td>
+<td>ค่ามองจาก MAX; MAX เอามาก, MIN เอาน้อย; ย้อนจากใบ</td>
+</tr>
+<tr>
+<td>Alpha-beta</td>
+<td>α เริ่ม −∞, β เริ่ม +∞; MAX ปรับ α, MIN ปรับ β; ตัดเมื่อ α≥β</td>
+</tr>
+<tr>
+<td>Deduction</td>
+<td>P→Q และ P ⇒ Q</td>
+</tr>
+<tr>
+<td>Induction/abduction</td>
+<td>สรุปกฎจากตัวอย่าง / เสนอเหตุจากผล; ไม่รับประกันจริง</td>
+</tr>
+</tbody></table></div>
+<h3 id="logic-และการพิสูจน์">Logic และการพิสูจน์</h3>
+<ul>
+<li><code>P→Q ≡ ¬P∨Q</code> และเป็นเท็จเฉพาะ P=T,Q=F</li>
+<li><code>¬(P∧Q) ≡ ¬P∨¬Q</code>; <code>¬(P∨Q) ≡ ¬P∧¬Q</code></li>
+<li>ทุก A เป็น B: <code>∀x(A(x)→B(x))</code></li>
+<li>บาง A เป็น B: <code>∃x(A(x)∧B(x))</code></li>
+<li><code>¬∀xP(x) ≡ ∃x¬P(x)</code>; <code>¬∃xP(x) ≡ ∀x¬P(x)</code></li>
+<li><code>∀x∃y</code> ต่างจาก <code>∃y∀x</code>: รายแรก y เปลี่ยนตาม x ได้ รายหลังมี y เดียวใช้ทุก x</li>
+<li>CNF = AND ของ clauses; แต่ละ clause = OR ของ literals</li>
+<li>แปลง CNF: ตัด ↔ → ตัด → → ดัน ¬ → เปลี่ยนชื่อตัวแปร → จัด quantifiers → Skolemize → ละ ∀ → แจกแจง OR ครอบ AND → แยก clauses</li>
+<li>Skolem: <code>∃xP(x) → P(a)</code>; <code>∀x∃yR(x,y) → ∀xR(x,f(x))</code></li>
+<li>Unification: หาค่าแทนตัวแปรให้ predicates ตรงกัน เช่น <code>P(x)</code> กับ <code>P(A)</code> ใช้ x=A</li>
+<li>Resolution: <code>(A∨B),(¬B∨C) ⇒ (A∨C)</code></li>
+<li>พิสูจน์ Q: เพิ่ม ¬Q → resolve → ได้ <code>□</code> จึงพิสูจน์สำเร็จ</li>
+</ul>
+<h2 id="final">Final</h2>
+<h3 id="regression-และ-correlation">Regression และ Correlation</h3>
+<pre><code class="language-text">ŷ = b₀+b₁x
+b₁ = [nΣxy−ΣxΣy] / [nΣx²−(Σx)²]
+b₀ = ȳ−b₁x̄
+e = y−ŷ; SSE=Σe²
+r = [nΣxy−ΣxΣy] / √{[nΣx²−(Σx)²][nΣy²−(Σy)²]}
+</code></pre>
+<p>b₁=การเปลี่ยนค่าทำนายต่อ x เพิ่ม 1; r บอกทิศทางและความแน่นเชิงเส้น; r≈0 ยังมีความสัมพันธ์โค้งได้; correlation ไม่พิสูจน์ causation</p>
+<h3 id="knn--naive-bayes--decision-tree">KNN / Naive Bayes / Decision Tree</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>วิธี</th>
+<th>ขั้นตอนและสูตร</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>KNN</td>
+<td>หาระยะ → เลือก k เพื่อนใกล้สุด → โหวต; d=√Σ(xⱼ−zⱼ)²</td>
+</tr>
+<tr>
+<td>Naive Bayes</td>
+<td>Score(C)=P(C)∏P(xⱼ</td>
+</tr>
+<tr>
+<td>Normalize NB</td>
+<td>P(C</td>
+</tr>
+<tr>
+<td>Entropy</td>
+<td>H(S)=−Σp(c)log₂p(c); บริสุทธิ์=0, สองคลาสครึ่งต่อครึ่ง=1</td>
+</tr>
+<tr>
+<td>Information gain</td>
+<td>Hก่อน − Σ(สัดส่วนกลุ่มลูก × Hลูก); ID3 เลือก gain มากสุด</td>
+</tr>
+<tr>
+<td>Tree→Rule</td>
+<td>หนึ่ง path root→leaf เป็นหนึ่ง IF เงื่อนไข AND … THEN class</td>
+</tr>
+</tbody></table></div>
+<p>ตัวเลขจากสไลด์: July มี score(+)=1/18 &gt; score(−)=1/125 จึงทาย +; Decision Tree เลือก HairColor gain≈0.45 ก่อน แล้วเลือก Lotion ในกลุ่ม Blonde</p>
+<h3 id="clustering">Clustering</h3>
+<ul>
+<li>Unsupervised: ไม่มี label; กลุ่มเดียวกันคล้ายกันมาก</li>
+<li>Hierarchical agglomerative: เริ่มจุดละกลุ่ม → รวมคู่ใกล้สุด → สร้าง dendrogram</li>
+<li>Single linkage=min ระยะข้ามกลุ่ม; Complete=max; Average=เฉลี่ยทุกคู่ข้ามกลุ่ม</li>
+<li>K-means: เลือก K → ตั้ง centroid → assign ใกล้สุด → update ค่าเฉลี่ย → ทำซ้ำ</li>
+<li><code>J=ΣₖΣ_{x∈Cₖ}||x−μₖ||²</code>; elbow ดูจุดที่เพิ่ม K แล้วลด J ช้าลงมาก</li>
+<li>K-means ไวต่อ initialization/outlier และไม่รับประกัน global optimum</li>
+<li>KNN มี label, K=เพื่อนบ้าน; K-means ไม่มี label, K=จำนวนกลุ่ม</li>
+</ul>
+<h3 id="ann-และ-backpropagation">ANN และ Backpropagation</h3>
+<pre><code class="language-text">z=b+Σwᵢxᵢ; output=activation(z)
+Perceptron: Δwᵢ=η(t−o)xᵢ; Δb=η(t−o)
+Sigmoid: σ(z)=1/(1+e^(−z)); σ′=σ(1−σ)
+ReLU: max(0,z)
+Backprop แบบ sigmoid+squared error:
+δ_output=o(1−o)(t−o)
+δ_hidden=o_h(1−o_h)Σw_khδ_k
+Δw_ji=ηδ_jx_ji
+</code></pre>
+<ul>
+<li>Input → Hidden → Output; weight กำหนดอิทธิพล, bias เลื่อน threshold</li>
+<li>เช็ก output ว่า 0/1 หรือ −1/+1 ก่อนคิด error</li>
+<li>Single perceptron แก้ AND/OR ได้ แต่ XOR ต้องมี nonlinear multilayer network</li>
+<li>Backprop: forward → loss → gradient ย้อนกลับ → update weights</li>
+<li>Recurrent connection กับ backpropagation คนละเรื่อง</li>
+</ul>
+<h3 id="deep-learning-และ-cnn">Deep Learning และ CNN</h3>
+<ul>
+<li><strong>RNN:</strong> ข้อมูลลำดับ/เวลา ใช้ hidden state</li>
+<li><strong>GAN:</strong> Generator สร้าง, Discriminator แยกจริง/ปลอม</li>
+<li><strong>CNN:</strong> เรียน features เชิงพื้นที่ด้วย filters</li>
+<li>Convolution=ทาบ filter แล้วคูณและบวก; Stride=ระยะเลื่อน; Padding=เติมขอบ</li>
+<li>Max pooling=เลือกค่าสูงสุดในหน้าต่าง; ReLU=ลบเป็น 0; Flatten=เรียงเป็นเวกเตอร์</li>
+<li>สูตรขนาดสำหรับ dilation=1: <code>floor((N+2P−F)/S)+1</code> ต่อแกน</li>
+<li>5×5,F3,S1,P0 → 3×3; เพิ่ม P1 → 5×5</li>
+<li>3 maps ขนาด 3×3 flatten ได้ 27 ค่า</li>
+<li>หนึ่ง filter แบบ 3D ครอบทุก input channels ให้หนึ่ง output channel</li>
+<li>ตัวอย่างกากบาทตามหน้า 21: convolution ช่องมุมได้ <strong>−3</strong>, ช่องกลางได้ <strong>21</strong>; ระวังเครื่องหมายลบของ filter</li>
+</ul>
+<h2 id="เช็กตัวเองก่อนสอบ">เช็กตัวเองก่อนสอบ</h2>
+<ol>
+<li>Trace BFS/DFS โดยระบุลำดับลูก และเขียนเส้นทางคำตอบแยกได้หรือยัง?</li>
+<li>คำนวณ g,h,f และอธิบายเงื่อนไข optimal ของ A* ได้หรือยัง?</li>
+<li>ย้อน Minimax และตัดกิ่งด้วย α≥β ได้หรือยัง?</li>
+<li>แปล ∀/∃ แปลง CNF และ resolve จน empty clause ได้หรือยัง?</li>
+<li>แทนสูตร regression, NB, entropy/gain และปรับ centroid ได้หรือยัง?</li>
+<li>คำนวณ perceptron update, convolution, pooling และขนาด output ได้หรือยัง?</li>
+</ol>
+</article><footer class="footer"><span>เรียน / Artificial Intelligence</span><a href="../../">กลับคลังเรียน</a></footer></main></div><script>let preferences={};try{preferences=JSON.parse(localStorage.getItem('skyce-learning-preferences')||'{}')}catch{}function savePreferences(){try{localStorage.setItem('skyce-learning-preferences',JSON.stringify(preferences))}catch{}}function applyTheme(){document.documentElement.dataset.theme=preferences.theme||'light';document.querySelector('#theme').textContent=preferences.theme==='dark'?'☀':'☾';document.querySelector('#theme').setAttribute('aria-label',preferences.theme==='dark'?'เปลี่ยนเป็นโหมดสว่าง':'เปลี่ยนเป็นโหมดมืด')}applyTheme();document.querySelector('#theme').onclick=()=>{preferences.theme=preferences.theme==='dark'?'light':'dark';savePreferences();applyTheme()};const sidebar=document.querySelector('#sidebar'),overlay=document.querySelector('#overlay'),menu=document.querySelector('#menu');function closeMenu(){sidebar.classList.remove('open');overlay.classList.remove('visible');menu.setAttribute('aria-expanded','false');sidebar.inert=matchMedia('(max-width:800px)').matches}function fitSidebar(){sidebar.inert=matchMedia('(max-width:800px)').matches&&!sidebar.classList.contains('open')}fitSidebar();window.addEventListener('resize',fitSidebar);menu.onclick=()=>{const opening=!sidebar.classList.contains('open');if(opening){sidebar.classList.add('open');sidebar.inert=false;overlay.classList.add('visible');menu.setAttribute('aria-expanded','true');sidebar.querySelector('a').focus()}else closeMenu()};overlay.onclick=closeMenu;document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.focus();closeMenu()}});sidebar.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));let fontSize=Number(preferences.font)||17;function setFont(){fontSize=Math.min(22,Math.max(14,fontSize));document.documentElement.style.setProperty('--text-size',fontSize+'px');document.querySelector('#font-value').textContent=fontSize;preferences.font=fontSize;savePreferences()}setFont();document.querySelector('#font-less').onclick=()=>{fontSize--;setFont()};document.querySelector('#font-more').onclick=()=>{fontSize++;setFont()};document.querySelector('#print').onclick=()=>window.print();</script></body></html>

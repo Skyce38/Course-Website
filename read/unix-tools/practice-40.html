@@ -1,0 +1,596 @@
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ข้อฝึกปรนัย Unix 40 ข้อ พร้อมเฉลย · เรียน</title><style>
+:root{--bg:#f5f5ee;--paper:#fffefa;--ink:#243e36;--muted:#748177;--line:#dfe5d8;--accent:#285f4b;--soft:#e8efdd;--gold:#e8d496;--text-size:17px;color-scheme:light}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.8 Tahoma,'Leelawadee UI',sans-serif}button,input,select{font:inherit}a{color:var(--accent);text-underline-offset:4px}button{cursor:pointer;color:inherit}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #b29440;outline-offset:4px}[hidden]{display:none!important}::selection{background:var(--gold);color:#203e31}.sidebar{position:fixed;inset:0 auto 0 0;width:246px;border-right:1px solid var(--line);background:var(--paper);padding:28px 18px;display:flex;flex-direction:column;z-index:60;overflow:auto}.brand{display:flex;gap:11px;align-items:center;text-decoration:none;color:var(--ink);padding:0 11px}.brand-symbol{background:var(--accent);color:#fff;width:40px;height:40px;display:grid;place-items:center;border-radius:12px;font:25px Georgia,serif}.brand strong{display:block;font-size:20px;line-height:1.3}.brand small{display:block;color:var(--muted);font:9px/1.8 monospace;letter-spacing:1.6px}.nav-label,.eyebrow{font:10px/1.6 monospace;letter-spacing:1.8px;color:var(--muted)}.nav-label{margin:35px 12px 12px}.side-link{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--muted);padding:11px 12px;border-radius:9px;font-size:12px;line-height:1.6;margin:3px 0}.side-link:hover,.side-link.active{background:var(--soft);color:var(--accent)}.side-link.active{font-weight:bold}.side-icon{font:12px monospace;width:25px;flex-shrink:0}.side-bottom{margin-top:auto;padding:28px 12px 0;font-size:10px;color:var(--muted)}.side-bottom a{display:block;font-size:11px;margin-top:12px}.workspace{margin-left:246px}.topbar{position:sticky;top:0;z-index:40;height:72px;background:var(--bg);border-bottom:1px solid var(--line);padding:0 42px;display:flex;align-items:center;justify-content:space-between;gap:15px}.breadcrumbs{font-size:11px;color:var(--muted)}.breadcrumbs a{text-decoration:none;color:inherit}.breadcrumbs span{color:var(--ink);margin-left:10px}.top-actions{display:flex;gap:8px;align-items:center}.icon-button{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:7px 12px;min-height:36px;font-size:12px}.menu-button{display:none}.content{max-width:1240px;margin:auto;padding:43px 50px 55px}.eyebrow{color:var(--accent);font-weight:bold}.hero{display:grid;grid-template-columns:1fr 180px;align-items:center;gap:30px;margin:10px 0 29px}.hero h1{font-size:clamp(34px,3.6vw,48px);line-height:1.35;letter-spacing:-1.5px;margin:13px 0 16px}.hero h1 em{font-style:normal;color:var(--accent)}.hero p{max-width:650px;color:var(--muted);font-size:13px;line-height:2}.book-art{height:150px;position:relative;display:flex;align-items:center;justify-content:center}.book-art div{position:absolute;width:100px;height:128px;background:var(--paper);border:1px solid #739077;border-radius:10px;transform:rotate(12deg)}.book-art div+div{transform:rotate(-10deg);background:var(--soft);padding:19px;display:flex;flex-direction:column;justify-content:space-between;font:11px monospace;color:var(--accent)}.book-art b{font:26px Georgia,serif}.book-art small{font:9px/1.6 monospace;letter-spacing:1px}.hero-facts{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.pill{border:1px solid var(--line);background:var(--paper);padding:4px 10px;border-radius:6px;color:var(--muted);font-size:10px}.section-heading{display:flex;justify-content:space-between;align-items:end;margin:30px 0 17px;gap:20px}.section-heading h2{font-size:22px;letter-spacing:-.5px;margin:0}.section-heading p{font-size:11px;color:var(--muted);margin:2px 0}.search-row{display:flex;gap:10px;align-items:center;margin:27px 0}.search-wrap{flex:1;position:relative}.search-wrap span{position:absolute;left:16px;top:11px;color:var(--muted)}#search{width:100%;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:12px 16px 12px 41px;color:var(--ink);font-size:12px}.search-help{color:var(--muted);font-size:10px}.course-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.course-card{display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px;text-decoration:none;color:var(--ink);transition:transform .15s,border-color .15s;min-height:235px}.course-card:hover{transform:translateY(-3px);border-color:var(--accent)}.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}.course-symbol{display:grid;place-items:center;width:44px;height:44px;border-radius:11px;background:color-mix(in srgb,var(--course-color) 11%,var(--paper));color:var(--course-color);font:bold 15px monospace}.card-number{font:10px monospace;color:var(--muted)}.course-card h3{font-size:17px;line-height:1.5;margin:0 0 5px;letter-spacing:-.3px}.course-thai{font-size:10px;color:var(--muted);line-height:1.7;margin:0 0 16px}.card-tags{display:flex;gap:5px;flex-wrap:wrap}.tag{background:var(--bg);border-radius:5px;padding:2px 7px;color:var(--muted);font-size:9px}.card-footer{margin-top:auto;padding-top:20px;display:flex;justify-content:space-between;gap:8px;font-size:10px;color:var(--muted)}.ready{color:var(--accent)}.quick-banner{background:var(--accent);color:white;border-radius:15px;padding:23px 27px;display:flex;align-items:center;justify-content:space-between;gap:20px;margin:28px 0}.quick-banner small{font:9px monospace;letter-spacing:1.5px;opacity:.65}.quick-banner h3{font-size:17px;margin:4px 0}.quick-banner p{font-size:11px;opacity:.75;margin:0}.quick-banner a{background:#ffffffed;color:#285f4b;padding:10px 16px;border-radius:8px;text-decoration:none;font-size:11px;white-space:nowrap}.resource-list{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden}.resource-row{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:15px}.resource-row:last-child{border-bottom:0}.file-icon{height:39px;width:39px;border-radius:9px;background:var(--soft);color:var(--accent);display:grid;place-items:center;font:10px monospace;flex-shrink:0}.resource-main{flex:1;min-width:0}.resource-main>a{color:var(--ink);font-weight:bold;font-size:13px;text-decoration:none;line-height:1.7}.resource-main>a:hover{text-decoration:underline}.resource-meta{color:var(--muted);font-size:10px;margin-top:4px;display:flex;flex-wrap:wrap;gap:9px}.resource-buttons{display:flex;gap:7px;align-items:center}.bookmark{background:none;border:0;padding:6px 8px;color:var(--muted);font-size:20px}.bookmark[aria-pressed=true]{color:#b28d2d}.read-link{font-size:11px;border:1px solid var(--line);border-radius:7px;padding:7px 11px;text-decoration:none;white-space:nowrap}.read-link:hover{background:var(--soft)}.course-header{display:flex;gap:20px;align-items:center;padding:15px 0 25px}.course-header .course-symbol{width:67px;height:72px;font-size:25px}.course-header h1{font-size:31px;line-height:1.5;letter-spacing:-.8px;margin:4px 0}.course-header p{font-size:12px;color:var(--muted);margin:5px 0}.course-toolbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin:10px 0 25px;font-size:11px;color:var(--muted)}.course-toolbar a{font-size:11px}.category-tabs{display:flex;gap:7px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:22px;margin-bottom:23px}.category-tab{border:1px solid var(--line);background:var(--paper);padding:9px 12px;border-radius:9px;font-size:11px;text-decoration:none;color:var(--muted)}.category-tab.active{border-color:var(--accent);background:var(--soft);color:var(--accent);font-weight:bold}.category-tab span{font:10px monospace;margin-left:6px;opacity:.6}.empty{padding:45px 25px;text-align:center;border:1px dashed var(--line);background:var(--paper);border-radius:15px}.empty-symbol{font-size:28px;color:var(--muted)}.empty h3{font-size:17px;margin:10px 0}.empty p{font-size:12px;color:var(--muted);max-width:440px;margin:9px auto 20px}.empty a{font-size:12px}.small-note{font-size:10px;color:var(--muted);margin-top:14px;line-height:1.9}.overview-counts{display:flex;gap:23px;font-size:10px;color:var(--muted);margin-top:24px}.overview-counts strong{font:21px Georgia,serif;color:var(--accent);margin-right:6px}.footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-size:10px;color:var(--muted);display:flex;justify-content:space-between;gap:15px}.footer a{color:inherit}.toast{position:fixed;bottom:24px;left:calc(50% + 100px);transform:translateX(-50%);border-radius:9px;background:var(--accent);color:white;padding:10px 17px;z-index:100;font-size:11px}.overlay{display:none}.result-label{font-size:12px;color:var(--muted);margin:18px 0}.back-link{font-size:11px;text-decoration:none;display:inline-block;margin-bottom:14px}.prose{font-size:var(--text-size);line-height:2.05;overflow-wrap:anywhere}.prose h1{font-size:30px;line-height:1.5;margin:15px 0 28px;letter-spacing:-.5px}.prose h2{font-size:23px;line-height:1.6;margin:38px 0 18px;padding-top:18px;border-top:1px solid var(--line);scroll-margin-top:90px}.prose h3{font-size:19px;margin:30px 0 15px;scroll-margin-top:90px}.prose h4{font-size:17px;margin:24px 0 12px}.prose p{margin:16px 0}.prose li{margin:8px 0}.prose ul,.prose ol{padding-left:25px}.prose code{font:.85em/1.7 Consolas,monospace;padding:2px 5px;border-radius:4px;background:var(--soft);color:var(--accent)}.prose pre{background:#213a34;color:#e7eedf;border-radius:11px;padding:20px;overflow:auto;line-height:1.8}.prose pre code{font-size:13px;color:inherit;background:none;padding:0;white-space:pre}.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:9px;margin:24px 0}.prose table{border-collapse:collapse;width:100%;font-size:.8em;min-width:420px;line-height:1.8}.prose th{background:var(--soft);color:var(--accent);text-align:left;padding:12px 15px}.prose td{padding:11px 15px;border-top:1px solid var(--line);vertical-align:top}.prose blockquote{border-left:3px solid #b5a368;background:var(--bg);padding:2px 19px;margin:22px 0;color:var(--muted)}.reading-page{max-width:950px;margin:0 auto;background:var(--paper);padding:32px 42px;border:1px solid var(--line);border-radius:16px}.reader-nav{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 20px}.reader-toc{max-height:calc(100vh - 180px);overflow:auto;margin-top:25px}.reader-toc a{display:block;padding:7px 10px;font-size:10px;color:var(--muted);text-decoration:none;border-radius:7px}.reader-toc a:hover{background:var(--soft);color:var(--accent)}.reader-toc a.sub{padding-left:20px;font-size:9px}.reader-content{max-width:1050px}.reader-font{display:flex;gap:5px;align-items:center}.reader-font span{font-size:10px;color:var(--muted)}.reader-top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:18px}
+html[data-theme=dark]{--bg:#172722;--paper:#1f322b;--ink:#e5ebdf;--muted:#a2b4a7;--line:#354b3f;--accent:#b7d19b;--soft:#304738;--gold:#a78b42;color-scheme:dark}html[data-theme=dark] .brand-symbol,html[data-theme=dark] .quick-banner,html[data-theme=dark] .toast{background:#355f47;color:#fff}html[data-theme=dark] .course-symbol{color:#d3dfca}
+@media(max-width:1200px){.content{padding:32px}.course-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sidebar{width:224px}.workspace{margin-left:224px}.topbar{padding:0 32px}.course-card{min-height:230px}}
+@media(max-width:800px){.sidebar{transform:translateX(-100%);width:270px;transition:transform .18s}.sidebar.open{transform:translateX(0)}.workspace{margin-left:0}.menu-button{display:inline-block}.topbar{padding:0 20px;height:65px}.content{padding:27px 23px}.hero h1{font-size:38px}.hero{grid-template-columns:1fr 120px;gap:10px}.book-art{transform:scale(.85)}.overlay.visible{display:block;position:fixed;inset:0;background:#12302166;z-index:55}.toast{left:50%}.reading-page{padding:28px}.reader-toc{max-height:65vh}}
+@media(max-width:480px){.topbar{padding:0 13px}.top-actions{gap:5px}.icon-button{padding:7px 9px;font-size:10px}.breadcrumbs{font-size:10px}.content{padding:24px 15px 35px}.hero{grid-template-columns:1fr}.book-art{display:none}.hero h1{font-size:36px}.hero p{font-size:12px}.course-grid{gap:11px}.course-card{padding:16px;min-height:230px}.course-card h3{font-size:14px}.course-thai{font-size:9px}.course-symbol{height:38px;width:38px;font-size:13px}.card-top{margin-bottom:15px}.card-footer{font-size:9px;flex-wrap:wrap;gap:4px}.card-tags{gap:4px}.tag{font-size:8px;padding:2px 5px}.section-heading h2{font-size:20px}.quick-banner{padding:20px;align-items:start;flex-direction:column;gap:14px}.quick-banner h3{font-size:16px}.resource-row{padding:15px 13px;gap:10px}.resource-main>a{font-size:12px}.resource-meta{font-size:9px;gap:6px}.file-icon{width:32px;height:35px;font-size:9px}.resource-buttons{gap:2px}.read-link{padding:6px 8px;font-size:10px}.bookmark{padding:5px;font-size:18px}.search-help{display:none}.course-header{gap:13px;align-items:start}.course-header h1{font-size:24px}.course-header .course-symbol{width:49px;height:56px;font-size:19px}.course-header p{font-size:11px}.course-toolbar{flex-wrap:wrap;font-size:10px}.category-tab{padding:8px 10px;font-size:10px}.category-tabs{gap:6px}.reading-page{padding:23px 18px;border-radius:12px}.prose{font-size:16px;line-height:1.95}.prose h1{font-size:25px}.prose h2{font-size:21px}.prose h3{font-size:18px}.prose pre code{font-size:11px}.reader-top{align-items:start;flex-wrap:wrap}.reader-content{padding:20px 12px}.footer{font-size:9px}.overview-counts{gap:16px}.reader-nav .read-link{font-size:10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media print{.sidebar,.topbar,.reader-nav,.reader-top,.footer,.overlay{display:none!important}.workspace{margin:0}.content,.reading-page{padding:0;max-width:none;border:0}.prose{font-size:12px;color:black}.prose h1{font-size:25px}.prose h2{font-size:20px;break-after:avoid}.prose h3{font-size:16px;break-after:avoid}.prose pre{background:#eee;color:black}.prose pre code{white-space:pre-wrap;font-size:10px}.table-scroll{overflow:visible}.prose table{min-width:0;font-size:10px}}
+</style></head><body><aside class="sidebar" id="sidebar" aria-label="สารบัญเอกสาร"><a href="https://skyce38.github.io/learning/" class="brand"><span class="brand-symbol">ร</span><span><strong>เรียน</strong><small>SKYCE38 / LEARNING</small></span></a><div class="reader-toc"><a href="../../#course/unix-tools">← Unix Tools &amp; Programming</a><a class="" href="#คำถาม">คำถาม</a><a class="sub" href="#1-hw6-นับ-arguments-ตามคำสั่งจริง">1. hw6: นับ arguments ตามคำสั่งจริง</a><a class="sub" href="#2-ถ้าใส่-quote-ให้ชื่อกับวันเกิด">2. ถ้าใส่ quote ให้ชื่อกับวันเกิด</a><a class="sub" href="#3-ชื่อไฟล์แบบ-yyyymmddhhmm">3. ชื่อไฟล์แบบ YYYYMMDDHHMM</a><a class="sub" href="#4-hw6-แบบไม่ใส่-quote-ในข้อ-1">4. hw6 แบบไม่ใส่ quote ในข้อ 1</a><a class="sub" href="#5-hw7-calc-sub-10">5. hw7: calc sub 10</a><a class="sub" href="#6-hw7-ผลตามตัวอย่างงาน">6. hw7: ผลตามตัวอย่างงาน</a><a class="sub" href="#7-รักษาลำดับ-operands">7. รักษาลำดับ operands</a><a class="sub" href="#8-ผลของ-bash-arithmetic">8. ผลของ Bash arithmetic</a><a class="sub" href="#9-สูตรแปลงอุณหภูมิที่เขียนด้วย-integer-arithmetic">9. สูตรแปลงอุณหภูมิที่เขียนด้วย integer arithmetic</a><a class="sub" href="#10-option-ใน-homework_5_2">10. Option ใน Homework_5_2</a><a class="sub" href="#11-แปลงอุณหภูมิแบบทศนิยมสองตำแหน่ง">11. แปลงอุณหภูมิแบบทศนิยมสองตำแหน่ง</a><a class="sub" href="#12-shift-option-ออกจากรายการ">12. shift option ออกจากรายการ</a><a class="sub" href="#13-factorial-ที่เงื่อนไขลูปผิด">13. Factorial ที่เงื่อนไขลูปผิด</a><a class="sub" href="#14-factorial-ของ-0">14. Factorial ของ 0</a><a class="sub" href="#15-นิยามจำนวนเฉพาะ">15. นิยามจำนวนเฉพาะ</a><a class="sub" href="#16-ป้องกันพลาด-n25-ใน-trial-division">16. ป้องกันพลาด n=25 ใน trial division</a><a class="sub" href="#17-sieve-of-eratosthenes">17. Sieve of Eratosthenes</a><a class="sub" href="#18-workshop-findeven">18. Workshop findEven</a><a class="sub" href="#19-นับข้อมูลซ้ำด้วยหรือไม่">19. นับข้อมูลซ้ำด้วยหรือไม่</a><a class="sub" href="#20-array-หลังลบสมาชิก">20. Array หลังลบสมาชิก</a><a class="sub" href="#21-ขอบบน-c-ในงาน-grading">21. ขอบบน C ในงาน grading</a><a class="sub" href="#22-ขอบบน-b">22. ขอบบน B</a><a class="sub" href="#23-ขอบล่าง-c">23. ขอบล่าง C</a><a class="sub" href="#24-variance-ในโจทย์จริง">24. Variance ในโจทย์จริง</a><a class="sub" href="#25-คะแนนทุกคนเท่ากัน">25. คะแนนทุกคนเท่ากัน</a><a class="sub" href="#26-hw5-stdout-กับ-stderr">26. hw5: stdout กับ stderr</a><a class="sub" href="#27-ลำดับ-redirection">27. ลำดับ redirection</a><a class="sub" href="#28-ข้อความ-usage-ใน-lecture-11">28. ข้อความ Usage ใน Lecture 11</a><a class="sub" href="#29-noclobber-และบังคับเขียนทับ">29. noclobber และบังคับเขียนทับ</a><a class="sub" href="#30-append">30. Append</a><a class="sub" href="#31-if-ตรวจสิ่งใด">31. if ตรวจสิ่งใด</a><a class="sub" href="#32-set----กับข้อมูล-ls-ตามตัวอย่าง">32. set -- กับข้อมูล ls ตามตัวอย่าง</a><a class="sub" href="#33-find-ในโปรแกรม-hard-links">33. find ในโปรแกรม hard links</a><a class="sub" href="#34-เมนูคำนวณและการออกจาก-script">34. เมนูคำนวณและการออกจาก script</a><a class="sub" href="#35-pipeline-จาก-hw5">35. Pipeline จาก hw5</a><a class="sub" href="#36-sed-จากหัวข้อ-final-เดิม">36. sed จากหัวข้อ Final เดิม</a><a class="sub" href="#37-awk-และ-field">37. awk และ field</a><a class="sub" href="#38-uniq-กับข้อมูลไม่ติดกัน">38. uniq กับข้อมูลไม่ติดกัน</a><a class="sub" href="#39-until-ทำต่อเมื่อเงื่อนไขยังไม่สำเร็จ">39. until ทำต่อเมื่อเงื่อนไขยังไม่สำเร็จ</a><a class="sub" href="#40-รักษา-arguments-ที่มีช่องว่าง">40. รักษา arguments ที่มีช่องว่าง</a><a class="" href="#เฉลยและเหตุผล">เฉลยและเหตุผล</a><a class="" href="#อ่านเพิ่มตามข้อที่ผิด">อ่านเพิ่มตามข้อที่ผิด</a></div></aside><div class="overlay" id="overlay"></div><div class="workspace"><header class="topbar"><div style="display:flex;align-items:center;gap:12px"><button class="icon-button menu-button" id="menu" aria-label="เปิดสารบัญวิชา" aria-expanded="false">☰</button><div class="breadcrumbs"><a href="https://skyce38.github.io/learning/">เรียน</a><span id="breadcrumbs">คลังเรียนทั้งหมด</span></div></div><div class="top-actions"><a class="icon-button" href="https://github.com/Skyce38/learning" target="_blank" rel="noopener" style="text-decoration:none">GitHub ↗</a><button class="icon-button" id="theme" aria-label="เปลี่ยนเป็นโหมดมืด">☾</button></div></header><main class="content reader-content"><div class="reader-top"><a class="back-link" href="../../#course/unix-tools/exams">← Unix Tools &amp; Programming / ข้อสอบและแบบฝึก</a><div class="reader-font"><button class="icon-button" id="font-less" aria-label="ลดตัวอักษร">A−</button><span id="font-value">17</span><button class="icon-button" id="font-more" aria-label="เพิ่มตัวอักษร">A+</button><button class="icon-button" id="print">พิมพ์</button></div></div><div class="reader-nav"><span class="pill">Final</span><a class="read-link" href="https://github.com/Skyce38/course-unix-tools/blob/main/exams/practice-40.md" target="_blank" rel="noopener">เปิด Markdown บน GitHub ↗</a></div><article class="reading-page prose"><h1>ข้อฝึกปรนัย Final: 40 ข้อ พร้อมเฉลยอธิบาย</h1>
+<p>แต่งขึ้นจากการบ้านในโฟลเดอร์ <code>homework final</code> และหัวข้อในสรุป Final <strong>ไม่ใช่ข้อสอบจริง</strong> อ่าน <a href="../../read/unix-tools/final-homework-analysis.html">บทวิเคราะห์การบ้าน</a> แล้วลองทำโดยยังไม่เปิดเฉลยท้ายไฟล์</p>
+<p>สมมติใช้ Bash บน Linux ไม่เปิด <code>set -e</code> หรือ options พิเศษ, ใช้ IFS ปกติ, ตัวเลขคำนวณไม่ overflow และไฟล์อ่านเขียนได้ เว้นแต่ข้อนั้นระบุอย่างอื่น ข้อที่ถามตัวเลขทศนิยมให้ยึดรูปแบบ output ที่โจทย์กำหนด</p>
+<h2 id="คำถาม">คำถาม</h2>
+<h3 id="1-hw6-นับ-arguments-ตามคำสั่งจริง">1. hw6: นับ arguments ตามคำสั่งจริง</h3>
+<pre><code class="language-bash">./inputdata.sh 63160001 Aekapop Bunpeng aekapop@buu.ac.th 08-1888-8884 8 Feb 1970
+</code></pre>
+<p><code>$#</code> ภายใน script เป็นเท่าไร?</p>
+<ul>
+<li>ก. 5</li>
+<li>ข. 7</li>
+<li>ค. 8</li>
+<li>ง. 9</li>
+</ul>
+<h3 id="2-ถ้าใส่-quote-ให้ชื่อกับวันเกิด">2. ถ้าใส่ quote ให้ชื่อกับวันเกิด</h3>
+<pre><code class="language-bash">./inputdata.sh 63160001 &quot;Aekapop Bunpeng&quot; aekapop@buu.ac.th 08-1888-8884 &quot;8 Feb 1970&quot;
+</code></pre>
+<p><code>$#</code> เป็นเท่าไร?</p>
+<ul>
+<li>ก. 3</li>
+<li>ข. 5</li>
+<li>ค. 8</li>
+<li>ง. 9</li>
+</ul>
+<h3 id="3-ชื่อไฟล์แบบ-yyyymmddhhmm">3. ชื่อไฟล์แบบ YYYYMMDDHHMM</h3>
+<p>format ใดตรงกับปี–เดือน–วัน–ชั่วโมง 24 ชั่วโมง–นาที?</p>
+<ul>
+<li>ก. <code>date +%Y%M%d%H%m</code></li>
+<li>ข. <code>date +%Y%m%d%H%M</code></li>
+<li>ค. <code>date +%y%m%d%H%M</code></li>
+<li>ง. <code>date +%Y%m%d%I%M</code></li>
+</ul>
+<h3 id="4-hw6-แบบไม่ใส่-quote-ในข้อ-1">4. hw6 แบบไม่ใส่ quote ในข้อ 1</h3>
+<p>คำสั่งใดสร้าง record ครบ 5 กลุ่มตามรูปแบบงาน?</p>
+<ul>
+<li>ก. <code>echo &quot;$1:$2 $3:$4:$5:$6 $7 $8&quot;</code></li>
+<li>ข. <code>echo &quot;$1:$2:$3:$4:$5&quot;</code></li>
+<li>ค. <code>echo &#39;$1:$2 $3:$4:$5:$6 $7 $8&#39;</code></li>
+<li>ง. <code>echo &quot;$1:$2:$3:$4:$5:$6:$7:$8&quot;</code></li>
+</ul>
+<h3 id="5-hw7-calc-sub-10">5. hw7: calc sub 10</h3>
+<p>เครื่องคิดเลขต้องการ <code>operation operand1 operand2</code> เมื่อเรียก <code>./calc sub 10</code> ยังขาดกี่ arguments?</p>
+<ul>
+<li>ก. 0</li>
+<li>ข. 2</li>
+<li>ค. 1</li>
+<li>ง. 3</li>
+</ul>
+<h3 id="6-hw7-ผลตามตัวอย่างงาน">6. hw7: ผลตามตัวอย่างงาน</h3>
+<p><code>./calc div 10 20</code> ควรได้ค่าตามงานเป็นข้อใด?</p>
+<ul>
+<li>ก. 0</li>
+<li>ข. 2</li>
+<li>ค. 20</li>
+<li>ง. 0.5</li>
+</ul>
+<h3 id="7-รักษาลำดับ-operands">7. รักษาลำดับ operands</h3>
+<p><code>./calc sub 10 20</code> เมื่อคำนวณ operand1 ลบ operand2 ต้องได้อะไร?</p>
+<ul>
+<li>ก. 10</li>
+<li>ข. -10</li>
+<li>ค. 30</li>
+<li>ง. -30</li>
+</ul>
+<h3 id="8-ผลของ-bash-arithmetic">8. ผลของ Bash arithmetic</h3>
+<pre><code class="language-bash">echo &quot;$((9/5))&quot;
+</code></pre>
+<ul>
+<li>ก. 0</li>
+<li>ข. 1.8</li>
+<li>ค. 1</li>
+<li>ง. 2</li>
+</ul>
+<h3 id="9-สูตรแปลงอุณหภูมิที่เขียนด้วย-integer-arithmetic">9. สูตรแปลงอุณหภูมิที่เขียนด้วย integer arithmetic</h3>
+<pre><code class="language-bash">echo &quot;$((9/5*40+32))&quot;
+</code></pre>
+<ul>
+<li>ก. 104</li>
+<li>ข. 72</li>
+<li>ค. 40</li>
+<li>ง. syntax error เพราะมีหลาย operators</li>
+</ul>
+<h3 id="10-option-ใน-homework_5_2">10. Option ใน Homework_5_2</h3>
+<p><code>./cf_fc.sh -f 40</code> แปลว่าอะไรตามโจทย์?</p>
+<ul>
+<li>ก. รับ 40 Fahrenheit และแปลงเป็น Celsius</li>
+<li>ข. รับชื่อไฟล์ 40</li>
+<li>ค. รับ 40 Celsius และแปลงเป็น Fahrenheit</li>
+<li>ง. แปลง 40 เป็นจำนวนเต็ม</li>
+</ul>
+<h3 id="11-แปลงอุณหภูมิแบบทศนิยมสองตำแหน่ง">11. แปลงอุณหภูมิแบบทศนิยมสองตำแหน่ง</h3>
+<p>ถ้าใช้สูตรตามงานและคำนวณทศนิยมถูกต้อง <code>./cf_fc.sh -c 204.4</code> ได้อะไร?</p>
+<ul>
+<li>ก. 39.00</li>
+<li>ข. 400.00</li>
+<li>ค. 95.77</li>
+<li>ง. 95.78</li>
+</ul>
+<h3 id="12-shift-option-ออกจากรายการ">12. shift option ออกจากรายการ</h3>
+<pre><code class="language-bash">set -- -c 102.2 204.4
+mode=$1
+shift
+printf &#39;%s %s %s\n&#39; &quot;$mode&quot; &quot;$#&quot; &quot;$1&quot;
+</code></pre>
+<ul>
+<li>ก. <code>-c 3 -c</code></li>
+<li>ข. <code>102.2 2 204.4</code></li>
+<li>ค. <code>-c 2 102.2</code></li>
+<li>ง. <code>-c 1 204.4</code></li>
+</ul>
+<h3 id="13-factorial-ที่เงื่อนไขลูปผิด">13. Factorial ที่เงื่อนไขลูปผิด</h3>
+<pre><code class="language-bash">n=5
+result=1
+for ((i=2; i&lt;n; i++)); do
+    result=$((result*i))
+done
+echo &quot;$result&quot;
+</code></pre>
+<ul>
+<li>ก. 24</li>
+<li>ข. 120</li>
+<li>ค. 0</li>
+<li>ง. 5</li>
+</ul>
+<h3 id="14-factorial-ของ-0">14. Factorial ของ 0</h3>
+<p>ฟังก์ชันเริ่ม <code>result=1</code> แล้ววน i=2 จนถึง i&lt;=n เมื่อ n=0 ผลควรเป็นอะไร?</p>
+<ul>
+<li>ก. 0</li>
+<li>ข. error เสมอ</li>
+<li>ค. 1</li>
+<li>ง. -1</li>
+</ul>
+<h3 id="15-นิยามจำนวนเฉพาะ">15. นิยามจำนวนเฉพาะ</h3>
+<p>ข้อใดถูกต้อง?</p>
+<ul>
+<li>ก. 1 เป็นจำนวนเฉพาะ เพราะหารด้วย 1 ลงตัว</li>
+<li>ข. 2 เป็นจำนวนเฉพาะคู่เพียงตัวเดียว</li>
+<li>ค. ทุกจำนวนคี่เป็นจำนวนเฉพาะ</li>
+<li>ง. 0 เป็นจำนวนเฉพาะ เพราะไม่มีเศษ</li>
+</ul>
+<h3 id="16-ป้องกันพลาด-n25-ใน-trial-division">16. ป้องกันพลาด n=25 ใน trial division</h3>
+<p>ถ้าเริ่ม d=2 และเพิ่ม d ทีละ 1 เงื่อนไขลูปใดเพียงพอสำหรับตรวจตัวหารจนถึงรากที่สองรวมปลายขอบ?</p>
+<ul>
+<li>ก. <code>d*d &lt; n</code></li>
+<li>ข. <code>d &lt; 2</code></li>
+<li>ค. <code>d*d &gt; n</code></li>
+<li>ง. <code>d*d &lt;= n</code></li>
+</ul>
+<h3 id="17-sieve-of-eratosthenes">17. Sieve of Eratosthenes</h3>
+<p>เมื่อ p เป็น prime ทำไมจึงเริ่มทำเครื่องหมายพหุคูณที่ p*p ได้?</p>
+<ul>
+<li>ก. เพราะ p*p เป็น prime เสมอ</li>
+<li>ข. เพราะพหุคูณของ p ที่เล็กกว่า p*p ถูกจัดการด้วย prime ที่เล็กกว่าแล้ว</li>
+<li>ค. เพราะห้ามทำเครื่องหมายเลขคู่</li>
+<li>ง. เพราะต้องตรวจเฉพาะเลขที่มากกว่า N</li>
+</ul>
+<h3 id="18-workshop-findeven">18. Workshop findEven</h3>
+<p>สำหรับ <code>./findEven -4 -3 0 7 8</code> ถ้าเงื่อนไขคือ <code>n%2 == 0</code> จะนับได้เท่าไร?</p>
+<ul>
+<li>ก. 3</li>
+<li>ข. 2</li>
+<li>ค. 1</li>
+<li>ง. 4</li>
+</ul>
+<h3 id="19-นับข้อมูลซ้ำด้วยหรือไม่">19. นับข้อมูลซ้ำด้วยหรือไม่</h3>
+<p>สำหรับ <code>./findEven 2 2 3</code> script เพิ่ม count หนึ่งครั้งต่อ argument ที่เป็นเลขคู่ จะได้เท่าไร?</p>
+<ul>
+<li>ก. 1</li>
+<li>ข. 3</li>
+<li>ค. 4</li>
+<li>ง. 2</li>
+</ul>
+<h3 id="20-array-หลังลบสมาชิก">20. Array หลังลบสมาชิก</h3>
+<pre><code class="language-bash">scores=(10 20 30)
+unset &#39;scores[1]&#39;
+echo &quot;${#scores[@]}&quot;
+</code></pre>
+<ul>
+<li>ก. 1</li>
+<li>ข. 2</li>
+<li>ค. 3</li>
+<li>ง. 30</li>
+</ul>
+<h3 id="21-ขอบบน-c-ในงาน-grading">21. ขอบบน C ในงาน grading</h3>
+<p>กำหนด avg=50, sd=10 และใช้ช่วงเกรดของ HW_Array คะแนน 60 ได้อะไร?</p>
+<ul>
+<li>ก. A</li>
+<li>ข. B</li>
+<li>ค. C</li>
+<li>ง. F</li>
+</ul>
+<h3 id="22-ขอบบน-b">22. ขอบบน B</h3>
+<p>จากสูตรเดียวกับข้อ 21 คะแนน 70 ได้อะไร?</p>
+<ul>
+<li>ก. A</li>
+<li>ข. B</li>
+<li>ค. C</li>
+<li>ง. F</li>
+</ul>
+<h3 id="23-ขอบล่าง-c">23. ขอบล่าง C</h3>
+<p>จากสูตรเดียวกับข้อ 21 คะแนน 40 ได้อะไร?</p>
+<ul>
+<li>ก. A</li>
+<li>ข. B</li>
+<li>ค. C</li>
+<li>ง. F</li>
+</ul>
+<h3 id="24-variance-ในโจทย์จริง">24. Variance ในโจทย์จริง</h3>
+<p>HW_Array ระบุให้หารผลรวม <code>(x-avg)^2</code> ด้วยค่าใด?</p>
+<ul>
+<li>ก. N</li>
+<li>ข. N−1</li>
+<li>ค. sd</li>
+<li>ง. avg</li>
+</ul>
+<h3 id="25-คะแนนทุกคนเท่ากัน">25. คะแนนทุกคนเท่ากัน</h3>
+<p>ถ้าใช้ช่วงเกรดที่ HW_Array พิมพ์ไว้โดยไม่เพิ่มเงื่อนไขพิเศษ และทุกคนได้ 50 จะเป็นอย่างไร?</p>
+<ul>
+<li>ก. ทุกคนได้ C เพราะเท่าค่าเฉลี่ย</li>
+<li>ข. ทุกคนได้ A เพราะคะแนนสูงสุดเท่ากัน</li>
+<li>ค. variance เป็นลบ จึงคำนวณไม่ได้</li>
+<li>ง. sd=0 และทุกคนได้ F ตามเงื่อนไขนั้น</li>
+</ul>
+<h3 id="26-hw5-stdout-กับ-stderr">26. hw5: stdout กับ stderr</h3>
+<p>xx.txt ไม่มี, yy.txt มีข้อมูล อ่านได้ และ log เปิดเขียนได้:</p>
+<pre><code class="language-bash">cat xx.txt yy.txt &gt;log
+</code></pre>
+<ul>
+<li>ก. ทั้งข้อมูล yy และ error ลง log</li>
+<li>ข. ไม่มีอะไรออกจอและ log ว่าง</li>
+<li>ค. ข้อมูล yy ลง log ส่วน error ของ xx ยังออกจอ</li>
+<li>ง. cat หยุดทันทีและไม่อ่าน yy</li>
+</ul>
+<h3 id="27-ลำดับ-redirection">27. ลำดับ redirection</h3>
+<p>ก่อนรัน stdout/stderr ต่อ terminal ตามปกติ cmd สร้างข้อความออกทั้งสอง stream:</p>
+<pre><code class="language-bash">cmd 2&gt;&amp;1 &gt;out.txt
+</code></pre>
+<ul>
+<li>ก. ทั้งสอง stream ไป out.txt</li>
+<li>ข. stderr ไป terminal ส่วน stdout ไป out.txt</li>
+<li>ค. stdout ไป terminal ส่วน stderr ไป out.txt</li>
+<li>ง. stderr ถูกทิ้ง</li>
+</ul>
+<h3 id="28-ข้อความ-usage-ใน-lecture-11">28. ข้อความ Usage ใน Lecture 11</h3>
+<pre><code class="language-bash">echo &#39;Usage: demo file&#39; 1&gt;&amp;2
+</code></pre>
+<p>ข้อใดถูกต้อง?</p>
+<ul>
+<li>ก. ข้อความไป stdout เสมอ เพราะใช้ echo</li>
+<li>ข. ถ้าเห็นบนจอแปลว่าใช้ stdout</li>
+<li>ค. ข้อความออก stderr และจับแยกด้วย <code>2&gt;err.txt</code> ได้</li>
+<li>ง. <code>1&gt;&amp;2</code> คือสร้างไฟล์ชื่อ 2</li>
+</ul>
+<h3 id="29-noclobber-และบังคับเขียนทับ">29. noclobber และบังคับเขียนทับ</h3>
+<p>เปิด <code>set -o noclobber</code> และ file.txt เป็น regular file ที่มีอยู่แล้ว คำสั่งใดบังคับแทนเนื้อหาเดิมได้?</p>
+<ul>
+<li>ก. <code>echo new &gt;file.txt</code></li>
+<li>ข. <code>echo new &lt;file.txt</code></li>
+<li>ค. <code>echo new &gt;&gt;file.txt</code></li>
+<li>ง. <code>echo new &gt;|file.txt</code></li>
+</ul>
+<h3 id="30-append">30. Append</h3>
+<p>file.txt เดิมมี <code>old</code> ตามด้วย newline เมื่อรัน <code>echo new &gt;&gt;file.txt</code> จะได้อะไร?</p>
+<ul>
+<li>ก. <code>old</code> แล้ว <code>new</code> คนละบรรทัด</li>
+<li>ข. เหลือเฉพาะ <code>new</code></li>
+<li>ค. เหลือเฉพาะ <code>old</code></li>
+<li>ง. เกิด error เสมอเมื่อไฟล์มีอยู่แล้ว</li>
+</ul>
+<h3 id="31-if-ตรวจสิ่งใด">31. if ตรวจสิ่งใด</h3>
+<pre><code class="language-bash">if false; then
+    echo A
+else
+    echo B
+fi
+</code></pre>
+<ul>
+<li>ก. พิมพ์ A เพราะ false เป็นคำสั่งที่เรียกได้</li>
+<li>ข. พิมพ์ B เพราะ false ให้ exit status ที่ไม่ใช่ 0</li>
+<li>ค. พิมพ์ทั้ง A และ B</li>
+<li>ง. ไม่พิมพ์อะไรเพราะ false ทำให้ทุก script จบทันที</li>
+</ul>
+<h3 id="32-set----กับข้อมูล-ls-ตามตัวอย่าง">32. set -- กับข้อมูล ls ตามตัวอย่าง</h3>
+<p>สมมติ stdout ของ <code>ls -l &quot;$file&quot;</code> เป็นหนึ่งบรรทัดนี้เท่านั้น:</p>
+<pre><code class="language-text">-rw-r--r-- 2 mali staff 41 Oct 21 10:00 aa.txt
+</code></pre>
+<p>หลัง <code>set -- $(ls -l &quot;$file&quot;)</code> ค่าของ <code>$2</code> คืออะไร?</p>
+<ul>
+<li>ก. mali</li>
+<li>ข. 41</li>
+<li>ค. 2</li>
+<li>ง. ชื่อไฟล์ที่เป็น argument เดิมของ script เสมอ</li>
+</ul>
+<h3 id="33-find-ในโปรแกรม-hard-links">33. find ในโปรแกรม hard links</h3>
+<p>option <code>-xdev</code> ใช้เพื่ออะไร?</p>
+<ul>
+<li>ก. จำกัดไม่ให้การค้นลงไปใน directory ของ filesystem อื่น</li>
+<li>ข. ลบ hard links ที่พบ</li>
+<li>ค. แสดงเฉพาะไฟล์ที่ execute ได้</li>
+<li>ง. ค้นเฉพาะนามสกุล .dev</li>
+</ul>
+<h3 id="34-เมนูคำนวณและการออกจาก-script">34. เมนูคำนวณและการออกจาก script</h3>
+<p>ข้อใดถูกต้องใน Bash script ที่รันตามปกติ?</p>
+<ul>
+<li>ก. <code>break</code> กับ <code>exit</code> ต้องให้ผลเหมือนกันเสมอ</li>
+<li>ข. <code>break</code> ภายในลูปจะข้ามเฉพาะรอบปัจจุบัน</li>
+<li>ค. <code>continue</code> จบทั้ง script</li>
+<li>ง. <code>break</code> ออกจาก loop ปัจจุบัน ส่วน <code>exit</code> ออกจาก shell ที่รัน script</li>
+</ul>
+<h3 id="35-pipeline-จาก-hw5">35. Pipeline จาก hw5</h3>
+<pre><code class="language-bash">who | cut -c1-8 | sort &gt;attend.txt
+</code></pre>
+<p>ข้อใดถูกต้อง?</p>
+<ul>
+<li>ก. ได้ชื่อเต็มทุกคนโดยไม่ถูกตัดแน่นอน</li>
+<li>ข. ตัด field 1–8 ของ who</li>
+<li>ค. เลือกอักขระ 1–8 แต่ละบรรทัด เรียงและเก็บไฟล์ โดยยังอาจมีชื่อซ้ำ</li>
+<li>ง. นับจำนวนผู้ใช้ไม่ซ้ำและพิมพ์ตัวเลข</li>
+</ul>
+<h3 id="36-sed-จากหัวข้อ-final-เดิม">36. sed จากหัวข้อ Final เดิม</h3>
+<pre><code class="language-bash">printf &#39;cat cat\n&#39; | sed &#39;s/cat/dog/&#39;
+</code></pre>
+<ul>
+<li>ก. <code>dog dog</code></li>
+<li>ข. <code>dog cat</code></li>
+<li>ค. <code>cat dog</code></li>
+<li>ง. ไม่มี output</li>
+</ul>
+<h3 id="37-awk-และ-field">37. awk และ field</h3>
+<pre><code class="language-bash">printf &#39;A:10:B\n&#39; | awk -F: &#39;{print NF, $2}&#39;
+</code></pre>
+<ul>
+<li>ก. <code>1 A:10:B</code></li>
+<li>ข. <code>3 B</code></li>
+<li>ค. <code>3 10</code></li>
+<li>ง. <code>10 3</code></li>
+</ul>
+<h3 id="38-uniq-กับข้อมูลไม่ติดกัน">38. uniq กับข้อมูลไม่ติดกัน</h3>
+<p>input มีสามบรรทัด <code>b</code>, <code>a</code>, <code>b</code> ตามลำดับ คำสั่งใดนับคำว่า b รวมสองครั้งได้โดยรวมบรรทัดที่เหมือนกันก่อน?</p>
+<ul>
+<li>ก. <code>uniq -c</code></li>
+<li>ข. <code>sort | uniq -c</code></li>
+<li>ค. <code>wc -c</code></li>
+<li>ง. <code>head -n1</code></li>
+</ul>
+<h3 id="39-until-ทำต่อเมื่อเงื่อนไขยังไม่สำเร็จ">39. until ทำต่อเมื่อเงื่อนไขยังไม่สำเร็จ</h3>
+<pre><code class="language-bash">i=0
+until [ &quot;$i&quot; -ge 3 ]; do
+    echo &quot;$i&quot;
+    i=$((i+1))
+done
+</code></pre>
+<ul>
+<li>ก. ไม่มี output</li>
+<li>ข. 1, 2, 3 คนละบรรทัด</li>
+<li>ค. 0, 1, 2, 3 คนละบรรทัด</li>
+<li>ง. 0, 1, 2 คนละบรรทัด</li>
+</ul>
+<h3 id="40-รักษา-arguments-ที่มีช่องว่าง">40. รักษา arguments ที่มีช่องว่าง</h3>
+<p>เมื่อเรียก script ด้วย <code>&quot;red blue&quot; green</code> รูปแบบใดวนสองรอบ โดยรอบแรกได้ <code>red blue</code> ทั้งข้อความ?</p>
+<ul>
+<li>ก. <code>for item in &quot;$@&quot;; do ...; done</code></li>
+<li>ข. <code>for item in &quot;$*&quot;; do ...; done</code></li>
+<li>ค. <code>for item in $*; do ...; done</code></li>
+<li>ง. <code>for item in $@; do ...; done</code></li>
+</ul>
+<hr>
+<h2 id="เฉลยและเหตุผล">เฉลยและเหตุผล</h2>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>ข้อ</th>
+<th>ตอบ</th>
+<th>เหตุผล / ตัวหลอกสำคัญ</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>ค</td>
+<td>มี 8 คำเป็น arguments ไม่รวมชื่อ script; กลุ่มข้อมูลเชิงความหมายไม่ได้กำหนดจำนวน arguments</td>
+</tr>
+<tr>
+<td>2</td>
+<td>ข</td>
+<td>ชื่อและวันเกิดถูก quote เป็นกลุ่มละ 1 argument จึงเหลือ 5</td>
+</tr>
+<tr>
+<td>3</td>
+<td>ข</td>
+<td><code>%Y</code> ปี 4 หลัก, <code>%m</code> เดือน, <code>%d</code> วัน, <code>%H</code> ชั่วโมง 24 ชั่วโมง, <code>%M</code> นาที; <code>%I</code> เป็นชั่วโมง 12 ชั่วโมง</td>
+</tr>
+<tr>
+<td>4</td>
+<td>ก</td>
+<td>จับชื่อจาก <code>$2 $3</code> และวันเกิดจาก <code>$6 $7 $8</code>; single quote จะไม่ขยายตัวแปร</td>
+</tr>
+<tr>
+<td>5</td>
+<td>ค</td>
+<td>มี sub และ 10 สอง arguments ต้องการสาม จึงขาดหนึ่ง</td>
+</tr>
+<tr>
+<td>6</td>
+<td>ง</td>
+<td>งานต้องการการหารทศนิยม; Bash integer division เป็นตัวหลอกที่ให้ 0</td>
+</tr>
+<tr>
+<td>7</td>
+<td>ข</td>
+<td>operand1−operand2 คือ 10−20 = -10</td>
+</tr>
+<tr>
+<td>8</td>
+<td>ค</td>
+<td>Bash arithmetic หารจำนวนเต็มได้ 1</td>
+</tr>
+<tr>
+<td>9</td>
+<td>ข</td>
+<td>คูณ/หารลำดับความสำคัญเท่ากัน อ่านซ้ายไปขวา: 9/5=1 แล้ว 1×40+32=72</td>
+</tr>
+<tr>
+<td>10</td>
+<td>ค</td>
+<td>-f หมายถึงแปลงไปหน่วย Fahrenheit ตามงานนี้</td>
+</tr>
+<tr>
+<td>11</td>
+<td>ง</td>
+<td>(204.4−32)×5/9 = 95.777… ปัดสองตำแหน่งเป็น 95.78</td>
+</tr>
+<tr>
+<td>12</td>
+<td>ค</td>
+<td>shift ตัด -c ออกจาก positional parameters แต่ mode ที่เก็บไว้ยังเป็น -c</td>
+</tr>
+<tr>
+<td>13</td>
+<td>ก</td>
+<td>ลูปคูณ 2×3×4 เท่านั้น เพราะ i&lt;5 ไม่รวม 5</td>
+</tr>
+<tr>
+<td>14</td>
+<td>ค</td>
+<td>ไม่เข้าลูป และ result ยังคง 1 ตรงกับ 0!</td>
+</tr>
+<tr>
+<td>15</td>
+<td>ข</td>
+<td>prime ต้องมากกว่า 1; จำนวนคู่ที่มากกว่า 2 มี 2 เป็นตัวหารอีกตัว</td>
+</tr>
+<tr>
+<td>16</td>
+<td>ง</td>
+<td>ต้องรวมตัวหารที่รากที่สอง เช่น 5 ของ 25; <code>&lt;</code> จะพลาดขอบนี้</td>
+</tr>
+<tr>
+<td>17</td>
+<td>ข</td>
+<td>ลดการทำเครื่องหมายซ้ำ; p*p เองเป็นจำนวนประกอบ ไม่ใช่ prime</td>
+</tr>
+<tr>
+<td>18</td>
+<td>ก</td>
+<td>-4, 0, 8 หารสองลงตัว รวมสามข้อมูล</td>
+</tr>
+<tr>
+<td>19</td>
+<td>ง</td>
+<td>นับสอง occurrences ของเลข 2 จึงเป็น 2 ไม่ได้ใช้ uniq</td>
+</tr>
+<tr>
+<td>20</td>
+<td>ข</td>
+<td>เหลือสมาชิก index 0 กับ 2 สองตัว ไม่เลื่อน index อัตโนมัติเพราะ unset</td>
+</tr>
+<tr>
+<td>21</td>
+<td>ค</td>
+<td>C กำหนด 40&lt;score&lt;=60 จึงรวม 60</td>
+</tr>
+<tr>
+<td>22</td>
+<td>ข</td>
+<td>B กำหนด 60&lt;score&lt;=70 จึงรวม 70; A ต้องมากกว่า 70</td>
+</tr>
+<tr>
+<td>23</td>
+<td>ง</td>
+<td>C ไม่รวม 40; จึงเข้า otherwise F</td>
+</tr>
+<tr>
+<td>24</td>
+<td>ก</td>
+<td>ใช้ population variance ตามสูตรโจทย์ที่หาร N</td>
+</tr>
+<tr>
+<td>25</td>
+<td>ง</td>
+<td>ทุกค่าเบี่ยงเบนเป็น 0 จึง sd=0; score=avg ไม่ผ่านขอบล่างแบบ strict ของ C และไม่ผ่าน B/A</td>
+</tr>
+<tr>
+<td>26</td>
+<td>ค</td>
+<td><code>&gt;</code> เปลี่ยนเฉพาะ stdout; cat ยังอ่าน yy ต่อแม้ xx ไม่มี</td>
+</tr>
+<tr>
+<td>27</td>
+<td>ข</td>
+<td>fd 2 อ้างปลายทางเดิมของ fd 1 ก่อน fd 1 เปลี่ยนไปไฟล์</td>
+</tr>
+<tr>
+<td>28</td>
+<td>ค</td>
+<td><code>1&gt;&amp;2</code> เปลี่ยนปลายทางของ stdout คำสั่งนี้ให้ไป stderr; การเห็นบนจอไม่บอกชนิด stream</td>
+</tr>
+<tr>
+<td>29</td>
+<td>ง</td>
+<td>`&gt;</td>
+</tr>
+<tr>
+<td>30</td>
+<td>ก</td>
+<td>append เก็บของเดิมแล้วเพิ่มบรรทัดใหม่</td>
+</tr>
+<tr>
+<td>31</td>
+<td>ข</td>
+<td>false ให้ status 1 จึงเข้า else; ตามสมมติฐานไม่ได้เปิด set -e และการใช้เป็นเงื่อนไขก็ไม่ใช่การสั่งหยุดทั่วไป</td>
+</tr>
+<tr>
+<td>32</td>
+<td>ค</td>
+<td>set เขียน positional parameters ใหม่จาก listing; field ที่สองคือ link count 2</td>
+</tr>
+<tr>
+<td>33</td>
+<td>ก</td>
+<td>ไม่เดินข้ามไป filesystem อื่น; ไม่ใช่ตัวกรอง permission x</td>
+</tr>
+<tr>
+<td>34</td>
+<td>ง</td>
+<td>ถ้ามีคำสั่งหลัง loop คำสั่งเหล่านั้นยังทำต่อได้หลัง break; continue ไป iteration ถัดไป</td>
+</tr>
+<tr>
+<td>35</td>
+<td>ค</td>
+<td><code>-c</code> เลือกตำแหน่งอักขระ และ sort อย่างเดียวไม่ได้ยุบชื่อซ้ำ</td>
+</tr>
+<tr>
+<td>36</td>
+<td>ข</td>
+<td>ไม่มี flag g จึงแทนเฉพาะ match แรกของบรรทัด</td>
+</tr>
+<tr>
+<td>37</td>
+<td>ค</td>
+<td>มีสาม fields เมื่อใช้ colon คั่น และ field สองคือ 10</td>
+</tr>
+<tr>
+<td>38</td>
+<td>ข</td>
+<td>sort ทำให้ b สองบรรทัดอยู่ติดกัน แล้ว uniq จึงนับรวมได้</td>
+</tr>
+<tr>
+<td>39</td>
+<td>ง</td>
+<td>ทำเมื่อ i&lt;3 จึงพิมพ์ 0–2 และหยุดเมื่อ i=3</td>
+</tr>
+<tr>
+<td>40</td>
+<td>ก</td>
+<td><code>&quot;$@&quot;</code> รักษา argument แต่ละตัว; <code>&quot;$*&quot;</code> รวมเป็นหนึ่ง ส่วนไม่ quote แตกคำตาม IFS</td>
+</tr>
+</tbody></table></div>
+<h2 id="อ่านเพิ่มตามข้อที่ผิด">อ่านเพิ่มตามข้อที่ผิด</h2>
+<ul>
+<li>ข้อ 1–4, 12, 40 → Arguments, quote, date และ shift</li>
+<li>ข้อ 5–11 → calculator, integer division และอุณหภูมิ</li>
+<li>ข้อ 13–19, 34, 39 → ลูป, factorial, prime และ workshops</li>
+<li>ข้อ 20–25 → array และขอบเขต grading</li>
+<li>ข้อ 26–33, 35 → redirection, status และ hard links</li>
+<li>ข้อ 36–38 → sed/awk และ pipeline จาก outline Final</li>
+</ul>
+<p>ทุกหัวข้อเชื่อมกลับไปที่ <a href="../../read/unix-tools/final-homework-analysis.html">บทวิเคราะห์การบ้าน</a> และ <a href="../../read/unix-tools/final.html">สรุป Final</a> ได้ ใช้ผลที่ผิดวางแผนทบทวน ไม่ใช้คะแนนชุดนี้ทำนายคะแนนสอบจริง</p>
+</article><footer class="footer"><span>เรียน / Unix Tools &amp; Programming</span><a href="../../">กลับคลังเรียน</a></footer></main></div><script>let preferences={};try{preferences=JSON.parse(localStorage.getItem('skyce-learning-preferences')||'{}')}catch{}function savePreferences(){try{localStorage.setItem('skyce-learning-preferences',JSON.stringify(preferences))}catch{}}function applyTheme(){document.documentElement.dataset.theme=preferences.theme||'light';document.querySelector('#theme').textContent=preferences.theme==='dark'?'☀':'☾';document.querySelector('#theme').setAttribute('aria-label',preferences.theme==='dark'?'เปลี่ยนเป็นโหมดสว่าง':'เปลี่ยนเป็นโหมดมืด')}applyTheme();document.querySelector('#theme').onclick=()=>{preferences.theme=preferences.theme==='dark'?'light':'dark';savePreferences();applyTheme()};const sidebar=document.querySelector('#sidebar'),overlay=document.querySelector('#overlay'),menu=document.querySelector('#menu');function closeMenu(){sidebar.classList.remove('open');overlay.classList.remove('visible');menu.setAttribute('aria-expanded','false');sidebar.inert=matchMedia('(max-width:800px)').matches}function fitSidebar(){sidebar.inert=matchMedia('(max-width:800px)').matches&&!sidebar.classList.contains('open')}fitSidebar();window.addEventListener('resize',fitSidebar);menu.onclick=()=>{const opening=!sidebar.classList.contains('open');if(opening){sidebar.classList.add('open');sidebar.inert=false;overlay.classList.add('visible');menu.setAttribute('aria-expanded','true');sidebar.querySelector('a').focus()}else closeMenu()};overlay.onclick=closeMenu;document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.focus();closeMenu()}});sidebar.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));let fontSize=Number(preferences.font)||17;function setFont(){fontSize=Math.min(22,Math.max(14,fontSize));document.documentElement.style.setProperty('--text-size',fontSize+'px');document.querySelector('#font-value').textContent=fontSize;preferences.font=fontSize;savePreferences()}setFont();document.querySelector('#font-less').onclick=()=>{fontSize--;setFont()};document.querySelector('#font-more').onclick=()=>{fontSize++;setFont()};document.querySelector('#print').onclick=()=>window.print();</script></body></html>

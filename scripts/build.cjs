@@ -1,0 +1,15 @@
+const fs=require('node:fs');
+const catalog=JSON.parse(fs.readFileSync('catalog.json','utf8'));
+const file='index.html';
+let html=fs.readFileSync(file,'utf8');
+const marker='const catalog=';
+const start=html.indexOf(marker)+marker.length;
+const end=html.indexOf(';const $=',start);
+if(start<marker.length||end<start)throw Error('Catalog marker missing');
+html=html.slice(0,start)+JSON.stringify(catalog).replace(/</g,'\\u003c')+html.slice(end);
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+const nav=catalog.courses.map(c=>'<a href=\"#course/'+esc(c.id)+'\" data-course-link=\"'+esc(c.id)+'\" class=\"side-link\"><span class=\"side-icon\">'+esc(c.short)+'</span><span>'+esc(c.name)+'</span></a>').join('');
+html=html.replace(/<nav id=\"course-nav\">[\s\S]*?<\/nav>/,'<nav id=\"course-nav\">'+nav+'</nav>');
+html=html.replace(/SUBJECTS \/ \d+/,'SUBJECTS / '+String(catalog.courses.length).padStart(2,'0'));
+fs.writeFileSync(file,html);
+console.log('Updated catalog for '+catalog.courses.length+' courses');

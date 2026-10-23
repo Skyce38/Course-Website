@@ -1,0 +1,929 @@
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>สรุป Final Python · Week 10–15 · เรียน</title><style>
+:root{--bg:#f5f5ee;--paper:#fffefa;--ink:#243e36;--muted:#748177;--line:#dfe5d8;--accent:#285f4b;--soft:#e8efdd;--gold:#e8d496;--text-size:17px;color-scheme:light}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.8 Tahoma,'Leelawadee UI',sans-serif}button,input,select{font:inherit}a{color:var(--accent);text-underline-offset:4px}button{cursor:pointer;color:inherit}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #b29440;outline-offset:4px}[hidden]{display:none!important}::selection{background:var(--gold);color:#203e31}.sidebar{position:fixed;inset:0 auto 0 0;width:246px;border-right:1px solid var(--line);background:var(--paper);padding:28px 18px;display:flex;flex-direction:column;z-index:60;overflow:auto}.brand{display:flex;gap:11px;align-items:center;text-decoration:none;color:var(--ink);padding:0 11px}.brand-symbol{background:var(--accent);color:#fff;width:40px;height:40px;display:grid;place-items:center;border-radius:12px;font:25px Georgia,serif}.brand strong{display:block;font-size:20px;line-height:1.3}.brand small{display:block;color:var(--muted);font:9px/1.8 monospace;letter-spacing:1.6px}.nav-label,.eyebrow{font:10px/1.6 monospace;letter-spacing:1.8px;color:var(--muted)}.nav-label{margin:35px 12px 12px}.side-link{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--muted);padding:11px 12px;border-radius:9px;font-size:12px;line-height:1.6;margin:3px 0}.side-link:hover,.side-link.active{background:var(--soft);color:var(--accent)}.side-link.active{font-weight:bold}.side-icon{font:12px monospace;width:25px;flex-shrink:0}.side-bottom{margin-top:auto;padding:28px 12px 0;font-size:10px;color:var(--muted)}.side-bottom a{display:block;font-size:11px;margin-top:12px}.workspace{margin-left:246px}.topbar{position:sticky;top:0;z-index:40;height:72px;background:var(--bg);border-bottom:1px solid var(--line);padding:0 42px;display:flex;align-items:center;justify-content:space-between;gap:15px}.breadcrumbs{font-size:11px;color:var(--muted)}.breadcrumbs a{text-decoration:none;color:inherit}.breadcrumbs span{color:var(--ink);margin-left:10px}.top-actions{display:flex;gap:8px;align-items:center}.icon-button{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:7px 12px;min-height:36px;font-size:12px}.menu-button{display:none}.content{max-width:1240px;margin:auto;padding:43px 50px 55px}.eyebrow{color:var(--accent);font-weight:bold}.hero{display:grid;grid-template-columns:1fr 180px;align-items:center;gap:30px;margin:10px 0 29px}.hero h1{font-size:clamp(34px,3.6vw,48px);line-height:1.35;letter-spacing:-1.5px;margin:13px 0 16px}.hero h1 em{font-style:normal;color:var(--accent)}.hero p{max-width:650px;color:var(--muted);font-size:13px;line-height:2}.book-art{height:150px;position:relative;display:flex;align-items:center;justify-content:center}.book-art div{position:absolute;width:100px;height:128px;background:var(--paper);border:1px solid #739077;border-radius:10px;transform:rotate(12deg)}.book-art div+div{transform:rotate(-10deg);background:var(--soft);padding:19px;display:flex;flex-direction:column;justify-content:space-between;font:11px monospace;color:var(--accent)}.book-art b{font:26px Georgia,serif}.book-art small{font:9px/1.6 monospace;letter-spacing:1px}.hero-facts{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.pill{border:1px solid var(--line);background:var(--paper);padding:4px 10px;border-radius:6px;color:var(--muted);font-size:10px}.section-heading{display:flex;justify-content:space-between;align-items:end;margin:30px 0 17px;gap:20px}.section-heading h2{font-size:22px;letter-spacing:-.5px;margin:0}.section-heading p{font-size:11px;color:var(--muted);margin:2px 0}.search-row{display:flex;gap:10px;align-items:center;margin:27px 0}.search-wrap{flex:1;position:relative}.search-wrap span{position:absolute;left:16px;top:11px;color:var(--muted)}#search{width:100%;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:12px 16px 12px 41px;color:var(--ink);font-size:12px}.search-help{color:var(--muted);font-size:10px}.course-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.course-card{display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px;text-decoration:none;color:var(--ink);transition:transform .15s,border-color .15s;min-height:235px}.course-card:hover{transform:translateY(-3px);border-color:var(--accent)}.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}.course-symbol{display:grid;place-items:center;width:44px;height:44px;border-radius:11px;background:color-mix(in srgb,var(--course-color) 11%,var(--paper));color:var(--course-color);font:bold 15px monospace}.card-number{font:10px monospace;color:var(--muted)}.course-card h3{font-size:17px;line-height:1.5;margin:0 0 5px;letter-spacing:-.3px}.course-thai{font-size:10px;color:var(--muted);line-height:1.7;margin:0 0 16px}.card-tags{display:flex;gap:5px;flex-wrap:wrap}.tag{background:var(--bg);border-radius:5px;padding:2px 7px;color:var(--muted);font-size:9px}.card-footer{margin-top:auto;padding-top:20px;display:flex;justify-content:space-between;gap:8px;font-size:10px;color:var(--muted)}.ready{color:var(--accent)}.quick-banner{background:var(--accent);color:white;border-radius:15px;padding:23px 27px;display:flex;align-items:center;justify-content:space-between;gap:20px;margin:28px 0}.quick-banner small{font:9px monospace;letter-spacing:1.5px;opacity:.65}.quick-banner h3{font-size:17px;margin:4px 0}.quick-banner p{font-size:11px;opacity:.75;margin:0}.quick-banner a{background:#ffffffed;color:#285f4b;padding:10px 16px;border-radius:8px;text-decoration:none;font-size:11px;white-space:nowrap}.resource-list{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden}.resource-row{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:15px}.resource-row:last-child{border-bottom:0}.file-icon{height:39px;width:39px;border-radius:9px;background:var(--soft);color:var(--accent);display:grid;place-items:center;font:10px monospace;flex-shrink:0}.resource-main{flex:1;min-width:0}.resource-main>a{color:var(--ink);font-weight:bold;font-size:13px;text-decoration:none;line-height:1.7}.resource-main>a:hover{text-decoration:underline}.resource-meta{color:var(--muted);font-size:10px;margin-top:4px;display:flex;flex-wrap:wrap;gap:9px}.resource-buttons{display:flex;gap:7px;align-items:center}.bookmark{background:none;border:0;padding:6px 8px;color:var(--muted);font-size:20px}.bookmark[aria-pressed=true]{color:#b28d2d}.read-link{font-size:11px;border:1px solid var(--line);border-radius:7px;padding:7px 11px;text-decoration:none;white-space:nowrap}.read-link:hover{background:var(--soft)}.course-header{display:flex;gap:20px;align-items:center;padding:15px 0 25px}.course-header .course-symbol{width:67px;height:72px;font-size:25px}.course-header h1{font-size:31px;line-height:1.5;letter-spacing:-.8px;margin:4px 0}.course-header p{font-size:12px;color:var(--muted);margin:5px 0}.course-toolbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin:10px 0 25px;font-size:11px;color:var(--muted)}.course-toolbar a{font-size:11px}.category-tabs{display:flex;gap:7px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:22px;margin-bottom:23px}.category-tab{border:1px solid var(--line);background:var(--paper);padding:9px 12px;border-radius:9px;font-size:11px;text-decoration:none;color:var(--muted)}.category-tab.active{border-color:var(--accent);background:var(--soft);color:var(--accent);font-weight:bold}.category-tab span{font:10px monospace;margin-left:6px;opacity:.6}.empty{padding:45px 25px;text-align:center;border:1px dashed var(--line);background:var(--paper);border-radius:15px}.empty-symbol{font-size:28px;color:var(--muted)}.empty h3{font-size:17px;margin:10px 0}.empty p{font-size:12px;color:var(--muted);max-width:440px;margin:9px auto 20px}.empty a{font-size:12px}.small-note{font-size:10px;color:var(--muted);margin-top:14px;line-height:1.9}.overview-counts{display:flex;gap:23px;font-size:10px;color:var(--muted);margin-top:24px}.overview-counts strong{font:21px Georgia,serif;color:var(--accent);margin-right:6px}.footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-size:10px;color:var(--muted);display:flex;justify-content:space-between;gap:15px}.footer a{color:inherit}.toast{position:fixed;bottom:24px;left:calc(50% + 100px);transform:translateX(-50%);border-radius:9px;background:var(--accent);color:white;padding:10px 17px;z-index:100;font-size:11px}.overlay{display:none}.result-label{font-size:12px;color:var(--muted);margin:18px 0}.back-link{font-size:11px;text-decoration:none;display:inline-block;margin-bottom:14px}.prose{font-size:var(--text-size);line-height:2.05;overflow-wrap:anywhere}.prose h1{font-size:30px;line-height:1.5;margin:15px 0 28px;letter-spacing:-.5px}.prose h2{font-size:23px;line-height:1.6;margin:38px 0 18px;padding-top:18px;border-top:1px solid var(--line);scroll-margin-top:90px}.prose h3{font-size:19px;margin:30px 0 15px;scroll-margin-top:90px}.prose h4{font-size:17px;margin:24px 0 12px}.prose p{margin:16px 0}.prose li{margin:8px 0}.prose ul,.prose ol{padding-left:25px}.prose code{font:.85em/1.7 Consolas,monospace;padding:2px 5px;border-radius:4px;background:var(--soft);color:var(--accent)}.prose pre{background:#213a34;color:#e7eedf;border-radius:11px;padding:20px;overflow:auto;line-height:1.8}.prose pre code{font-size:13px;color:inherit;background:none;padding:0;white-space:pre}.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:9px;margin:24px 0}.prose table{border-collapse:collapse;width:100%;font-size:.8em;min-width:420px;line-height:1.8}.prose th{background:var(--soft);color:var(--accent);text-align:left;padding:12px 15px}.prose td{padding:11px 15px;border-top:1px solid var(--line);vertical-align:top}.prose blockquote{border-left:3px solid #b5a368;background:var(--bg);padding:2px 19px;margin:22px 0;color:var(--muted)}.reading-page{max-width:950px;margin:0 auto;background:var(--paper);padding:32px 42px;border:1px solid var(--line);border-radius:16px}.reader-nav{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 20px}.reader-toc{max-height:calc(100vh - 180px);overflow:auto;margin-top:25px}.reader-toc a{display:block;padding:7px 10px;font-size:10px;color:var(--muted);text-decoration:none;border-radius:7px}.reader-toc a:hover{background:var(--soft);color:var(--accent)}.reader-toc a.sub{padding-left:20px;font-size:9px}.reader-content{max-width:1050px}.reader-font{display:flex;gap:5px;align-items:center}.reader-font span{font-size:10px;color:var(--muted)}.reader-top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:18px}
+html[data-theme=dark]{--bg:#172722;--paper:#1f322b;--ink:#e5ebdf;--muted:#a2b4a7;--line:#354b3f;--accent:#b7d19b;--soft:#304738;--gold:#a78b42;color-scheme:dark}html[data-theme=dark] .brand-symbol,html[data-theme=dark] .quick-banner,html[data-theme=dark] .toast{background:#355f47;color:#fff}html[data-theme=dark] .course-symbol{color:#d3dfca}
+@media(max-width:1200px){.content{padding:32px}.course-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sidebar{width:224px}.workspace{margin-left:224px}.topbar{padding:0 32px}.course-card{min-height:230px}}
+@media(max-width:800px){.sidebar{transform:translateX(-100%);width:270px;transition:transform .18s}.sidebar.open{transform:translateX(0)}.workspace{margin-left:0}.menu-button{display:inline-block}.topbar{padding:0 20px;height:65px}.content{padding:27px 23px}.hero h1{font-size:38px}.hero{grid-template-columns:1fr 120px;gap:10px}.book-art{transform:scale(.85)}.overlay.visible{display:block;position:fixed;inset:0;background:#12302166;z-index:55}.toast{left:50%}.reading-page{padding:28px}.reader-toc{max-height:65vh}}
+@media(max-width:480px){.topbar{padding:0 13px}.top-actions{gap:5px}.icon-button{padding:7px 9px;font-size:10px}.breadcrumbs{font-size:10px}.content{padding:24px 15px 35px}.hero{grid-template-columns:1fr}.book-art{display:none}.hero h1{font-size:36px}.hero p{font-size:12px}.course-grid{gap:11px}.course-card{padding:16px;min-height:230px}.course-card h3{font-size:14px}.course-thai{font-size:9px}.course-symbol{height:38px;width:38px;font-size:13px}.card-top{margin-bottom:15px}.card-footer{font-size:9px;flex-wrap:wrap;gap:4px}.card-tags{gap:4px}.tag{font-size:8px;padding:2px 5px}.section-heading h2{font-size:20px}.quick-banner{padding:20px;align-items:start;flex-direction:column;gap:14px}.quick-banner h3{font-size:16px}.resource-row{padding:15px 13px;gap:10px}.resource-main>a{font-size:12px}.resource-meta{font-size:9px;gap:6px}.file-icon{width:32px;height:35px;font-size:9px}.resource-buttons{gap:2px}.read-link{padding:6px 8px;font-size:10px}.bookmark{padding:5px;font-size:18px}.search-help{display:none}.course-header{gap:13px;align-items:start}.course-header h1{font-size:24px}.course-header .course-symbol{width:49px;height:56px;font-size:19px}.course-header p{font-size:11px}.course-toolbar{flex-wrap:wrap;font-size:10px}.category-tab{padding:8px 10px;font-size:10px}.category-tabs{gap:6px}.reading-page{padding:23px 18px;border-radius:12px}.prose{font-size:16px;line-height:1.95}.prose h1{font-size:25px}.prose h2{font-size:21px}.prose h3{font-size:18px}.prose pre code{font-size:11px}.reader-top{align-items:start;flex-wrap:wrap}.reader-content{padding:20px 12px}.footer{font-size:9px}.overview-counts{gap:16px}.reader-nav .read-link{font-size:10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media print{.sidebar,.topbar,.reader-nav,.reader-top,.footer,.overlay{display:none!important}.workspace{margin:0}.content,.reading-page{padding:0;max-width:none;border:0}.prose{font-size:12px;color:black}.prose h1{font-size:25px}.prose h2{font-size:20px;break-after:avoid}.prose h3{font-size:16px;break-after:avoid}.prose pre{background:#eee;color:black}.prose pre code{white-space:pre-wrap;font-size:10px}.table-scroll{overflow:visible}.prose table{min-width:0;font-size:10px}}
+</style></head><body><aside class="sidebar" id="sidebar" aria-label="สารบัญเอกสาร"><a href="https://skyce38.github.io/learning/" class="brand"><span class="brand-symbol">ร</span><span><strong>เรียน</strong><small>SKYCE38 / LEARNING</small></span></a><div class="reader-toc"><a href="../../#course/oop-python">← OOP &amp; Data Structures</a><a class="" href="#สารบัญ">สารบัญ</a><a class="" href="#week-10--linked-list">Week 10 — Linked List</a><a class="sub" href="#การเดินอ่านข้อมูล">การเดินอ่านข้อมูล</a><a class="sub" href="#เปลี่ยนตัวแปร-กับเปลี่ยนโครงสร้าง-ต่างกัน">เปลี่ยนตัวแปร กับเปลี่ยนโครงสร้าง ต่างกัน</a><a class="sub" href="#แทรก-node-หลังตำแหน่งที่รู้แล้ว">แทรก Node หลังตำแหน่งที่รู้แล้ว</a><a class="sub" href="#ตารางที่ควรจำ">ตารางที่ควรจำ</a><a class="sub" href="#กับดักข้อสอบ">กับดักข้อสอบ</a><a class="" href="#week-11--stack">Week 11 — Stack</a><a class="sub" href="#ตัวอย่างไล่โค้ด">ตัวอย่างไล่โค้ด</a><a class="sub" href="#call-stack">Call Stack</a><a class="sub" href="#ตรวจวงเล็บ">ตรวจวงเล็บ</a><a class="sub" href="#undoredo">Undo/Redo</a><a class="sub" href="#postfix--เชื่อมกับ-lab11-1">Postfix — เชื่อมกับ Lab11-1</a><a class="" href="#week-12--queue-และรูปแบบต่าง-ๆ">Week 12 — Queue และรูปแบบต่าง ๆ</a><a class="sub" href="#queue-ธรรมดา">Queue ธรรมดา</a><a class="sub" href="#circular-queue">Circular Queue</a><a class="sub" href="#deque-ใน-python">Deque ใน Python</a><a class="sub" href="#priority-queue">Priority Queue</a><a class="" href="#week-13--big-o-และ-sorting-พื้นฐาน">Week 13 — Big-O และ Sorting พื้นฐาน</a><a class="sub" href="#big-o">Big-O</a><a class="sub" href="#sorting-สามแบบต่างกันอย่างไร">Sorting สามแบบต่างกันอย่างไร</a><a class="sub" href="#ตารางที่ควรจำ-1">ตารางที่ควรจำ</a><a class="sub" href="#จุดหลอก">จุดหลอก</a><a class="sub" href="#ระวังการนับพื้นที่">ระวังการนับพื้นที่</a><a class="" href="#week-14--merge-sort-quick-sort-และ-timsort">Week 14 — Merge Sort, Quick Sort และ Timsort</a><a class="sub" href="#merge-sort">Merge Sort</a><a class="sub" href="#quick-sort">Quick Sort</a><a class="sub" href="#จุดหลอกของ-quick-sort">จุดหลอกของ Quick Sort</a><a class="sub" href="#python-sorting">Python sorting</a><a class="" href="#week-15--hash-table">Week 15 — Hash Table</a><a class="sub" href="#collision">Collision</a><a class="sub" href="#tombstone-สำคัญอย่างไร">Tombstone สำคัญอย่างไร</a><a class="sub" href="#load-factor-และ-rehashing">Load factor และ Rehashing</a><a class="sub" href="#python-ที่ควรจำ">Python ที่ควรจำ</a><a class="sub" href="#ระวัง-reference-ซ้ำตอนสร้าง-buckets">ระวัง reference ซ้ำตอนสร้าง buckets</a><a class="" href="#แนวข้อสอบปรนัย-20-ข้อ">แนวข้อสอบปรนัย 20 ข้อ</a><a class="sub" href="#ข้อ-1">ข้อ 1</a><a class="sub" href="#ข้อ-2">ข้อ 2</a><a class="sub" href="#ข้อ-3">ข้อ 3</a><a class="sub" href="#ข้อ-4">ข้อ 4</a><a class="sub" href="#ข้อ-5">ข้อ 5</a><a class="sub" href="#ข้อ-6">ข้อ 6</a><a class="sub" href="#ข้อ-7">ข้อ 7</a><a class="sub" href="#ข้อ-8">ข้อ 8</a><a class="sub" href="#ข้อ-9">ข้อ 9</a><a class="sub" href="#ข้อ-10">ข้อ 10</a><a class="sub" href="#ข้อ-11">ข้อ 11</a><a class="sub" href="#ข้อ-12">ข้อ 12</a><a class="sub" href="#ข้อ-13">ข้อ 13</a><a class="sub" href="#ข้อ-14">ข้อ 14</a><a class="sub" href="#ข้อ-15">ข้อ 15</a><a class="sub" href="#ข้อ-16">ข้อ 16</a><a class="sub" href="#ข้อ-17">ข้อ 17</a><a class="sub" href="#ข้อ-18">ข้อ 18</a><a class="sub" href="#ข้อ-19">ข้อ 19</a><a class="sub" href="#ข้อ-20">ข้อ 20</a><a class="" href="#เฉลยพร้อมเหตุผล">เฉลยพร้อมเหตุผล</a><a class="" href="#รายการทบทวนก่อนสอบ">รายการทบทวนก่อนสอบ</a><a class="sub" href="#ถ้ามีเวลาน้อย-ให้ทบทวนตามลำดับนี้">ถ้ามีเวลาน้อย ให้ทบทวนตามลำดับนี้</a><a class="" href="#เอกสารอ้างอิง">เอกสารอ้างอิง</a></div></aside><div class="overlay" id="overlay"></div><div class="workspace"><header class="topbar"><div style="display:flex;align-items:center;gap:12px"><button class="icon-button menu-button" id="menu" aria-label="เปิดสารบัญวิชา" aria-expanded="false">☰</button><div class="breadcrumbs"><a href="https://skyce38.github.io/learning/">เรียน</a><span id="breadcrumbs">คลังเรียนทั้งหมด</span></div></div><div class="top-actions"><a class="icon-button" href="https://github.com/Skyce38/learning" target="_blank" rel="noopener" style="text-decoration:none">GitHub ↗</a><button class="icon-button" id="theme" aria-label="เปลี่ยนเป็นโหมดมืด">☾</button></div></header><main class="content reader-content"><div class="reader-top"><a class="back-link" href="../../#course/oop-python/summaries">← OOP &amp; Data Structures / สรุป</a><div class="reader-font"><button class="icon-button" id="font-less" aria-label="ลดตัวอักษร">A−</button><span id="font-value">17</span><button class="icon-button" id="font-more" aria-label="เพิ่มตัวอักษร">A+</button><button class="icon-button" id="print">พิมพ์</button></div></div><div class="reader-nav"><span class="pill">Final</span><a class="read-link" href="https://github.com/Skyce38/python-final/blob/main/summaries/final-week10-15.md" target="_blank" rel="noopener">เปิด Markdown บน GitHub ↗</a></div><article class="reading-page prose"><h1>สรุปติวสอบ Final Python — Week 10–15</h1>
+<p>สรุปจากสไลด์ประกอบรายวิชา เน้นเตรียมสอบปรนัย: <strong>จำหลักการ → ไล่โค้ด → เทียบ Big-O → จับจุดผิด</strong></p>
+<blockquote>
+<p>เนื้อหาช่วงนี้เน้นโครงสร้างข้อมูลและอัลกอริทึมที่เขียนด้วย Python แนวข้อสอบท้ายไฟล์เป็นข้อฝึกที่สร้างจากบทเรียน ไม่ใช่ข้อสอบจริง และยังไม่มีข้อมูลยืนยันรูปแบบข้อสอบ</p>
+</blockquote>
+<h2 id="สารบัญ">สารบัญ</h2>
+<ul>
+<li><a href="#week-10--linked-list">Week 10 — Linked List</a></li>
+<li><a href="#week-11--stack">Week 11 — Stack</a></li>
+<li><a href="#week-12--queue-%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B9%81%E0%B8%9A%E0%B8%9A%E0%B8%95%E0%B9%88%E0%B8%B2%E0%B8%87-%E0%B9%86">Week 12 — Queue และรูปแบบต่าง ๆ</a></li>
+<li><a href="#week-13--big-o-%E0%B9%81%E0%B8%A5%E0%B8%B0-sorting-%E0%B8%9E%E0%B8%B7%E0%B9%89%E0%B8%99%E0%B8%90%E0%B8%B2%E0%B8%99">Week 13 — Big-O และ Sorting พื้นฐาน</a></li>
+<li><a href="#week-14--merge-sort-quick-sort-%E0%B9%81%E0%B8%A5%E0%B8%B0-timsort">Week 14 — Merge Sort, Quick Sort และ Timsort</a></li>
+<li><a href="#week-15--hash-table">Week 15 — Hash Table</a></li>
+<li><a href="#%E0%B9%81%E0%B8%99%E0%B8%A7%E0%B8%82%E0%B9%89%E0%B8%AD%E0%B8%AA%E0%B8%AD%E0%B8%9A%E0%B8%9B%E0%B8%A3%E0%B8%99%E0%B8%B1%E0%B8%A2-20-%E0%B8%82%E0%B9%89%E0%B8%AD">แนวข้อสอบปรนัย 20 ข้อ</a></li>
+<li><a href="#%E0%B9%80%E0%B8%89%E0%B8%A5%E0%B8%A2%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B9%80%E0%B8%AB%E0%B8%95%E0%B8%B8%E0%B8%9C%E0%B8%A5">เฉลยพร้อมเหตุผล</a></li>
+<li><a href="#%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%97%E0%B8%9A%E0%B8%97%E0%B8%A7%E0%B8%99%E0%B8%81%E0%B9%88%E0%B8%AD%E0%B8%99%E0%B8%AA%E0%B8%AD%E0%B8%9A">รายการทบทวนก่อนสอบ</a></li>
+<li><a href="#%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3%E0%B8%AD%E0%B9%89%E0%B8%B2%E0%B8%87%E0%B8%AD%E0%B8%B4%E0%B8%87">เอกสารอ้างอิง</a></li>
+</ul>
+<h2 id="week-10--linked-list">Week 10 — Linked List</h2>
+<p>Linked List เก็บข้อมูลเป็น <strong>Node ที่เชื่อมกันด้วย reference</strong> แต่ละ Node ไม่จำเป็นต้องอยู่ติดกันในหน่วยความจำ</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>คำศัพท์</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>data</code></td>
+<td>ข้อมูลใน Node</td>
+</tr>
+<tr>
+<td><code>next</code></td>
+<td>อ้างอิงไป Node ถัดไป</td>
+</tr>
+<tr>
+<td><code>prev</code></td>
+<td>อ้างอิงไป Node ก่อนหน้า สำหรับ Doubly Linked List</td>
+</tr>
+<tr>
+<td><code>head</code></td>
+<td>Node แรก</td>
+</tr>
+<tr>
+<td><code>tail</code></td>
+<td>Node สุดท้าย</td>
+</tr>
+<tr>
+<td>Traversal</td>
+<td>เดินผ่าน Node ทีละตัว</td>
+</tr>
+</tbody></table></div>
+<p><strong>Singly Linked List</strong> เดินไปข้างหน้าผ่าน <code>next</code> ส่วน <strong>Doubly Linked List</strong> เดินได้สองทิศทางผ่าน <code>next</code> และ <code>prev</code></p>
+<pre><code class="language-text">Singly:  head → 10 → 20 → 30 → None
+
+Doubly:  None ← 10 ⇄ 20 ⇄ 30 → None
+</code></pre>
+<h3 id="การเดินอ่านข้อมูล">การเดินอ่านข้อมูล</h3>
+<p>ใช้ตัวแปรชั่วคราว เพื่อให้ <code>head</code> ยังชี้จุดเริ่มต้นอยู่:</p>
+<pre><code class="language-python">current = head
+while current is not None:
+    print(current.data)
+    current = current.next
+</code></pre>
+<p>ก่อนเข้าถึง <code>current.data</code> หรือ <code>current.next</code> ต้องมั่นใจว่า <code>current</code> ไม่ใช่ <code>None</code> มิฉะนั้นอาจเกิด <code>AttributeError</code></p>
+<h3 id="เปลี่ยนตัวแปร-กับเปลี่ยนโครงสร้าง-ต่างกัน">เปลี่ยนตัวแปร กับเปลี่ยนโครงสร้าง ต่างกัน</h3>
+<pre><code class="language-python">current = current.next       # เปลี่ยนว่า current ชี้ไปไหน
+current.next = another_node  # เปลี่ยนการเชื่อมต่อของ Node
+</code></pre>
+<p><code>a = b</code> ทำให้ทั้งสองตัวแปรอ้างอิง object เดียวกัน ไม่ได้สร้างสำเนา</p>
+<h3 id="แทรก-node-หลังตำแหน่งที่รู้แล้ว">แทรก Node หลังตำแหน่งที่รู้แล้ว</h3>
+<pre><code class="language-python">new_node.next = current.next
+current.next = new_node
+</code></pre>
+<p>ต้องเก็บทางไป Node ถัดไปไว้ก่อน หากสลับสองบรรทัดนี้ <code>new_node.next</code> อาจชี้กลับมาหาตัวเอง และขาดทางไปส่วนท้ายเดิม</p>
+<p>หาก <code>current</code> เป็น tail เดิม ต้องอัปเดต tail ให้เป็น Node ใหม่ด้วย</p>
+<h3 id="ตารางที่ควรจำ">ตารางที่ควรจำ</h3>
+<p>สมมติ Linked List มีทั้ง <code>head</code> และ <code>tail</code> และใช้รูปแบบมาตรฐานที่เรียน</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>Operation</th>
+<th align="right">Dynamic Array</th>
+<th align="right">Singly LL</th>
+<th align="right">Doubly LL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>เข้าถึงตาม index</td>
+<td align="right">O(1)</td>
+<td align="right">O(n)</td>
+<td align="right">O(n)</td>
+</tr>
+<tr>
+<td>ค้นหาค่าแบบไล่ทีละตัว</td>
+<td align="right">O(n)</td>
+<td align="right">O(n)</td>
+<td align="right">O(n)</td>
+</tr>
+<tr>
+<td>เพิ่มด้านหน้า</td>
+<td align="right">O(n)</td>
+<td align="right">O(1)</td>
+<td align="right">O(1)</td>
+</tr>
+<tr>
+<td>เพิ่มด้านท้าย</td>
+<td align="right">O(1) amortized</td>
+<td align="right">O(1)</td>
+<td align="right">O(1)</td>
+</tr>
+<tr>
+<td>ลบด้านหน้า</td>
+<td align="right">O(n)</td>
+<td align="right">O(1)</td>
+<td align="right">O(1)</td>
+</tr>
+<tr>
+<td>ลบด้านท้าย</td>
+<td align="right">O(1)</td>
+<td align="right">O(n)</td>
+<td align="right">O(1)</td>
+</tr>
+<tr>
+<td>ลบ Node กลางที่มี reference อยู่แล้ว</td>
+<td align="right">O(n)</td>
+<td align="right">O(n) หากยังต้องหา Node ก่อนหน้า</td>
+<td align="right">O(1)</td>
+</tr>
+</tbody></table></div>
+<h3 id="กับดักข้อสอบ">กับดักข้อสอบ</h3>
+<ul>
+<li>Linked List ไม่ได้แทรกหรือลบเป็น O(1) ทุกกรณี: <strong>ถ้าต้องค้นหาตำแหน่งก่อน รวมแล้วอาจเป็น O(n)</strong></li>
+<li>Singly LL มี <code>tail</code> ก็ยังลบตัวท้ายเป็น O(n) เพราะต้องหา Node ก่อนหน้า</li>
+<li>ถ้า Singly LL มี reference ของ Node ก่อนหน้าที่ต้องใช้พร้อมอยู่แล้ว การเชื่อมข้าม Node ทำได้ O(1)</li>
+<li>เมื่อลบ Node สุดท้ายออก ต้องให้ <strong><code>head = tail = None</code></strong></li>
+<li>Doubly LL ใช้หน่วยความจำต่อ Node มากกว่า เพราะเก็บ <code>prev</code> เพิ่ม และต้องดูแลการเชื่อมทั้งสองทิศทาง</li>
+</ul>
+<h2 id="week-11--stack">Week 11 — Stack</h2>
+<p><strong>Stack = LIFO: Last In, First Out — เข้าหลัง ออกก่อน</strong> เหมือนกองจาน เพิ่มและนำออกจากด้าน <code>top</code></p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>หน้าที่</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>push(x)</code></td>
+<td>เพิ่มข้อมูลบนสุด</td>
+</tr>
+<tr>
+<td><code>pop()</code></td>
+<td>นำข้อมูลบนสุดออกและคืนค่า</td>
+</tr>
+<tr>
+<td><code>peek()</code></td>
+<td>ดูข้อมูลบนสุดโดยไม่เอาออก</td>
+</tr>
+<tr>
+<td><code>is_empty()</code></td>
+<td>ตรวจว่าว่างหรือไม่</td>
+</tr>
+</tbody></table></div>
+<p>สำหรับ Stack ที่ใช้ Linked List และให้ <code>top</code> อยู่ที่ <code>head</code> ทั้งสี่ operation ทำได้ <strong>O(1)</strong></p>
+<p>ถ้าใช้ Python <code>list</code> ให้ใช้ด้านท้าย: <code>append()</code> สำหรับ push และ <code>pop()</code> สำหรับ pop โดยการเพิ่มท้ายมีต้นทุน O(1) แบบ amortized</p>
+<p>Stack เป็น <strong>ADT (Abstract Data Type)</strong> ที่กำหนดพฤติกรรมและ operation ส่วน implementation อาจใช้ Array หรือ Linked List ก็ได้ การซ่อนโครงสร้างภายในหลัง interface เดียวกันเชื่อมกับหลัก <strong>encapsulation</strong></p>
+<h3 id="ตัวอย่างไล่โค้ด">ตัวอย่างไล่โค้ด</h3>
+<pre><code class="language-python">s = []
+s.append(10)
+s.append(20)
+a = s.pop()
+s.append(30)
+print(a, s[-1])
+</code></pre>
+<p>ผลลัพธ์:</p>
+<pre><code class="language-text">20 30
+</code></pre>
+<p><code>pop()</code> เอา 20 ออก จากนั้น 30 กลายเป็นตัวบนสุด</p>
+<h3 id="call-stack">Call Stack</h3>
+<ul>
+<li>เรียกฟังก์ชัน → เพิ่ม stack frame ของการเรียกนั้น</li>
+<li>ฟังก์ชัน return → นำ frame ออก แล้วกลับไปทำงานต่อที่ผู้เรียก</li>
+<li>ถ้า A เรียก B และ B เรียก C เมื่อ C จบ จะกลับไป B ก่อน</li>
+<li>Recursion ต้องมีเงื่อนไขหยุด การเรียกซ้อนลึกเกินไปอาจเกิด <code>RecursionError</code></li>
+</ul>
+<h3 id="ตรวจวงเล็บ">ตรวจวงเล็บ</h3>
+<p>วงเล็บที่เปิดล่าสุดต้องปิดก่อน:</p>
+<ol>
+<li>พบวงเล็บเปิด → push</li>
+<li>พบวงเล็บปิด → Stack ต้องไม่ว่าง และต้องตรงชนิดกับตัวที่ pop</li>
+<li>อ่านจบ → Stack ต้องว่าง</li>
+</ol>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>ข้อความ</th>
+<th>ผล</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>([]{})</code></td>
+<td>ถูก</td>
+</tr>
+<tr>
+<td><code>([)]</code></td>
+<td>ผิด แม้จำนวนเปิดและปิดจะครบ</td>
+</tr>
+<tr>
+<td><code>(()</code></td>
+<td>ผิด เพราะมีวงเล็บเปิดค้าง</td>
+</tr>
+<tr>
+<td><code>)(</code></td>
+<td>ผิด เพราะพบวงเล็บปิดก่อน</td>
+</tr>
+</tbody></table></div>
+<p>ตรวจข้อความยาว n ตัว ใช้เวลา <strong>O(n)</strong> และพื้นที่เพิ่มได้สูงสุด O(n)</p>
+<h3 id="undoredo">Undo/Redo</h3>
+<p>ใช้ Stack สองกอง:</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>การกระทำ</th>
+<th>สิ่งที่ต้องทำ</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Action ใหม่</td>
+<td>เก็บสถานะเดิมลง undo_stack, ล้าง redo_stack, เปลี่ยนสถานะ</td>
+</tr>
+<tr>
+<td>Undo</td>
+<td>เก็บสถานะปัจจุบันลง redo_stack แล้วนำสถานะจาก undo_stack มาใช้</td>
+</tr>
+<tr>
+<td>Redo</td>
+<td>เก็บสถานะปัจจุบันลง undo_stack แล้วนำสถานะจาก redo_stack มาใช้</td>
+</tr>
+</tbody></table></div>
+<p><strong>จุดสำคัญ:</strong> เมื่อ Undo แล้วทำ action ใหม่ ต้อง <strong>ล้าง redo_stack</strong> เพราะเกิดเส้นทางใหม่แล้ว</p>
+<h3 id="postfix--เชื่อมกับ-lab11-1">Postfix — เชื่อมกับ Lab11-1</h3>
+<p>พบตัวเลขให้ push พบ operator ให้ pop ตัวถูกดำเนินการออกมาคำนวณ แล้ว push ผลกลับ</p>
+<pre><code class="language-text">3 4 + 2 *  →  (3 + 4) × 2  →  14
+</code></pre>
+<pre><code class="language-python">right = stack.pop()
+left = stack.pop()
+result = left - right
+</code></pre>
+<p><strong>ตัวที่ pop ก่อนเป็นตัวขวา</strong> ต้องระวังเป็นพิเศษกับ <code>-</code> และ <code>/</code></p>
+<p>ตัวอย่าง <code>8 2 -</code> ต้องเป็น <code>8 - 2 = 6</code> ไม่ใช่ <code>2 - 8</code></p>
+<h2 id="week-12--queue-และรูปแบบต่าง-ๆ">Week 12 — Queue และรูปแบบต่าง ๆ</h2>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>โครงสร้าง</th>
+<th>หลักการ</th>
+<th>ตัวอย่าง</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Queue</td>
+<td>FIFO: เข้าก่อน ออกก่อน</td>
+<td>คิวรอรับบริการ</td>
+</tr>
+<tr>
+<td>Circular Queue</td>
+<td>คิวที่ index วนกลับมาใช้ช่องเดิม</td>
+<td>Buffer ขนาดจำกัด</td>
+</tr>
+<tr>
+<td>Deque</td>
+<td>เพิ่มและนำออกได้ทั้งสองด้าน</td>
+<td>ประวัติแบบจำกัดจำนวน</td>
+</tr>
+<tr>
+<td>Priority Queue</td>
+<td>ความสำคัญสูงออกก่อน</td>
+<td>คิวผู้ป่วยตามความเร่งด่วน</td>
+</tr>
+</tbody></table></div>
+<h3 id="queue-ธรรมดา">Queue ธรรมดา</h3>
+<ul>
+<li><code>enqueue(x)</code> เพิ่มที่ท้าย หรือ <code>rear</code></li>
+<li><code>dequeue()</code> นำออกที่หน้า หรือ <code>front</code></li>
+<li><code>peek()</code> ดูตัวหน้าโดยไม่เอาออก</li>
+<li>Linked List Queue มี <code>head</code> และ <code>tail</code> เพื่อให้เพิ่มท้ายและนำออกหน้าเป็น <strong>O(1)</strong></li>
+<li>หากไม่มี tail การเพิ่มท้ายอาจต้อง traverse เป็น O(n)</li>
+<li>นำสมาชิกตัวสุดท้ายออกแล้ว ต้องตั้งทั้ง <code>head</code> และ <code>tail</code> เป็น <code>None</code></li>
+</ul>
+<h3 id="circular-queue">Circular Queue</h3>
+<p>ใช้ <code>% capacity</code> เพื่อวน index กลับมาต้นอาร์เรย์:</p>
+<pre><code class="language-python">rear = (rear + 1) % capacity
+front = (front + 1) % capacity
+</code></pre>
+<p>เช่น capacity = 5 ถ้า index = 4 เลื่อนอีกหนึ่งครั้งจะได้ <strong>0</strong></p>
+<p>ใน implementation ตามสไลด์ <code>rear</code> หมายถึง <strong>ช่องที่จะเขียนข้อมูลถัดไป</strong> โดยเขียนก่อนแล้วจึงเลื่อน:</p>
+<pre><code class="language-python">data[rear] = item
+rear = (rear + 1) % capacity
+size += 1
+</code></pre>
+<p><strong><code>front == rear</code> อาจเกิดได้ทั้งตอนว่างและตอนเต็ม</strong> จึงใช้ <code>size</code> แยกสถานะ:</p>
+<pre><code class="language-python">size == 0         # ว่าง
+size == capacity  # เต็ม
+</code></pre>
+<p>ถ้าต้องอ่านข้อมูลตามลำดับจากหน้าไปท้าย ตำแหน่งจริงของสมาชิกตัวที่ i คือ:</p>
+<pre><code class="language-python">index = (front + i) % capacity
+</code></pre>
+<h3 id="deque-ใน-python">Deque ใน Python</h3>
+<pre><code class="language-python">from collections import deque
+
+d = deque([10, 20])
+d.append(30)      # เพิ่มขวา
+d.appendleft(5)   # เพิ่มซ้าย
+d.pop()          # เอาขวาออก ได้ 30
+d.popleft()      # เอาซ้ายออก ได้ 5
+</code></pre>
+<p>การเพิ่มและนำออกที่ปลายทั้งสองด้านทำได้ O(1) จึงใช้เป็นทั้ง Stack และ Queue ได้ตามวิธีเรียกใช้</p>
+<pre><code class="language-python">d = deque([1, 2, 3], maxlen=3)
+d.append(4)
+print(list(d))  # [2, 3, 4]
+</code></pre>
+<p>เมื่อเต็มแล้วเพิ่มด้านขวา ข้อมูลเก่าด้านซ้ายจะถูกทิ้ง</p>
+<h3 id="priority-queue">Priority Queue</h3>
+<p>ตามตัวอย่างที่ใช้ <code>heapq</code> แบบ min-heap: <strong>ค่าตัวเลข priority น้อยกว่า ออกก่อน</strong></p>
+<p>เก็บข้อมูลเป็น:</p>
+<pre><code class="language-python">(priority, arrival_order, data)
+</code></pre>
+<p>Python เทียบ tuple จากซ้ายไปขวา:</p>
+<ol>
+<li>เทียบ priority</li>
+<li>ถ้าเท่ากัน เทียบลำดับมาถึง</li>
+<li>counter ที่ไม่ซ้ำกันช่วยไม่ให้ต้องเปรียบเทียบ <code>data</code></li>
+</ol>
+<p>ตัวอย่าง <code>(1, 0, &quot;A&quot;)</code> ออกก่อน <code>(1, 1, &quot;B&quot;)</code> และทั้งสองออกก่อน <code>(2, 2, &quot;C&quot;)</code></p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>Operation ของ heap</th>
+<th align="right">เวลา</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>เพิ่มข้อมูล</td>
+<td align="right">O(log n)</td>
+</tr>
+<tr>
+<td>นำตัวน้อยสุดออก</td>
+<td align="right">O(log n)</td>
+</tr>
+<tr>
+<td>ดูตัวน้อยสุดที่ <code>heap[0]</code></td>
+<td align="right">O(1)</td>
+</tr>
+</tbody></table></div>
+<p><strong>กับดัก:</strong> Priority Queue ไม่ได้เป็น O(1) ทุก operation และการรักษา FIFO เมื่อ priority เท่ากันต้องออกแบบตัวตัดสิน เช่น arrival counter ไม่ใช่คุณสมบัติที่ heap ทำให้เองเสมอ</p>
+<h2 id="week-13--big-o-และ-sorting-พื้นฐาน">Week 13 — Big-O และ Sorting พื้นฐาน</h2>
+<h3 id="big-o">Big-O</h3>
+<p>Big-O บอก <strong>อัตราการเติบโตของงานเมื่อจำนวนข้อมูลเพิ่มขึ้น</strong> ไม่ได้บอกจำนวนวินาทีโดยตรง</p>
+<pre><code class="language-text">อัตราเติบโตจากน้อยไปมาก:
+O(1) &lt; O(log n) &lt; O(n) &lt; O(n log n) &lt; O(n²)
+</code></pre>
+<ul>
+<li>ลูปครบ n ตัวหนึ่งรอบ → O(n)</li>
+<li>ลูปซ้อน โดยแต่ละลูปวิ่ง n รอบ → O(n²)</li>
+<li>ลดขนาดปัญหาเหลือครึ่งหนึ่งซ้ำ ๆ โดยทำงานคงที่ต่อขั้น → O(log n)</li>
+<li><code>3n² + 5n + 7</code> → O(n²)</li>
+<li>Binary Search ต้องใช้ข้อมูลที่เรียงแล้ว และบน Array ใช้เวลา O(log n)</li>
+</ul>
+<h3 id="sorting-สามแบบต่างกันอย่างไร">Sorting สามแบบต่างกันอย่างไร</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th>วิธีจำ</th>
+<th>สิ่งที่เกิดหลังจบหนึ่งรอบหลัก</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Bubble Sort</td>
+<td>เทียบคู่ติดกันแล้วสลับ</td>
+<td>ถ้าวิ่งซ้ายไปขวา ค่ามากสุดของส่วนที่ยังไม่เรียงไปอยู่ท้าย</td>
+</tr>
+<tr>
+<td>Selection Sort</td>
+<td>หาค่าน้อยสุดแล้วสลับมาไว้หน้า</td>
+<td>ได้ค่าน้อยสุดถัดไปในตำแหน่งที่ถูกต้อง</td>
+</tr>
+<tr>
+<td>Insertion Sort</td>
+<td>หยิบตัวถัดไปมาเสียบในส่วนซ้าย</td>
+<td>ส่วนซ้ายที่เรียงแล้วขยายขึ้นหนึ่งตัว</td>
+</tr>
+</tbody></table></div>
+<p>ตัวอย่างจาก <code>[5, 3, 8, 1, 2]</code> เรียงน้อยไปมาก:</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th>หลังรอบแรก</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Bubble วิ่งซ้ายไปขวาหนึ่ง pass</td>
+<td><code>[3, 5, 1, 2, 8]</code></td>
+</tr>
+<tr>
+<td>Selection เลือก minimum รอบแรก</td>
+<td><code>[1, 3, 8, 5, 2]</code></td>
+</tr>
+<tr>
+<td>Insertion จบ <code>i = 1</code></td>
+<td><code>[3, 5, 8, 1, 2]</code></td>
+</tr>
+</tbody></table></div>
+<h3 id="ตารางที่ควรจำ-1">ตารางที่ควรจำ</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th align="right">Best</th>
+<th align="right">Average</th>
+<th align="right">Worst</th>
+<th>Stable</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Bubble มี early termination</td>
+<td align="right">O(n)</td>
+<td align="right">O(n²)</td>
+<td align="right">O(n²)</td>
+<td>ใช่ เมื่อสลับเฉพาะค่าที่มากกว่า</td>
+</tr>
+<tr>
+<td>Selection แบบสลับ minimum</td>
+<td align="right">O(n²)</td>
+<td align="right">O(n²)</td>
+<td align="right">O(n²)</td>
+<td>ไม่ใช่</td>
+</tr>
+<tr>
+<td>Insertion</td>
+<td align="right">O(n)</td>
+<td align="right">O(n²)</td>
+<td align="right">O(n²)</td>
+<td>ใช่ เมื่อเลื่อนเฉพาะค่าที่มากกว่า key</td>
+</tr>
+</tbody></table></div>
+<p><strong>Stable</strong> หมายถึง เมื่อ key เท่ากัน ยังรักษาลำดับเดิมของรายการเหล่านั้น เช่น <code>3A</code> มาก่อน <code>3B</code> ก่อน sort ก็ยังมาก่อนหลัง sort</p>
+<h3 id="จุดหลอก">จุดหลอก</h3>
+<ul>
+<li>Bubble ได้ best O(n) เมื่อมีเงื่อนไข <strong>หยุดเมื่อทั้ง pass ไม่มีการ swap</strong> ถ้ายังวนครบทุก pass ตามลูปเดิม อาจยังเป็น O(n²)</li>
+<li>Selection ยังต้องหา minimum จนครบ แม้ข้อมูลเรียงแล้ว</li>
+<li>Selection เปรียบเทียบรวม <code>n(n−1)/2</code> ครั้ง และ swap ไม่เกิน <code>n−1</code> ครั้งในแบบมาตรฐาน</li>
+<li>Insertion เหมาะกับข้อมูล <strong>ขนาดเล็กหรือเกือบเรียงแล้ว</strong></li>
+<li>Insertion ใช้ <code>arr[j] &gt; key</code> เพื่อไม่เลื่อนสมาชิกที่ค่าเท่ากันข้ามกัน</li>
+<li>เงื่อนไข <code>j &gt;= 0 and arr[j] &gt; key</code> ใช้ short-circuit: เมื่อเงื่อนไขแรกเป็น False จะไม่อ่านเงื่อนไขหลัง</li>
+</ul>
+<h3 id="ระวังการนับพื้นที่">ระวังการนับพื้นที่</h3>
+<p>แกนของสามอัลกอริทึมใช้พื้นที่เพิ่ม O(1) แต่ถ้าโค้ดเริ่มด้วย <code>arr.copy()</code> แบบตัวอย่างในสไลด์ การสร้างสำเนาจะใช้พื้นที่เพิ่ม O(n) ต้องดูว่าข้อสอบถามตัวอัลกอริทึมหรือโค้ดทั้งฟังก์ชัน</p>
+<h2 id="week-14--merge-sort-quick-sort-และ-timsort">Week 14 — Merge Sort, Quick Sort และ Timsort</h2>
+<p><strong>Divide and Conquer</strong> คือ แบ่งปัญหา → แก้ปัญหาย่อย → รวมผล</p>
+<p>Recursion ต้องมี <strong>base case</strong> เช่น ข้อมูลเหลือ 0 หรือ 1 ตัวให้หยุด</p>
+<h3 id="merge-sort">Merge Sort</h3>
+<ol>
+<li>แบ่งข้อมูลเป็นสองครึ่ง</li>
+<li>เรียงแต่ละครึ่งด้วย recursion</li>
+<li>merge สองฝั่งที่เรียงแล้ว</li>
+</ol>
+<pre><code class="language-text">[4, 1, 3, 2]
+      ↓ แบ่ง
+[4, 1]       [3, 2]
+      ↓ เรียงแต่ละฝั่ง
+[1, 4]       [2, 3]
+      ↓ merge
+[1, 2, 3, 4]
+</code></pre>
+<ul>
+<li>เวลา <strong>O(n log n)</strong> ทั้ง best, average และ worst สำหรับแบบมาตรฐานที่เรียน</li>
+<li>พื้นที่เพิ่ม <strong>O(n)</strong></li>
+<li>เป็น stable เมื่อค่าซ้ายและขวาเท่ากันแล้ว <strong>เลือกฝั่งซ้ายก่อน</strong> เช่นใช้ <code>left[i] &lt;= right[j]</code></li>
+<li>merge สองลิสต์ที่เรียงแล้ว รวมความยาว n ใช้เวลา O(n)</li>
+</ul>
+<p>ที่มาของ O(n log n): มีระดับการแบ่งประมาณ log₂n และมีงานรวม O(n) ต่อระดับ</p>
+<p>ตัวอย่าง n = 8 แบ่งจนเหลือหนึ่งตัวได้ 3 ครั้ง ถ้านับระดับรากเป็น level 0 จะมีทั้งหมด 4 level รวมราก ต้องอ่านว่าข้อสอบนับอย่างไร</p>
+<h3 id="quick-sort">Quick Sort</h3>
+<ol>
+<li>เลือก <code>pivot</code></li>
+<li>partition ข้อมูลรอบ pivot</li>
+<li>เรียงฝั่งซ้ายและขวาต่อด้วย recursion</li>
+</ol>
+<p>ใน <strong>Lomuto partition ตามสไลด์</strong> ใช้ตัวท้ายเป็น pivot เมื่อ partition จบ pivot จะอยู่ในตำแหน่งที่ถูกต้อง แต่ <strong>ข้อมูลแต่ละฝั่งอาจยังไม่เรียง</strong></p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th align="right">Best</th>
+<th align="right">Average</th>
+<th align="right">Worst</th>
+<th>Stable</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Merge Sort</td>
+<td align="right">O(n log n)</td>
+<td align="right">O(n log n)</td>
+<td align="right">O(n log n)</td>
+<td>ใช่ เมื่อจัดการค่าเท่ากันถูกต้อง</td>
+</tr>
+<tr>
+<td>Quick Sort แบบที่เรียน</td>
+<td align="right">O(n log n)</td>
+<td align="right">O(n log n)</td>
+<td align="right">O(n²)</td>
+<td>ไม่ใช่</td>
+</tr>
+</tbody></table></div>
+<h3 id="จุดหลอกของ-quick-sort">จุดหลอกของ Quick Sort</h3>
+<ul>
+<li>เลือกตัวท้ายเป็น pivot เจอข้อมูลเรียงแล้ว → แบ่งไม่สมดุล → worst O(n²)</li>
+<li>Random pivot หรือ median-of-three ช่วยลดปัญหาการเลือก pivot แต่ไม่ได้รับประกันว่าไม่มี worst case</li>
+<li>Median-of-three เลือกค่ากลางจากค่าที่ตำแหน่งต้น กลาง ท้าย ไม่ใช่ median ของข้อมูลทั้งหมด</li>
+<li>Call stack ใช้ O(log n) เมื่อแบ่งสมดุล และอาจถึง O(n) เมื่อแบ่งแย่มาก</li>
+<li>ถ้าโค้ดสร้างสำเนา list ก่อนเริ่ม ต้องนับพื้นที่ของสำเนาเพิ่มด้วย</li>
+</ul>
+<h3 id="python-sorting">Python sorting</h3>
+<p>ตามบทเรียน Python ใช้แนวคิด <strong>Timsort</strong> ซึ่งผสมการจัดการข้อมูลช่วงเล็กแบบ Insertion Sort กับการ merge และเป็น <strong>stable sort</strong></p>
+<pre><code class="language-python">a = [3, 1, 2]
+b = sorted(a)  # สร้าง list ใหม่
+# a = [3, 1, 2], b = [1, 2, 3]
+
+result = a.sort()  # แก้ a โดยตรง
+# a = [1, 2, 3], result = None
+</code></pre>
+<p>จำให้แม่น: <strong><code>sorted(a)</code> คืน list ใหม่ ส่วน <code>a.sort()</code> คืน <code>None</code></strong></p>
+<h2 id="week-15--hash-table">Week 15 — Hash Table</h2>
+<p>Hash Table ใช้ key คำนวณว่าจะไปเก็บหรือค้นหาที่ bucket ใด:</p>
+<pre><code class="language-python">index = hash(key) % capacity
+</code></pre>
+<p>เมื่อ capacity เป็นจำนวนเต็มบวก ผล index อยู่ในช่วง 0 ถึง capacity−1</p>
+<p>Hash function ที่ดีควรให้ผลคงที่สำหรับ key เดิมภายใต้บริบทการทำงานเดียวกัน กระจาย key ได้ดี และคำนวณรวดเร็ว</p>
+<h3 id="collision">Collision</h3>
+<p><strong>Collision</strong> คือ key ต่างกัน แต่ได้ bucket index เดียวกัน ไม่ได้หมายความว่า key เหมือนกัน</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>วิธีจัดการ collision</th>
+<th>หลักการ</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Chaining</td>
+<td>bucket หนึ่งเก็บหลาย <code>(key, value)</code></td>
+</tr>
+<tr>
+<td>Linear Probing</td>
+<td>ถ้าช่องชน ให้หาช่องถัดไป และวนด้วย modulo</td>
+</tr>
+</tbody></table></div>
+<h3 id="tombstone-สำคัญอย่างไร">Tombstone สำคัญอย่างไร</h3>
+<p>สมมติ A กับ B มี index เริ่มต้นเดียวกัน:</p>
+<pre><code class="language-text">index 2: A
+index 3: B  ← ชนจึงเลื่อนไปช่องถัดไป
+</code></pre>
+<p>หากลบ A แล้วใส่ <code>None</code> การค้นหา B ที่เริ่มจาก index 2 อาจหยุดทันทีและเข้าใจว่าไม่พบ B</p>
+<p>จึงใช้ <strong>Tombstone</strong> แทน:</p>
+<ul>
+<li><code>None</code> → ช่องว่างที่ใช้เป็นจุดหยุดค้นหา</li>
+<li>Tombstone → เคยมีข้อมูลแล้วถูกลบ <strong>ต้องค้นต่อ</strong></li>
+</ul>
+<h3 id="load-factor-และ-rehashing">Load factor และ Rehashing</h3>
+<pre><code class="language-python">load_factor = size / capacity
+</code></pre>
+<p>เช่น size = 6, capacity = 8 → load factor = <strong>0.75</strong></p>
+<p><strong>Rehashing</strong> คือสร้างตารางขนาดใหม่ แล้วคำนวณ bucket ของข้อมูลเดิมใหม่ เพราะ <code>% capacity</code> เปลี่ยนไป</p>
+<ul>
+<li>ค้นหา/เพิ่ม/ลบ: โดยเฉลี่ย O(1) เมื่อกระจาย hash ดีและควบคุม load factor</li>
+<li>กรณีแย่สุด: O(n)</li>
+<li>Rehash หนึ่งครั้ง: โดยทั่วไป O(n) ภายใต้เงื่อนไขการกระจาย hash ที่ดี</li>
+<li>การเพิ่มต่อเนื่องยังได้ต้นทุนเฉลี่ยแบบ amortized O(1) ภายใต้เงื่อนไขดังกล่าว</li>
+<li>เกณฑ์ขยายตารางขึ้นอยู่กับ implementation ไม่ใช่กฎตายตัวของ Hash Table ทุกแบบ</li>
+</ul>
+<p><strong>จุดออกข้อสอบเฉพาะโค้ดในสไลด์:</strong> ตรวจ <code>load_factor &gt;= 0.75</code> <strong>ก่อน insert</strong> ดังนั้นการเพิ่มจนแตะ 0.75 พอดี จะยังไม่ rehash จนกว่าจะเรียก insert ครั้งถัดไป</p>
+<h3 id="python-ที่ควรจำ">Python ที่ควรจำ</h3>
+<ul>
+<li><code>dict</code> วนตามลำดับการเพิ่ม key ไม่ได้เรียง key ให้อัตโนมัติ</li>
+<li>ใส่ key เดิมอีกครั้ง → อัปเดต value จำนวน key ไม่เพิ่ม</li>
+<li>key ต้อง <strong>hashable</strong> เช่น <code>int</code>, <code>str</code>, tuple ที่สมาชิกทั้งหมด hashable</li>
+<li><code>list</code> ใช้เป็น dict key ไม่ได้ และ tuple ที่มี list เป็นสมาชิกก็ใช้เป็น key ไม่ได้</li>
+<li><code>hash()</code> ของ string อาจต่างกันเมื่อเปิด interpreter คนละครั้ง แต่คงที่สำหรับ string เดิมภายในรอบการทำงานเดียวกัน</li>
+<li><code>is</code> ตรวจว่าเป็น object เดียวกัน ส่วน <code>==</code> ตรวจความเท่ากันของค่า</li>
+<li>ตัวอย่างคลาส HashTable ในสไลด์โยน <code>KeyError</code> เมื่อค้นหาหรือลบ key ที่ไม่มีอยู่</li>
+</ul>
+<h3 id="ระวัง-reference-ซ้ำตอนสร้าง-buckets">ระวัง reference ซ้ำตอนสร้าง buckets</h3>
+<pre><code class="language-python">wrong = [[]] * 3
+wrong[0].append(1)
+print(wrong)  # [[1], [1], [1]]
+</code></pre>
+<p>ทั้งสามช่องอ้างอิง list ตัวเดียวกัน ต้องสร้างแยก:</p>
+<pre><code class="language-python">correct = [[] for _ in range(3)]
+correct[0].append(1)
+print(correct)  # [[1], [], []]
+</code></pre>
+<h2 id="แนวข้อสอบปรนัย-20-ข้อ">แนวข้อสอบปรนัย 20 ข้อ</h2>
+<p>ลองทำก่อนดูเฉลย แต่ละข้อมีคำตอบที่ถูกต้องที่สุดหนึ่งข้อ</p>
+<h3 id="ข้อ-1">ข้อ 1</h3>
+<p>Singly Linked List มี <code>tail</code> อยู่แล้ว การเพิ่มท้ายมีเวลาเท่าใด?</p>
+<ul>
+<li>ก. O(1)</li>
+<li>ข. O(log n)</li>
+<li>ค. O(n)</li>
+<li>ง. O(n²)</li>
+</ul>
+<h3 id="ข้อ-2">ข้อ 2</h3>
+<p>ทำไมการลบตัวท้ายของ Singly Linked List ยังเป็น O(n)?</p>
+<ul>
+<li>ก. ต้องเรียงข้อมูล</li>
+<li>ข. ต้องหา Node ก่อนท้าย</li>
+<li>ค. ต้อง copy ทุก Node</li>
+<li>ง. ต้องทำ rehash</li>
+</ul>
+<h3 id="ข้อ-3">ข้อ 3</h3>
+<p>แทรก <code>new</code> หลัง <code>current</code> โดยรักษา Node ถัดไปเดิมไว้ ควรทำข้อใดก่อน?</p>
+<ul>
+<li>ก. <code>current = new</code></li>
+<li>ข. <code>current.next = new</code></li>
+<li>ค. <code>new.next = current.next</code></li>
+<li>ง. <code>head = None</code></li>
+</ul>
+<h3 id="ข้อ-4">ข้อ 4</h3>
+<p>ลบสมาชิกตัวเดียวที่เหลือใน Linked List แล้ว ข้อใดถูก?</p>
+<ul>
+<li>ก. เปลี่ยนเฉพาะ tail</li>
+<li>ข. ไม่ต้องเปลี่ยนอะไร</li>
+<li>ค. เพิ่ม size</li>
+<li>ง. head และ tail เป็น None</li>
+</ul>
+<h3 id="ข้อ-5">ข้อ 5</h3>
+<p>Stack เริ่มว่าง ได้รับ <code>push(1), push(2), pop(), push(3)</code> แล้ว <code>peek()</code> ได้อะไร?</p>
+<ul>
+<li>ก. 1</li>
+<li>ข. 2</li>
+<li>ค. 3</li>
+<li>ง. Stack ว่าง</li>
+</ul>
+<h3 id="ข้อ-6">ข้อ 6</h3>
+<p>ข้อใดมีวงเล็บถูกต้อง?</p>
+<ul>
+<li>ก. <code>([)]</code></li>
+<li>ข. <code>([])</code></li>
+<li>ค. <code>(()</code></li>
+<li>ง. <code>)(</code></li>
+</ul>
+<h3 id="ข้อ-7">ข้อ 7</h3>
+<p>Undo แล้วพิมพ์ข้อความใหม่ ควรทำอย่างไรกับ redo_stack?</p>
+<ul>
+<li>ก. ล้างทิ้ง</li>
+<li>ข. เรียงข้อมูล</li>
+<li>ค. ย้ายทั้งหมดลง undo_stack</li>
+<li>ง. เก็บเหมือนเดิม</li>
+</ul>
+<h3 id="ข้อ-8">ข้อ 8</h3>
+<p>Queue เริ่มว่าง ได้รับ <code>enqueue(&quot;A&quot;), enqueue(&quot;B&quot;), dequeue(), enqueue(&quot;C&quot;)</code> แล้วตัวหน้าคืออะไร?</p>
+<ul>
+<li>ก. A</li>
+<li>ข. C</li>
+<li>ค. ว่าง</li>
+<li>ง. B</li>
+</ul>
+<h3 id="ข้อ-9">ข้อ 9</h3>
+<p>Circular Queue มี capacity = 5, rear = 4 ถ้า enqueue สำเร็จหนึ่งครั้ง rear ใหม่คืออะไร ตามสูตรในบทเรียน?</p>
+<ul>
+<li>ก. 5</li>
+<li>ข. 0</li>
+<li>ค. 1</li>
+<li>ง. 4</li>
+</ul>
+<h3 id="ข้อ-10">ข้อ 10</h3>
+<p>Circular Queue ที่ใช้ size ตรวจว่าเต็มด้วยเงื่อนไขใด?</p>
+<ul>
+<li>ก. <code>front == rear</code> เสมอ</li>
+<li>ข. <code>rear == 0</code></li>
+<li>ค. <code>size == capacity</code></li>
+<li>ง. <code>size == 0</code></li>
+</ul>
+<h3 id="ข้อ-11">ข้อ 11</h3>
+<p>ใน min-heap มี <code>(2,0,&quot;A&quot;), (1,1,&quot;B&quot;), (1,2,&quot;C&quot;)</code> ลำดับนำข้อมูลออกคืออะไร?</p>
+<ul>
+<li>ก. B, C, A</li>
+<li>ข. A, B, C</li>
+<li>ค. C, B, A</li>
+<li>ง. B, A, C</li>
+</ul>
+<h3 id="ข้อ-12">ข้อ 12</h3>
+<p>Bubble Sort เรียงน้อยไปมาก วิ่งซ้ายไปขวาหนึ่ง pass บน <code>[4,2,3,1]</code> ได้อะไร?</p>
+<ul>
+<li>ก. <code>[1,2,3,4]</code></li>
+<li>ข. <code>[2,4,3,1]</code></li>
+<li>ค. <code>[1,4,2,3]</code></li>
+<li>ง. <code>[2,3,1,4]</code></li>
+</ul>
+<h3 id="ข้อ-13">ข้อ 13</h3>
+<p>Selection Sort แบบมาตรฐานบนข้อมูล 5 ตัว เปรียบเทียบหาค่าน้อยสุดรวมกี่ครั้ง?</p>
+<ul>
+<li>ก. 5</li>
+<li>ข. 10</li>
+<li>ค. 20</li>
+<li>ง. 25</li>
+</ul>
+<h3 id="ข้อ-14">ข้อ 14</h3>
+<p>ข้อมูลเกือบเรียงแล้ว ควรเลือกอะไรในสามอัลกอริทึมพื้นฐานที่เรียน?</p>
+<ul>
+<li>ก. Selection</li>
+<li>ข. Bubble แบบไม่หยุดก่อน</li>
+<li>ค. Insertion</li>
+<li>ง. ทั้งหมดใช้เวลาจริงเท่ากันเสมอ</li>
+</ul>
+<h3 id="ข้อ-15">ข้อ 15</h3>
+<p>Stable sort หมายถึงอะไร?</p>
+<ul>
+<li>ก. รักษาลำดับเดิมของรายการที่ key เท่ากัน</li>
+<li>ข. เวลาเป็น O(n) เสมอ</li>
+<li>ค. ไม่ใช้ recursion</li>
+<li>ง. ไม่ใช้หน่วยความจำ</li>
+</ul>
+<h3 id="ข้อ-16">ข้อ 16</h3>
+<p>Merge Sort แบบมาตรฐานในบทเรียนมี worst-case time เท่าใด?</p>
+<ul>
+<li>ก. O(1)</li>
+<li>ข. O(n)</li>
+<li>ค. O(n²)</li>
+<li>ง. O(n log n)</li>
+</ul>
+<h3 id="ข้อ-17">ข้อ 17</h3>
+<p>Quick Sort เลือกตัวท้ายเป็น pivot เจอข้อมูลเรียงแล้ว อาจเกิดอะไร?</p>
+<ul>
+<li>ก. ไม่มี recursion</li>
+<li>ข. แบ่งเท่ากันเสมอ</li>
+<li>ค. เวลาเป็น O(n²)</li>
+<li>ง. กลายเป็น stable</li>
+</ul>
+<h3 id="ข้อ-18">ข้อ 18</h3>
+<p>โค้ดนี้แสดงค่าอะไร?</p>
+<pre><code class="language-python">a = [3, 1, 2]
+b = a.sort()
+print(b)
+</code></pre>
+<ul>
+<li>ก. <code>[1,2,3]</code></li>
+<li>ข. <code>None</code></li>
+<li>ค. <code>[3,1,2]</code></li>
+<li>ง. Error เสมอ</li>
+</ul>
+<h3 id="ข้อ-19">ข้อ 19</h3>
+<p>Hash Table มีข้อมูล 6 รายการ capacity 8 มี load factor เท่าใด?</p>
+<ul>
+<li>ก. 0.75</li>
+<li>ข. 0.25</li>
+<li>ค. 1.33</li>
+<li>ง. 2</li>
+</ul>
+<h3 id="ข้อ-20">ข้อ 20</h3>
+<p>ทำไม Linear Probing จึงใช้ Tombstone เมื่อลบข้อมูล?</p>
+<ul>
+<li>ก. เพื่อเรียง key</li>
+<li>ข. เพื่อไม่ให้ collision เกิดอีก</li>
+<li>ค. เพื่อเพิ่ม capacity</li>
+<li>ง. เพื่อให้การค้นหาข้ามช่องที่ถูกลบไปต่อได้</li>
+</ul>
+<h2 id="เฉลยพร้อมเหตุผล">เฉลยพร้อมเหตุผล</h2>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>ข้อ</th>
+<th>ตอบ</th>
+<th>เหตุผล</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>ก</td>
+<td>มี tail จึงต่อ Node ใหม่ได้ทันที</td>
+</tr>
+<tr>
+<td>2</td>
+<td>ข</td>
+<td>ต้องหา Node ก่อนท้ายเพื่อให้เป็น tail ใหม่</td>
+</tr>
+<tr>
+<td>3</td>
+<td>ค</td>
+<td>เก็บทางไปส่วนท้ายเดิมก่อนเปลี่ยนการเชื่อม</td>
+</tr>
+<tr>
+<td>4</td>
+<td>ง</td>
+<td>List ว่างแล้ว ต้องอัปเดตทั้งสองตัว</td>
+</tr>
+<tr>
+<td>5</td>
+<td>ค</td>
+<td>2 ถูก pop ออก แล้ว 3 เป็น top ใหม่</td>
+</tr>
+<tr>
+<td>6</td>
+<td>ข</td>
+<td>วงเล็บจับคู่ตรงชนิดและปิดตามลำดับ</td>
+</tr>
+<tr>
+<td>7</td>
+<td>ก</td>
+<td>Action ใหม่ทำให้เส้นทาง redo เดิมใช้ไม่ได้</td>
+</tr>
+<tr>
+<td>8</td>
+<td>ง</td>
+<td>A ออกก่อน เหลือ B อยู่หน้า C</td>
+</tr>
+<tr>
+<td>9</td>
+<td>ข</td>
+<td><code>(4 + 1) % 5 = 0</code></td>
+</tr>
+<tr>
+<td>10</td>
+<td>ค</td>
+<td>size เท่าความจุแปลว่าเต็ม</td>
+</tr>
+<tr>
+<td>11</td>
+<td>ก</td>
+<td>priority 1 ก่อน และ B มาถึงก่อน C</td>
+</tr>
+<tr>
+<td>12</td>
+<td>ง</td>
+<td>4 ถูกสลับไปจนถึงท้าย</td>
+</tr>
+<tr>
+<td>13</td>
+<td>ข</td>
+<td><code>4 + 3 + 2 + 1 = 10</code></td>
+</tr>
+<tr>
+<td>14</td>
+<td>ค</td>
+<td>Insertion เลื่อนข้อมูลน้อยเมื่อเกือบเรียงแล้ว</td>
+</tr>
+<tr>
+<td>15</td>
+<td>ก</td>
+<td>key เท่ากันยังคงลำดับสัมพัทธ์เดิม</td>
+</tr>
+<tr>
+<td>16</td>
+<td>ง</td>
+<td>งาน O(n) ต่อระดับ × O(log n) ระดับ</td>
+</tr>
+<tr>
+<td>17</td>
+<td>ค</td>
+<td>แบ่งเป็นฝั่ง n−1 กับฝั่งว่างซ้ำ ๆ</td>
+</tr>
+<tr>
+<td>18</td>
+<td>ข</td>
+<td><code>list.sort()</code> คืน None</td>
+</tr>
+<tr>
+<td>19</td>
+<td>ก</td>
+<td><code>6 / 8 = 0.75</code></td>
+</tr>
+<tr>
+<td>20</td>
+<td>ง</td>
+<td>ป้องกันการหยุดค้นหาก่อนถึง key ที่เคยชนกัน</td>
+</tr>
+</tbody></table></div>
+<h2 id="รายการทบทวนก่อนสอบ">รายการทบทวนก่อนสอบ</h2>
+<ul>
+<li><input disabled="" type="checkbox"> แยก LIFO / FIFO / priority และไล่ลำดับข้อมูลออกได้</li>
+<li><input disabled="" type="checkbox"> อธิบายว่า Linked List operation ใดต้องค้นหาก่อน และข้อใดเปลี่ยน reference ได้ทันที</li>
+<li><input disabled="" type="checkbox"> จำกรณี List/Queue ว่าง และกรณีเหลือสมาชิกตัวเดียว</li>
+<li><input disabled="" type="checkbox"> ตรวจวงเล็บ และอธิบายการล้าง redo_stack หลัง action ใหม่ได้</li>
+<li><input disabled="" type="checkbox"> คำนวณ Postfix โดยไม่สลับ operand ของการลบและหาร</li>
+<li><input disabled="" type="checkbox"> คำนวณการวน index ของ Circular Queue และแยกสถานะเต็ม/ว่างด้วย size</li>
+<li><input disabled="" type="checkbox"> อ่าน tuple <code>(priority, counter, data)</code> และเรียงลำดับนำออกได้</li>
+<li><input disabled="" type="checkbox"> ไล่ Bubble, Selection, Insertion ให้ได้อย่างน้อยสองรอบ</li>
+<li><input disabled="" type="checkbox"> จำเวลา Sorting พร้อมเงื่อนไข best/worst และความหมายของ stable</li>
+<li><input disabled="" type="checkbox"> อธิบาย Merge Sort ว่าทำไมเป็น O(n log n)</li>
+<li><input disabled="" type="checkbox"> อธิบาย pivot และกรณีแย่สุดของ Quick Sort</li>
+<li><input disabled="" type="checkbox"> แยก <code>sorted(a)</code> กับ <code>a.sort()</code> ได้</li>
+<li><input disabled="" type="checkbox"> คำนวณ modulo และ load factor</li>
+<li><input disabled="" type="checkbox"> อธิบาย collision → probing → tombstone → rehash ได้</li>
+<li><input disabled="" type="checkbox"> อ่าน reference ซ้ำจาก <code>[[]] * n</code> ได้</li>
+<li><input disabled="" type="checkbox"> เวลาเจอ Big-O อ่านก่อนว่ารวมการค้นหา การ copy และ call stack หรือไม่</li>
+</ul>
+<h3 id="ถ้ามีเวลาน้อย-ให้ทบทวนตามลำดับนี้">ถ้ามีเวลาน้อย ให้ทบทวนตามลำดับนี้</h3>
+<ol>
+<li>ตาราง Big-O ของ Linked List และ Sorting</li>
+<li>ไล่ลำดับ Stack, Queue, Priority Queue</li>
+<li>ไล่ Sorting ทีละ pass</li>
+<li>Circular Queue, load factor และ modulo</li>
+<li>จุดหลอก: stable, tombstone, <code>sort()</code> คืน None, การอ้างอิง object เดียวกัน</li>
+</ol>
+<h2 id="เอกสารอ้างอิง">เอกสารอ้างอิง</h2>
+<p>รายการชื่อเอกสารประกอบรายวิชาที่ใช้จัดทำสรุป</p>
+<ul>
+<li>Week10.pdf — Linked List</li>
+<li>Week11.pdf — Stack และการประยุกต์</li>
+<li>Week12.pdf — Queue, Circular Queue, Deque และ Priority Queue</li>
+<li>Week13.pdf — Big-O, Bubble, Selection และ Insertion Sort</li>
+<li>Week14.pdf — Merge Sort, Quick Sort และ Timsort</li>
+<li>Week15.pdf — Hashing และ Hash Table</li>
+<li>Lab11-1.docx — Postfix Calculator</li>
+</ul>
+<blockquote>
+<p>ตารางและคำอธิบายระบุเงื่อนไขของ implementation เพื่อช่วยอ่านข้อสอบให้แม่น โดยเฉพาะพื้นที่ของ <code>arr.copy()</code>, call stack ของ Quick Sort และเวลาที่รวมการค้นหาตำแหน่งใน Linked List</p>
+</blockquote>
+</article><footer class="footer"><span>เรียน / OOP &amp; Data Structures</span><a href="../../">กลับคลังเรียน</a></footer></main></div><script>let preferences={};try{preferences=JSON.parse(localStorage.getItem('skyce-learning-preferences')||'{}')}catch{}function savePreferences(){try{localStorage.setItem('skyce-learning-preferences',JSON.stringify(preferences))}catch{}}function applyTheme(){document.documentElement.dataset.theme=preferences.theme||'light';document.querySelector('#theme').textContent=preferences.theme==='dark'?'☀':'☾';document.querySelector('#theme').setAttribute('aria-label',preferences.theme==='dark'?'เปลี่ยนเป็นโหมดสว่าง':'เปลี่ยนเป็นโหมดมืด')}applyTheme();document.querySelector('#theme').onclick=()=>{preferences.theme=preferences.theme==='dark'?'light':'dark';savePreferences();applyTheme()};const sidebar=document.querySelector('#sidebar'),overlay=document.querySelector('#overlay'),menu=document.querySelector('#menu');function closeMenu(){sidebar.classList.remove('open');overlay.classList.remove('visible');menu.setAttribute('aria-expanded','false');sidebar.inert=matchMedia('(max-width:800px)').matches}function fitSidebar(){sidebar.inert=matchMedia('(max-width:800px)').matches&&!sidebar.classList.contains('open')}fitSidebar();window.addEventListener('resize',fitSidebar);menu.onclick=()=>{const opening=!sidebar.classList.contains('open');if(opening){sidebar.classList.add('open');sidebar.inert=false;overlay.classList.add('visible');menu.setAttribute('aria-expanded','true');sidebar.querySelector('a').focus()}else closeMenu()};overlay.onclick=closeMenu;document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.focus();closeMenu()}});sidebar.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));let fontSize=Number(preferences.font)||17;function setFont(){fontSize=Math.min(22,Math.max(14,fontSize));document.documentElement.style.setProperty('--text-size',fontSize+'px');document.querySelector('#font-value').textContent=fontSize;preferences.font=fontSize;savePreferences()}setFont();document.querySelector('#font-less').onclick=()=>{fontSize--;setFont()};document.querySelector('#font-more').onclick=()=>{fontSize++;setFont()};document.querySelector('#print').onclick=()=>window.print();</script></body></html>

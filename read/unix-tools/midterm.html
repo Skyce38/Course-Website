@@ -1,0 +1,584 @@
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>สรุป Unix Tools · Midterm · เรียน</title><style>
+:root{--bg:#f5f5ee;--paper:#fffefa;--ink:#243e36;--muted:#748177;--line:#dfe5d8;--accent:#285f4b;--soft:#e8efdd;--gold:#e8d496;--text-size:17px;color-scheme:light}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.8 Tahoma,'Leelawadee UI',sans-serif}button,input,select{font:inherit}a{color:var(--accent);text-underline-offset:4px}button{cursor:pointer;color:inherit}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #b29440;outline-offset:4px}[hidden]{display:none!important}::selection{background:var(--gold);color:#203e31}.sidebar{position:fixed;inset:0 auto 0 0;width:246px;border-right:1px solid var(--line);background:var(--paper);padding:28px 18px;display:flex;flex-direction:column;z-index:60;overflow:auto}.brand{display:flex;gap:11px;align-items:center;text-decoration:none;color:var(--ink);padding:0 11px}.brand-symbol{background:var(--accent);color:#fff;width:40px;height:40px;display:grid;place-items:center;border-radius:12px;font:25px Georgia,serif}.brand strong{display:block;font-size:20px;line-height:1.3}.brand small{display:block;color:var(--muted);font:9px/1.8 monospace;letter-spacing:1.6px}.nav-label,.eyebrow{font:10px/1.6 monospace;letter-spacing:1.8px;color:var(--muted)}.nav-label{margin:35px 12px 12px}.side-link{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--muted);padding:11px 12px;border-radius:9px;font-size:12px;line-height:1.6;margin:3px 0}.side-link:hover,.side-link.active{background:var(--soft);color:var(--accent)}.side-link.active{font-weight:bold}.side-icon{font:12px monospace;width:25px;flex-shrink:0}.side-bottom{margin-top:auto;padding:28px 12px 0;font-size:10px;color:var(--muted)}.side-bottom a{display:block;font-size:11px;margin-top:12px}.workspace{margin-left:246px}.topbar{position:sticky;top:0;z-index:40;height:72px;background:var(--bg);border-bottom:1px solid var(--line);padding:0 42px;display:flex;align-items:center;justify-content:space-between;gap:15px}.breadcrumbs{font-size:11px;color:var(--muted)}.breadcrumbs a{text-decoration:none;color:inherit}.breadcrumbs span{color:var(--ink);margin-left:10px}.top-actions{display:flex;gap:8px;align-items:center}.icon-button{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:7px 12px;min-height:36px;font-size:12px}.menu-button{display:none}.content{max-width:1240px;margin:auto;padding:43px 50px 55px}.eyebrow{color:var(--accent);font-weight:bold}.hero{display:grid;grid-template-columns:1fr 180px;align-items:center;gap:30px;margin:10px 0 29px}.hero h1{font-size:clamp(34px,3.6vw,48px);line-height:1.35;letter-spacing:-1.5px;margin:13px 0 16px}.hero h1 em{font-style:normal;color:var(--accent)}.hero p{max-width:650px;color:var(--muted);font-size:13px;line-height:2}.book-art{height:150px;position:relative;display:flex;align-items:center;justify-content:center}.book-art div{position:absolute;width:100px;height:128px;background:var(--paper);border:1px solid #739077;border-radius:10px;transform:rotate(12deg)}.book-art div+div{transform:rotate(-10deg);background:var(--soft);padding:19px;display:flex;flex-direction:column;justify-content:space-between;font:11px monospace;color:var(--accent)}.book-art b{font:26px Georgia,serif}.book-art small{font:9px/1.6 monospace;letter-spacing:1px}.hero-facts{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.pill{border:1px solid var(--line);background:var(--paper);padding:4px 10px;border-radius:6px;color:var(--muted);font-size:10px}.section-heading{display:flex;justify-content:space-between;align-items:end;margin:30px 0 17px;gap:20px}.section-heading h2{font-size:22px;letter-spacing:-.5px;margin:0}.section-heading p{font-size:11px;color:var(--muted);margin:2px 0}.search-row{display:flex;gap:10px;align-items:center;margin:27px 0}.search-wrap{flex:1;position:relative}.search-wrap span{position:absolute;left:16px;top:11px;color:var(--muted)}#search{width:100%;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:12px 16px 12px 41px;color:var(--ink);font-size:12px}.search-help{color:var(--muted);font-size:10px}.course-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.course-card{display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px;text-decoration:none;color:var(--ink);transition:transform .15s,border-color .15s;min-height:235px}.course-card:hover{transform:translateY(-3px);border-color:var(--accent)}.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}.course-symbol{display:grid;place-items:center;width:44px;height:44px;border-radius:11px;background:color-mix(in srgb,var(--course-color) 11%,var(--paper));color:var(--course-color);font:bold 15px monospace}.card-number{font:10px monospace;color:var(--muted)}.course-card h3{font-size:17px;line-height:1.5;margin:0 0 5px;letter-spacing:-.3px}.course-thai{font-size:10px;color:var(--muted);line-height:1.7;margin:0 0 16px}.card-tags{display:flex;gap:5px;flex-wrap:wrap}.tag{background:var(--bg);border-radius:5px;padding:2px 7px;color:var(--muted);font-size:9px}.card-footer{margin-top:auto;padding-top:20px;display:flex;justify-content:space-between;gap:8px;font-size:10px;color:var(--muted)}.ready{color:var(--accent)}.quick-banner{background:var(--accent);color:white;border-radius:15px;padding:23px 27px;display:flex;align-items:center;justify-content:space-between;gap:20px;margin:28px 0}.quick-banner small{font:9px monospace;letter-spacing:1.5px;opacity:.65}.quick-banner h3{font-size:17px;margin:4px 0}.quick-banner p{font-size:11px;opacity:.75;margin:0}.quick-banner a{background:#ffffffed;color:#285f4b;padding:10px 16px;border-radius:8px;text-decoration:none;font-size:11px;white-space:nowrap}.resource-list{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden}.resource-row{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:15px}.resource-row:last-child{border-bottom:0}.file-icon{height:39px;width:39px;border-radius:9px;background:var(--soft);color:var(--accent);display:grid;place-items:center;font:10px monospace;flex-shrink:0}.resource-main{flex:1;min-width:0}.resource-main>a{color:var(--ink);font-weight:bold;font-size:13px;text-decoration:none;line-height:1.7}.resource-main>a:hover{text-decoration:underline}.resource-meta{color:var(--muted);font-size:10px;margin-top:4px;display:flex;flex-wrap:wrap;gap:9px}.resource-buttons{display:flex;gap:7px;align-items:center}.bookmark{background:none;border:0;padding:6px 8px;color:var(--muted);font-size:20px}.bookmark[aria-pressed=true]{color:#b28d2d}.read-link{font-size:11px;border:1px solid var(--line);border-radius:7px;padding:7px 11px;text-decoration:none;white-space:nowrap}.read-link:hover{background:var(--soft)}.course-header{display:flex;gap:20px;align-items:center;padding:15px 0 25px}.course-header .course-symbol{width:67px;height:72px;font-size:25px}.course-header h1{font-size:31px;line-height:1.5;letter-spacing:-.8px;margin:4px 0}.course-header p{font-size:12px;color:var(--muted);margin:5px 0}.course-toolbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin:10px 0 25px;font-size:11px;color:var(--muted)}.course-toolbar a{font-size:11px}.category-tabs{display:flex;gap:7px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:22px;margin-bottom:23px}.category-tab{border:1px solid var(--line);background:var(--paper);padding:9px 12px;border-radius:9px;font-size:11px;text-decoration:none;color:var(--muted)}.category-tab.active{border-color:var(--accent);background:var(--soft);color:var(--accent);font-weight:bold}.category-tab span{font:10px monospace;margin-left:6px;opacity:.6}.empty{padding:45px 25px;text-align:center;border:1px dashed var(--line);background:var(--paper);border-radius:15px}.empty-symbol{font-size:28px;color:var(--muted)}.empty h3{font-size:17px;margin:10px 0}.empty p{font-size:12px;color:var(--muted);max-width:440px;margin:9px auto 20px}.empty a{font-size:12px}.small-note{font-size:10px;color:var(--muted);margin-top:14px;line-height:1.9}.overview-counts{display:flex;gap:23px;font-size:10px;color:var(--muted);margin-top:24px}.overview-counts strong{font:21px Georgia,serif;color:var(--accent);margin-right:6px}.footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-size:10px;color:var(--muted);display:flex;justify-content:space-between;gap:15px}.footer a{color:inherit}.toast{position:fixed;bottom:24px;left:calc(50% + 100px);transform:translateX(-50%);border-radius:9px;background:var(--accent);color:white;padding:10px 17px;z-index:100;font-size:11px}.overlay{display:none}.result-label{font-size:12px;color:var(--muted);margin:18px 0}.back-link{font-size:11px;text-decoration:none;display:inline-block;margin-bottom:14px}.prose{font-size:var(--text-size);line-height:2.05;overflow-wrap:anywhere}.prose h1{font-size:30px;line-height:1.5;margin:15px 0 28px;letter-spacing:-.5px}.prose h2{font-size:23px;line-height:1.6;margin:38px 0 18px;padding-top:18px;border-top:1px solid var(--line);scroll-margin-top:90px}.prose h3{font-size:19px;margin:30px 0 15px;scroll-margin-top:90px}.prose h4{font-size:17px;margin:24px 0 12px}.prose p{margin:16px 0}.prose li{margin:8px 0}.prose ul,.prose ol{padding-left:25px}.prose code{font:.85em/1.7 Consolas,monospace;padding:2px 5px;border-radius:4px;background:var(--soft);color:var(--accent)}.prose pre{background:#213a34;color:#e7eedf;border-radius:11px;padding:20px;overflow:auto;line-height:1.8}.prose pre code{font-size:13px;color:inherit;background:none;padding:0;white-space:pre}.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:9px;margin:24px 0}.prose table{border-collapse:collapse;width:100%;font-size:.8em;min-width:420px;line-height:1.8}.prose th{background:var(--soft);color:var(--accent);text-align:left;padding:12px 15px}.prose td{padding:11px 15px;border-top:1px solid var(--line);vertical-align:top}.prose blockquote{border-left:3px solid #b5a368;background:var(--bg);padding:2px 19px;margin:22px 0;color:var(--muted)}.reading-page{max-width:950px;margin:0 auto;background:var(--paper);padding:32px 42px;border:1px solid var(--line);border-radius:16px}.reader-nav{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 20px}.reader-toc{max-height:calc(100vh - 180px);overflow:auto;margin-top:25px}.reader-toc a{display:block;padding:7px 10px;font-size:10px;color:var(--muted);text-decoration:none;border-radius:7px}.reader-toc a:hover{background:var(--soft);color:var(--accent)}.reader-toc a.sub{padding-left:20px;font-size:9px}.reader-content{max-width:1050px}.reader-font{display:flex;gap:5px;align-items:center}.reader-font span{font-size:10px;color:var(--muted)}.reader-top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:18px}
+html[data-theme=dark]{--bg:#172722;--paper:#1f322b;--ink:#e5ebdf;--muted:#a2b4a7;--line:#354b3f;--accent:#b7d19b;--soft:#304738;--gold:#a78b42;color-scheme:dark}html[data-theme=dark] .brand-symbol,html[data-theme=dark] .quick-banner,html[data-theme=dark] .toast{background:#355f47;color:#fff}html[data-theme=dark] .course-symbol{color:#d3dfca}
+@media(max-width:1200px){.content{padding:32px}.course-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sidebar{width:224px}.workspace{margin-left:224px}.topbar{padding:0 32px}.course-card{min-height:230px}}
+@media(max-width:800px){.sidebar{transform:translateX(-100%);width:270px;transition:transform .18s}.sidebar.open{transform:translateX(0)}.workspace{margin-left:0}.menu-button{display:inline-block}.topbar{padding:0 20px;height:65px}.content{padding:27px 23px}.hero h1{font-size:38px}.hero{grid-template-columns:1fr 120px;gap:10px}.book-art{transform:scale(.85)}.overlay.visible{display:block;position:fixed;inset:0;background:#12302166;z-index:55}.toast{left:50%}.reading-page{padding:28px}.reader-toc{max-height:65vh}}
+@media(max-width:480px){.topbar{padding:0 13px}.top-actions{gap:5px}.icon-button{padding:7px 9px;font-size:10px}.breadcrumbs{font-size:10px}.content{padding:24px 15px 35px}.hero{grid-template-columns:1fr}.book-art{display:none}.hero h1{font-size:36px}.hero p{font-size:12px}.course-grid{gap:11px}.course-card{padding:16px;min-height:230px}.course-card h3{font-size:14px}.course-thai{font-size:9px}.course-symbol{height:38px;width:38px;font-size:13px}.card-top{margin-bottom:15px}.card-footer{font-size:9px;flex-wrap:wrap;gap:4px}.card-tags{gap:4px}.tag{font-size:8px;padding:2px 5px}.section-heading h2{font-size:20px}.quick-banner{padding:20px;align-items:start;flex-direction:column;gap:14px}.quick-banner h3{font-size:16px}.resource-row{padding:15px 13px;gap:10px}.resource-main>a{font-size:12px}.resource-meta{font-size:9px;gap:6px}.file-icon{width:32px;height:35px;font-size:9px}.resource-buttons{gap:2px}.read-link{padding:6px 8px;font-size:10px}.bookmark{padding:5px;font-size:18px}.search-help{display:none}.course-header{gap:13px;align-items:start}.course-header h1{font-size:24px}.course-header .course-symbol{width:49px;height:56px;font-size:19px}.course-header p{font-size:11px}.course-toolbar{flex-wrap:wrap;font-size:10px}.category-tab{padding:8px 10px;font-size:10px}.category-tabs{gap:6px}.reading-page{padding:23px 18px;border-radius:12px}.prose{font-size:16px;line-height:1.95}.prose h1{font-size:25px}.prose h2{font-size:21px}.prose h3{font-size:18px}.prose pre code{font-size:11px}.reader-top{align-items:start;flex-wrap:wrap}.reader-content{padding:20px 12px}.footer{font-size:9px}.overview-counts{gap:16px}.reader-nav .read-link{font-size:10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media print{.sidebar,.topbar,.reader-nav,.reader-top,.footer,.overlay{display:none!important}.workspace{margin:0}.content,.reading-page{padding:0;max-width:none;border:0}.prose{font-size:12px;color:black}.prose h1{font-size:25px}.prose h2{font-size:20px;break-after:avoid}.prose h3{font-size:16px;break-after:avoid}.prose pre{background:#eee;color:black}.prose pre code{white-space:pre-wrap;font-size:10px}.table-scroll{overflow:visible}.prose table{min-width:0;font-size:10px}}
+</style></head><body><aside class="sidebar" id="sidebar" aria-label="สารบัญเอกสาร"><a href="https://skyce38.github.io/learning/" class="brand"><span class="brand-symbol">ร</span><span><strong>เรียน</strong><small>SKYCE38 / LEARNING</small></span></a><div class="reader-toc"><a href="../../#course/unix-tools">← Unix Tools &amp; Programming</a><a class="" href="#1-ภาพรวมที่ต้องอธิบายได้">1. ภาพรวมที่ต้องอธิบายได้</a><a class="" href="#2-คำสั่งพื้นฐานและเส้นทาง">2. คำสั่งพื้นฐานและเส้นทาง</a><a class="" href="#3-vi-จำโหมดก่อนจำปุ่ม">3. vi: จำโหมดก่อนจำปุ่ม</a><a class="" href="#4-user-group-และ-permission">4. User, group และ permission</a><a class="" href="#5-process-และ-job-control">5. Process และ job control</a><a class="" href="#6-docker-บัญชีผู้ใช้-และเครือข่าย">6. Docker, บัญชีผู้ใช้ และเครือข่าย</a><a class="" href="#7-อักขระพิเศษ-shell-เป็นคนตีความ">7. อักขระพิเศษ: shell เป็นคนตีความ</a><a class="" href="#8-ระบบแฟ้ม-directory--inode--data">8. ระบบแฟ้ม: directory → inode → data</a><a class="sub" href="#สูตร-pointer-ตามแบบจำลองในสไลด์">สูตร pointer ตามแบบจำลองในสไลด์</a><a class="" href="#9-redirection-และ-pipeline">9. Redirection และ pipeline</a><a class="sub" href="#utilities-ที่ใช้ต่อกันบ่อย">Utilities ที่ใช้ต่อกันบ่อย</a><a class="" href="#10-แบบฝึกหัดแต่งเพิ่มพร้อมเฉลย">10. แบบฝึกหัดแต่งเพิ่มพร้อมเฉลย</a><a class="" href="#อ่านรอบสุดท้าย">อ่านรอบสุดท้าย</a><a class="" href="#แหล่งประกอบ">แหล่งประกอบ</a></div></aside><div class="overlay" id="overlay"></div><div class="workspace"><header class="topbar"><div style="display:flex;align-items:center;gap:12px"><button class="icon-button menu-button" id="menu" aria-label="เปิดสารบัญวิชา" aria-expanded="false">☰</button><div class="breadcrumbs"><a href="https://skyce38.github.io/learning/">เรียน</a><span id="breadcrumbs">คลังเรียนทั้งหมด</span></div></div><div class="top-actions"><a class="icon-button" href="https://github.com/Skyce38/learning" target="_blank" rel="noopener" style="text-decoration:none">GitHub ↗</a><button class="icon-button" id="theme" aria-label="เปลี่ยนเป็นโหมดมืด">☾</button></div></header><main class="content reader-content"><div class="reader-top"><a class="back-link" href="../../#course/unix-tools/summaries">← Unix Tools &amp; Programming / สรุป</a><div class="reader-font"><button class="icon-button" id="font-less" aria-label="ลดตัวอักษร">A−</button><span id="font-value">17</span><button class="icon-button" id="font-more" aria-label="เพิ่มตัวอักษร">A+</button><button class="icon-button" id="print">พิมพ์</button></div></div><div class="reader-nav"><span class="pill">Midterm</span><a class="read-link" href="https://github.com/Skyce38/course-unix-tools/blob/main/summaries/midterm.md" target="_blank" rel="noopener">เปิด Markdown บน GitHub ↗</a></div><article class="reading-page prose"><h1>สรุปอ่านสอบ MIDTERM: Unix Tools and Programming</h1>
+<p>อิง <a href="https://angsila.cs.buu.ac.th/~nutthanon/88624159/">โครงร่างรายวิชา</a> ที่ระบุสอบกลางภาคในสัปดาห์ 8 จึงจัดเนื้อหาสัปดาห์ 1–6 เป็นชุด Midterm การแบ่งนี้อิงลำดับเรียน ไม่ใช่ประกาศยืนยันขอบเขตข้อสอบของปีปัจจุบัน ตัวอย่างคำสั่งใช้ Linux/Bash</p>
+<h2 id="1-ภาพรวมที่ต้องอธิบายได้">1. ภาพรวมที่ต้องอธิบายได้</h2>
+<ul>
+<li><strong>Kernel</strong> จัดการ CPU หน่วยความจำ อุปกรณ์ โพรเซส และระบบแฟ้ม</li>
+<li><strong>Shell</strong> รับและตีความคำสั่ง เช่น Bash และใช้เขียน shell script</li>
+<li><strong>Utilities</strong> โปรแกรมช่วยทำงาน เช่น <code>ls</code>, <code>cp</code>, <code>grep</code></li>
+<li><strong>Multiuser</strong> ผู้ใช้หลายคนใช้งานระบบร่วมกัน มี UID, GID และสิทธิของตน</li>
+<li><strong>Multitasking</strong> ระบบจัดสรรเวลาประมวลผลให้หลายโพรเซส</li>
+<li><strong>Process</strong> โปรแกรมที่กำลังทำงาน อ้างด้วย PID; <strong>job</strong> งานที่ shell ติดตาม อาจมีหลายโพรเซสใน pipeline เดียว</li>
+</ul>
+<p>ลำดับการใช้งาน: ผู้ใช้ → shell → เรียกคำสั่ง/โปรแกรม → ขอใช้บริการ kernel</p>
+<h2 id="2-คำสั่งพื้นฐานและเส้นทาง">2. คำสั่งพื้นฐานและเส้นทาง</h2>
+<p>รูปแบบทั่วไป: <code>command [options] [arguments]</code> เช่น <code>ls -l /tmp</code></p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>คำสั่ง</th>
+<th>จำว่าใช้ทำอะไร</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>man ls</code></td>
+<td>เปิดคู่มือคำสั่ง</td>
+</tr>
+<tr>
+<td><code>man 5 passwd</code></td>
+<td>เปิดคู่มือรูปแบบไฟล์ใน section 5</td>
+</tr>
+<tr>
+<td><code>apropos password</code></td>
+<td>ค้นชื่อและคำอธิบายคำสั่งจาก keyword</td>
+</tr>
+<tr>
+<td><code>help cd</code></td>
+<td>คู่มือคำสั่งภายใน Bash</td>
+</tr>
+<tr>
+<td><code>pwd</code></td>
+<td>แสดง working directory</td>
+</tr>
+<tr>
+<td><code>ls -la</code></td>
+<td>แสดงรายละเอียด รวมชื่อที่ขึ้นต้นด้วยจุด</td>
+</tr>
+<tr>
+<td><code>cd dir</code> / <code>cd ..</code></td>
+<td>เข้า directory / ขึ้นไป directory แม่</td>
+</tr>
+<tr>
+<td><code>cd</code> / <code>cd ~</code></td>
+<td>กลับ home directory</td>
+</tr>
+<tr>
+<td><code>cd -</code></td>
+<td>กลับ directory ก่อนหน้า</td>
+</tr>
+<tr>
+<td><code>cat a.txt</code></td>
+<td>แสดงเนื้อหาไฟล์</td>
+</tr>
+<tr>
+<td><code>more a.txt</code> / <code>less a.txt</code></td>
+<td>อ่านทีละหน้า; <code>less</code> เลื่อนย้อนกลับได้</td>
+</tr>
+<tr>
+<td><code>mkdir -p a/b</code></td>
+<td>สร้าง directory ซ้อนกัน</td>
+</tr>
+<tr>
+<td><code>rmdir empty</code></td>
+<td>ลบ directory ที่ว่าง</td>
+</tr>
+<tr>
+<td><code>cp a.txt b.txt</code></td>
+<td>คัดลอกไฟล์</td>
+</tr>
+<tr>
+<td><code>cp -r src backup</code></td>
+<td>คัดลอก directory และเนื้อหา</td>
+</tr>
+<tr>
+<td><code>mv old new</code></td>
+<td>ย้ายหรือเปลี่ยนชื่อ</td>
+</tr>
+<tr>
+<td><code>rm a.txt</code> / <code>rm -r dir</code></td>
+<td>ลบไฟล์ / ลบ directory พร้อมเนื้อหา</td>
+</tr>
+<tr>
+<td><code>ssh user@host</code></td>
+<td>เข้าใช้เครื่องปลายทาง</td>
+</tr>
+<tr>
+<td><code>scp a.txt user@host:/tmp/</code></td>
+<td>คัดลอกไฟล์ไปเครื่องปลายทาง</td>
+</tr>
+</tbody></table></div>
+<p><strong>Absolute path</strong> เริ่มจาก <code>/</code> เช่น <code>/home/student/report.txt</code></p>
+<p><strong>Relative path</strong> เริ่มจาก directory ปัจจุบัน เช่น <code>../report.txt</code></p>
+<p><code>.</code> = ปัจจุบัน, <code>..</code> = directory แม่, <code>~</code> = home ของผู้ใช้; <code>/</code> คือ root directory ส่วน <code>/root</code> มักเป็น home ของผู้ใช้ root บน Linux</p>
+<p>ตัวอย่าง: อยู่ที่ <code>/home/mali/work</code> แล้วสั่ง <code>cd ../notes</code> → อยู่ที่ <code>/home/mali/notes</code></p>
+<p>ใน <code>less</code>: Space = หน้าถัดไป, <code>b</code> = ย้อนหน้า, <code>/word</code> = ค้น, <code>n</code> = ผลถัดไป, <code>q</code> = ออก</p>
+<h2 id="3-vi-จำโหมดก่อนจำปุ่ม">3. vi: จำโหมดก่อนจำปุ่ม</h2>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>งาน</th>
+<th>ปุ่ม/คำสั่ง</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>เปิดไฟล์</td>
+<td><code>vi note.txt</code></td>
+</tr>
+<tr>
+<td>เข้า insert mode</td>
+<td><code>i</code> ก่อน cursor, <code>a</code> หลัง cursor, <code>o</code> เปิดบรรทัดใหม่ด้านล่าง</td>
+</tr>
+<tr>
+<td>กลับ normal/command mode</td>
+<td><code>Esc</code></td>
+</tr>
+<tr>
+<td>เลื่อน</td>
+<td><code>h</code> ซ้าย, <code>j</code> ลง, <code>k</code> ขึ้น, <code>l</code> ขวา</td>
+</tr>
+<tr>
+<td>ไปต้น/ท้ายบรรทัด</td>
+<td><code>0</code> / <code>$</code></td>
+</tr>
+<tr>
+<td>ไปท้ายไฟล์</td>
+<td><code>G</code></td>
+</tr>
+<tr>
+<td>ไปบรรทัด 20</td>
+<td><code>:20</code></td>
+</tr>
+<tr>
+<td>ลบ</td>
+<td><code>x</code> ลบตัวอักษร, <code>dd</code> ลบบรรทัด, <code>3dd</code> ลบ 3 บรรทัด</td>
+</tr>
+<tr>
+<td>คัดลอกและวาง</td>
+<td><code>yy</code> คัดลอกบรรทัด, <code>p</code> วางหลังตำแหน่งปัจจุบัน</td>
+</tr>
+<tr>
+<td>ย้อนการแก้ไข</td>
+<td><code>u</code></td>
+</tr>
+<tr>
+<td>ค้น</td>
+<td><code>/word</code> แล้ว Enter; <code>n</code> ไปผลถัดไป</td>
+</tr>
+<tr>
+<td>บันทึก</td>
+<td><code>:w</code></td>
+</tr>
+<tr>
+<td>บันทึกแล้วออก</td>
+<td><code>:wq</code></td>
+</tr>
+<tr>
+<td>ออกเมื่อไม่มีการแก้ไขค้าง</td>
+<td><code>:q</code></td>
+</tr>
+<tr>
+<td>ออกทิ้งการแก้ไข</td>
+<td><code>:q!</code></td>
+</tr>
+<tr>
+<td>แทนคำทั่วไฟล์</td>
+<td><code>:%s/old/new/g</code></td>
+</tr>
+</tbody></table></div>
+<p>แบบฝึกสั้น: เปิดไฟล์ → <code>i</code> → พิมพ์ → <code>Esc</code> → <code>:wq</code> → Enter</p>
+<h2 id="4-user-group-และ-permission">4. User, group และ permission</h2>
+<p><code>id</code> แสดง UID, GID และกลุ่ม; <code>/etc/passwd</code> เก็บข้อมูลบัญชี, <code>/etc/group</code> เก็บข้อมูลกลุ่ม, <code>/etc/shadow</code> เก็บ password hash และข้อมูลอายุรหัสผ่าน</p>
+<p>อ่าน <code>ls -l</code> ตัวอย่าง:</p>
+<pre><code class="language-text">-rwxr-x--- 2 mali students 120 Oct 17 10:00 run.sh
+│└─┬──┘
+│  permission: owner / group / others
+└ file type: - ไฟล์ทั่วไป, d directory, l symbolic link
+</code></pre>
+<p>สิทธิแบ่งสามชุดตามลำดับ <strong>u / g / o</strong>; แต่ละชุดเรียง <strong>r / w / x</strong></p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>สิทธิ</th>
+<th>ไฟล์ทั่วไป</th>
+<th>Directory</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>r</code></td>
+<td>อ่านเนื้อหา</td>
+<td>อ่านรายชื่อสมาชิก</td>
+</tr>
+<tr>
+<td><code>w</code></td>
+<td>แก้ไขเนื้อหา</td>
+<td>เพิ่ม/ลบ/เปลี่ยนชื่อสมาชิก โดยทั่วไปต้องมี <code>x</code> ร่วมด้วย</td>
+</tr>
+<tr>
+<td><code>x</code></td>
+<td>เรียกเป็นโปรแกรม</td>
+<td>เดินผ่าน/เข้าถึงชื่อภายใน directory</td>
+</tr>
+</tbody></table></div>
+<p><strong>จุดสำคัญ:</strong> การลบชื่อไฟล์พิจารณาสิทธิของ directory แม่เป็นหลัก จึงไม่ได้ตัดสินจาก <code>w</code> ของตัวไฟล์เพียงอย่างเดียว; sticky bit อาจเพิ่มข้อจำกัด</p>
+<p>เลขสิทธิ: <code>r=4</code>, <code>w=2</code>, <code>x=1</code> แล้วบวกในแต่ละชุด</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>เลข</th>
+<th>สิทธิ</th>
+<th>ตัวอย่าง</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>7</td>
+<td><code>rwx</code></td>
+<td>4+2+1</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>rw-</code></td>
+<td>4+2</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>r-x</code></td>
+<td>4+1</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>r--</code></td>
+<td>4</td>
+</tr>
+<tr>
+<td>0</td>
+<td><code>---</code></td>
+<td>ไม่มีสิทธิ</td>
+</tr>
+</tbody></table></div>
+<pre><code class="language-bash">chmod 754 run.sh       # rwxr-xr--
+chmod u+x run.sh       # เพิ่ม x ให้เจ้าของ
+chmod go-w data.txt    # ถอน w จาก group และ others
+chown mali data.txt    # เปลี่ยนเจ้าของ ต้องมีสิทธิเพียงพอ
+chgrp students data.txt
+</code></pre>
+<p><strong>umask:</strong> สิทธิเริ่มต้น = ฐานสิทธิ AND NOT mask ไม่ใช่การลบเลขฐานแปดแบบธรรมดา</p>
+<ul>
+<li>ฐานทั่วไปของไฟล์ใหม่ <code>666</code>; directory ใหม่ <code>777</code></li>
+<li><code>umask 022</code> → ไฟล์ <code>644</code>, directory <code>755</code></li>
+<li><code>umask 027</code> → ไฟล์ <code>640</code>, directory <code>750</code></li>
+<li>ไฟล์ปกติไม่ได้รับ <code>x</code> อัตโนมัติจากฐาน <code>666</code></li>
+</ul>
+<h2 id="5-process-และ-job-control">5. Process และ job control</h2>
+<pre><code class="language-bash">ps aux           # รายการโพรเซส
+sleep 60 &amp;       # ทำงาน background
+jobs             # งานที่ shell นี้ติดตาม
+fg %1            # นำ job 1 กลับ foreground
+bg %1            # ให้งานที่หยุดอยู่ทำต่อใน background
+kill 1234        # ส่ง SIGTERM ให้ PID 1234
+kill -9 1234     # ส่ง SIGKILL
+</code></pre>
+<ul>
+<li><code>Ctrl+C</code> ส่ง SIGINT ไปยังกลุ่มโพรเซส foreground ตามการตั้งค่า terminal ปกติ</li>
+<li><code>Ctrl+Z</code> หยุดงานชั่วคราว แล้วใช้ <code>bg</code> หรือ <code>fg</code> ให้ทำต่อ</li>
+<li><code>&amp;</code> เริ่มงานแบบ background; ไม่ใช่ pipe</li>
+<li><code>kill</code> ส่งสัญญาณ; ไม่ได้แปลว่าทุกสัญญาณต้องฆ่าโพรเซส</li>
+<li><strong>PID 1234</strong> กับ <strong>job <code>%1</code></strong> เป็นคนละระบบเลขอ้างอิง</li>
+</ul>
+<h2 id="6-docker-บัญชีผู้ใช้-และเครือข่าย">6. Docker, บัญชีผู้ใช้ และเครือข่าย</h2>
+<p>อยู่ในสัปดาห์ 3 ของ outline จึงควรทบทวน แม้รายละเอียดที่ใช้จริงขึ้นกับห้องปฏิบัติการ</p>
+<p><strong>Image</strong> = แม่แบบสำหรับสร้าง container; <strong>container</strong> = instance ที่สร้างจาก image; <strong>registry</strong> = ที่จัดเก็บและแจกจ่าย image</p>
+<pre><code class="language-bash">docker images
+docker ps                  # container ที่กำลังทำงาน
+docker ps -a               # รวมที่หยุดแล้ว
+docker run -it ubuntu bash
+docker exec -it mybox bash  # เข้า container ที่กำลังทำงาน
+docker stop mybox
+docker start mybox
+docker run -d -p 8080:80 nginx
+</code></pre>
+<p><code>-i</code> เปิด stdin, <code>-t</code> จัดสรร pseudo-terminal, <code>-d</code> ทำงาน detached, <code>-p 8080:80</code> จับคู่ <strong>port เครื่อง host : port container</strong></p>
+<p>คำสั่ง Linux ที่ควรรู้จัก: <code>sudo command</code>, <code>passwd</code>, <code>sudo useradd -m student</code> และ <code>sudo passwd student</code> ส่วน <code>adduser</code> และคำสั่งตั้งค่าเครือข่ายต่างกันตาม distribution</p>
+<p>เครือข่าย: IP = ที่อยู่เครื่อง, subnet/prefix = ขอบเขตเครือข่าย, gateway = ทางออกไปเครือข่ายอื่น, DNS = แปลงชื่อเป็น IP; <code>ip addr</code> ดูที่อยู่, <code>ip route</code> ดูเส้นทาง, <code>ping host</code> ทดสอบ ICMP reachability</p>
+<h2 id="7-อักขระพิเศษ-shell-เป็นคนตีความ">7. อักขระพิเศษ: shell เป็นคนตีความ</h2>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>รูปแบบ</th>
+<th>ความหมาย/ตัวอย่าง</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>*</code></td>
+<td>glob: ตัวอักษรตั้งแต่ 0 ตัวขึ้นไป เช่น <code>*.txt</code></td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>glob: ตัวอักษรหนึ่งตัว เช่น <code>a?.txt</code></td>
+</tr>
+<tr>
+<td><code>[abc]</code>, <code>[0-9]</code></td>
+<td>glob: หนึ่งตัวจากชุด/ช่วง</td>
+</tr>
+<tr>
+<td><code>~</code></td>
+<td>home เช่น <code>~/work</code></td>
+</tr>
+<tr>
+<td><code>;</code></td>
+<td>จบคำสั่งหนึ่งแล้วทำคำสั่งต่อไป</td>
+</tr>
+<tr>
+<td><code>&amp;</code></td>
+<td>ให้ทำงาน background</td>
+</tr>
+<tr>
+<td><code>\</code></td>
+<td>escape ตัวถัดไป; ก่อน newline ใช้ต่อบรรทัด</td>
+</tr>
+<tr>
+<td><code>&#39;...&#39;</code></td>
+<td>เก็บข้อความตรงตัว ไม่ขยาย <code>$var</code></td>
+</tr>
+<tr>
+<td><code>&quot;...&quot;</code></td>
+<td>ยังขยายตัวแปรและ <code>$(...)</code> แต่ป้องกัน word splitting และ globbing ของผลขยาย</td>
+</tr>
+<tr>
+<td><code>$name</code>, <code>${name}</code></td>
+<td>แทนด้วยค่าตัวแปร</td>
+</tr>
+<tr>
+<td><code>$(command)</code></td>
+<td>นำ stdout ของคำสั่งมาแทนตำแหน่งนี้</td>
+</tr>
+<tr>
+<td><code>$((expression))</code></td>
+<td>คำนวณจำนวนเต็ม เช่น <code>$((3+4))</code></td>
+</tr>
+<tr>
+<td><code>{a,b}</code>, <code>{1..3}</code></td>
+<td>brace expansion สร้างหลายคำ</td>
+</tr>
+<tr>
+<td><code>( commands )</code></td>
+<td>ทำคำสั่งใน subshell</td>
+</tr>
+<tr>
+<td><code>{ commands; }</code></td>
+<td>จัดกลุ่มใน shell ปัจจุบัน; เว้นวรรคและมีตัวคั่นก่อน <code>}</code></td>
+</tr>
+<tr>
+<td><code>!</code></td>
+<td>กลับ exit status ใน <code>! command</code>; ใน interactive shell อาจเป็น history expansion</td>
+</tr>
+</tbody></table></div>
+<p>เครื่องหมาย backtick ใช้ command substitution ได้เช่นกัน แต่ <code>$(...)</code> อ่านและซ้อนคำสั่งง่ายกว่า ส่วน <code>^</code> มีความหมายตามบริบท เช่นต้นบรรทัดใน regex ไม่ใช่ glob ที่แปลว่าเริ่มต้นชื่อไฟล์</p>
+<pre><code class="language-bash">name=Dao
+printf &#39;%s\n&#39; &quot;$name&quot;   # Dao
+printf &#39;%s\n&#39; &#39;$name&#39;   # $name
+printf &#39;%s\n&#39; \$name    # $name
+printf &#39;%s\n&#39; file{1,2}.txt
+# file1.txt
+# file2.txt
+</code></pre>
+<p>glob มักไม่จับชื่อที่ขึ้นต้นด้วย <code>.</code> และถ้าไม่พบชื่อที่ตรง pattern ค่าเริ่มต้นของ Bash จะคง pattern นั้นไว้</p>
+<h2 id="8-ระบบแฟ้ม-directory--inode--data">8. ระบบแฟ้ม: directory → inode → data</h2>
+<pre><code class="language-text">directory entry: ชื่อไฟล์ + หมายเลข inode
+                         ↓
+inode: ชนิด สิทธิ UID/GID ขนาด เวลา link count และตัวชี้ข้อมูล
+                         ↓
+data blocks: เนื้อหาของไฟล์
+</code></pre>
+<p><strong>ชื่อไฟล์อยู่ใน directory entry ไม่ได้เก็บเป็นชื่อหลักใน inode</strong>; <code>ls -i</code> แสดงหมายเลข inode</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>ประเด็น</th>
+<th>Hard link</th>
+<th>Symbolic link</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>สร้าง</td>
+<td><code>ln original alias</code></td>
+<td><code>ln -s original shortcut</code></td>
+</tr>
+<tr>
+<td>หลักการ</td>
+<td>เพิ่มชื่อที่อ้าง inode เดิม</td>
+<td>ไฟล์ link เก็บ pathname ปลายทาง</td>
+</tr>
+<tr>
+<td>inode ของ link</td>
+<td>เดียวกับต้นฉบับใน filesystem เดียวกัน</td>
+<td>มี inode ของตนเอง</td>
+</tr>
+<tr>
+<td>ลบชื่อเดิม</td>
+<td>อีกชื่อยังใช้ข้อมูลได้</td>
+<td>link อาจขาด ถ้า pathname เดิมใช้ไม่ได้</td>
+</tr>
+<tr>
+<td>ข้าม filesystem</td>
+<td>ไม่ได้</td>
+<td>ได้</td>
+</tr>
+</tbody></table></div>
+<p><code>rm</code> ถอน directory entry; พื้นที่ข้อมูลถูกคืนเมื่อไม่มี hard link และไม่มีโพรเซสเปิดไฟล์นั้นค้างอยู่ การเปลี่ยนชื่อภายใน filesystem เดียวกันโดยทั่วไปไม่ต้องคัดลอกข้อมูลใหม่</p>
+<h3 id="สูตร-pointer-ตามแบบจำลองในสไลด์">สูตร pointer ตามแบบจำลองในสไลด์</h3>
+<p>สมมติ inode มี <strong>12 direct + single indirect + double indirect + triple indirect</strong>; ให้ block size = <code>B</code> bytes, pointer size = <code>P</code> bytes และ <code>N=B/P</code></p>
+<pre><code class="language-text">direct           = 12B
+single indirect  = NB
+double indirect  = N²B
+triple indirect  = N³B
+รวมความจุข้อมูล = B(12 + N + N² + N³)
+</code></pre>
+<p>เช่น <code>B=4096</code>, <code>P=4</code> → <code>N=1024</code> → รวม <code>48 KiB + 4 MiB + 4 GiB + 4 TiB</code> โดยไม่นับพื้นที่บล็อกเก็บ pointer ในยอดข้อมูล แบบจำลองนี้ใช้ทำโจทย์ของสไลด์ ไม่ใช่สูตรของทุก filesystem</p>
+<p>โจทย์พื้นที่: ไฟล์ 13 KiB บน block 4 KiB ต้องใช้ data block <code>ceil(13/4)=4</code> บล็อก รวม 16 KiB เหลือในบล็อกท้าย 3 KiB โดยไม่นับ metadata และสมมติไฟล์ไม่เป็น sparse file</p>
+<h2 id="9-redirection-และ-pipeline">9. Redirection และ pipeline</h2>
+<p>File descriptor พื้นฐาน: <strong>0 = stdin, 1 = stdout, 2 = stderr</strong></p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>รูปแบบ</th>
+<th>ผล</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>cmd &lt; in.txt</code></td>
+<td>รับ stdin จากไฟล์</td>
+</tr>
+<tr>
+<td><code>cmd &gt; out.txt</code></td>
+<td>ส่ง stdout ไปไฟล์ สร้างใหม่/ตัดเนื้อหาเดิม</td>
+</tr>
+<tr>
+<td><code>cmd &gt;&gt; out.txt</code></td>
+<td>ต่อท้าย stdout</td>
+</tr>
+<tr>
+<td><code>cmd 2&gt; err.txt</code></td>
+<td>ส่ง stderr ไปไฟล์</td>
+</tr>
+<tr>
+<td><code>cmd &gt; all.txt 2&gt;&amp;1</code></td>
+<td>ส่ง stdout ไปไฟล์ แล้วให้ stderr ไปที่เดียวกับ stdout</td>
+</tr>
+<tr>
+<td><code>cmd 2&gt;/dev/null</code></td>
+<td>ทิ้ง stderr</td>
+</tr>
+<tr>
+<td><code>a | b</code></td>
+<td>stdout ของ a เป็น stdin ของ b</td>
+</tr>
+<tr>
+<td><code>a | tee out.txt</code></td>
+<td>ส่งข้อมูลไปทั้ง stdout และไฟล์</td>
+</tr>
+</tbody></table></div>
+<p><strong>ลำดับ redirection อ่านจากซ้ายไปขวา</strong></p>
+<pre><code class="language-bash">cmd &gt; all.txt 2&gt;&amp;1   # ทั้ง stdout และ stderr ไปไฟล์
+cmd 2&gt;&amp;1 &gt; out.txt   # stderr ไปปลายทาง stdout เดิม; stdout ไปไฟล์
+</code></pre>
+<p><code>a | b</code> ต่อเฉพาะ stdout ตามปกติ; pipeline ทั้งชุดสามารถทำ background ด้วย <code>a | b &amp;</code></p>
+<h3 id="utilities-ที่ใช้ต่อกันบ่อย">Utilities ที่ใช้ต่อกันบ่อย</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>คำสั่ง</th>
+<th>หน้าที่</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>grep &#39;word&#39; file</code></td>
+<td>เลือกบรรทัดที่ตรง pattern</td>
+</tr>
+<tr>
+<td><code>grep -v &#39;word&#39; file</code></td>
+<td>เลือกบรรทัดที่ไม่ตรง</td>
+</tr>
+<tr>
+<td><code>grep -n &#39;word&#39; file</code></td>
+<td>แสดงเลขบรรทัดด้วย</td>
+</tr>
+<tr>
+<td><code>sort file</code> / <code>sort -n file</code></td>
+<td>เรียงข้อความ / เรียงตามตัวเลข</td>
+</tr>
+<tr>
+<td><code>sort -r file</code></td>
+<td>เรียงย้อนลำดับ</td>
+</tr>
+<tr>
+<td><code>uniq</code> / <code>uniq -c</code></td>
+<td>ยุบ/นับบรรทัดซ้ำที่อยู่ติดกัน</td>
+</tr>
+<tr>
+<td><code>wc -l</code> / <code>wc -w</code> / <code>wc -c</code></td>
+<td>นับ newline / คำ / bytes</td>
+</tr>
+<tr>
+<td><code>head -n 5</code> / <code>tail -n 5</code></td>
+<td>ห้าบรรทัดแรก / ท้าย</td>
+</tr>
+<tr>
+<td><code>cut -d: -f1</code></td>
+<td>เลือก field แรก ใช้ <code>:</code> คั่น</td>
+</tr>
+<tr>
+<td><code>tr &#39;[:lower:]&#39; &#39;[:upper:]&#39;</code></td>
+<td>เปลี่ยนตัวเล็กเป็นใหญ่</td>
+</tr>
+<tr>
+<td><code>xargs command</code></td>
+<td>แปลง stdin เป็น arguments ของคำสั่ง</td>
+</tr>
+</tbody></table></div>
+<pre><code class="language-bash">grep &#39;ERROR&#39; app.log | wc -l
+# จำนวนบรรทัดที่มี ERROR ไม่ใช่จำนวนครั้งที่ ERROR ปรากฏ
+
+sort names.txt | uniq -c | sort -nr
+# รวมชื่อเหมือนกัน → นับ → เรียงจำนวนมากไปน้อย
+
+cut -d: -f1 /etc/passwd | sort
+# ชื่อบัญชีเรียงตามลำดับ
+</code></pre>
+<p><strong>Pipe ส่งเป็นข้อมูล stdin ส่วน <code>$(...)</code> ส่งผลลัพธ์มาเป็นส่วนของบรรทัดคำสั่ง</strong> เช่น <code>wc -l &lt; a.txt</code> อ่านเนื้อหา a.txt; <code>echo &quot;$(wc -l &lt; a.txt)&quot;</code> นำจำนวนมาพิมพ์</p>
+<h2 id="10-แบบฝึกหัดแต่งเพิ่มพร้อมเฉลย">10. แบบฝึกหัดแต่งเพิ่มพร้อมเฉลย</h2>
+<p>ลองตอบก่อนอ่านเฉลย ชุดนี้ใช้ฝึกตามหัวข้อในเว็บ ไม่ใช่ข้อสอบเก่าที่ได้รับการยืนยัน</p>
+<ol>
+<li>แปลง <code>-rw-r-----</code> เป็นเลข permission → <strong>640</strong></li>
+<li><code>chmod 751 x</code> ได้สิทธิอะไร → <strong>rwxr-x--x</strong></li>
+<li>ตั้ง <code>umask 027</code> แล้วสร้าง directory ปกติ ได้อะไร → <strong>750</strong></li>
+<li>ต้องการ stdout และ stderr อยู่ใน <code>run.log</code> → <strong><code>cmd &gt; run.log 2&gt;&amp;1</code></strong></li>
+<li><code>a; b</code> กับ <code>a | b</code> ต่างกันอย่างไร → <strong>แบบแรกทำตามลำดับ; แบบหลังต่อ stdout ของ a เข้า stdin ของ b</strong></li>
+<li>ข้อมูล <code>b, a, b</code> คนละบรรทัด ใช้ <code>uniq</code> อย่างเดียวจะนับ b รวมได้ไหม → <strong>ไม่ได้ ต้องจัดบรรทัดเหมือนกันให้อยู่ติดกัน เช่น <code>sort | uniq -c</code></strong></li>
+<li>สร้าง hard link แล้วลบชื่อเดิม ข้อมูลหายทันทีไหม → <strong>ไม่หายถ้ายังมี hard link อื่น</strong></li>
+<li>inode เก็บชื่อไฟล์หรือไม่ → <strong>ไม่เก็บชื่อหลัก; directory entry เชื่อมชื่อกับ inode</strong></li>
+<li>กด <code>Ctrl+Z</code> แล้วอยากทำงานนั้นต่อเบื้องหลัง → <strong><code>bg %หมายเลขงาน</code></strong></li>
+<li>มี <code>a1.txt</code>, <code>a2.txt</code>, <code>a10.txt</code> แล้ว <code>a?.txt</code> ตรงกับอะไร → <strong>a1.txt และ a2.txt</strong></li>
+<li><code>echo &#39;*.txt&#39;</code> ขยายเป็นรายชื่อไฟล์ไหม → <strong>ไม่ขยาย เพราะ single quote</strong></li>
+<li>block 2 KiB, pointer 4 bytes: single indirect เก็บข้อมูลได้เท่าไร → <strong>512 × 2 KiB = 1 MiB</strong></li>
+</ol>
+<h2 id="อ่านรอบสุดท้าย">อ่านรอบสุดท้าย</h2>
+<ul>
+<li><input disabled="" type="checkbox"> แปลง rwx ↔ เลขฐานแปด และแยกสิทธิไฟล์กับ directory ได้</li>
+<li><input disabled="" type="checkbox"> อธิบายชื่อไฟล์, inode, data block และ hard/symbolic link ได้</li>
+<li><input disabled="" type="checkbox"> คำนวณ direct/indirect จากขนาด block และ pointer ได้</li>
+<li><input disabled="" type="checkbox"> อ่าน quote/glob และแยก <code>;</code>, <code>&amp;</code>, <code>|</code>, <code>$(...)</code> ได้</li>
+<li><input disabled="" type="checkbox"> ใช้ stdin/stdout/stderr และอธิบายลำดับ <code>2&gt;&amp;1</code> ได้</li>
+<li><input disabled="" type="checkbox"> ต่อ pipeline นับ กรอง เรียงข้อมูลได้</li>
+<li><input disabled="" type="checkbox"> ใช้ vi บันทึก/ออก และ job control ได้</li>
+<li><input disabled="" type="checkbox"> ทบทวน Docker และคำสั่งจัดการบัญชีตามที่ทำใน lab</li>
+</ul>
+<h2 id="แหล่งประกอบ">แหล่งประกอบ</h2>
+<ul>
+<li><a href="https://angsila.cs.buu.ac.th/~nutthanon/88624159/">หน้าเนื้อหารายวิชาและจุดแบ่งสอบ</a></li>
+<li><a href="https://staff.informatics.buu.ac.th/~nutthanon/88624159/Lect01.pdf">Lecture 1: ระบบปฏิบัติการ ผู้ใช้และสิทธิ</a></li>
+<li><a href="https://staff.informatics.buu.ac.th/~nutthanon/88624159/Lect%2002.pdf">Lecture 2</a></li>
+<li><a href="https://www.dropbox.com/s/4saquh8dyt6fqs5/Lect04.pdf?dl=0">Lecture 3 ตามป้ายในหน้าเว็บ: command line</a></li>
+<li><a href="https://www.dropbox.com/s/n9fudbxyupie7me/Lect04_2.docx?dl=0">Lecture 4 ตามป้ายในหน้าเว็บ: อักขระพิเศษ</a></li>
+<li><a href="https://www.dropbox.com/s/1szrdcr08pz1e93/Lect06.pdf?dl=0">เอกสารระบบแฟ้มที่ลิงก์ในสัปดาห์ 5</a></li>
+<li><a href="https://www.dropbox.com/s/txwafybaeuoukhh/Lect06.pdf?dl=0">เอกสาร Redirection/Pipeline ในสัปดาห์ 6</a></li>
+<li><a href="https://docs.google.com/presentation/d/10Ab2i7QeSAQgMwgncuLkiB1gV5J3MRA08Qqa9Q_qm3c/htmlpresent">Docker ที่รายวิชาลิงก์ไว้</a></li>
+</ul>
+<p>หมายเหตุ: ป้ายชื่อ lecture บนเว็บกับชื่อไฟล์บางรายการไม่ตรงกัน สรุปนี้จัดตามเนื้อหาที่อ่านได้จริง ตัวอย่างและคำอธิบายเรียบเรียงใหม่เพื่อทบทวน</p>
+</article><footer class="footer"><span>เรียน / Unix Tools &amp; Programming</span><a href="../../">กลับคลังเรียน</a></footer></main></div><script>let preferences={};try{preferences=JSON.parse(localStorage.getItem('skyce-learning-preferences')||'{}')}catch{}function savePreferences(){try{localStorage.setItem('skyce-learning-preferences',JSON.stringify(preferences))}catch{}}function applyTheme(){document.documentElement.dataset.theme=preferences.theme||'light';document.querySelector('#theme').textContent=preferences.theme==='dark'?'☀':'☾';document.querySelector('#theme').setAttribute('aria-label',preferences.theme==='dark'?'เปลี่ยนเป็นโหมดสว่าง':'เปลี่ยนเป็นโหมดมืด')}applyTheme();document.querySelector('#theme').onclick=()=>{preferences.theme=preferences.theme==='dark'?'light':'dark';savePreferences();applyTheme()};const sidebar=document.querySelector('#sidebar'),overlay=document.querySelector('#overlay'),menu=document.querySelector('#menu');function closeMenu(){sidebar.classList.remove('open');overlay.classList.remove('visible');menu.setAttribute('aria-expanded','false');sidebar.inert=matchMedia('(max-width:800px)').matches}function fitSidebar(){sidebar.inert=matchMedia('(max-width:800px)').matches&&!sidebar.classList.contains('open')}fitSidebar();window.addEventListener('resize',fitSidebar);menu.onclick=()=>{const opening=!sidebar.classList.contains('open');if(opening){sidebar.classList.add('open');sidebar.inert=false;overlay.classList.add('visible');menu.setAttribute('aria-expanded','true');sidebar.querySelector('a').focus()}else closeMenu()};overlay.onclick=closeMenu;document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.focus();closeMenu()}});sidebar.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));let fontSize=Number(preferences.font)||17;function setFont(){fontSize=Math.min(22,Math.max(14,fontSize));document.documentElement.style.setProperty('--text-size',fontSize+'px');document.querySelector('#font-value').textContent=fontSize;preferences.font=fontSize;savePreferences()}setFont();document.querySelector('#font-less').onclick=()=>{fontSize--;setFont()};document.querySelector('#font-more').onclick=()=>{fontSize++;setFont()};document.querySelector('#print').onclick=()=>window.print();</script></body></html>

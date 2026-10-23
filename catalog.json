@@ -1,0 +1,233 @@
+{
+  "title": "เรียน · Skyce38",
+  "owner": "Skyce38",
+  "courses": [
+    {
+      "id": "oop-python",
+      "name": "OOP & Data Structures",
+      "thai": "การเขียนโปรแกรมเชิงวัตถุและโครงสร้างข้อมูล",
+      "short": "PY",
+      "repo": "python-final",
+      "code": "89022367",
+      "color": "#265d4d",
+      "tags": [
+        "Python",
+        "OOP",
+        "Data Structures"
+      ],
+      "description": "จากคลาสและออบเจกต์ สู่ Linked List, Stack, Queue, Sorting และ Hash Table",
+      "source": "โปรเจกต์ OOP และเอกสารในเครื่อง"
+    },
+    {
+      "id": "artificial-intelligence",
+      "name": "Artificial Intelligence",
+      "thai": "ปัญญาประดิษฐ์",
+      "short": "AI",
+      "repo": "course-artificial-intelligence",
+      "code": "",
+      "color": "#796042",
+      "tags": [
+        "AI",
+        "Search",
+        "Machine Learning"
+      ],
+      "description": "Search, Logic, Regression, Classification, Clustering และ Neural Networks",
+      "source": "โปรเจกต์ FinalAI และบันทึกคลังเรียนเดิม"
+    },
+    {
+      "id": "unix-tools",
+      "name": "Unix Tools & Programming",
+      "thai": "เครื่องมือและการเขียนโปรแกรม Unix",
+      "short": "$_",
+      "repo": "course-unix-tools",
+      "code": "88624159",
+      "color": "#4e6478",
+      "tags": [
+        "Linux",
+        "Shell",
+        "Bash"
+      ],
+      "description": "คำสั่ง Unix, Shell Script, Redirection, Regex, sed และ awk",
+      "source": "โปรเจกต์ Unix Tools และบันทึกคลังเรียนเดิม"
+    },
+    {
+      "id": "database-management",
+      "name": "Database Management",
+      "thai": "การจัดการฐานข้อมูล",
+      "short": "DB",
+      "repo": "course-database-management",
+      "code": "",
+      "color": "#795d71",
+      "tags": [
+        "Database",
+        "SQL"
+      ],
+      "description": "คลังรายวิชาฐานข้อมูลและ SQL พร้อมหมวดสำหรับการบ้าน สไลด์ และสรุป",
+      "source": "โปรเจกต์ Database Management และบันทึกคลังเรียนเดิม"
+    },
+    {
+      "id": "internet-of-things",
+      "name": "Electronics & Internet of Things",
+      "thai": "อิเล็กทรอนิกส์พื้นฐานและอินเทอร์เน็ตของสรรพสิ่ง",
+      "short": "IoT",
+      "repo": "course-internet-of-things",
+      "code": "",
+      "color": "#96703e",
+      "tags": [
+        "IoT",
+        "Electronics",
+        "Sensors"
+      ],
+      "description": "คลังอิเล็กทรอนิกส์ เซนเซอร์ และ IoT พร้อมแยกประเภทเอกสาร",
+      "source": "โปรเจกต์ IoT และบันทึกคลังเรียนเดิม"
+    },
+    {
+      "id": "statistics-r",
+      "name": "Statistics & R",
+      "thai": "สถิติและภาษา R",
+      "short": "R",
+      "repo": "course-statistics-r",
+      "code": "",
+      "color": "#54705f",
+      "tags": [
+        "Statistics",
+        "R"
+      ],
+      "description": "คลังสถิติและภาษา R เตรียมหมวดสำหรับเอกสารและแบบฝึกหัด",
+      "source": "ชื่อโฟลเดอร์ที่บันทึกไว้ในคลังเรียนเดิม"
+    }
+  ],
+  "categories": [
+    {
+      "id": "assignments",
+      "name": "การบ้าน",
+      "icon": "✎",
+      "description": "โจทย์ งานส่ง แบบฝึกหัด และบทวิเคราะห์การบ้าน"
+    },
+    {
+      "id": "slides",
+      "name": "สไลด์เรียน",
+      "icon": "▤",
+      "description": "สไลด์และเอกสารประกอบการบรรยาย"
+    },
+    {
+      "id": "summaries",
+      "name": "สรุป",
+      "icon": "≡",
+      "description": "สรุปบทเรียน แยก Midterm และ Final"
+    },
+    {
+      "id": "tutoring",
+      "name": "ไฟล์ติว",
+      "icon": "◇",
+      "description": "ชีททวนเร็ว ตัวอย่าง และแนวทางอ่านสอบ"
+    },
+    {
+      "id": "exams",
+      "name": "ข้อสอบและแบบฝึก",
+      "icon": "✓",
+      "description": "ข้อฝึกปรนัยและเฉลย พร้อมระบุแหล่งที่มา"
+    }
+  ],
+  "resources": [
+    {
+      "id": "oop-python-final-week10-15",
+      "course": "oop-python",
+      "category": "summaries",
+      "title": "สรุป Final Python · Week 10–15",
+      "scope": "Final",
+      "path": "summaries/final-week10-15.md",
+      "format": "MD",
+      "reader": "read/oop-python/final-week10-15.html",
+      "github": "https://github.com/Skyce38/python-final/blob/main/summaries/final-week10-15.md"
+    },
+    {
+      "id": "oop-python-practice",
+      "course": "oop-python",
+      "category": "exams",
+      "title": "ทำข้อฝึกปรนัย Python 20 ข้อ",
+      "scope": "Final",
+      "path": "exams/practice-20.md",
+      "format": "QUIZ",
+      "url": "https://skyce38.github.io/python-final/#quiz",
+      "github": "https://github.com/Skyce38/python-final/blob/main/exams/practice-20.md"
+    },
+    {
+      "id": "oop-python-web",
+      "course": "oop-python",
+      "category": "tutoring",
+      "title": "เว็บติว Python พร้อมตัวอย่างและตาราง Big-O",
+      "scope": "Final",
+      "path": "tutoring/README.md",
+      "format": "WEB",
+      "url": "https://skyce38.github.io/python-final/",
+      "github": "https://github.com/Skyce38/python-final"
+    },
+    {
+      "id": "artificial-intelligence-midterm-final",
+      "course": "artificial-intelligence",
+      "category": "summaries",
+      "title": "สรุป AI ฉบับเต็ม · Midterm + Final",
+      "scope": "Midterm + Final",
+      "path": "summaries/midterm-final.md",
+      "format": "MD",
+      "reader": "read/artificial-intelligence/midterm-final.html",
+      "github": "https://github.com/Skyce38/course-artificial-intelligence/blob/main/summaries/midterm-final.md"
+    },
+    {
+      "id": "artificial-intelligence-quick-review",
+      "course": "artificial-intelligence",
+      "category": "tutoring",
+      "title": "ชีททวนเร็ว AI ก่อนสอบ",
+      "scope": "Midterm + Final",
+      "path": "tutoring/quick-review.md",
+      "format": "MD",
+      "reader": "read/artificial-intelligence/quick-review.html",
+      "github": "https://github.com/Skyce38/course-artificial-intelligence/blob/main/tutoring/quick-review.md"
+    },
+    {
+      "id": "unix-tools-midterm",
+      "course": "unix-tools",
+      "category": "summaries",
+      "title": "สรุป Unix Tools · Midterm",
+      "scope": "Midterm",
+      "path": "summaries/midterm.md",
+      "format": "MD",
+      "reader": "read/unix-tools/midterm.html",
+      "github": "https://github.com/Skyce38/course-unix-tools/blob/main/summaries/midterm.md"
+    },
+    {
+      "id": "unix-tools-final",
+      "course": "unix-tools",
+      "category": "summaries",
+      "title": "สรุป Shell Script · Final",
+      "scope": "Final",
+      "path": "summaries/final.md",
+      "format": "MD",
+      "reader": "read/unix-tools/final.html",
+      "github": "https://github.com/Skyce38/course-unix-tools/blob/main/summaries/final.md"
+    },
+    {
+      "id": "unix-tools-final-homework-analysis",
+      "course": "unix-tools",
+      "category": "assignments",
+      "title": "วิเคราะห์การบ้าน Final และจุดหลอก",
+      "scope": "Final",
+      "path": "assignments/final-homework-analysis.md",
+      "format": "MD",
+      "reader": "read/unix-tools/final-homework-analysis.html",
+      "github": "https://github.com/Skyce38/course-unix-tools/blob/main/assignments/final-homework-analysis.md"
+    },
+    {
+      "id": "unix-tools-practice-40",
+      "course": "unix-tools",
+      "category": "exams",
+      "title": "ข้อฝึกปรนัย Unix 40 ข้อ พร้อมเฉลย",
+      "scope": "Final",
+      "path": "exams/practice-40.md",
+      "format": "MD",
+      "reader": "read/unix-tools/practice-40.html",
+      "github": "https://github.com/Skyce38/course-unix-tools/blob/main/exams/practice-40.md"
+    }
+  ]
+}

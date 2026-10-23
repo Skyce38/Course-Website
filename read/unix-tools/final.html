@@ -1,0 +1,622 @@
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>สรุป Shell Script · Final · เรียน</title><style>
+:root{--bg:#f5f5ee;--paper:#fffefa;--ink:#243e36;--muted:#748177;--line:#dfe5d8;--accent:#285f4b;--soft:#e8efdd;--gold:#e8d496;--text-size:17px;color-scheme:light}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.8 Tahoma,'Leelawadee UI',sans-serif}button,input,select{font:inherit}a{color:var(--accent);text-underline-offset:4px}button{cursor:pointer;color:inherit}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #b29440;outline-offset:4px}[hidden]{display:none!important}::selection{background:var(--gold);color:#203e31}.sidebar{position:fixed;inset:0 auto 0 0;width:246px;border-right:1px solid var(--line);background:var(--paper);padding:28px 18px;display:flex;flex-direction:column;z-index:60;overflow:auto}.brand{display:flex;gap:11px;align-items:center;text-decoration:none;color:var(--ink);padding:0 11px}.brand-symbol{background:var(--accent);color:#fff;width:40px;height:40px;display:grid;place-items:center;border-radius:12px;font:25px Georgia,serif}.brand strong{display:block;font-size:20px;line-height:1.3}.brand small{display:block;color:var(--muted);font:9px/1.8 monospace;letter-spacing:1.6px}.nav-label,.eyebrow{font:10px/1.6 monospace;letter-spacing:1.8px;color:var(--muted)}.nav-label{margin:35px 12px 12px}.side-link{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--muted);padding:11px 12px;border-radius:9px;font-size:12px;line-height:1.6;margin:3px 0}.side-link:hover,.side-link.active{background:var(--soft);color:var(--accent)}.side-link.active{font-weight:bold}.side-icon{font:12px monospace;width:25px;flex-shrink:0}.side-bottom{margin-top:auto;padding:28px 12px 0;font-size:10px;color:var(--muted)}.side-bottom a{display:block;font-size:11px;margin-top:12px}.workspace{margin-left:246px}.topbar{position:sticky;top:0;z-index:40;height:72px;background:var(--bg);border-bottom:1px solid var(--line);padding:0 42px;display:flex;align-items:center;justify-content:space-between;gap:15px}.breadcrumbs{font-size:11px;color:var(--muted)}.breadcrumbs a{text-decoration:none;color:inherit}.breadcrumbs span{color:var(--ink);margin-left:10px}.top-actions{display:flex;gap:8px;align-items:center}.icon-button{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:7px 12px;min-height:36px;font-size:12px}.menu-button{display:none}.content{max-width:1240px;margin:auto;padding:43px 50px 55px}.eyebrow{color:var(--accent);font-weight:bold}.hero{display:grid;grid-template-columns:1fr 180px;align-items:center;gap:30px;margin:10px 0 29px}.hero h1{font-size:clamp(34px,3.6vw,48px);line-height:1.35;letter-spacing:-1.5px;margin:13px 0 16px}.hero h1 em{font-style:normal;color:var(--accent)}.hero p{max-width:650px;color:var(--muted);font-size:13px;line-height:2}.book-art{height:150px;position:relative;display:flex;align-items:center;justify-content:center}.book-art div{position:absolute;width:100px;height:128px;background:var(--paper);border:1px solid #739077;border-radius:10px;transform:rotate(12deg)}.book-art div+div{transform:rotate(-10deg);background:var(--soft);padding:19px;display:flex;flex-direction:column;justify-content:space-between;font:11px monospace;color:var(--accent)}.book-art b{font:26px Georgia,serif}.book-art small{font:9px/1.6 monospace;letter-spacing:1px}.hero-facts{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.pill{border:1px solid var(--line);background:var(--paper);padding:4px 10px;border-radius:6px;color:var(--muted);font-size:10px}.section-heading{display:flex;justify-content:space-between;align-items:end;margin:30px 0 17px;gap:20px}.section-heading h2{font-size:22px;letter-spacing:-.5px;margin:0}.section-heading p{font-size:11px;color:var(--muted);margin:2px 0}.search-row{display:flex;gap:10px;align-items:center;margin:27px 0}.search-wrap{flex:1;position:relative}.search-wrap span{position:absolute;left:16px;top:11px;color:var(--muted)}#search{width:100%;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:12px 16px 12px 41px;color:var(--ink);font-size:12px}.search-help{color:var(--muted);font-size:10px}.course-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.course-card{display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px;text-decoration:none;color:var(--ink);transition:transform .15s,border-color .15s;min-height:235px}.course-card:hover{transform:translateY(-3px);border-color:var(--accent)}.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}.course-symbol{display:grid;place-items:center;width:44px;height:44px;border-radius:11px;background:color-mix(in srgb,var(--course-color) 11%,var(--paper));color:var(--course-color);font:bold 15px monospace}.card-number{font:10px monospace;color:var(--muted)}.course-card h3{font-size:17px;line-height:1.5;margin:0 0 5px;letter-spacing:-.3px}.course-thai{font-size:10px;color:var(--muted);line-height:1.7;margin:0 0 16px}.card-tags{display:flex;gap:5px;flex-wrap:wrap}.tag{background:var(--bg);border-radius:5px;padding:2px 7px;color:var(--muted);font-size:9px}.card-footer{margin-top:auto;padding-top:20px;display:flex;justify-content:space-between;gap:8px;font-size:10px;color:var(--muted)}.ready{color:var(--accent)}.quick-banner{background:var(--accent);color:white;border-radius:15px;padding:23px 27px;display:flex;align-items:center;justify-content:space-between;gap:20px;margin:28px 0}.quick-banner small{font:9px monospace;letter-spacing:1.5px;opacity:.65}.quick-banner h3{font-size:17px;margin:4px 0}.quick-banner p{font-size:11px;opacity:.75;margin:0}.quick-banner a{background:#ffffffed;color:#285f4b;padding:10px 16px;border-radius:8px;text-decoration:none;font-size:11px;white-space:nowrap}.resource-list{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden}.resource-row{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:15px}.resource-row:last-child{border-bottom:0}.file-icon{height:39px;width:39px;border-radius:9px;background:var(--soft);color:var(--accent);display:grid;place-items:center;font:10px monospace;flex-shrink:0}.resource-main{flex:1;min-width:0}.resource-main>a{color:var(--ink);font-weight:bold;font-size:13px;text-decoration:none;line-height:1.7}.resource-main>a:hover{text-decoration:underline}.resource-meta{color:var(--muted);font-size:10px;margin-top:4px;display:flex;flex-wrap:wrap;gap:9px}.resource-buttons{display:flex;gap:7px;align-items:center}.bookmark{background:none;border:0;padding:6px 8px;color:var(--muted);font-size:20px}.bookmark[aria-pressed=true]{color:#b28d2d}.read-link{font-size:11px;border:1px solid var(--line);border-radius:7px;padding:7px 11px;text-decoration:none;white-space:nowrap}.read-link:hover{background:var(--soft)}.course-header{display:flex;gap:20px;align-items:center;padding:15px 0 25px}.course-header .course-symbol{width:67px;height:72px;font-size:25px}.course-header h1{font-size:31px;line-height:1.5;letter-spacing:-.8px;margin:4px 0}.course-header p{font-size:12px;color:var(--muted);margin:5px 0}.course-toolbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin:10px 0 25px;font-size:11px;color:var(--muted)}.course-toolbar a{font-size:11px}.category-tabs{display:flex;gap:7px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:22px;margin-bottom:23px}.category-tab{border:1px solid var(--line);background:var(--paper);padding:9px 12px;border-radius:9px;font-size:11px;text-decoration:none;color:var(--muted)}.category-tab.active{border-color:var(--accent);background:var(--soft);color:var(--accent);font-weight:bold}.category-tab span{font:10px monospace;margin-left:6px;opacity:.6}.empty{padding:45px 25px;text-align:center;border:1px dashed var(--line);background:var(--paper);border-radius:15px}.empty-symbol{font-size:28px;color:var(--muted)}.empty h3{font-size:17px;margin:10px 0}.empty p{font-size:12px;color:var(--muted);max-width:440px;margin:9px auto 20px}.empty a{font-size:12px}.small-note{font-size:10px;color:var(--muted);margin-top:14px;line-height:1.9}.overview-counts{display:flex;gap:23px;font-size:10px;color:var(--muted);margin-top:24px}.overview-counts strong{font:21px Georgia,serif;color:var(--accent);margin-right:6px}.footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-size:10px;color:var(--muted);display:flex;justify-content:space-between;gap:15px}.footer a{color:inherit}.toast{position:fixed;bottom:24px;left:calc(50% + 100px);transform:translateX(-50%);border-radius:9px;background:var(--accent);color:white;padding:10px 17px;z-index:100;font-size:11px}.overlay{display:none}.result-label{font-size:12px;color:var(--muted);margin:18px 0}.back-link{font-size:11px;text-decoration:none;display:inline-block;margin-bottom:14px}.prose{font-size:var(--text-size);line-height:2.05;overflow-wrap:anywhere}.prose h1{font-size:30px;line-height:1.5;margin:15px 0 28px;letter-spacing:-.5px}.prose h2{font-size:23px;line-height:1.6;margin:38px 0 18px;padding-top:18px;border-top:1px solid var(--line);scroll-margin-top:90px}.prose h3{font-size:19px;margin:30px 0 15px;scroll-margin-top:90px}.prose h4{font-size:17px;margin:24px 0 12px}.prose p{margin:16px 0}.prose li{margin:8px 0}.prose ul,.prose ol{padding-left:25px}.prose code{font:.85em/1.7 Consolas,monospace;padding:2px 5px;border-radius:4px;background:var(--soft);color:var(--accent)}.prose pre{background:#213a34;color:#e7eedf;border-radius:11px;padding:20px;overflow:auto;line-height:1.8}.prose pre code{font-size:13px;color:inherit;background:none;padding:0;white-space:pre}.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:9px;margin:24px 0}.prose table{border-collapse:collapse;width:100%;font-size:.8em;min-width:420px;line-height:1.8}.prose th{background:var(--soft);color:var(--accent);text-align:left;padding:12px 15px}.prose td{padding:11px 15px;border-top:1px solid var(--line);vertical-align:top}.prose blockquote{border-left:3px solid #b5a368;background:var(--bg);padding:2px 19px;margin:22px 0;color:var(--muted)}.reading-page{max-width:950px;margin:0 auto;background:var(--paper);padding:32px 42px;border:1px solid var(--line);border-radius:16px}.reader-nav{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 20px}.reader-toc{max-height:calc(100vh - 180px);overflow:auto;margin-top:25px}.reader-toc a{display:block;padding:7px 10px;font-size:10px;color:var(--muted);text-decoration:none;border-radius:7px}.reader-toc a:hover{background:var(--soft);color:var(--accent)}.reader-toc a.sub{padding-left:20px;font-size:9px}.reader-content{max-width:1050px}.reader-font{display:flex;gap:5px;align-items:center}.reader-font span{font-size:10px;color:var(--muted)}.reader-top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:18px}
+html[data-theme=dark]{--bg:#172722;--paper:#1f322b;--ink:#e5ebdf;--muted:#a2b4a7;--line:#354b3f;--accent:#b7d19b;--soft:#304738;--gold:#a78b42;color-scheme:dark}html[data-theme=dark] .brand-symbol,html[data-theme=dark] .quick-banner,html[data-theme=dark] .toast{background:#355f47;color:#fff}html[data-theme=dark] .course-symbol{color:#d3dfca}
+@media(max-width:1200px){.content{padding:32px}.course-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sidebar{width:224px}.workspace{margin-left:224px}.topbar{padding:0 32px}.course-card{min-height:230px}}
+@media(max-width:800px){.sidebar{transform:translateX(-100%);width:270px;transition:transform .18s}.sidebar.open{transform:translateX(0)}.workspace{margin-left:0}.menu-button{display:inline-block}.topbar{padding:0 20px;height:65px}.content{padding:27px 23px}.hero h1{font-size:38px}.hero{grid-template-columns:1fr 120px;gap:10px}.book-art{transform:scale(.85)}.overlay.visible{display:block;position:fixed;inset:0;background:#12302166;z-index:55}.toast{left:50%}.reading-page{padding:28px}.reader-toc{max-height:65vh}}
+@media(max-width:480px){.topbar{padding:0 13px}.top-actions{gap:5px}.icon-button{padding:7px 9px;font-size:10px}.breadcrumbs{font-size:10px}.content{padding:24px 15px 35px}.hero{grid-template-columns:1fr}.book-art{display:none}.hero h1{font-size:36px}.hero p{font-size:12px}.course-grid{gap:11px}.course-card{padding:16px;min-height:230px}.course-card h3{font-size:14px}.course-thai{font-size:9px}.course-symbol{height:38px;width:38px;font-size:13px}.card-top{margin-bottom:15px}.card-footer{font-size:9px;flex-wrap:wrap;gap:4px}.card-tags{gap:4px}.tag{font-size:8px;padding:2px 5px}.section-heading h2{font-size:20px}.quick-banner{padding:20px;align-items:start;flex-direction:column;gap:14px}.quick-banner h3{font-size:16px}.resource-row{padding:15px 13px;gap:10px}.resource-main>a{font-size:12px}.resource-meta{font-size:9px;gap:6px}.file-icon{width:32px;height:35px;font-size:9px}.resource-buttons{gap:2px}.read-link{padding:6px 8px;font-size:10px}.bookmark{padding:5px;font-size:18px}.search-help{display:none}.course-header{gap:13px;align-items:start}.course-header h1{font-size:24px}.course-header .course-symbol{width:49px;height:56px;font-size:19px}.course-header p{font-size:11px}.course-toolbar{flex-wrap:wrap;font-size:10px}.category-tab{padding:8px 10px;font-size:10px}.category-tabs{gap:6px}.reading-page{padding:23px 18px;border-radius:12px}.prose{font-size:16px;line-height:1.95}.prose h1{font-size:25px}.prose h2{font-size:21px}.prose h3{font-size:18px}.prose pre code{font-size:11px}.reader-top{align-items:start;flex-wrap:wrap}.reader-content{padding:20px 12px}.footer{font-size:9px}.overview-counts{gap:16px}.reader-nav .read-link{font-size:10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media print{.sidebar,.topbar,.reader-nav,.reader-top,.footer,.overlay{display:none!important}.workspace{margin:0}.content,.reading-page{padding:0;max-width:none;border:0}.prose{font-size:12px;color:black}.prose h1{font-size:25px}.prose h2{font-size:20px;break-after:avoid}.prose h3{font-size:16px;break-after:avoid}.prose pre{background:#eee;color:black}.prose pre code{white-space:pre-wrap;font-size:10px}.table-scroll{overflow:visible}.prose table{min-width:0;font-size:10px}}
+</style></head><body><aside class="sidebar" id="sidebar" aria-label="สารบัญเอกสาร"><a href="https://skyce38.github.io/learning/" class="brand"><span class="brand-symbol">ร</span><span><strong>เรียน</strong><small>SKYCE38 / LEARNING</small></span></a><div class="reader-toc"><a href="../../#course/unix-tools">← Unix Tools &amp; Programming</a><a class="" href="#1-เริ่มเขียนและรัน-shell-script">1. เริ่มเขียนและรัน shell script</a><a class="" href="#2-ตัวแปร-ขอบเขต-และ-quote">2. ตัวแปร ขอบเขต และ quote</a><a class="sub" href="#ค่าว่างและค่าเริ่มต้น">ค่าว่างและค่าเริ่มต้น</a><a class="" href="#3-arguments-และ-special-parameters">3. Arguments และ special parameters</a><a class="" href="#4-คำนวณ-string-กับ-arithmetic-ต่างกัน">4. คำนวณ: string กับ arithmetic ต่างกัน</a><a class="" href="#5-exit-status-test-และ-if">5. Exit status, test และ if</a><a class="sub" href="#ตาราง-test-ที่ต้องจำ">ตาราง test ที่ต้องจำ</a><a class="sub" href="#แยกวงเล็บให้ได้">แยกวงเล็บให้ได้</a><a class="" href="#6-ลูป-for-while-until">6. ลูป for, while, until</a><a class="sub" href="#for-ไล่รายการ">for: ไล่รายการ</a><a class="sub" href="#while-ทำต่อเมื่อเงื่อนไขสำเร็จ">while: ทำต่อเมื่อเงื่อนไขสำเร็จ</a><a class="sub" href="#until-ทำต่อเมื่อเงื่อนไขยังไม่สำเร็จ">until: ทำต่อเมื่อเงื่อนไขยังไม่สำเร็จ</a><a class="sub" href="#อ่านไฟล์ทีละบรรทัด">อ่านไฟล์ทีละบรรทัด</a><a class="" href="#7-case-และ-here-document">7. case และ here document</a><a class="sub" href="#here-document-ป้อนข้อความหลายบรรทัดเป็น-stdin">Here document: ป้อนข้อความหลายบรรทัดเป็น stdin</a><a class="" href="#8-function-รับ-argument-และคืนผล">8. Function: รับ argument และคืนผล</a><a class="sub" href="#ตัวอย่างแต่งเพิ่ม-factorial-สำหรับจำนวน-020">ตัวอย่างแต่งเพิ่ม: factorial สำหรับจำนวน 0–20</a><a class="" href="#9-array-ใน-bash">9. Array ใน Bash</a><a class="" href="#10-regex-แยกจาก-glob">10. Regex: แยกจาก glob</a><a class="" href="#11-sed-แก้ไขข้อความเป็น-stream">11. sed: แก้ไขข้อความเป็น stream</a><a class="" href="#12-awk-ทำงานตาม-record-และ-field">12. awk: ทำงานตาม record และ field</a><a class="" href="#13-โจทย์ประยุกต์แต่งเพิ่ม-นับคำในข้อความภาษาอังกฤษ">13. โจทย์ประยุกต์แต่งเพิ่ม: นับคำในข้อความภาษาอังกฤษ</a><a class="" href="#14-รายละเอียดเสริมจาก-lecture-15-file-descriptor">14. รายละเอียดเสริมจาก Lecture 15: File descriptor</a><a class="" href="#15-การบ้านในเว็บบอกทักษะที่ควรซ้อม">15. การบ้านในเว็บบอกทักษะที่ควรซ้อม</a><a class="" href="#16-แบบฝึกหัดแต่งเพิ่มพร้อมเฉลย">16. แบบฝึกหัดแต่งเพิ่มพร้อมเฉลย</a><a class="" href="#อ่านรอบสุดท้าย">อ่านรอบสุดท้าย</a><a class="" href="#แหล่งประกอบ">แหล่งประกอบ</a></div></aside><div class="overlay" id="overlay"></div><div class="workspace"><header class="topbar"><div style="display:flex;align-items:center;gap:12px"><button class="icon-button menu-button" id="menu" aria-label="เปิดสารบัญวิชา" aria-expanded="false">☰</button><div class="breadcrumbs"><a href="https://skyce38.github.io/learning/">เรียน</a><span id="breadcrumbs">คลังเรียนทั้งหมด</span></div></div><div class="top-actions"><a class="icon-button" href="https://github.com/Skyce38/learning" target="_blank" rel="noopener" style="text-decoration:none">GitHub ↗</a><button class="icon-button" id="theme" aria-label="เปลี่ยนเป็นโหมดมืด">☾</button></div></header><main class="content reader-content"><div class="reader-top"><a class="back-link" href="../../#course/unix-tools/summaries">← Unix Tools &amp; Programming / สรุป</a><div class="reader-font"><button class="icon-button" id="font-less" aria-label="ลดตัวอักษร">A−</button><span id="font-value">17</span><button class="icon-button" id="font-more" aria-label="เพิ่มตัวอักษร">A+</button><button class="icon-button" id="print">พิมพ์</button></div></div><div class="reader-nav"><span class="pill">Final</span><a class="read-link" href="https://github.com/Skyce38/course-unix-tools/blob/main/summaries/final.md" target="_blank" rel="noopener">เปิด Markdown บน GitHub ↗</a></div><article class="reading-page prose"><h1>สรุปอ่านสอบ FINAL: Unix Tools and Programming</h1>
+<p><strong>อัปเดตตามรูปแบบสอบที่ผู้เรียนแจ้ง: ข้อสอบปรนัย</strong> ให้อ่านโดยฝึกเลือกผลลัพธ์ของโค้ด ตรวจจำนวน arguments, exit status และเงื่อนไขขอบเขต คู่กับ <a href="../../read/unix-tools/final-homework-analysis.html">วิเคราะห์การบ้าน Final ทั้ง 6 ไฟล์</a> และ <a href="../../read/unix-tools/practice-40.html">ข้อฝึกปรนัย 40 ข้อพร้อมเฉลยอธิบาย</a></p>
+<p>อิง <a href="https://angsila.cs.buu.ac.th/~nutthanon/88624159/">โครงร่างรายวิชา</a> ช่วงหลังกลางภาค สัปดาห์ 9–13: Shell Script → ตัวแปร/test/if → ลูป → case/function → array/sed/awk การจัดชุดนี้อิงลำดับเรียน ไม่ใช่ประกาศยืนยันว่า Final จะไม่ออกเนื้อหาก่อนกลางภาค</p>
+<p>ใช้ <strong>Bash บน Linux</strong> เป็นหลัก โดยเฉพาะ <code>[[ ]]</code>, array และ <code>local</code>; ใช้ <code>bash script.sh</code> หรือ shebang ที่ระบุ Bash ไม่ใช้ <code>sh</code> แทนโดยสมมติว่าทำงานเหมือนกันทั้งหมด</p>
+<h2 id="1-เริ่มเขียนและรัน-shell-script">1. เริ่มเขียนและรัน shell script</h2>
+<pre><code class="language-bash">#!/usr/bin/env bash
+printf &#39;Hello %s\n&#39; &quot;$1&quot;
+</code></pre>
+<p>บันทึกเป็น <code>hello.sh</code> แล้วรันได้สองแบบ:</p>
+<pre><code class="language-bash">bash hello.sh Dao
+# หรือ
+chmod u+x hello.sh
+./hello.sh Dao
+</code></pre>
+<ul>
+<li>shebang ระบุ interpreter เมื่อเรียกไฟล์ให้ทำงานโดยตรง</li>
+<li><code>./</code> ระบุ path เพราะ directory ปัจจุบันไม่จำเป็นต้องอยู่ใน <code>PATH</code></li>
+<li><code>bash file.sh</code> ทำงานใน Bash อีกตัว; การเปลี่ยนตัวแปรหรือ directory ไม่ย้อนมาเปลี่ยน shell ผู้เรียก</li>
+<li><code>source file.sh</code> หรือ <code>. file.sh</code> ทำงานใน shell ปัจจุบัน</li>
+<li><code>bash -n file.sh</code> ตรวจ syntax โดยไม่รัน; <code>bash -x file.sh</code> รันพร้อมแสดง trace</li>
+<li>คำสั่งภายในดูด้วย <code>help</code> เช่น <code>help read</code>, <code>help for</code></li>
+</ul>
+<p>คำสั่งทบทวนใน Lecture 9: <code>jobs</code>, <code>fg</code>, <code>bg</code>, <code>kill</code>, <code>cd -</code> และ <code>( commands )</code> ซึ่งสร้าง subshell</p>
+<p>การสำรองไฟล์ที่พบในบท: <code>tar -cf backup.tar dir/</code> สร้าง archive, <code>tar -tf backup.tar</code> ดูรายการ, <code>tar -xf backup.tar</code> แตกไฟล์; เติม <code>z</code> เช่น <code>tar -czf backup.tar.gz dir/</code> เมื่อต้องการ gzip</p>
+<h2 id="2-ตัวแปร-ขอบเขต-และ-quote">2. ตัวแปร ขอบเขต และ quote</h2>
+<pre><code class="language-bash">name=&quot;Dao Jai&quot;            # ห้ามเว้นวรรครอบ =
+printf &#39;%s\n&#39; &quot;$name&quot;     # หนึ่ง argument แม้ค่ามีช่องว่าง
+printf &#39;%s\n&#39; &#39;${name}&#39;   # พิมพ์ ${name} ตรงตัว
+printf &#39;%s\n&#39; &quot;${name}_report&quot;
+read -r name              # รับข้อความ; -r ไม่ตีความ backslash เป็น escape
+unset name                # ถอนตัวแปร
+readonly course=Unix      # อ่านได้ เปลี่ยน/ถอนค่าไม่ได้ใน shell นี้
+declare -i count=0        # กำหนด attribute จำนวนเต็ม
+</code></pre>
+<p><code>name=</code> คือมีตัวแปรแต่เป็นค่าว่าง; <code>unset name</code> คือถอนตัวแปร</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>รูปแบบ</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>v=value</code></td>
+<td>ตั้งตัวแปรใน shell นี้</td>
+</tr>
+<tr>
+<td><code>export v=value</code></td>
+<td>ให้โพรเซสลูกที่เรียกภายหลังรับค่าผ่าน environment</td>
+</tr>
+<tr>
+<td><code>local v=value</code></td>
+<td>จำกัดตัวแปรไว้ในขอบเขตฟังก์ชันของ Bash</td>
+</tr>
+<tr>
+<td><code>( v=new )</code></td>
+<td>เปลี่ยนค่าใน subshell ไม่เปลี่ยนค่าตัวแปรใน shell แม่</td>
+</tr>
+<tr>
+<td><code>{ v=new; }</code></td>
+<td>ทำใน shell ปัจจุบัน ค่าจึงเปลี่ยนตาม</td>
+</tr>
+</tbody></table></div>
+<p><strong>export ไม่ได้ทำให้แม่และลูกใช้ตัวแปรร่วมกันแบบแก้ไขถึงกันได้</strong> โพรเซสลูกได้รับค่าเริ่มต้น และการเปลี่ยนในลูกไม่ย้อนกลับไปแก้ environment ของแม่</p>
+<h3 id="ค่าว่างและค่าเริ่มต้น">ค่าว่างและค่าเริ่มต้น</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>รูปแบบ</th>
+<th>เมื่อ v ว่างหรือยังไม่ถูกตั้ง</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>${v:-default}</code></td>
+<td>ใช้ default แทนในการขยาย แต่ไม่กำหนดกลับให้ v</td>
+</tr>
+<tr>
+<td><code>${v:=default}</code></td>
+<td>กำหนด default ให้ v แล้วใช้ค่านั้น</td>
+</tr>
+<tr>
+<td><code>${v:?message}</code></td>
+<td>แสดง error; ใน non-interactive shell จะยุติ shell หากเกิด error นี้</td>
+</tr>
+</tbody></table></div>
+<p>เครื่องหมาย <code>:</code> ทำให้ตรวจทั้ง unset และค่าว่าง; แบบไม่มี <code>:</code> เช่น <code>${v-default}</code> ตรวจเฉพาะ unset</p>
+<pre><code class="language-bash">unset folder
+printf &#39;%s\n&#39; &quot;${folder:-./data}&quot;  # ./data; folder ยัง unset
+: &quot;${folder:=./data}&quot;             # folder กลายเป็น ./data
+</code></pre>
+<h2 id="3-arguments-และ-special-parameters">3. Arguments และ special parameters</h2>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>ตัวแปร</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>$0</code></td>
+<td>ชื่อ/เส้นทางที่ใช้เรียก script</td>
+</tr>
+<tr>
+<td><code>$1</code>, <code>$2</code>, …</td>
+<td>argument ตามลำดับ</td>
+</tr>
+<tr>
+<td><code>${10}</code></td>
+<td>argument ลำดับ 10; <code>$10</code> ไม่ได้หมายถึงตัวที่ 10</td>
+</tr>
+<tr>
+<td><code>$#</code></td>
+<td>จำนวน positional arguments</td>
+</tr>
+<tr>
+<td><code>&quot;$@&quot;</code></td>
+<td>arguments ทุกตัว โดยคงแต่ละตัวแยกกัน</td>
+</tr>
+<tr>
+<td><code>&quot;$*&quot;</code></td>
+<td>arguments ทั้งหมดเป็นคำเดียว คั่นด้วยตัวแรกของ IFS</td>
+</tr>
+<tr>
+<td><code>$?</code></td>
+<td>exit status ของคำสั่งล่าสุด</td>
+</tr>
+<tr>
+<td><code>$$</code></td>
+<td>process ID ของ shell ตามความหมายของ Bash</td>
+</tr>
+<tr>
+<td><code>$!</code></td>
+<td>PID ของงานที่เริ่มแบบ background ล่าสุด</td>
+</tr>
+</tbody></table></div>
+<p>เรียก <code>./show.sh &quot;red blue&quot; green</code> → <code>$#</code> เป็น 2, <code>$1</code> เป็น <code>red blue</code>, <code>$2</code> เป็น <code>green</code></p>
+<pre><code class="language-bash">for item in &quot;$@&quot;; do
+    printf &#39;&lt;%s&gt;\n&#39; &quot;$item&quot;
+done
+# &lt;red blue&gt;
+# &lt;green&gt;
+</code></pre>
+<p><code>shift</code> เลื่อน positional parameters: <code>$2</code> เดิมมาเป็น <code>$1</code> และ <code>$#</code> ลดลงหนึ่ง; <code>shift 2</code> เลื่อนสองตำแหน่ง ต้องมี arguments เพียงพอ</p>
+<p><strong>อย่าใช้ <code>$@</code> แบบไม่ quote เมื่อจำเป็นต้องรักษาช่องว่างใน argument</strong></p>
+<h2 id="4-คำนวณ-string-กับ-arithmetic-ต่างกัน">4. คำนวณ: string กับ arithmetic ต่างกัน</h2>
+<pre><code class="language-bash">n=7+2
+printf &#39;%s\n&#39; &quot;$n&quot;           # 7+2
+n=$((7+2))
+printf &#39;%s\n&#39; &quot;$n&quot;           # 9
+printf &#39;%s\n&#39; &quot;$((7/2))&quot;     # 3: หารจำนวนเต็ม
+printf &#39;%s\n&#39; &quot;$((7%2))&quot;     # 1: เศษ
+((n += 1))                   # เปลี่ยนค่า n
+</code></pre>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>รูปแบบ</th>
+<th>ใช้ทำอะไร</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>$(command)</code></td>
+<td>รับ stdout ของคำสั่ง โดยตัด newline ที่ท้ายผลลัพธ์</td>
+</tr>
+<tr>
+<td><code>$((expression))</code></td>
+<td>คำนวณแล้วขยายเป็นข้อความผลลัพธ์</td>
+</tr>
+<tr>
+<td><code>((expression))</code></td>
+<td>คำสั่งคำนวณ; status 0 เมื่อนิพจน์ไม่เป็น 0, status 1 เมื่อค่าเป็น 0</td>
+</tr>
+</tbody></table></div>
+<p><code>^</code> ใน Bash arithmetic คือ XOR; ยกกำลังใช้ <code>**</code> หารทศนิยมให้ใช้เครื่องมือเช่น <code>awk</code> หรือ <code>bc</code> ที่ติดตั้งไว้</p>
+<pre><code class="language-bash">awk &#39;BEGIN {printf &quot;%.2f\n&quot;, 7/2}&#39;   # 3.50
+printf &#39;scale=2; 7/2\n&#39; | bc        # 3.50
+</code></pre>
+<p>ตัวเลขขึ้นต้นด้วย <code>0</code> ใน Bash arithmetic อาจถูกมองเป็นฐานแปด เช่น <code>08</code> ใช้ไม่ได้ หากรับจำนวนฐานสิบที่มีศูนย์นำหน้าควรตรวจรูปแบบและแปลงฐานให้ชัดเจน</p>
+<h2 id="5-exit-status-test-และ-if">5. Exit status, test และ if</h2>
+<p><strong>คำสั่งสำเร็จ = status 0; ไม่สำเร็จ/เงื่อนไขเท็จ = nonzero</strong>; <code>if</code> ตรวจ status ของคำสั่ง ไม่ใช่อ่านคำว่า true/false ที่พิมพ์ออกมา</p>
+<pre><code class="language-bash">if grep -q &#39;ERROR&#39; app.log; then
+    printf &#39;Found ERROR\n&#39;
+fi
+</code></pre>
+<p><code>grep</code> ให้ 0 เมื่อพบ, 1 เมื่อไม่พบ, ส่วน error เป็นค่าอื่น จึงไม่ควรตีความ nonzero ทุกกรณีว่าไม่พบอย่างเดียว</p>
+<p><code>$?</code> เปลี่ยนทุกครั้งที่มีคำสั่งใหม่ หากต้องใช้ภายหลังให้บันทึกทันที:</p>
+<pre><code class="language-bash">some_command
+status=$?
+printf &#39;status=%s\n&#39; &quot;$status&quot;
+</code></pre>
+<h3 id="ตาราง-test-ที่ต้องจำ">ตาราง test ที่ต้องจำ</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>กลุ่ม</th>
+<th>ตัวดำเนินการ</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>จำนวนเต็ม</td>
+<td><code>-eq</code>, <code>-ne</code>, <code>-lt</code>, <code>-le</code>, <code>-gt</code>, <code>-ge</code></td>
+</tr>
+<tr>
+<td>String</td>
+<td><code>=</code>, <code>!=</code>, <code>-z</code> ว่าง, <code>-n</code> ไม่ว่าง</td>
+</tr>
+<tr>
+<td>File</td>
+<td><code>-e</code> มีอยู่, <code>-f</code> ไฟล์ทั่วไป, <code>-d</code> directory, <code>-s</code> มีอยู่และขนาดมากกว่า 0</td>
+</tr>
+<tr>
+<td>สิทธิ</td>
+<td><code>-r</code> อ่านได้, <code>-w</code> เขียนได้, <code>-x</code> execute/search ได้</td>
+</tr>
+<tr>
+<td>เปรียบเทียบไฟล์</td>
+<td><code>a -nt b</code> ใหม่กว่า, <code>a -ot b</code> เก่ากว่า, <code>a -ef b</code> อ้างไฟล์เดียวกัน</td>
+</tr>
+</tbody></table></div>
+<pre><code class="language-bash">if [ &quot;$score&quot; -ge 80 ]; then
+    printf &#39;A\n&#39;
+elif [ &quot;$score&quot; -ge 70 ]; then
+    printf &#39;B\n&#39;
+else
+    printf &#39;Other\n&#39;
+fi
+</code></pre>
+<p>สมมติ score ผ่านการตรวจว่าเป็นจำนวนเต็มแล้ว; <strong>ต้องเว้นวรรคหลัง <code>[</code> และก่อน <code>]</code></strong> เพราะ <code>[</code> เป็นคำสั่ง และ <code>]</code> เป็น argument ปิดท้าย</p>
+<pre><code class="language-bash">[ &quot;$n&quot; -ge 1 ] &amp;&amp; [ &quot;$n&quot; -le 10 ]  # AND
+[ &quot;$x&quot; = yes ] || [ &quot;$x&quot; = y ]     # OR
+! [ -f &quot;$file&quot; ]                    # NOT
+</code></pre>
+<p><code>a &amp;&amp; b</code> ทำ b เมื่อ a สำเร็จ; <code>a || b</code> ทำ b เมื่อ a ไม่สำเร็จ; <code>a; b</code> ทำ b ต่อโดยไม่ใช้ status ของ a ตัดสิน</p>
+<h3 id="แยกวงเล็บให้ได้">แยกวงเล็บให้ได้</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>รูปแบบ</th>
+<th>เหมาะกับ</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>[ &quot;$a&quot; -gt &quot;$b&quot; ]</code></td>
+<td>เปรียบเทียบจำนวนเต็มแบบ test</td>
+</tr>
+<tr>
+<td><code>[[ &quot;$name&quot; == A* ]]</code></td>
+<td>Bash conditional จับ pattern ขึ้นต้น A</td>
+</tr>
+<tr>
+<td><code>[[ &quot;$name&quot; == &quot;A*&quot; ]]</code></td>
+<td>เทียบกับข้อความ A* ตรงตัว</td>
+</tr>
+<tr>
+<td><code>(( a &gt; b ))</code></td>
+<td>เปรียบเทียบ/คำนวณจำนวนเต็มใน Bash</td>
+</tr>
+<tr>
+<td><code>( commands )</code></td>
+<td>สร้าง subshell</td>
+</tr>
+</tbody></table></div>
+<p><code>[ &quot;$a&quot; &gt; &quot;$b&quot; ]</code> มีปัญหา เพราะ shell อาจมอง <code>&gt;</code> เป็น redirection; สำหรับ string ใน Bash ใช้ <code>[[ &quot;$a&quot; &gt; &quot;$b&quot; ]]</code> ส่วนตัวเลขใช้ <code>-gt</code> หรือ <code>(( ))</code></p>
+<h2 id="6-ลูป-for-while-until">6. ลูป for, while, until</h2>
+<h3 id="for-ไล่รายการ">for: ไล่รายการ</h3>
+<pre><code class="language-bash">for value in 2 4 6; do
+    printf &#39;%s\n&#39; &quot;$value&quot;
+done
+
+for arg in &quot;$@&quot;; do
+    printf &#39;%s\n&#39; &quot;$arg&quot;
+done
+
+for ((i=1; i&lt;=3; i++)); do
+    printf &#39;%s\n&#39; &quot;$i&quot;
+done
+</code></pre>
+<p><code>for arg; do ...; done</code> เป็นรูปย่อของการวน positional arguments แบบรักษาแต่ละ argument</p>
+<h3 id="while-ทำต่อเมื่อเงื่อนไขสำเร็จ">while: ทำต่อเมื่อเงื่อนไขสำเร็จ</h3>
+<pre><code class="language-bash">i=1
+while [ &quot;$i&quot; -le 3 ]; do
+    printf &#39;%s\n&#39; &quot;$i&quot;
+    i=$((i+1))
+done
+</code></pre>
+<h3 id="until-ทำต่อเมื่อเงื่อนไขยังไม่สำเร็จ">until: ทำต่อเมื่อเงื่อนไขยังไม่สำเร็จ</h3>
+<pre><code class="language-bash">i=1
+until [ &quot;$i&quot; -gt 3 ]; do
+    printf &#39;%s\n&#39; &quot;$i&quot;
+    i=$((i+1))
+done
+</code></pre>
+<p>ทั้งสองตัวอย่างพิมพ์ 1, 2, 3; ตรวจเงื่อนไขก่อนทำ จึงอาจไม่เข้าลูปเลย</p>
+<ul>
+<li><code>break</code> ออกจากลูป</li>
+<li><code>continue</code> ข้ามส่วนที่เหลือของรอบปัจจุบันแล้วเริ่มรอบถัดไป</li>
+<li>ต้องตรวจจุดเริ่มต้น เงื่อนไขหยุด และการอัปเดตตัวแปร ป้องกันวนไม่จบและ off-by-one</li>
+</ul>
+<h3 id="อ่านไฟล์ทีละบรรทัด">อ่านไฟล์ทีละบรรทัด</h3>
+<pre><code class="language-bash">count=0
+while IFS= read -r line || [ -n &quot;$line&quot; ]; do
+    count=$((count+1))
+done &lt; input.txt
+printf &#39;%s\n&#39; &quot;$count&quot;
+</code></pre>
+<p><code>IFS=</code> รักษาช่องว่างหัว/ท้าย, <code>-r</code> รักษา backslash, เงื่อนไขหลัง <code>||</code> ช่วยรับบรรทัดท้ายที่ไม่มี newline</p>
+<p><code>cat input.txt | while ...</code> มักทำให้ลูปอยู่ใน subshell ของ Bash ค่าตัวแปรที่แก้ในลูปจึงอาจไม่คงอยู่ภายนอก ใช้ redirect เข้า loop ตามตัวอย่างเมื่อจำเป็นต้องใช้ค่าต่อ</p>
+<h2 id="7-case-และ-here-document">7. case และ here document</h2>
+<pre><code class="language-bash">case &quot;$1&quot; in
+    start|run) printf &#39;Start\n&#39; ;;
+    stop)      printf &#39;Stop\n&#39; ;;
+    *.txt)     printf &#39;Text file\n&#39; ;;
+    *)         printf &#39;Unknown\n&#39; ;;
+esac
+</code></pre>
+<p>case ใช้ shell patterns เช่น <code>*</code>, <code>?</code>, <code>[...]</code>; เลือกแขนแรกที่ตรง และ <code>;;</code> จบแขนนั้น ไม่ใช่ regex</p>
+<h3 id="here-document-ป้อนข้อความหลายบรรทัดเป็น-stdin">Here document: ป้อนข้อความหลายบรรทัดเป็น stdin</h3>
+<pre><code class="language-bash">name=Dao
+cat &lt;&lt;EOF
+Hello $name
+Today: $(date +%F)
+EOF
+</code></pre>
+<p>delimiter <code>EOF</code> บรรทัดปิดต้องอยู่ตามรูปแบบที่ถูกต้อง ไม่มีช่องว่างเกิน; <code>&lt;&lt;&#39;EOF&#39;</code> จะไม่ขยายตัวแปร/คำสั่งในเนื้อหา และ <code>&lt;&lt;-EOF</code> ตัด tab นำหน้าได้ แต่ไม่ตัด space</p>
+<h2 id="8-function-รับ-argument-และคืนผล">8. Function: รับ argument และคืนผล</h2>
+<pre><code class="language-bash">sum() {
+    local a=$1 b=$2
+    printf &#39;%s\n&#39; &quot;$((a+b))&quot;
+}
+answer=$(sum 4 7)
+printf &#39;%s\n&#39; &quot;$answer&quot;       # 11
+</code></pre>
+<ul>
+<li>เรียก <code>sum 4 7</code> โดยไม่ใส่วงเล็บแบบ C/Python</li>
+<li>ภายในฟังก์ชัน <code>$1</code>, <code>$2</code>, <code>$#</code> หมายถึง arguments ของฟังก์ชัน</li>
+<li>ตัวแปรที่ไม่ได้ประกาศ <code>local</code> อาจแก้ค่าตัวแปรภายนอกได้</li>
+<li><code>return 0</code> คืน <strong>สถานะ</strong> สำเร็จ ไม่ได้คืนค่าข้อมูลทั่วไป; status อยู่ในช่วง 0–255</li>
+<li>ส่งข้อมูลทาง stdout ด้วย <code>printf</code> แล้วรับด้วย <code>$(...)</code></li>
+<li><code>return</code> จบฟังก์ชัน; <code>exit</code> จบ shell ที่กำลังรัน script</li>
+</ul>
+<h3 id="ตัวอย่างแต่งเพิ่ม-factorial-สำหรับจำนวน-020">ตัวอย่างแต่งเพิ่ม: factorial สำหรับจำนวน 0–20</h3>
+<p>ใช้ช่วงนี้เพื่อให้ผลอยู่ในขอบเขต signed 64-bit ของ Bash ทั่วไป</p>
+<pre><code class="language-bash">#!/usr/bin/env bash
+fac() {
+    local n=$1 result=1 i
+    for ((i=2; i&lt;=n; i++)); do
+        result=$((result*i))
+    done
+    printf &#39;%s\n&#39; &quot;$result&quot;
+}
+
+if [ &quot;$#&quot; -eq 0 ]; then
+    printf &#39;Usage: %s integer...\n&#39; &quot;$0&quot; &gt;&amp;2
+    exit 1
+fi
+
+for n in &quot;$@&quot;; do
+    if [[ ! &quot;$n&quot; =~ ^([0-9]|1[0-9]|20)$ ]]; then
+        printf &#39;Expected integer 0..20: %s\n&#39; &quot;$n&quot; &gt;&amp;2
+        exit 1
+    fi
+    fac &quot;$n&quot;
+done
+</code></pre>
+<p><code>./fac.sh 5 0</code> → 120 และ 1 คนละบรรทัด; <code>0! = 1</code> จึงเริ่ม result ที่ 1 และไม่เข้าลูปเมื่อ n=0</p>
+<h2 id="9-array-ใน-bash">9. Array ใน Bash</h2>
+<pre><code class="language-bash">scores=(65 82 74)
+scores[1]=90
+printf &#39;%s\n&#39; &quot;${scores[0]}&quot;    # 65
+printf &#39;%s\n&#39; &quot;${#scores[@]}&quot;   # 3: จำนวนสมาชิก
+printf &#39;%s\n&#39; &quot;${!scores[@]}&quot;   # index แต่ละตัว
+
+for s in &quot;${scores[@]}&quot;; do
+    printf &#39;%s\n&#39; &quot;$s&quot;
+done
+
+unset &#39;scores[1]&#39;
+</code></pre>
+<ul>
+<li>indexed array เริ่ม index 0 และมีช่องว่างของ index ได้</li>
+<li><code>&quot;${arr[@]}&quot;</code> ขยายแต่ละสมาชิกเป็นคนละ argument</li>
+<li><code>&quot;${arr[*]}&quot;</code> รวมเป็น argument เดียวด้วยตัวแรกของ IFS</li>
+<li><code>${#arr[@]}</code> = จำนวนสมาชิก; <code>${#arr[0]}</code> = ความยาวข้อความสมาชิกแรก</li>
+<li>หลัง unset จำนวนสมาชิกไม่จำเป็นต้องเท่ากับ index สูงสุด + 1; วน index ด้วย <code>&quot;${!arr[@]}&quot;</code> เมื่อต้องการรองรับช่องว่าง</li>
+</ul>
+<pre><code class="language-bash">scores=(10 20 30)
+sum=0
+for s in &quot;${scores[@]}&quot;; do
+    sum=$((sum+s))
+done
+awk -v s=&quot;$sum&quot; -v n=&quot;${#scores[@]}&quot; \
+    &#39;BEGIN {if (n&gt;0) printf &quot;avg=%.2f\n&quot;, s/n}&#39;
+# avg=20.00
+</code></pre>
+<h2 id="10-regex-แยกจาก-glob">10. Regex: แยกจาก glob</h2>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>รูปแบบ</th>
+<th>Glob ที่ shell ใช้เลือกชื่อ</th>
+<th>Regex ที่ grep/sed/awk ใช้ค้นข้อความ</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>*</code></td>
+<td>อักขระอะไรก็ได้ 0 ตัวขึ้นไป</td>
+<td>ทำ item ก่อนหน้าซ้ำ 0 ครั้งขึ้นไป</td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>อักขระหนึ่งตัว</td>
+<td>ใน ERE ทำ item ก่อนหน้าเป็น optional</td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td>จุดตรงตัว</td>
+<td>อักขระหนึ่งตัว</td>
+</tr>
+<tr>
+<td><code>^</code>, <code>$</code></td>
+<td>โดยทั่วไปเป็นตัวอักษรธรรมดา</td>
+<td>ต้น/ท้ายบรรทัด</td>
+</tr>
+</tbody></table></div>
+<p>ใช้ <code>grep -E</code> สำหรับ ERE: <code>+</code> = อย่างน้อยหนึ่ง, <code>?</code> = ศูนย์หรือหนึ่ง, <code>(...)</code> = กลุ่ม, <code>a|b</code> = ทางเลือก, <code>{m,n}</code> = จำนวนซ้ำ</p>
+<pre><code class="language-bash">grep -E &#39;^[0-9]+$&#39; data.txt   # ทั้งบรรทัดเป็นเลขอย่างน้อยหนึ่งหลัก
+grep -E &#39;^A.*z$&#39; data.txt     # เริ่ม A และจบ z
+grep -F &#39;a.b&#39; data.txt        # ค้นข้อความ a.b แบบตรงตัว
+</code></pre>
+<p><code>[[:digit:]]</code> คือ character class สำหรับเลข; <code>[^0-9]</code> คือหนึ่งตัวที่ไม่ใช่เลข; <code>\.</code> ใช้จุดตรงตัวใน regex</p>
+<p>ใส่ single quote รอบ regex เพื่อให้ shell ส่ง pattern ให้เครื่องมือ ส่วน Bash <code>[[ &quot;$x&quot; =~ regex ]]</code> ใช้ ERE และการ quote RHS ทั้งหมดจะทำให้ส่วนนั้นถูกเทียบแบบ literal</p>
+<h2 id="11-sed-แก้ไขข้อความเป็น-stream">11. sed: แก้ไขข้อความเป็น stream</h2>
+<pre><code class="language-bash">sed &#39;s/cat/dog/&#39; input.txt     # เปลี่ยนครั้งแรกของแต่ละบรรทัด
+sed &#39;s/cat/dog/g&#39; input.txt    # เปลี่ยนทุกครั้งในแต่ละบรรทัด
+sed &#39;2,4d&#39; input.txt           # ตัดบรรทัด 2–4 ออกจาก output
+sed &#39;/^#/d&#39; input.txt          # ตัดบรรทัดที่เริ่มด้วย #
+sed &#39;/^$/d&#39; input.txt          # ตัดบรรทัดว่างจริง ๆ
+sed -n &#39;2,4p&#39; input.txt        # พิมพ์เฉพาะบรรทัด 2–4
+sed -E &#39;s/[0-9]+/NUM/g&#39; input.txt
+</code></pre>
+<p>โครงสร้าง substitution: <code>s / pattern / replacement / flags</code></p>
+<ul>
+<li>ปกติ sed พิมพ์ผลแต่ละบรรทัดอัตโนมัติ; <code>-n</code> ปิดการพิมพ์อัตโนมัติ</li>
+<li><code>p</code> เพิ่มการพิมพ์ จึงอาจเห็นบรรทัดซ้ำเมื่อไม่ใช้ <code>-n</code></li>
+<li><code>d</code> ตัดทั้งบรรทัดจาก output; <code>s/pattern//</code> ลบเฉพาะส่วนที่ตรง</li>
+<li>ไม่ใส่ <code>-i</code> จะไม่แก้ไฟล์ต้นฉบับ; อย่าเขียน <code>sed ... file &gt; file</code> เพราะ shell ตัดไฟล์ก่อน sed อ่าน</li>
+<li><code>^$</code> ไม่ตรงกับบรรทัดที่มีช่องว่าง; ใช้ <code>^[[:space:]]*$</code> เมื่อต้องการรวมกรณีนั้น</li>
+</ul>
+<h2 id="12-awk-ทำงานตาม-record-และ-field">12. awk: ทำงานตาม record และ field</h2>
+<p>รูปแบบ: <code>awk &#39;pattern { action }&#39; file</code> โดยค่าปกติหนึ่งบรรทัดเป็นหนึ่ง record และแบ่ง field ด้วย whitespace</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>ชื่อ</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>$0</code></td>
+<td>record ทั้งหมด</td>
+</tr>
+<tr>
+<td><code>$1</code>, <code>$2</code></td>
+<td>field ที่ 1, 2</td>
+</tr>
+<tr>
+<td><code>NR</code></td>
+<td>จำนวน record ที่อ่านแล้วรวมทุกไฟล์</td>
+</tr>
+<tr>
+<td><code>NF</code></td>
+<td>จำนวน field ของ record ปัจจุบัน</td>
+</tr>
+<tr>
+<td><code>FS</code> / <code>-F</code></td>
+<td>ตัวคั่น field ขาเข้า</td>
+</tr>
+<tr>
+<td><code>OFS</code></td>
+<td>ตัวคั่นระหว่างค่าที่ <code>print</code> คั่นด้วย comma</td>
+</tr>
+<tr>
+<td><code>BEGIN</code> / <code>END</code></td>
+<td>ทำก่อนอ่านข้อมูล / หลังอ่านข้อมูล</td>
+</tr>
+</tbody></table></div>
+<p>สมมติ <code>scores.txt</code> มี:</p>
+<pre><code class="language-text">Dao 80
+Mek 65
+Fon 95
+</code></pre>
+<pre><code class="language-bash">awk &#39;{print $1}&#39; scores.txt
+# Dao, Mek, Fon คนละบรรทัด
+
+awk &#39;$2 &gt;= 80 {print $1, $2}&#39; scores.txt
+# Dao 80
+# Fon 95
+
+awk &#39;{sum += $2} END {if (NR&gt;0) printf &quot;%.2f\n&quot;, sum/NR}&#39; scores.txt
+# 80.00
+
+awk -F: &#39;{print $1, $3}&#39; /etc/passwd
+# ชื่อบัญชี กับ UID
+</code></pre>
+<p><code>$1</code> ของ awk คือ field ของข้อมูล ไม่ใช่ argument ของ shell; single quote รอบโปรแกรมป้องกัน shell ขยาย <code>$1</code> ก่อนส่งให้ awk เมื่อต้องส่งค่าจาก shell ใช้ <code>awk -v limit=&quot;$limit&quot; &#39;$2 &gt;= limit&#39; file</code></p>
+<p><code>print $1,$2</code> มี OFS คั่น; <code>print $1 $2</code> ต่อข้อความกัน การใช้ <code>-F,</code> เหมาะกับข้อมูล comma แบบง่าย ไม่ใช่ตัวอ่าน CSV เต็มรูปแบบที่รองรับ quoted comma ทุกกรณี</p>
+<h2 id="13-โจทย์ประยุกต์แต่งเพิ่ม-นับคำในข้อความภาษาอังกฤษ">13. โจทย์ประยุกต์แต่งเพิ่ม: นับคำในข้อความภาษาอังกฤษ</h2>
+<p>ตัวอย่างนี้นิยามคำเป็นช่วงตัวอักษร a–z และใช้สัญลักษณ์อื่นเป็นตัวแบ่งคำ</p>
+<pre><code class="language-bash">export LC_ALL=C
+tr &#39;[:upper:]&#39; &#39;[:lower:]&#39; &lt; input.txt |
+    tr -cs &#39;a-z&#39; &#39;\n&#39; |
+    sed &#39;/^$/d&#39; |
+    sort |
+    uniq -c |
+    sort -k1,1nr -k2,2 |
+    awk &#39;{print $2, $1}&#39; &gt; output.txt
+</code></pre>
+<p>อ่านทีละขั้น: ทำตัวเล็ก → หนึ่งคำต่อบรรทัด → ตัดบรรทัดว่าง → เรียงให้คำซ้ำติดกัน → นับ → เรียงความถี่จากมากไปน้อยและเรียงคำเมื่อจำนวนเท่ากัน → สลับเป็น <code>คำ จำนวน</code></p>
+<p>เช่น input <code>Red blue red. Blue green!</code> → output:</p>
+<pre><code class="language-text">blue 2
+red 2
+green 1
+</code></pre>
+<p><code>tr -cs</code> เปลี่ยนชุดอักขระที่ไม่ใช่ a–z เป็น newline และยุบตัวแบ่งซ้ำ ตัวอย่างนี้จึงไม่ใช้กับการตัดคำไทยโดยตรง</p>
+<h2 id="14-รายละเอียดเสริมจาก-lecture-15-file-descriptor">14. รายละเอียดเสริมจาก Lecture 15: File descriptor</h2>
+<p>ทบทวน 0 stdin, 1 stdout, 2 stderr และการเปิด descriptor เพิ่ม:</p>
+<pre><code class="language-bash">exec 3&lt; input.txt       # เปิดอ่านด้วย fd 3
+IFS= read -r line &lt;&amp;3
+printf &#39;%s\n&#39; &quot;$line&quot;
+exec 3&lt;&amp;-              # ปิด fd 3
+
+exec 4&gt; output.txt     # เปิดเขียนด้วย fd 4
+printf &#39;hello\n&#39; &gt;&amp;4
+exec 4&gt;&amp;-              # ปิด fd 4
+</code></pre>
+<p><code>&gt;&amp;4</code> ส่ง output ไป descriptor ที่เปิดอยู่; <code>2&gt;&amp;1</code> ทำให้ fd 2 อ้างปลายทางปัจจุบันของ fd 1 ส่วน <code>exec</code> แบบมีเพียง redirection เปลี่ยน descriptor ของ shell ปัจจุบัน</p>
+<h2 id="15-การบ้านในเว็บบอกทักษะที่ควรซ้อม">15. การบ้านในเว็บบอกทักษะที่ควรซ้อม</h2>
+<p><strong>เพิ่มการวิเคราะห์ไฟล์ที่ผู้เรียนให้ไว้ในโฟลเดอร์ <code>homework final</code>:</strong> มี hw5 เรื่อง redirection, hw6 รับข้อมูลนิสิต, hw7 calculator, Homework_5_2 เรื่อง function, HW_Array เรื่อง grading และ Lect11 ซึ่งมี workshop เมนู/นับเลขคู่ อ่านรายละเอียดใน <a href="../../read/unix-tools/final-homework-analysis.html">บทวิเคราะห์ฉบับเพิ่ม</a> โดยเฉพาะการนับ 8 arguments จากคำสั่งที่ไม่ quote ชื่อและวันเกิด รวมถึงช่วงเกรดที่ตัวอย่างในเอกสารไม่ตรงสูตร</p>
+<p>รายการด้านล่างเป็นการบ้านจากเว็บที่ตรวจไว้ก่อนหน้า ไม่ใช่รายชื่อไฟล์ชุดเดียวกับโฟลเดอร์ที่เพิ่มมาครั้งนี้</p>
+<p>รายการนี้คือหัวข้องานที่พบจริง ไม่ใช่การคาดการณ์ข้อสอบ</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง"><table>
+<thead>
+<tr>
+<th>งานในเว็บ</th>
+<th>ทักษะที่ควรทำได้</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>เวลาแข่งขันเฉลี่ย / แสดง directory เป็น tree / bubble sort</td>
+<td>รับข้อมูล ลูป เงื่อนไข array และการอ่านเขียนไฟล์</td>
+</tr>
+<tr>
+<td>factorial / prime / แปลง Celsius–Fahrenheit</td>
+<td>function, arguments, validation, เลขทศนิยม</td>
+</tr>
+<tr>
+<td>grading ด้วย array</td>
+<td>รวมคะแนน เฉลี่ย variance และ SD</td>
+</tr>
+<tr>
+<td>นับความถี่คำ / ประมวลบทละคร</td>
+<td>pipeline, regex, grep/sed/awk, sort/uniq</td>
+</tr>
+</tbody></table></div>
+<p>สำหรับ array grading สูตรที่โจทย์ระบุใช้ population variance: <code>avg=Σx/N</code>, <code>var=Σ(x−avg)²/N</code>, <code>sd=√var</code> ให้ใช้สูตรและช่วงเกรดที่โจทย์กำหนด อ่านเครื่องหมาย <code>&lt;</code>/<code>&lt;=</code> ให้ตรง</p>
+<p><strong>ข้อสังเกตจากการตรวจเอกสาร:</strong> ตัวอย่างเฉลยบางส่วนไม่สอดคล้องกับสูตร เช่นเวลา <code>12.2, 11.8, 12.5, 10.9, 11.1</code> เฉลี่ยได้ <strong>11.7</strong>; ตัวอย่าง grading คะแนน 1–10 มี avg=5.5 และ SD≈2.87228 ดังนั้นการแจกเกรดตามสูตรที่พิมพ์ไว้จะไม่ตรงกับรายการเกรดตัวอย่างทั้งหมด ใช้เป็นโจทย์ตรวจเหตุผล และยึดคำชี้แจงอาจารย์เมื่อกำหนดคำตอบส่ง</p>
+<h2 id="16-แบบฝึกหัดแต่งเพิ่มพร้อมเฉลย">16. แบบฝึกหัดแต่งเพิ่มพร้อมเฉลย</h2>
+<ol>
+<li><code>x=7; echo &#39;$x&#39;; echo &quot;$x&quot;</code> → <strong><code>$x</code> แล้ว <code>7</code></strong></li>
+<li><code>echo &quot;$((9/4))&quot;</code> → <strong>2</strong> เพราะ integer division</li>
+<li><code>[ 8 -gt 2 ]; echo $?</code> → <strong>0</strong></li>
+<li><code>((0)); echo $?</code> → <strong>1</strong>; <code>((5)); echo $?</code> → <strong>0</strong></li>
+<li><code>./x.sh &quot;a b&quot; c</code> มี <code>$#</code> เท่าไร → <strong>2</strong></li>
+<li>หลัง <code>shift</code> จากข้อ 5 <code>$1</code> เหลืออะไร → <strong>c</strong></li>
+<li><code>for x in &quot;$@&quot;</code> ต่างจาก <code>for x in &quot;$*&quot;</code> อย่างไร → <strong>แบบแรกวนทีละ argument; แบบหลังวนข้อความรวมหนึ่งรอบ</strong></li>
+<li><code>i=0; until [ &quot;$i&quot; -ge 3 ]; do echo &quot;$i&quot;; i=$((i+1)); done</code> → <strong>0, 1, 2 คนละบรรทัด</strong></li>
+<li><code>a=(x y z); unset &#39;a[1]&#39;; echo &quot;${#a[@]}&quot;</code> → <strong>2</strong></li>
+<li>ใน array ข้อ 9 index ใดเหลืออยู่ → <strong>0 และ 2</strong></li>
+<li><code>printf &#39;cat cat\n&#39; | sed &#39;s/cat/dog/&#39;</code> → <strong>dog cat</strong></li>
+<li>เปลี่ยน sed ข้อ 11 เป็น <code>s/cat/dog/g</code> → <strong>dog dog</strong></li>
+<li><code>printf &#39;A:10:B\n&#39; | awk -F: &#39;{print NF, $2}&#39;</code> → <strong>3 10</strong></li>
+<li>ต้องการฟังก์ชันส่งค่าผลรวม 300 ควร <code>return 300</code> หรือไม่ → <strong>ไม่ควร ใช้ stdout; return เป็น exit status</strong></li>
+<li><code>${v:-x}</code> กับ <code>${v:=x}</code> ต่างกันอย่างไร → <strong>แบบหลังตั้งค่าให้ตัวแปรเมื่อว่าง/unset; แบบแรกไม่ตั้ง</strong></li>
+<li>ถ้า <code>false; echo ready; echo $?</code> จะได้ status ของ false หรือไม่ → <strong>ไม่ได้ จะได้ 0 ของ echo ready เมื่อ echo สำเร็จ</strong></li>
+<li><code>sed -n &#39;1,2p&#39;</code> กับ <code>sed &#39;1,2p&#39;</code> ต่างกันอย่างไร → <strong>แบบแรกพิมพ์เฉพาะ 1–2; แบบหลังยังพิมพ์ทุกบรรทัดและเพิ่มสำเนา 1–2 อีกครั้ง</strong></li>
+<li><code>ls *.txt</code> กับ <code>grep &#39;.*txt&#39; file</code> ใช้ pattern ภาษาเดียวกันไหม → <strong>ไม่ใช่ แบบแรก glob ของ shell แบบหลัง regex ของ grep</strong></li>
+</ol>
+<h2 id="อ่านรอบสุดท้าย">อ่านรอบสุดท้าย</h2>
+<ul>
+<li><input disabled="" type="checkbox"> เขียน if/elif/else, for, while, until, case และ function จากหน้าว่างได้</li>
+<li><input disabled="" type="checkbox"> จำ <code>0=สำเร็จ</code>, quote, <code>&quot;$@&quot;</code>, <code>shift</code> และการตรวจจำนวน arguments ได้</li>
+<li><input disabled="" type="checkbox"> แยก <code>[ ]</code>, <code>[[ ]]</code>, <code>(( ))</code>, <code>$(( ))</code>, <code>$( )</code> และ <code>( )</code> ได้</li>
+<li><input disabled="" type="checkbox"> รู้ว่า export, local, subshell และ source มีผลต่อค่าตัวแปรอย่างไร</li>
+<li><input disabled="" type="checkbox"> วน array โดยไม่สมมติว่า index ต่อเนื่องเสมอ</li>
+<li><input disabled="" type="checkbox"> แยก glob/BRE/ERE; ใช้ anchor และ character class ได้</li>
+<li><input disabled="" type="checkbox"> อ่านผล sed และ awk ทีละบรรทัด/field ได้</li>
+<li><input disabled="" type="checkbox"> ต่อ pipeline กรอง แปลง นับ และเรียงข้อมูลได้</li>
+<li><input disabled="" type="checkbox"> ตรวจ input, กรณีไม่มี argument, ค่าว่าง, 0 และขอบเขตลูป</li>
+</ul>
+<h2 id="แหล่งประกอบ">แหล่งประกอบ</h2>
+<ul>
+<li><a href="https://angsila.cs.buu.ac.th/~nutthanon/88624159/">โครงร่างรายวิชา</a></li>
+<li><a href="https://staff.informatics.buu.ac.th/~nutthanon/88624159/Lect09.pdf">Lecture 9: เริ่ม Shell Script</a></li>
+<li><a href="https://staff.informatics.buu.ac.th/~nutthanon/88624159/Lecture10.pdf">Lecture 10: variables, test และ if</a></li>
+<li><a href="https://staff.informatics.buu.ac.th/~nutthanon/88624159/Lect11.pdf">Lecture 11: arguments, if และ for</a></li>
+<li><a href="https://staff.cs.buu.ac.th/~jira/886326/Lectures/week12/Lect12.txt">Lecture 12: loop</a></li>
+<li><a href="https://staff.informatics.buu.ac.th/~nutthanon/88624159/Lect13.pdf">Lecture 13: case และ here document</a></li>
+<li><a href="https://staff.informatics.buu.ac.th/~nutthanon/88624159/Lect15.pdf">Lecture 15: function และ file descriptor</a></li>
+<li><a href="https://www.cs.cornell.edu/courses/cs2043/2014sp/lectures/lecture16.pdf">Array: Cornell Lecture 16</a></li>
+<li><a href="https://cs.brown.edu/courses/cs0060/assets/slides/slides9.pdf">Regex/sed/awk: Brown</a></li>
+<li><a href="https://angsila.cs.buu.ac.th/~nutthanon/88624159/Homework_Lect12.pdf">การบ้าน loop</a>, <a href="https://angsila.cs.buu.ac.th/~nutthanon/88624159/Homework_5_2.pdf">function</a>, <a href="https://angsila.cs.buu.ac.th/~nutthanon/88624159/HW_Array.pdf">array</a>, <a href="https://angsila.cs.buu.ac.th/~nutthanon/88624159/Homework_7.pdf">text processing</a></li>
+</ul>
+<p>สรุปนี้เรียบเรียงใหม่ พร้อมตัวอย่างแต่งเพิ่ม คำอธิบายเรื่อง environment, pipeline และ parameter expansion ระบุพฤติกรรม Bash ให้ชัดในจุดที่เอกสารเก่าอาจทำให้เข้าใจคลาดเคลื่อน</p>
+</article><footer class="footer"><span>เรียน / Unix Tools &amp; Programming</span><a href="../../">กลับคลังเรียน</a></footer></main></div><script>let preferences={};try{preferences=JSON.parse(localStorage.getItem('skyce-learning-preferences')||'{}')}catch{}function savePreferences(){try{localStorage.setItem('skyce-learning-preferences',JSON.stringify(preferences))}catch{}}function applyTheme(){document.documentElement.dataset.theme=preferences.theme||'light';document.querySelector('#theme').textContent=preferences.theme==='dark'?'☀':'☾';document.querySelector('#theme').setAttribute('aria-label',preferences.theme==='dark'?'เปลี่ยนเป็นโหมดสว่าง':'เปลี่ยนเป็นโหมดมืด')}applyTheme();document.querySelector('#theme').onclick=()=>{preferences.theme=preferences.theme==='dark'?'light':'dark';savePreferences();applyTheme()};const sidebar=document.querySelector('#sidebar'),overlay=document.querySelector('#overlay'),menu=document.querySelector('#menu');function closeMenu(){sidebar.classList.remove('open');overlay.classList.remove('visible');menu.setAttribute('aria-expanded','false');sidebar.inert=matchMedia('(max-width:800px)').matches}function fitSidebar(){sidebar.inert=matchMedia('(max-width:800px)').matches&&!sidebar.classList.contains('open')}fitSidebar();window.addEventListener('resize',fitSidebar);menu.onclick=()=>{const opening=!sidebar.classList.contains('open');if(opening){sidebar.classList.add('open');sidebar.inert=false;overlay.classList.add('visible');menu.setAttribute('aria-expanded','true');sidebar.querySelector('a').focus()}else closeMenu()};overlay.onclick=closeMenu;document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.focus();closeMenu()}});sidebar.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));let fontSize=Number(preferences.font)||17;function setFont(){fontSize=Math.min(22,Math.max(14,fontSize));document.documentElement.style.setProperty('--text-size',fontSize+'px');document.querySelector('#font-value').textContent=fontSize;preferences.font=fontSize;savePreferences()}setFont();document.querySelector('#font-less').onclick=()=>{fontSize--;setFont()};document.querySelector('#font-more').onclick=()=>{fontSize++;setFont()};document.querySelector('#print').onclick=()=>window.print();</script></body></html>

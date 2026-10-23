@@ -1,0 +1,10 @@
+{
+  "id": "subject-slug",
+  "name": "ชื่อวิชา",
+  "thai": "ชื่อวิชาภาษาไทย",
+  "short": "XX",
+  "repo": "course-subject-slug",
+  "code": "",
+  "tags": [],
+  "description": "คำอธิบายวิชา"
+}
