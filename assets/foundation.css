@@ -1,0 +1,15 @@
+:root{--bg:#f5f5ee;--paper:#fffefa;--ink:#243e36;--muted:#657369;--line:#dfe5d8;--accent:#285f4b;--soft:#e8efdd;color-scheme:light}
+html[data-theme=dark]{--bg:#172722;--paper:#1f322b;--ink:#e5ebdf;--muted:#a2b4a7;--line:#354b3f;--accent:#b7d19b;--soft:#304738;color-scheme:dark}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.8 Tahoma,'Leelawadee UI',sans-serif}
+a{color:var(--accent);text-underline-offset:4px}button,input,select{font:inherit}button{cursor:pointer;color:inherit}
+.foundation-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 32px;border-bottom:1px solid var(--line)}
+.foundation-header nav{display:flex;gap:8px;align-items:center}.brand{display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--ink);font-size:20px}
+.foundation-content{max-width:1000px;margin:auto;padding:32px}.foundation-content h1{font-size:32px;line-height:1.4;overflow-wrap:anywhere;margin:8px 0 24px}
+.eyebrow{font:10px/1.6 monospace;letter-spacing:1.8px;color:var(--accent);margin-top:24px}
+.icon-button,.read-link{display:inline-block;border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:8px 12px;min-height:40px;font-size:12px;color:var(--accent);text-decoration:none}
+button:disabled{opacity:.5;cursor:default}.back-link{font-size:12px}.small-note{font-size:12px;color:var(--muted)}
+.pdf-content{max-width:1440px}.pdf-controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:16px}.pdf-controls label{display:flex;gap:8px;align-items:center}.pdf-controls input{width:85px}
+#pdf-frame{width:100%;height:75vh;min-height:420px;border:1px solid var(--line);border-radius:12px;background:var(--paper);margin-top:16px}
+.document-fallback{border:1px solid var(--line);background:var(--paper);padding:16px;border-radius:12px}.document-fallback p{font-size:12px;margin:0 0 10px}
+@media(max-width:600px){.foundation-header{padding:16px}.brand{font-size:15px}.foundation-content{padding:24px 16px}.foundation-content h1{font-size:26px}.pdf-controls{gap:7px}#pdf-frame{height:65vh;min-height:350px}}
