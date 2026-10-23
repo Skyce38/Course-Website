@@ -87,3 +87,6 @@ for (const preset of Object.keys(preferences.presets)) for (const mode of ['ligh
 }
 console.log('PASS: all theme palettes in light/dark, custom contrast safeguards, legacy migration and invalid-color rejection');
 console.log(`PASS: ${catalog.courses.length} courses, ${catalog.resources.length} documents, ${htmlFiles.length} pages, local links, JS syntax, catalog consistency and preference validation`);
+require('./check-study.cjs');
+require('./check-i18n.cjs');
+require('./check-pdf-source.cjs');

@@ -112,11 +112,13 @@
     root.style.setProperty('--text-size', value.font + 'px');
     root.style.setProperty('--reading-size', value.font + 'px');
     document.querySelectorAll('#theme, #theme-toggle').forEach(button => {
-      button.textContent = value.theme === 'dark' ? '☀' : '☾';
+      button.type = 'button';
+      button.textContent = value.theme === 'dark' ? '☀ Light' : '☾ Dark';
       button.setAttribute('aria-label', value.language === 'en'
         ? (value.theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode')
         : (value.theme === 'dark' ? 'เปลี่ยนเป็นโหมดสว่าง' : 'เปลี่ยนเป็นโหมดมืด'));
       button.setAttribute('aria-pressed', String(root.dataset.theme === 'dark'));
+      button.title = button.getAttribute('aria-label');
     });
     document.querySelectorAll('#font-value, #font-size').forEach(node => node.textContent = value.font);
     document.dispatchEvent(new CustomEvent('preferenceschange', {detail: {...value}}));

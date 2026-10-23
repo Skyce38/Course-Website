@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+  <rect width="40" height="40" rx="12" fill="#17618c"/>
+  <defs><symbol id="book" viewBox="0 0 40 40">
+  <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 13c-3-2-6-2.5-10-2v17c4-.5 7 0 10 2 3-2 6-2.5 10-2V17M20 13v17M13 16c1.5 0 2.5.3 4 1M13 21c1.5 0 2.5.3 4 1M24 23l2 2 4-4"/>
+    <path d="M29 8v6m-3-3h6" opacity=".8"/>
+  </g>
+  </symbol></defs>
+  <use href="#book" color="#fff"/>
+</svg>

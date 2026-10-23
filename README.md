@@ -59,7 +59,7 @@ Course-Website/
 
 การตั้งค่าบันทึกด้วย `localStorage` ในเบราว์เซอร์ ไม่ส่งข้อมูลออกไป หากปิดการจัดเก็บจะใช้การตั้งค่าได้เฉพาะแท็บนั้น GitHub sync ใช้ public API พร้อมแคช 10 นาทีและรายการเดิมเมื่อเชื่อมต่อไม่ได้ บุ๊กมาร์กไฟล์ที่ค้นพบจาก GitHub เรียกคืนจากแคชได้หลังรีโหลด
 
-OOP → Slides มี PDF จริง 14 ไฟล์: Week1–Week8 และ Week10–Week15 (ไม่มี Week9) เพิ่มไฟล์ `.pdf` ใน `courses/<วิชา>/<หมวด>/` แล้วรัน `node scripts/build.cjs` เพื่อค้นหาไฟล์และเพิ่มเข้า catalog โดยไม่เปลี่ยนชื่อหรือแก้ PDF; หลังเผยแพร่ GitHub sync ยังดึงไฟล์ใหม่ได้ตามเดิมและไม่แสดงซ้ำ ตัวอ่านใช้ PDF ของเบราว์เซอร์โดยไม่เพิ่มไลบรารี การฝังเอกสารและคำสั่งหน้า/ซูมขึ้นอยู่กับเบราว์เซอร์ ใช้แถบเครื่องมือภายในหรือเปิด/ดาวน์โหลดโดยตรงได้เสมอ ตัวอ่านไม่สามารถทราบหน้าที่เปลี่ยนผ่านแถบเครื่องมือ PDF หรือจำนวนหน้าทั้งหมดได้
+OOP → Slides มี PDF จริง 14 ไฟล์: Week1–Week8 และ Week10–Week15 (ไม่มี Week9) เพิ่มไฟล์ `.pdf` ใน `courses/<วิชา>/<หมวด>/` แล้วรัน `node scripts/build.cjs` เพื่อค้นหาไฟล์และเพิ่มเข้า catalog โดยไม่เปลี่ยนชื่อหรือแก้ PDF; หลังเผยแพร่ GitHub sync ยังดึงไฟล์ใหม่ได้ตามเดิมและไม่แสดงซ้ำ ตัวอ่านใช้ PDF.js ที่จัดเก็บในเว็บไซต์ เพื่อบันทึกหน้า ซูม และตำแหน่งเลื่อนอัตโนมัติ พร้อมแสดงจำนวนหน้าจริง เปิดตัวอ่านของเบราว์เซอร์หรือดาวน์โหลดได้เสมอ หากใช้ตัวอ่านสำรองจะบันทึกได้เฉพาะคำสั่งหน้า/ซูมจากปุ่มของเว็บไซต์
 
 ลบรายการ `summaries/original-notes.md` ที่อ้างถึงไฟล์ซึ่งไม่มีอยู่จริงออกจาก catalog แล้ว เอกสารที่มีอยู่ยังคงครบ
 
@@ -85,6 +85,12 @@ node scripts/check.cjs
 
 ทดสอบด้วย Chrome/Playwright ที่ 1440, 390 และ 320 px: routing, search, bookmarks, GitHub sync/ข้อผิดพลาด, PDF fixture 3 หน้าและดาวน์โหลด, appearance/language persistence, import/export/reset, storage ถูกปิด และ Python quiz/progress ไม่มี runtime errors ที่ไม่คาดหมาย ยังไม่ได้ทดสอบ Safari/Firefox หรืออุปกรณ์จริง
 
-ตรวจ PDF จริงทั้ง 14 ไฟล์และลิงก์ viewer ที่ `/Course-Website/` แล้ว ทดสอบ Week1: native next/previous/go-to page, zoom 150%, download ตรงกับต้นฉบับทุกไบต์ และ mobile fallback ที่ 390 px; SHA-256 ของ PDF ต้นฉบับทั้ง 14 ไฟล์ไม่เปลี่ยน
+ตรวจ PDF จริงทั้ง 14 ไฟล์และลิงก์ viewer ที่ `/Course-Website/` แล้ว ทดสอบ Week1: PDF.js next/previous/go-to page, scroll/zoom 150%, refresh/Continue Reading, native fallback และ download ตรงกับต้นฉบับทุกไบต์ และ mobile fallback ที่ 390 px; SHA-256 ของ PDF ต้นฉบับทั้ง 14 ไฟล์ไม่เปลี่ยน
 
 [Figma: Settings และ PDF Viewer — desktop/mobile](https://www.figma.com/design/pmPq5RuGDji2vbkumGfqjf) ใช้สีเดิมและ reusable controls; Figma ใช้ Noto Sans Thai แทน Tahoma ที่ไม่มีในบริการ ส่วนเว็บไซต์คงฟอนต์เดิม
+
+### Continue Reading (Phase 2)
+
+Recent documents resume PDF page, zoom and scroll position, or an HTML section and scroll offset. Positions are local to this browser, saved every 400 ms and flushed on leaving; use **Reset reading position** in a reader to start over without changing completion. PDF.js 6.4.299 is bundled locally under `assets/vendor/pdfjs/` (Apache-2.0 and included asset licenses); no CDN, build step or paid service is required. Native viewer and download remain available. Native internal scrolling/page changes are unavailable to the site; only site controls can save position in that fallback.
+
+Synced PDFs use local files first. If a file is absent in local preview, the reader fetches only its validated PDF path from `Skyce38/Course-Website` on GitHub `main`, checks HTTP status, CORS, MIME type and the PDF signature, and uses a PDF Blob for viewing/download. The canonical document ID and reading position remain the same. Remote-only files require internet; blocked/unavailable files retain direct-open/download links and Retry.
