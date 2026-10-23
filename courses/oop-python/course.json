@@ -1,0 +1,24 @@
+{
+  "id": "oop-python",
+  "name": "OOP & Data Structures",
+  "thai": "การเขียนโปรแกรมเชิงวัตถุและโครงสร้างข้อมูล",
+  "short": "PY",
+  "repo": "learning",
+  "code": "89022367",
+  "color": "#265d4d",
+  "tags": [
+    "Python",
+    "OOP",
+    "Data Structures"
+  ],
+  "description": "จากคลาสและออบเจกต์ สู่ Linked List, Stack, Queue, Sorting และ Hash Table",
+  "source": "โปรเจกต์ OOP และเอกสารในเครื่อง",
+  "categories": [
+    "assignments",
+    "slides",
+    "summaries",
+    "tutoring",
+    "exams"
+  ],
+  "folder": "courses/oop-python"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "artificial-intelligence",
+  "name": "Artificial Intelligence",
+  "thai": "ปัญญาประดิษฐ์",
+  "short": "AI",
+  "repo": "learning",
+  "code": "",
+  "color": "#796042",
+  "tags": [
+    "AI",
+    "Search",
+    "Machine Learning"
+  ],
+  "description": "Search, Logic, Regression, Classification, Clustering และ Neural Networks",
+  "source": "โปรเจกต์ FinalAI และบันทึกคลังเรียนเดิม",
+  "categories": [
+    "assignments",
+    "slides",
+    "summaries",
+    "tutoring",
+    "exams"
+  ],
+  "folder": "courses/artificial-intelligence"
+}

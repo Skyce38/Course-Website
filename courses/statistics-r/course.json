@@ -1,0 +1,23 @@
+{
+  "id": "statistics-r",
+  "name": "Statistics & R",
+  "thai": "สถิติและภาษา R",
+  "short": "R",
+  "repo": "learning",
+  "code": "",
+  "color": "#54705f",
+  "tags": [
+    "Statistics",
+    "R"
+  ],
+  "description": "คลังสถิติและภาษา R เตรียมหมวดสำหรับเอกสารและแบบฝึกหัด",
+  "source": "ชื่อโฟลเดอร์ที่บันทึกไว้ในคลังเรียนเดิม",
+  "categories": [
+    "assignments",
+    "slides",
+    "summaries",
+    "tutoring",
+    "exams"
+  ],
+  "folder": "courses/statistics-r"
+}

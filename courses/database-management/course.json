@@ -1,0 +1,23 @@
+{
+  "id": "database-management",
+  "name": "Database Management",
+  "thai": "การจัดการฐานข้อมูล",
+  "short": "DB",
+  "repo": "learning",
+  "code": "",
+  "color": "#795d71",
+  "tags": [
+    "Database",
+    "SQL"
+  ],
+  "description": "คลังรายวิชาฐานข้อมูลและ SQL พร้อมหมวดสำหรับการบ้าน สไลด์ และสรุป",
+  "source": "โปรเจกต์ Database Management และบันทึกคลังเรียนเดิม",
+  "categories": [
+    "assignments",
+    "slides",
+    "summaries",
+    "tutoring",
+    "exams"
+  ],
+  "folder": "courses/database-management"
+}

@@ -1,65 +1,49 @@
-# เรียน — คลังเรียนของ Skyce38
+# คลังเรียน · Skyce38
 
 [เปิดเว็บคลังเรียน](https://skyce38.github.io/learning/)
 
-คลังกลางสำหรับเลือกวิชาและค้นหาเอกสาร เชื่อมไป repository ของแต่ละวิชา
+คลังทุกวิชาอยู่ใน repository นี้ จัดตามวิชาและประเภทเอกสาร เปิดอ่านหรือเพิ่มไฟล์ได้จากที่เดียว
 
-## รายวิชา
+## วิชา
 
-| วิชา | Repository | เอกสารที่นำเข้า |
-|---|---|---|
-| [OOP & Data Structures](https://skyce38.github.io/learning/#course/oop-python) | [python-final](https://github.com/Skyce38/python-final) | 3 รายการ |
-| [Artificial Intelligence](https://skyce38.github.io/learning/#course/artificial-intelligence) | [course-artificial-intelligence](https://github.com/Skyce38/course-artificial-intelligence) | 2 รายการ |
-| [Unix Tools & Programming](https://skyce38.github.io/learning/#course/unix-tools) | [course-unix-tools](https://github.com/Skyce38/course-unix-tools) | 4 รายการ |
-| [Database Management](https://skyce38.github.io/learning/#course/database-management) | [course-database-management](https://github.com/Skyce38/course-database-management) | 0 รายการ |
-| [Electronics & Internet of Things](https://skyce38.github.io/learning/#course/internet-of-things) | [course-internet-of-things](https://github.com/Skyce38/course-internet-of-things) | 0 รายการ |
-| [Statistics & R](https://skyce38.github.io/learning/#course/statistics-r) | [course-statistics-r](https://github.com/Skyce38/course-statistics-r) | 0 รายการ |
+- [OOP & Data Structures](courses/oop-python/README.md) · [เปิดหน้าอ่าน](https://skyce38.github.io/learning/#course/oop-python)
+- [Artificial Intelligence](courses/artificial-intelligence/README.md) · [เปิดหน้าอ่าน](https://skyce38.github.io/learning/#course/artificial-intelligence)
+- [Unix Tools & Programming](courses/unix-tools/README.md) · [เปิดหน้าอ่าน](https://skyce38.github.io/learning/#course/unix-tools)
+- [Database Management](courses/database-management/README.md) · [เปิดหน้าอ่าน](https://skyce38.github.io/learning/#course/database-management)
+- [Electronics & Internet of Things](courses/internet-of-things/README.md) · [เปิดหน้าอ่าน](https://skyce38.github.io/learning/#course/internet-of-things)
+- [Statistics & R](courses/statistics-r/README.md) · [เปิดหน้าอ่าน](https://skyce38.github.io/learning/#course/statistics-r)
 
 ## โครงสร้าง
 
-GitHub repository ไม่ได้ซ้อน repository กันเหมือนโฟลเดอร์ โครงสร้างนี้ใช้คลังกลางเชื่อม repository รายวิชา และใช้โฟลเดอร์แบ่งประเภทเอกสารในแต่ละวิชา
-
 ```text
-learning/                       หน้ารวมทุกวิชา
-├── index.html                  เว็บคลังเรียน
-├── catalog.json                รายวิชาและเอกสารที่นำเข้า
-├── read/                       หน้าสำหรับอ่านสรุป
-└── templates/course/           แม่แบบเพิ่มวิชา
-
-repository ของแต่ละวิชา/
-├── README.md                   หน้ารวมวิชา
-├── course.json                 ข้อมูลวิชา
-├── assignments/                การบ้าน
-├── slides/                     สไลด์เรียน
-├── summaries/                  สรุป
-├── tutoring/                   ไฟล์ติว
-└── exams/                      ข้อสอบและแบบฝึก
+learning/
+├── index.html
+├── catalog.json
+├── courses/
+│   ├── oop-python/
+│   ├── artificial-intelligence/
+│   ├── unix-tools/
+│   ├── database-management/
+│   ├── internet-of-things/
+│   └── statistics-r/
+├── read/                  หน้าอ่านเอกสาร
+└── templates/course/      แม่แบบเพิ่มวิชา
 ```
 
-## เพิ่มไฟล์
+ภายในแต่ละโฟลเดอร์วิชามีหมวด `assignments/`, `slides/`, `summaries/`, `tutoring/` และ `exams/`
 
-1. เปิด repository ของวิชา
-2. เข้าโฟลเดอร์ให้ตรงประเภท
-3. เลือก Add file → Upload files หรือ Create new file แล้ว Commit changes
-4. เปิดหน้าวิชาในเว็บ แล้วกดรีเฟรชรายการ
+## เพิ่มเอกสาร
 
-เว็บอ่านรายการไฟล์จาก GitHub public API พร้อมแคช 10 นาที ถ้า API ใช้ไม่ได้ จะแสดงเอกสารที่นำเข้าไว้และแจ้งสถานะ ไม่ต้องใส่ token ในหน้าเว็บ
+1. เปิดโฟลเดอร์วิชาใน GitHub
+2. เลือกหมวดที่ตรงกับเอกสาร
+3. กด **Add file → Upload files** แล้ว Commit changes
+4. เปิดเว็บคลังเรียน เข้าหน้าวิชา แล้วกด **รีเฟรชรายการ**
 
-ไฟล์ที่เพิ่มใหม่เปิดผ่าน GitHub ได้ทันทีหลังรีเฟรชรายการ หน้าบทอ่าน HTML ที่จัดรูปแบบไว้เป็นชุดที่นำเข้าแล้ว หากแก้ Markdown เดิม ต้องสร้างหน้าบทอ่าน HTML ใหม่เพื่อให้เนื้อหาตรงกัน
+ไฟล์ใหม่ในโฟลเดอร์วิชาจะแสดงบนเว็บหลังรีเฟรช รายการสรุปที่จัดรูปแบบให้อ่านเป็นหน้า HTML อยู่ใน `read/`.
 
-## เพิ่มวิชาใหม่
+## เนื้อหาที่นำเข้าแล้ว
 
-1. สร้าง repository รายวิชา เช่น `course-subject-name`
-2. ใช้โครงสร้างจาก [templates/course](templates/course/)
-3. เพิ่มข้อมูลวิชาใน catalog.json และสร้างหน้า index.html จาก catalog ใหม่ด้วย scripts/build.cjs
-4. Commit การเปลี่ยนแปลงกลับคลังกลาง
-
-## ขอบเขตปัจจุบัน
-
-- รายชื่อ 6 วิชามาจากโปรเจกต์และบันทึกคลังเรียนเดิม
-- นำเข้าสรุป OOP, AI และ Unix ที่ตรวจพบในเครื่อง
-- Database, IoT และ Statistics/R มีโครงสร้างหมวดพร้อมแล้ว ยังไม่มีเนื้อหาที่นำเข้า
-- หมวดสไลด์และการบ้านที่ไม่มีไฟล์จะแสดงสถานะว่างตามจริง
-- แบบฝึกที่แต่งขึ้นระบุว่าเป็นข้อฝึก ไม่ใช่ข้อสอบจริง
-- เอกสารใน repository สาธารณะเปิดอ่านได้ทั่วไป
-- รายการดาวและการตั้งค่าการอ่านเก็บแยกในเบราว์เซอร์ ไม่ซิงก์ข้ามอุปกรณ์
+- OOP/Python: สรุป Week 10–15 และข้อฝึกปรนัย 20 ข้อ
+- AI: สรุป Midterm + Final และชีททวนเร็ว
+- Unix Tools: สรุป Midterm/Final บทวิเคราะห์การบ้าน และข้อฝึกปรนัย 40 ข้อ
+- Database, IoT และ Statistics/R: เตรียมโครงสร้างหมวดไว้แล้ว
