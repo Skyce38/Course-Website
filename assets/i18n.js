@@ -2,6 +2,21 @@
 (() => {
   'use strict';
   const strings = {
+    resetReadingPosition: ['เริ่มอ่านใหม่', 'Reset reading position'],
+    resetReadingPositionLabel: ['เริ่มอ่าน {title} ใหม่', 'Reset reading position: {title}'],
+    markCompleteLabel: ['ทำเครื่องหมายว่าอ่านจบ: {title}', 'Mark completed: {title}'],
+    markIncompleteLabel: ['ยกเลิกสถานะอ่านจบ: {title}', 'Mark not completed: {title}'],
+    continueReadingLabel: ['อ่านต่อ: {title}', 'Continue reading: {title}'],
+    readDocumentLabel: ['อ่านเอกสาร: {title}', 'Read document: {title}'],
+    saveDocumentLabel: ['บันทึก {title}', 'Save {title}'], unsaveDocumentLabel: ['ยกเลิกบันทึก {title}', 'Unsave {title}'],
+    progressDescription: ['อ่านจบ {completed} จาก {total} เอกสาร', '{completed} of {total} documents completed'],
+    pdfDocument: ['เอกสาร PDF', 'PDF document'], pdfPageLabel: ['หน้า {page}', 'Page {page}'],
+    nativeViewer: ['ตัวอ่านของเบราว์เซอร์', 'Use native viewer'],
+    trackedPDFNote: ['บันทึกหน้า ตำแหน่ง และซูมอัตโนมัติ ตัวอ่านของเบราว์เซอร์บันทึกได้เฉพาะปุ่มด้านบน', 'Page, position and zoom save automatically. Native fallback tracks only the controls above.'],
+    recentReading: ['เอกสารที่เปิดล่าสุด', 'Recently opened'], continueReading: ['อ่านต่อ →', 'Continue reading →'],
+    historyEmpty: ['เปิดเอกสารเพื่อเริ่มรายการอ่านล่าสุด', 'Open a document to start your reading history.'],
+    studyProgress: ['ความคืบหน้ารายวิชา', 'Study progress'], completedCount: ['เอกสารที่อ่านจบ', 'documents completed'],
+    markComplete: ['ทำเครื่องหมายว่าอ่านจบ', 'Mark completed'], documentCompleted: ['✓ อ่านจบแล้ว', '✓ Completed'], markIncomplete: ['ยกเลิกสถานะอ่านจบ', 'Mark not completed'],
     colorMode: ['โหมดสี', 'Color mode'], themeGallery: ['แกลเลอรีธีม', 'Theme gallery'],
     themeGalleryNote: ['เลือกชุดสีสำหรับทั้งเว็บไซต์และหน้าอ่านเอกสาร', 'Choose a palette for the entire website and HTML readers.'],
     forestGreen: ['เขียวป่า', 'Forest Green'], oceanBlue: ['ฟ้ามหาสมุทร', 'Ocean Blue'], lavender: ['ลาเวนเดอร์', 'Lavender'],
@@ -53,7 +68,9 @@
   const englishLabels = legacy.filter(p => /^[A-Z .]+$/.test(p[0]));
   const protectedSelector = 'script,style,noscript,.prose:not(.settings-preview),.course-thai,.course-header p,.resource-main>a,.resource-meta span:last-child,#pdf-title,#lessons article,#quiz .question';
   const isProtected = node => node.closest(protectedSelector) && !node.closest('.copy-code,.read-button,.chapter-footer,.question-status,.reveal-answer,legend');
-  const t = key => strings[key]?.[LearningPreferences.value.language === 'en' ? 1 : 0] || key;
+  const t = (key, values = {}) => (strings[key]?.[LearningPreferences.value.language === 'en' ? 1 : 0] || key).replace(/\{(\w+)\}/g, (match,name) => values[name] ?? match);
+  const localizedAttributes = ['aria-label','title','placeholder','aria-valuetext'];
+  const valuesFor = node => ({title:node.dataset.documentTitle || '',page:node.dataset.page,completed:node.dataset.completed,total:node.dataset.total});
   function translate(text, lang = LearningPreferences.value.language) {
     const clean = text.trim();
     const pair = pairs.find(p => p[0] === clean);
@@ -82,7 +99,7 @@
   }
   function apply() {
     document.querySelectorAll('[data-i18n]').forEach(node => {
-      const text = t(node.dataset.i18n);
+      const text = t(node.dataset.i18n, valuesFor(node));
       if (node.textContent !== text) node.textContent = text;
     });
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
@@ -95,15 +112,16 @@
       originals.set(node, {source, result});
       if (result !== node.textContent) node.textContent = result;
     }
-    document.querySelectorAll('[aria-label],[placeholder]').forEach(node => {
-      if (isProtected(node) || ['theme','theme-toggle'].includes(node.id)) return;
+    document.querySelectorAll('[aria-label],[title],[placeholder],[aria-valuetext],'+localizedAttributes.map(attr => '[data-i18n-'+attr+']').join(',')).forEach(node => {
+      if ((isProtected(node) && !localizedAttributes.some(attr => node.hasAttribute('data-i18n-'+attr))) || ['theme','theme-toggle'].includes(node.id)) return;
       let saved = attributes.get(node) || {};
-      for (const attr of ['aria-label', 'placeholder']) {
-        if (!node.hasAttribute(attr)) continue;
+      for (const attr of localizedAttributes) {
+        const key = node.getAttribute('data-i18n-'+attr);
+        if (!key && !node.hasAttribute(attr)) continue;
         const current = node.getAttribute(attr), prior = saved[attr];
         const source = prior && prior.result === current ? prior.source : current;
-        let result = translate(source);
-        if (LearningPreferences.value.language === 'en' && node.matches('.bookmark')) result = source.replace(/^ยกเลิกบันทึก /, 'Unsave ').replace(/^บันทึก /, 'Save ');
+        let result = key ? t(key,valuesFor(node)) : translate(source);
+        if (!key && LearningPreferences.value.language === 'en' && node.matches('.bookmark')) result = source.replace(/^ยกเลิกบันทึก /, 'Unsave ').replace(/^บันทึก /, 'Save ');
         saved[attr] = {source, result};
         if (current !== result) node.setAttribute(attr, result);
       }
@@ -120,6 +138,6 @@
       if (pending) return;
       pending = true;
       queueMicrotask(() => { pending = false; apply(); });
-    }).observe(document.body, {subtree:true, childList:true, characterData:true, attributes:true, attributeFilter:['aria-label','placeholder']});
+    }).observe(document.body, {subtree:true, childList:true, characterData:true, attributes:true, attributeFilter:['data-i18n',...localizedAttributes,...localizedAttributes.map(attr => 'data-i18n-'+attr),'data-document-title','data-page','data-completed','data-total']});
   });
 })();

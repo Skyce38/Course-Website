@@ -6,17 +6,18 @@
   <title>PDF Viewer · Course Website</title>
   <link rel="stylesheet" href="assets/foundation.css">
   <link rel="stylesheet" href="assets/preferences.css">
-  <script src="assets/preferences.js"></script><script src="assets/i18n.js"></script>
+  <script src="assets/preferences.js"></script><script src="assets/i18n.js"></script><script src="assets/study.js"></script>
+  <script src="assets/pdf-source.js" defer></script>
   <script src="assets/pdf.js" defer></script>
-</head>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg"></head>
 <body class="foundation">
-  <header class="foundation-header"><a class="brand" href="./"><span class="brand-symbol">AAI</span><strong>Course Website</strong></a><nav><button class="icon-button" id="theme">◐</button> <a class="read-link" href="settings.html" data-i18n="settings">ตั้งค่า</a></nav></header>
+  <header class="foundation-header"><a class="brand" href="./"><span class="brand-symbol"><svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false"><use href="assets/study-icon.svg#book"/></svg></span><strong>Course Website</strong></a><nav><button class="icon-button" id="theme">◐</button> <a class="read-link" href="settings.html" data-i18n="settings">ตั้งค่า</a></nav></header>
   <main class="foundation-content pdf-content">
     <a class="back-link" id="pdf-back" href="./" data-i18n="backLibrary">← กลับคลังเรียน</a>
     <p class="eyebrow">DOCUMENT READER</p><h1 id="pdf-title">PDF Viewer</h1>
     <form id="pdf-controls" class="pdf-controls" hidden>
       <button class="icon-button" type="button" id="pdf-prev" data-i18n="previous">ก่อนหน้า</button>
-      <label><span data-i18n="page">หน้า</span> <input id="pdf-page" type="number" min="1" max="10000" value="1" required inputmode="numeric"></label>
+      <label><span data-i18n="page">หน้า</span> <input id="pdf-page" type="number" min="1" max="10000" value="1" required inputmode="numeric"> <span id="pdf-total"></span></label>
       <button class="icon-button" type="submit" data-i18n="go">ไป</button>
       <button class="icon-button" type="button" id="pdf-next" data-i18n="next">ถัดไป</button>
       <label><span data-i18n="zoom">ซูม</span> <select id="pdf-zoom"><option value="page-width" data-i18n="fitWidth">พอดีความกว้าง</option><option value="100">100%</option><option value="125">125%</option><option value="150">150%</option><option value="200">200%</option></select></label>
@@ -26,10 +27,12 @@
       <p data-i18n="pdfFallback">หากเอกสารไม่แสดงหรือเบราว์เซอร์ไม่รองรับ ให้เปิดไฟล์หรือดาวน์โหลดแทน</p>
       <a id="pdf-open" class="read-link" target="_blank" rel="noopener" data-i18n="openPDF">เปิด PDF ↗</a>
       <a id="pdf-download" class="read-link" download data-i18n="download">ดาวน์โหลด</a>
+      <button id="pdf-native" class="icon-button" type="button" data-i18n="nativeViewer">ตัวอ่านของเบราว์เซอร์</button>
       <button id="pdf-retry" class="icon-button" type="button" data-i18n="retry">ลองอีกครั้ง</button>
     </div>
-    <iframe id="pdf-frame" title="PDF document" hidden></iframe>
-    <p class="small-note" data-i18n="nativePDFNote">ใช้ตัวอ่าน PDF ของเบราว์เซอร์ การซูมและเปลี่ยนหน้าขึ้นอยู่กับเบราว์เซอร์ หากปุ่มไม่ตอบสนอง ให้ใช้แถบเครื่องมือในเอกสาร</p>
+    <div id="pdf-pages" tabindex="0" role="region" aria-label="เอกสาร PDF" data-i18n-aria-label="pdfDocument" hidden></div>
+    <iframe id="pdf-frame" title="เอกสาร PDF" data-i18n-title="pdfDocument" hidden></iframe>
+    <p class="small-note" id="pdf-note" data-i18n="trackedPDFNote">ใช้ตัวอ่าน PDF ของเบราว์เซอร์ การซูมและเปลี่ยนหน้าขึ้นอยู่กับเบราว์เซอร์ หากปุ่มไม่ตอบสนอง ให้ใช้แถบเครื่องมือในเอกสาร</p>
   </main>
 </body>
 </html>
