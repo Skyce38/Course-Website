@@ -10,7 +10,8 @@
     {
       "course": "artificial-intelligence",
       "lessons": [
-        "artificial-intelligence-ai-foundations-agents"
+        "artificial-intelligence-ai-foundations-agents",
+        "artificial-intelligence-search-models-bfs-dfs"
       ]
     }
   ]

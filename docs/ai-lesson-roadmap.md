@@ -61,7 +61,7 @@
 - **Examples:** source Romania, graph 0→5 และ grid; กำหนด successor order ในคำอธิบายเพิ่มให้ผล trace ไม่กำกวม
 - **Interactive:** Python code viewer + static frontier table; step selection เป็น optional ถ้า contract เดิมแทนสถานะได้จริง
 - **Practice needed:** 6 ข้อ รวม 2 source exercises, cyclic case และ counterexample สำหรับ least-cost claim; คำตอบใหม่ต้องแยกจาก source
-- **Prerequisites / status:** T01/R-DS; **Planned, P0**; W01 §2 มีสรุปเดิม
+- **Prerequisites / status:** T01/R-DS; **Integration candidate, P0** — [Markdown](../courses/artificial-intelligence/summaries/search-models-bfs-dfs.md) / [coverage](ai-search-bfs-dfs-coverage.md); registry และ AI path หลัง Foundations พร้อมใน branch นี้ รอ review/merge
 
 ### AI-L04 / T04 — แก้ 8-Puzzle ด้วย Python และ A* (8-Puzzle & A*)
 - **Objectives:** สร้าง valid moves; อธิบาย visited/depth/cost; คำนวณ Manhattan และ g+h ตาม goal จริง; อ่าน heapq/path reconstruction
@@ -196,7 +196,7 @@
 ## Next action and publication gate
 
 1. **อันดับแรก:** review P01 integration candidate ที่ reuse บทเดิมและสร้าง HTML ด้วยระบบปัจจุบัน; merge/deploy เฉพาะเมื่อได้รับคำสั่ง ไม่ generate Foundations ซ้ำ
-2. **บทใหม่ถัดไปเมื่อได้รับอนุมัติ:** AI-L03 Search Models & BFS/DFS เพราะมี source exercise ที่ตรวจแล้ว ใช้ต่อทั้ง A*/game search และใช้ templates/rich tables/code viewer เดิมได้
+2. **Phase 4B-2:** AI-L03 Search Models & BFS/DFS มีบทจริงและเฉลยที่ตรวจแล้ว ใช้ tables/code viewers เดิม; review integration candidate นี้ก่อนสร้างบทใหม่ ไม่ generate AI-L03 ซ้ำ
 3. แต่ละบทต้องตรวจครบ source ranges ในแผน แยกคำอธิบายเพิ่ม ตรวจเฉลย/formula/code/alt/caption/physical page references และผ่าน reader/theme/language/resume regressions ก่อน register เป็น resource
 4. เพิ่ม lesson registry และ learning path เฉพาะเมื่อ Markdown/HTML จริงพร้อมและ stable ID ได้รับการตรวจแล้ว; รักษา IDs ของ W01/W02/W03/P01; ไม่เปลี่ยน saved data เพื่อรองรับแผนนี้
 5. ส่งเอกสารนี้ให้ผู้สอน/ผู้ใช้ตรวจ chronology และ exam scope ก่อนอ้างเป็น official curriculum. แผนพร้อม review แต่ AI-L19 และ legal-currentness claims ยังต้อง evidence เพิ่ม
