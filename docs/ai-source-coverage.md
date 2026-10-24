@@ -122,3 +122,6 @@ X01 และ X02 มี SHA-256 เดียวกัน: `1a7114d4331b5cc0bbda
 
 
 **Phase 4B-F1:** [FINAL Regression](../courses/artificial-intelligence/summaries/final-regression.md) เป็น integration candidate จาก S06 pp.2–13, A03, X07, C02 และ D03; [coverage/ความละเอียด/ข้อจำกัด](ai-final-regression-coverage.md). พบความต่างของเส้นปัดกับเส้นเต็มใน X07 และ target PerformanceIndex ของ C02 ซึ่งไม่ตรงชื่อตัวแปร predictedCO2. ไม่แก้ source files. AI path ต่อท้าย Foundations → Search → FINAL Regression เป็นลำดับเผยแพร่ชั่วคราว ไม่ใช่ลำดับสอนที่รับรอง; ยังไม่เพิ่มบท Midterm ที่หยุดไว้.
+
+
+**Phase 4B-F2:** [FINAL KNN](../courses/artificial-intelligence/summaries/final-knn.md) เป็น integration candidate จาก S07 pp.2–5, X01/X03 KNN/X04 และ C01 KNN เท่านั้น; [coverage/ผลตรวจระยะและข้อจำกัด](ai-final-knn-coverage.md). X02 เป็นสำเนาไม่ใช่ dataset เพิ่ม; ระยะ/encoding/อันดับคำนวณใหม่ ไม่ใช้ cached answers รับรองผลโดยลำพัง. ต่อหลัง FINAL Regression ตามลำดับเผยแพร่ชั่วคราว ไม่ใช่ verified teaching sequence; ไม่มีบท Naive Bayes ในงานนี้.

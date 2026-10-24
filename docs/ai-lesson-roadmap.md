@@ -122,7 +122,7 @@
 - **Examples:** source drug/Buy/Iris; ระบุ k ของแต่ละตัวอย่างไม่ปนภาพ voting กับ code
 - **Interactive:** distance table + code viewer; ไม่สร้างใหม่ทั้ง training environment
 - **Practice needed:** 5 tasks distance/ranking/tie convention/encoding/train-test; scaling experiment ใหม่เป็น E03
-- **Prerequisites / status:** R-MATH/R-PY; **Planned, P1**
+- **Prerequisites / status:** R-MATH/R-PY; **FINAL integration candidate, P0** — [Markdown](../courses/artificial-intelligence/summaries/final-knn.md), [coverage](ai-final-knn-coverage.md); หลัง Regression ตามลำดับเผยแพร่ชั่วคราว รอ review/merge
 
 ### AI-L11 / T11 — จำแนกด้วยเบย์ (Naive Bayes)
 - **Objectives:** คำนวณ class scores; อธิบาย conditional independence; แยก Gaussian กับ categorical และผลของ zero/smoothing
