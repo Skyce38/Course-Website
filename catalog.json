@@ -392,6 +392,17 @@
       "reader": "read/artificial-intelligence/ai-foundations-agents.html",
       "generatedLesson": 1,
       "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/artificial-intelligence/summaries/ai-foundations-agents.md"
+    },
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs",
+      "course": "artificial-intelligence",
+      "category": "summaries",
+      "title": "แบบจำลองปัญหาและการค้นหา BFS/DFS (Search Models & Uninformed Search)",
+      "path": "summaries/search-models-bfs-dfs.md",
+      "format": "MD",
+      "reader": "read/artificial-intelligence/search-models-bfs-dfs.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/artificial-intelligence/summaries/search-models-bfs-dfs.md"
     }
   ]
 }

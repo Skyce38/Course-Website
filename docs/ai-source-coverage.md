@@ -116,3 +116,6 @@ X01 และ X02 มี SHA-256 เดียวกัน: `1a7114d4331b5cc0bbda
 - QA ของงานนี้: ตรวจ source paths/hashes ทั้ง 33, internal links/anchors, 69 page-range assertions, topic/lesson IDs ไม่ซ้ำ และ prerequisite graph ไม่มี cycle; แผนทั้ง 19 บทมี objectives/coverage/examples/interactive option/practice/prerequisites/status
 - Existing regression suite ผ่านหลัง build ใน disposable copy ของ main. การรันตรง fresh Windows checkout พบ CRLF-only comparison ของ generated Linked List; ยืนยันว่า normalized content ตรงกันโดยไม่ rewrite reader หรือแก้ tests ที่ไม่เกี่ยวกับงานนี้
 - Protected worktrees ทั้งห้า (AI Pilot, Phase 3B, Learning Navigation, Rich Content, Theme Toggle) คง branch/status/staging/file hashes เดิม; branch นี้เพิ่มเฉพาะเอกสาร 3 ไฟล์ ไม่มี tracked website/source changes
+
+
+**Phase 4B-2:** PR #11 รวม Foundations & Agents เข้า main แล้ว (ไม่ใช่การยืนยันสถานะ deployment). เพิ่ม [Search Models & BFS/DFS](../courses/artificial-intelligence/summaries/search-models-bfs-dfs.md) จาก S02 เป็น integration candidate; [coverage และข้อจำกัด](ai-search-bfs-dfs-coverage.md). AI path มีบทจริงสองบทตามลำดับ Foundations → Search; OOP path และ source documents ไม่เปลี่ยน.
