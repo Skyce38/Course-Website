@@ -34,7 +34,7 @@ for (const resource of catalog.resources) {
 for (const file of htmlFiles) {
   const html = fs.readFileSync(file, 'utf8');
   for (const [,asset] of html.matchAll(/(?:src|href)="([^" ]*assets\/(?:preferences\.(?:js|css)|layouts\.css|readers\.(?:js|css)|lesson(?:-(?:components|contract))?\.(?:js|css)|i18n\.js|study\.js|settings\.js|pdf(?:-source)?\.js)[^" ]*)"/g)) {
-    assert.equal(new URL(asset,'https://example.test/').searchParams.get('v'),'phase3a-2',file+': version shared UI assets together to prevent stale bundles');
+    assert.equal(new URL(asset,'https://example.test/').searchParams.get('v'),'theme-flash-1',file+': version shared UI assets together to prevent stale bundles');
   }
   for (const match of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) new vm.Script(match[1], {filename: file});
   const markup = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, script => script.startsWith('<script src=') ? script : '');
@@ -65,6 +65,12 @@ assert.equal(root.dataset.theme, 'dark');
 preferences.cycleTheme();
 assert.equal(root.dataset.theme, 'light');
 assert.equal(preferences.value.preset, 'ocean');
+let colorFlushes=0;
+context.getComputedStyle=()=>{assert.equal(root.dataset.themeSwitching,'','Scoped transitions must be suppressed during the final color flush');colorFlushes++;return {backgroundColor:'final'};};
+context.document.querySelectorAll=selector=>selector.startsWith('.breadcrumbs>a')?[{}]:[];
+preferences.cycleTheme();preferences.cycleTheme();
+assert.equal(colorFlushes,2);assert.equal(root.dataset.themeSwitching,undefined,'Rapid toggles must not leave suppression enabled');
+context.document.querySelectorAll=()=>[];
 assert.equal(preferences.validate({}).layout,'classic','New users start in Classic');
 assert.equal(preferences.validate({theme:'dark',language:'en'}).layout,'classic','Older exports default to Classic');
 preferences.update({layout:'modern'});

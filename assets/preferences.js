@@ -101,6 +101,8 @@
   } catch { value = validate({}); }
   function apply() {
     const root = document.documentElement;
+    const changingTheme = root.dataset.theme && root.dataset.theme !== value.theme;
+    if (changingTheme) root.dataset.themeSwitching = '';
     if (root.dataset.layout && root.dataset.layout !== value.layout) document.dispatchEvent(new CustomEvent('layoutwillchange',{detail:{from:root.dataset.layout,to:value.layout}}));
     root.dataset.layout = value.layout;
     root.dataset.theme = value.theme;
@@ -129,6 +131,11 @@
       button.title = button.getAttribute('aria-label');
     });
     document.querySelectorAll('#font-value, #font-size').forEach(node => node.textContent = value.font);
+    if (changingTheme) {
+      // Commit the scoped final colors before restoring hover transitions. No timer can race a rapid toggle.
+      document.querySelectorAll('.breadcrumbs>a,.breadcrumb .crumb-prefix>a,.study-complete').forEach(node => getComputedStyle(node).backgroundColor);
+      delete root.dataset.themeSwitching;
+    }
     document.dispatchEvent(new CustomEvent('preferenceschange', {detail: {...value}}));
   }
   function update(patch) {

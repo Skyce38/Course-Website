@@ -119,10 +119,18 @@
     if (clean.startsWith('เรียน / ')) return text.replace('เรียน / ', 'Learn / ');
     return text;
   }
+  function setText(node, text) {
+    if (!node.querySelector('svg')) { if (node.textContent !== text) node.textContent = text; return; }
+    // Icon-bearing controls keep their SVG and text nodes through language/state changes.
+    const labels = [...node.childNodes].filter(child => child.nodeType === 3);
+    if (labels.map(child => child.textContent).join('') === text) return;
+    if (!labels.length) node.prepend(document.createTextNode(text));
+    else labels.forEach((label,index) => { const value = index === 0 ? text : ''; if (label.textContent !== value) label.textContent = value; });
+  }
   function apply() {
     document.querySelectorAll('[data-i18n]').forEach(node => {
       const text = t(node.dataset.i18n, valuesFor(node));
-      if (node.textContent !== text) node.textContent = text;
+      setText(node, text);
     });
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
     while (walker.nextNode()) {
@@ -151,7 +159,7 @@
     });
     if (location.pathname.endsWith('/settings.html')) document.title = t('settings') + ' · Course Website';
   }
-  window.LearningI18n = {t, translate, apply};
+  window.LearningI18n = {t, translate, apply, setText};
   document.addEventListener('preferenceschange', () => { if (document.body) apply(); });
   document.addEventListener('DOMContentLoaded', () => {
     apply();

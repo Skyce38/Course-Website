@@ -2,7 +2,7 @@
 const fs = require('node:fs'), path = require('node:path');
 const {validate} = require('../assets/lesson-contract.js');
 const rich = require('./lesson-rich.cjs');
-const VERSION = 'phase3a-2';
+const VERSION = 'theme-flash-1';
 const esc = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const json = value => JSON.stringify(value).replace(/</g,'\\u003c').replace(/\u2028/g,'\\u2028').replace(/\u2029/g,'\\u2029');
 function metadata(source) {

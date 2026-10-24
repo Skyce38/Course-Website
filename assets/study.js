@@ -101,7 +101,8 @@
       set('aria-pressed', String(complete));
       set('data-i18n', complete ? 'documentCompleted' : 'markComplete');
       const text = t(button.dataset.i18n);
-      if (button.textContent !== text) button.textContent = text;
+      if (window.LearningI18n?.setText) window.LearningI18n.setText(button, text);
+      else if (button.textContent !== text) button.textContent = text;
       const labelKey = complete ? 'markIncompleteLabel' : 'markCompleteLabel';
       const label = window.LearningI18n?.t(labelKey,{title:button.dataset.documentTitle || ''}) || labelKey;
       set('data-i18n-aria-label',labelKey); set('data-i18n-title',labelKey);
