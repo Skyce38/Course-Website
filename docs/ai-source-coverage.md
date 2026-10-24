@@ -74,7 +74,9 @@ X01 และ X02 มี SHA-256 เดียวกัน: `1a7114d4331b5cc0bbda
 | <a id="w03"></a>W03 | [slides/01_intro.pdf](../courses/artificial-intelligence/slides/01_intro.pdf) — `artificial-intelligence-slides/01_intro.pdf` | PDF published, hash ตรง S01; แหล่งอ่าน ไม่ใช่ registered Markdown lesson |
 | <a id="p01"></a>P01 | worktree `codex/ai-lesson-pilot`: `courses/artificial-intelligence/summaries/ai-foundations-agents.md` — `artificial-intelligence-ai-foundations-agents` | Draft ที่มีอยู่จริง ครอบคลุม S01 pp.3–16; ยังไม่อยู่ main/catalog/registry/learning path; ตรวจ read-only ไม่คัดลอกหรือเปลี่ยน staging |
 
-ณ baseline main นี้ AI มี catalog resources 3 รายการข้างต้น แต่ **ไม่มี registered AI lesson**; `scripts/lessons.json` และ `learning-paths.json` ยังมีเพียง Linked List ของ OOP งานเอกสารนี้ไม่เปลี่ยน IDs หรือ configuration เหล่านั้น
+ณ baseline main ของ Phase 4A AI มี catalog resources 3 รายการข้างต้น แต่ **ไม่มี registered AI lesson**; `scripts/lessons.json` และ `learning-paths.json` ยังมีเพียง Linked List ของ OOP งานเอกสาร Phase 4A ไม่เปลี่ยน IDs หรือ configuration เหล่านั้น
+
+**Phase 4B-1 integration:** reuse [P01 Markdown](../courses/artificial-intelligence/summaries/ai-foundations-agents.md) แบบ byte-for-byte และ generate [reader](../read/artificial-intelligence/ai-foundations-agents.html) ด้วย builder ปัจจุบัน; stable ID เดิม ลงทะเบียนเป็นบทแรกใน AI learning path พร้อมรักษา OOP path. Branch integration มี AI resources 4 รายการและ registered AI lesson 1 บท; รอ user review/merge/deploy ยังไม่ใช่สถานะ live. ต้นฉบับ pilot และ staging ไม่ถูกแก้ไข ดู [coverage/ข้อจำกัด](ai-foundations-agents-coverage.md).
 
 ## Source-to-topic coverage matrix
 

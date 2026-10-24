@@ -381,6 +381,17 @@
       "reader": "read/oop-python/linked-list.html",
       "generatedLesson": 1,
       "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/summaries/linked-list.md"
+    },
+    {
+      "id": "artificial-intelligence-ai-foundations-agents",
+      "course": "artificial-intelligence",
+      "category": "summaries",
+      "title": "พื้นฐานปัญญาประดิษฐ์และตัวกระทำอัจฉริยะ (AI & Intelligent Agents)",
+      "path": "summaries/ai-foundations-agents.md",
+      "format": "MD",
+      "reader": "read/artificial-intelligence/ai-foundations-agents.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/artificial-intelligence/summaries/ai-foundations-agents.md"
     }
   ]
 }

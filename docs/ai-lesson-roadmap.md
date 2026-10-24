@@ -26,7 +26,7 @@
 - เนื้อหานักศึกษาเป็นภาษาไทยเป็นหลัก เก็บศัพท์อังกฤษในวงเล็บ รวมถึงสูตร ชื่อตัวแปรและ syntax มาตรฐาน. ทุก worked example ระบุว่าเป็น source-derived หรือเขียนเพิ่ม; solutions ต้องคำนวณตรวจใหม่และไม่อ้างว่า source มีคำตอบหากไม่มี
 - ใช้ KaTeX inline/block, tables, responsive repository-local raster figures พร้อม alt/caption/source, และ Python code viewer/copy ที่มีอยู่แล้ว. ภาพอ้างอิงในแผนยังไม่ถูกคัดลอกเข้า repo; ตรวจสิทธิ์และหน้าให้ตรงก่อนเผยแพร่
 - คอลัมน์/ข้อเสนอ interactive ด้านล่างเป็น **ตัวเลือกในอนาคต ไม่ใช่งานที่พัฒนาแล้ว**. ส่วนใหญ่ใช้ static traces/tables/code viewers ได้; graph/tree/matrix ที่ current stepper แสดง semantics ไม่ครบให้ใช้ภาพอธิบายก่อน ไม่สร้าง visualizer ใหม่ในงานนี้
-- `AI-Lxx` เป็น planning ID จับคู่ `AI-Txx` เท่านั้น ไม่ใช่ catalog/resource ID. Existing = เอกสาร published เดิม; Draft = P01 จริง; Planned = ยังไม่มี source lesson file. ยังไม่เติม AI ลง `learning-paths.json`
+- `AI-Lxx` เป็น planning ID จับคู่ `AI-Txx` เท่านั้น ไม่ใช่ catalog/resource ID. Existing = เอกสาร published เดิม; Draft = P01 จริง; Planned = ยังไม่มี source lesson file. ใน Phase 4A ยังไม่เติม AI ลง `learning-paths.json`; Phase 4B-1 ลงทะเบียนเฉพาะ P01 ที่มี Markdown/HTML จริงเป็นบทแรกของ AI (รอ review/merge/deploy)
 
 ## Existing / Draft baseline
 
@@ -35,7 +35,7 @@
 | W01 `artificial-intelligence-midterm-final` | Existing overview | เก็บ ID/reader/anchors; ใช้เป็น overview และค้นช่องว่าง ไม่เปลี่ยนชื่อเป็น registered lessons หลายบท |
 | W02 `artificial-intelligence-quick-review` | Existing review sheet | คงเป็น review sheet ไม่ถือว่าเทียบเท่า objectives/practice ครบทุก dedicated lesson |
 | W03 `artificial-intelligence-slides/01_intro.pdf` | Existing source PDF | ลิงก์ใช้ได้และ hash ตรง S01; ไม่แก้เนื้อหา |
-| P01 `artificial-intelligence-ai-foundations-agents` | Draft, isolated/unmerged | reuse existing Markdown/generated HTML ใน worktree เดิมเมื่อมีคำสั่งภายหลัง; ไม่คัดลอก ไม่ re-register หรือ merge ในงานนี้ |
+| P01 `artificial-intelligence-ai-foundations-agents` | Integration candidate; original Draft preserved | reuse [Markdown](../courses/artificial-intelligence/summaries/ai-foundations-agents.md) เดิมและ generate [HTML](../read/artificial-intelligence/ai-foundations-agents.html) ด้วย builder ปัจจุบัน; ไม่คัดลอก HTML เก่า; registry/path พร้อมใน branch integration รอ user review/merge/deploy |
 
 ## Midterm lesson plans
 
@@ -45,7 +45,7 @@
 - **Examples:** source car/Socrates/LLM; EU numerical example ใน P01 เป็น original instructional example ต้องติดป้ายเดิม
 - **Interactive:** ไม่จำเป็น; rich equations, comparison table และภาพวงจรที่อธิบายได้ครบเหมาะกว่า stepper เส้นตรง
 - **Practice needed:** reuse/recheck 10 ข้อใน P01; ต้องแยก objective จาก achieved outcome และไม่สร้างเฉลย objective เฉพาะ ChatGPT
-- **Prerequisites / status:** ไม่มี topic dependency; **Draft P01, P0** ไม่เขียนซ้ำ
+- **Prerequisites / status:** ไม่มี topic dependency; **P01 integration candidate, P0** reuse บทเดิม ไม่เขียนซ้ำ รอ review/merge
 
 ### AI-L02 / T02 — ประวัติ การประยุกต์และ AI ที่รับผิดชอบ (History, Applications & Responsible AI)
 - **Objectives:** อธิบาย AI winters/drivers/effect; จับคู่ applications; วิเคราะห์ bias/privacy/safety/alignment ในบริบท source
@@ -195,7 +195,7 @@
 
 ## Next action and publication gate
 
-1. **อันดับแรก:** นำ P01 ที่มีอยู่แล้วเข้าสู่ user review/แก้เฉพาะจุดตาม review และค่อยรวมภายหลังเมื่อได้รับคำสั่ง ไม่ generate Foundations ซ้ำ
+1. **อันดับแรก:** review P01 integration candidate ที่ reuse บทเดิมและสร้าง HTML ด้วยระบบปัจจุบัน; merge/deploy เฉพาะเมื่อได้รับคำสั่ง ไม่ generate Foundations ซ้ำ
 2. **บทใหม่ถัดไปเมื่อได้รับอนุมัติ:** AI-L03 Search Models & BFS/DFS เพราะมี source exercise ที่ตรวจแล้ว ใช้ต่อทั้ง A*/game search และใช้ templates/rich tables/code viewer เดิมได้
 3. แต่ละบทต้องตรวจครบ source ranges ในแผน แยกคำอธิบายเพิ่ม ตรวจเฉลย/formula/code/alt/caption/physical page references และผ่าน reader/theme/language/resume regressions ก่อน register เป็น resource
 4. เพิ่ม lesson registry และ learning path เฉพาะเมื่อ Markdown/HTML จริงพร้อมและ stable ID ได้รับการตรวจแล้ว; รักษา IDs ของ W01/W02/W03/P01; ไม่เปลี่ยน saved data เพื่อรองรับแผนนี้
