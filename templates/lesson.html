@@ -1,0 +1,33 @@
+{{MARKER}}
+<!doctype html>
+<html lang="{{LANG}}">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{TITLE}} · Study</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="stylesheet" href="../../assets/foundation.css">
+<link rel="stylesheet" href="../../assets/preferences.css?v={{VERSION}}">
+<link rel="stylesheet" href="../../assets/lesson.css?v={{VERSION}}">
+<link rel="stylesheet" href="../../assets/readers.css?v={{VERSION}}">
+<script src="../../assets/preferences.js?v={{VERSION}}"></script>
+<script src="../../assets/i18n.js?v={{VERSION}}"></script>
+<script src="../../assets/study.js?v={{VERSION}}"></script>
+<script src="../../assets/readers.js?v={{VERSION}}" defer></script>
+<script src="../../assets/lesson.js?v={{VERSION}}" defer></script>
+{{COMPONENTS}}
+</head>
+<body class="lesson-reader html-reader">
+<a class="lesson-skip" href="#main-content" data-i18n="skipContent">ข้ามไปเนื้อหา</a>
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../"><span class="brand-symbol"><svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true"><use href="../../assets/study-icon.svg#book"/></svg></span><span><strong>Course Website</strong><small>Study</small></span></a>
+  <p class="lesson-course-back"><a href="../../#course/{{COURSE_ID}}/{{CATEGORY_ID}}">← {{COURSE}}</a></p>
+  <nav class="reader-toc" lang="{{LANG}}">{{TOC}}</nav>
+</aside>
+<div class="overlay" id="overlay" hidden></div>
+<div class="workspace">
+  <header class="topbar"><div class="lesson-breadcrumb"><button class="icon-button menu-button" id="menu" type="button" data-i18n-aria-label="readerContents" aria-label="สารบัญบทเรียน" aria-controls="sidebar" aria-expanded="false">☰</button><div class="breadcrumbs"><a href="../../" data-i18n="learn">เรียน</a><span id="breadcrumbs">{{COURSE}}</span></div></div><div class="top-actions"><button class="icon-button" type="button" id="theme">☾ Dark</button></div></header>
+  <main class="content reader-content" id="main-content">
+    <div class="reader-top"><a class="back-link" href="../../#course/{{COURSE_ID}}/{{CATEGORY_ID}}">← {{COURSE}} / {{CATEGORY}}</a><div class="reader-font"><button type="button" class="icon-button" id="font-less" data-i18n-aria-label="decreaseFont" aria-label="ลดขนาดตัวอักษร">A−</button><span id="font-value">17</span><button type="button" class="icon-button" id="font-more" data-i18n-aria-label="increaseFont" aria-label="เพิ่มขนาดตัวอักษร">A+</button><button type="button" class="icon-button" id="print" data-i18n="printLesson">พิมพ์</button></div></div>
+    <article class="reading-page prose" lang="{{LANG}}"><h1>{{TITLE}}</h1>{{BODY}}</article>
+  </main>
+</div>
+</body></html>

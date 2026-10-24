@@ -65,4 +65,12 @@ context.localStorage.setItem=()=>{throw Error('Storage blocked')};
 study.open(html);
 study.toggleCompleted(html.id);
 assert.equal(study.isCompleted(html.id),true);
-console.log('PASS: recent history deduplication/limit/resume links, throttled persistent positions/reset/validation, explicit completion, course totals, cross-tab updates, storage corruption/denial and isolation from preferences/bookmarks');
+// A theme-only refresh must not rewrite an unchanged completion control.
+let controlWrites=0,controlText='';
+const controlAttributes=new Map();
+const control={dataset:{complete:'control-fixture',documentTitle:'Fixture'},getAttribute:name=>controlAttributes.get(name) ?? null,setAttribute(name,value){controlWrites++;controlAttributes.set(name,value);if(name==='data-i18n')this.dataset.i18n=value;},get textContent(){return controlText;},set textContent(value){controlWrites++;controlText=value;}};
+context.document.querySelectorAll=selector=>selector==='[data-complete]'?[control]:[];
+study.refreshControls();controlWrites=0;study.refreshControls();assert.equal(controlWrites,0,'Unchanged controls must retain their text/attributes');
+study.toggleCompleted('control-fixture');assert.equal(control.getAttribute('aria-pressed'),'true');assert.equal(control.textContent,'documentCompleted');
+controlWrites=0;study.refreshControls();assert.equal(controlWrites,0);
+console.log('PASS: recent history deduplication/limit/resume links, throttled persistent positions/reset/validation, explicit completion, course totals, cross-tab updates, storage corruption/denial, idempotent completion controls and isolation from preferences/bookmarks');

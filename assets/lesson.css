@@ -1,0 +1,32 @@
+/* Shell for generated lessons only; existing hand-maintained readers are untouched. */
+.lesson-reader .sidebar{position:fixed;inset:0 auto 0 0;width:246px;padding:24px 18px;background:var(--paper);border-right:1px solid var(--line);overflow:auto;z-index:60}
+.lesson-reader .brand{padding-bottom:20px;line-height:1.4}.lesson-reader .brand strong{font-size:20px}.lesson-reader .brand small{display:block;color:var(--muted);font-size:12px}
+.lesson-reader .workspace{margin-left:246px}.lesson-reader .topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 28px;min-height:76px;background:var(--bg);border-bottom:1px solid var(--line)}
+.lesson-reader .lesson-breadcrumb,.lesson-reader .top-actions{display:flex;align-items:center;gap:10px;min-width:0}.lesson-reader .breadcrumbs{color:var(--muted);font-size:14px}.lesson-reader #breadcrumbs{margin-inline-start:10px}
+.lesson-reader .menu-button{display:none}.lesson-reader .content{max-width:1100px;margin:auto;padding:32px 36px 60px}
+.lesson-reader .reader-top,.lesson-reader .reader-font{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}.lesson-reader .reader-top{margin-bottom:22px;gap:16px}
+.lesson-reader .reading-page{padding:32px 38px;border:1px solid var(--line);border-radius:16px;background:var(--paper);overflow-wrap:anywhere}
+.lesson-reader .prose{font-size:var(--text-size);line-height:1.95}.lesson-reader .prose h1{font-size:32px;line-height:1.5;margin:0 0 28px}.lesson-reader .prose h2{font-size:28px;border-top:1px solid var(--line);padding-top:24px;margin-top:36px;scroll-margin-top:100px}.lesson-reader .prose h3{font-size:23px;scroll-margin-top:100px}.lesson-reader .prose p{margin:16px 0}.lesson-reader .prose li{margin:8px 0}
+.lesson-reader .prose pre{background:var(--code);color:var(--code-text);padding:18px;overflow:auto;border-radius:10px;max-width:100%}.lesson-reader .prose code{font-family:Consolas,monospace;font-size:.9em}.lesson-reader .prose :not(pre)>code{background:var(--soft);padding:2px 5px;border-radius:4px}
+.lesson-reader .prose blockquote{margin:20px 0;padding:4px 16px;border-inline-start:3px solid var(--accent);background:var(--soft)}
+.lesson-reader :is(pre,.step-visualizer,summary):focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.lesson-reader .code-viewer pre:focus-visible{outline-offset:-3px}
+.lesson-reader .table-scroll{max-width:100%;overflow:auto}.lesson-reader table{border-collapse:collapse;width:100%;font-size:.9em}.lesson-reader :is(th,td){padding:10px 12px;text-align:start;border-bottom:1px solid var(--line)}.lesson-reader th{background:var(--soft)}
+.lesson-reader .reader-toc a{display:block;padding:9px 10px;color:var(--muted);text-decoration:none;line-height:1.7;font-size:14px;border-radius:8px}.lesson-reader .reader-toc a.sub{padding-inline-start:24px}.lesson-reader .reader-toc a:hover{background:var(--soft);color:var(--accent)}
+.lesson-reader .overlay{position:fixed;inset:0;background:#0007;z-index:50}.lesson-skip{position:fixed;inset:8px auto auto 8px;transform:translateY(-180%);z-index:100;background:var(--paper);padding:10px}.lesson-skip:focus{transform:none}
+/* Only the generated Modern reader gets the compact, single-scroll sidebar. */
+@media screen{
+html[data-layout=modern] .lesson-reader.html-reader .sidebar{display:flex;flex-direction:column;height:100dvh;overflow:hidden}
+html[data-layout=modern] .lesson-reader.html-reader .sidebar .brand{flex:none;padding:0 4px 18px}
+html[data-layout=modern] .lesson-reader.html-reader .lesson-course-back{flex:none;margin:12px 0 0}
+html[data-layout=modern] .lesson-reader.html-reader .lesson-course-back a{display:block;padding:8px 10px;border-radius:8px;color:var(--muted);text-decoration:none;font-size:14px;line-height:1.65;overflow-wrap:anywhere}
+html[data-layout=modern] .lesson-reader.html-reader .lesson-course-back a:hover{background:var(--soft);color:var(--ink)}
+html[data-layout=modern] .lesson-reader.html-reader .reader-contents-label{flex:none;margin:16px 10px 8px;line-height:1.6}
+html[data-layout=modern] .lesson-reader.html-reader .reader-toc{flex:1;min-height:0;max-height:none;overflow-x:hidden;overflow-y:auto;margin:0;padding:4px 4px 8px;scrollbar-gutter:stable;overscroll-behavior:contain}
+html[data-layout=modern] .lesson-reader.html-reader .reader-toc a{font-size:14px;line-height:1.65;min-height:44px;padding:8px 10px;margin:2px 0;white-space:normal;overflow-wrap:anywhere}
+html[data-layout=modern] .lesson-reader.html-reader .reader-toc a.sub{padding-inline-start:22px;font-size:13px}
+html[data-layout=modern] .lesson-reader.html-reader .reader-toc [data-toc-detail=practice]{display:none}
+html[data-layout=modern] .lesson-reader.html-reader .reader-toc a:focus-visible{outline-offset:-3px}
+}
+@media(max-width:800px){.lesson-reader .sidebar{transform:translateX(-100%);width:min(300px,calc(100vw - 20px))}.lesson-reader .sidebar.open{transform:none}.lesson-reader .workspace{margin-left:0}.lesson-reader .menu-button{display:block}.lesson-reader .topbar{flex-wrap:wrap;padding:12px 16px}.lesson-reader .lesson-breadcrumb{width:100%}.lesson-reader .top-actions{margin-inline-start:auto}.lesson-reader #breadcrumbs{display:none}.lesson-reader .content{padding:24px 14px 40px}.lesson-reader .reading-page{padding:24px 18px}.lesson-reader .prose h1{font-size:27px}.lesson-reader .prose h2{font-size:25px;scroll-margin-top:160px}.lesson-reader .prose h3{font-size:21px;scroll-margin-top:160px}}
+@media print{.lesson-reader :is(.sidebar,.topbar,.reader-top,.study-reader-actions,.lesson-skip){display:none}.lesson-reader .workspace{margin:0}.lesson-reader .content,.lesson-reader .reading-page{max-width:none;padding:0;border:0}.lesson-reader pre{white-space:pre-wrap;overflow-wrap:anywhere}}
