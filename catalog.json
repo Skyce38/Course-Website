@@ -425,6 +425,17 @@
       "reader": "read/artificial-intelligence/final-knn.html",
       "generatedLesson": 1,
       "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/artificial-intelligence/summaries/final-knn.md"
+    },
+    {
+      "id": "artificial-intelligence-final-naive-bayes",
+      "course": "artificial-intelligence",
+      "category": "summaries",
+      "title": "FINAL: การจำแนกแบบนาอีฟเบย์ (Naive Bayes Classification)",
+      "path": "summaries/final-naive-bayes.md",
+      "format": "MD",
+      "reader": "read/artificial-intelligence/final-naive-bayes.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/artificial-intelligence/summaries/final-naive-bayes.md"
     }
   ]
 }

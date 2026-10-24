@@ -13,7 +13,8 @@
         "artificial-intelligence-ai-foundations-agents",
         "artificial-intelligence-search-models-bfs-dfs",
         "artificial-intelligence-final-regression",
-        "artificial-intelligence-final-knn"
+        "artificial-intelligence-final-knn",
+        "artificial-intelligence-final-naive-bayes"
       ]
     }
   ]

@@ -127,10 +127,10 @@
 ### AI-L11 / T11 — จำแนกด้วยเบย์ (Naive Bayes)
 - **Objectives:** คำนวณ class scores; อธิบาย conditional independence; แยก Gaussian กับ categorical และผลของ zero/smoothing
 - **Required coverage:** S07 pp.6–8; X03 `NaiveBayes`; C01 lines 50–59
-- **Examples:** July จาก source p.7; Buy จาก lab; ไม่ใช้ Gaussian likelihood แทน categorical counts โดยไม่อธิบาย
+- **Examples:** Judy จาก source p.7 (ชื่อ July ในแผนเดิมอ่านคลาดเคลื่อน); Buy จาก lab; ไม่ใช้ Gaussian likelihood แทน categorical counts โดยไม่อธิบาย
 - **Interactive:** probability/product tables และ code viewer
 - **Practice needed:** 5 count/score/assumption/model-choice tasks; คำนวณเฉลยใหม่และแก้ความกำกวมของ X03 โดยไม่แก้ source file
-- **Prerequisites / status:** T10/R-PROB; **Planned, P1**
+- **Prerequisites / status:** T10/R-PROB; **FINAL integration candidate, P0** — [Markdown](../courses/artificial-intelligence/summaries/final-naive-bayes.md), [coverage](ai-final-naive-bayes-coverage.md); ต่อหลัง KNN ตามลำดับเผยแพร่ชั่วคราว รอ review/merge
 
 ### AI-L12 / T12 — สร้างต้นไม้ด้วย Information Gain (Decision Trees & ID3)
 - **Objectives:** คำนวณ entropy/weighted gain; เลือก split/ต่อ subtree; อ่านต้นไม้และแปลงเป็น rules

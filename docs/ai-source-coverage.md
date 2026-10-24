@@ -23,7 +23,7 @@
 | <a id="s04"></a>S04 | `Midterm/GameTree.pdf` | 25 | pp.2–12 Minimax/trace/properties/pseudocode; pp.13–24 alpha-beta/ตัวอย่างตัดกิ่ง; p.25 references ไม่ใช่โจทย์เพิ่มเติม |
 | <a id="s05"></a>S05 | `Midterm/KnowledgeRepresentation (1).pdf` | 54 | pp.2–11 KB, deduction/induction/abduction และกฎประพจน์; pp.12–19 FOL/quantifiers; pp.20–33 CNF/Skolemization/resolution/unification; pp.34–54 ตัวอย่างพิสูจน์หลายชุด |
 | <a id="s06"></a>S06 | `Final/Linear Regression.pdf` | 13 | pp.2–8 scatter/correlation/ตารางต้นไม้; pp.9–13 regression/least squares. pp.2–13 เกือบทั้งหมดเป็นภาพ จึงตรวจภาพจริง |
-| <a id="s07"></a>S07 | `Final/KNN_NB_Classification.pdf` | 8 | pp.2–3 classification/Drug table; p.4 KNN/voting; p.5 Iris KNN code; p.6 Bayes/assumption; p.7 categorical July example; p.8 GaussianNB/Iris code. ต้องอ่านภาพ |
+| <a id="s07"></a>S07 | `Final/KNN_NB_Classification.pdf` | 8 | pp.2–3 classification/Drug table; p.4 KNN/voting; p.5 Iris KNN code; p.6 Bayes/assumption; p.7 categorical Judy example (แผนเดิมอ่านเป็น July); p.8 GaussianNB/Iris code. ต้องอ่านภาพ |
 | <a id="s08"></a>S08 | `Final/Decision Tree Slide.pdf` | 17 | pp.3–12 classification/ID3/ตัวอย่างผิวไหม้/Occam; pp.13–15 information gain; pp.16–17 tree-to-rules. ปกเอ่ย Explanation Based Learning แต่ไม่พบหน่วยสอนรายละเอียดแยก |
 | <a id="s09"></a>S09 | `Final/clustering.pdf` | 46 | pp.2–11 learning types/similarity/distance/correlation; pp.12–30 hierarchical/linkage/dendrogram/outliers/genes; pp.31–45 K-means/objective/elbow; p.46 review. p.5 เพียงเอ่ย mixture model และ dimensionality reduction |
 | <a id="s10"></a>S10 | `Final/ANN.pdf` | 25 | pp.2–9 neuron/layers/weights/network connections; pp.10–18 perceptron/decision surface/update/AND–XOR; pp.19–24 multilayer/sigmoid/backprop; p.25 applications. pp.11–24 มีภาพ/สูตรจำนวนมาก |
@@ -125,3 +125,6 @@ X01 และ X02 มี SHA-256 เดียวกัน: `1a7114d4331b5cc0bbda
 
 
 **Phase 4B-F2:** [FINAL KNN](../courses/artificial-intelligence/summaries/final-knn.md) เป็น integration candidate จาก S07 pp.2–5, X01/X03 KNN/X04 และ C01 KNN เท่านั้น; [coverage/ผลตรวจระยะและข้อจำกัด](ai-final-knn-coverage.md). X02 เป็นสำเนาไม่ใช่ dataset เพิ่ม; ระยะ/encoding/อันดับคำนวณใหม่ ไม่ใช้ cached answers รับรองผลโดยลำพัง. ต่อหลัง FINAL Regression ตามลำดับเผยแพร่ชั่วคราว ไม่ใช่ verified teaching sequence; ไม่มีบท Naive Bayes ในงานนี้.
+
+
+**Phase 4B-F3:** [FINAL Naive Bayes](../courses/artificial-intelligence/summaries/final-naive-bayes.md) เป็น integration candidate จาก S07 pp.6–8, X01/X03 NaiveBayes และ C01 lines 50–59. ตรวจภาพชื่อ query เป็น Judy (July ในแผนเดิม); ตรวจ raw counts, normalization และ alpha=1 ของ CategoricalNB แยกจากสูตรดิบใน workbook. [Coverage/ผลตรวจ/ข้อจำกัด](ai-final-naive-bayes-coverage.md). L3/L6 ไม่สมบูรณ์ไม่ใช้เป็นเฉลย; ต่อหลัง FINAL KNN ตามลำดับเผยแพร่ชั่วคราว ไม่ใช่ verified teaching order. ไม่มี Decision Tree ในงานนี้.
