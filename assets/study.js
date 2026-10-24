@@ -167,7 +167,8 @@
   }
   window.LearningStudy = {
     ready:loaded,
-    configure(items, subjects) { resources = items; courses = subjects; }, open, toggleCompleted, progress, resumeLink, position, setPosition, resetPosition, flush, refreshControls:updateControls,
+    configure(items, subjects) { resources = items; courses = subjects; ready(); }, open, toggleCompleted, progress, resumeLink, position, setPosition, resetPosition, flush, refreshControls:updateControls,
+    get resources() { return resources; }, get courses() { return courses; },
     get recent() { return state.recent; }, isCompleted:id => state.completed.includes(id),
     setPDF(file,page) { pdf = {file:new URL(file,app),page}; if (!current) identify(); return current?.id; }
   };
@@ -196,6 +197,8 @@
     if (layoutPending) { layoutPending = false; restoreHTML(true); }
   });
   window.addEventListener('storage', event => { if (event.key === key || event.key === null) { state = read(); changed(); } });
+  // A restored BFCache page must see completion/history written on the page just left.
+  window.addEventListener('pageshow', event => { if (event.persisted) { state = read(); changed(); } });
   window.addEventListener('hashchange', () => { if (current && !pdf) identify(); });
   window.addEventListener('scroll', captureHTML, {passive:true});
   window.addEventListener('pagehide', () => { captureHTML(); flush(); });

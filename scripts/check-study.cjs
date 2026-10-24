@@ -73,4 +73,7 @@ context.document.querySelectorAll=selector=>selector==='[data-complete]'?[contro
 study.refreshControls();controlWrites=0;study.refreshControls();assert.equal(controlWrites,0,'Unchanged controls must retain their text/attributes');
 study.toggleCompleted('control-fixture');assert.equal(control.getAttribute('aria-pressed'),'true');assert.equal(control.textContent,'documentCompleted');
 controlWrites=0;study.refreshControls();assert.equal(controlWrites,0);
+storage.set('skyce-learning-study',JSON.stringify({recent:[],completed:['oop-python-linked-list'],positions:{}}));
+events.pageshow({persisted:false});assert.equal(study.isCompleted('oop-python-linked-list'),false);
+events.pageshow({persisted:true});assert.equal(study.isCompleted('oop-python-linked-list'),true,'BFCache restoration must read completion from the page just left');
 console.log('PASS: recent history deduplication/limit/resume links, throttled persistent positions/reset/validation, explicit completion, course totals, cross-tab updates, storage corruption/denial, idempotent completion controls and isolation from preferences/bookmarks');

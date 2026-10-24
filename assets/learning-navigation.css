@@ -1,0 +1,24 @@
+/* Shared geometry and tokens; no color transitions during theme changes. */
+.learning-path{padding:20px;margin:22px 0;border:1px solid var(--line);border-radius:14px;background:var(--paper);color:var(--ink);min-width:0;overflow-wrap:anywhere}
+.learning-path[hidden]{display:none}
+.learning-path h2{font-size:26px;line-height:1.5;margin:0 0 10px}
+.learning-path-heading p{margin:8px 0;color:var(--muted);font-size:15px;line-height:1.8}
+.learning-path progress{display:block;width:100%;height:10px;margin:12px 0;border:0;border-radius:999px;overflow:hidden;background:var(--soft);accent-color:var(--accent)}
+.learning-path progress::-webkit-progress-bar{background:var(--soft)}
+.learning-path progress::-webkit-progress-value{background:var(--accent)}
+.learning-path progress::-moz-progress-bar{background:var(--accent)}
+.learning-path-list{padding-inline-start:26px;margin:18px 0}
+.learning-path-list li{padding:12px 10px;border-bottom:1px solid var(--line);line-height:1.85}
+.learning-path-list li.is-current{background:var(--soft);border-radius:8px}
+.learning-path-list a{color:var(--accent);font-size:16px}
+.learning-path-status{display:block;font-size:14px;color:var(--muted);margin-top:4px}
+.learning-path-neighbors{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}
+.learning-path .icon-button{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;min-height:44px;min-width:0;max-width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--accent);font:inherit;text-decoration:none;white-space:normal;line-height:1.75;transition:none}
+.learning-path a:hover{background:var(--soft)}
+.learning-path a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.learning-link-title{font-size:14px;color:var(--ink)}
+.learning-boundary{display:flex;align-items:center;color:var(--muted);padding:10px 12px;font-size:15px}
+.learning-continue{margin-top:16px}
+html[data-layout=modern] .learning-path{border-radius:16px;border-color:color-mix(in srgb,var(--line) 65%,var(--paper))}
+@media(max-width:480px){.learning-path{padding:16px}.learning-path-neighbors{grid-template-columns:1fr}.learning-path h2{font-size:25px}}
+@media print{.learning-path{display:none}}
