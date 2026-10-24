@@ -119,3 +119,6 @@ X01 และ X02 มี SHA-256 เดียวกัน: `1a7114d4331b5cc0bbda
 
 
 **Phase 4B-2:** PR #11 รวม Foundations & Agents เข้า main แล้ว (ไม่ใช่การยืนยันสถานะ deployment). เพิ่ม [Search Models & BFS/DFS](../courses/artificial-intelligence/summaries/search-models-bfs-dfs.md) จาก S02 เป็น integration candidate; [coverage และข้อจำกัด](ai-search-bfs-dfs-coverage.md). AI path มีบทจริงสองบทตามลำดับ Foundations → Search; OOP path และ source documents ไม่เปลี่ยน.
+
+
+**Phase 4B-F1:** [FINAL Regression](../courses/artificial-intelligence/summaries/final-regression.md) เป็น integration candidate จาก S06 pp.2–13, A03, X07, C02 และ D03; [coverage/ความละเอียด/ข้อจำกัด](ai-final-regression-coverage.md). พบความต่างของเส้นปัดกับเส้นเต็มใน X07 และ target PerformanceIndex ของ C02 ซึ่งไม่ตรงชื่อตัวแปร predictedCO2. ไม่แก้ source files. AI path ต่อท้าย Foundations → Search → FINAL Regression เป็นลำดับเผยแพร่ชั่วคราว ไม่ใช่ลำดับสอนที่รับรอง; ยังไม่เพิ่มบท Midterm ที่หยุดไว้.
