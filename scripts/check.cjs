@@ -106,3 +106,4 @@ require('./check-study.cjs');
 require('./check-i18n.cjs');
 require('./check-pdf-source.cjs');
 require('./check-lessons.cjs');
+require('./check-lesson-rich.cjs');

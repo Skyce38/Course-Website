@@ -12,8 +12,22 @@
 คำอธิบายภาษาไทยพร้อม English terminology ระบุส่วนที่เขียนเสริมเอง
 
 ## Examples {#examples}
+ตัวอย่างที่เขียนเสริมต้องแยกจากตัวอย่างในเอกสารต้นฉบับ ระบุสมมติฐานและตรวจเฉลย
+
+สมการในบรรทัด: \(a^2 + b^2 = c^2\)
+
+$$
+\frac{1}{2} + \frac{1}{2} = 1
+$$
+
 ```python
 print("Example")
+```
+
+ตัวอย่างรูปแบบภาพ (ใช้เมื่อมีไฟล์จริงและตรวจที่มาแล้ว; นำ code fence ออก):
+```text
+![คำบรรยายภาพที่สื่อความหมาย](images/verified-diagram.png "คำอธิบายภาพ")
+ที่มา: [เอกสารต้นฉบับ หน้า PDF ที่ตรวจแล้ว](../slides/verified-source.pdf#page=3)
 ```
 
 ## Optional Interactive Demo {#interactive}
