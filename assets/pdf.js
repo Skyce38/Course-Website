@@ -119,6 +119,16 @@
     if (native) { page = 1; nativePage(); } else layout({page:1});
   });
   let resize;
+  let layoutPosition = null;
+  document.addEventListener('layoutwillchange',() => {
+    if (doc && !native) {
+      if (!changing) remember();
+      layoutPosition = changing ? window.LearningStudy.position(id) : snapshot(); changing = true;
+    }
+  });
+  document.addEventListener('preferenceschange',() => {
+    if (layoutPosition) { const saved = layoutPosition; layoutPosition = null; layout(saved); }
+  });
   window.addEventListener('resize',() => { clearTimeout(resize); if (doc && !native) resize = setTimeout(() => layout(snapshot()),150); });
   window.addEventListener('pagehide',() => { remember(); window.LearningStudy?.flush(); });
   document.addEventListener('visibilitychange',() => { if (document.visibilityState === 'hidden') { remember(); window.LearningStudy?.flush(); } });

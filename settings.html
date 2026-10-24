@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>ตั้งค่า · Course Website</title>
-  <link rel="stylesheet" href="assets/foundation.css"><link rel="stylesheet" href="assets/preferences.css?v=phase2-hotfix-1">
-  <script src="assets/preferences.js?v=phase2-hotfix-1"></script><script src="assets/i18n.js?v=phase2-hotfix-1"></script><script src="assets/settings.js?v=phase2-hotfix-1" defer></script>
+  <link rel="stylesheet" href="assets/foundation.css"><link rel="stylesheet" href="assets/preferences.css?v=study-v2-c-1">
+  <link rel="stylesheet" href="assets/layouts.css?v=study-v2-c-1"><script src="assets/preferences.js?v=study-v2-c-1"></script><script src="assets/i18n.js?v=study-v2-c-1"></script><script src="assets/settings.js?v=study-v2-c-1" defer></script>
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg"></head>
 <body class="foundation">
   <header class="foundation-header"><a class="brand" href="./"><span class="brand-symbol"><svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false"><use href="assets/study-icon.svg#book"/></svg></span><strong>Course Website</strong></a><button class="icon-button" id="theme">◐</button></header>
@@ -13,6 +13,20 @@
     <p class="eyebrow">MAKE ROOM FOR LEARNING</p>
     <h1 data-i18n="settings">ตั้งค่า</h1>
     <p class="small-note" data-i18n="savedAutomatically">บันทึกอัตโนมัติในเบราว์เซอร์นี้ ใช้ร่วมกันทุกหน้าอ่าน</p>
+    <section class="settings-card" aria-labelledby="layout-heading">
+      <h2 id="layout-heading" data-i18n="layout">รูปแบบเว็บไซต์</h2>
+      <p class="small-note" data-i18n="layoutNote">เปลี่ยนรูปแบบได้ทันที โดยใช้รายวิชาและข้อมูลการเรียนชุดเดิม</p>
+      <div class="layout-gallery" role="group" aria-labelledby="layout-heading">
+        <button type="button" class="theme-choice layout-choice" data-layout-choice="classic" aria-pressed="true">
+          <span class="layout-preview preview-classic" aria-hidden="true"><span class="preview-rail"></span><span class="preview-content"><span class="preview-banner"></span><span class="preview-cards"><i></i><i></i><i></i><i></i></span></span></span>
+          <strong class="theme-name" data-i18n="classicLayout">คลาสสิก</strong><span class="layout-description" data-i18n="classicLayoutNote">คลังเรียนในรูปแบบเดิมที่คุ้นเคย</span><span class="theme-selected" aria-hidden="true">✓</span>
+        </button>
+        <button type="button" class="theme-choice layout-choice" data-layout-choice="modern" aria-pressed="false">
+          <span class="layout-preview preview-modern" aria-hidden="true"><span class="preview-rail"></span><span class="preview-content"><span class="preview-banner"></span><span class="preview-cards"><i></i><i></i><i></i></span></span></span>
+          <strong class="theme-name" data-i18n="modernLayout">โมเดิร์น</strong><span class="layout-description" data-i18n="modernLayoutNote">แดชบอร์ดรายวิชาและรายการอ่านล่าสุด</span><span class="theme-selected" aria-hidden="true">✓</span>
+        </button>
+      </div>
+    </section>
     <section class="settings-card" aria-labelledby="appearance-heading">
       <h2 id="appearance-heading" data-i18n="appearance">รูปลักษณ์</h2>
       <label class="setting-row"><span data-i18n="colorMode">โหมดสี</span><select id="setting-theme" data-preference="theme"><option value="light" data-i18n="light">สว่าง</option><option value="dark" data-i18n="dark">มืด</option></select></label>

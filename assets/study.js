@@ -140,13 +140,16 @@
   }
   function captureHTML() {
     if (!current || pdf || restoring) return;
-    const headings = [...document.querySelectorAll('h1[id],h2[id],h3[id],section[id],article[id]')].filter(node => node.getClientRects().length && node.getBoundingClientRect().top <= 100);
+    const top = document.documentElement.dataset.layout === 'modern' ? (document.querySelector('.topbar')?.getBoundingClientRect().bottom || 76)+48 : 100;
+    const headings = [...document.querySelectorAll('h1[id],h2[id],h3[id],section[id],article[id]')].filter(node => node.getClientRects().length && node.getBoundingClientRect().top <= top);
     const section = headings.at(-1);
     setPosition(current.id,{scroll:window.scrollY,anchor:section ? '#'+encodeURIComponent(section.id) : location.hash || '#',sectionOffset:section ? -section.getBoundingClientRect().top : 0});
   }
-  async function restoreHTML() {
+  async function restoreHTML(force = false) {
     const saved = position(current.id), version = ++restoreVersion;
-    if (!Object.keys(saved).length || (location.hash && new URL(location.href).searchParams.get('resume') !== '1' && location.hash !== saved.anchor)) return;
+    const navigation = window.performance?.getEntriesByType('navigation')[0]?.type;
+    const reopening = navigation === 'reload' || navigation === 'back_forward';
+    if (!Object.keys(saved).length || (!force && !reopening && location.hash && new URL(location.href).searchParams.get('resume') !== '1' && location.hash !== saved.anchor)) { restoring = false; return; }
     restoring = true;
     history.scrollRestoration = 'manual';
     if (document.readyState !== 'complete') await new Promise(resolve => window.addEventListener('load',resolve,{once:true}));
@@ -157,7 +160,7 @@
     try { section = document.getElementById(decodeURIComponent((saved.anchor || '').slice(1))); } catch { /* Invalid anchor falls back to scroll. */ }
     if (section && section.getClientRects().length) window.scrollTo({top:section.getBoundingClientRect().top+window.scrollY+(saved.sectionOffset || 0),behavior:'instant'});
     else window.scrollTo({top:saved.scroll || 0,behavior:'instant'});
-    requestAnimationFrame(() => { restoring = false; });
+    requestAnimationFrame(() => { restoring = false; if (force) captureHTML(); });
   }
   window.LearningStudy = {
     ready:loaded,
@@ -182,6 +185,13 @@
     if (resource) open(resource);
   });
   document.addEventListener('preferenceschange', updateControls);
+  let layoutPending = false;
+  document.addEventListener('layoutwillchange', () => {
+    if (current && !pdf) { captureHTML(); restoring = true; layoutPending = true; }
+  });
+  document.addEventListener('preferenceschange', () => {
+    if (layoutPending) { layoutPending = false; restoreHTML(true); }
+  });
   window.addEventListener('storage', event => { if (event.key === key || event.key === null) { state = read(); changed(); } });
   window.addEventListener('hashchange', () => { if (current && !pdf) identify(); });
   window.addEventListener('scroll', captureHTML, {passive:true});

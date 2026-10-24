@@ -1,0 +1,138 @@
+/* V2-C reader presentation. Classic keeps its existing markup, geometry and controls. */
+.reader-contents-label,.reader-context{display:none}
+@media screen{
+html[data-layout=modern]:has(.html-reader){scroll-padding-top:var(--reader-header-offset,96px)}
+html[data-layout=modern] :is(.html-reader,.pdf-reader){--reader-line:color-mix(in srgb,var(--line) 65%,var(--paper));font-family:"Segoe UI",Tahoma,sans-serif;line-height:1.85}
+html[data-layout=modern] .html-reader .sidebar{width:260px;padding:24px 14px;background:var(--paper)}
+html[data-layout=modern] .html-reader .brand{padding:0 6px 22px;gap:12px;border-bottom:1px solid var(--reader-line)}
+html[data-layout=modern] .html-reader .brand small{font-size:11px;letter-spacing:.7px}
+html[data-layout=modern] .html-reader .workspace{margin-left:260px}
+html[data-layout=modern] .html-reader .reader-contents-label{display:block;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.7px;margin:24px 10px 10px}
+html[data-layout=modern] .html-reader .reader-toc{margin:0;max-height:calc(100vh - 185px);overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
+html[data-layout=modern] .html-reader .reader-toc a,html[data-layout=modern] .html-reader .nav-link{font-size:14px;line-height:1.8;min-height:40px;padding:10px 12px;border-radius:9px;margin:3px 0;color:var(--muted)}
+html[data-layout=modern] .html-reader .reader-toc a.sub{padding-inline-start:24px;font-size:13px}
+html[data-layout=modern] .html-reader :is(.reader-toc a,.nav-link):hover{background:var(--soft);color:var(--ink)}
+html[data-layout=modern] .html-reader .nav-link{background:transparent;font-weight:400}
+html[data-layout=modern] .html-reader :is(.reader-toc a,.nav-link).is-current{background:var(--soft);color:var(--accent);box-shadow:inset 3px 0 var(--accent);font-weight:600}
+html[data-layout=modern] .html-reader .sidebar-label{font-size:12px;letter-spacing:.8px;margin:25px 12px 12px}
+html[data-layout=modern] .html-reader .sidebar-note{font-size:13px}
+html[data-layout=modern] .html-reader .topbar{height:auto;min-height:76px;gap:16px;padding:14px 28px;background:var(--paper)}
+html[data-layout=modern] .html-reader .topbar>div:first-child{min-width:0;flex:1}
+html[data-layout=modern] .html-reader .top-actions,html[data-layout=modern] .html-reader .toolbar{flex-shrink:0;gap:8px}
+html[data-layout=modern] .html-reader .breadcrumbs{display:flex;align-items:center;gap:10px;min-width:0;font-size:14px}
+html[data-layout=modern] .html-reader .breadcrumbs>a{flex-shrink:0;white-space:nowrap}
+html[data-layout=modern] .html-reader .breadcrumbs #breadcrumbs{display:none}
+html[data-layout=modern] .html-reader .reader-context{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px;color:var(--ink)}
+html[data-layout=modern] .html-reader .content{padding:28px 38px 48px}
+html[data-layout=modern] .html-reader .reader-content{max-width:calc(var(--reader-width) + 100px)}
+html[data-layout=modern] .html-reader .reader-top{gap:14px;align-items:center;margin:0 0 16px}
+html[data-layout=modern] .html-reader .reader-nav{gap:10px;margin:0 0 22px}
+html[data-layout=modern] .html-reader .reader-font{gap:7px;flex-wrap:wrap}
+html[data-layout=modern] .html-reader .reader-font span{font-size:14px;font-variant-numeric:tabular-nums}
+html[data-layout=modern] .html-reader :is(.icon-button,.tool,.read-link){border-radius:9px;min-height:44px;font-size:15px;line-height:1.7}
+html[data-layout=modern] .html-reader :is(.icon-button,.tool,.read-link):hover{border-color:var(--accent);background:var(--soft)}
+html[data-layout=modern] .html-reader .study-reader-actions{padding:14px;border:1px solid var(--reader-line);border-radius:13px;background:var(--paper);gap:9px;margin:0 0 18px}
+html[data-layout=modern] .html-reader .study-reader-actions .icon-button{min-height:44px;padding:8px 12px;white-space:normal}
+html[data-layout=modern] .html-reader .study-complete[aria-pressed=true]{background:var(--soft);border-color:var(--accent);color:var(--accent)}
+html[data-layout=modern] .html-reader .reading-page{max-width:var(--reader-width);padding:36px 42px;border-radius:18px;border-color:var(--reader-line);background:var(--paper)}
+html[data-layout=modern] .html-reader .prose{font-size:var(--text-size);line-height:1.95}
+html[data-layout=modern] .html-reader .prose h1{font-size:clamp(28px,2.6vw,36px);line-height:1.5;letter-spacing:-.5px;margin:0 0 30px}
+html[data-layout=modern] .html-reader .prose h2{font-size:28px;line-height:1.55;margin:38px 0 20px;padding-top:26px;border-color:var(--reader-line)}
+html[data-layout=modern] .html-reader .prose h3{font-size:23px;line-height:1.6;margin:28px 0 15px}
+html[data-layout=modern] .html-reader .prose h4{font-size:20px;line-height:1.6;margin:25px 0 12px}
+html[data-layout=modern] .html-reader :is(.prose h2,.prose h3,.prose h4,.chapter,.extra-section)[id]{scroll-margin-top:20px}
+html[data-layout=modern] .html-reader .prose p{margin:17px 0}
+html[data-layout=modern] .html-reader .prose li{margin:8px 0}
+html[data-layout=modern] .html-reader .prose pre{max-width:100%;overflow:auto;border:1px solid var(--reader-line);border-radius:12px;background:var(--code);color:var(--code-text);padding:22px;line-height:1.8;margin:24px 0}
+html[data-layout=modern] .html-reader .prose pre code{font-size:max(14px,.9em);white-space:pre;overflow-wrap:normal;color:inherit;background:none;padding:0}
+html[data-layout=modern] .html-reader .prose :not(pre)>code{font-size:.9em;border-radius:5px;padding:3px 6px;background:var(--soft);color:var(--accent)}
+html[data-layout=modern] .html-reader .prose blockquote{background:var(--soft);color:var(--ink);border-inline-start:3px solid var(--accent);padding:6px 20px;border-radius:0 10px 10px 0;margin:24px 0}
+html[data-layout=modern] .html-reader .table-scroll{max-width:100%;border-color:var(--reader-line);border-radius:11px;overflow:auto}
+html[data-layout=modern] .html-reader .prose table{font-size:max(14px,.88em);line-height:1.8}
+html[data-layout=modern] .html-reader .prose :is(td,th){padding:12px 16px;border-color:var(--reader-line)}
+html[data-layout=modern] .html-reader .footer{font-size:13px;border-color:var(--reader-line)}
+html[data-layout=modern] .python-reader.html-reader .content{max-width:calc(var(--reader-width) + 110px)}
+html[data-layout=modern] .python-reader.html-reader .hero{grid-template-columns:minmax(0,1fr);padding:0 0 24px}
+html[data-layout=modern] .python-reader.html-reader .hero-art{display:none}
+html[data-layout=modern] .python-reader.html-reader .hero h1{font-size:clamp(30px,3vw,42px);line-height:1.4}
+html[data-layout=modern] .python-reader.html-reader .tabs-row{padding:14px;background:var(--paper);border:1px solid var(--reader-line);border-radius:13px;gap:14px;flex-wrap:wrap;align-items:center}
+html[data-layout=modern] .python-reader.html-reader .tab{min-height:44px;border-radius:9px;font-size:15px}
+html[data-layout=modern] .python-reader.html-reader .tab[aria-selected=true]{color:var(--accent);background:var(--soft)}
+html[data-layout=modern] .python-reader.html-reader .search-wrap{min-width:0}
+html[data-layout=modern] .python-reader.html-reader .search{font-size:16px;min-width:0}
+html[data-layout=modern] .python-reader.html-reader .chapter{padding:28px;border-radius:16px;border-color:var(--reader-line);background:var(--paper)}
+html[data-layout=modern] .python-reader.html-reader .chapter-header h2{font-size:28px;line-height:1.5}
+html[data-layout=modern] .python-reader.html-reader .copy-code{font-size:14px;min-height:36px;border-radius:7px}
+
+/* The PDF canvas is never recolored; only the surrounding reader is themed. */
+html[data-layout=modern] .pdf-reader .foundation-header{position:sticky;top:0;z-index:40;background:var(--paper);padding:18px 28px;border-color:var(--reader-line);gap:14px}
+html[data-layout=modern] .pdf-reader .foundation-header nav{flex-wrap:wrap;justify-content:flex-end;gap:8px}
+html[data-layout=modern] .pdf-reader .pdf-content{max-width:1320px;padding:28px}
+html[data-layout=modern] .pdf-reader .eyebrow{display:none}
+html[data-layout=modern] .pdf-reader h1{font-size:30px;line-height:1.4;margin:0 0 22px}
+html[data-layout=modern] .pdf-reader :is(.icon-button,.read-link){min-height:44px;border-radius:9px;padding:8px 12px;line-height:1.7;font-size:15px}
+html[data-layout=modern] .pdf-reader :is(.icon-button,.read-link):hover:not(:disabled){background:var(--soft);border-color:var(--accent)}
+html[data-layout=modern] .pdf-reader .study-reader-actions{gap:9px;margin:0 0 16px}
+html[data-layout=modern] .pdf-reader .study-complete[aria-pressed=true]{background:var(--soft);border-color:var(--accent);color:var(--accent)}
+html[data-layout=modern] .pdf-reader #pdf-controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:16px;background:var(--paper);border:1px solid var(--reader-line);border-radius:14px;margin:0 0 14px}
+html[data-layout=modern] .pdf-reader #pdf-controls label{min-width:0;gap:8px;font-size:15px}
+html[data-layout=modern] .pdf-reader #pdf-page{width:72px;min-height:44px;text-align:center;font-variant-numeric:tabular-nums}
+html[data-layout=modern] .pdf-reader #pdf-total{white-space:nowrap;font-size:14px;font-variant-numeric:tabular-nums;color:var(--muted)}
+html[data-layout=modern] .pdf-reader #pdf-zoom{min-height:44px;max-width:100%;font-size:15px}
+html[data-layout=modern] .pdf-reader #pdf-status{font-size:14px;color:var(--muted);margin:12px 0}
+html[data-layout=modern] .pdf-reader:has(#pdf-status[data-i18n=pdfReady]) #pdf-status{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+html[data-layout=modern] .pdf-reader:has(#pdf-status[data-i18n=pdfReady]) #pdf-fallback p{display:none}
+html[data-layout=modern] .pdf-reader #pdf-fallback{display:flex;flex-wrap:wrap;align-items:center;gap:9px;padding:15px;background:var(--paper);border-color:var(--reader-line);border-radius:14px}
+html[data-layout=modern] .pdf-reader #pdf-fallback p{flex-basis:100%;font-size:14px;margin:0 0 4px}
+html[data-layout=modern] .pdf-reader #pdf-download{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+html[data-layout=modern] .pdf-reader #pdf-download:hover{text-decoration:underline}
+html[data-layout=modern] .pdf-reader #pdf-pages{width:100%;max-width:100%;height:72vh;min-height:360px;border-color:var(--line);border-radius:15px;background:var(--soft);margin-top:16px;padding:12px}
+html[data-layout=modern] .pdf-reader .pdf-sheet{margin-bottom:16px;box-shadow:0 3px 14px #0003}
+html[data-layout=modern] .pdf-reader #pdf-frame{height:72vh;border-color:var(--line);border-radius:15px;background:var(--soft)}
+html[data-layout=modern] .pdf-reader #pdf-note{font-size:14px;line-height:1.85}
+@media(max-width:1100px){
+  html[data-layout=modern] .python-reader.html-reader .topbar{flex-wrap:wrap}
+  html[data-layout=modern] .python-reader.html-reader .toolbar{width:100%;justify-content:flex-end;flex-wrap:wrap}
+}
+@media(max-width:800px){
+  html[data-layout=modern] .html-reader .sidebar{width:min(300px,calc(100vw - 20px))}
+  html[data-layout=modern] .html-reader .workspace{margin-left:0}
+  html[data-layout=modern] .html-reader .content{padding:24px 20px 36px}
+}
+@media(max-width:600px){
+  html[data-layout=modern]:has(.html-reader){scroll-padding-top:var(--reader-header-offset,140px)}
+  html[data-layout=modern] .html-reader .topbar{padding:12px 16px;gap:10px;flex-wrap:wrap}
+  html[data-layout=modern] .html-reader .topbar>div:first-child{flex-basis:100%;max-width:100%}
+  html[data-layout=modern] .html-reader .top-actions,html[data-layout=modern] .html-reader .toolbar{width:100%;justify-content:flex-end;flex-wrap:wrap}
+  html[data-layout=modern] .html-reader .content{padding:20px 14px 32px}
+  html[data-layout=modern] .html-reader .reading-page{padding:25px 20px;border-radius:14px}
+  html[data-layout=modern] .html-reader .prose h1{font-size:27px}
+  html[data-layout=modern] .html-reader .prose h2{font-size:25px;margin-top:30px;padding-top:22px}
+  html[data-layout=modern] .html-reader .prose h3{font-size:21px}
+  html[data-layout=modern] .html-reader .prose pre{padding:16px;border-radius:10px}
+  html[data-layout=modern] .html-reader .study-reader-actions{padding:12px;gap:8px}
+  html[data-layout=modern] .html-reader .study-reader-actions .icon-button{font-size:14px;max-width:100%}
+  html[data-layout=modern] .html-reader .reader-top{align-items:flex-start;flex-wrap:wrap}
+  html[data-layout=modern] .python-reader.html-reader .chapter{padding:22px 18px}
+  html[data-layout=modern] .python-reader.html-reader .chapter-header{flex-wrap:wrap}
+  html[data-layout=modern] .python-reader.html-reader .tabs-row{padding:12px;gap:12px}
+  html[data-layout=modern] .pdf-reader .foundation-header{padding:14px 16px;flex-wrap:wrap;align-items:center}
+  html[data-layout=modern] .pdf-reader .foundation-header nav{width:100%;margin-inline-start:auto}
+  html[data-layout=modern] .pdf-reader .pdf-content{padding:22px 16px}
+  html[data-layout=modern] .pdf-reader h1{font-size:26px}
+  html[data-layout=modern] .pdf-reader .study-reader-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  html[data-layout=modern] .pdf-reader .study-reader-actions .icon-button{min-width:0}
+  html[data-layout=modern] .pdf-reader :is(.icon-button,.read-link){font-size:14px;white-space:normal;max-width:100%;text-align:center}
+  html[data-layout=modern] .pdf-reader #pdf-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:12px}
+  html[data-layout=modern] .pdf-reader #pdf-controls label:has(#pdf-page){grid-column:1/-1;order:0;justify-content:center;flex-wrap:nowrap}
+  html[data-layout=modern] .pdf-reader #pdf-prev{order:1}
+  html[data-layout=modern] .pdf-reader #pdf-controls button[type=submit]{order:2}
+  html[data-layout=modern] .pdf-reader #pdf-next{order:3}
+  html[data-layout=modern] .pdf-reader #pdf-controls label:has(#pdf-zoom){grid-column:1/-1;order:4}
+  html[data-layout=modern] .pdf-reader #pdf-zoom{width:100%;min-width:0;flex:1}
+  html[data-layout=modern] .pdf-reader #pdf-fallback{padding:13px;gap:8px}
+  html[data-layout=modern] .pdf-reader #pdf-pages{height:64vh;min-height:320px;padding:6px}
+  html[data-layout=modern] .pdf-reader #pdf-frame{height:64vh;min-height:320px}
+}
+@media(prefers-reduced-motion:reduce){html[data-layout=modern]:has(.html-reader){scroll-behavior:auto}}
+}
