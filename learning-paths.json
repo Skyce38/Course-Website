@@ -3,7 +3,15 @@
   "paths": [
     {
       "course": "oop-python",
-      "lessons": ["oop-python-linked-list"]
+      "lessons": [
+        "oop-python-linked-list"
+      ]
+    },
+    {
+      "course": "artificial-intelligence",
+      "lessons": [
+        "artificial-intelligence-ai-foundations-agents"
+      ]
     }
   ]
 }
