@@ -11,7 +11,7 @@ for (const [key,pair] of Object.entries(strings)) {
 let count = 0;
 function scan(folder) {
   for (const item of fs.readdirSync(folder,{withFileTypes:true})) {
-    if (['.git','vendor','node_modules'].includes(item.name)) continue;
+    if (['.git','vendor','node_modules','_design-references'].includes(item.name)) continue;
     const file = path.join(folder,item.name);
     if (item.isDirectory()) scan(file);
     else if (/\.(html|js)$/.test(item.name)) {

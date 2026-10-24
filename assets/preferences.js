@@ -13,8 +13,8 @@
     custom: {label:'customTheme'}
   };
   const legacyPresets = {forest:'forest', blue:'ocean', plum:'lavender'};
-  const defaults = {theme: 'light', preset: 'forest', accent: 'forest', custom: {primary:'#285f4b', background:'#f5f5ee', surface:'#fffefa'}, font: 17, width: 'comfortable', language: 'th', pdfZoom: 'page-width', pdfToolbar: true};
-  const choices = {theme: ['light', 'dark'], preset: Object.keys(presets), accent: ['forest', 'blue', 'plum'], width: ['narrow', 'comfortable', 'wide'], language: ['th', 'en'], pdfZoom: ['page-width', '100', '125', '150']};
+  const defaults = {layout:'classic', theme: 'light', preset: 'forest', accent: 'forest', custom: {primary:'#285f4b', background:'#f5f5ee', surface:'#fffefa'}, font: 17, width: 'comfortable', language: 'th', pdfZoom: 'page-width', pdfToolbar: true};
+  const choices = {layout:['classic','modern'], theme: ['light', 'dark'], preset: Object.keys(presets), accent: ['forest', 'blue', 'plum'], width: ['narrow', 'comfortable', 'wide'], language: ['th', 'en'], pdfZoom: ['page-width', '100', '125', '150']};
   const rgb = color => color.slice(1).match(/../g).map(channel => parseInt(channel, 16));
   const mix = (a, b, amount) => '#' + rgb(a).map((channel, i) => Math.round(channel * (1 - amount) + rgb(b)[i] * amount).toString(16).padStart(2, '0')).join('');
   function luminance(color) {
@@ -101,6 +101,8 @@
   } catch { value = validate({}); }
   function apply() {
     const root = document.documentElement;
+    if (root.dataset.layout && root.dataset.layout !== value.layout) document.dispatchEvent(new CustomEvent('layoutwillchange',{detail:{from:root.dataset.layout,to:value.layout}}));
+    root.dataset.layout = value.layout;
     root.dataset.theme = value.theme;
     root.dataset.accent = value.accent;
     root.dataset.preset = value.preset;

@@ -43,3 +43,41 @@ Position validation: refresh, close/reopen, Continue Reading, page/zoom/scroll n
 - [x] Shared Study SVG branding/favicon, removal of GitHub utility links, responsive sync/refresh toolbar and centered SVG search icon. GitHub-only PDFs use a validated, same-repository/main fallback with canonical history/resume and Blob-based download/native viewing. Tested the live AI introductory slides and HTTP/MIME/signature/CORS failures without copying remote PDFs locally.
 
 Final audit: monochrome black/white tab favicon remains separate from the theme-aware Study logo. Static/study/i18n/source-security checks, focused Chrome regression/resume/favicon checks and all 14 original PDF hashes pass; secret-pattern and unintended-file scans are clean. Earlier full theme/viewport matrices were not repeated for publication.
+
+## Study V2-A — Dual Layout Foundation
+
+Branch: `codex/study-v2-dual-layout`, based on latest `main`.
+
+- [x] Classic by default, including older preferences/imports without `layout`; Modern is opt-in.
+- [x] Settings visual previews, instant/cross-tab switching, persistence, existing export/import/reset, and before-body root layout application.
+- [x] Scoped Modern home/course dashboard using shared components and real course/document/completion data; Classic home/course screenshots remain pixel-identical.
+- [x] Validate both layouts, all palettes/modes/languages at 1440/390/320 px, saved data, document navigation and existing regressions.
+
+V2-A only: document readers keep their existing presentation; full Modern redesign and Phase 3 remain outside this change. No original PDFs changed; no new dependencies. No prototype attachment was available for exact visual comparison.
+
+## Study V2-B — Modern Dashboard
+
+- [x] Compare both supplied local prototypes; use their shell/panel hierarchy without demo data, dependencies or copied application logic.
+- [x] Modern sidebar, shared header search, course cards, recent reading, real progress, document rows and category tabs; compact accessible refresh and document actions.
+- [x] TH/EN, Light/Dark, palette smoke checks and focused 1440/390/320px interactions. Classic home/course screenshots remain pixel-identical after switching back.
+- [x] Preserve shared navigation, bookmarks, manual completion, PDF Continue Reading and original PDF hashes; keep design references out of Git.
+
+PDF/HTML reader presentation is unchanged; V2-C and Phase 3 remain outside this change. Safari/Firefox and physical devices remain untested.
+
+## Study V2-C — Reader Integration
+
+- [x] Modern-scoped HTML/Python reader typography, code/table surfaces, active existing TOCs, responsive navigation and sticky-header anchor clearance. Original lesson content, IDs and examples stay unchanged.
+- [x] Modern PDF toolbar, document actions and mobile viewer; retain download, original open, PDF.js and native fallback. PDF page contents are untouched.
+- [x] Preserve reading state through layout changes; keep HTML anchor/scroll and PDF page/zoom/scroll resume, completion/history and reset.
+- [x] 27 Classic reader/PDF screenshots match their baselines at 1440/390/320 px. All Modern HTML readers fit those widths, with focused TH/EN, Light/Dark, palette, keyboard, anchor, resume and existing regression checks.
+
+Native fallback still cannot expose its internal page/scroll changes; site controls remain tracked. Safari/Firefox and physical devices remain untested. Phase 3 remains outside this change; no commits or publishing performed.
+
+## Study V2-D — Final QA and Release Preparation
+
+- [x] Review cumulative changes, relative paths, shared asset versions, generated catalog, bilingual keys and browser DOM; build/check scripts pass without catalog changes.
+- [x] Capture 50 Classic/Modern screenshots at 1440/390/320 px and inspect representative dashboard, cards, course tabs, sidebar, Settings and HTML/PDF reader views. Fix the confirmed Modern mobile breadcrumb button wrapping; Classic remains unchanged in 33 baseline screenshot comparisons.
+- [x] Focused Chrome checks pass for layout persistence/legacy imports/export, TH/EN, all palettes and custom Light/Dark, search, bookmarks, sync/count/cache/error handling, completion/history, HTML anchors/resume/reset, PDF page/zoom/scroll/download/fallback, quiz and keyboard/mobile navigation. No unexpected console errors or page overflow in tested routes.
+- [x] All 15 tracked PDFs match Git baselines; the original 14 also match saved SHA-256 hashes. Original lesson article content is unchanged. No detected secrets, dependencies, temporary files or local design references in the proposed file set.
+
+Ready for PR preparation; no commit, push, merge or deployment performed. Browser tests use Chrome with isolated local storage and controlled GitHub API fixtures; live API availability, Safari/Firefox, physical devices and a formal HTML/accessibility certification are not covered. Native PDF internal controls retain the limitation documented above.

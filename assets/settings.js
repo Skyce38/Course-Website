@@ -33,6 +33,7 @@
     node.textContent = LearningI18n.t(key);
   };
   function refresh() {
+    document.querySelectorAll('[data-layout-choice]').forEach(button => button.setAttribute('aria-pressed',String(button.dataset.layoutChoice === preferences.value.layout)));
     document.querySelectorAll('[data-preference]').forEach(control => {
       const value = preferences.value[control.dataset.preference];
       if (control.type === 'checkbox') control.checked = value;
@@ -54,6 +55,12 @@
       const name = control.dataset.preference;
       const value = name === 'font' ? Number(control.value) : control.type === 'checkbox' ? control.checked : control.value;
       preferences.update({[name]: value});
+      if (!preferences.canPersist) status('localOnly');
+    };
+  });
+  document.querySelectorAll('[data-layout-choice]').forEach(button => {
+    button.onclick = () => {
+      preferences.update({layout:button.dataset.layoutChoice});
       if (!preferences.canPersist) status('localOnly');
     };
   });

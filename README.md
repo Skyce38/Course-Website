@@ -95,4 +95,16 @@ Recent documents resume PDF page, zoom and scroll position, or an HTML section a
 
 Synced PDFs use local files first. If a file is absent in local preview, the reader fetches only its validated PDF path from `Skyce38/Course-Website` on GitHub `main`, checks HTTP status, CORS, MIME type and the PDF signature, and uses a PDF Blob for viewing/download. The canonical document ID and reading position remain the same. Remote-only files require internet; blocked/unavailable files retain direct-open/download links and Retry.
 
-Shared UI scripts/styles use `?v=phase2-hotfix-1` to prevent cached dictionaries from mixing with newer markup. Bump the shared release version in HTML and its check when changing these assets. The category-tab ↻ button forces a library-wide file refresh; the header TH/EN button shares the existing language preference.
+Shared UI scripts/styles use `?v=study-v2-c-1` to prevent cached dictionaries from mixing with newer markup. Bump the shared release version in HTML and its check when changing these assets. The category-tab ↻ button forces a library-wide file refresh; the header TH/EN button shares the existing language preference.
+
+### Study V2-A layouts
+
+Settings → Website layout offers Classic (the default for new/existing users and older imports) and Modern. Selection applies immediately, persists with existing preferences, and is included in version-1 exports. Modern is an initial academic dashboard for the home/course library with real catalog/completion counts; both layouts share navigation, data and study logic. Modern styles live in `assets/layouts.css` under `data-layout=modern` and `.library-app`; Classic readers retain their existing presentation; Modern reader integration is described below. No new dependencies or PDF changes.
+
+### Study V2-B Modern Dashboard
+
+Modern now has header search (the same input used by Classic), active navigation with real document counts, recent-reading and progress panels, and course cards with actual manual-completion progress. Document actions retain accessible labels and the category refresh remains icon-only. Presentation is isolated to the Modern library; Modern PDF/HTML reader design is extended in V2-C below. Local `_design-references/` files are visual references only and are locally excluded from Git.
+
+### Study V2-C Reader Integration
+
+Modern HTML lessons reuse their existing headings, anchors and menus with a responsive, active Table of Contents and refined article/code typography. Modern PDF controls and actions share the same PDF.js/native engine and document IDs; original page contents are never recolored. A pre-layout-change snapshot restores the HTML section offset or PDF page/zoom/scroll after switching layouts. Refresh also resumes HTML reading when the address still contains an older section anchor. Classic readers remain visually unchanged. Styles and TOC presentation live in `assets/readers.css` and `assets/readers.js`; no dependencies, saved-data migration or Phase 3 features are added.

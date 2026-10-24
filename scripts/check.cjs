@@ -33,8 +33,8 @@ for (const resource of catalog.resources) {
 }
 for (const file of htmlFiles) {
   const html = fs.readFileSync(file, 'utf8');
-  for (const [,asset] of html.matchAll(/(?:src|href)="([^" ]*assets\/(?:preferences\.(?:js|css)|i18n\.js|study\.js|settings\.js|pdf(?:-source)?\.js)[^" ]*)"/g)) {
-    assert.equal(new URL(asset,'https://example.test/').searchParams.get('v'),'phase2-hotfix-1',file+': version shared UI assets together to prevent stale bundles');
+  for (const [,asset] of html.matchAll(/(?:src|href)="([^" ]*assets\/(?:preferences\.(?:js|css)|layouts\.css|readers\.(?:js|css)|i18n\.js|study\.js|settings\.js|pdf(?:-source)?\.js)[^" ]*)"/g)) {
+    assert.equal(new URL(asset,'https://example.test/').searchParams.get('v'),'study-v2-c-1',file+': version shared UI assets together to prevent stale bundles');
   }
   for (const match of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) new vm.Script(match[1], {filename: file});
   const markup = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, script => script.startsWith('<script src=') ? script : '');
@@ -50,11 +50,12 @@ const embedded = fs.readFileSync('index.html', 'utf8').match(/const catalog=([\s
 assert.deepEqual(JSON.parse(embedded[1]), catalog, 'Run node scripts/build.cjs to refresh the embedded catalog');
 // Exercise shared preference validation without installing a test runner.
 const root = {dataset:{},style:{setProperty(){}}};
-let migrated;
-const context = {URL,console,CustomEvent:class{},matchMedia:()=>{throw Error('OS theme queries are disabled')},localStorage:{getItem:()=>'{"theme":"system","preset":"ocean","font":19}',setItem(key,value){migrated=JSON.parse(value)}},document:{currentScript:{src:'https://example.test/Course-Website/assets/preferences.js'},documentElement:root,querySelectorAll:()=>[],dispatchEvent(){},addEventListener(){}},window:{addEventListener(){}}};
+let migrated, beforeLayout;
+const context = {URL,console,CustomEvent:class{constructor(type,options){this.type=type;this.detail=options?.detail}},matchMedia:()=>{throw Error('OS theme queries are disabled')},localStorage:{getItem:()=>'{"theme":"system","preset":"ocean","font":19}',setItem(key,value){migrated=JSON.parse(value)}},document:{currentScript:{src:'https://example.test/Course-Website/assets/preferences.js'},documentElement:root,querySelectorAll:()=>[],dispatchEvent(event){if(event.type==='layoutwillchange')beforeLayout={from:root.dataset.layout,to:event.detail.to}},addEventListener(){}},window:{addEventListener(){}}};
 vm.runInNewContext(fs.readFileSync('assets/preferences.js','utf8'), context);
 const preferences = context.window.LearningPreferences;
 assert.equal(root.dataset.theme, 'light');
+assert.equal(root.dataset.layout,'classic','Existing preferences without layout must remain Classic');
 assert.equal(migrated.theme, 'light');
 assert.equal(migrated.preset, 'ocean');
 assert.equal(migrated.font, 19);
@@ -64,6 +65,17 @@ assert.equal(root.dataset.theme, 'dark');
 preferences.cycleTheme();
 assert.equal(root.dataset.theme, 'light');
 assert.equal(preferences.value.preset, 'ocean');
+assert.equal(preferences.validate({}).layout,'classic','New users start in Classic');
+assert.equal(preferences.validate({theme:'dark',language:'en'}).layout,'classic','Older exports default to Classic');
+preferences.update({layout:'modern'});
+assert.equal(root.dataset.layout,'modern','Layout applies synchronously');
+assert.equal(beforeLayout.from,'classic','Readers snapshot before layout CSS changes');
+assert.equal(beforeLayout.to,'modern');
+assert.equal(preferences.value.preset,'ocean','Layout must preserve other preferences');
+assert.equal(migrated.layout,'modern','Layout must persist');
+assert.throws(()=>preferences.validate({layout:'unknown'}));
+preferences.update({layout:'classic'});
+console.log('PASS: Classic defaults/legacy imports, layout validation/persistence and synchronous root application');
 preferences.update({theme:'light',font:22});
 assert.equal(root.dataset.theme, 'light');
 assert.equal(preferences.value.font, 22);

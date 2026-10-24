@@ -2,6 +2,17 @@
 (() => {
   'use strict';
   const strings = {
+    readerContents: ['สารบัญบทเรียน', 'Lesson contents'],
+    modernWelcome: ['พื้นที่เรียนรู้ของคุณ', 'Your study workspace'],
+    modernWelcomeNote: ['รวมรายวิชา เอกสาร และรายการอ่านต่อ พร้อมติดตามความคืบหน้าจากการเรียนของคุณ', 'Your courses, resources and recent reading, with progress from your own study.'],
+    documentCountLabel: ['เอกสาร {total} รายการ', '{total} documents'],
+    courseDocument: ['เอกสารรายวิชา', 'Course document'], githubDocument: ['ไฟล์จาก GitHub', 'File from GitHub'],
+    layout: ['รูปแบบเว็บไซต์', 'Website layout'],
+    layoutNote: ['เปลี่ยนรูปแบบได้ทันที โดยใช้รายวิชาและข้อมูลการเรียนชุดเดิม', 'Switch instantly with the same courses and saved study data.'],
+    classicLayout: ['คลาสสิก', 'Classic'], modernLayout: ['โมเดิร์น', 'Modern'],
+    classicLayoutNote: ['คลังเรียนในรูปแบบเดิมที่คุ้นเคย', 'The familiar course library design.'],
+    modernLayoutNote: ['แดชบอร์ดรายวิชาและรายการอ่านล่าสุด', 'An academic dashboard for courses and recent reading.'],
+    studyOverview: ['ภาพรวมการเรียน', 'Study overview'], overviewCourses: ['รายวิชา', 'Courses'], overviewCompleted: ['อ่านจบ', 'Completed'],
     refreshFiles: ['รีเฟรชรายการไฟล์', 'Refresh files'],
     resetReadingPosition: ['เริ่มอ่านใหม่', 'Reset reading position'],
     resetReadingPositionLabel: ['เริ่มอ่าน {title} ใหม่', 'Reset reading position: {title}'],
