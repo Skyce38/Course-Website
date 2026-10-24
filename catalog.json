@@ -403,6 +403,17 @@
       "reader": "read/artificial-intelligence/search-models-bfs-dfs.html",
       "generatedLesson": 1,
       "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/artificial-intelligence/summaries/search-models-bfs-dfs.md"
+    },
+    {
+      "id": "artificial-intelligence-final-regression",
+      "course": "artificial-intelligence",
+      "category": "summaries",
+      "title": "FINAL: สหสัมพันธ์ การถดถอยเชิงเส้นและพหุคูณ (Correlation & Linear Regression)",
+      "path": "summaries/final-regression.md",
+      "format": "MD",
+      "reader": "read/artificial-intelligence/final-regression.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/artificial-intelligence/summaries/final-regression.md"
     }
   ]
 }

@@ -11,7 +11,8 @@
       "course": "artificial-intelligence",
       "lessons": [
         "artificial-intelligence-ai-foundations-agents",
-        "artificial-intelligence-search-models-bfs-dfs"
+        "artificial-intelligence-search-models-bfs-dfs",
+        "artificial-intelligence-final-regression"
       ]
     }
   ]

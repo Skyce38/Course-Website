@@ -1,5 +1,8 @@
 # AI lesson roadmap — planning only
 
+> **Phase 4B-F1 priority:** FINAL ก่อน Midterm ที่ยังไม่สร้าง: หยุดการสร้าง 8-Puzzle/A*, Minimax/Alpha-Beta และ Knowledge Representation/Logic ไว้ก่อน โดยไม่ลบหรือเปลี่ยนงานเดิม เริ่ม AI-L09 Regression เป็นบท FINAL เดียวในงานนี้ การต่อท้าย BFS/DFS ใน path เป็นลำดับเผยแพร่ชั่วคราว ไม่ใช่ verified teaching sequence และไม่สื่อ exam weighting.
+
+
 อ้าง [topic map](ai-curriculum-map.md) และ [source IDs/locators](ai-source-coverage.md) ไม่มี full lesson, demo, registry หรือ learning-path entry ใหม่ใน Phase 4A
 
 ## ลำดับเรียนที่เสนอและความมั่นใจ
@@ -111,7 +114,7 @@
 - **Examples:** source tree data และ household data; StudentPerformance เป็น code example จริง ไม่อ้าง held-out accuracy ที่ไม่มี
 - **Interactive:** equations, calculation tables, Python code viewer; optional slope controls ภายหลังเท่านั้น
 - **Practice needed:** 6 hand-calculation/interpretation/error/code-reading tasks; รักษาหน่วยรายได้กับค่าใช้จ่ายต่างกัน
-- **Prerequisites / status:** R-MATH/R-PY ตามส่วน; **Planned, P1**
+- **Prerequisites / status:** R-MATH/R-PY ตามส่วน; **FINAL integration candidate, P0 ตาม priority ใหม่** — [Markdown](../courses/artificial-intelligence/summaries/final-regression.md), [coverage](ai-final-regression-coverage.md); รอ review/merge
 
 ### AI-L10 / T10 — จำแนกด้วยเพื่อนบ้าน (Classification & KNN)
 - **Objectives:** แยก features/labels; คำนวณระยะ/vote; อธิบาย encoding/k; อ่าน split/fit/predict/accuracy
