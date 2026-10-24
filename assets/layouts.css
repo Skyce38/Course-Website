@@ -87,21 +87,23 @@ html[data-layout=modern] .library-app .card-footer>span:first-child{display:none
 html[data-layout=modern] .library-app .resource-list{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;border:0;border-radius:0;background:none;overflow:visible}
 html[data-layout=modern] .library-app .resource-row{display:grid;grid-template-columns:40px minmax(0,1fr) auto;align-items:center;gap:14px;padding:17px 18px;border:1px solid var(--dashboard-line);border-radius:13px;background:var(--paper)}
 html[data-layout=modern] .library-app .file-icon{width:38px;height:44px;border:1px solid var(--dashboard-line);border-radius:9px;font-size:12px;font-weight:700}
+html[data-layout=modern] .library-app .resource-row .file-icon{align-self:start}
 html[data-layout=modern] .library-app .resource-main>a{font-size:16px;line-height:1.6}
-html[data-layout=modern] .library-app .resource-meta{font-size:13px;line-height:1.8;gap:4px 10px}
+html[data-layout=modern] .library-app .resource-meta{font-size:13px;line-height:1.8;gap:5px 12px;margin-top:7px}
+html[data-layout=modern] .library-app .resource-meta>span:not(.classic-scope){display:inline-flex;align-items:baseline;gap:8px}
+html[data-layout=modern] .library-app .resource-meta>span:nth-child(2)::before,html[data-layout=modern] .library-app .modern-scope::before{content:"·";color:var(--muted)}
 html[data-layout=modern] .library-app .classic-scope{display:none}
 html[data-layout=modern] .library-app .resource-buttons{gap:8px;min-width:0;justify-content:flex-end}
-html[data-layout=modern] .library-app .resource-buttons .study-complete,html[data-layout=modern] .library-app .bookmark{font-size:0;width:38px;min-width:38px;min-height:40px;height:40px;padding:0;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--muted)}
-html[data-layout=modern] .library-app .study-complete .modern-icon{width:18px;height:18px}
+html[data-layout=modern] .library-app .resource-buttons .study-complete,html[data-layout=modern] .library-app .bookmark{font-size:0;line-height:0;gap:0;width:44px;min-width:44px;min-height:44px;height:44px;padding:0;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--muted)}
+html[data-layout=modern] .library-app .resource-buttons :is(.study-complete,.bookmark) .modern-icon{display:block;width:20px;height:20px}
 html[data-layout=modern] .library-app .study-complete[aria-pressed=false] .modern-check{display:none}
 html[data-layout=modern] .library-app .resource-buttons :is(.study-complete,.bookmark):hover{border-color:var(--accent);color:var(--accent);background:var(--soft)}
 html[data-layout=modern] .library-app .study-complete[aria-pressed=true]{background:var(--soft);color:var(--accent);border-color:var(--accent)}
 html[data-layout=modern] .library-app .bookmark[aria-pressed=true] .modern-icon{fill:var(--soft);stroke:var(--accent)}
-html[data-layout=modern] .library-app .resource-buttons .read-link{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-size:14px;line-height:1.7;min-height:40px;padding:7px 12px;border-radius:9px}
+html[data-layout=modern] .library-app .resource-buttons .read-link{display:inline-flex;align-items:center;justify-content:center;background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-size:14px;line-height:1.7;min-height:44px;padding:8px 12px;border-radius:9px}
 html[data-layout=modern] .library-app .resource-buttons .read-link:hover{text-decoration:underline;text-underline-offset:4px}
 html[data-layout=modern] .library-app .recent-reading .resource-list{max-height:320px;overflow:auto;scrollbar-width:thin;scrollbar-color:var(--line) transparent;padding:3px}
 html[data-layout=modern] .library-app .recent-reading .resource-row{grid-template-columns:38px minmax(0,1fr);gap:12px;padding:15px}
-html[data-layout=modern] .library-app .recent-reading .resource-row:first-child{background:var(--soft);border-color:var(--accent)}
 html[data-layout=modern] .library-app .recent-reading .resource-buttons{grid-column:2;justify-content:flex-start}
 html[data-layout=modern] .library-app .course-header{background:var(--paper);border:1px solid var(--dashboard-line);border-radius:18px;padding:26px;margin:14px 0 18px;gap:20px}
 html[data-layout=modern] .library-app .course-header .course-symbol{width:58px;height:58px;font-size:20px;flex-shrink:0}
@@ -159,9 +161,10 @@ html[data-layout=modern] .library-app .footer{font-size:12px;border-color:var(--
   html[data-layout=modern] .library-app .recent-reading .resource-row{padding:12px;grid-template-columns:32px minmax(0,1fr)}
   html[data-layout=modern] .library-app .recent-reading .file-icon{width:32px;height:38px}
   html[data-layout=modern] .library-app .recent-reading .resource-buttons{grid-column:1/-1}
+  html[data-layout=modern] .library-app .resource-buttons{grid-column:1/-1}
   html[data-layout=modern] .library-app .resource-buttons{gap:7px}
   html[data-layout=modern] .library-app .resource-buttons :is(.study-complete,.bookmark){width:44px;min-width:44px;height:44px;min-height:44px}
-  html[data-layout=modern] .library-app .resource-buttons .read-link{font-size:13px;padding-inline:9px;min-height:44px;white-space:normal;text-align:center}
+  html[data-layout=modern] .library-app .resource-buttons .read-link{flex:1;min-width:0;font-size:13px;padding-inline:9px;min-height:44px;white-space:normal;text-align:center}
   html[data-layout=modern] .library-app .course-header{padding:20px;gap:14px;align-items:start}
   html[data-layout=modern] .library-app .course-header .course-symbol{width:45px;height:45px;font-size:16px}
   html[data-layout=modern] .library-app .course-header h1{font-size:24px}

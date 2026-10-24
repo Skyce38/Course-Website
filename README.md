@@ -95,7 +95,7 @@ Recent documents resume PDF page, zoom and scroll position, or an HTML section a
 
 Synced PDFs use local files first. If a file is absent in local preview, the reader fetches only its validated PDF path from `Skyce38/Course-Website` on GitHub `main`, checks HTTP status, CORS, MIME type and the PDF signature, and uses a PDF Blob for viewing/download. The canonical document ID and reading position remain the same. Remote-only files require internet; blocked/unavailable files retain direct-open/download links and Retry.
 
-Shared UI scripts/styles use `?v=study-v2-c-1` to prevent cached dictionaries from mixing with newer markup. Bump the shared release version in HTML and its check when changing these assets. The category-tab ↻ button forces a library-wide file refresh; the header TH/EN button shares the existing language preference.
+Shared UI scripts/styles use `?v=study-v2-dark-1` to prevent cached dictionaries from mixing with newer markup. Bump the shared release version in HTML and its check when changing these assets. The category-tab ↻ button forces a library-wide file refresh; the header TH/EN button shares the existing language preference.
 
 ### Study V2-A layouts
 
