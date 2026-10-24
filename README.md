@@ -95,7 +95,7 @@ Recent documents resume PDF page, zoom and scroll position, or an HTML section a
 
 Synced PDFs use local files first. If a file is absent in local preview, the reader fetches only its validated PDF path from `Skyce38/Course-Website` on GitHub `main`, checks HTTP status, CORS, MIME type and the PDF signature, and uses a PDF Blob for viewing/download. The canonical document ID and reading position remain the same. Remote-only files require internet; blocked/unavailable files retain direct-open/download links and Retry.
 
-Shared UI scripts/styles use `?v=study-v2-dark-1` to prevent cached dictionaries from mixing with newer markup. Bump the shared release version in HTML and its check when changing these assets. The category-tab ↻ button forces a library-wide file refresh; the header TH/EN button shares the existing language preference.
+Shared UI scripts/styles use `?v=phase3a-2` to prevent cached dictionaries from mixing with newer markup. Bump the shared release version in HTML and its check when changing these assets. The category-tab ↻ button forces a library-wide file refresh; the header TH/EN button shares the existing language preference.
 
 ### Study V2-A layouts
 
@@ -108,3 +108,9 @@ Modern now has header search (the same input used by Classic), active navigation
 ### Study V2-C Reader Integration
 
 Modern HTML lessons reuse their existing headings, anchors and menus with a responsive, active Table of Contents and refined article/code typography. Modern PDF controls and actions share the same PDF.js/native engine and document IDs; original page contents are never recolored. A pre-layout-change snapshot restores the HTML section offset or PDF page/zoom/scroll after switching layouts. Refresh also resumes HTML reading when the address still contains an older section anchor. Classic readers remain visually unchanged. Styles and TOC presentation live in `assets/readers.css` and `assets/readers.js`; no dependencies, saved-data migration or Phase 3 features are added.
+
+### Phase 3A — Interactive lesson foundation
+
+The Linked List pilot is authored in `courses/oop-python/summaries/linked-list.md` and generated as `read/oop-python/linked-list.html`, with the permanent resource ID `oop-python-linked-list`. It reuses Classic/Modern readers, preferences, catalog, bookmarks, manual completion and reading positions. Python Code Viewers and a declarative 11-step traversal support copy, active lines/nodes, visited states, Previous/Next/Reset and keyboard controls. Static code, diagram and all bilingual step explanations remain available without JavaScript; no lesson code is executed.
+
+Run `node scripts/build.cjs` and `node scripts/check.cjs`. Only sources in `scripts/lessons.json` are built; hand-maintained readers are protected from overwrites. See [the lesson contracts and authoring guide](docs/interactive-lessons.md) and `templates/lesson.md`. A restricted Markdown subset and shared build/browser data validation avoid new dependencies. Lesson content stays Thai; shared controls and step explanations support TH/EN. Step selection is temporary; document reading positions continue to use the existing storage format. General graph/quiz engines and further lessons are deferred.

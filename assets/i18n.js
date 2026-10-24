@@ -2,6 +2,14 @@
 (() => {
   'use strict';
   const strings = {
+    learn: ['เรียน','Learn'], skipContent: ['ข้ามไปเนื้อหา','Skip to content'],
+    decreaseFont: ['ลดขนาดตัวอักษร','Decrease font size'], increaseFont: ['เพิ่มขนาดตัวอักษร','Increase font size'], printLesson: ['พิมพ์','Print'],
+    pythonCode: ['โค้ด Python','Python code'], copyCode: ['คัดลอกโค้ด','Copy code'], codeCopied: ['คัดลอกแล้ว','Code copied'], copyUnavailable: ['คัดลอกอัตโนมัติไม่ได้ โปรดเลือกและคัดลอกโค้ด','Copy unavailable; select and copy the code'],
+    stepDiagram: ['แผนภาพตามลำดับ','Ordered step diagram'], stepLegend: ['กรอบหนา = ตำแหน่งปัจจุบัน · ✓ = ประมวลผลแล้ว','Thick border = current position · ✓ = processed'],
+    previousStep: ['ก่อนหน้า','Previous'], nextStep: ['ถัดไป','Next'], resetSteps: ['เริ่มใหม่','Reset'],
+    staticSteps: ['อ่านขั้นตอนทั้งหมด (ใช้ได้โดยไม่เปิด JavaScript)','Read all steps (available without JavaScript)'],
+    programOutput: ['ผลลัพธ์','Output'], stepPosition: ['ขั้นตอน {page} จาก {total}','Step {page} of {total}'],
+    activeNode: ['ตำแหน่งปัจจุบัน','Current position'], visitedNode: ['ประมวลผลแล้ว','Processed'], pendingNode: ['ยังไม่ประมวลผล','Not processed'],
     readerContents: ['สารบัญบทเรียน', 'Lesson contents'],
     modernWelcome: ['พื้นที่เรียนรู้ของคุณ', 'Your study workspace'],
     modernWelcomeNote: ['รวมรายวิชา เอกสาร และรายการอ่านต่อ พร้อมติดตามความคืบหน้าจากการเรียนของคุณ', 'Your courses, resources and recent reading, with progress from your own study.'],

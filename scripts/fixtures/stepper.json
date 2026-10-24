@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "id": "assignment-states",
+  "title": "Independent assignment fixture",
+  "code": "left = 1\nright = left + 1",
+  "startLabel": "Input",
+  "endLabel": "End",
+  "nodes": [{"id":"input","label":"left"},{"id":"result","label":"right"}],
+  "steps": [
+    {"line":1,"active":"input","visited":[],"output":"","explanation":{"th":"กำหนดค่า left เป็น 1","en":"Assign 1 to left."}},
+    {"line":2,"active":"result","visited":["input"],"output":"","explanation":{"th":"กำหนดค่า right เป็น 2 โดยยังไม่มีคำสั่งพิมพ์","en":"Assign 2 to right. There is no print instruction."}}
+  ]
+}

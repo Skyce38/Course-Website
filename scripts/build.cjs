@@ -1,6 +1,7 @@
 const fs=require('node:fs');
 const path=require('node:path');
 const catalog=JSON.parse(fs.readFileSync('catalog.json','utf8'));
+const originalCatalog=JSON.stringify(catalog);
 // Include local PDFs before publishing; runtime GitHub sync handles remote additions.
 function pdfFiles(folder){
   if(!fs.existsSync(folder))return [];
@@ -24,7 +25,8 @@ for(const course of catalog.courses){
     }
   }
 }
-if(added)fs.writeFileSync('catalog.json',JSON.stringify(catalog,null,2)+'\n');
+const lessons=require('./lesson-build.cjs').buildLessons(catalog);
+if(JSON.stringify(catalog)!==originalCatalog)fs.writeFileSync('catalog.json',JSON.stringify(catalog,null,2)+'\n');
 const file='index.html';
 let html=fs.readFileSync(file,'utf8');
 const marker='const catalog=';
@@ -39,3 +41,4 @@ html=html.replace(/SUBJECTS \/ \d+/,'SUBJECTS / '+String(catalog.courses.length)
 fs.writeFileSync(file,html);
 console.log('Updated catalog for '+catalog.courses.length+' courses');
 console.log('Added '+added+' local PDFs');
+console.log('Built '+lessons+' registered Markdown lessons');

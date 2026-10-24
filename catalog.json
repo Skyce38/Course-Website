@@ -370,6 +370,17 @@
       "path": "slides/01_intro.pdf",
       "format": "PDF",
       "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/artificial-intelligence/slides/01_intro.pdf"
+    },
+    {
+      "id": "oop-python-linked-list",
+      "course": "oop-python",
+      "category": "summaries",
+      "title": "Linked List — เข้าใจ Node และไล่ Python ทีละขั้น",
+      "path": "summaries/linked-list.md",
+      "format": "MD",
+      "reader": "read/oop-python/linked-list.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/summaries/linked-list.md"
     }
   ]
 }

@@ -97,13 +97,15 @@
   function updateControls() {
     document.querySelectorAll('[data-complete]').forEach(button => {
       const complete = state.completed.includes(button.dataset.complete);
-      button.setAttribute('aria-pressed', String(complete));
-      button.dataset.i18n = complete ? 'documentCompleted' : 'markComplete';
-      button.textContent = t(button.dataset.i18n);
+      const set = (name,value) => { if (button.getAttribute(name) !== value) button.setAttribute(name,value); };
+      set('aria-pressed', String(complete));
+      set('data-i18n', complete ? 'documentCompleted' : 'markComplete');
+      const text = t(button.dataset.i18n);
+      if (button.textContent !== text) button.textContent = text;
       const labelKey = complete ? 'markIncompleteLabel' : 'markCompleteLabel';
       const label = window.LearningI18n?.t(labelKey,{title:button.dataset.documentTitle || ''}) || labelKey;
-      button.setAttribute('data-i18n-aria-label',labelKey); button.setAttribute('data-i18n-title',labelKey);
-      button.setAttribute('aria-label',label); button.title = label;
+      set('data-i18n-aria-label',labelKey); set('data-i18n-title',labelKey);
+      set('aria-label',label); set('title',label);
     });
   }
   function showReader(resource, position = {}) {

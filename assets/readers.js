@@ -29,7 +29,7 @@
     headerOffset();
     const modern = document.documentElement.dataset.layout === 'modern';
     const top = (document.querySelector('.topbar')?.getBoundingClientRect().bottom || 0)+48;
-    const visible = links.filter(item => item.target.getClientRects().length);
+    const visible = links.filter(item => item.target.getClientRects().length && item.link.getClientRects().length);
     const current = visible.filter(item => item.target.getBoundingClientRect().top <= top).at(-1) || visible[0];
     for (const item of links) {
       const active = modern && item === current;
