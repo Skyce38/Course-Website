@@ -29,6 +29,9 @@ input{accent-color:var(--accent)}
 .study-reader-actions{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 20px}
 /* Reader colors switch together: a surface-only transition flashes under dark-mode text colors. */
 :is(.html-reader,.pdf-reader) .study-reader-actions .icon-button{transition:none}
+/* Only theme recoloring is atomic; normal hover/focus feedback remains available. */
+html[data-theme-switching] :is(.breadcrumbs>a,.breadcrumb .crumb-prefix>a,.study-complete),html[data-theme-switching] :is(.breadcrumbs>a,.breadcrumb .crumb-prefix>a,.study-complete) *{transition:none!important}
+@media(prefers-reduced-motion:reduce){:is(.breadcrumbs>a,.breadcrumb .crumb-prefix>a,.study-complete){transition:none}}
 .course-progress{display:grid;gap:12px;padding:20px;border:1px solid var(--line);border-radius:16px;background:var(--paper);margin:20px 0}
 .course-progress h2{font-size:26px;line-height:1.5;margin:0}.progress-summary{font-size:14px;color:var(--muted);margin:8px 0 0}.progress-summary strong{font-size:18px;color:var(--accent)}
 .course-progress progress{width:100%;height:14px;accent-color:var(--accent)}
