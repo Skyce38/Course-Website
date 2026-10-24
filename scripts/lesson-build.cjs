@@ -1,6 +1,7 @@
-/* Restricted, dependency-free Markdown for explicitly registered lessons only. */
+/* Restricted Markdown for registered lessons; rich math uses vendored build-time KaTeX. */
 const fs = require('node:fs'), path = require('node:path');
 const {validate} = require('../assets/lesson-contract.js');
+const rich = require('./lesson-rich.cjs');
 const VERSION = 'phase3a-2';
 const esc = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const json = value => JSON.stringify(value).replace(/</g,'\\u003c').replace(/\u2028/g,'\\u2028').replace(/\u2029/g,'\\u2029');
@@ -28,13 +29,16 @@ function urlFor(raw, context) {
   return path.relative(path.resolve(context.root,path.dirname(context.output)),destination).split(path.sep).map(encodeURIComponent).join('/')+(match[2] || '');
 }
 function inline(text, context) {
-  const pattern = /`([^`]+)`|\*\*([^*]+)\*\*|\[([^\]]+)\]\(([^)]+)\)/g;
+  const pattern = /`(?<code>[^`]+)`|\\\((?<math>.+?)\\\)|\*\*(?<bold>[^*]+)\*\*|\[(?<label>[^\]]+)\]\((?<url>[^)]+)\)/g;
   let result = '', last = 0;
   for (const match of text.matchAll(pattern)) {
+    if (/\\[()]/.test(text.slice(last,match.index))) throw Error('Unmatched inline lesson equation delimiter');
     result += esc(text.slice(last,match.index));
-    result += match[1] !== undefined ? '<code>'+esc(match[1])+'</code>' : match[2] !== undefined ? '<strong>'+esc(match[2])+'</strong>' : '<a href="'+esc(urlFor(match[4],context))+'">'+esc(match[3])+'</a>';
+    const token=match.groups;
+    result += token.code !== undefined ? '<code>'+esc(token.code)+'</code>' : token.math !== undefined ? rich.math(token.math,false,context) : token.bold !== undefined ? '<strong>'+inline(token.bold,context)+'</strong>' : '<a href="'+esc(urlFor(token.url,context))+'">'+esc(token.label)+'</a>';
     last = match.index+match[0].length;
   }
+  if (/\\[()]/.test(text.slice(last))) throw Error('Unmatched inline lesson equation delimiter');
   return result+esc(text.slice(last));
 }
 function codeViewer(code, id) {
@@ -45,12 +49,25 @@ function stepper(data) {
   return '<section class="step-visualizer" id="demo-'+data.id+'" tabindex="0" role="group" aria-labelledby="step-title-'+data.id+'"><h3 id="step-title-'+data.id+'">'+esc(data.title)+'</h3>'+codeViewer(data.code,'step-code-'+data.id)+'<div class="step-diagram" role="list" data-i18n-aria-label="stepDiagram" aria-label="แผนภาพตามลำดับ"><span class="step-endpoint">'+esc(data.startLabel)+'</span>'+data.nodes.map(node=>'<span class="step-arrow" aria-hidden="true">→</span><span role="listitem" class="step-node" data-node="'+node.id+'">'+esc(node.label)+'</span>').join('')+'<span class="step-arrow" aria-hidden="true">→</span><span class="step-endpoint step-end">'+esc(data.endLabel)+'</span></div><p class="step-legend" data-i18n="stepLegend">กรอบหนา = ตำแหน่งปัจจุบัน · ✓ = ประมวลผลแล้ว</p><div class="step-controls" hidden><button type="button" class="icon-button" data-step-action="previous" data-i18n="previousStep">ก่อนหน้า</button><button type="button" class="icon-button" data-step-action="next" data-i18n="nextStep">ถัดไป</button><button type="button" class="icon-button" data-step-action="reset" data-i18n="resetSteps">เริ่มใหม่</button></div><div class="step-live" role="status" aria-live="polite" hidden><p class="step-position"></p><p class="step-explanation"></p><p><strong data-i18n="programOutput">ผลลัพธ์</strong></p><pre class="step-output"></pre></div><details class="step-fallback" open><summary data-i18n="staticSteps">อ่านขั้นตอนทั้งหมด (ใช้ได้โดยไม่เปิด JavaScript)</summary><ol>'+data.steps.map(step=>'<li><strong>Python '+step.line+'</strong> — '+esc(step.explanation.th)+'<br><span lang="en">'+esc(step.explanation.en)+'</span><pre>'+esc(step.output || '—')+'</pre></li>').join('')+'</ol></details><script type="application/json" class="step-data">'+json(data)+'</script></section>';
 }
 function markdown(body, context) {
+  context={...context,root:path.resolve(context.root),features:new Set()};
   const lines = body.split('\n'), headings = [], ids = new Set(['main-content','sidebar','menu','overlay','theme','font-less','font-more','font-value','print']);
   let result = '', codeCount = 0, interactive = false;
   const addID = id => { if (ids.has(id)) throw Error('Duplicate lesson anchor: '+id); ids.add(id); };
   for (let i=0;i<lines.length;) {
     const line = lines[i]; if (!line.trim()) { i++; continue; }
-    if (line.startsWith('```')) {
+    if (line==='$$' || line==='\\[') {
+      const close=line==='$$'?'$$':'\\]',block=[];i++;
+      while(i<lines.length && lines[i]!==close) block.push(lines[i++]);
+      if(i===lines.length) throw Error('Unclosed lesson equation');i++;
+      result+=rich.math(block.join('\n'),true,context);
+    } else if (line.startsWith('![')) {
+      const figure=line.match(/^!\[([^\]]*)\]\((\S+?)(?: "([^"]*)")?\)$/);
+      if(!figure) throw Error('Use a standalone lesson image with alt text and optional caption');
+      const img=rich.image(figure[2],figure[1],context);i++;
+      let source='';const attribution=(lines[i] || '').match(/^(?:Source|ที่มา): (.+)$/);
+      if(attribution) { if(!/^\[[^\]]+\]\([^)]+\)$/.test(attribution[1])) throw Error('Figure source requires a labeled source link');source='<span class="lesson-figure-source">'+inline(attribution[1],context)+'</span>';i++; }
+      result+='<figure class="lesson-figure">'+img+((figure[3] || source)?'<figcaption>'+(figure[3]?inline(figure[3],context):'')+source+'</figcaption>':'')+'</figure>';
+    } else if (line.startsWith('```')) {
       const lang = line.slice(3).trim(); const block = []; i++;
       while (i<lines.length && lines[i] !== '```') block.push(lines[i++]);
       if (i===lines.length) throw Error('Unclosed code fence'); i++;
@@ -72,12 +89,12 @@ function markdown(body, context) {
       result+='<ul>'; while(i<lines.length && /^- /.test(lines[i])) result+='<li>'+inline(lines[i++].slice(2),context)+'</li>'; result+='</ul>';
     } else if (/^> /.test(line)) { result+='<blockquote><p>'+inline(line.slice(2),context)+'</p></blockquote>'; i++; }
     else {
-      const paragraph=[line]; i++; while(i<lines.length && lines[i].trim() && !/^(?:#{1,6} |```|- |> |\|)/.test(lines[i])) paragraph.push(lines[i++]);
+      const paragraph=[line]; i++; while(i<lines.length && lines[i].trim() && !/^(?:#{1,6} |```|- |> |\||!\[|\$\$$|\\\[$)/.test(lines[i])) paragraph.push(lines[i++]);
       result+='<p>'+inline(paragraph.join(' '),context)+'</p>';
     }
   }
   for (const [,anchor] of result.matchAll(/href="#([^"\s]+)"/g)) if (!ids.has(decodeURIComponent(anchor))) throw Error('Missing lesson anchor: '+anchor);
-  return {html:result,headings,interactive};
+  return {html:result,headings,interactive,features:[...context.features]};
 }
 function tocHTML(headings) {
   let section = '';
@@ -87,6 +104,7 @@ function tocHTML(headings) {
   }).join('');
 }
 function buildLessons(catalog, root = process.cwd()) {
+  root=path.resolve(root);
   if (new Set(catalog.resources.map(r=>r.id)).size !== catalog.resources.length) throw Error('Duplicate catalog IDs');
   const sources = JSON.parse(fs.readFileSync(path.join(root,'scripts/lessons.json'),'utf8'));
   if (!Array.isArray(sources) || new Set(sources).size !== sources.length) throw Error('Duplicate/invalid lesson registry');
@@ -107,6 +125,8 @@ function buildLessons(catalog, root = process.cwd()) {
     if (!rendered.headings.length) throw Error('Lesson requires headings');
     const values={MARKER:marker,TITLE:esc(meta.title),LANG:meta.language,COURSE:esc(course.name),COURSE_ID:esc(course.id),CATEGORY:esc(category.name),CATEGORY_ID:esc(category.id),VERSION,BODY:rendered.html,TOC:tocHTML(rendered.headings),COMPONENTS:rendered.interactive?'<script src="../../assets/lesson-contract.js?v='+VERSION+'" defer></script><script src="../../assets/lesson-components.js?v='+VERSION+'" defer></script>':''};
     if (rendered.interactive) values.COMPONENTS='<link rel="stylesheet" href="../../assets/lesson-components.css?v='+VERSION+'">'+values.COMPONENTS;
+    values.RICH_CONTENT=rendered.features.length?'<link rel="stylesheet" href="../../assets/lesson-rich.css?v=rich-lesson-1">':'';
+    if(rendered.features.includes('math')) values.RICH_CONTENT='<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css?v=0.19.1">'+values.RICH_CONTENT;
     const template=fs.readFileSync(path.join(root,'templates/lesson.html'),'utf8').replace(/\r\n/g,'\n');
     const html=template.replace(/\{\{([A-Z_]+)\}\}/g,(_,key)=>{ if (!(key in values)) throw Error('Unknown template token'); return values[key]; });
     plans.push({target,html,resource,old});

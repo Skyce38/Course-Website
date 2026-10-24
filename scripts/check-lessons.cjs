@@ -6,7 +6,7 @@ const catalog=JSON.parse(fs.readFileSync('catalog.json','utf8')),source='courses
 const context={root:process.cwd(),source,output,catalog};
 const raw=fs.readFileSync(source,'utf8'),parsed=metadata(raw);
 assert.equal(parsed.meta.id,'oop-python-linked-list');
-assert.equal(metadata(raw.replace(/\n/g,'\r\n')).meta.id,parsed.meta.id);
+assert.equal(metadata(raw.replace(/\r\n/g,'\n').replace(/\n/g,'\r\n')).meta.id,parsed.meta.id);
 assert.throws(()=>metadata('No metadata'));
 assert.throws(()=>metadata(raw.replace('"version":1','"version":2')));
 assert.throws(()=>metadata(raw.replace('"slug":"linked-list"','"slug":"../linked-list"')));
@@ -34,6 +34,7 @@ const temp=fs.mkdtempSync(path.join(os.tmpdir(),'study-lesson-check-'));
 assert.equal(path.dirname(path.resolve(temp)),path.resolve(os.tmpdir()),'Scratch cleanup must stay inside the OS temp directory');
 try {
   for(const file of ['scripts/lessons.json','templates/lesson.html',source]) { fs.mkdirSync(path.dirname(path.join(temp,file)),{recursive:true});fs.copyFileSync(file,path.join(temp,file)); }
+  fs.writeFileSync(path.join(temp,'scripts/lessons.json'),JSON.stringify([source])); // Keep this isolated fixture independent of other registered lessons.
   for(const file of ['courses/oop-python/summaries/final-week10-15.md','courses/oop-python/slides/Week10.pdf']) { fs.mkdirSync(path.dirname(path.join(temp,file)),{recursive:true});fs.writeFileSync(path.join(temp,file),'Fixture only'); }
   const data=structuredClone(catalog);buildLessons(data,temp);
   const target=path.join(temp,output),html=fs.readFileSync(target,'utf8'),before=JSON.stringify(data);

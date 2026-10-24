@@ -1,0 +1,11 @@
+/* Conditional rich-content styles; inherit Classic/Modern and every theme. */
+.lesson-reader .lesson-math-inline{display:inline-block;max-width:100%;overflow-x:auto;vertical-align:middle;padding:.15em .1em;line-height:1.5}
+.lesson-reader .lesson-math-inline>.katex{white-space:nowrap}
+.lesson-reader .lesson-math-block{max-width:100%;overflow-x:auto;margin:24px 0;padding:12px 8px;background:var(--soft);border-radius:10px}
+.lesson-reader .lesson-math-block .katex-display{margin:.5em 0;text-align:start}
+.lesson-reader :is(.lesson-math-block,.lesson-math-inline):focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.lesson-reader .lesson-figure{margin:28px 0;max-width:100%}
+.lesson-reader .lesson-figure img{display:block;max-width:100%;height:auto;margin-inline:auto;border-radius:8px}
+.lesson-reader .lesson-figure figcaption{margin-top:12px;font-size:.9em;line-height:1.8;color:var(--muted);overflow-wrap:anywhere}
+.lesson-reader .lesson-figure-source{display:block;margin-top:6px}
+@media print{.lesson-reader .lesson-math-block{background:transparent;overflow:visible}.lesson-reader .lesson-figure{break-inside:avoid}.lesson-reader .lesson-figure img{max-height:80vh;object-fit:contain}}
