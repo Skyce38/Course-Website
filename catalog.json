@@ -414,6 +414,17 @@
       "reader": "read/artificial-intelligence/final-regression.html",
       "generatedLesson": 1,
       "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/artificial-intelligence/summaries/final-regression.md"
+    },
+    {
+      "id": "artificial-intelligence-final-knn",
+      "course": "artificial-intelligence",
+      "category": "summaries",
+      "title": "FINAL: การจำแนกและเพื่อนบ้านใกล้ที่สุด (Classification & KNN)",
+      "path": "summaries/final-knn.md",
+      "format": "MD",
+      "reader": "read/artificial-intelligence/final-knn.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/artificial-intelligence/summaries/final-knn.md"
     }
   ]
 }
