@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "paths": [
+    {
+      "course": "oop-python",
+      "lessons": ["oop-python-linked-list"]
+    }
+  ]
+}

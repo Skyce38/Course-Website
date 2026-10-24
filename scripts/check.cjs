@@ -33,8 +33,8 @@ for (const resource of catalog.resources) {
 }
 for (const file of htmlFiles) {
   const html = fs.readFileSync(file, 'utf8');
-  for (const [,asset] of html.matchAll(/(?:src|href)="([^" ]*assets\/(?:preferences\.(?:js|css)|layouts\.css|readers\.(?:js|css)|lesson(?:-(?:components|contract))?\.(?:js|css)|i18n\.js|study\.js|settings\.js|pdf(?:-source)?\.js)[^" ]*)"/g)) {
-    assert.equal(new URL(asset,'https://example.test/').searchParams.get('v'),'theme-flash-1',file+': version shared UI assets together to prevent stale bundles');
+  for (const [,asset] of html.matchAll(/(?:src|href)="([^" ]*assets\/(?:preferences\.(?:js|css)|layouts\.css|readers\.(?:js|css)|lesson(?:-(?:components|contract))?\.(?:js|css)|learning-(?:paths|navigation)\.(?:js|css)|i18n\.js|study\.js|settings\.js|pdf(?:-source)?\.js)[^" ]*)"/g)) {
+    assert.equal(new URL(asset,'https://example.test/').searchParams.get('v'),'learning-navigation-1',file+': version shared UI assets together to prevent stale bundles');
   }
   for (const match of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) new vm.Script(match[1], {filename: file});
   const markup = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, script => script.startsWith('<script src=') ? script : '');
@@ -113,3 +113,4 @@ require('./check-i18n.cjs');
 require('./check-pdf-source.cjs');
 require('./check-lessons.cjs');
 require('./check-lesson-rich.cjs');
+require('./check-learning-paths.cjs');

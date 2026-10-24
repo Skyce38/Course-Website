@@ -11,6 +11,13 @@
     programOutput: ['ผลลัพธ์','Output'], stepPosition: ['ขั้นตอน {page} จาก {total}','Step {page} of {total}'],
     activeNode: ['ตำแหน่งปัจจุบัน','Current position'], visitedNode: ['ประมวลผลแล้ว','Processed'], pendingNode: ['ยังไม่ประมวลผล','Not processed'],
     readerContents: ['สารบัญบทเรียน', 'Lesson contents'],
+    learningPath: ['เส้นทางการเรียน','Learning path'], lessonNavigation: ['นำทางระหว่างบทเรียน','Lesson navigation'],
+    continueLearning: ['เรียนต่อ','Continue learning'], continueLearningLabel: ['เรียนต่อ: {title}','Continue learning: {title}'],
+    previousLesson: ['บทเรียนก่อนหน้า','Previous lesson'], nextLesson: ['บทเรียนถัดไป','Next lesson'],
+    previousLessonLabel: ['บทเรียนก่อนหน้า: {title}','Previous lesson: {title}'], nextLessonLabel: ['บทเรียนถัดไป: {title}','Next lesson: {title}'],
+    currentLesson: ['บทเรียนปัจจุบัน','Current lesson'], lessonIncomplete: ['ยังไม่อ่านจบ','Incomplete'],
+    learningPathProgress: ['อ่านจบ {completed} จาก {total} บทเรียน','{completed} of {total} lessons completed'],
+    learningPathEmpty: ['ยังไม่มีบทเรียนในเส้นทางนี้','No lessons in this path yet'], learningPathComplete: ['อ่านจบทุกบทเรียนในเส้นทางนี้แล้ว','All lessons in this path are completed'],
     modernWelcome: ['พื้นที่เรียนรู้ของคุณ', 'Your study workspace'],
     modernWelcomeNote: ['รวมรายวิชา เอกสาร และรายการอ่านต่อ พร้อมติดตามความคืบหน้าจากการเรียนของคุณ', 'Your courses, resources and recent reading, with progress from your own study.'],
     documentCountLabel: ['เอกสาร {total} รายการ', '{total} documents'],
@@ -86,7 +93,7 @@
   const originals = new WeakMap(), attributes = new WeakMap();
   const pairs = [...Object.values(strings), ...legacy.filter(p => !/^[A-Z .]+$/.test(p[0]))];
   const englishLabels = legacy.filter(p => /^[A-Z .]+$/.test(p[0]));
-  const protectedSelector = 'script,style,noscript,.prose:not(.settings-preview),.course-thai,.course-header p,.resource-main>a,.resource-meta span:last-child,#pdf-title,#lessons article,#quiz .question';
+  const protectedSelector = 'script,style,noscript,.prose:not(.settings-preview),.course-thai,.course-header p,.resource-main>a,.resource-meta span:last-child,.learning-link-title,.learning-path-list a,#pdf-title,#lessons article,#quiz .question';
   const isProtected = node => node.closest(protectedSelector) && !node.closest('.copy-code,.read-button,.chapter-footer,.question-status,.reveal-answer,legend');
   const t = (key, values = {}) => (strings[key]?.[LearningPreferences.value.language === 'en' ? 1 : 0] || key).replace(/\{(\w+)\}/g, (match,name) => values[name] ?? match);
   const localizedAttributes = ['aria-label','title','placeholder','aria-valuetext'];
