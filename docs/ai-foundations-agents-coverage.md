@@ -50,7 +50,7 @@
 
 - Reused the original pilot Markdown byte-for-byte from the read-only `codex/ai-lesson-pilot` worktree; its staged/uncommitted state is preserved.
 - Regenerated [the reader](../read/artificial-intelligence/ai-foundations-agents.html) from [the reused Markdown](../courses/artificial-intelligence/summaries/ai-foundations-agents.md) with the current template, preferences, theme fix and learning navigation; no old generated HTML or runtime code was copied.
-- Stable resource ID: `artificial-intelligence-ai-foundations-agents`; registered as the first actual AI lesson in `learning-paths.json`, with the existing OOP path preserved.
+- Stable resource ID: `artificial-intelligence-ai-foundations-agents`; registered in the lesson registry/catalog. It originally joined the Phase3C learning path; Phase5 now provides direct catalog access without path configuration.
 - Integration candidate on `codex/ai-foundations-integration`, pending user review/merge/deployment; not a claim that the live website has already published it.
 - Source PDF and Markdown match the previously reviewed hashes. Content scope remains physical pages 3–16; page 1 is credited separately and pages 17–36 are explicitly outside the lesson.
 - Existing tables/text equations remain compatible without extra scripts; no renderer, dependency, visualizer or BFS/DFS lesson was added.

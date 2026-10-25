@@ -81,3 +81,9 @@ Native fallback still cannot expose its internal page/scroll changes; site contr
 - [x] All 15 tracked PDFs match Git baselines; the original 14 also match saved SHA-256 hashes. Original lesson article content is unchanged. No detected secrets, dependencies, temporary files or local design references in the proposed file set.
 
 Ready for PR preparation; no commit, push, merge or deployment performed. Browser tests use Chrome with isolated local storage and controlled GitHub API fixtures; live API availability, Safari/Firefox, physical devices and a formal HTML/accessibility certification are not covered. Native PDF internal controls retain the limitation documented above.
+
+## Phase 5 — OOP expansion and simpler navigation
+
+- [x] Inventory14OOP PDFs/610physicalpages and accessible local labs; no Week9 invented.
+- [x] Remove path-only configuration/runtime/controls; retain catalog access, independent history/Continue Reading, bookmarks, completion and exact resume. Seeded legacy-data checks pass in both layouts.
+- [ ] Complete12source-supported OOP lessons and focused correctness/browser/integrity checks. Existing Linked List and AI content remain unchanged.

@@ -5,7 +5,7 @@ Base main: c68346e389cc37c1fd6093acf6df61cff51b3795. Branch: codex/phase5-oop-ex
 | Stage | Status |
 |---|---|
 | A Source inventory/map | Validated:14 tracked PDFs/610physicalpages; relevant code/figures/tables and local labs indexed; lecture copies byte-identical; source caveats documented |
-| B Remove path dependencies | Pending |
+| B Remove path dependencies | Validated: obsolete runtime/config/docs/tests removed; build/checks and seeded Classic/Modern legacy-state browser checks pass; study.js unchanged |
 | C Weeks1–8 lessons | Pending:7 coherent chapters (UML/SOLID and arrays span week boundaries) |
 | D Weeks11–15 lessons | Pending:5 chapters; existing Linked List unchanged |
 | E Correctness/integration/state/browser QA | Pending |

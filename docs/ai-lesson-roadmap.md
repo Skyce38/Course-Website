@@ -1,5 +1,8 @@
 # AI lesson roadmap — source plan and implementation status
 
+> Phase5 navigation note: references to historical Learning Paths describe earlier releases. Current lessons are independent catalog resources; no path configuration, sequence gating or recommendation engine remains.
+
+
 > **Combined FINAL priority:** AI-L11–L18 implemented in `codex/ai-final-complete`, pending review/merge. AI-L09 Regression/AI-L10 KNN already on main. Midterm 8-Puzzle/A*, Minimax/Alpha-Beta and Logic remain paused; no work deleted. AI-L19 remains source-limited preparation only. Path order is temporary publication order, not a verified teaching timetable or exam weighting.
 
 

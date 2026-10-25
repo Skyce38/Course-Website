@@ -45,7 +45,7 @@ assert floor((7+2-3)/2)+1==4 and 3*3*3*4+4==112
 assert 3*3*3*5+5==140 and 3*3*5*10+10==460 and 27+1==28
 for n in range(1,9):assert f'### ข้อ{n} ' in t
 # Partial F11 must never appear as a completed lesson in registration/path.
-for file in ['scripts/lessons.json','learning-paths.json']:
+for file in ['scripts/lessons.json','catalog.json']:
  assert 'neural-training-lab' not in (r/file).read_text()
 guide=(r/'docs/ai-final-neural-training-lab-preparation.md').read_text(encoding='utf-8-sig')
 assert '6838' in guide and 'source-limited' in guide and 'ไม่ใช่เฉลยทางการ' in guide
