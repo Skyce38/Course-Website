@@ -2,7 +2,7 @@
 const fs = require('node:fs'), path = require('node:path');
 const {validate} = require('../assets/lesson-contract.js');
 const rich = require('./lesson-rich.cjs');
-const VERSION = 'learning-navigation-1';
+const VERSION = 'phase5-catalog-1';
 const esc = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const json = value => JSON.stringify(value).replace(/</g,'\\u003c').replace(/\u2028/g,'\\u2028').replace(/\u2029/g,'\\u2029');
 function metadata(source) {
@@ -125,7 +125,6 @@ function buildLessons(catalog, root = process.cwd()) {
     if (!rendered.headings.length) throw Error('Lesson requires headings');
     const values={MARKER:marker,TITLE:esc(meta.title),LANG:meta.language,COURSE:esc(course.name),COURSE_ID:esc(course.id),CATEGORY:esc(category.name),CATEGORY_ID:esc(category.id),VERSION,BODY:rendered.html,TOC:tocHTML(rendered.headings),COMPONENTS:rendered.interactive?'<script src="../../assets/lesson-contract.js?v='+VERSION+'" defer></script><script src="../../assets/lesson-components.js?v='+VERSION+'" defer></script>':''};
     if (rendered.interactive) values.COMPONENTS='<link rel="stylesheet" href="../../assets/lesson-components.css?v='+VERSION+'">'+values.COMPONENTS;
-    values.LESSON_ID=esc(meta.id);
     values.RICH_CONTENT=rendered.features.length?'<link rel="stylesheet" href="../../assets/lesson-rich.css?v=rich-lesson-1">':'';
     if(rendered.features.includes('math')) values.RICH_CONTENT='<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css?v=0.19.1">'+values.RICH_CONTENT;
     const template=fs.readFileSync(path.join(root,'templates/lesson.html'),'utf8').replace(/\r\n/g,'\n');

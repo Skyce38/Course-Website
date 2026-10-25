@@ -513,6 +513,138 @@
       "reader": "read/artificial-intelligence/final-cnn.html",
       "generatedLesson": 1,
       "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/artificial-intelligence/summaries/final-cnn.md"
+    },
+    {
+      "id": "oop-python-classes-objects",
+      "course": "oop-python",
+      "category": "summaries",
+      "title": "คลาส ออบเจ็กต์ และ Reference (Classes & Objects)",
+      "path": "summaries/classes-objects.md",
+      "format": "MD",
+      "reader": "read/oop-python/classes-objects.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/summaries/classes-objects.md"
+    },
+    {
+      "id": "oop-python-encapsulation-properties",
+      "course": "oop-python",
+      "category": "summaries",
+      "title": "Encapsulation และ Properties",
+      "path": "summaries/encapsulation-properties.md",
+      "format": "MD",
+      "reader": "read/oop-python/encapsulation-properties.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/summaries/encapsulation-properties.md"
+    },
+    {
+      "id": "oop-python-inheritance-mro",
+      "course": "oop-python",
+      "category": "summaries",
+      "title": "การสืบทอด Override และ MRO (Inheritance)",
+      "path": "summaries/inheritance-mro.md",
+      "format": "MD",
+      "reader": "read/oop-python/inheritance-mro.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/summaries/inheritance-mro.md"
+    },
+    {
+      "id": "oop-python-polymorphism-abc",
+      "course": "oop-python",
+      "category": "summaries",
+      "title": "Polymorphism, Duck Typing และ Abstract Classes",
+      "path": "summaries/polymorphism-abc.md",
+      "format": "MD",
+      "reader": "read/oop-python/polymorphism-abc.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/summaries/polymorphism-abc.md"
+    },
+    {
+      "id": "oop-python-object-relationships",
+      "course": "oop-python",
+      "category": "summaries",
+      "title": "Reference และความสัมพันธ์ระหว่าง Object",
+      "path": "summaries/object-relationships.md",
+      "format": "MD",
+      "reader": "read/oop-python/object-relationships.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/summaries/object-relationships.md"
+    },
+    {
+      "id": "oop-python-uml-solid",
+      "course": "oop-python",
+      "category": "summaries",
+      "title": "UML และหลักออกแบบ SRP, OCP, LSP",
+      "path": "summaries/uml-solid.md",
+      "format": "MD",
+      "reader": "read/oop-python/uml-solid.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/summaries/uml-solid.md"
+    },
+    {
+      "id": "oop-python-arrays-dynamic-array",
+      "course": "oop-python",
+      "category": "summaries",
+      "title": "Array, Dynamic Array และ Amortized Analysis",
+      "path": "summaries/arrays-dynamic-array.md",
+      "format": "MD",
+      "reader": "read/oop-python/arrays-dynamic-array.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/summaries/arrays-dynamic-array.md"
+    },
+    {
+      "id": "oop-python-stack",
+      "course": "oop-python",
+      "category": "summaries",
+      "title": "FINAL: Stack, Recursion และ Undo/Redo",
+      "path": "summaries/stack.md",
+      "format": "MD",
+      "reader": "read/oop-python/stack.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/summaries/stack.md"
+    },
+    {
+      "id": "oop-python-queue",
+      "course": "oop-python",
+      "category": "summaries",
+      "title": "FINAL: Queue, Circular Queue, Deque และ Priority Queue",
+      "path": "summaries/queue.md",
+      "format": "MD",
+      "reader": "read/oop-python/queue.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/summaries/queue.md"
+    },
+    {
+      "id": "oop-python-complexity-basic-sorting",
+      "course": "oop-python",
+      "category": "summaries",
+      "title": "FINAL: Big-O และ Bubble, Selection, Insertion Sort",
+      "path": "summaries/complexity-basic-sorting.md",
+      "format": "MD",
+      "reader": "read/oop-python/complexity-basic-sorting.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/summaries/complexity-basic-sorting.md"
+    },
+    {
+      "id": "oop-python-advanced-sorting",
+      "course": "oop-python",
+      "category": "summaries",
+      "title": "FINAL: Merge Sort, Quick Sort และ Timsort",
+      "path": "summaries/advanced-sorting.md",
+      "format": "MD",
+      "reader": "read/oop-python/advanced-sorting.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/summaries/advanced-sorting.md"
+    },
+    {
+      "id": "oop-python-hash-tables",
+      "course": "oop-python",
+      "category": "summaries",
+      "title": "FINAL: Hash Tables, Collisions และ Dictionaries",
+      "path": "summaries/hash-tables.md",
+      "format": "MD",
+      "reader": "read/oop-python/hash-tables.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/summaries/hash-tables.md"
     }
   ]
 }

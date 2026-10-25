@@ -1,5 +1,8 @@
 # AI source inventory and evidence coverage
 
+> Phase5 navigation note: references to historical Learning Paths describe earlier releases. Current lessons are independent catalog resources; no path configuration, sequence gating or recommendation engine remains.
+
+
 ตรวจเมื่อ 24 ตุลาคม 2026 บน `codex/ai-curriculum-map` จาก main `78f6faa` งานนี้เป็นเอกสารวางแผนเท่านั้น ไม่แก้เว็บไซต์ บทเรียน หรือ learning paths
 
 ## ขอบเขตและวิธีตรวจ

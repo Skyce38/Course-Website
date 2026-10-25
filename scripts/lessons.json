@@ -11,5 +11,17 @@
   "courses/artificial-intelligence/summaries/final-perceptron.md",
   "courses/artificial-intelligence/summaries/final-backpropagation.md",
   "courses/artificial-intelligence/summaries/final-deep-learning-overview.md",
-  "courses/artificial-intelligence/summaries/final-cnn.md"
+  "courses/artificial-intelligence/summaries/final-cnn.md",
+  "courses/oop-python/summaries/classes-objects.md",
+  "courses/oop-python/summaries/encapsulation-properties.md",
+  "courses/oop-python/summaries/inheritance-mro.md",
+  "courses/oop-python/summaries/polymorphism-abc.md",
+  "courses/oop-python/summaries/object-relationships.md",
+  "courses/oop-python/summaries/uml-solid.md",
+  "courses/oop-python/summaries/arrays-dynamic-array.md",
+  "courses/oop-python/summaries/stack.md",
+  "courses/oop-python/summaries/queue.md",
+  "courses/oop-python/summaries/complexity-basic-sorting.md",
+  "courses/oop-python/summaries/advanced-sorting.md",
+  "courses/oop-python/summaries/hash-tables.md"
 ]

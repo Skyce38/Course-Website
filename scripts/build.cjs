@@ -26,10 +26,6 @@ for(const course of catalog.courses){
   }
 }
 const lessons=require('./lesson-build.cjs').buildLessons(catalog);
-const learningPaths=require('../assets/learning-paths.js').validate(JSON.parse(fs.readFileSync('learning-paths.json','utf8')),catalog);
-for(const lesson of learningPaths.flatMap(item=>item.lessons)) {
-  if(!fs.existsSync(lesson.reader)||!fs.existsSync(path.join('courses',lesson.course,lesson.path)))throw Error('Learning-path lesson is unavailable: '+lesson.id);
-}
 if(JSON.stringify(catalog)!==originalCatalog)fs.writeFileSync('catalog.json',JSON.stringify(catalog,null,2)+'\n');
 const file='index.html';
 let html=fs.readFileSync(file,'utf8');
