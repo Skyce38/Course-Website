@@ -19,6 +19,20 @@ Self-assessments: rg-rounding, nb-models, hc-linkages, km-audit, pc-xor, bp-chec
 
 ## Verification method
 
+## Stage B — OOP Data Structures
+
+| Lesson | Automatic IDs / objectives | Heading evidence | Independent verification |
+|---|---|---|---|
+| linked-list | ll-head/empty/remaining/insert/tail | question-head, question-empty, explanation, mistakes, question-tail | Actual Python Node identity, traversal count, deletion reachability and reference ordering; predecessor-search complexity assumption reviewed separately |
+| queue | qu-empty/rear/full/priority/deque | concepts, trace, circular, priority, deque | Reviewed Linked/Circular/Priority implementations executed offline; tail reset, wrap-around, bounded/full exceptions and stable priority ties; independent deque interface |
+| advanced-sorting | as-merge/partition/worst/python/space | merge, quick, timsort, tradeoffs | Independent merge comparison counter and Lomuto partition; reviewed Quick counts; Python stable sort/None return; worst-case recursion-depth argument |
+| hash-tables | ht-collision/tombstone/load/hashability/bounded | concepts, trace, load, dict, resolution | Collision/equality counterexample, forced-collision update after tombstone, rehash/load and full-table behavior; actual Python hashability exceptions/identity hashes |
+| arrays-dynamic-array | ar-cost/row-major/amortized/indices/alias | amortized, matrix, complexity | Reviewed DynamicArray operation/copy counts, independent flat index, geometric bound, None/invalid-index checks and actual shared-sublist/comprehension behavior |
+
+Self-assessments: ll-audit, qu-invariants, as-compare, ht-contract, ar-growth. They require explicit boundary/complexity/ownership assumptions, not unsupported asymptotic claims. Existing `check-oop-data-structures.py` also passes its independent randomized stack/queue/sorting/hash checks; it is not used as a substitute for checking the newly authored keys.
+
+## Verification method
+
 `python scripts/check-practice-expansion.py --stage A` checks every implemented Stage A automatic key, reporting executable arithmetic/code evidence separately from source-reviewed conceptual propositions. A Python result alone cannot prove a philosophical definition or documentary claim. Conceptual distractors/rationales were separately compared with their referenced lesson sections; the ledger states that evidence explicitly.
 
 `node scripts/check.cjs` checks schema, registry identity, global question-ID uniqueness, Thai content, real anchors, safe escaping, score/state invariants and deterministic isolated builds. During an incomplete stage only, set `PRACTICE_EXPECTED_COUNT` to the actual interim total. Final validation must use the default count derived from the full lesson registry.

@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-queue",
+  "title": "Queue: FIFO, circular buffer และ priorities",
+  "questions": [
+    {
+      "id": "qu-empty",
+      "type": "choice",
+      "prompt": "Linked Queue enqueue A แล้ว dequeue A จนว่าง ต้องมี state ใดก่อน enqueue B ครั้งต่อไป?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "id": "a",
+          "text": "head=None แต่ tail ยังชี้ A เพื่อใช้ซ้ำ"
+        },
+        {
+          "id": "b",
+          "text": "head=None และ tail=None; enqueue B ทำให้ทั้งคู่ชี้ B"
+        },
+        {
+          "id": "c",
+          "text": "head และ tail ชี้ A แต่ size เป็น0ก็เพียงพอ"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ลบNodeสุดท้ายต้องเคลียร์ทั้งheadและtail มิฉะนั้นtailอาจค้างNodeที่ไม่อยู่ในQueue เมื่อใส่Bในคิวว่างทั้งคู่ต้องชี้Bและsize=1"
+    },
+    {
+      "id": "qu-rear",
+      "type": "numeric",
+      "prompt": "Circular Queue cap=5 เริ่ม front=rear=0,size=0; enqueue A,B,C,D,E; dequeue 3 ครั้ง; enqueue F,G โดย rear หมายถึงช่องที่จะเขียนครั้งถัดไป จงหา rear สุดท้าย",
+      "reference": "trace",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "ใส่ABCDEครบ rearวนกลับ0;นำออก3ทำfront=3,rearยัง0;ใส่Fที่0และGที่1ทำrear=2 สภาพraw=[F,G,None,D,E],size4 แต่ลำดับFIFOคือD,E,F,G"
+    },
+    {
+      "id": "qu-full",
+      "type": "choice",
+      "prompt": "Circular Queue ที่ใช้ size แยกว่าง/เต็ม เมื่อ cap=3 และ front=rear=0 ข้อใดถูก?",
+      "reference": "circular",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เป็น empty เสมอเพราะ pointers เท่ากัน"
+        },
+        {
+          "id": "b",
+          "text": "เป็น full เสมอเพราะใช้ครบวง"
+        },
+        {
+          "id": "c",
+          "text": "ต้องดู size: size0 คือ empty และ size3 คือ full ตาม contract ที่ระบุ"
+        }
+      ],
+      "answer": "c",
+      "explanation": "pointerเท่ากันเกิดได้ทั้งว่างและเต็ม ต้องใช้sizeหรือนโยบายสำรองช่องที่ประกาศ ในบทนี้ใส่เต็มแล้วenqueueใหม่เกิดOverflowErrorโดยไม่เขียนทับข้อมูลเงียบ ๆ"
+    },
+    {
+      "id": "qu-priority",
+      "type": "choice",
+      "prompt": "Priority Queue แบบ min-heap ใช้ (priority,counter,item) ใส่ A priority2, B priority1, C priority2 ตามลำดับ จะนำออกอย่างไร?",
+      "reference": "priority",
+      "choices": [
+        {
+          "id": "a",
+          "text": "B,A,C เพราะ priority ต่ำก่อน และ tie รักษาลำดับเข้าด้วย counter"
+        },
+        {
+          "id": "b",
+          "text": "A,B,C เพราะ FIFO ทั้งหมด"
+        },
+        {
+          "id": "c",
+          "text": "B,C,A เพราะ item ที่เข้าทีหลังชนะ tie เสมอ"
+        }
+      ],
+      "answer": "a",
+      "explanation": "Bมีpriority1จึงออกก่อน AและCpriority2เท่ากันจึงเทียบcounterของAที่น้อยกว่า ทำให้Aก่อนC Counterยังช่วยไม่ให้ต้องเปรียบdictpayloadเมื่อpriorityเสมอ"
+    },
+    {
+      "id": "qu-deque",
+      "type": "choice",
+      "prompt": "งานต้องเพิ่ม VIP ด้านหน้าและคนทั่วไปด้านท้าย ควรเลือกอะไรและระวัง policy ใด?",
+      "reference": "deque",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ใช้ deque และประกาศพฤติกรรมเมื่อจำกัดความจุ ไม่ปล่อย maxlen ทิ้งข้อมูลโดยไม่บอก"
+        },
+        {
+          "id": "b",
+          "text": "ใช้ FIFO Queue ที่อนุญาต enqueue ได้เฉพาะท้ายโดยไม่มีการปรับ contract"
+        },
+        {
+          "id": "c",
+          "text": "ใช้ Stack เพราะไม่มีลำดับความสำคัญ"
+        }
+      ],
+      "answer": "a",
+      "explanation": "deque รองรับเพิ่ม/ลบสองด้านตรงกับงาน แต่ boundeddequeอาจทิ้งข้อมูลตามpolicyของมัน ต่างจากCircularQueueในบทที่rejectเมื่อเต็ม ต้องอธิบายcontractไม่เปลี่ยนADTเงียบ ๆ"
+    },
+    {
+      "id": "qu-invariants",
+      "type": "self",
+      "prompt": "เสนอ test sequence สำหรับ Linked/Circular Queue ที่ครอบคลุม empty,singleton,wrap-around,full และตรวจ FIFO หลังทุกขั้นโดยใช้ independent reference",
+      "reference": "python",
+      "explanation": "เปรียบลำดับผลลัพธ์กับdeque/รายการอ้างอิง ตรวจsizeและhead/tailเมื่อว่าง Circularตรวจ0≤size≤capacity และfront/rearmodcapacity แยกfull/emptyด้วยsize พร้อมตรวจว่าความผิดพลาดไม่เปลี่ยนstate ไม่ใช้ rawarrayเริ่มช่อง0แทนlogicalFIFO",
+      "rubric": [
+        "ครอบคลุม empty/singleton/full และ exceptions ตาม contract",
+        "ตรวจ invariants และ wrap-around ทุก operation",
+        "ใช้ reference ที่แยกจากimplementation และไม่สับสน raw storage กับ FIFO"
+      ]
+    }
+  ]
+}

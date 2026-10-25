@@ -35,6 +35,8 @@ assert.equal(path.dirname(path.resolve(temp)),path.resolve(os.tmpdir()),'Scratch
 try {
   for(const file of ['scripts/lessons.json','templates/lesson.html',source]) { fs.mkdirSync(path.dirname(path.join(temp,file)),{recursive:true});fs.copyFileSync(file,path.join(temp,file)); }
   fs.writeFileSync(path.join(temp,'scripts/lessons.json'),JSON.stringify([source])); // Keep this isolated fixture independent of other registered lessons.
+  const practice='courses/oop-python/practice/linked-list.json';
+  if(fs.existsSync(practice)){fs.mkdirSync(path.dirname(path.join(temp,practice)),{recursive:true});fs.copyFileSync(practice,path.join(temp,practice));}
   for(const file of ['courses/oop-python/summaries/final-week10-15.md','courses/oop-python/slides/Week10.pdf']) { fs.mkdirSync(path.dirname(path.join(temp,file)),{recursive:true});fs.writeFileSync(path.join(temp,file),'Fixture only'); }
   const data=structuredClone(catalog);buildLessons(data,temp);
   const target=path.join(temp,output),html=fs.readFileSync(target,'utf8'),before=JSON.stringify(data);
@@ -44,7 +46,7 @@ try {
   buildLessons(data,temp);assert.equal(fs.readFileSync(target,'utf8'),html);assert.equal(JSON.stringify(data),before);
   assert.equal(data.resources.filter(r=>r.id===parsed.meta.id).length,1);
   fs.writeFileSync(target,'<!doctype html><p>Manual reader</p>');assert.throws(()=>buildLessons(data,temp),/manual reader/);assert.equal(fs.readFileSync(target,'utf8'),'<!doctype html><p>Manual reader</p>');
-  fs.unlinkSync(target);const simple=raw.slice(0,raw.indexOf('---',4)+3)+'\n## Static {#static}\nJust text.\n';fs.writeFileSync(path.join(temp,source),simple);buildLessons(data,temp);
+  fs.unlinkSync(target);if(fs.existsSync(path.join(temp,practice)))fs.unlinkSync(path.join(temp,practice));const simple=raw.slice(0,raw.indexOf('---',4)+3)+'\n## Static {#static}\nJust text.\n';fs.writeFileSync(path.join(temp,source),simple);buildLessons(data,temp);
   assert.ok(!fs.readFileSync(target,'utf8').includes('lesson-components.'));assert.ok(!fs.readFileSync(target,'utf8').includes('lesson-contract.js'));
   data.resources.find(r=>r.id===parsed.meta.id).generatedLesson=undefined;assert.throws(()=>buildLessons(data,temp),/conflicts/);
 } finally { fs.rmSync(temp,{recursive:true,force:true}); }

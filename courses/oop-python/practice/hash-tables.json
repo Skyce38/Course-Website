@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-hash-tables",
+  "title": "Hash Tables: collision, tombstone และ load factor",
+  "questions": [
+    {
+      "id": "ht-collision",
+      "type": "choice",
+      "prompt": "Hash สมมติให้ h(A)=10,h(B)=18 ที่ capacity8 จึงได้ bucket2ทั้งคู่ ข้อใดถูก?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "id": "a",
+          "text": "collision แปลว่า A และ B เป็น key เดียวกัน ต้องแทนค่าเก่า"
+        },
+        {
+          "id": "b",
+          "text": "ยังต้องแยกด้วย equality และ collision resolution; bucket เดียวไม่แปลว่า duplicate key"
+        },
+        {
+          "id": "c",
+          "text": "ห้ามเก็บ B เพราะ hash ต่างจาก A"
+        }
+      ],
+      "answer": "b",
+      "explanation": "10mod8=18mod8=2 แต่hash/bucketเท่ากันไม่รับรองequality ต้องใช้chaining/probingและเปรียบkeyตามcontract ไม่ทิ้งentryเก่าหรือถือว่าเป็นduplicateโดยอัตโนมัติ"
+    },
+    {
+      "id": "ht-tombstone",
+      "type": "choice",
+      "prompt": "Linear Probing มี Aที่2,Bที่3,Cที่4 แล้วลบA ถ้าจะ updateB ควรทำอย่างไร?",
+      "reference": "trace",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ใส่ B ใหม่ที่ช่อง2ทันที ทำให้มี Bซ้ำได้"
+        },
+        {
+          "id": "b",
+          "text": "เปลี่ยนช่อง2เป็นNoneแล้วหยุดค้นหา"
+        },
+        {
+          "id": "c",
+          "text": "เก็บ tombstone และค้นต่อจนพบ Bที่3ก่อน update โดย sizeไม่เพิ่ม"
+        }
+      ],
+      "answer": "c",
+      "explanation": "tombstoneรักษาทางprobeไปยังB/C การreuseช่องลบต้องเป็นcandidateขณะแสวงหาkeyเดิมจนจบตามกติกา มิฉะนั้นอาจสร้างkeyซ้ำ การupdateBไม่ใช่insertkeyใหม่จึงไม่เพิ่มsize"
+    },
+    {
+      "id": "ht-load",
+      "type": "numeric",
+      "prompt": "Chaining cap4 มี3keys เมื่อเพิ่ม keyที่4และpolicyขยายcapacityเป็น8 หลังrehashให้หา load factor α=n/capacity",
+      "reference": "load",
+      "answer": 0.5,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "หลังเพิ่มมีn4และcapacity8จึงα=.5 ไม่ใช่.75จากก่อนinsert การupdatekeyเก่าไม่เพิ่มnและไม่บังคับresizeแบบinsertใหม่"
+    },
+    {
+      "id": "ht-hashability",
+      "type": "choice",
+      "prompt": "ข้อใดสรุป hashability ตามบทได้ถูกต้อง?",
+      "reference": "dict",
+      "choices": [
+        {
+          "id": "a",
+          "text": "mutable ทุกชนิดเป็น key ไม่ได้ ไม่มีข้อยกเว้น"
+        },
+        {
+          "id": "b",
+          "text": "(1,2) ใช้เป็น key ได้ แต่ tupleที่มีlistอย่าง ([1,2],) ใช้ไม่ได้; custom identity-hashed object อาจ mutable ได้"
+        },
+        {
+          "id": "c",
+          "text": "tuple ทุกชนิด hashable ไม่ว่ามีสมาชิกอะไร"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ต้องดูhash/equalitycontractและสมาชิก ไม่ใช่แค่ชื่อtype (1,2)hashableแต่tupleที่มีlistไม่hashable Customobjectอาจใช้identityhashได้แม้มีattributesเปลี่ยนได้ และequalkeysต้องมีsamehash"
+    },
+    {
+      "id": "ht-bounded",
+      "type": "choice",
+      "prompt": "ค้น keyที่ไม่มีใน Linear Probing ที่เต็มหรือมีแต่ tombstones ควรทำอย่างไร?",
+      "reference": "resolution",
+      "choices": [
+        {
+          "id": "a",
+          "text": "probe วนไปเรื่อย ๆ จนกว่าจะพบ key"
+        },
+        {
+          "id": "b",
+          "text": "สรุปว่าkeyมีอยู่เพราะมีtombstone"
+        },
+        {
+          "id": "c",
+          "text": "จำกัดจำนวน probe ไม่เกิน capacity แล้วรายงานไม่พบตาม contract"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ไม่มีempty slotไม่ได้แปลว่าจะพบkey จึงต้องมีขอบเขตprobeหนึ่งรอบtableและแยกfull/update/missingให้ถูก ไม่ปล่อยinfinite loop; fulltableยังupdateexistingkeyได้"
+    },
+    {
+      "id": "ht-contract",
+      "type": "self",
+      "prompt": "อธิบาย expected lookup O(1) เทียบ worst case,ผลของload/resize และความต่าง dict/OrderedDict/Linked List โดยไม่แต่ง project requirements",
+      "reference": "comparison",
+      "explanation": "expectedO(1)ต้องมีhashdistribution/load assumptions;ชนกันหนักอาจO(n) resizeต้องrehashตามcapacityใหม่ dictรักษาinsertion orderแต่ไม่ใช่APIเดียวกับOrderedDict.move_to_end ส่วนLinkedListค้นตามค่าอาจO(n)แม้แก้knownnodeO(1)ไม่มีNewsManager/DailyFeedsourceให้แต่งrequirements",
+      "rubric": [
+        "ระบุ expected/worst-case และhash/load assumptions",
+        "แยก update,insert,delete/tombstone กับ rehash",
+        "เปรียบordering/interface/searchcostตามหลักฐาน ไม่แต่งprojectที่ไม่มีsource"
+      ]
+    }
+  ]
+}

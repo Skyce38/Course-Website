@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-advanced-sorting",
+  "title": "Advanced Sorting: merge, partition และ trade-offs",
+  "questions": [
+    {
+      "id": "as-merge",
+      "type": "numeric",
+      "prompt": "Merge left=[1,3,5,8], right=[2,4,7,9] โดยเปรียบหัวสองฝั่งจนฝั่งใดว่าง แล้วต่อส่วนที่เหลือ จงนับ key comparisons (ไม่นับการตรวจ loop)",
+      "reference": "merge",
+      "answer": 7,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "เลือก1,2,3,4,5,7,8ผ่าน7comparisons แล้วleftหมด ต่อ9จากrightโดยไม่เทียบkeyเพิ่ม ดังนั้นcaptionที่ว่าขวาหมดก่อนขัดกับtraceนี้"
+    },
+    {
+      "id": "as-partition",
+      "type": "choice",
+      "prompt": "Lomuto partition ใช้ pivot ท้ายและเงื่อนไข ≤ บน [3,6,8,10,1,2,1] หลัง partition ครั้งแรกข้อใดถูก?",
+      "reference": "quick",
+      "choices": [
+        {
+          "id": "a",
+          "text": "[1,1,8,10,3,2,6],split index1 แต่ฝั่งขวายังต้องเรียงต่อ"
+        },
+        {
+          "id": "b",
+          "text": "[1,1,2,3,6,8,10] จบ sort ทั้งหมดแล้ว"
+        },
+        {
+          "id": "c",
+          "text": "pivot1 ต้องอยู่ index0 เสมอแม้มีค่าซ้ำ"
+        }
+      ],
+      "answer": "a",
+      "explanation": "pivotท้าย1 ถูกย้ายเข้าindex1หลังเก็บค่าที่≤1ไว้ฝั่งซ้าย ได้[1,1,8,10,3,2,6] เป็นpartitionไม่ใช่fullsort ต้องเรียกrecursiveกับส่วนที่เหลือ"
+    },
+    {
+      "id": "as-worst",
+      "type": "numeric",
+      "prompt": "Quick Sort แบบ recursive,last pivot และ key≤pivot บน [1,2,3,4,5] เปรียบ key ทั้งหมดกี่ครั้ง (ไม่นับ loop/boundary checks)?",
+      "reference": "quick",
+      "answer": 10,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "แต่ละpartitionมี4,3,2,1keycomparisonsตามขนาดsubarrayที่ลดทีละ1 รวม10 กรณีนี้แตกn−1/0 ไม่ใช่แบ่งครึ่ง"
+    },
+    {
+      "id": "as-python",
+      "type": "choice",
+      "prompt": "ถ้าต้องเรียงตาม key และคงลำดับของ key ที่เท่ากัน ข้อใดถูกเกี่ยวกับ Python interface ในบท?",
+      "reference": "timsort",
+      "choices": [
+        {
+          "id": "a",
+          "text": "sorted คืนลิสต์ใหม่และ stable; list.sort แก้ลิสต์เดิมและคืน None"
+        },
+        {
+          "id": "b",
+          "text": "list.sort คืนสำเนาลิสต์ใหม่เสมอ"
+        },
+        {
+          "id": "c",
+          "text": "ทุก implementation ของ Quick Sort stable โดยอัตโนมัติ"
+        }
+      ],
+      "answer": "a",
+      "explanation": "Python sorting รับรองstabilityของequalkeys sortedสร้างลิสต์ใหม่ ส่วนlist.sortทำin-placeและคืนNone ไม่เอาคำรับรองนี้ไปใช้กับQuickimplementationทุกแบบหรืออ้างว่าทุกsortstable"
+    },
+    {
+      "id": "as-space",
+      "type": "choice",
+      "prompt": "Recursive Quick Sort เมื่อpartitionแตก n−1/0 ซ้ำ ๆ มี call-stack space worst case เท่าใด หากยังไม่รวม trace copies?",
+      "reference": "tradeoffs",
+      "choices": [
+        {
+          "id": "a",
+          "text": "O(1) เพราะ partition ทำในarrayเดิม"
+        },
+        {
+          "id": "b",
+          "text": "O(log n) เสมอแม้ต้นไม้เอียง"
+        },
+        {
+          "id": "c",
+          "text": "O(n) เพราะ recursion depth อาจโตตาม n"
+        }
+      ],
+      "answer": "c",
+      "explanation": "corepartitionอาจใช้พื้นที่คงที่แต่recursivecallstackในกรณีเอียงลึกO(n);O(logn)ต้องมีเงื่อนไขต้นไม้สมดุล หากเก็บtraceสำเนาทุกขั้นก็มีoverheadเพิ่มนอกcore"
+    },
+    {
+      "id": "as-compare",
+      "type": "self",
+      "prompt": "เปรียบ Merge กับ Quick/Timsort ในเรื่อง stability,recursion memory,duplicate pivots และการอ่าน benchmark พร้อมแยก core จาก trace",
+      "reference": "tradeoffs",
+      "explanation": "Mergeใช้≤เพื่อเก็บequalkeysจากฝั่งซ้ายก่อนและเวอร์ชันcopy/sliceมีO(n)peak;QuickอาจลึกO(n)และduplicateทั้งหมดทำให้แย่แม้เลือกmedianที่ค่าเท่ากัน Timsort/Pythonstableใช้ประโยชน์จากrunsตามimplementation เงื่อนไข37.4xในsourceเป็นrunรายงานไม่ใช่ผลรับรองทุกเครื่อง",
+      "rubric": [
+        "ระบุ stability และmemory assumptions ของimplementationที่เปรียบ",
+        "อธิบาย duplicate/worst-case และแยก trace overhead จากcore",
+        "ไม่ทำbenchmark claimทั่วไปจากrunเดียวหรือสลับAPIของ sorted/list.sort"
+      ]
+    }
+  ]
+}

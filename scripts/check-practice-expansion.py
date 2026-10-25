@@ -4,7 +4,8 @@ Numeric/code answers use independent executable oracles. Conceptual MC keys are
 source-reviewed semantic propositions; checks identify those separately rather
 than pretending that executing Python proves a definition or teaching claim.
 """
-import argparse, json, math, pathlib, re, ast
+import argparse, json, math, pathlib, re, ast, io
+from contextlib import redirect_stdout
 from fractions import Fraction as F
 from statistics import mean
 
@@ -37,6 +38,16 @@ def choice(qid,proposition,concept=False):
  assert q['answer']==matches[0]['id'],(qid,q['answer'],matches[0]['id']);covered.add(qid)
  if concept:concepts.add(qid)
 def sigmoid(z):return 1/(1+math.exp(-z))
+def lesson_code(slug):
+ source=(ROOT/f'courses/oop-python/summaries/{slug}.md').read_text(encoding='utf-8');namespace={}
+ # Execute only the already-reviewed, repository-authored standalone examples offline.
+ with redirect_stdout(io.StringIO()):
+  for block in re.findall(r'^```python\n([\s\S]*?)^```',source,re.M):exec(compile(block,slug,'exec'),namespace)
+ return namespace
+def raises(kind,fn):
+ try:fn()
+ except kind:return
+ raise AssertionError('Expected '+kind.__name__)
 
 if 'A' in stages:
  # OLS with exact centered fractions, not the answer's coefficients or rounded worksheet line.
@@ -92,6 +103,69 @@ if 'A' in stages:
  assert sum(a*b for row,krow in zip(patch,kernel[::-1]) for a,b in zip(row,krow[::-1]))==312
  numeric('cn-size',(7+2-3)//2+1);numeric('cn-parameters',(3*3*3+1)*4);assert max([1,3,8,7])==8 and mean([1,3,8,7])==4.75
  choice('cn-pool','max8 และ average4.75');choice('cn-fc-evidence','ยังไม่ได้ ต้องมีพารามิเตอร์',True)
+
+if 'B' in stages:
+ # Object-identity traversal and link mutation, with explicit empty boundary.
+ ll=lesson_code('linked-list');Node=ll['Node'];head=Node(10);middle=Node(20);tail=Node(30);head.next=middle;middle.next=tail
+ current=head
+ while current is not None:current=current.next
+ assert head is not None and current is None;choice('ll-head','head ยังชี้ Node 10')
+ empty=None;count=0
+ while empty is not None:count+=1;empty=empty.next
+ numeric('ll-empty',count);head.next=head.next.next;current=head;count=0
+ while current is not None:count+=1;current=current.next
+ numeric('ll-remaining',count)
+ new=Node(99);new.next=head.next;head.next=new;assert head.next is new and new.next is tail
+ choice('ll-insert','new_node.next=current.next แล้ว current.next=new_node');choice('ll-tail','O(n) เพราะต้องหา',True)
+ q=lesson_code('queue');linked=q['LinkedQueue']();linked.enqueue('A');assert linked.dequeue()=='A' and linked._head is linked._tail is None;linked.enqueue('B');assert linked._head is linked._tail and linked.peek()=='B'
+ choice('qu-empty','head=None และ tail=None')
+ circular=q['CircularQueue'](5)
+ for value in 'ABCDE':circular.enqueue(value)
+ for _ in range(3):circular.dequeue()
+ for value in 'FG':circular.enqueue(value)
+ numeric('qu-rear',circular._rear);assert circular.items()==list('DEFG') and len(circular)==4
+ full=q['CircularQueue'](3)
+ for value in 'ABC':full.enqueue(value)
+ assert full._front==full._rear==0 and full.is_full();raises(OverflowError,lambda:full.enqueue('D'))
+ for _ in range(3):full.dequeue()
+ assert full._front==full._rear==0 and full.is_empty();choice('qu-full','ต้องดู size')
+ priority=q['PriorityQueue']()
+ for item,p in [('A',2),('B',1),('C',2)]:priority.enqueue(item,p)
+ assert [priority.dequeue()[0] for _ in range(3)]==list('BAC');choice('qu-priority','B,A,C เพราะ')
+ from collections import deque
+ line=deque(['A']);line.appendleft('VIP');line.append('B');assert list(line)==['VIP','A','B'];choice('qu-deque','ใช้ deque และประกาศ',True)
+ # Independently count merge/partition work, also compare the reviewed Python interfaces.
+ left=[1,3,5,8];right=[2,4,7,9];i=j=comparisons=0;merged=[]
+ while i<len(left) and j<len(right):
+  comparisons+=1
+  if left[i]<=right[j]:merged.append(left[i]);i+=1
+  else:merged.append(right[j]);j+=1
+ merged+=left[i:]+right[j:];assert merged==sorted(left+right);numeric('as-merge',comparisons)
+ values=[3,6,8,10,1,2,1];pivot=values[-1];split=0
+ for j in range(len(values)-1):
+  if values[j]<=pivot:values[split],values[j]=values[j],values[split];split+=1
+ values[split],values[-1]=values[-1],values[split];assert split==1
+ choice('as-partition',str(values).replace(' ','')+',split index'+str(split))
+ advanced=lesson_code('advanced-sorting');numeric('as-worst',sum(range(5)));assert advanced['quick_sort']([1,2,3,4,5])[1]['comparisons']==sum(range(5))
+ tagged=[(2,'A'),(1,'B'),(2,'C')];ordered=sorted(tagged,key=lambda x:x[0]);assert ordered==[(1,'B'),(2,'A'),(2,'C')] and tagged.sort(key=lambda x:x[0]) is None
+ choice('as-python','sorted คืนลิสต์ใหม่และ stable');choice('as-space','O(n) เพราะ recursion depth',True)
+ h=lesson_code('hash-tables');assert 10%8==18%8 and 10!=18;choice('ht-collision','ยังต้องแยกด้วย equality',True)
+ table=h['LinearProbingHashTable'](8);a,b,c=map(h['ForcedKey'],'ABC')
+ for k,v in [(a,1),(b,2),(c,3)]:table.insert(k,v)
+ table.delete(a);table.insert(b,42);assert len(table)==2 and table.get(b)==42;choice('ht-tombstone','เก็บ tombstone และค้นต่อ')
+ chained=h['ChainingHashTable'](4)
+ for i in range(4):chained.insert(i,i)
+ numeric('ht-load',chained.load_factor);assert chained._capacity==8
+ assert hash((1,2))==hash((1,2));raises(TypeError,lambda:hash(([1,2],)))
+ class Mutable:pass
+ mutable=Mutable();old=hash(mutable);mutable.x=1;assert hash(mutable)==old;choice('ht-hashability','(1,2) ใช้เป็น key ได้')
+ one=h['LinearProbingHashTable'](1);one.insert('A',1);raises(KeyError,lambda:one.get('missing'));raises(OverflowError,lambda:one.insert('B',2));choice('ht-bounded','จำกัดจำนวน probe ไม่เกิน capacity',True)
+ arrays=lesson_code('arrays-dynamic-array');array=arrays['DynamicArray']()
+ for i in range(8):array.append(i)
+ numeric('ar-cost',array.copies+len(array));numeric('ar-row-major',1*4+2);assert array.capacity==8
+ assert sum([1,2,4])<2*8 and 8+sum([1,2,4])<3*8;choice('ar-amortized','ต้นทุนรวมของลำดับ n appends',True)
+ empty=arrays['DynamicArray']();raises(IndexError,lambda:empty[0]);empty.insert_at(0,None);assert empty[0] is None;raises(IndexError,lambda:empty[-1]);choice('ar-indices','insert_at(0,x)ใช้ได้')
+ rows=[[0]*4]*3;rows[0][0]=9;assert [r[0] for r in rows]==[9,9,9];independent=[[0]*4 for _ in range(3)];independent[0][0]=9;assert [r[0] for r in independent]==[9,0,0];choice('ar-alias','ทุกแถวที่column0กลายเป็น9')
 
 # Each self-assessment is intentionally not autograded. Source/rubric review is documented.
 for data in selected:

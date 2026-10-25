@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-arrays-dynamic-array",
+  "title": "Dynamic Array: doubling, indices และ aliasing",
+  "questions": [
+    {
+      "id": "ar-cost",
+      "type": "numeric",
+      "prompt": "Dynamic Array เริ่มcapacity1,size0และขยายสองเท่าเมื่อเต็ม ให้copyเก่าหนึ่งค่าเป็น1หน่วยและwriteใหม่หนึ่งค่าเป็น1หน่วย append8ค่าใช้copy+writeรวมกี่หน่วย?",
+      "reference": "amortized",
+      "answer": 15,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "resizecopyครั้งละ1,2,4รวม7 และwriteใหม่8ครั้งรวม8 จึง15 ไม่ใช่ทุกappendมีต้นทุน1;ครั้งที่5ต้องcopy4+write1=5"
+    },
+    {
+      "id": "ar-row-major",
+      "type": "numeric",
+      "prompt": "Matrix3แถว4คอลัมน์เก็บrow-majorและใช้zero-based indices ตำแหน่ง row1,column2 มีflat indexเท่าใด?",
+      "reference": "matrix",
+      "answer": 6,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "flat index=row×จำนวนคอลัมน์+column=1×4+2=6 ไม่ใช้จำนวนแถว3เป็นstrideของแถว"
+    },
+    {
+      "id": "ar-amortized",
+      "type": "choice",
+      "prompt": "ข้อใดอธิบาย amortized O(1) ของ append แบบdoublingได้ถูก?",
+      "reference": "amortized",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทุกcallมีต้นทุนO(1)แม้ต้องcopyข้อมูลเดิมทั้งหมด"
+        },
+        {
+          "id": "b",
+          "text": "ต้นทุนรวมของลำดับ n appends เป็นO(n) แม้บางcallเป็นO(n);ไม่ต้องสมมติinputสุ่ม"
+        },
+        {
+          "id": "c",
+          "text": "หมายถึงexpectedเวลาจากinputสุ่มเสมอ"
+        }
+      ],
+      "answer": "b",
+      "explanation": "doublingทำให้ผลรวมcopyเป็นอนุกรมเรขาคณิต<2n บวกwrite nจึง<3nสำหรับmodelนี้ เป็นsequence bound ไม่ใช่รับรองแต่ละcallหรือprobabilisticaverage"
+    },
+    {
+      "id": "ar-indices",
+      "type": "choice",
+      "prompt": "ตามcustomarraycontractในบท ถ้าarrayว่าง operationใดใช้ได้ และข้อใดไม่ควรยกจากPythonlistมาสมมติเอง?",
+      "reference": "complexity",
+      "choices": [
+        {
+          "id": "a",
+          "text": "insert_at(0,x)ใช้ได้เพราะi=size;get(0)ล้มเหลว และnegativeindexไม่ได้รองรับโดยอัตโนมัติ"
+        },
+        {
+          "id": "b",
+          "text": "get(0)คืนNoneเสมอแทนerror"
+        },
+        {
+          "id": "c",
+          "text": "insert_at(0,x)ต้องล้มเหลวเพราะยังไม่มีindexที่0"
+        }
+      ],
+      "answer": "a",
+      "explanation": "insertionยอมให้0≤i≤size ส่วนgetต้อง0≤i<size arrayว่างจึงinsert0ได้แต่get0IndexError และmodelนี้ไม่ได้สัญญาว่ามีnegativeindex/slicingแบบPythonlist;Noneเป็นlivevalueได้"
+    },
+    {
+      "id": "ar-alias",
+      "type": "choice",
+      "prompt": "หลัง rows=[[0]*4]*3 แล้ว rows[0][0]=9 จะเกิดอะไร และแก้การสร้างแถวอย่างไร?",
+      "reference": "matrix",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เปลี่ยนเฉพาะแถว0เสมอเพราะlistคัดลอกทุกระดับ"
+        },
+        {
+          "id": "b",
+          "text": "ทุกแถวที่column0กลายเป็น9เพราะแชร์sublistเดียว;ใช้comprehensionสร้างแต่ละแถวแยกกัน"
+        },
+        {
+          "id": "c",
+          "text": "เกิดIndexErrorเพราะrowsไม่มีrow0"
+        }
+      ],
+      "answer": "b",
+      "explanation": "การคูณouterlistทำสำเนาreferencesไปsublistเดียว จึงเห็นค่า9จากทั้ง3แถว สร้าง[[0]*4 for _ in range(3)]จะได้คนละsublist ไม่ใช่เพียงcopyouterlistภายหลัง"
+    },
+    {
+      "id": "ar-growth",
+      "type": "self",
+      "prompt": "เปรียบ doubling กับขยายcapacityทีละ1 และอธิบายต้นทุนinsert/removeกลางarrayรวมทั้งพื้นที่ว่างและNone livevalue",
+      "reference": "trace",
+      "explanation": "doublingมีcopyรวมเชิงเรขาคณิตจึงamortizedappendO(1)ภายใต้model ส่วนเพิ่มทีละ1อาจcopy1+...+(n−1)=O(n²) insert/removeกลางต้องshiftเช่นindex1ใน[10,20,30,40]เลื่อน3ค่า ต้องแยกsize/capacityและอย่าใช้Noneตัดสินlive slotเพราะNoneเป็นค่าข้อมูลได้",
+      "rubric": [
+        "แสดงผลรวมต้นทุนและแยกsingle-callจากsequence",
+        "อธิบายทิศทางshiftและขอบเขตindicesเมื่อinsert/remove",
+        "แยกsize/capacity/liveNoneและไม่อ้างdoublingเป็นallocationpolicyตรงของCPython"
+      ]
+    }
+  ]
+}
