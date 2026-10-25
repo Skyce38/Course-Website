@@ -167,6 +167,48 @@ if 'B' in stages:
  empty=arrays['DynamicArray']();raises(IndexError,lambda:empty[0]);empty.insert_at(0,None);assert empty[0] is None;raises(IndexError,lambda:empty[-1]);choice('ar-indices','insert_at(0,x)ใช้ได้')
  rows=[[0]*4]*3;rows[0][0]=9;assert [r[0] for r in rows]==[9,9,9];independent=[[0]*4 for _ in range(3)];independent[0][0]=9;assert [r[0] for r in independent]==[9,0,0];choice('ar-alias','ทุกแถวที่column0กลายเป็น9')
 
+if 'C' in stages:
+ n=lesson_code('classes-objects');Bank=n['BankAccount'];a=Bank('A',0);assert isinstance(a,Bank) and type(Bank) is type;choice('co-instance','BankAccount คือ class')
+ account=Bank('A',1000);account.deposit(500);account.withdraw(200);numeric('co-balance',account.balance);alias=account;identity=id(alias);del account;alias.deposit(100);assert id(alias)==identity and alias.balance==1400;choice('co-alias','aliasยังอ้างobjectเดิม')
+ class BadInit:
+  def __init__(self):return 1
+ raises(TypeError,BadInit);choice('co-init','เกิดTypeError')
+ class LocalOnly:
+  def __init__(self,balance):balance=balance
+ raises(AttributeError,lambda:LocalOnly(100).balance);choice('co-local','AttributeError เพราะ')
+ n=lesson_code('encapsulation-properties');Account=n['Account'];raises(ValueError,lambda:Account('x','A',-1));choice('ep-constructor','เกิดValueErrorระหว่างสร้าง')
+ a=Account('x','A',100);a.deposit(20);a.withdraw(30);raises(ValueError,lambda:a.withdraw(100));numeric('ep-balance',a.balance);a.balance=200;numeric('ep-count',a.transaction_count);raises(TypeError,lambda:a.balance());choice('ep-property-call','TypeError เพราะ')
+ raises(AttributeError,lambda:setattr(a,'owner','B'));assert getattr(a,'_Account__owner')=='A';choice('ep-private','ไม่มีpublic setter')
+ for invalid in ['100',True]:raises(TypeError,lambda:setattr(a,'balance',invalid))
+ for invalid in [-1,float('nan')]:raises(ValueError,lambda:setattr(a,'balance',invalid))
+ assert a.balance==200
+ n=lesson_code('inheritance-mro');D=n['D'];mro=','.join(c.__name__ for c in D.__mro__);choice('im-mro',mro);assert D().chain()==['D','B','C','A'];choice('im-super','C เพราะsuper')
+ base=n['BankAccount']('x','N',1000);s=n['SavingsAccount']('x','N',1000,.03);assert isinstance(s,n['BankAccount']);base.withdraw(1000);assert base.balance==0;raises(ValueError,lambda:s.withdraw(1000));choice('im-lsp','clientฐานที่อนุญาตถอนหมด')
+ class Base:
+  def __init__(self):self.__count=1
+ class Child(Base):
+  def __init__(self):super().__init__();self.__count=2
+ child=Child();assert vars(child)=={'_Base__count':1,'_Child__count':2};choice('im-private','อาจเป็นคนละชื่อ')
+ zero=n['SavingsAccount']('x','N',1000,0);assert zero.apply_interest()==0 and zero.transaction_count==0;choice('im-zero','คืน0โดยไม่เรียกdeposit0')
+ s=n['SavingsAccount']('x','N',10000,.03);assert s.apply_interest()==300 and s.balance==10300;s.withdraw(9800);assert (s.balance,s.transaction_count)==(500,2);raises(ValueError,lambda:s.withdraw(1))
+ n=lesson_code('polymorphism-abc');Shape=n['Shape'];numeric('pa-perimeter',n['Rectangle'](3,4).perimeter())
+ class Missing(Shape):
+  def area(self):return 0
+ raises(TypeError,Missing);choice('pa-abstract','ไม่ได้ เกิดTypeError')
+ assert n['total_area']([n['Badge']()])==1 and not isinstance(n['Badge'](),Shape);choice('pa-duck','ผ่านการเรียกแบบduck typing')
+ raises(ValueError,lambda:n['Circle'](0));raises(TypeError,lambda:n['Rectangle']('3',4));choice('pa-validation','Circle(0)ValueError')
+ from abc import ABC
+ class EmptyABC(ABC):pass
+ assert isinstance(EmptyABC(),ABC);choice('pa-empty-abc','ได้;การใช้ABCเพียงอย่างเดียว')
+ n=lesson_code('object-relationships');team=n['Team']('A');player=n['Player']('P');team.add_player(player);snapshot=team.players;team.remove_player(player);snapshot[0].score();assert len(snapshot)==1 and team.players==() and snapshot[0] is player and player.goals==1;choice('or-snapshot','tupleยังยาว1และอ้างpเดิม')
+ house=n['House']()
+ for name,area in [('L',20),('K',12),('B',6)]:house.add_room(name,area)
+ numeric('or-area',house.total_area);choice('or-song','aggregationตามownershipcontract',True);choice('or-domain','Doctor/Patientเป็นassociation',True)
+ owner=[object()];part=owner[0];identity=id(part);del owner;assert id(part)==identity;choice('or-lifetime','ไม่รับรอง ต้องแยกdomainownership',True)
+ n=lesson_code('uml-solid');assert n['client_area'](n['Rectangle'](2,3))==20 and n['client_area'](n['CoupledSquare'](2))==16;choice('us-square','observablecontractของclientผิด')
+ log=n['MemoryLog']();service=n['NotificationService'](log);assert service.notify(n['Push'](),'A','hello')=='Push:A:hello' and log.entries==['Push:A:hello']
+ for qid,proposition in [('us-uml','เพชรโปร่งที่Team'),('us-srp','พิจารณาเหตุผลของการเปลี่ยน'),('us-ocp','ออกแบบจุดขยาย'),('us-cost','designprincipleไม่เปลี่ยนต้นทุนงานจริง')]:choice(qid,proposition,True)
+
 # Each self-assessment is intentionally not autograded. Source/rubric review is documented.
 for data in selected:
  for q in data['questions']:

@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-classes-objects",
+  "title": "Classes และ Objects: state, methods และ references",
+  "questions": [
+    {
+      "id": "co-instance",
+      "type": "choice",
+      "prompt": "จาก a=BankAccount(\"A\",0) ข้อใดแยก class/object/reference ได้ถูก?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "id": "a",
+          "text": "BankAccount คือ class, การเรียกสร้าง instance และ a เป็นชื่อที่อ้างถึง instance"
+        },
+        {
+          "id": "b",
+          "text": "a คือ class ที่เป็นสำเนาแบบแปลนทุกครั้งที่อ่าน"
+        },
+        {
+          "id": "c",
+          "text": "BankAccount(\"A\",0) เป็นเพียงdictionaryโดยไม่มีmethods"
+        }
+      ],
+      "answer": "a",
+      "explanation": "classกำหนดโครงสร้าง/พฤติกรรม การเรียกconstructorสร้างinstance ส่วนaเป็นชื่อreferenceไม่ใช่แบบแปลน ไม่สมมติว่าการassignชื่อสร้างสำเนาobject"
+    },
+    {
+      "id": "co-balance",
+      "type": "numeric",
+      "prompt": "ใช้ BankAccount ตามบท เริ่มbalance1000 จากนั้นdeposit500และwithdraw200โดยทั้งสองoperationสำเร็จ จงหายอดคงเหลือ",
+      "reference": "trace",
+      "answer": 1300,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "1000+500−200=1300 แต่หากถอน1400ครั้งถัดไปจะValueErrorก่อนลดเงิน ยอดต้องยัง1300 การคำนวณนี้ยึดcontractจำนวนเงินบวกและไม่ถอนเกินยอด"
+    },
+    {
+      "id": "co-alias",
+      "type": "choice",
+      "prompt": "หลัง alias=a แล้ว del a ถ้ายังไม่มีการลบ reference อื่นทั้งหมด ข้อใดถูก?",
+      "reference": "references",
+      "choices": [
+        {
+          "id": "a",
+          "text": "objectต้องถูกทำลายทันทีและaliasใช้ไม่ได้"
+        },
+        {
+          "id": "b",
+          "text": "aliasยังอ้างobjectเดิมได้ การassignไม่ได้cloneobject"
+        },
+        {
+          "id": "c",
+          "text": "aliasกลายเป็นclassโดยอัตโนมัติ"
+        }
+      ],
+      "answer": "b",
+      "explanation": "del aลบชื่อa ไม่ได้สั่งทำลายobjectที่aliasยังอ้างอยู่ การเรียกmethodผ่านaliasจึงยังใช้stateเดิมได้ ไม่รับรองเวลาทำลายobjectจากการลบชื่อเดียว"
+    },
+    {
+      "id": "co-init",
+      "type": "choice",
+      "prompt": "ถ้า __init__ ของclassผู้เขียนคืนค่า1แทนNone การเรียกสร้างinstanceจะเกิดอะไรในPython?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ได้instanceที่มีค่า1เป็นreturnหลักตามปกติ"
+        },
+        {
+          "id": "b",
+          "text": "ได้integer1แทนinstanceเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "เกิดTypeError เพราะ __init__ ต้องคืนNone"
+        }
+      ],
+      "answer": "c",
+      "explanation": "__init__เป็นinitializerของinstanceที่สร้างแล้ว ต้องคืนNone;return1ทำให้TypeError อย่าสับสนกับฟังก์ชันfactoryหรือ__new__ที่เป็นคนละoperation"
+    },
+    {
+      "id": "co-local",
+      "type": "choice",
+      "prompt": "ถ้า __init__ เขียน balance=balance เป็นเพียงlocalและไม่มีการกำหนดattributeจากที่อื่น ต่อมาอ่านobj.balanceจะเกิดอะไร?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "id": "a",
+          "text": "AttributeError เพราะยังไม่ได้สร้างinstance attributeด้วยself.balance"
+        },
+        {
+          "id": "b",
+          "text": "ได้ค่า0อัตโนมัติทุกattribute"
+        },
+        {
+          "id": "c",
+          "text": "เปลี่ยนclass attributeของทุกobjectให้เท่ากันเสมอ"
+        }
+      ],
+      "answer": "a",
+      "explanation": "assignmentชื่อล้วนในmethodไม่ได้เท่ากับself.balance ต้องผูกattributeกับinstanceโดยชัดเจน ภายใต้เงื่อนไขว่าไม่มีattributeจากแหล่งอื่นจึงอ่านแล้วAttributeError"
+    },
+    {
+      "id": "co-contract",
+      "type": "self",
+      "prompt": "ออกแบบtest BankAccount สองinstanceและalias โดยครอบคลุมdefault balance,deposit0,withdrawเกินยอด และอธิบายว่าการใช้classต่างจากdictionaryอย่างไร",
+      "reference": "python",
+      "explanation": "แต่ละinstanceควรแยกยอด default0;aliasของหนึ่งinstanceแก้stateเดียวกัน deposit0/withdrawเกินยอดผิดcontractโดยไม่เปลี่ยนยอด classรวมmethodsและinvariantsได้แต่ไม่ใช่ว่าdictionaryทำทุกอย่างไม่ได้ ต้องระบุvalidation/interfaceและพฤติกรรมจริง",
+      "rubric": [
+        "ทดสอบinstance independenceกับalias identityแยกกัน",
+        "ตรวจexceptionsและstateไม่เปลี่ยนเมื่อoperationล้มเหลว",
+        "อธิบายclass/state/method/contractโดยไม่อ้างว่าclassปลอดภัยเองอัตโนมัติ"
+      ]
+    }
+  ]
+}

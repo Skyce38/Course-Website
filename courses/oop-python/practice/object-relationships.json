@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-object-relationships",
+  "title": "Object Relationships: identity, ownership และ snapshots",
+  "questions": [
+    {
+      "id": "or-snapshot",
+      "type": "choice",
+      "prompt": "Team.playersคืนtuple snapshotที่มีPlayer p ก่อนremove pออกจากTeam เมื่อยังเก็บsnapshotไว้ ข้อใดถูก?",
+      "reference": "trace",
+      "choices": [
+        {
+          "id": "a",
+          "text": "snapshotต้องว่างตามTeamทันทีเพราะtupleเป็นviewเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "tupleยังยาว1และอ้างpเดิม การremoveจากTeamไม่ใช่deepcopyหรือลบทุกreference"
+        },
+        {
+          "id": "c",
+          "text": "Playerถูกcloneใหม่ทุกครั้งที่อ่านtuple"
+        }
+      ],
+      "answer": "b",
+      "explanation": "snapshotตรึงรายการreferencesขณะสร้าง ไม่ใช่liveviewของcontainerแต่ก็ไม่clonePlayer การเรียกoperationผ่านsnapshot[0]ยังเปลี่ยนpเดิมได้ ต้องแยกcontainercopyกับelementidentity"
+    },
+    {
+      "id": "or-area",
+      "type": "numeric",
+      "prompt": "HouseมีRoomสามห้องพื้นที่20,12,6ตามตัวอย่าง จงหาค่าtotal_area",
+      "reference": "practice",
+      "answer": 38,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "รวม20+12+6=38 การคำนวณtotal_areaต้องอ่านพื้นที่ห้องทั้งrห้องจึงO(r) ต่างจากroom_countที่อ่านlenได้O(1)"
+    },
+    {
+      "id": "or-song",
+      "type": "choice",
+      "prompt": "ในscenarioที่Songมีตัวตนอิสระและใช้หลายPlaylistได้ ความสัมพันธ์ตามบทคืออะไรและควรเพิ่มSongอย่างไร?",
+      "reference": "relationships",
+      "choices": [
+        {
+          "id": "a",
+          "text": "compositionเสมอเพราะPlaylistมีlist และต้องcloneSongทุกครั้ง"
+        },
+        {
+          "id": "b",
+          "text": "inheritanceเพราะPlaylistคือSongชนิดหนึ่ง"
+        },
+        {
+          "id": "c",
+          "text": "aggregationตามownershipcontract และเก็บreferenceSongเดิมเมื่อควรคงidentity"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ชื่อlistไม่กำหนดownership ในscenarioนี้Songอยู่ได้อิสระ/ใช้หลายPlaylistจึงaggregation การสร้างSongใหม่โดยไม่ตั้งใจอาจทำmetadataหรือidentityหาย ต้องยึดdomaincontract"
+    },
+    {
+      "id": "or-domain",
+      "type": "choice",
+      "prompt": "ตามscenarioWeek5ที่Doctor.examineใช้Patientโดยไม่เก็บ และCarสร้างEngineภายในโดยไม่ย้ายระหว่างรถ ข้อใดตรงกับบท?",
+      "reference": "practice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Doctor/Patientเป็นassociation;Car/Engineเป็นcompositionตามcontractนั้น"
+        },
+        {
+          "id": "b",
+          "text": "Doctor/Patientต้องinheritanceและCar/Engineต้องaggregationเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "ชื่อCar/Engineเพียงอย่างเดียวตัดสินownershipทุกระบบได้"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ต้องดูการใช้reference/การสร้างและownershipที่กำหนด Doctorใช้Patientชั่วคราวเป็นassociation ส่วนCarเป็นเจ้าของEngineตามscenarioนี้เป็นcomposition ไม่อนุมานทุกระบบจากคำนามอย่างเดียว"
+    },
+    {
+      "id": "or-lifetime",
+      "type": "choice",
+      "prompt": "CompositionในUMLรับรองหรือไม่ว่าเมื่อdelชื่อownerแล้วPythonจะทำลายpartทันทีแม้มีaliasถึงpartอยู่?",
+      "reference": "lifetime",
+      "choices": [
+        {
+          "id": "a",
+          "text": "รับรองทันทีเพราะเพชรทึบเป็นคำสั่งgarbagecollector"
+        },
+        {
+          "id": "b",
+          "text": "ไม่รับรอง ต้องแยกdomainownershipออกจากreference/lifetimeของภาษา"
+        },
+        {
+          "id": "c",
+          "text": "รับรองเฉพาะเมื่อpartเป็นmutable"
+        }
+      ],
+      "answer": "b",
+      "explanation": "compositionแสดงสัญญาownership ไม่ใช่คำสั่งGC Pythonaliasที่ยังอ้างpartอาจรักษาpartไว้หลังลบชื่อowner ต้องออกแบบinterfaceไม่เผยreferenceที่ฝืนcontractโดยไม่พิจารณา"
+    },
+    {
+      "id": "or-design",
+      "type": "self",
+      "prompt": "ออกแบบการส่งroom summariesและplayer snapshotsให้client โดยแยกcopy,identity,ownershipและต้นทุน แล้วอธิบายสิ่งที่read-onlycontainerยังไม่ป้องกัน",
+      "reference": "complexity",
+      "explanation": "snapshotของreferencesอาจป้องกันแก้containerเดิมแต่ยังเข้าถึงmutableobjectsเดิมได้ summariesที่สร้างใหม่ต้องอธิบายขอบเขตcopy การอ่านlenอาจO(1)แต่การรวมพื้นที่หรือสร้างr summariesเป็นO(r) ไม่อ้างว่าทุกpropertyO(1)หรือtupleทำให้ทุกobjectimmutable",
+      "rubric": [
+        "แยกcontainercopy/deepcopyและidentityของelements",
+        "รักษาownershipตามdomainและบอกข้อจำกัดalias/read-onlycontainer",
+        "วิเคราะห์len,total_areaและsnapshotตามงานจริง"
+      ]
+    }
+  ]
+}

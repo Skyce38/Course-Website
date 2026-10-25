@@ -17,8 +17,6 @@ All questions are authored adaptations of verified lesson content, not official 
 
 Self-assessments: rg-rounding, nb-models, hc-linkages, km-audit, pc-xor, bp-check, dl-architecture, cn-order. Each has three specific rubric criteria and no automatic answer key. The source-limited lab, unsupported style-transfer settings and missing FC weights remain uncertain rather than filled in.
 
-## Verification method
-
 ## Stage B — OOP Data Structures
 
 | Lesson | Automatic IDs / objectives | Heading evidence | Independent verification |
@@ -30,6 +28,19 @@ Self-assessments: rg-rounding, nb-models, hc-linkages, km-audit, pc-xor, bp-chec
 | arrays-dynamic-array | ar-cost/row-major/amortized/indices/alias | amortized, matrix, complexity | Reviewed DynamicArray operation/copy counts, independent flat index, geometric bound, None/invalid-index checks and actual shared-sublist/comprehension behavior |
 
 Self-assessments: ll-audit, qu-invariants, as-compare, ht-contract, ar-growth. They require explicit boundary/complexity/ownership assumptions, not unsupported asymptotic claims. Existing `check-oop-data-structures.py` also passes its independent randomized stack/queue/sorting/hash checks; it is not used as a substitute for checking the newly authored keys.
+
+## Stage C — OOP Foundations
+
+| Lesson | Automatic IDs / objectives | Heading evidence | Independent verification |
+|---|---|---|---|
+| classes-objects | co-instance/balance/alias/init/local | concepts, trace, references, mistakes | Actual BankAccount construction/transactions/identity; separate Python bad-initializer and missing-instance-attribute counterexamples |
+| encapsulation-properties | ep-constructor/balance/count/property-call/private | properties, trace, practice, concepts | Actual constructor/setter and method execution; successful versus rejected transactions; property-call/read-only exceptions and mangled-name inspection |
+| inheritance-mro | im-mro/super/lsp/private/zero | practice, python, contracts, trace | Python MRO/cooperative chain; base/subclass withdrawal counterexample; explicit name-mangling fixture and zero-interest state; Savings rubric arithmetic also executed |
+| polymorphism-abc | pa-perimeter/abstract/duck/validation/empty-abc | trace, abc, concepts, python | Actual Shape/Badge/Rectangle interfaces; missing abstract method TypeError; validation exceptions; independent ABC-without-abstract-method instance |
+| object-relationships | or-snapshot/area/song/domain/lifetime | trace, practice, relationships, lifetime | Actual Team/Player snapshot identity and House area; Python alias lifetime counterexample; source review of domain-specific aggregation/association/composition |
+| uml-solid | us-uml/srp/ocp/square/cost | uml, srp, ocp, lsp, complexity | Rectangle/CoupledSquare observable-contract counterexample and Push side effect executed; UML symbols/SRP/OCP/complexity assumptions reviewed against lesson |
+
+Self-assessments: co-contract, ep-validation, im-savings, pa-triangle, or-design, us-push. Rubrics distinguish type from behavior, read-only from immutability/security, domain ownership from GC, and design principles from runtime guarantees.
 
 ## Verification method
 

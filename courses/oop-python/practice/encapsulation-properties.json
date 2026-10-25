@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-encapsulation-properties",
+  "title": "Encapsulation และ Properties: validation กับสัญญา",
+  "questions": [
+    {
+      "id": "ep-constructor",
+      "type": "choice",
+      "prompt": "Account(\"x\",\"A\",−1) ตามโค้ดบทนี้ที่constructorส่งค่าผ่านbalance setter มีผลอย่างไร?",
+      "reference": "properties",
+      "choices": [
+        {
+          "id": "a",
+          "text": "สร้างบัญชียอดติดลบสำเร็จเพราะsetterใช้ได้เฉพาะภายหลัง"
+        },
+        {
+          "id": "b",
+          "text": "เกิดValueErrorระหว่างสร้าง เพราะvalidationใช้ตั้งแต่constructor"
+        },
+        {
+          "id": "c",
+          "text": "ชื่อprivateทำให้Pythonแก้ค่า−1เป็น0เอง"
+        }
+      ],
+      "answer": "b",
+      "explanation": "constructorเรียกsetterจึงใช้invariantเดียวกับการแก้ภายหลัง ค่าติดลบถูกปฏิเสธ ไม่ได้ข้ามกฎเพียงเพราะกำลังสร้างobject และprivateไม่ได้แก้ตัวเลขให้อัตโนมัติ"
+    },
+    {
+      "id": "ep-balance",
+      "type": "numeric",
+      "prompt": "Accountเริ่ม100 ฝาก20สำเร็จ ถอน30สำเร็จ แล้วถอน100ล้มเหลวเพราะเกินยอด จงหายอดหลังจับexceptionของครั้งสุดท้าย",
+      "reference": "trace",
+      "answer": 90,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "100+20−30=90 การถอน100ล้มเหลวก่อนแก้stateจึงยัง90 ไม่ใช่−10 และไม่ย้อนสองoperationที่สำเร็จก่อนหน้า"
+    },
+    {
+      "id": "ep-count",
+      "type": "numeric",
+      "prompt": "ตามcontractcountนับเฉพาะdeposit/withdrawที่สำเร็จ: เริ่มcount0ฝาก20ถอน30สำเร็จ ถอน100ล้มเหลว แล้วตั้งbalance=200ผ่านsetterโดยตรง จงหาcountสุดท้าย",
+      "reference": "practice",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "มีธุรกรรมสำเร็จเพียง2ครั้ง การถอนล้มเหลวไม่เพิ่มcount และการตั้งpropertyโดยตรงไม่ใช่transactionตามนิยามนี้ จึงcount2แม้balanceเปลี่ยนเป็น200"
+    },
+    {
+      "id": "ep-property-call",
+      "type": "choice",
+      "prompt": "ถ้าa.balanceเป็นpropertyที่คืนค่าตัวเลข และค่าปัจจุบัน100 การเขียน a.balance() จะเกิดอะไร?",
+      "reference": "properties",
+      "choices": [
+        {
+          "id": "a",
+          "text": "TypeError เพราะพยายามเรียกตัวเลขเหมือนfunction"
+        },
+        {
+          "id": "b",
+          "text": "ได้100เพราะpropertyต้องใส่วงเล็บเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "เปลี่ยนbalanceเป็นNone"
+        }
+      ],
+      "answer": "a",
+      "explanation": "อ่านpropertyด้วยa.balance getterถูกเรียกโดยattribute accessแล้ว การเติม()พยายามเรียกค่าตัวเลขจึงTypeError ต่างจากmethodชื่อget_balance()"
+    },
+    {
+      "id": "ep-private",
+      "type": "choice",
+      "prompt": "ownerเป็นread-only propertyและเก็บด้วย__owner ข้อใดถูกเกี่ยวกับmanglingและsecurity?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Pythonเข้ารหัสownerจนไม่มีทางเข้าถึงจากภายนอก"
+        },
+        {
+          "id": "b",
+          "text": "การassigna.ownerใช้setterที่ไม่มีโดยอัตโนมัติ"
+        },
+        {
+          "id": "c",
+          "text": "ไม่มีpublic setterจึงassignownerไม่ได้ตามinterface;name manglingไม่ใช่securityและยังฝืนเข้าถึงชื่อที่ถูกmangleได้"
+        }
+      ],
+      "answer": "c",
+      "explanation": "read-onlyช่วยกำหนดinterfaceและป้องกันการแก้ผ่านproperty แต่ชื่อ_Account__ownerยังเป็นชื่อที่Pythonใช้ ไม่ใช่ระบบสิทธิ์/การเข้ารหัส การฝืนข้ามinterfaceไม่ใช่การใช้งานที่รับรอง"
+    },
+    {
+      "id": "ep-validation",
+      "type": "self",
+      "prompt": "เสนอtestsสำหรับbalance=\"100\",True,−1และNaN โดยตรวจทั้งexception/stateเดิม และอธิบายว่าทำไมread-only propertyไม่รับรองdeep immutability",
+      "reference": "python",
+      "explanation": "ตามpolicyบทนี้string/boolเกิดTypeError ส่วนnegative/nonfiniteเกิดValueErrorและต้องไม่เปลี่ยนค่าเดิม เพราะboolเป็นsubclassของintจึงต้องตรวจเจาะจงหากต้องห้าม Read-onlypropertyห้ามเปลี่ยนผ่านsetterไม่ได้แปลว่าobjectย่อยหรือชื่อmangledเปลี่ยนไม่ได้",
+      "rubric": [
+        "แยกtype errorกับrange/nonfinite errorตามcontractที่ประกาศ",
+        "ตรวจstateไม่เปลี่ยนทุกกรณีและอธิบายbool/int",
+        "แยกinterface read-only,name manglingและdeep immutabilityโดยไม่อ้างsecurity"
+      ]
+    }
+  ]
+}

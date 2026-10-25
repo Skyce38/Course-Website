@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-uml-solid",
+  "title": "UML, SRP, OCP และ LSP ตาม behavioral contracts",
+  "questions": [
+    {
+      "id": "us-uml",
+      "type": "choice",
+      "prompt": "อ่านUMLตามcontract Team/Playerที่partอิสระ และOrder/OrderLineที่เจ้าของสร้างจัดการ ควรใช้สัญลักษณ์อย่างไร?",
+      "reference": "uml",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เพชรโปร่งที่Teamสำหรับaggregation;เพชรทึบที่Orderสำหรับcomposition;ลูกศรinheritanceชี้ฐาน"
+        },
+        {
+          "id": "b",
+          "text": "เพชรทึบที่Playerเสมอและinheritanceชี้child"
+        },
+        {
+          "id": "c",
+          "text": "ทุกความสัมพันธ์ใช้ลูกศรเดียวกันจึงไม่ต้องดูownership"
+        }
+      ],
+      "answer": "a",
+      "explanation": "เพชรวางที่ฝั่งwhole/ownerและแยกโปร่งกับทึบตามความสัมพันธ์ที่ประกาศ inheritanceชี้ฐาน ไม่ตัดสินจากชื่อตัวแปรหรือมีcontainerเพียงอย่างเดียว"
+    },
+    {
+      "id": "us-srp",
+      "type": "choice",
+      "prompt": "Reportคำนวณข้อมูล,formatCSVและบันทึกไฟล์อาจเปลี่ยนคนละเหตุผล ข้อใดตีความSRPถูก?",
+      "reference": "srp",
+      "choices": [
+        {
+          "id": "a",
+          "text": "classที่มีมากกว่าหนึ่งmethodผิดSRPเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "พิจารณาเหตุผลของการเปลี่ยน/ความรับผิดชอบที่ต่างกัน ไม่ใช่นับmethodอย่างเดียว"
+        },
+        {
+          "id": "c",
+          "text": "รวมทุกอย่างไว้classเดียวจะรับรองSRPอัตโนมัติ"
+        }
+      ],
+      "answer": "b",
+      "explanation": "SRPคือแยกresponsibilitiesที่อาจเปลี่ยนต่างเหตุผล ไม่ใช่กฎหนึ่งmethodต่อclass งานคำนวณ/format/storageอาจแยกตามบริบท แต่หลายmethodของresponsibilityเดียวไม่ผิดโดยอัตโนมัติ"
+    },
+    {
+      "id": "us-ocp",
+      "type": "choice",
+      "prompt": "ข้อใดอธิบายOCPตามบทได้เหมาะสม?",
+      "reference": "ocp",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ห้ามแก้sourceเดิมทุกกรณีแม้มีbug"
+        },
+        {
+          "id": "b",
+          "text": "เพิ่มclassให้มากที่สุดแล้วไม่ต้องมีcontract"
+        },
+        {
+          "id": "c",
+          "text": "ออกแบบจุดขยายเพื่อลดการแก้clientซ้ำ แต่ยังแก้bugformatterได้ ไม่ใช่ข้อห้ามแก้โค้ดตายตัว"
+        }
+      ],
+      "answer": "c",
+      "explanation": "OCPใช้abstraction/extensionpointที่รักษาcontract ไม่ใช่ห้ามmaintenanceหรือbugfix การเลือกclassใหม่ที่compositionrootทำได้โดยไม่ต้องเพิ่มifทุกชนิดในservice"
+    },
+    {
+      "id": "us-square",
+      "type": "choice",
+      "prompt": "Clientตั้งwidth5,height4แล้วคาดarea20 Rectangleให้20 แต่Squareที่ผูกside (CoupledSquareในโค้ด) ให้4ทั้งสองด้านจึงได้16 ข้อสรุปใดถูก?",
+      "reference": "lsp",
+      "choices": [
+        {
+          "id": "a",
+          "text": "SquareแทนRectangleได้เสมอเพราะisinstanceTrue"
+        },
+        {
+          "id": "b",
+          "text": "observablecontractของclientผิดเมื่อแทนSquare แม้typecheckผ่าน จึงเป็นLSPcounterexampleนี้"
+        },
+        {
+          "id": "c",
+          "text": "area16ทำให้Pythonคำนวณเลขผิด"
+        }
+      ],
+      "answer": "b",
+      "explanation": "Rectanglecontractในclientอนุญาตแก้width/heightอิสระ Squareผูกสองด้านจึงเปลี่ยนpostconditionของoperation การสืบทอดทางsyntaxไม่เพียงพอจะรับรองLSP ไม่ใช่ข้อห้ามคณิตศาสตร์ว่าทุกSquareไม่เป็นRectangle"
+    },
+    {
+      "id": "us-cost",
+      "type": "choice",
+      "prompt": "เพิ่มChannelclassเพื่อขยายformatterแล้ว งานformatข้อความยาวmต้องอ่าน/สร้างข้อความตามความยาว ข้อใดถูก?",
+      "reference": "complexity",
+      "choices": [
+        {
+          "id": "a",
+          "text": "การเพิ่มclassทำให้runtimeเป็นO(1)โดยอัตโนมัติ"
+        },
+        {
+          "id": "b",
+          "text": "designprincipleไม่เปลี่ยนต้นทุนงานจริง อาจยังO(m) และต้องระบุcontract/implementation"
+        },
+        {
+          "id": "c",
+          "text": "OCPรับรองว่าไม่มีallocationเกิดขึ้น"
+        }
+      ],
+      "answer": "b",
+      "explanation": "SRP/OCP/LSPเป็นเรื่องdesign/contracts ไม่ใช่สูตรลดoperationcount การformat/สร้างข้อความยาวmยังต้องพิจารณาO(m)และallocationตามimplementation ไม่อ้างว่ามีclassจึงconstanttime"
+    },
+    {
+      "id": "us-push",
+      "type": "self",
+      "prompt": "ออกแบบเพิ่มPushChannelให้notifyโดยไม่เพิ่มtypebranchในservice แล้ววางtestsด้านข้อความ,side effectsและLSP พร้อมอ่านUMLownershipอย่างมีเหตุผล",
+      "reference": "python",
+      "explanation": "Pushต้องทำformatตามChannelcontractและให้clientcompositionเลือกinstanceใหม่ notifyเรียกprotocolเดิม บทตัวอย่างPush:A:helloถูกบันทึกหนึ่งครั้ง ต้องทดสอบผลและจำนวนsideeffectsโดยไม่เสริมpreconditionที่clientเดิมไม่รู้ การแยกsender/formatterไม่ยกเลิกต้นทุนข้อความ",
+      "rubric": [
+        "เสนอextensionpointและclientcompositionที่ไม่เพิ่มifตามชนิดทุกครั้ง",
+        "ทดสอบข้อความ/sideeffectsและobservablecontractเพื่อดูLSP",
+        "เชื่อมUML/SRP/ownershipกับขอบเขตงาน ไม่รับรองperformanceหรือGCโดยไม่มีหลักฐาน"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-polymorphism-abc",
+  "title": "Polymorphism, Duck Typing และ ABC",
+  "questions": [
+    {
+      "id": "pa-perimeter",
+      "type": "numeric",
+      "prompt": "Rectangleกว้าง3สูง4ตามinterfaceในบท คำนวณperimeterคืนค่าเท่าใด? ไม่ใช่area",
+      "reference": "trace",
+      "answer": 14,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "perimeter=2(3+4)=14 ส่วนarea=3×4=12 การเรียกinterfaceเดียวกันบนรูปต่างชนิดต้องใช้สูตรของชนิดจริง"
+    },
+    {
+      "id": "pa-abstract",
+      "type": "choice",
+      "prompt": "Shapeประกาศareaและperimeterเป็นabstract ถ้าMissing(Shape)implementเพียงareaจะinstantiateได้หรือไม่?",
+      "reference": "abc",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ได้เพราะมีmethodอย่างน้อยหนึ่งอัน"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ได้ เกิดTypeErrorเพราะperimeterยังabstract"
+        },
+        {
+          "id": "c",
+          "text": "ได้และPythonเติมperimeterให้เป็น0เอง"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ABCบังคับว่าabstractmethodsที่ยังไม่implementedต้องครบก่อนสร้างconcreteinstance ไม่มีการเดาสูตรperimeterหรือถือว่าทำareaแล้วครบทุกรายการ"
+    },
+    {
+      "id": "pa-duck",
+      "type": "choice",
+      "prompt": "Badgeไม่ได้สืบทอดShapeแต่มีarea()คืน1 แล้วผ่านtotal_areaที่ใช้area protocol ข้อใดถูก?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ผ่านการเรียกแบบduck typingได้ แต่isinstance(Badge(),Shape)ยังFalse"
+        },
+        {
+          "id": "b",
+          "text": "isinstanceต้องTrueทันทีที่มีmethodชื่อเหมือนกัน"
+        },
+        {
+          "id": "c",
+          "text": "duck typingแปลว่าPythonไม่เคยมีTypeError"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ความสามารถตอบprotocolและความสัมพันธ์typeเป็นคนละเรื่อง Badgeใช้ผ่านclientที่เรียกareaได้โดยไม่ต้องเป็นShape แต่ถ้าขาดoperationหรือผิดcontractก็ยังผิดพลาดได้"
+    },
+    {
+      "id": "pa-validation",
+      "type": "choice",
+      "prompt": "ตามvalidationของบท Circle(0)และRectangle(\"3\",4)ให้ผลใด?",
+      "reference": "python",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทั้งสองสร้างได้เพราะPythonแปลงstringเป็นfloatเองเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "Circle(0)TypeErrorแต่Rectangle(\"3\",4)ValueError"
+        },
+        {
+          "id": "c",
+          "text": "Circle(0)ValueErrorเพราะขอบเขต;Rectangle(\"3\",4)TypeErrorเพราะชนิด"
+        }
+      ],
+      "answer": "c",
+      "explanation": "การตรวจtypeกับrangeเป็นคนละขั้น policyนี้ไม่รับdimension0และไม่coerceข้อความเป็นตัวเลขอัตโนมัติ การsetradiusติดลบต้องไม่เปลี่ยนradiusเดิมด้วย"
+    },
+    {
+      "id": "pa-empty-abc",
+      "type": "choice",
+      "prompt": "classที่สืบทอดABCแต่ไม่มีabstractmethodค้างอยู่ สามารถinstantiateได้หรือไม่?",
+      "reference": "abc",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ได้;การใช้ABCเพียงอย่างเดียวไม่ได้ทำให้ทุกclassสร้างinstanceไม่ได้"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ได้ไม่ว่ามีabstractmethodหรือไม่"
+        },
+        {
+          "id": "c",
+          "text": "ได้เฉพาะเมื่อปิดPythonvalidationทั้งหมด"
+        }
+      ],
+      "answer": "a",
+      "explanation": "สิ่งที่ขวางการสร้างคือabstractmethodsที่ยังค้างภายใต้ABCMeta ไม่ใช่ชื่อABCล้วน ๆ อีกทั้งabstractmethodอาจมีbodyให้ลูกเรียกผ่านsuperได้ตามdesign"
+    },
+    {
+      "id": "pa-triangle",
+      "type": "self",
+      "prompt": "เสนอTriangleที่รักษาShapecontractและเพิ่มเข้าtotal_areaโดยไม่เพิ่มisinstancebranch พร้อมกรณีinvaliddimensionและวิเคราะห์ต้นทุนรวม",
+      "reference": "types",
+      "explanation": "implementarea/perimeterและvalidationให้สอดคล้องinterfaceแล้วส่งผ่านlistเดิมได้ clientเรียกoperationไม่จำเป็นต้องbranchตามtype ระบุว่าnรูปที่แต่ละareaO(1)รวมO(n) และทดสอบinvaliddimensions/abstractครบ ไม่อ้างว่าการมีmethodชื่อเหมือนรับรองsemanticsเสมอ",
+      "rubric": [
+        "implementครบและรักษาความหมาย/validationของinterface",
+        "แสดงclientที่เรียกprotocolโดยไม่ขยายtypebranch",
+        "ระบุกรณีผิดสัญญาและBig-Oassumptionsของผลรวม"
+      ]
+    }
+  ]
+}
