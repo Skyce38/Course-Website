@@ -5,7 +5,7 @@ Branch: codex/ai-final-complete. Base: origin/main including PR14. Existing work
 | Stage | Scope | State |
 |---|---|---|
 | A | Reuse verified Naive Bayes | Validated; source/numerical/build checks pass; prior browser results reused |
-| B | Decision Tree; Hierarchical | Pending |
+| B | Decision Tree; Hierarchical | Validated: source images, all gains/merges, 80 MI + 75 SciPy checks, build/regressions and 3-width browser/copy checks |
 | C | K-Means; Perceptron | Pending |
 | D | Backpropagation; DL/RNN/GAN | Pending |
 | E | CNN; source-supported lab preparation | Pending |

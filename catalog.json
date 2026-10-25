@@ -436,6 +436,28 @@
       "reader": "read/artificial-intelligence/final-naive-bayes.html",
       "generatedLesson": 1,
       "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/artificial-intelligence/summaries/final-naive-bayes.md"
+    },
+    {
+      "id": "artificial-intelligence-final-decision-tree",
+      "course": "artificial-intelligence",
+      "category": "summaries",
+      "title": "FINAL: ต้นไม้ตัดสินใจ Entropy และ Information Gain (Decision Tree & ID3)",
+      "path": "summaries/final-decision-tree.md",
+      "format": "MD",
+      "reader": "read/artificial-intelligence/final-decision-tree.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/artificial-intelligence/summaries/final-decision-tree.md"
+    },
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering",
+      "course": "artificial-intelligence",
+      "category": "summaries",
+      "title": "FINAL: ความคล้ายและการจัดกลุ่มลำดับชั้น (Similarity & Hierarchical Clustering)",
+      "path": "summaries/final-hierarchical-clustering.md",
+      "format": "MD",
+      "reader": "read/artificial-intelligence/final-hierarchical-clustering.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/artificial-intelligence/summaries/final-hierarchical-clustering.md"
     }
   ]
 }

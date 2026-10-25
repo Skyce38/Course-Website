@@ -14,7 +14,9 @@
         "artificial-intelligence-search-models-bfs-dfs",
         "artificial-intelligence-final-regression",
         "artificial-intelligence-final-knn",
-        "artificial-intelligence-final-naive-bayes"
+        "artificial-intelligence-final-naive-bayes",
+        "artificial-intelligence-final-decision-tree",
+        "artificial-intelligence-final-hierarchical-clustering"
       ]
     }
   ]
