@@ -10,7 +10,9 @@
 - เลือก ownership/multiplicity ให้เข้ากับ domain และอธิบาย Pythonlifetime อย่างถูกต้อง
 
 ## ทำไมไม่ยัดทุกอย่างใน Class เดียว {#concepts}
-Week5 pp.3–18 ยก order/address/item และการเก็บ object ไว้เป็น attribute แยกข้อมูลกับพฤติกรรมตามขอบเขตที่เปลี่ยนจริง เช่นอ้าง Addressobject แทนขนานหลาย lists ซึ่ง index คลาดกันได้ Attribute เก็บ reference ไม่ใช่สำเนา object ใหม่ `None`อาจแทนความสัมพันธ์ที่ยังไม่มี;ต้องตรวจ None ก่อนเรียก method
+Week5 pp.3–18 ยก order / address / item และการเก็บ object ไว้เป็น attribute แยกข้อมูลกับพฤติกรรมตามขอบเขตที่เปลี่ยนจริง เช่น อ้าง Address object แทนการใช้หลายลิสต์ขนานกัน ซึ่ง index อาจคลาดกันได้
+
+Attribute เก็บ reference ไม่ใช่สำเนา object ใหม่ `None` อาจแทนความสัมพันธ์ที่ยังไม่มี จึงต้องตรวจ None ก่อนเรียก method
 
 ## ความสัมพันธ์สามแบบ {#relationships}
 | แบบ | เจตนา | ตัวอย่างที่ source ใช้ | สิ่งที่ต้องประกาศ |

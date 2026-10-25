@@ -12,7 +12,9 @@
 ## Inheritance และการออกแบบสัญญา {#concepts}
 Week3 pp.3–16 แก้ copy-paste ด้วย subclass: `class SavingsAccount(BankAccount)` สืบทอด method/property ที่ค้นพบตาม MRO แต่ instance ยังมี objectidentity ของมันเอง ไม่ได้คัดลอก instance บัญชีแม่อีกตัวขึ้นมา `isinstance(s,BankAccount)`เป็น True และ `issubclass(SavingsAccount,BankAccount)`เป็น True แต่ชนิดอย่างเดียวไม่พิสูจน์ LSP
 
-Override คือนิยามชื่อ method เดิมใน child อาจแทนทั้งหมดหรือขยายด้วย super เช่น source ให้ withdraw ตรวจขั้นต่ำก่อนใช้ logic ฐาน และ apply_interest เรียก deposit เพื่อนับธุรกรรม ไม่ควรอ้างว่าทุก override ต้องเรียก super เสมอ ขึ้นกับสัญญาของ operation
+Override คือนิยามชื่อ method เดิมใน child อาจแทนทั้งหมดหรือขยายด้วย super เช่น source ให้ withdraw ตรวจขั้นต่ำก่อนใช้ logic ฐาน และ apply_interest เรียก deposit เพื่อนับธุรกรรม
+
+ไม่ควรอ้างว่าทุก override ต้องเรียก super เสมอ ขึ้นกับสัญญาของ operation
 
 `super()`คืน proxy ที่ค้นหาลำดับถัดไปใน MRO ไม่ใช่ object พ่ออีกตัว และไม่จำเป็นต้องตรงกับ parent ที่คิดไว้โดยชื่อ ใน diamondD(B,C)ลำดับ D,B,C,A,object ทำให้ super ใน B ไป C การเรียก A.method(self)ตรงอาจข้าม C/ทำ base ซ้ำ ควรใช้ cooperativeinterfaces ที่รับ arguments เข้ากันได้
 

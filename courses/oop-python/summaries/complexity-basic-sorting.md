@@ -11,7 +11,9 @@
 - เลือกวิธีตาม near-sorteddata/ต้นทุนย้าย และทดสอบ empty/duplicate/boundaries
 
 ## Time, Space และ Cases {#complexity}
-Week13 pp.3–13:O(1),O(log n),O(n),O(n log n),O(n²)บอกอัตราการโตไม่ใช่วินาที Big-O เป็น upperbound ไม่ได้มีความหมายว่า worstcase โดยตัวมันเอง ต้องระบุว่าเรากำลัง boundbest/average/worst หรือ amortized แม้3n+2เป็น O(n²)ได้แต่ใช้ tightboundΘ(n)อธิบายได้แม่นกว่า
+Week13 pp.3–13:O(1),O(log n),O(n),O(n log n),O(n²)บอกอัตราการโตไม่ใช่วินาที
+
+Big-O เป็น upperbound ไม่ได้มีความหมายว่า worstcase โดยตัวมันเอง ต้องระบุว่าเรากำลัง boundbest/average/worst หรือ amortized แม้3n+2เป็น O(n²)ได้แต่ใช้ tightboundΘ(n)อธิบายได้แม่นกว่า
 
 loopn รอบทำงานคงที่ให้Θ(n);สามเหลี่ยม(n−1)+(n−2)+...+1=n(n−1)/2ให้Θ(n²);การหารช่วงลงครึ่งทุกครั้งให้ logn เมื่อมีเงื่อนไขครบ ไม่ท่องว่าทุก nestedloop ต้อง n² เพราะขอบเขต loop อาจต่างกัน ตัวอย่าง comparison จำนวนมากไม่ใช่เวลาจริงหากต้นทุนเปรียบเทียบต่างกัน
 

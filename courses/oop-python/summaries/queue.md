@@ -122,7 +122,9 @@ Week12 pp.20–22เริ่ม cap5 A,B,C,D,E เต็ม;dequeue สาม�
 ลำดับทางกายภาพไม่ใช่ logicalorder การแสดงผลต้องเดิน `(front+i)%capacity` เพียง size ครั้ง Source บาง diagramrear ชี้ค่าตัวสุดท้าย แต่ classcode ใช้ช่องถัดไป จึงประกาศนิยามก่อน trace ไม่สลับสอง conventions
 
 ## Deque และการเลือก ADT {#deque}
-pp.26–30:double-endedqueue เพิ่ม/ลบได้สองปลาย:append/appendleft,pop/popleft;peek ใช้[0]/[-1]เมื่อไม่ว่าง เหมาะคิวทั่วไป/ประวัติ/งานสองปลาย ตรงข้ามกับ APIStack หรือ Queue ที่ตั้งใจจำกัดการใช้ ความเป็น deque ไม่ได้ทำให้ค้น/ลบค่ากลาง O(1) ข้อกำหนด boundeddeque อาจ discard อีกฝั่งเมื่อเต็ม ส่วน CircularQueue ตัวอย่าง raiseOverflowError ต้องเลือกตามงาน
+pp.26–30:double-endedqueue เพิ่ม/ลบได้สองปลาย:append/appendleft,pop/popleft;peek ใช้[0]/[-1]เมื่อไม่ว่าง เหมาะคิวทั่วไป/ประวัติ/งานสองปลาย ตรงข้ามกับ APIStack หรือ Queue ที่ตั้งใจจำกัดการใช้
+
+ความเป็น deque ไม่ได้ทำให้ค้น/ลบค่ากลาง O(1) ข้อกำหนด boundeddeque อาจ discard อีกฝั่งเมื่อเต็ม ส่วน CircularQueue ตัวอย่าง raiseOverflowError ต้องเลือกตามงาน
 
 ตัวอย่างที่มีจริง:PrintJobScheduler ใช้ FIFO;RestaurantWaitlist มีการจัดการสองปลาย;BoundedUndoHistory จำกัดประวัติเก่า นี่คือโจทย์ local ที่ตรวจแล้ว ไม่ใช่การสร้าง requirementsNewsManager ซึ่งไม่พบ source
 

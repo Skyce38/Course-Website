@@ -11,7 +11,9 @@
 - อ่าน dendrogram, cuts และ outlier โดยไม่ตีความเป็น probability
 
 ## Supervised เทียบ Unsupervised {#concepts}
-S09 pp.2–5: supervised มี (X,Y) เช่น classification/regression; unsupervised ใช้ X โดยไม่มี teacher labels Clustering ต้องการคล้ายกันมากภายในกลุ่มและคล้ายกันน้อยข้ามกลุ่ม หน้า4ยก people/images/language/species ไม่ได้มีคำตอบกลุ่มเดียวที่ถูกเสมอ Mixture models/dimensionality reduction เป็นชื่อที่เอ่ยหน้า5 ไม่ใช่เนื้อหาขยายในบทนี้
+S09 pp.2–5: supervised มี (X,Y) เช่น classification/regression; unsupervised ใช้ X โดยไม่มี teacher labels
+
+Clustering ต้องการคล้ายกันมากภายในกลุ่มและคล้ายกันน้อยข้ามกลุ่ม หน้า4ยก people/images/language/species ไม่ได้มีคำตอบกลุ่มเดียวที่ถูกเสมอ Mixture models/dimensionality reduction เป็นชื่อที่เอ่ยหน้า5 ไม่ใช่เนื้อหาขยายในบทนี้
 
 ## Similarity, Distance และ Correlation {#distance}
 pp.6–9 อธิบายว่าความคล้ายขึ้นกับตัวแทน/เกณฑ์และให้คุณสมบัติ metric: nonnegative, symmetry, d(x,x)=0, identity of indiscernibles และ triangle inequality รูปคน/ข้อความ/genes เป็นตัวอย่าง representation ไม่ใช่การวัดหน่วยเดียวกันทั้งหมด

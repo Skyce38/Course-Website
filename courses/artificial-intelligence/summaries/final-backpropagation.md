@@ -11,7 +11,9 @@
 - ตรวจผลด้วย finite differences และรู้ข้อจำกัดของการลด loss หนึ่งก้าว
 
 ## Single Layer สู่ Multilayer {#networks}
-S10 pp.19–21 ต่อจากข้อจำกัด XOR: perceptron เดียวสร้าง linear decision surface เครือข่ายหลายชั้นรวมขอบเขตได้ซับซ้อนขึ้น S11 pp.2–5 แสดง weighted sum, nonlinear activation และ hidden layers ถ้าทุกชั้นเป็น affine map โดยไม่มี nonlinearity การซ้อนยังยุบเป็น affine map เดียว จึงไม่แก้ XOR ด้วยการเพิ่มชั้นเชิงเส้นอย่างเดียว
+S10 pp.19–21 ต่อจากข้อจำกัด XOR: perceptron เดียวสร้าง linear decision surface เครือข่ายหลายชั้นรวมขอบเขตได้ซับซ้อนขึ้น
+
+S11 pp.2–5 แสดง weighted sum, nonlinear activation และ hidden layers ถ้าทุกชั้นเป็น affine map โดยไม่มี nonlinearity การซ้อนยังยุบเป็น affine map เดียว จึงไม่แก้ XOR ด้วยการเพิ่มชั้นเชิงเส้นอย่างเดียว
 
 ### XOR ตาม weights ใน S10 p.20
 ภาพใช้ binary threshold ไม่ใช่ sigmoid: hidden ตัวบน weights(1,1),bias−.5 ทำ OR; ตัวล่าง weights(1,1),bias−1.5 ทำ AND; output weights(1,−2),bias−.5 บทนี้กำหนด >0 (ไม่มีกรณีเท่าศูนย์สำหรับสี่ inputs นี้)

@@ -12,7 +12,9 @@
 - ตรวจข้อผิดพลาดตัวเลขใน source โดยไม่จำค่าที่ขัดกับสูตร
 
 ## ภาพ, Pixels และ CNN {#images}
-S11 pp.12–14 ยก CNN สำหรับข้อมูลเชิงพื้นที่ (spatialdata) เช่นภาพ/วิดีโอ ใช้ filters ดึง features แล้วส่งต่อ classifier ภาพกากบาท5×5เป็นตัวแทนเชิงตัวเลข:ช่องกากบาทกำหนด5และที่เหลือ1 เป็น **encoding สมมติ** ไม่ใช่มาตรฐานว่าสีฟ้าทุกภาพมี pixel5 ภาพ grayscale เป็น H×W; RGB มี3channels ซึ่งแต่ละ pixel เก็บสามค่า
+S11 pp.12–14 ยก CNN สำหรับข้อมูลเชิงพื้นที่ (spatialdata) เช่นภาพ/วิดีโอ ใช้ filters ดึง features แล้วส่งต่อ classifier
+
+ภาพกากบาท5×5เป็นตัวแทนเชิงตัวเลข:ช่องกากบาทกำหนด5และที่เหลือ1 เป็น **encoding สมมติ** ไม่ใช่มาตรฐานว่าสีฟ้าทุกภาพมี pixel5 ภาพ grayscale เป็น H×W; RGB มี3channels ซึ่งแต่ละ pixel เก็บสามค่า
 
 ภาพ pipelinep.13แสดง convolution/ReLU/pooling หลายครั้งแล้ว flatten/FC/softmax ส่วน workedexamplepp.19–30ใช้ convolution→pooling→ReLU→FC ต้องตามลำดับของตัวอย่าง ไม่สรุปว่า CNN ทุกแบบมี layerorder เดียวกัน หน้าเว็บไม่ train โมเดลหรือแสดง accuracy ที่แต่งขึ้น
 

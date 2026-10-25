@@ -83,7 +83,7 @@ function markdown(body, context) {
       addID(id); headings.push({id,title:match[2],level:match[1].length}); result+='<h'+match[1].length+' id="'+esc(id)+'">'+inline(match[2],context)+'</h'+match[1].length+'>'; i++;
     } else if (line.startsWith('|') && /^\|[\s:|\-]+\|$/.test(lines[i+1] || '')) {
       const cells = value => value.slice(1,-1).split('|').map(cell=>inline(cell.trim(),context));
-      result+='<div class="table-scroll"><table><thead><tr>'+cells(line).map(cell=>'<th scope="col">'+cell+'</th>').join('')+'</tr></thead><tbody>'; i+=2;
+      result+='<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง / Table"><table><thead><tr>'+cells(line).map(cell=>'<th scope="col">'+cell+'</th>').join('')+'</tr></thead><tbody>'; i+=2;
       while(i<lines.length && lines[i].startsWith('|')) { result+='<tr>'+cells(lines[i++]).map(cell=>'<td>'+cell+'</td>').join('')+'</tr>'; } result+='</tbody></table></div>';
     } else if (/^- /.test(line)) {
       result+='<ul>'; while(i<lines.length && /^- /.test(lines[i])) result+='<li>'+inline(lines[i++].slice(2),context)+'</li>'; result+='</ul>';

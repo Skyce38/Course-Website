@@ -11,7 +11,9 @@
 - แยก binary workbook ออกจาก bipolar slides และผลรายงาน L01 ที่จำลองซ้ำไม่ได้
 
 ## Artificial Neural Network {#ann}
-S10 pp.2–8 ใช้สมอง/เซลล์ประสาทเป็นแรงบันดาลใจ ไม่ได้หมายถึงแบบจำลองสมองครบถ้วน Artificial neuron รับ inputs x คูณ weights w แล้วบวก bias b ผ่าน activation เพื่อได้ output เครือข่ายมี input, hidden และ output layers การเรียนรู้เปลี่ยน weights ตามข้อมูล ไม่ใช่จำเพียงโครงรูป neuron หน้า9 เปรียบเทียบ forward/feedback connections; feedback connection ไม่ใช่คำเดียวกับ backpropagation ซึ่งเป็นวิธีหาความชัน
+S10 pp.2–8 ใช้สมอง/เซลล์ประสาทเป็นแรงบันดาลใจ ไม่ได้หมายถึงแบบจำลองสมองครบถ้วน
+
+Artificial neuron รับ inputs x คูณ weights w แล้วบวก bias b ผ่าน activation เพื่อได้ output เครือข่ายมี input, hidden และ output layers การเรียนรู้เปลี่ยน weights ตามข้อมูล ไม่ใช่จำเพียงโครงรูป neuron หน้า9 เปรียบเทียบ forward/feedback connections; feedback connection ไม่ใช่คำเดียวกับ backpropagation ซึ่งเป็นวิธีหาความชัน
 
 $$
 z=b+\sum_j w_jx_j,\qquad y=f(z)

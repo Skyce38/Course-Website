@@ -11,7 +11,11 @@
 - ใช้__len__,__getitem__,__setitem__,__str__,__repr__ให้ตรง logicaldata
 
 ## Memory Model และ Random Access {#concepts}
-Week7 pp.26–38:array มีช่องตำแหน่งต่อเนื่องในแบบจำลอง จึงคำนวณ base_address+i×element_size ได้โดยไม่เดินผ่านสมาชิกก่อนหน้า เป็นเหตุผลของ indexaccessO(1)เมื่อขนาดช่องคงที่ Python list เก็บ references ในช่อง ไม่ได้แปลว่า objects ที่มีชนิด/ขนาดต่างกันวางติดกันทั้งหมด สูตรนี้ไม่ใช่วิธีหา address จริงของ Python object จาก id ด้วยการบวกเอง
+Week7 pp.26–38:array มีช่องตำแหน่งต่อเนื่องในแบบจำลอง จึงคำนวณ base_address+i×element_size ได้โดยไม่เดินผ่านสมาชิกก่อนหน้า เป็นเหตุผลของ indexaccessO(1)เมื่อขนาดช่องคงที่
+
+Python list เก็บ references ในช่อง ไม่ได้แปลว่า objects ที่มีชนิด/ขนาดต่างกันวางติดกันทั้งหมด
+
+สูตรนี้ไม่ใช่วิธีหา address จริงของ Python object จาก id ด้วยการบวกเอง
 
 FixedArray กำหนด capacity ตอนสร้างและปฏิเสธเมื่อเต็ม DynamicArray ขยาย buffer เมื่อจำเป็น จึงมี0≤size≤capacity;size นับค่าจริงและ capacity นับ slot ทั้งหมด ค่า None อาจเป็นค่าจริงใน array ได้จึงห้ามใช้ None แทนขนาด การสร้าง capacity slots O(capacity)เป็นคนละคำถามกับการอ่าน index หนึ่งครั้ง O(1)
 

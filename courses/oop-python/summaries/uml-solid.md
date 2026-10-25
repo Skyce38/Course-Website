@@ -24,7 +24,9 @@ Channel <|-- Email / SMS / Push  (implements interface)
 ตาราง p.26มี5แบบ worked:inheritance ลูกศรหัวสามเหลี่ยมโปร่งชี้ฐาน,realization เส้นประหัวสามเหลี่ยมชี้ interface,association เส้นทั่วไป,aggregation เพชรโปร่งฝั่ง whole,composition เพชรทึบฝั่ง whole หัวข้อ p.19เรียก6ระดับแต่ไม่แสดง worked ตัวที่หกครบ จึงไม่แต่งว่า source สอนตัวอย่าง dependency เพิ่มเติม การวาดสัญลักษณ์ไม่ทำให้ code มี validation/multiplicity เอง
 
 ## SRP: หนึ่งเหตุผลของการเปลี่ยน {#srp}
-Week6 pp.28–35แยก Report การคำนวณ,Formatter รูปแบบ,Repository การเก็บ,Notifier การแจ้งเตือน เพราะ requirements เหล่านี้เปลี่ยนคนละเหตุผล SRP ไม่ใช่มี method เดียวต่อ class และไม่ควรแยก count/total/average เป็นสาม class โดยไม่มีเหตุผลต่างกัน การแยกมากเกินไปเพิ่ม coupling/ความซับซ้อนแทน
+Week6 pp.28–35แยก Report การคำนวณ,Formatter รูปแบบ,Repository การเก็บ,Notifier การแจ้งเตือน เพราะ requirements เหล่านี้เปลี่ยนคนละเหตุผล
+
+SRP ไม่ใช่มี method เดียวต่อ class และไม่ควรแยก count/total/average เป็นสาม class โดยไม่มีเหตุผลต่างกัน การแยกมากเกินไปเพิ่ม coupling/ความซับซ้อนแทน
 
 ## OCP: เปิดให้ขยายผ่านจุดที่ออกแบบไว้ {#ocp}
 pp.37–43และ Week7 pp.14–23:ถ้าต้องเพิ่ม output/channel ใหม่แล้วกลับไปแก้ ifemail/sms/...ทุกครั้ง อาจแยก interface ให้เพิ่ม implementation ใหม่ โดย client ไม่ต้องรู้ชนิด OCP ไม่ใช่ห้ามแก้โค้ดใดตลอดกาล:การแก้ bug หรือเปลี่ยนสัญญาฐานยังทำได้หลังประเมินผลกระทบ จุด compositionroot ที่เลือก channel ย่อมต้องรับ configuration ใหม่

@@ -11,7 +11,9 @@
 - แยก hashability,insertionorder และ choice ของ dict/OrderedDict/LinkedList
 
 ## Hash Function และ Collision {#concepts}
-Week15 pp.2–11: index=hash(key)%capacity ช่วยระบุตำแหน่งตั้งต้น ไม่ต้อง scan ทุก key เมื่อ hash กระจายดี hash เดียวกันไม่ได้แปลว่า key เท่ากันเพราะพื้นที่ hash/buckets จำกัด (pigeonholeprinciple) ต้องใช้ equality ตรวจ key จริงด้วย
+Week15 pp.2–11: index=hash(key)%capacity ช่วยระบุตำแหน่งตั้งต้น ไม่ต้อง scan ทุก key เมื่อ hash กระจายดี
+
+hash เดียวกันไม่ได้แปลว่า key เท่ากันเพราะพื้นที่ hash/buckets จำกัด (pigeonholeprinciple) ต้องใช้ equality ตรวจ key จริงด้วย
 
 Hash ที่ใช้งานได้ต้องคงที่ระหว่างใช้ key ในตารางและ key ที่เท่ากันต้องมี hash เท่ากัน การกระจายสม่ำเสมอและคำนวณเร็วช่วย performance แต่ไม่ได้ห้าม collision หรือรับรองทุก keyO(1)โดยไม่ดูขนาด key การ hashstring ยาว m อาจมีต้นทุน O(m)และ equals ก็แพงได้ จึงประกาศ key cost คงที่เมื่อวิเคราะห์ O(1)แบบย่อ
 

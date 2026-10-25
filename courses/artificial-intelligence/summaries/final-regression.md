@@ -11,10 +11,12 @@
 - แยก simple กับ multiple regression และอ่าน feature/target จากโค้ด C02 ได้
 - ตรวจผลคำนวณด้วย Python และแยก training error ออกจากความสามารถบนข้อมูลใหม่
 
-**ลำดับอ่าน:** ทบทวน [Foundations & Agents](ai-foundations-agents.md) ตามจำเป็น แล้วอ่านบท FINAL นี้ได้โดยไม่ต้องใช้ BFS/DFS เป็น prerequisite การวางไว้หลัง [Search Models & BFS/DFS](search-models-bfs-dfs.md) ใน Learning Path เป็น **ลำดับเผยแพร่ชั่วคราว ไม่ใช่ลำดับสอนที่ยืนยันแล้ว** หัวข้อ 8-Puzzle/A*, Minimax และ Logic หยุดการสร้างบทใหม่ไว้ตามลำดับความสำคัญ FINAL โดยไม่ลบงานเดิม
+**ลำดับอ่าน:** ทบทวน [Foundations & Agents](ai-foundations-agents.md) ตามจำเป็น แล้วอ่านบท FINAL นี้ได้โดยไม่ต้องใช้ BFS/DFS เป็น prerequisite [Search Models & BFS/DFS](search-models-bfs-dfs.md) เป็นบทอ่านแยกอิสระ ลำดับเผยแพร่ไม่ใช่ลำดับสอนที่ยืนยันแล้ว หัวข้อ 8-Puzzle/A*, Minimax และ Logic หยุดการสร้างบทใหม่ไว้ตามลำดับความสำคัญ FINAL โดยไม่ลบงานเดิม
 
 ## ทบทวนการเรียนรู้แบบมีผู้สอน (Supervised Learning) {#supervised}
-คำอธิบายเสริมเชื่อมกับข้อมูลมีคู่ input–target ใน A03 และ C02/D03: แต่ละตัวอย่างมี feature หรือ X และค่าจริง Y ที่ใช้ฝึกให้แบบจำลองทำนาย Regression ทำนายค่าตัวเลข เช่น ค่าอาหารหรือ PerformanceIndex ต่างจาก classification ที่เลือกคลาส สูตร supervised recap นี้ไม่ได้อ้างว่าเป็นเนื้อหาใหม่บน S06 หน้า 2
+คำอธิบายเสริมเชื่อมกับข้อมูลมีคู่ input–target ใน A03 และ C02/D03: แต่ละตัวอย่างมี feature หรือ X และค่าจริง Y ที่ใช้ฝึกให้แบบจำลองทำนาย Regression ทำนายค่าตัวเลข เช่น ค่าอาหารหรือ PerformanceIndex ต่างจาก classification ที่เลือกคลาส สูตร supervised recap นี้ไม่ได้อ้างว่าเป็นเนื้อหาใหม่บน
+
+S06 หน้า 2
 
 | งาน | Features | Target |
 |---|---|---|

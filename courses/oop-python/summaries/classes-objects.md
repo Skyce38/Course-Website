@@ -10,7 +10,9 @@
 - อ่านข้อผิดพลาด TypeError/AttributeError จากโค้ด และอธิบายขอบเขตของแบบจำลอง
 
 ## แนวคิดสำคัญ: จากตัวแปรสู่ Object {#concepts}
-Week1 pp.3–13 ยกปัญหาบัญชีจำนวนมาก: owner/balance แยกจากฟังก์ชันจนจับคู่ผิดได้ Class คือแบบแปลนที่รวมข้อมูลและพฤติกรรม; instance คือ object ที่สร้างจากแบบแปลนนั้น เช่น BankAccount หนึ่งคลาสสร้างบัญชีหลายตัว แต่ละตัวมีสถานะของตนเอง Attribute คือ owner/balance; method คือ deposit/withdraw/get_balance ไม่ใช่ class=object หรือ method=ผลลัพธ์ของการเรียก
+Week1 pp.3–13 ยกปัญหาบัญชีจำนวนมาก: owner/balance แยกจากฟังก์ชันจนจับคู่ผิดได้
+
+Class คือแบบแปลนที่รวมข้อมูลและพฤติกรรม; instance คือ object ที่สร้างจากแบบแปลนนั้น เช่น BankAccount หนึ่งคลาสสร้างบัญชีหลายตัว แต่ละตัวมีสถานะของตนเอง Attribute คือ owner/balance; method คือ deposit/withdraw/get_balance ไม่ใช่ class=object หรือ method=ผลลัพธ์ของการเรียก
 
 `a.deposit(500)` เป็น bound-method call ซึ่งส่ง a เป็น argument แรกให้ method โดยอัตโนมัติ จึงเทียบได้กับ `BankAccount.deposit(a, 500)` ชื่อ self เป็น convention ไม่ใช่ keyword แต่ควรใช้เพื่ออ่านง่าย กฎนี้กล่าวถึง **instance methods**; classmethod/staticmethod เป็นข้อยกเว้นที่ไม่ได้ต้องการแทนพฤติกรรมบัญชีในตัวอย่างนี้
 

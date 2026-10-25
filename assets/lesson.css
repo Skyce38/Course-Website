@@ -30,3 +30,18 @@ html[data-layout=modern] .lesson-reader.html-reader .reader-toc a:focus-visible{
 }
 @media(max-width:800px){.lesson-reader .sidebar{transform:translateX(-100%);width:min(300px,calc(100vw - 20px))}.lesson-reader .sidebar.open{transform:none}.lesson-reader .workspace{margin-left:0}.lesson-reader .menu-button{display:block}.lesson-reader .topbar{flex-wrap:wrap;padding:12px 16px}.lesson-reader .lesson-breadcrumb{width:100%}.lesson-reader .top-actions{margin-inline-start:auto}.lesson-reader #breadcrumbs{display:none}.lesson-reader .content{padding:24px 14px 40px}.lesson-reader .reading-page{padding:24px 18px}.lesson-reader .prose h1{font-size:27px}.lesson-reader .prose h2{font-size:25px;scroll-margin-top:160px}.lesson-reader .prose h3{font-size:21px;scroll-margin-top:160px}}
 @media print{.lesson-reader :is(.sidebar,.topbar,.reader-top,.study-reader-actions,.lesson-skip){display:none}.lesson-reader .workspace{margin:0}.lesson-reader .content,.lesson-reader .reading-page{max-width:none;padding:0;border:0}.lesson-reader pre{white-space:pre-wrap;overflow-wrap:anywhere}}
+/* Generated lessons only. Higher specificity keeps one rhythm after Modern reader rules. */
+html[data-layout] .lesson-reader.html-reader .prose{line-height:1.85;word-break:normal;overflow-wrap:break-word}
+html[data-layout] .lesson-reader.html-reader .prose p{margin:.8em 0}
+html[data-layout] .lesson-reader.html-reader .prose :is(h2,h3,h4){line-height:1.55;margin:1.55em 0 .65em;scroll-margin-top:var(--reader-header-offset,150px)}
+html[data-layout] .lesson-reader.html-reader .prose h2{padding-top:.85em}
+html[data-layout] .lesson-reader.html-reader .prose :is(ul,ol){padding-inline-start:1.5em;margin:.8em 0}
+html[data-layout] .lesson-reader.html-reader .prose li{margin:.4em 0;padding-inline-start:.15em}
+html[data-layout] .lesson-reader.html-reader .prose :is(blockquote,.code-viewer,.table-scroll,.lesson-math-block,.lesson-figure){margin-block:1.1em}
+html[data-layout] .lesson-reader.html-reader .prose blockquote{padding:.2em 1em}
+html[data-layout] .lesson-reader.html-reader .prose :is(td,th){padding:.65em .8em;vertical-align:top;line-height:1.7}
+html[data-layout] .lesson-reader.html-reader .prose :is(table,pre){font-size:max(14px,.9em)}
+html[data-layout] .lesson-reader.html-reader .prose .code-viewer pre{margin:0;line-height:1.7}
+html[data-layout] .lesson-reader.html-reader .prose :is(a,:not(pre)>code){overflow-wrap:anywhere}
+.lesson-reader .table-scroll:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+@media(max-width:600px){html[data-layout] .lesson-reader.html-reader .reading-page.prose{padding:22px 16px}html[data-layout] .lesson-reader.html-reader .prose :is(h2,h3,h4){margin-top:1.3em}}

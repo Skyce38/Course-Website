@@ -113,7 +113,9 @@ Week14 pp.20–22:array[3,6,8,10,1,2,1],lo0,hi6,pivot1,i เริ่ม−1
 Partition เดียวไม่ใช่ full sort;การ swap ไกลทำให้ Quick ไม่ stable โดยทั่วไป เช่น[(2,A),(2,B),(1,C)]ได้ C,B,A หลัง pivot1และ tie ไม่กลับเป็น A,B อย่างรับประกัน
 
 ## Pivot, Stability และ Space {#tradeoffs}
-pp.23–27:last pivot บน sorted/reverse/ค่าเท่ากันมากอาจแบ่ง n−1กับ0ซ้ำ ทำ comparisonsn(n−1)/2และ call stackO(n) Median-of-three หรือ randompivot ช่วยหลายกรณี แต่ไม่รับรองทุก input เป็น O(nlogn)หรือป้องกัน worstcase ของ Lomutoduplicates ได้ Randompivotexpectedbound ต้องบอกสมมติฐาน randomness ไม่ใช้ benchmark หนึ่งชุดเป็นข้อพิสูจน์
+pp.23–27:last pivot บน sorted/reverse/ค่าเท่ากันมากอาจแบ่ง n−1กับ0ซ้ำ ทำ comparisonsn(n−1)/2และ call stackO(n)
+
+Median-of-three หรือ randompivot ช่วยหลายกรณี แต่ไม่รับรองทุก input เป็น O(nlogn)หรือป้องกัน worstcase ของ Lomutoduplicates ได้ Randompivotexpectedbound ต้องบอกสมมติฐาน randomness ไม่ใช้ benchmark หนึ่งชุดเป็นข้อพิสูจน์
 
 | Algorithm/version | เวลา | พื้นที่ auxiliary/stack | Stability |
 |---|---|---|---|

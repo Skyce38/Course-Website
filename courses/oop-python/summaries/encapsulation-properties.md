@@ -10,7 +10,9 @@
 - แยก TypeError,ValueError,AttributeError และการเปลี่ยน state ที่สำเร็จ
 
 ## Access และ Name Mangling {#concepts}
-Week2 pp.3–7: public `balance` เข้าถึงตรง; `_balance` เป็นสัญญาณ non-public ตาม convention; `__balance` ใน Account ถูก mangle เป็น `_Account__balance` เพื่อลดชื่อชนกับ subclass ไม่ใช่ encryption/accesscontrol ภายนอกยังเข้าถึงชื่อที่ mangle ได้ จึงไม่ใช้เก็บ secrets โดยหวังว่าคนอ่านไม่ได้
+Week2 pp.3–7: public `balance` เข้าถึงตรง; `_balance` เป็นสัญญาณ non-public ตาม convention; `__balance` ใน Account ถูก mangle เป็น `_Account__balance` เพื่อลดชื่อชนกับ subclass
+
+ไม่ใช่ encryption/accesscontrol ภายนอกยังเข้าถึงชื่อที่ mangle ได้ จึงไม่ใช้เก็บ secrets โดยหวังว่าคนอ่านไม่ได้
 
 ## Property เป็นช่องทางของ Invariant {#properties}
 pp.9–19: `@property` ทำ method ให้เรียกอ่านด้วย syntax attribute; `@balance.setter` ต้องใช้ชื่อ property ที่ประกาศแล้ว เมื่อเขียน `a.balance=500` Python ส่ง500ให้ setter ไม่ต้องเรียก `a.balance()` หากไม่มี setter การ assign ชื่อ property นั้นจะ AttributeError แต่ object ไม่ได้ deep-immutable และ backingattribute ยังเปลี่ยนได้จากโค้ดที่ฝ่าฝืน interface

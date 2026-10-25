@@ -12,7 +12,9 @@
 ## Polymorphism และ Duck Typing {#concepts}
 pp.3–11: polymorphism คือการเรียก operation เดียวกันแล้วแต่ละ object ทำงานตาม implementation ของมัน เช่น s.area()แสดงพฤติกรรม Circle หรือ Rectangle โดยไม่ต้อง ifisinstance เป็นสายยาว ทุกครั้งที่เพิ่มชนิดใหม่ client ที่อิง interface เดิมไม่ควรต้องรู้สูตรใหม่
 
-Ducktyping ต้องการพฤติกรรมที่ใช้จริง ไม่จำเป็นต้องสืบทอด class เดียวกัน:total_area ใช้เพียง area ดังนั้น Badge ที่มี area ใช้ได้ แต่ Badge ไม่จำเป็นต้องมี perimeter และไม่ผ่าน isinstance(Shape) การมีชื่อ method อย่างเดียวไม่พิสูจน์ว่าผลลัพธ์ตรง contract;เช่นคืน str แทนตัวเลขจะทำให้ sum ล้มเหลว
+Ducktyping ต้องการพฤติกรรมที่ใช้จริง ไม่จำเป็นต้องสืบทอด class เดียวกัน:total_area ใช้เพียง area ดังนั้น Badge ที่มี area ใช้ได้ แต่ Badge ไม่จำเป็นต้องมี perimeter และไม่ผ่าน isinstance(Shape)
+
+การมีชื่อ method อย่างเดียวไม่พิสูจน์ว่าผลลัพธ์ตรง contract;เช่นคืน str แทนตัวเลขจะทำให้ sum ล้มเหลว
 
 ## ABC และขอบเขตการบังคับ {#abc}
 pp.13–24: Shape สืบทอด ABC เพื่อใช้ ABCMeta และทำเครื่องหมาย area/perimeter ด้วย abstractmethod จึงสร้าง Shape หรือ subclass ที่ยังไม่ทำครบไม่ได้ (TypeError) method ธรรมดา describe ใช้ร่วมกันได้

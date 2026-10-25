@@ -5,13 +5,15 @@
 > FINAL: Week11ทุกหัวข้อหลักและ Week8stackwrapper ขยาย Postfix จาก Lab11-1ที่มีจริง โค้ด/trace/เฉลยผู้เขียนตรวจอิสระ ไม่ใช่ข้อสอบจริงหรือเฉลยทางการ ไม่สร้าง interactivecomponent ที่แสดง algorithm ผิด
 
 ## เป้าหมายการเรียนรู้ {#objectives}
-- ใช้ LIFO และ Stack ADT แยกจาก storageimplementation
-- tracepush/pop/peek และ empty/singleton โดยไม่ให้ head/size ผิด
+- ใช้ LIFO และ Stack ADT แยกจาก รูปแบบจัดเก็บข้อมูล (storage implementation)
+- ไล่การทำงานของ push / pop / peek และ empty/singleton โดยไม่ให้ head/size ผิด
 - อธิบาย call stack/recursion,balancedbrackets,postfix และ undo/redo
 - แยก worstcase/amortized และต้นทุนข้อมูล snapshot
 
 ## LIFO และ Stack ADT {#concepts}
-Week11 pp.3–17:ข้อมูลเข้าทีหลังออกก่อน (Last In, First Out) เข้าถึงฝั่ง top โดย push เพิ่ม,pop คืนและนำออก,peek อ่านแต่ไม่ลบ,is_empty/len ตรวจสถานะ ADT กำหนดพฤติกรรม ไม่บังคับว่าต้องเป็น linkedlist เสมอ Python list ใช้ท้ายเป็น top;linkedstack ใช้ head เป็น top เพื่อให้ทั้ง push/pop ไม่ต้องหาตัวก่อน tail
+Week11 pp.3–17: ข้อมูลที่เข้าทีหลังออกก่อน (Last In, First Out: LIFO) เข้าถึงข้อมูลจากด้าน top โดย push เพิ่มค่า, pop คืนค่าและนำออก และ peek อ่านค่าโดยไม่ลบ ส่วน is_empty และ len ใช้ตรวจสถานะ
+
+Stack ADT กำหนดพฤติกรรม ไม่ได้บังคับรูปแบบจัดเก็บ Python list ใช้ท้ายลิสต์เป็น top ส่วน linked stack ใช้ head เป็น top เพื่อให้ push และ pop ไม่ต้องค้นหาโหนดก่อน tail
 
 เพิ่ม10,20,30→top30→pop คืน30→peek20→size2;pop/peek ว่างต้องมี policy ชัด ตัว ADT ในบทนี้ raiseIndexError แต่ undo ที่ไม่มีประวัติเป็น no-op เพื่อให้ UI ไม่ล้มตามแนว sourcepp.44–45 ห้ามใช้ None แทน empty โดยไม่บอก เพราะ None อาจเป็นข้อมูลจริง
 
@@ -128,7 +130,9 @@ print(editor.text, factorial(4))       # AC 24
 ```
 
 ## ไล่ Bracket Matching {#brackets}
-Week11 pp.22–25,37–41:อ่านทุกตัว;วงเล็บเปิด push;วงเล็บปิดต้องตรงตัวบนสุด;จบแล้ว stack ต้องว่าง อักขระอื่นถูกข้าม ไม่ใช่ fullPython/HTMLparser
+Week11 pp.22–25, 37–41: อ่านอักขระทุกตัว เมื่อพบวงเล็บเปิดให้ push และเมื่อพบวงเล็บปิดต้องตรวจว่าตรงกับตัวบนสุด เมื่ออ่านจบ stack ต้องว่าง
+
+ตัวอย่างนี้ข้ามอักขระอื่น จึงเป็นตัวตรวจวงเล็บ ไม่ใช่ตัววิเคราะห์ไวยากรณ์ Python หรือ HTML แบบสมบูรณ์
 
 | token ใน([{}]) | action | stack จากล่างไปบน |
 |---|---|---|
