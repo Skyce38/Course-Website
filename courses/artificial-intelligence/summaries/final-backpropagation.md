@@ -14,7 +14,7 @@
 S10 pp.19–21 ต่อจากข้อจำกัด XOR: perceptron เดียวสร้าง linear decision surface เครือข่ายหลายชั้นรวมขอบเขตได้ซับซ้อนขึ้น S11 pp.2–5 แสดง weighted sum, nonlinear activation และ hidden layers ถ้าทุกชั้นเป็น affine map โดยไม่มี nonlinearity การซ้อนยังยุบเป็น affine map เดียว จึงไม่แก้ XOR ด้วยการเพิ่มชั้นเชิงเส้นอย่างเดียว
 
 ### XOR ตาม weights ใน S10 p.20
-ภาพใช้ binary threshold ไม่ใช่ sigmoid: hiddenตัวบน weights(1,1),bias−.5 ทำ OR; ตัวล่าง weights(1,1),bias−1.5 ทำ AND; output weights(1,−2),bias−.5 บทนี้กำหนด >0 (ไม่มีกรณีเท่าศูนย์สำหรับสี่ inputs นี้)
+ภาพใช้ binary threshold ไม่ใช่ sigmoid: hidden ตัวบน weights(1,1),bias−.5 ทำ OR; ตัวล่าง weights(1,1),bias−1.5 ทำ AND; output weights(1,−2),bias−.5 บทนี้กำหนด >0 (ไม่มีกรณีเท่าศูนย์สำหรับสี่ inputs นี้)
 
 | x1,x2 | z OR → h1 | z AND → h2 | z output → y |
 |---|---|---|---|
@@ -23,7 +23,7 @@ S10 pp.19–21 ต่อจากข้อจำกัด XOR: perceptron เด
 | 1,0 | .5 → 1 | −.5 → 0 | .5 → 1 |
 | 1,1 | 1.5 → 1 | .5 → 1 | −1.5 → 0 |
 
-นี่เป็นการตรวจ network ที่กำหนดแล้ว ไม่ใช่ผล train ด้วย backpropagation Threshold ไม่ differentiable ที่0 และอนุพันธ์0เกือบทุกจุด จึงใช้ smooth sigmoid ในบทเรียน gradient ถัดไป ห้ามแทน threshold ด้วย sigmoidโดยใช้weightsเดิมแล้วอ้าง output XOR เหมือนกัน
+นี่เป็นการตรวจ network ที่กำหนดแล้ว ไม่ใช่ผล train ด้วย backpropagation Threshold ไม่ differentiable ที่0 และอนุพันธ์0เกือบทุกจุด จึงใช้ smooth sigmoid ในบทเรียน gradient ถัดไป ห้ามแทน threshold ด้วย sigmoid โดยใช้ weights เดิมแล้วอ้าง output XOR เหมือนกัน
 
 ## Sigmoid และอนุพันธ์ {#sigmoid}
 S10 pp.21–22 นิยาม
@@ -32,10 +32,10 @@ $$
 \sigma(z)=\frac{1}{1+e^{-z}},\qquad \sigma'(z)=\sigma(z)(1-\sigma(z))
 $$
 
-ที่z0ได้.5และอนุพันธ์.25; เมื่อ|z|มาก outputอิ่มตัว (saturation) ทำให้ gradientเล็ก นี่เป็นข้ออธิบายเพิ่มเติม ไม่ใช่การรับรองว่า sigmoid output คือ calibrated probability โดยอัตโนมัติ
+ที่ z0ได้.5และอนุพันธ์.25; เมื่อ|z|มาก output อิ่มตัว (saturation) ทำให้ gradient เล็ก นี่เป็นข้ออธิบายเพิ่มเติม ไม่ใช่การรับรองว่า sigmoid output คือ calibrated probability โดยอัตโนมัติ
 
 ## Loss, Sign และ Backpropagation {#backprop}
-S10 p.23 ใช้ squared error รวมข้อมูล/outputs พร้อมตัวคูณ1/2; ตัวอย่างนี้ใช้หนึ่งsample/หนึ่งoutput จึง
+S10 p.23 ใช้ squared error รวมข้อมูล/outputs พร้อมตัวคูณ1/2; ตัวอย่างนี้ใช้หนึ่ง sample/หนึ่ง output จึง
 
 $$
 L=\frac12(y-t)^2,\quad g_o=\frac{\partial L}{\partial z_o}=(y-t)y(1-y)
@@ -47,10 +47,10 @@ $$
 g_j=h_j(1-h_j)v_jg_o,\quad \frac{\partial L}{\partial v_j}=g_oh_j,\quad \frac{\partial L}{\partial a_{ji}}=g_jx_i,\quad \frac{\partial L}{\partial b_o}=g_o,\quad \frac{\partial L}{\partial b_j}=g_j
 $$
 
-Gradient descent: θnew=θold−η∂L/∂θ สำหรับทุกparameterพร้อมกัน S10 p.24 ใช้ δ_o=(t−y)y(1−y)=−g_o และ update **บวก** ηδx จึงทิศเดียวกัน ไม่ใช่สูตรขัดกัน ต้องคำนวณ hidden error จาก output weights **เก่า** เก็บ gradients ทั้งหมดแล้วจึง update; biasใช้inputคงที่1 ส่วน lossรวม/เฉลี่ยbatchต่างกันด้วยscale ต้องประกาศก่อนเทียบlearning rate
+Gradient descent: θnew=θold−η∂L/∂θ สำหรับทุก parameter พร้อมกัน S10 p.24 ใช้ δ_o=(t−y)y(1−y)=−g_o และ update **บวก** ηδx จึงทิศเดียวกัน ไม่ใช่สูตรขัดกัน ต้องคำนวณ hidden error จาก output weights **เก่า** เก็บ gradients ทั้งหมดแล้วจึง update; bias ใช้ input คงที่1 ส่วน loss รวม/เฉลี่ย batch ต่างกันด้วย scale ต้องประกาศก่อนเทียบ learning rate
 
 ## คำนวณหนึ่งก้าวทีละขั้น: ตัวอย่างผู้เขียน {#worked}
-ไม่ใช่ weights XOR ด้านบน ใช้ inputs(1,.5),target.8,η.2, sigmoidทุกhidden/output, ไม่มีregularization:
+ไม่ใช่ weights XOR ด้านบน ใช้ inputs(1,.5),target.8,η.2, sigmoid ทุก hidden/output, ไม่มี regularization:
 - hidden1 a11=.1,a12=.2,b1=.1 → z1=.1(1)+.2(.5)+.1=.3 → h1=.574442517
 - hidden2 a21=−.3,a22=.4,b2=−.2 → z2=−.3(1)+.4(.5)−.2=−.3 → h2=.425557483
 - v1=.7,v2=−.5,bo=.1 → zo=.7h1−.5h2+.1=.289331020 → y=.571832348
@@ -70,10 +70,10 @@ Gradient descent: θnew=θold−η∂L/∂θ สำหรับทุกparamete
 | v2 | -0.5 | -0.023773596 | -0.495245281 |
 | bo | 0.1 | -0.055864594 | 0.111172919 |
 
-Feedforward อีกครั้งด้วย **ทุกค่าใหม่** ได้ L=.025035809 ลดลงในตัวอย่างนี้ ไม่อ้างว่า learning rateใดก็ลด lossหรือหา global minimumได้ S10 p.23 เตือน local minima; neural lossไม่เป็นconvexโดยทั่วไปและgradientเล็กอาจเป็นsaddle/plateauได้ด้วย
+Feedforward อีกครั้งด้วย **ทุกค่าใหม่** ได้ L=.025035809 ลดลงในตัวอย่างนี้ ไม่อ้างว่า learning rate ใดก็ลด loss หรือหา global minimum ได้ S10 p.23 เตือน local minima; neural loss ไม่เป็น convex โดยทั่วไปและ gradient เล็กอาจเป็น saddle/plateau ได้ด้วย
 
 ## Python และการตรวจอิสระ {#python}
-โค้ดตัวอย่างไม่trainตัวเองในหน้าเว็บ ตัวตรวจออฟไลน์เปรียบเทียบ central finite differences [L(θ+ε)−L(θ−ε)]/(2ε), ε=10⁻⁶ กับgradientทุก9parameters; finite differenceเป็นเครื่องมือเช็ค ไม่แทนbackpropในการtrainจริง
+โค้ดตัวอย่างไม่ train ตัวเองในหน้าเว็บ ตัวตรวจออฟไลน์เปรียบเทียบ central finite differences [L(θ+ε)−L(θ−ε)]/(2ε), ε=10⁻⁶ กับ gradient ทุก9parameters; finite difference เป็นเครื่องมือเช็ค ไม่แทน backprop ในการ train จริง
 
 ```python
 from math import exp
@@ -130,45 +130,45 @@ for xx in [(0,0),(0,1),(1,0),(1,1)]:
 ```
 
 ## ข้อผิดพลาดที่พบบ่อย {#mistakes}
-- ผสมδ=(t−y)กับupdateลบจนกลับทิศ หรือใช้ MSE lossแต่ขาดตัวคูณที่นิยามไว้
-- ลืม sigmoid derivative หรือ bias; ใช้outputweightใหม่หาhiddenerror
-- คิดว่า hidden targetต้องมี labelแยก: errorส่งผ่าน chain ruleได้
-- อ้าง XORthreshold network เป็นผลtrain sigmoid หรือหยุดเมื่อsampleเดียวถูก
-- สรุปgradient descentรับประกัน global optimum
+- ผสมδ=(t−y)กับ update ลบจนกลับทิศ หรือใช้ MSE loss แต่ขาดตัวคูณที่นิยามไว้
+- ลืม sigmoid derivative หรือ bias; ใช้ outputweight ใหม่หา hiddenerror
+- คิดว่า hidden target ต้องมี label แยก: error ส่งผ่าน chain rule ได้
+- อ้าง XORthreshold network เป็นผล train sigmoid หรือหยุดเมื่อ sample เดียวถูก
+- สรุป gradient descent รับประกัน global optimum
 
 ## แบบฝึกพร้อมเฉลย: ผู้เขียนจัดทำอิสระ {#practice}
 ### ข้อ1 Source XOR
 คำนวณ x=(1,1) จาก S10 p.20
 
-**เฉลย:** z1=1.5→h1=1,z2=.5→h2=1,zo=1−2−.5=−1.5→0 ถูกXOR ไม่ได้ใช้sigmoid
+**เฉลย:** z1=1.5→h1=1,z2=.5→h2=1,zo=1−2−.5=−1.5→0 ถูก XOR ไม่ได้ใช้ sigmoid
 
 ### ข้อ2 Sigmoid
-หาค่าσ(0),σ′(0) และLเมื่อy=.5,t1
+หาค่าσ(0),σ′(0) และ L เมื่อ y=.5,t1
 
 **เฉลย:** .5,.25; L=.5(.5−1)²=.125 ไม่ใช่.25เพราะนิยามมี1/2
 
 ### ข้อ3 Output Error
-ถ้า y=.5,t1,h=.4,v=.8 ให้หาgoและgradientของv
+ถ้า y=.5,t1,h=.4,v=.8 ให้หา go และ gradient ของ v
 
 **เฉลย:** go=(.5−1)(.5)(.5)=−.125; ∂L/∂v=−.125(.4)=−.05 ถ้าη.1 vnew=.8−.1(−.05)=.805
 
 ### ข้อ4 Hidden Error
-ใช้ค่าในข้อ3 หาgh, gradientของweight inputx2 และbias
+ใช้ค่าในข้อ3 หา gh, gradient ของ weight เมื่อ input x=2 และ bias
 
-**เฉลย:** gh=.4(.6)(.8)(−.125)=−.024; gradientweight=gh(2)=−.048; gradientbias=−.024 ทั้งหมดใช้vเก่า.8 ไม่ใช้.805
+**เฉลย:** gh=.4(.6)(.8)(−.125)=−.024; gradientweight=gh(2)=−.048; gradientbias=−.024 ทั้งหมดใช้ v เก่า.8 ไม่ใช้.805
 
 ### ข้อ5 Sign Convention
-ถ้าsourceδ=.125 และinput.4,η.1 จะ updateเท่าใด? ตรงกับgradientหรือไม่?
+ถ้า sourceδ=.125 และ input.4,η.1 จะ update เท่าใด? ตรงกับ gradient หรือไม่?
 
-**เฉลย:** Δw=+.1(.125)(.4)=+.005 ตรงกับลบgradient−.05ด้วยη.1 แต่ถ้าเขียนw−ηδxจะผิดทิศ
+**เฉลย:** Δw=+.1(.125)(.4)=+.005 ตรงกับลบ gradient−.05ด้วยη.1 แต่ถ้าเขียน w−ηδx จะผิดทิศ
 
 ### ข้อ6 ตรวจครบหนึ่งก้าว
-จากworkedexampleให้บอกoutputbiasใหม่,lossใหม่ และเหตุใดไม่updatevก่อนหาhiddenerror
+จาก workedexample ให้บอก outputbias ใหม่,loss ใหม่ และเหตุใดไม่ updatev ก่อนหา hiddenerror
 
-**เฉลย:** bo=.1−.2(−.055864594)=.111172919; feedforwardใหม่ได้L=.025035809 หากใช้vใหม่จะไม่ใช่gradientของlossที่θเดิม ทำให้ finite-difference checkไม่ตรง ค่าที่แสดงปัด9ตำแหน่งแต่โค้ดใช้floatเต็ม
+**เฉลย:** bo=.1−.2(−.055864594)=.111172919; feedforward ใหม่ได้ L=.025035809 หากใช้ v ใหม่จะไม่ใช่ gradient ของ loss ที่θเดิม ทำให้ finite-difference check ไม่ตรง ค่าที่แสดงปัด9ตำแหน่งแต่โค้ดใช้ float เต็ม
 
 ## สรุปเตรียม FINAL {#summary}
-Forwardจากweightsเก่า → กำหนดloss → outputgradient → hiddengradientจากweightsเก่า → เก็บทุกgradient → updateweightsและbiasพร้อมกัน → ตรวจlossใหม่ Backpropคือchain rule; optimizerคือวิธีนำgradientไปupdate สองขั้นนี้ไม่ใช่คำเดียวกัน
+Forward จาก weights เก่า → กำหนด loss → outputgradient → hiddengradient จาก weights เก่า → เก็บทุก gradient → updateweights และ bias พร้อมกัน → ตรวจ loss ใหม่ Backprop คือ chain rule; optimizer คือวิธีนำ gradient ไป update สองขั้นนี้ไม่ใช่คำเดียวกัน
 
 ## แหล่งอ้างอิง {#sources}
 - [บัญชี S10/S11](../../../docs/ai-source-coverage.md), original local-only

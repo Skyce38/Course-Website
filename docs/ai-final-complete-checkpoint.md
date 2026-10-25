@@ -9,6 +9,6 @@ Branch: codex/ai-final-complete. Base: origin/main including PR14. Existing work
 | C | K-Means; Perceptron | Validated: all source distances/updates, 40 K-Means + 30 perceptron comparisons, build/regressions, 3-width browser/copy checks |
 | D | Backpropagation; DL/RNN/GAN | Validated: all source images, 909 independent finite-difference gradients, XOR, concepts/exercises, build/regressions and 3-width browser checks |
 | E | CNN; source-supported lab preparation | Validated: all source matrices, 80 correlation + 48 pooling references, build/regressions, 3-width browser checks; missing lab figures documented, guide not registered |
-| F | Consolidated QA; combined PR | Pending |
+| F | Consolidated QA; combined PR | Validated: deterministic builds, full repository checks, combined Chrome path/state/PDF/theme regressions, 11 protected worktrees and 15 PDFs unchanged; ready for one combined PR |
 
 Protected-worktree snapshot and source renders are outside Git. No source PDF/workbook/private dataset will be committed. Each stage gets scoped validation and a local commit. Push/one combined PR only after all complete source-supported lessons pass. Missing lab evidence is documented, never invented.

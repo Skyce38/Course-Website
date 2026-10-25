@@ -1,6 +1,6 @@
-# AI lesson roadmap — planning only
+# AI lesson roadmap — source plan and implementation status
 
-> **Phase 4B-F1 priority:** FINAL ก่อน Midterm ที่ยังไม่สร้าง: หยุดการสร้าง 8-Puzzle/A*, Minimax/Alpha-Beta และ Knowledge Representation/Logic ไว้ก่อน โดยไม่ลบหรือเปลี่ยนงานเดิม เริ่ม AI-L09 Regression เป็นบท FINAL เดียวในงานนี้ การต่อท้าย BFS/DFS ใน path เป็นลำดับเผยแพร่ชั่วคราว ไม่ใช่ verified teaching sequence และไม่สื่อ exam weighting.
+> **Combined FINAL priority:** AI-L11–L18 implemented in `codex/ai-final-complete`, pending review/merge. AI-L09 Regression/AI-L10 KNN already on main. Midterm 8-Puzzle/A*, Minimax/Alpha-Beta and Logic remain paused; no work deleted. AI-L19 remains source-limited preparation only. Path order is temporary publication order, not a verified teaching timetable or exam weighting.
 
 
 อ้าง [topic map](ai-curriculum-map.md) และ [source IDs/locators](ai-source-coverage.md) ไม่มี full lesson, demo, registry หรือ learning-path entry ใหม่ใน Phase 4A
@@ -48,7 +48,7 @@
 - **Examples:** source car/Socrates/LLM; EU numerical example ใน P01 เป็น original instructional example ต้องติดป้ายเดิม
 - **Interactive:** ไม่จำเป็น; rich equations, comparison table และภาพวงจรที่อธิบายได้ครบเหมาะกว่า stepper เส้นตรง
 - **Practice needed:** reuse/recheck 10 ข้อใน P01; ต้องแยก objective จาก achieved outcome และไม่สร้างเฉลย objective เฉพาะ ChatGPT
-- **Prerequisites / status:** ไม่มี topic dependency; **P01 integration candidate, P0** reuse บทเดิม ไม่เขียนซ้ำ รอ review/merge
+- **Prerequisites / status:** ไม่มี topic dependency; **Published on main** reuse บทเดิม ไม่เขียนซ้ำ
 
 ### AI-L02 / T02 — ประวัติ การประยุกต์และ AI ที่รับผิดชอบ (History, Applications & Responsible AI)
 - **Objectives:** อธิบาย AI winters/drivers/effect; จับคู่ applications; วิเคราะห์ bias/privacy/safety/alignment ในบริบท source
@@ -64,7 +64,7 @@
 - **Examples:** source Romania, graph 0→5 และ grid; กำหนด successor order ในคำอธิบายเพิ่มให้ผล trace ไม่กำกวม
 - **Interactive:** Python code viewer + static frontier table; step selection เป็น optional ถ้า contract เดิมแทนสถานะได้จริง
 - **Practice needed:** 6 ข้อ รวม 2 source exercises, cyclic case และ counterexample สำหรับ least-cost claim; คำตอบใหม่ต้องแยกจาก source
-- **Prerequisites / status:** T01/R-DS; **Integration candidate, P0** — [Markdown](../courses/artificial-intelligence/summaries/search-models-bfs-dfs.md) / [coverage](ai-search-bfs-dfs-coverage.md); registry และ AI path หลัง Foundations พร้อมใน branch นี้ รอ review/merge
+- **Prerequisites / status:** T01/R-DS; **Published on main** — [Markdown](../courses/artificial-intelligence/summaries/search-models-bfs-dfs.md) / [coverage](ai-search-bfs-dfs-coverage.md); registry และ AI path หลัง Foundations พร้อมบน main
 
 ### AI-L04 / T04 — แก้ 8-Puzzle ด้วย Python และ A* (8-Puzzle & A*)
 - **Objectives:** สร้าง valid moves; อธิบาย visited/depth/cost; คำนวณ Manhattan และ g+h ตาม goal จริง; อ่าน heapq/path reconstruction
@@ -114,7 +114,7 @@
 - **Examples:** source tree data และ household data; StudentPerformance เป็น code example จริง ไม่อ้าง held-out accuracy ที่ไม่มี
 - **Interactive:** equations, calculation tables, Python code viewer; optional slope controls ภายหลังเท่านั้น
 - **Practice needed:** 6 hand-calculation/interpretation/error/code-reading tasks; รักษาหน่วยรายได้กับค่าใช้จ่ายต่างกัน
-- **Prerequisites / status:** R-MATH/R-PY ตามส่วน; **FINAL integration candidate, P0 ตาม priority ใหม่** — [Markdown](../courses/artificial-intelligence/summaries/final-regression.md), [coverage](ai-final-regression-coverage.md); รอ review/merge
+- **Prerequisites / status:** R-MATH/R-PY ตามส่วน; **Published on main** — [Markdown](../courses/artificial-intelligence/summaries/final-regression.md), [coverage](ai-final-regression-coverage.md);
 
 ### AI-L10 / T10 — จำแนกด้วยเพื่อนบ้าน (Classification & KNN)
 - **Objectives:** แยก features/labels; คำนวณระยะ/vote; อธิบาย encoding/k; อ่าน split/fit/predict/accuracy
@@ -122,7 +122,7 @@
 - **Examples:** source drug/Buy/Iris; ระบุ k ของแต่ละตัวอย่างไม่ปนภาพ voting กับ code
 - **Interactive:** distance table + code viewer; ไม่สร้างใหม่ทั้ง training environment
 - **Practice needed:** 5 tasks distance/ranking/tie convention/encoding/train-test; scaling experiment ใหม่เป็น E03
-- **Prerequisites / status:** R-MATH/R-PY; **FINAL integration candidate, P0** — [Markdown](../courses/artificial-intelligence/summaries/final-knn.md), [coverage](ai-final-knn-coverage.md); หลัง Regression ตามลำดับเผยแพร่ชั่วคราว รอ review/merge
+- **Prerequisites / status:** R-MATH/R-PY; **Published on main** — [Markdown](../courses/artificial-intelligence/summaries/final-knn.md), [coverage](ai-final-knn-coverage.md); หลัง Regression ตามลำดับเผยแพร่ชั่วคราว
 
 ### AI-L11 / T11 — จำแนกด้วยเบย์ (Naive Bayes)
 - **Objectives:** คำนวณ class scores; อธิบาย conditional independence; แยก Gaussian กับ categorical และผลของ zero/smoothing
@@ -130,7 +130,7 @@
 - **Examples:** Judy จาก source p.7 (ชื่อ July ในแผนเดิมอ่านคลาดเคลื่อน); Buy จาก lab; ไม่ใช้ Gaussian likelihood แทน categorical counts โดยไม่อธิบาย
 - **Interactive:** probability/product tables และ code viewer
 - **Practice needed:** 5 count/score/assumption/model-choice tasks; คำนวณเฉลยใหม่และแก้ความกำกวมของ X03 โดยไม่แก้ source file
-- **Prerequisites / status:** T10/R-PROB; **FINAL integration candidate, P0** — [Markdown](../courses/artificial-intelligence/summaries/final-naive-bayes.md), [coverage](ai-final-naive-bayes-coverage.md); ต่อหลัง KNN ตามลำดับเผยแพร่ชั่วคราว รอ review/merge
+- **Prerequisites / status:** T10/R-PROB; **Implemented / pending combined PR merge** — [lesson](../courses/artificial-intelligence/summaries/final-naive-bayes.md), [coverage](ai-final-naive-bayes-coverage.md)
 
 ### AI-L12 / T12 — สร้างต้นไม้ด้วย Information Gain (Decision Trees & ID3)
 - **Objectives:** คำนวณ entropy/weighted gain; เลือก split/ต่อ subtree; อ่านต้นไม้และแปลงเป็น rules
@@ -138,7 +138,7 @@
 - **Examples:** source sunburn และ PlayTennis เป็นคนละ dataset; แยก worked artifacts จาก official answer authority
 - **Interactive:** static annotated tree, gain tables และ KaTeX; tree visualizer ไม่ใช่ requirement ปัจจุบัน
 - **Practice needed:** 6 root/subtree/rules/zero-probability tasks; ทำ verification จาก counts ไม่คัดค่ามาจากงานส่ง
-- **Prerequisites / status:** T10/R-PROB; **Planned, P1**
+- **Prerequisites / status:** T10/R-PROB; **Implemented / pending combined PR merge** — [lesson](../courses/artificial-intelligence/summaries/final-decision-tree.md), [coverage](ai-final-decision-tree-coverage.md)
 
 ### AI-L13 / T13 — จัดกลุ่มแบบลำดับชั้น (Similarity & Hierarchical Clustering)
 - **Objectives:** เลือก distance/similarity; เปรียบเทียบ linkage; trace merges และอ่าน dendrogram/cut/outlier
@@ -146,7 +146,7 @@
 - **Examples:** source distance matrices/dendrogram/genes; ไม่ตีความ dendrogram height เป็น probability
 - **Interactive:** matrix/merge tables + responsive figure with alt text; no new graph renderer
 - **Practice needed:** 5 merge/linkage/cut/metric interpretation tasks; เฉลยสร้างใหม่จาก matrix ที่ระบุ
-- **Prerequisites / status:** R-MATH, T09 correlation recap; **Planned, P1**
+- **Prerequisites / status:** R-MATH, T09 correlation recap; **Implemented / pending combined PR merge** — [lesson](../courses/artificial-intelligence/summaries/final-hierarchical-clustering.md), [coverage](ai-final-hierarchical-coverage.md)
 
 ### AI-L14 / T14 — วนรอบ K-Means และเลือก k (K-Means & Elbow)
 - **Objectives:** assign/update centroid; ติดตาม objective/convergence; อธิบาย initialization/k limitations
@@ -154,7 +154,7 @@
 - **Examples:** source algorithm frames และ A02 seeds ที่กำหนด; X05 คนละข้อมูลจึงไม่เรียกเฉลย assignment
 - **Interactive:** per-iteration tables/figures; centroid animation เป็น optional แยกงานในอนาคต
 - **Practice needed:** 5 assign/update/SSE/stop/elbow tasks; คำนวณทุก iteration ของคำตอบใหม่ก่อนเผยแพร่
-- **Prerequisites / status:** T13/R-MATH; **Planned, P1**
+- **Prerequisites / status:** T13/R-MATH; **Implemented / pending combined PR merge** — [lesson](../courses/artificial-intelligence/summaries/final-kmeans.md), [coverage](ai-final-kmeans-coverage.md)
 
 ### AI-L15 / T15 — หน่วยประสาทและ Perceptron (ANN & Perceptron)
 - **Objectives:** ระบุ input/weight/bias/activation; คำนวณ output/update; อธิบาย decision boundary และ AND/XOR limitation
@@ -162,7 +162,7 @@
 - **Examples:** source AND/XOR; workbook AND 0/1 convention; ไม่ปนกับ bipolar rule/parameters ต่างชุด
 - **Interactive:** code/calculation table และ equations; plot ใหม่เป็น instructional example ไม่อ้างว่าเป็น missing screenshot
 - **Practice needed:** 6 output/update/bias/boundary/separability tasks พร้อม convention ที่ชัดเจน
-- **Prerequisites / status:** R-MATH และ vector ส่วน R-CALC; **Planned, P1**
+- **Prerequisites / status:** R-MATH และ vector ส่วน R-CALC; **Implemented / pending combined PR merge** — [lesson](../courses/artificial-intelligence/summaries/final-perceptron.md), [coverage](ai-final-perceptron-coverage.md)
 
 ### AI-L16 / T16 — คำนวณหลายชั้นและ Backpropagation (MLP & Backpropagation)
 - **Objectives:** forward pass; คำนวณ sigmoid derivative/loss/deltas; อธิบาย gradient updates และ local-minimum limitation
@@ -170,7 +170,7 @@
 - **Examples:** source XOR network และ algorithm; numerical gradient example ใหม่ระบุว่าเขียนเสริม ตรวจ sign/bias/update order
 - **Interactive:** code viewer + forward/backward tables; ไม่ execute Python จาก Markdown
 - **Practice needed:** 6 forward/derivative/delta/update/sign/limitation tasks; original numerical solutions ต้อง independently check
-- **Prerequisites / status:** T15/R-CALC; **Planned, P1**
+- **Prerequisites / status:** T15/R-CALC; **Implemented / pending combined PR merge** — [lesson](../courses/artificial-intelligence/summaries/final-backpropagation.md), [coverage](ai-final-backpropagation-coverage.md)
 
 ### AI-L17 / T17 — ภาพรวม Deep Learning, RNN และ GAN (Deep Learning Families)
 - **Objectives:** เปรียบเทียบ shallow/deep; จับคู่ sequence/image/generation task กับ architecture; อธิบายบทบาท generator/discriminator
@@ -178,7 +178,7 @@
 - **Examples:** source RNN configurations และ GAN/style transfer; รักษาเครดิตของ figures
 - **Interactive:** comparison tables/diagrams; ไม่ต้องมี runnable RNN/GAN lab
 - **Practice needed:** 5 architecture/task/role/limitations prompts พร้อมเหตุผล ไม่เพิ่ม claims เรื่อง model ปัจจุบัน
-- **Prerequisites / status:** T16; **Planned, P2**
+- **Prerequisites / status:** T16; **Implemented / pending combined PR merge** — [lesson](../courses/artificial-intelligence/summaries/final-deep-learning-overview.md), [coverage](ai-final-deep-learning-overview-coverage.md)
 
 ### AI-L18 / T18 — คำนวณภาพใน CNN (CNN & Image Operations)
 - **Objectives:** trace feature map/filter; คำนวณ stride/padding/pooling/ReLU; อธิบาย flatten/FC และ channel aggregation
@@ -186,7 +186,7 @@
 - **Examples:** source cross/filter matrices; คำนวณใหม่จากภาพจริง แยก convolution convention และไม่ยึด flow เดียวเป็นกฎทุก CNN
 - **Interactive:** equations/matrices/annotated raster figures; kernel slider หากทำภายหลังต้องแยก scope ไม่จำเป็นต่อบทแรก
 - **Practice needed:** 8 cell-computation/output-size/padding/pooling/ReLU/channel tasks พร้อม intermediate steps
-- **Prerequisites / status:** T15–T16, R-MATH/vector-matrix; **Planned, P1**
+- **Prerequisites / status:** T15–T16, R-MATH/vector-matrix; **Implemented / pending combined PR merge** — [lesson](../courses/artificial-intelligence/summaries/final-cnn.md), [coverage](ai-final-cnn-coverage.md)
 
 ### AI-L19 / T19 — ทดลองการฝึกและ Learning Rate (Neural Training Lab)
 - **Objectives:** ตั้งค่า classification task; บันทึก parameters/run conditions; เปรียบเทียบ learning rates โดยไม่อ้าง epochs คงที่
@@ -194,12 +194,11 @@
 - **Examples:** ใช้โจทย์เดิมได้เมื่อกู้รูป/เครื่องมือ/ข้อมูล/initialization/noise settings ครบ; ผลใน TXT เป็น reported run เท่านั้น
 - **Interactive:** ยังไม่เลือกเครื่องมือ เพราะ source ไม่ระบุ reproducible environment ครบ; ไม่เพิ่ม dependency/backend
 - **Practice needed:** 4 task groups ตามข้อความ พร้อม capture settings และ run log; ไม่แต่งคำตอบ Q2–Q4 หรือใช้ screenshot ชุดใหม่แอบแทนต้นฉบับ
-- **Prerequisites / status:** T15–T16 และ source recovery; **Planned / source-blocked, P2**
+- **Prerequisites / status:** T15–T16 และ source recovery; **Source-limited preparation / not registered** — [guide and missing evidence](ai-final-neural-training-lab-preparation.md)
 
 ## Next action and publication gate
 
-1. **อันดับแรก:** review P01 integration candidate ที่ reuse บทเดิมและสร้าง HTML ด้วยระบบปัจจุบัน; merge/deploy เฉพาะเมื่อได้รับคำสั่ง ไม่ generate Foundations ซ้ำ
-2. **Phase 4B-2:** AI-L03 Search Models & BFS/DFS มีบทจริงและเฉลยที่ตรวจแล้ว ใช้ tables/code viewers เดิม; review integration candidate นี้ก่อนสร้างบทใหม่ ไม่ generate AI-L03 ซ้ำ
-3. แต่ละบทต้องตรวจครบ source ranges ในแผน แยกคำอธิบายเพิ่ม ตรวจเฉลย/formula/code/alt/caption/physical page references และผ่าน reader/theme/language/resume regressions ก่อน register เป็น resource
-4. เพิ่ม lesson registry และ learning path เฉพาะเมื่อ Markdown/HTML จริงพร้อมและ stable ID ได้รับการตรวจแล้ว; รักษา IDs ของ W01/W02/W03/P01; ไม่เปลี่ยน saved data เพื่อรองรับแผนนี้
-5. ส่งเอกสารนี้ให้ผู้สอน/ผู้ใช้ตรวจ chronology และ exam scope ก่อนอ้างเป็น official curriculum. แผนพร้อม review แต่ AI-L19 และ legal-currentness claims ยังต้อง evidence เพิ่ม
+1. Review the combined AI-L11–L18 implementation using [release verification](ai-final-complete-validation.md); do not regenerate the reused Naive Bayes draft.
+2. AI-L01/L03/L09/L10 are already on main; preserve stable IDs and existing OOP. AI-L11–L18 exist in this branch only until the combined PR merges. No automatic merge/deployment.
+3. AI-L19 has a preparation guide only: recover figures/data/settings before publishing a verified lab. Reported epochs are not reproduced results.
+4. Midterm paused lessons remain outside this task; any future teaching-order or exam-weight claims require evidence. Add path entries only for real built lessons; never placeholders.

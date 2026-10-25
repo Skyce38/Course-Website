@@ -148,12 +148,12 @@ S08 pp.16–17 ให้หนึ่ง IF–THEN ต่อ root-to-leaf path �
 ### 2. Root ของ Sunburn {#q2}
 คำนวณ gain ของ HairColor จาก branch counts
 
-**เฉลย:** Hparent=.954434; blonde (2,2) H1 ขนาด4,red pureขนาด1,brown pureขนาด3 → Hafter=.5; gain=.454434 สูงกว่า Height .265712, Weight .015712 และ Lotion .347590 จึงเลือก HairColor
+**เฉลย:** Hparent=.954434; blonde (2,2) H1 ขนาด4,red pure ขนาด1,brown pure ขนาด3 → Hafter=.5; gain=.454434 สูงกว่า Height .265712, Weight .015712 และ Lotion .347590 จึงเลือก HairColor
 
 ### 3. Blonde Subtree {#q3}
 ทำไม Lotion ดีกว่า Weight?
 
-**เฉลย:** ใน blondeมี4แถว Lotionแบ่ง noเป็น+2 และ yesเป็น−2 จึง Hafter0,gain1 ขณะที่ Weight light มี+1/−1 และ average มี+1/−1 จึง Hafter1,gain0 ไม่ใช้8แถวเดิมมาหาค่า subtree
+**เฉลย:** ใน blonde มี4แถว Lotion แบ่ง no เป็น+2 และ yes เป็น−2 จึง Hafter0,gain1 ขณะที่ Weight light มี+1/−1 และ average มี+1/−1 จึง Hafter1,gain0 ไม่ใช้8แถวเดิมมาหาค่า subtree
 
 ### 4. Root ของ PlayTennis {#q4}
 คำนวณ weighted entropy ของ Outlook แล้วเลือก root
@@ -168,12 +168,12 @@ Sunny/Normal และ Rain/Strong ให้ผลอะไร? เขียน�
 ### 6. Unknown และการประเมิน {#q6}
 ถ้า query มี Outlook=Snow และได้ training14/14 จะรับรองผลใหม่หรือไม่?
 
-**เฉลย:** sourceไม่ได้กำหนด Snow; policyโค้ดคืนmajority root=Yes แต่ไม่ใช่คำตอบที่ sourceรับรอง และtraining14/14ไม่เท่ากับheld-out accuracy ต้องแยกvalidation/unknown policy ข้อมูลขัดกันที่featureเดียวกันอาจแยกไม่ได้
+**เฉลย:** source ไม่ได้กำหนด Snow; policy โค้ดคืน majority root=Yes แต่ไม่ใช่คำตอบที่ source รับรอง และ training14/14ไม่เท่ากับ held-out accuracy ต้องแยก validation/unknown policy ข้อมูลขัดกันที่ feature เดียวกันอาจแยกไม่ได้
 
 ## สรุป FINAL และแหล่งอ้างอิง {#summary}
-- Entropyวัดความปนของlabels; gainลดweighted entropy และเลือกsplitเฉพาะข้อมูลที่nodeนั้น
-- Sunburn: HairColor→Lotion; PlayTennis: Outlook→Humidity/Wind ตรวจcountsก่อนเชื่อเลขปัดในartifact
-- Pathเป็นrule; fitting/Occam/greedy choiceไม่รับรองgeneralization
+- Entropy วัดความปนของ labels; gain ลด weighted entropy และเลือก split เฉพาะข้อมูลที่ node นั้น
+- Sunburn: HairColor→Lotion; PlayTennis: Outlook→Humidity/Wind ตรวจ counts ก่อนเชื่อเลขปัดใน artifact
+- Path เป็น rule; fitting/Occam/greedy choice ไม่รับรอง generalization
 
 ## Sources {#sources}
-S08 `Final/Decision Tree Slide.pdf` pp.3–4 terms/if–then,5–6 Sunburn,7–12 ID3/trees/Occam,13–15 gain/subtrees,16–17 rules; A01 `Assignment/Assignment_DecisionTree.pdf` p.1; A04 `Assignment/example.pdf` pp.1–6; A05 `Assignment/Lab_Sol.pdf` pp.1–3; A06 inventory alias `Assignment/[student-id]Decision Tree File.pdf` pp.1–4 (ไม่เผยรหัส/ภาพ); D01 `Assignment/play_tennis.csv` 14 records. ทั้งหมด local-only ไม่สร้าง public links ที่ไม่มีไฟล์จริง ตัวเลข/โค้ด/เฉลยในบทคำนวณอิสระและระบุความต่างจากการปัดในartifact
+S08 `Final/Decision Tree Slide.pdf` pp.3–4 terms/if–then,5–6 Sunburn,7–12 ID3/trees/Occam,13–15 gain/subtrees,16–17 rules; A01 `Assignment/Assignment_DecisionTree.pdf` p.1; A04 `Assignment/example.pdf` pp.1–6; A05 `Assignment/Lab_Sol.pdf` pp.1–3; A06 inventory alias `Assignment/[student-id]Decision Tree File.pdf` pp.1–4 (ไม่เผยรหัส/ภาพ); D01 `Assignment/play_tennis.csv` 14 records. ทั้งหมด local-only ไม่สร้าง public links ที่ไม่มีไฟล์จริง ตัวเลข/โค้ด/เฉลยในบทคำนวณอิสระและระบุความต่างจากการปัดใน artifact

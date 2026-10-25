@@ -54,6 +54,9 @@ for _ in range(30):
   assert np.isclose(float(z),score) and pred==y
   w+=rate*(t-pred)*v
   assert np.allclose(np.array(after,float),w,atol=1e-12)
+for rate,epochs in [(0,1),(-1,1),(.5,0)]:
+ try:train(p['patterns_and'],[0,0,0],rate,epochs);raise AssertionError('Invalid training setting')
+ except ValueError:pass
 assert len(train(p['patterns_xor'],[.1,.1,.1],.5,20))==80
 args=argparse.ArgumentParser();args.add_argument('--source-root',type=Path);args=args.parse_args()
 if args.source_root:

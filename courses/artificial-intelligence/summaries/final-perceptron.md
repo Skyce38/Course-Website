@@ -29,7 +29,7 @@ $$
 S10 pp.14–15 แสดงการปรับ weights ตาม error; α>0 คือ learning rate ขนาดก้าว ไม่ใช่อัตราความถูกต้อง แต่ละ sample ใช้ weights ก่อนแถวนั้นคำนวณ z,y,e ก่อนปรับทุก weight จาก error เดียวกัน แถวถัดไปใช้ผลใหม่ ครบข้อมูลหนึ่งรอบเรียก epoch ถ้า e=0 ไม่ปรับ
 
 ## X06: AND ทุกขั้น {#and}
-Sheet1!B1 α=.5, G3:I3 initial(w0,w1,w2)=(.1,.1,.1); A4:C27 เป็น AND 00→0,01→0,10→0,11→1 เรียงซ้ำ6epochs แถวแรก z=.1, y=1,e=−1 จึง w0=.1−.5=−.4, w1=.1,w2=.1; แถว x1=x2=1 ของ epoch1 z=−.2 จึง y=0,e=1 และบวก .5 ทั้งสามweights
+Sheet1!B1 α=.5, G3:I3 initial(w0,w1,w2)=(.1,.1,.1); A4:C27 เป็น AND 00→0,01→0,10→0,11→1 เรียงซ้ำ6epochs แถวแรก z=.1, y=1,e=−1 จึง w0=.1−.5=−.4, w1=.1,w2=.1; แถว x1=x2=1 ของ epoch1 z=−.2 จึง y=0,e=1 และบวก .5 ทั้งสาม weights
 
 ตารางแสดงค่าก่อน/หลังทุก sample; ไม่มี batch averaging หรือ shuffle ใช้เศษส่วนในการตรวจ ไม่ปัดกลางรอบ
 
@@ -111,41 +111,41 @@ print('final',trace[-1][-1])
 ```
 
 ## ข้อผิดพลาดที่พบบ่อย {#mistakes}
-สลับ target±1 กับ0/1; ใช้ z≥0 ทั้งที่ workbook ใช้>; ลืม bias update; เปลี่ยนweightsก่อนคำนวณerrorครบ; เรียก sampleเดียวว่าepoch; อ้าง139epochsของ L01 เป็น AND; สรุปเพิ่มlayers/αแล้วรับรองคำตอบเสมอ
+สลับ target±1 กับ0/1; ใช้ z≥0 ทั้งที่ workbook ใช้>; ลืม bias update; เปลี่ยน weights ก่อนคำนวณ error ครบ; เรียก sample เดียวว่า epoch; อ้าง139epochs ของ L01 เป็น AND; สรุปเพิ่ม layers/αแล้วรับรองคำตอบเสมอ
 
 ## แบบฝึกพร้อมเฉลย: ผู้เขียนจัดทำอิสระ {#practice}
 ### ข้อ1 คำนวณ neuron
-w=(.1,.1,.1), x=(0,1), target0, α=.5 ให้หา z,y,e และ weightsใหม่
+w=(.1,.1,.1), x=(0,1), target0, α=.5 ให้หา z,y,e และ weights ใหม่
 
 **เฉลย:** z=.1+.1(0)+.1(1)=.2>0 → y1,e−1; w0=−.4,w1=.1,w2=−.4 ต้องปรับ bias ด้วย
 
 ### ข้อ2 ตรวจแถวแรก X06
 เหตุใด x=(0,0) ยังเปลี่ยน weights?
 
-**เฉลย:** input bias=1 จึง w0=.1+.5(−1)(1)=−.4 แต่ w1,w2 คง.1 เพราะ x1=x2=0 ไม่ใช่ errorหาย
+**เฉลย:** input bias=1 จึง w0=.1+.5(−1)(1)=−.4 แต่ w1,w2 คง.1 เพราะ x1=x2=0 ไม่ใช่ error หาย
 
 ### ข้อ3 Threshold ที่ศูนย์
 ถ้า z=0,target1 จะปรับหรือไม่? ต่างจาก ≥0 อย่างไร?
 
-**เฉลย:** workbook strict y0,e1 จึงปรับ α[1,x1,x2]; ถ้าใช้≥0จะ y1,e0 และไม่ปรับ เป็นคนละโมเดล ไม่อ้างสองrunเหมือนกัน
+**เฉลย:** workbook strict y0,e1 จึงปรับ α[1,x1,x2]; ถ้าใช้≥0จะ y1,e0 และไม่ปรับ เป็นคนละโมเดล ไม่อ้างสอง run เหมือนกัน
 
 ### ข้อ4 ผลท้ายและ boundary
-ตรวจ AND จาก weightsสุดท้ายและหา x2 เมื่อ x1=1 บนเส้น
+ตรวจ AND จาก weights สุดท้ายและหา x2 เมื่อ x1=1 บนเส้น
 
-**เฉลย:** scores[−1.4,−.8,−.3,.3] ให้[0,0,0,1]; x2=(1.4−1.1)/.6=.5 คือเส้นแบ่ง ไม่ใช่ค่าtarget
+**เฉลย:** scores[−1.4,−.8,−.3,.3] ให้[0,0,0,1]; x2=(1.4−1.1)/.6=.5 คือเส้นแบ่ง ไม่ใช่ค่า target
 
 ### ข้อ5 XOR
 เหตุใดเพิ่ม epochs ไม่ทำให้ single perceptron แก้ XOR ได้ทุกจุด?
 
-**เฉลย:** สี่ constraints ขัดกันตามการบวกข้างต้น แสดงว่าไม่มีเส้นใดตอบครบ จึงต้องเปลี่ยนrepresentation/architecture ไม่ใช่อ้างว่าค่าαใหญ่ขึ้นจะแก้ข้อจำกัดเชิงเรขาคณิต
+**เฉลย:** สี่ constraints ขัดกันตามการบวกข้างต้น แสดงว่าไม่มีเส้นใดตอบครบ จึงต้องเปลี่ยน representation/architecture ไม่ใช่อ้างว่าค่าαใหญ่ขึ้นจะแก้ข้อจำกัดเชิงเรขาคณิต
 
 ### ข้อ6 วิเคราะห์รายงานการฝึก
 ควรยืนยันหรือไม่ว่า X06 จะใช้139epochs และผลคือ(1.27,−218,924)?
 
-**เฉลย:** ไม่ควร ค่านั้นมาจาก L01 ต่างinitial/α และขาดdataset/screenshot X06 traceนี้มีepoch6ไร้errorและfinal(−1.4,1.1,.6) จำนวนepochขึ้นกับorder/convention/initialization ต้องรายงานsettingsก่อนเทียบ
+**เฉลย:** ไม่ควร ค่านั้นมาจาก L01 ต่าง initial/α และขาด dataset/screenshot X06 trace นี้มี epoch6ไร้ error และ final(−1.4,1.1,.6) จำนวน epoch ขึ้นกับ order/convention/initialization ต้องรายงาน settings ก่อนเทียบ
 
 ## สรุปเตรียม FINAL {#summary}
-z=b+w·x → strict threshold → e=t−y → updateด้วยαex ทีละsample → ตรวจทั้งepoch AND linearly separable; XORไม่ใช่ X06=0/1 ไม่ปะปนbipolar L01ยังreplayไม่ได้
+z=b+w·x → strict threshold → e=t−y → update ด้วยαex ทีละ sample → ตรวจทั้ง epoch AND linearly separable; XOR ไม่ใช่ X06=0/1 ไม่ปะปน bipolar L01ยัง replay ไม่ได้
 
 ## แหล่งอ้างอิง {#sources}
 - [บัญชี S10/X06/L01](../../../docs/ai-source-coverage.md): source local-only ไม่เผยแพร่ข้อมูลส่วนตัว
