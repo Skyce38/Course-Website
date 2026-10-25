@@ -1,0 +1,573 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-inheritance-mro",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "oop-python-inheritance-mro-exam-01",
+      "type": "choice",
+      "prompt": "เลือก inheritance ควรตรวจความสัมพันธ์ใดก่อน?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "is-a พร้อม behavioral contract",
+          "id": "a"
+        },
+        {
+          "text": "มีชื่อ attributes คล้ายกันก็พอ",
+          "id": "b"
+        },
+        {
+          "text": "has-a ต้องสืบทอดเสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "การ reuse อย่างเดียวไม่พิสูจน์ว่าทดแทนกันได้",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week3 pp.3–16 แก้ copy-paste ด้วย subclass: `class SavingsAccount(BankAccount)` สืบทอด method/property ที่ค้นพบตาม MRO แต่ instance ยังมี object identity ของมันเอง ไม่ได้คัดลอก instance บัญชีแม่อีกตัวขึ้นมา `isinstance(s,BankAccount)`เป็น T"
+      }
+    },
+    {
+      "id": "oop-python-inheritance-mro-exam-02",
+      "type": "choice",
+      "prompt": "Override หมายถึงอะไร?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "สร้าง object พ่อสำเนาใหม่",
+          "id": "a"
+        },
+        {
+          "text": "subclass นิยาม method ชื่อเดิมเพื่อเปลี่ยนหรือขยายพฤติกรรม",
+          "id": "b"
+        },
+        {
+          "text": "ลบทุก method ของฐาน",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "lookup ใช้ MRO เลือก implementation ไม่ใช่คัดลอกบัญชีแม่",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week3 pp.3–16 แก้ copy-paste ด้วย subclass: `class SavingsAccount(BankAccount)` สืบทอด method/property ที่ค้นพบตาม MRO แต่ instance ยังมี object identity ของมันเอง ไม่ได้คัดลอก instance บัญชีแม่อีกตัวขึ้นมา `isinstance(s,BankAccount)`เป็น T"
+      }
+    },
+    {
+      "id": "oop-python-inheritance-mro-exam-03",
+      "type": "choice",
+      "prompt": "ทุก override จำเป็นต้องเรียก super เสมอหรือไม่?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "จำเป็นทุกกรณี",
+          "id": "a"
+        },
+        {
+          "text": "ห้ามเรียก super ทุกกรณี",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ ขึ้นกับสัญญาของ operation",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "อาจแทนทั้งหมดหรือขยายฐาน ต้องรักษา contract",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week3 pp.3–16 แก้ copy-paste ด้วย subclass: `class SavingsAccount(BankAccount)` สืบทอด method/property ที่ค้นพบตาม MRO แต่ instance ยังมี object identity ของมันเอง ไม่ได้คัดลอก instance บัญชีแม่อีกตัวขึ้นมา `isinstance(s,BankAccount)`เป็น T"
+      }
+    },
+    {
+      "id": "oop-python-inheritance-mro-exam-04",
+      "type": "choice",
+      "prompt": "super() คืนอะไรในบริบท cooperative inheritance?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "proxy ค้นหาลำดับถัดไปใน MRO",
+          "id": "a"
+        },
+        {
+          "text": "instance พ่ออิสระอีกตัว",
+          "id": "b"
+        },
+        {
+          "text": "class แรกตามชื่อไฟล์เสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "จึงไม่ใช่คำสั่งเรียก parent เดียวตายตัว",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week3 pp.3–16 แก้ copy-paste ด้วย subclass: `class SavingsAccount(BankAccount)` สืบทอด method/property ที่ค้นพบตาม MRO แต่ instance ยังมี object identity ของมันเอง ไม่ได้คัดลอก instance บัญชีแม่อีกตัวขึ้นมา `isinstance(s,BankAccount)`เป็น T"
+      }
+    },
+    {
+      "id": "oop-python-inheritance-mro-exam-05",
+      "type": "choice",
+      "prompt": "Diamond D(B,C),B(A),C(A) ที่สอดคล้องแบบตัวอย่าง มี MRO ใด?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "D, B, A, C, A, object",
+          "id": "a"
+        },
+        {
+          "text": "D, B, C, A, object",
+          "id": "b"
+        },
+        {
+          "text": "D, A, B, C, object",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "C3 รักษาลำดับที่สอดคล้องและไม่ทำ A ซ้ำ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "จาก sourcephysicalpp.25–30: rate ช่วง 0..0.10;ดอกเบี้ยจาก balance×rate;ถอนแล้วเหลืออย่างน้อย 500 ปรับ type/finite validation ตามบทก่อน และกรณี interest0 ให้ no-op เพราะ source ยอม rate0 แต่ deposit0 ผิดสัญญาบัญชี อย่าเรียก deposit(0) แล้วอ้",
+        "oracle": "run(\"class A: pass\\nclass B(A): pass\\nclass C(A): pass\\nclass D(B,C): pass\\nprint(\\\", \\\".join(k.__name__ for k in D.__mro__))\")"
+      }
+    },
+    {
+      "id": "oop-python-inheritance-mro-exam-06",
+      "type": "choice",
+      "prompt": "ใน diamond เดิม super ภายใน B จะไปหา C ได้หรือไม่?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "ไม่ได้ ต้องไป A เท่านั้น",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ได้เพราะ C ไม่ได้เป็นฐานตรงของ B",
+          "id": "b"
+        },
+        {
+          "text": "ได้ เมื่อ receiver มี MRO ของ D",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "super ทำตาม MRO ของ receiver ไม่ใช่แผนภาพพ่อเดี่ยว",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "จาก sourcephysicalpp.25–30: rate ช่วง 0..0.10;ดอกเบี้ยจาก balance×rate;ถอนแล้วเหลืออย่างน้อย 500 ปรับ type/finite validation ตามบทก่อน และกรณี interest0 ให้ no-op เพราะ source ยอม rate0 แต่ deposit0 ผิดสัญญาบัญชี อย่าเรียก deposit(0) แล้วอ้"
+      }
+    },
+    {
+      "id": "oop-python-inheritance-mro-exam-07",
+      "type": "choice",
+      "prompt": "เรียก A.method(self) โดยตรงใน cooperative diamond เสี่ยงอะไร?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "ข้าม C หรือทำฐานซ้ำ",
+          "id": "a"
+        },
+        {
+          "text": "แก้ MRO ให้อัตโนมัติ",
+          "id": "b"
+        },
+        {
+          "text": "สร้าง instance ใหม่แทน self",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ควรออกแบบ arguments และ super chain ให้ทำงานร่วมกัน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "จาก sourcephysicalpp.25–30: rate ช่วง 0..0.10;ดอกเบี้ยจาก balance×rate;ถอนแล้วเหลืออย่างน้อย 500 ปรับ type/finite validation ตามบทก่อน และกรณี interest0 ให้ no-op เพราะ source ยอม rate0 แต่ deposit0 ผิดสัญญาบัญชี อย่าเรียก deposit(0) แล้วอ้"
+      }
+    },
+    {
+      "id": "oop-python-inheritance-mro-exam-08",
+      "type": "choice",
+      "prompt": "SavingsAccount เป็น subclass ของ BankAccount แล้ว isinstance(s,BankAccount) เป็นอะไร?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "False",
+          "id": "a"
+        },
+        {
+          "text": "True",
+          "id": "b"
+        },
+        {
+          "text": "ขึ้นกับยอดเงิน",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ความสัมพันธ์ชนิดเป็นจริง แต่ยังไม่พิสูจน์ behavioral LSP",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week3 pp.3–16 แก้ copy-paste ด้วย subclass: `class SavingsAccount(BankAccount)` สืบทอด method/property ที่ค้นพบตาม MRO แต่ instance ยังมี object identity ของมันเอง ไม่ได้คัดลอก instance บัญชีแม่อีกตัวขึ้นมา `isinstance(s,BankAccount)`เป็น T"
+      }
+    },
+    {
+      "id": "oop-python-inheritance-mro-exam-09",
+      "type": "numeric",
+      "prompt": "บัญชี 1000 rate=.04 คิดดอกเบี้ย balance×rate ได้เท่าใด?",
+      "reference": "trace",
+      "answer": 40,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "1000×.04=40 ก่อนฝากดอกเบี้ย",
+      "difficulty": "easy",
+      "verification": {
+        "method": "python",
+        "evidence": "| ขั้น | balance | rate | count | การ dispatch |\n|---|---:|---:|---:|---|\n| SavingsAccount(...10000,.03) | 10000 | .03 | 0 | superinit เตรียมข้อมูลฐาน ก่อนตั้ง rate |\n| apply_interest | 10300 | .03 | 1 | interest300→deposit จากฐาน→setter |\n",
+        "oracle": "1000*Fraction(4,100)"
+      }
+    },
+    {
+      "id": "oop-python-inheritance-mro-exam-10",
+      "type": "numeric",
+      "prompt": "บัญชี 2000 rate=.05 apply_interest ผ่าน deposit สำเร็จ จงหายอดใหม่",
+      "reference": "trace",
+      "answer": 2100,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "ดอกเบี้ย 100 แล้วเพิ่มในยอดเดิม",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "| ขั้น | balance | rate | count | การ dispatch |\n|---|---:|---:|---:|---|\n| SavingsAccount(...10000,.03) | 10000 | .03 | 0 | superinit เตรียมข้อมูลฐาน ก่อนตั้ง rate |\n| apply_interest | 10300 | .03 | 1 | interest300→deposit จากฐาน→setter |\n",
+        "oracle": "2000+2000*Fraction(5,100)"
+      }
+    },
+    {
+      "id": "oop-python-inheritance-mro-exam-11",
+      "type": "choice",
+      "prompt": "นโยบาย interest=0 ของผู้เขียนทำอย่างไร?",
+      "reference": "trace",
+      "choices": [
+        {
+          "text": "เพิ่ม count แม้ไม่เปลี่ยนยอด",
+          "id": "a"
+        },
+        {
+          "text": "no-op ไม่เรียก deposit(0)",
+          "id": "b"
+        },
+        {
+          "text": "raise ทุกกรณีเพราะ rate0 ใช้ไม่ได้",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "source ยอม rate0 แต่ deposit ต้องจำนวนบวก จึงประกาศนโยบายเสริม",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "| ขั้น | balance | rate | count | การ dispatch |\n|---|---:|---:|---:|---|\n| SavingsAccount(...10000,.03) | 10000 | .03 | 0 | superinit เตรียมข้อมูลฐาน ก่อนตั้ง rate |\n| apply_interest | 10300 | .03 | 1 | interest300→deposit จากฐาน→setter |\n"
+      }
+    },
+    {
+      "id": "oop-python-inheritance-mro-exam-12",
+      "type": "numeric",
+      "prompt": "ยอด 1100 ต้องเหลือขั้นต่ำ 500 ถอนมากที่สุดได้เท่าใด?",
+      "reference": "trace",
+      "answer": 600,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "1100−500=600 ภายใต้กฎตัวอย่าง ไม่มีค่าธรรมเนียมเพิ่ม",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "| ขั้น | balance | rate | count | การ dispatch |\n|---|---:|---:|---:|---|\n| SavingsAccount(...10000,.03) | 10000 | .03 | 0 | superinit เตรียมข้อมูลฐาน ก่อนตั้ง rate |\n| apply_interest | 10300 | .03 | 1 | interest300→deposit จากฐาน→setter |\n",
+        "oracle": "1100-500"
+      }
+    },
+    {
+      "id": "oop-python-inheritance-mro-exam-13",
+      "type": "choice",
+      "prompt": "ถ้าฐานรับถอนจนเหลือ 0 แต่ subclass บังคับขั้นต่ำ 500 ต้องระวังอะไร?",
+      "reference": "contracts",
+      "choices": [
+        {
+          "text": "เสริม precondition อาจละเมิดความคาดหวัง client ฐาน",
+          "id": "a"
+        },
+        {
+          "text": "isinstance รับรอง LSP อยู่แล้ว",
+          "id": "b"
+        },
+        {
+          "text": "ทุก subclass ต้องรับกฎใดก็ได้",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ต้องระบุข้อจำกัดของแบบจำลองและ contract ของผู้ใช้",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Parent__balance ถูก mangle ตามชื่อ parent การเขียน self.__balance ใน Savings สร้างคนละชื่อและไม่แก้ balance จริง จึงใช้ property ฐาน `super().__init__`อยู่ก่อนใช้ attributes ที่ฐานเตรียมให้ในตัวอย่างนี้ แต่ไม่ใช่ข้อห้ามสากลว่าไม่มีโค้ดใดนำห"
+      }
+    },
+    {
+      "id": "oop-python-inheritance-mro-exam-14",
+      "type": "choice",
+      "prompt": "MRO ถูกต้องตาม syntax รับรอง LSP หรือไม่?",
+      "reference": "contracts",
+      "choices": [
+        {
+          "text": "รับรองทุก method",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ ต้องตรวจพฤติกรรมที่ client คาดหวัง",
+          "id": "b"
+        },
+        {
+          "text": "รับรองเฉพาะ account",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "type graph กับ behavior เป็นคนละระดับ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Parent__balance ถูก mangle ตามชื่อ parent การเขียน self.__balance ใน Savings สร้างคนละชื่อและไม่แก้ balance จริง จึงใช้ property ฐาน `super().__init__`อยู่ก่อนใช้ attributes ที่ฐานเตรียมให้ในตัวอย่างนี้ แต่ไม่ใช่ข้อห้ามสากลว่าไม่มีโค้ดใดนำห"
+      }
+    },
+    {
+      "id": "oop-python-inheritance-mro-exam-15",
+      "type": "choice",
+      "prompt": "เพิ่ม subclass ให้ operation บวกตัวเลขคงที่ ทำให้ Big-O ลดเองหรือไม่?",
+      "reference": "complexity",
+      "choices": [
+        {
+          "text": "ลดจาก O(n) เป็น O(1) เสมอ",
+          "id": "a"
+        },
+        {
+          "text": "ขึ้นอยู่กับชื่อ class เท่านั้น",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ ต้องดูงานที่ method ทำจริง",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "โครงสร้าง class ไม่ใช่ข้อพิสูจน์ performance",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตัวอย่างบัญชีถือ arithmetic คงที่ O(1);การค้น method มีต้นทุนตามขนาด hierarchy ไม่ใช่จำนวนบัญชี ไม่ใช้จำนวนคลาสแทน n ของข้อมูล ข้อผิดพลาดหลักคือลืม init ฐานก่อนใช้ property,ส่ง args ผิด,เขียน private ฐานซ้ำ,ใช้ inheritance กับ has-a เช่น Cu"
+      }
+    },
+    {
+      "id": "oop-python-inheritance-mro-exam-16",
+      "type": "choice",
+      "prompt": "Subclass __init__ ไม่เรียก initialization ที่จำเป็นของฐาน เสี่ยงอะไร?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "attribute ฐานที่ method ต้องใช้ยังไม่ถูกตั้ง",
+          "id": "a"
+        },
+        {
+          "text": "ทุก attribute ถูกตั้งอัตโนมัติ",
+          "id": "b"
+        },
+        {
+          "text": "Python ห้ามมี __init__ ใน child",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ต้องรวมการตั้ง state ตาม contract ไม่ใช่สมมติว่ามีอยู่",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "จาก sourcephysicalpp.25–30: rate ช่วง 0..0.10;ดอกเบี้ยจาก balance×rate;ถอนแล้วเหลืออย่างน้อย 500 ปรับ type/finite validation ตามบทก่อน และกรณี interest0 ให้ no-op เพราะ source ยอม rate0 แต่ deposit0 ผิดสัญญาบัญชี อย่าเรียก deposit(0) แล้วอ้"
+      }
+    },
+    {
+      "id": "oop-python-inheritance-mro-exam-17",
+      "type": "numeric",
+      "prompt": "เริ่ม count0 apply_interest บวกผ่าน deposit หนึ่งครั้ง แล้วถอนสำเร็จหนึ่งครั้ง count เท่าใด?",
+      "reference": "trace",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "สองธุรกรรมสำเร็จเพิ่ม count ครั้งละ 1",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "| ขั้น | balance | rate | count | การ dispatch |\n|---|---:|---:|---:|---|\n| SavingsAccount(...10000,.03) | 10000 | .03 | 0 | superinit เตรียมข้อมูลฐาน ก่อนตั้ง rate |\n| apply_interest | 10300 | .03 | 1 | interest300→deposit จากฐาน→setter |\n",
+        "oracle": "1+1"
+      }
+    },
+    {
+      "id": "oop-python-inheritance-mro-exam-18",
+      "type": "choice",
+      "prompt": "ต้องการตรวจว่า class เป็น subclass ควรใช้สิ่งใด?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "isinstance(Child(),str) เสมอ",
+          "id": "a"
+        },
+        {
+          "text": "id(Child)==id(Base)",
+          "id": "b"
+        },
+        {
+          "text": "issubclass(Child,Base)",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "issubclass ใช้กับ classes ต่างจากตรวจ instance",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "จาก sourcephysicalpp.25–30: rate ช่วง 0..0.10;ดอกเบี้ยจาก balance×rate;ถอนแล้วเหลืออย่างน้อย 500 ปรับ type/finite validation ตามบทก่อน และกรณี interest0 ให้ no-op เพราะ source ยอม rate0 แต่ deposit0 ผิดสัญญาบัญชี อย่าเรียก deposit(0) แล้วอ้"
+      }
+    },
+    {
+      "id": "oop-python-inheritance-mro-exam-19",
+      "type": "choice",
+      "prompt": "อัตราดอกเบี้ยที่ถูกช่วงไม่รับรองการถอนผ่านเสมอเพราะอะไร?",
+      "reference": "contracts",
+      "choices": [
+        {
+          "text": "ยังต้องตรวจยอดและขั้นต่ำของ operation ถอน",
+          "id": "a"
+        },
+        {
+          "text": "เพราะ rate แทนยอดเสมอ",
+          "id": "b"
+        },
+        {
+          "text": "เพราะ inheritance ปิด withdraw",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "invariants หลายข้อทำงานร่วมกัน ไม่แทนกันด้วยเงื่อนไขเดียว",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Parent__balance ถูก mangle ตามชื่อ parent การเขียน self.__balance ใน Savings สร้างคนละชื่อและไม่แก้ balance จริง จึงใช้ property ฐาน `super().__init__`อยู่ก่อนใช้ attributes ที่ฐานเตรียมให้ในตัวอย่างนี้ แต่ไม่ใช่ข้อห้ามสากลว่าไม่มีโค้ดใดนำห"
+      }
+    },
+    {
+      "id": "oop-python-inheritance-mro-exam-20",
+      "type": "choice",
+      "prompt": "Cooperative methods ในหลาย inheritance ควรคำนึงถึงอะไร?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "ชื่อไฟล์เรียงอักษรเท่านั้น",
+          "id": "a"
+        },
+        {
+          "text": "signatures/arguments ที่ส่งต่อเข้ากันได้",
+          "id": "b"
+        },
+        {
+          "text": "ทุก class ต้องสร้าง self ใหม่",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "super chain จะล้มได้หาก method ถัดไปไม่รับ arguments ที่ส่ง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "จาก sourcephysicalpp.25–30: rate ช่วง 0..0.10;ดอกเบี้ยจาก balance×rate;ถอนแล้วเหลืออย่างน้อย 500 ปรับ type/finite validation ตามบทก่อน และกรณี interest0 ให้ no-op เพราะ source ยอม rate0 แต่ deposit0 ผิดสัญญาบัญชี อย่าเรียก deposit(0) แล้วอ้"
+      }
+    },
+    {
+      "id": "oop-python-inheritance-mro-exam-21",
+      "type": "self",
+      "prompt": "ทำ trace savings ที่มีดอกเบี้ยบวก ศูนย์ และถอนต่ำกว่าขั้นต่ำ",
+      "reference": "trace",
+      "rubric": [
+        "คำนวณยอดก่อน/หลังและ count",
+        "zero-interest เป็น no-op ตาม policy ผู้เขียน",
+        "failure ไม่เปลี่ยน state"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: คำนวณยอดก่อน/หลังและ count zero-interest เป็น no-op ตาม policy ผู้เขียน failure ไม่เปลี่ยน state",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "| ขั้น | balance | rate | count | การ dispatch |\n|---|---:|---:|---:|---|\n| SavingsAccount(...10000,.03) | 10000 | .03 | 0 | superinit เตรียมข้อมูลฐาน ก่อนตั้ง rate |\n| apply_interest | 10300 | .03 | 1 | interest300→deposit จากฐาน→setter |\n"
+      }
+    },
+    {
+      "id": "oop-python-inheritance-mro-exam-22",
+      "type": "self",
+      "prompt": "เขียน cooperative diamond ที่เรียกแต่ละคลาสครั้งเดียวแล้วตรวจ MRO",
+      "reference": "python",
+      "rubric": [
+        "ระบุ D(B,C),B(A),C(A) ชัดเจน",
+        "ใช้ super และ signatures เข้ากัน",
+        "ตรวจลำดับ output กับ D,B,C,A ไม่เรียก A ซ้ำตรงๆ"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ระบุ D(B,C),B(A),C(A) ชัดเจน ใช้ super และ signatures เข้ากัน ตรวจลำดับ output กับ D,B,C,A ไม่เรียก A ซ้ำตรงๆ",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "จาก sourcephysicalpp.25–30: rate ช่วง 0..0.10;ดอกเบี้ยจาก balance×rate;ถอนแล้วเหลืออย่างน้อย 500 ปรับ type/finite validation ตามบทก่อน และกรณี interest0 ให้ no-op เพราะ source ยอม rate0 แต่ deposit0 ผิดสัญญาบัญชี อย่าเรียก deposit(0) แล้วอ้"
+      }
+    },
+    {
+      "id": "oop-python-inheritance-mro-exam-23",
+      "type": "self",
+      "prompt": "สร้าง counterexample client ที่ชี้ minimum-balance constraint อาจทำให้ทดแทนฐานไม่ได้",
+      "reference": "contracts",
+      "rubric": [
+        "เขียน precondition ฐานที่ client พึ่ง",
+        "เลือกยอดถอนที่ฐานรับแต่ subclass ปฏิเสธ",
+        "เสนอแยก contract หรือ hierarchy โดยไม่อ้าง isinstance เป็นข้อพิสูจน์"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: เขียน precondition ฐานที่ client พึ่ง เลือกยอดถอนที่ฐานรับแต่ subclass ปฏิเสธ เสนอแยก contract หรือ hierarchy โดยไม่อ้าง isinstance เป็นข้อพิสูจน์",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Parent__balance ถูก mangle ตามชื่อ parent การเขียน self.__balance ใน Savings สร้างคนละชื่อและไม่แก้ balance จริง จึงใช้ property ฐาน `super().__init__`อยู่ก่อนใช้ attributes ที่ฐานเตรียมให้ในตัวอย่างนี้ แต่ไม่ใช่ข้อห้ามสากลว่าไม่มีโค้ดใดนำห"
+      }
+    },
+    {
+      "id": "oop-python-inheritance-mro-exam-24",
+      "type": "self",
+      "prompt": "เปรียบ override กับ composition ในการ reuse บัญชี",
+      "reference": "concepts",
+      "rubric": [
+        "ใช้ is-a หรือ has-a ตามหน้าที่จริง",
+        "ระบุ state ที่ต้อง initialize",
+        "ไม่สรุปว่าการ reuse ต้องเป็น inheritance เสมอ"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ใช้ is-a หรือ has-a ตามหน้าที่จริง ระบุ state ที่ต้อง initialize ไม่สรุปว่าการ reuse ต้องเป็น inheritance เสมอ",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Week3 pp.3–16 แก้ copy-paste ด้วย subclass: `class SavingsAccount(BankAccount)` สืบทอด method/property ที่ค้นพบตาม MRO แต่ instance ยังมี object identity ของมันเอง ไม่ได้คัดลอก instance บัญชีแม่อีกตัวขึ้นมา `isinstance(s,BankAccount)`เป็น T"
+      }
+    }
+  ]
+}

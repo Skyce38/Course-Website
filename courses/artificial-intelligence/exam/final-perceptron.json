@@ -1,0 +1,550 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "artificial-intelligence-final-perceptron",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "artificial-intelligence-final-perceptron-exam-01",
+      "type": "choice",
+      "prompt": "Weight ต่างจาก input อย่างไร?",
+      "reference": "ann",
+      "choices": [
+        {
+          "text": "weight เป็น parameter ที่ปรับ ส่วน input เป็นข้อมูลที่ป้อน",
+          "id": "a"
+        },
+        {
+          "text": "ทั้งคู่ต้องปรับจาก target พร้อมกัน",
+          "id": "b"
+        },
+        {
+          "text": "weight คือ classlabel",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "neuron คูณ inputs ด้วย weights แล้วบวก bias ก่อน activation",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S10 pp.2–8 ใช้สมอง/เซลล์ประสาทเป็นแรงบันดาลใจ ไม่ได้หมายถึงแบบจำลองสมองครบถ้วน\n\nArtificial neuron รับ inputs x คูณ weights w แล้วบวก bias b ผ่าน activation เพื่อได้ output เครือข่ายมี input, hidden และ output layers การเรียนรู้เปลี่ยน weigh"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-perceptron-exam-02",
+      "type": "choice",
+      "prompt": "Bias ช่วยเปลี่ยนสิ่งใดของ linear boundary?",
+      "reference": "ann",
+      "choices": [
+        {
+          "text": "จำนวนข้อมูลฝึก",
+          "id": "a"
+        },
+        {
+          "text": "ตำแหน่งของเส้นแบ่งโดยไม่ต้องผ่าน origin เสมอ",
+          "id": "b"
+        },
+        {
+          "text": "จำนวน features เอง",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "b เป็นค่าคงที่ใน weighted sum ไม่ใช่ noise ที่ต้องลบทุกครั้ง",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S10 pp.2–8 ใช้สมอง/เซลล์ประสาทเป็นแรงบันดาลใจ ไม่ได้หมายถึงแบบจำลองสมองครบถ้วน\n\nArtificial neuron รับ inputs x คูณ weights w แล้วบวก bias b ผ่าน activation เพื่อได้ output เครือข่ายมี input, hidden และ output layers การเรียนรู้เปลี่ยน weigh"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-perceptron-exam-03",
+      "type": "choice",
+      "prompt": "X06 ใช้ strict threshold z>0 หาก z=−.2 จะได้ y เท่าใด?",
+      "reference": "perceptron",
+      "choices": [
+        {
+          "text": "1",
+          "id": "a"
+        },
+        {
+          "text": "−1",
+          "id": "b"
+        },
+        {
+          "text": "0",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ใช้ binary0/1 ตาม workbook ไม่ปน bipolar±1",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S10 pp.10–13 มี bipolar ±1 และภาพ binary ต้องเลือกให้ชัด บทคำนวณใช้ **X06 output 0/1 และเงื่อนไข z>0** เท่านั้น: z=0 ให้ 0 ไม่ใช้ ≥0\n\n\n\nS10 pp.14–15 แสดงการปรับ weights ตาม error; α>0 คือ learning rate ขนาดก้าว ไม่ใช่อัตราความถูกต้อง แต่ละ "
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-perceptron-exam-04",
+      "type": "numeric",
+      "prompt": "z=b+w1x1+w2x2 โดย b=−1,w=(2,3),x=(1,2) จงหา z",
+      "reference": "perceptron",
+      "answer": 7,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "−1+2×1+3×2=7 ก่อนผ่าน threshold",
+      "difficulty": "easy",
+      "verification": {
+        "method": "python",
+        "evidence": "S10 pp.10–13 มี bipolar ±1 และภาพ binary ต้องเลือกให้ชัด บทคำนวณใช้ **X06 output 0/1 และเงื่อนไข z>0** เท่านั้น: z=0 ให้ 0 ไม่ใช้ ≥0\n\n\n\nS10 pp.14–15 แสดงการปรับ weights ตาม error; α>0 คือ learning rate ขนาดก้าว ไม่ใช่อัตราความถูกต้อง แต่ละ ",
+        "oracle": "-1+2*1+3*2"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-perceptron-exam-05",
+      "type": "numeric",
+      "prompt": "target=1,predicted=0 จงหา e=t−y",
+      "reference": "perceptron",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "1−0=1 sign นี้ใช้กับ update แบบบวกαex",
+      "difficulty": "easy",
+      "verification": {
+        "method": "python",
+        "evidence": "S10 pp.10–13 มี bipolar ±1 และภาพ binary ต้องเลือกให้ชัด บทคำนวณใช้ **X06 output 0/1 และเงื่อนไข z>0** เท่านั้น: z=0 ให้ 0 ไม่ใช้ ≥0\n\n\n\nS10 pp.14–15 แสดงการปรับ weights ตาม error; α>0 คือ learning rate ขนาดก้าว ไม่ใช่อัตราความถูกต้อง แต่ละ ",
+        "oracle": "1-0"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-perceptron-exam-06",
+      "type": "choice",
+      "prompt": "ถ้าทำนายถูกและ e=0 updateweights ตามสูตรเป็นอย่างไร?",
+      "reference": "perceptron",
+      "choices": [
+        {
+          "text": "เพิ่มαทุก weight",
+          "id": "a"
+        },
+        {
+          "text": "ลด bias เสมอ",
+          "id": "b"
+        },
+        {
+          "text": "ไม่เปลี่ยนจาก perceptronrule นี้",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "αex เป็นศูนย์เมื่อ e=0",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S10 pp.10–13 มี bipolar ±1 และภาพ binary ต้องเลือกให้ชัด บทคำนวณใช้ **X06 output 0/1 และเงื่อนไข z>0** เท่านั้น: z=0 ให้ 0 ไม่ใช้ ≥0\n\n\n\nS10 pp.14–15 แสดงการปรับ weights ตาม error; α>0 คือ learning rate ขนาดก้าว ไม่ใช่อัตราความถูกต้อง แต่ละ "
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-perceptron-exam-07",
+      "type": "numeric",
+      "prompt": "w1=.2,α=.5,e=−1,x1=2 จงหา w1 ใหม่",
+      "reference": "perceptron",
+      "answer": -0.8,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "w ใหม่=.2+.5×(−1)×2=−.8",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "S10 pp.10–13 มี bipolar ±1 และภาพ binary ต้องเลือกให้ชัด บทคำนวณใช้ **X06 output 0/1 และเงื่อนไข z>0** เท่านั้น: z=0 ให้ 0 ไม่ใช้ ≥0\n\n\n\nS10 pp.14–15 แสดงการปรับ weights ตาม error; α>0 คือ learning rate ขนาดก้าว ไม่ใช่อัตราความถูกต้อง แต่ละ ",
+        "oracle": "Fraction(2,10)+Fraction(1,2)*(-1)*2"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-perceptron-exam-08",
+      "type": "numeric",
+      "prompt": "b=.3,α=.1,e=1 และ biasinput=1 จงหา b ใหม่",
+      "reference": "perceptron",
+      "answer": 0.4,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "biasupdate=b+αe=.3+.1=.4",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "S10 pp.10–13 มี bipolar ±1 และภาพ binary ต้องเลือกให้ชัด บทคำนวณใช้ **X06 output 0/1 และเงื่อนไข z>0** เท่านั้น: z=0 ให้ 0 ไม่ใช้ ≥0\n\n\n\nS10 pp.14–15 แสดงการปรับ weights ตาม error; α>0 คือ learning rate ขนาดก้าว ไม่ใช่อัตราความถูกต้อง แต่ละ ",
+        "oracle": "Fraction(3,10)+Fraction(1,10)"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-perceptron-exam-09",
+      "type": "choice",
+      "prompt": "xj=0 แต่ทายผิด weight j เปลี่ยนหรือไม่ในสูตรนี้?",
+      "reference": "perceptron",
+      "choices": [
+        {
+          "text": "เปลี่ยนเท่ากับ bias ทุกครั้ง",
+          "id": "a"
+        },
+        {
+          "text": "ต้องตั้งเป็น 0",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ เพราะαexj=0",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "weight ของ feature ศูนย์ไม่เปลี่ยน แต่ bias อาจเปลี่ยน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S10 pp.10–13 มี bipolar ±1 และภาพ binary ต้องเลือกให้ชัด บทคำนวณใช้ **X06 output 0/1 และเงื่อนไข z>0** เท่านั้น: z=0 ให้ 0 ไม่ใช้ ≥0\n\n\n\nS10 pp.14–15 แสดงการปรับ weights ตาม error; α>0 คือ learning rate ขนาดก้าว ไม่ใช่อัตราความถูกต้อง แต่ละ "
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-perceptron-exam-10",
+      "type": "choice",
+      "prompt": "หนึ่ง epoch ของ X06 หมายถึงอะไร?",
+      "reference": "and",
+      "choices": [
+        {
+          "text": "ผ่าน ANDpatterns ทั้งสี่ตามลำดับหนึ่งรอบ",
+          "id": "a"
+        },
+        {
+          "text": "update หนึ่ง sample เท่านั้น",
+          "id": "b"
+        },
+        {
+          "text": "รันจน converge ทั้งหมด",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "แยก sample,update และ epoch ให้ชัด",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Sheet1!B1 α=.5, G3:I3 initial(w0,w1,w2)=(.1,.1,.1); A4:C27 เป็น AND 00→0,01→0,10→0,11→1 เรียงซ้ำ 6epochs แถวแรก z=.1, y=1,e=−1 จึง w0=.1−.5=−.4, w1=.1,w2=.1; แถว x1=x2=1 ของ epoch1 z=−.2 จึง y=0,e=1 และบวก .5 ทั้งสาม weights\n\nตารางแสดงค่าก่"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-perceptron-exam-11",
+      "type": "choice",
+      "prompt": "Sequentialupdate ต้องใช้ weights ชุดใดกับ sample ถัดไป?",
+      "reference": "and",
+      "choices": [
+        {
+          "text": "weights เริ่มต้นตลอด epoch เสมอ",
+          "id": "a"
+        },
+        {
+          "text": "weights ที่อัปเดตจาก sample ก่อนหน้าแล้ว",
+          "id": "b"
+        },
+        {
+          "text": "weights เฉลี่ยของทุก epoch",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "นี่คือ online/sequential convention ของ workbook",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Sheet1!B1 α=.5, G3:I3 initial(w0,w1,w2)=(.1,.1,.1); A4:C27 เป็น AND 00→0,01→0,10→0,11→1 เรียงซ้ำ 6epochs แถวแรก z=.1, y=1,e=−1 จึง w0=.1−.5=−.4, w1=.1,w2=.1; แถว x1=x2=1 ของ epoch1 z=−.2 จึง y=0,e=1 และบวก .5 ทั้งสาม weights\n\nตารางแสดงค่าก่"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-perceptron-exam-12",
+      "type": "numeric",
+      "prompt": "AND มี inputs(0,0),(0,1),(1,0),(1,1) เป้าหมาย 1 มีกี่ pattern?",
+      "reference": "and",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "AND เป็น 1 เฉพาะเมื่อทั้งสอง input เป็น 1",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "Sheet1!B1 α=.5, G3:I3 initial(w0,w1,w2)=(.1,.1,.1); A4:C27 เป็น AND 00→0,01→0,10→0,11→1 เรียงซ้ำ 6epochs แถวแรก z=.1, y=1,e=−1 จึง w0=.1−.5=−.4, w1=.1,w2=.1; แถว x1=x2=1 ของ epoch1 z=−.2 จึง y=0,e=1 และบวก .5 ทั้งสาม weights\n\nตารางแสดงค่าก่",
+        "oracle": "sum(a and b for a,b in [(0,0),(0,1),(1,0),(1,1)])"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-perceptron-exam-13",
+      "type": "choice",
+      "prompt": "XOR ไม่แยกด้วยเส้นเดียวเพราะอะไร?",
+      "reference": "boundary",
+      "choices": [
+        {
+          "text": "positive และ negative สลับมุมจนไม่ linearly separable",
+          "id": "a"
+        },
+        {
+          "text": "เพราะมีเพียง 4 แถวจึง train ไม่ได้ทุกแบบ",
+          "id": "b"
+        },
+        {
+          "text": "เพราะ learningrate ต่ำเสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "เพิ่ม epochs อย่างเดียวไม่แก้ข้อจำกัด class ของ single linear threshold",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S10 pp.13,16–18: boundary คือ b+w1x1+w2x2=0 ด้าน z>0 เป็น 1 สำหรับผล X06 เส้น −1.4+1.1x1+.6x2=0 หรือ x2=7/3−(11/6)x1; ถ้า w2=0 ไม่ใช้สูตรหาร w2 แต่เขียนเส้นแนวตั้งแทน\n\nAND แยกด้วยเส้นตรงได้ แต่ XOR positives(0,1),(1,0) กับ negatives(0,0),(1"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-perceptron-exam-14",
+      "type": "choice",
+      "prompt": "ถ้า w2=0 ควรเขียนเส้นแบ่งอย่างไร?",
+      "reference": "boundary",
+      "choices": [
+        {
+          "text": "หารด้วย 0 แล้วให้ slope เป็น 0",
+          "id": "a"
+        },
+        {
+          "text": "ใช้ b+w1x1=0 โดยไม่หารด้วย w2",
+          "id": "b"
+        },
+        {
+          "text": "สรุปว่าไม่มี boundary ทุกกรณี",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "กรณี w1 ไม่ศูนย์เป็นเส้นแนวตั้ง ต้องพิจารณา degenerateweights แยก",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S10 pp.13,16–18: boundary คือ b+w1x1+w2x2=0 ด้าน z>0 เป็น 1 สำหรับผล X06 เส้น −1.4+1.1x1+.6x2=0 หรือ x2=7/3−(11/6)x1; ถ้า w2=0 ไม่ใช้สูตรหาร w2 แต่เขียนเส้นแนวตั้งแทน\n\nAND แยกด้วยเส้นตรงได้ แต่ XOR positives(0,1),(1,0) กับ negatives(0,0),(1"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-perceptron-exam-15",
+      "type": "numeric",
+      "prompt": "Boundary −2+4x1=0 โดย w2=0 อยู่ที่ x1 เท่าใด?",
+      "reference": "boundary",
+      "answer": 0.5,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "4x1=2 จึง x1=.5 ไม่หารด้วย w2",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "S10 pp.13,16–18: boundary คือ b+w1x1+w2x2=0 ด้าน z>0 เป็น 1 สำหรับผล X06 เส้น −1.4+1.1x1+.6x2=0 หรือ x2=7/3−(11/6)x1; ถ้า w2=0 ไม่ใช้สูตรหาร w2 แต่เขียนเส้นแนวตั้งแทน\n\nAND แยกด้วยเส้นตรงได้ แต่ XOR positives(0,1),(1,0) กับ negatives(0,0),(1",
+        "oracle": "Fraction(2,4)"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-perceptron-exam-16",
+      "type": "choice",
+      "prompt": "L01 เริ่ม weights/αต่างจาก X06 ควรเทียบ 139epochs อย่างไร?",
+      "reference": "lab-evidence",
+      "choices": [
+        {
+          "text": "เป็น run คนละเงื่อนไข ไม่ยืนยันว่า AND ต้อง 139epochs",
+          "id": "a"
+        },
+        {
+          "text": "เป็นมาตรฐานทุก dataset",
+          "id": "b"
+        },
+        {
+          "text": "ต้องแก้ X06 ให้ตรง L01",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ข้อมูล/ลำดับ/ภาพ settings ไม่ครบ จึง replay ผลรายงานไม่ได้",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "L01 lines1–43 เป็นข้อความงานส่ง: initial w0=.6,w1=.7,w2=.8, α=.67 ไม่ใช่ X06 รายงาน final w0=1.27,w1=−218,w2=924 และ 139epochs แต่ screenshot ที่อ้างไม่พบ ไม่มีหลักฐาน dataset/ลำดับข้อมูล/การหยุดครบ จึง **ไม่รับรอง replay/คำตอบทางการ** และไ"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-perceptron-exam-17",
+      "type": "choice",
+      "prompt": "ถึง epochcap ก่อนเงื่อนไขหยุดแปลว่าอะไร?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "เรียนสำเร็จเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "หยุดตามขีดจำกัด ยังไม่รับรอง convergence",
+          "id": "b"
+        },
+        {
+          "text": "dataset ผิดแน่นอน",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ต้องรายงาน stopreason ไม่เอาจำนวน epoch แทนความถูกต้อง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "โค้ดผู้เขียนพิมพ์ trace ตรงตาราง ใช้ strict threshold และ epoch cap ชัดเจน การถึง cap ไม่รับรองเรียนสำเร็จ"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-perceptron-exam-18",
+      "type": "choice",
+      "prompt": "เหตุใดควรใช้ exact fractions เมื่อตรวจ threshold z=0 ของตัวอย่าง?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "ทำให้ทุกปัญหา linearly separable",
+          "id": "a"
+        },
+        {
+          "text": "เปลี่ยน binary เป็น bipolar",
+          "id": "b"
+        },
+        {
+          "text": "ลดความสับสนจาก floating-point ใกล้ศูนย์",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ต้องรักษา strictcomparison และตรวจผลใกล้ boundary อย่างระมัดระวัง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "โค้ดผู้เขียนพิมพ์ trace ตรงตาราง ใช้ strict threshold และ epoch cap ชัดเจน การถึง cap ไม่รับรองเรียนสำเร็จ"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-perceptron-exam-19",
+      "type": "choice",
+      "prompt": "ใช้ targets±1 กับ rule y∈{0,1} โดยไม่แปลงเหมาะสมหรือไม่?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "text": "ไม่ ต้องใช้ convention ที่สอดคล้องกัน",
+          "id": "a"
+        },
+        {
+          "text": "ได้เพราะเครื่องหมายไม่มีผล",
+          "id": "b"
+        },
+        {
+          "text": "ได้เฉพาะ epoch แรก",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "label,activation,error และ update ต้องนิยามเป็นระบบเดียว",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "สลับ target±1 กับ 0/1; ใช้ z≥0 ทั้งที่ workbook ใช้>; ลืม bias update; เปลี่ยน weights ก่อนคำนวณ error ครบ; เรียก sample เดียวว่า epoch; อ้าง 139epochs ของ L01 เป็น AND; สรุปเพิ่ม layers/αแล้วรับรองคำตอบเสมอ"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-perceptron-exam-20",
+      "type": "choice",
+      "prompt": "สมองเป็นแรงบันดาลใจของ ANN รับรองว่าโมเดลจำลองสมองครบหรือไม่?",
+      "reference": "ann",
+      "choices": [
+        {
+          "text": "ครบทุกกลไก",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ เป็นแบบจำลองทางคำนวณที่มีขอบเขต",
+          "id": "b"
+        },
+        {
+          "text": "ครบเมื่อ weights มากกว่า 100",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "อย่าขยายอุปมาเป็นข้อกล่าวทางชีววิทยาที่ source ไม่พิสูจน์",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S10 pp.2–8 ใช้สมอง/เซลล์ประสาทเป็นแรงบันดาลใจ ไม่ได้หมายถึงแบบจำลองสมองครบถ้วน\n\nArtificial neuron รับ inputs x คูณ weights w แล้วบวก bias b ผ่าน activation เพื่อได้ output เครือข่ายมี input, hidden และ output layers การเรียนรู้เปลี่ยน weigh"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-perceptron-exam-21",
+      "type": "self",
+      "prompt": "ไล่หนึ่ง epoch ของ AND ด้วยค่าเริ่มต้นและ strict threshold ของ X06",
+      "reference": "and",
+      "rubric": [
+        "คำนวณ z และ y ก่อน update ทุก sample",
+        "คำนวณ e=t−y แล้วปรับ bias ด้วย",
+        "เก็บ weights ใหม่ไป sample ถัดไปและตรวจลำดับข้อมูล"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: คำนวณ z และ y ก่อน update ทุก sample คำนวณ e=t−y แล้วปรับ bias ด้วย เก็บ weights ใหม่ไป sample ถัดไปและตรวจลำดับข้อมูล",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Sheet1!B1 α=.5, G3:I3 initial(w0,w1,w2)=(.1,.1,.1); A4:C27 เป็น AND 00→0,01→0,10→0,11→1 เรียงซ้ำ 6epochs แถวแรก z=.1, y=1,e=−1 จึง w0=.1−.5=−.4, w1=.1,w2=.1; แถว x1=x2=1 ของ epoch1 z=−.2 จึง y=0,e=1 และบวก .5 ทั้งสาม weights\n\nตารางแสดงค่าก่"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-perceptron-exam-22",
+      "type": "self",
+      "prompt": "พิสูจน์ข้อจำกัด XOR ของเส้นตรงด้วยการแยกมุมทั้งสี่",
+      "reference": "boundary",
+      "rubric": [
+        "ระบุคลาสของแต่ละมุม",
+        "แสดงข้อจำกัดที่เส้นเดียวทำพร้อมกันไม่ได้",
+        "ไม่อ้างเพิ่มαหรือ epochs เป็นการแก้ architecture"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ระบุคลาสของแต่ละมุม แสดงข้อจำกัดที่เส้นเดียวทำพร้อมกันไม่ได้ ไม่อ้างเพิ่มαหรือ epochs เป็นการแก้ architecture",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "S10 pp.13,16–18: boundary คือ b+w1x1+w2x2=0 ด้าน z>0 เป็น 1 สำหรับผล X06 เส้น −1.4+1.1x1+.6x2=0 หรือ x2=7/3−(11/6)x1; ถ้า w2=0 ไม่ใช้สูตรหาร w2 แต่เขียนเส้นแนวตั้งแทน\n\nAND แยกด้วยเส้นตรงได้ แต่ XOR positives(0,1),(1,0) กับ negatives(0,0),(1"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-perceptron-exam-23",
+      "type": "self",
+      "prompt": "ออกแบบรายงาน NeuralTrainingLab ที่มีหลักฐานจำกัด",
+      "reference": "lab-evidence",
+      "rubric": [
+        "แยกค่าที่อ่านได้จากข้อความกับภาพที่หาย",
+        "ไม่แต่ง dataset,settings หรือผล replay",
+        "ระบุสิ่งที่ต้องได้เพิ่มก่อนตรวจ 139epochs"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: แยกค่าที่อ่านได้จากข้อความกับภาพที่หาย ไม่แต่ง dataset,settings หรือผล replay ระบุสิ่งที่ต้องได้เพิ่มก่อนตรวจ 139epochs",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "L01 lines1–43 เป็นข้อความงานส่ง: initial w0=.6,w1=.7,w2=.8, α=.67 ไม่ใช่ X06 รายงาน final w0=1.27,w1=−218,w2=924 และ 139epochs แต่ screenshot ที่อ้างไม่พบ ไม่มีหลักฐาน dataset/ลำดับข้อมูล/การหยุดครบ จึง **ไม่รับรอง replay/คำตอบทางการ** และไ"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-perceptron-exam-24",
+      "type": "self",
+      "prompt": "วาง tests ของ perceptron สำหรับ z<0,z=0,z>0 และ update",
+      "reference": "python",
+      "rubric": [
+        "คง targets0/1 และ threshold>0",
+        "ตรวจ e0 และ input0 แยกจาก bias",
+        "แยก cap กับ convergence และรายงาน precision"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: คง targets0/1 และ threshold>0 ตรวจ e0 และ input0 แยกจาก bias แยก cap กับ convergence และรายงาน precision",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "โค้ดผู้เขียนพิมพ์ trace ตรงตาราง ใช้ strict threshold และ epoch cap ชัดเจน การถึง cap ไม่รับรองเรียนสำเร็จ"
+      }
+    }
+  ]
+}

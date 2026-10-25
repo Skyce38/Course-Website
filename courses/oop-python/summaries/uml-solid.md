@@ -2,10 +2,10 @@
 {"version":1,"id":"oop-python-uml-solid","course":"oop-python","category":"summaries","slug":"uml-solid","title":"UML และหลักออกแบบ SRP, OCP, LSP","language":"th"}
 ---
 
-> Week6 และ Week7 pp.3–23เป็นชุดแนวคิดออกแบบต่อเนื่องจึงรวมเป็นบทเดียว ไม่สร้าง chapter ปลอมตามจำนวนสัปดาห์ ตัวอย่าง notification เป็น simulation ที่คืนข้อความ/เขียน memory เท่านั้น ไม่ส่งอีเมลหรือเขียนไฟล์จริง
+> Week6 และ Week7 pp.3–23 เป็นชุดแนวคิดออกแบบต่อเนื่องจึงรวมเป็นบทเดียว ไม่สร้าง chapter ปลอมตามจำนวนสัปดาห์ ตัวอย่าง notification เป็น simulation ที่คืนข้อความ/เขียน memory เท่านั้น ไม่ส่งอีเมลหรือเขียนไฟล์จริง
 
 ## เป้าหมายการเรียนรู้ {#objectives}
-- อ่าน UMLclassbox/visibility/relationship/multiplicity แล้วเชื่อมกับ Python
+- อ่าน UML class box/visibility/relationship/multiplicity แล้วเชื่อมกับ Python
 - แยก SRP,OCP,LSP ด้วยเหตุผลของการเปลี่ยนและ contract จริง
 - trace การเพิ่ม channel ใหม่โดยไม่เพิ่ม type branch และสร้าง counterexample ของ hierarchy ที่ผิด
 
@@ -21,13 +21,15 @@ NotificationService
 Channel <|-- Email / SMS / Push  (implements interface)
 ```
 
-ตาราง p.26มี5แบบ worked:inheritance ลูกศรหัวสามเหลี่ยมโปร่งชี้ฐาน,realization เส้นประหัวสามเหลี่ยมชี้ interface,association เส้นทั่วไป,aggregation เพชรโปร่งฝั่ง whole,composition เพชรทึบฝั่ง whole หัวข้อ p.19เรียก6ระดับแต่ไม่แสดง worked ตัวที่หกครบ จึงไม่แต่งว่า source สอนตัวอย่าง dependency เพิ่มเติม การวาดสัญลักษณ์ไม่ทำให้ code มี validation/multiplicity เอง
+ตาราง p.26 มี 5 แบบ worked:inheritance ลูกศรหัวสามเหลี่ยมโปร่งชี้ฐาน,realization เส้นประหัวสามเหลี่ยมชี้ interface,association เส้นทั่วไป,aggregation เพชรโปร่งฝั่ง whole,composition เพชรทึบฝั่ง whole หัวข้อ p.19 เรียก 6 ระดับแต่ไม่แสดง worked ตัวที่หกครบ จึงไม่แต่งว่า source สอนตัวอย่าง dependency เพิ่มเติม การวาดสัญลักษณ์ไม่ทำให้ code มี validation/multiplicity เอง
 
 ## SRP: หนึ่งเหตุผลของการเปลี่ยน {#srp}
-Week6 pp.28–35แยก Report การคำนวณ,Formatter รูปแบบ,Repository การเก็บ,Notifier การแจ้งเตือน เพราะ requirements เหล่านี้เปลี่ยนคนละเหตุผล SRP ไม่ใช่มี method เดียวต่อ class และไม่ควรแยก count/total/average เป็นสาม class โดยไม่มีเหตุผลต่างกัน การแยกมากเกินไปเพิ่ม coupling/ความซับซ้อนแทน
+Week6 pp.28–35 แยก Report การคำนวณ,Formatter รูปแบบ,Repository การเก็บ,Notifier การแจ้งเตือน เพราะ requirements เหล่านี้เปลี่ยนคนละเหตุผล
+
+SRP ไม่ใช่มี method เดียวต่อ class และไม่ควรแยก count/total/average เป็นสาม class โดยไม่มีเหตุผลต่างกัน การแยกมากเกินไปเพิ่ม coupling/ความซับซ้อนแทน
 
 ## OCP: เปิดให้ขยายผ่านจุดที่ออกแบบไว้ {#ocp}
-pp.37–43และ Week7 pp.14–23:ถ้าต้องเพิ่ม output/channel ใหม่แล้วกลับไปแก้ ifemail/sms/...ทุกครั้ง อาจแยก interface ให้เพิ่ม implementation ใหม่ โดย client ไม่ต้องรู้ชนิด OCP ไม่ใช่ห้ามแก้โค้ดใดตลอดกาล:การแก้ bug หรือเปลี่ยนสัญญาฐานยังทำได้หลังประเมินผลกระทบ จุด compositionroot ที่เลือก channel ย่อมต้องรับ configuration ใหม่
+pp.37–43 และ Week7 pp.14–23:ถ้าต้องเพิ่ม output/channel ใหม่แล้วกลับไปแก้ ifemail/sms/...ทุกครั้ง อาจแยก interface ให้เพิ่ม implementation ใหม่ โดย client ไม่ต้องรู้ชนิด OCP ไม่ใช่ห้ามแก้โค้ดใดตลอดกาล:การแก้ bug หรือเปลี่ยนสัญญาฐานยังทำได้หลังประเมินผลกระทบ จุด compositionroot ที่เลือก channel ย่อมต้องรับ configuration ใหม่
 
 ## LSP: ทดแทนแล้วรักษา Contract {#lsp}
 Week7 pp.3–13:การสืบทอดที่ถูก syntax ยังละเมิดความคาดหวัง client ได้ Square ทางคณิตศาสตร์เป็น rectangle แต่ mutableRectangle ที่ width/height แก้แยกกันมี contract ต่างจาก Square ที่ผูกสองค่า วิธีแก้คือแยกชนิดผ่าน Shape ร่วมและไม่ให้ Square รับสัญญา set อิสระที่ทำไม่ได้ เช่นเดียวกับ Bird ที่ไม่ควรรับรอง fly ถ้ามี Penguin ที่บินไม่ได้
@@ -100,12 +102,12 @@ print(client_area(CoupledSquare(2)))         # 16: contract violation demonstrat
 ```
 
 ## Trace และการเลือกความรับผิดชอบ {#trace}
-Push.format("A","hello")คืน Push:A:hello→service ส่งค่าเดียวให้ logger→entries มี1รายการ เพิ่ม Email/SMS โดยใช้ service เดิมได้ ไม่มี ifbranch ตามชื่อชนิด ข้อมูลไม่ถูกส่งออกเครือข่าย
+Push.format("A","hello") คืน Push:A:hello→service ส่งค่าเดียวให้ logger→entries มี 1 รายการ เพิ่ม Email/SMS โดยใช้ service เดิมได้ ไม่มี ifbranch ตามชื่อชนิด ข้อมูลไม่ถูกส่งออกเครือข่าย
 
-client_area ตั้ง width5แล้ว height4:Rectangle ได้20;CoupledSquare เก็บ side ตัวเดียว จึงหลังสองคำสั่ง side4และ area16 ไม่ใช่20 Counterexample หนึ่งที่ทำลาย contract ก็พอชี้ LSPviolation ไม่ใช้ isinstance มาปิดบังหรือแก้ client ให้รู้ทุก child
+client_area ตั้ง width5 แล้ว height4:Rectangle ได้ 20;CoupledSquare เก็บ side ตัวเดียว จึงหลังสองคำสั่ง side4 และ area16 ไม่ใช่ 20 Counterexample หนึ่งที่ทำลาย contract ก็พอชี้ LSP violation ไม่ใช้ isinstance มาปิดบังหรือแก้ client ให้รู้ทุก child
 
 ## ต้นทุนและข้อผิดพลาด {#complexity}
-การจัดรูปข้อความ m ตัวอักษรใช้ O(m);เพิ่ม loglistamortizedO(1)ไม่นับข้อความ;เก็บ k ข้อความใช้พื้นที่ตามความยาวรวม การแบ่ง class ไม่ลด Big-O โดยอัตโนมัติและมี indirection/objects เพิ่มบ้าง ห้ามอ้าง refactor ประหยัด memory หรือเร็วขึ้นโดยไม่มี measurement
+การจัดรูปข้อความ m ตัวอักษรใช้ O(m);เพิ่ม loglistamortizedO(1) ไม่นับข้อความ;เก็บ k ข้อความใช้พื้นที่ตามความยาวรวม การแบ่ง class ไม่ลด Big-O โดยอัตโนมัติและมี indirection/objects เพิ่มบ้าง ห้ามอ้าง refactor ประหยัด memory หรือเร็วขึ้นโดยไม่มี measurement
 
 ข้อผิดพลาดคือดู UML แล้วเลือก inheritance จากคำว่า has-a,สร้าง GodClass หรือแตก class เกินเหตุ,ถือ OCP เป็นคำสั่งห้ามแก้ bug และเชื่อ LSP ตรวจได้แค่ชื่อ method/ชนิดผลลัพธ์โดยไม่สนใจ invariants/exceptions
 
@@ -132,7 +134,7 @@ client_area ตั้ง width5แล้ว height4:Rectangle ได้20;Couple
 **เฉลย:** แก้ bugformatter ได้ ไม่ใช่ละเมิด OCP โดยอัตโนมัติ;เพิ่ม class ไม่ได้ทำให้การ format ข้อความยาว m จาก O(m)เป็น O(1) ต้องวิเคราะห์งานจริงและสัญญาที่ต้องรักษา
 
 ## สรุปทบทวน {#summary}
-UML สื่อสัญญาไม่ใช่ runtime enforcement;SRP แยกเหตุผลเปลี่ยน;OCP เตรียม extensionpoint;LSP ทดแทนต้องรักษา behavior ไม่ใช่เพียง syntax/sourcegraph
+UML สื่อสัญญาไม่ใช่ runtime enforcement;SRP แยกเหตุผลเปลี่ยน;OCP เตรียม extension point;LSP ทดแทนต้องรักษา behavior ไม่ใช่เพียง syntax/source graph
 
 ## แหล่งอ้างอิงและขอบเขต {#sources}
 - [Week6 physical pp.3–47](../slides/Week6.pdf#page=3) — UML,relationships,SRP/OCP และ overview

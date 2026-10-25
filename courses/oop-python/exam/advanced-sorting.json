@@ -1,0 +1,562 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-advanced-sorting",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "oop-python-advanced-sorting-exam-01",
+      "type": "choice",
+      "prompt": "Divide-and-conquer ประกอบด้วยขั้นใด?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "divide,conquer,combine",
+          "id": "a"
+        },
+        {
+          "text": "hash,encrypt,upload",
+          "id": "b"
+        },
+        {
+          "text": "enqueue,peek,dequeue",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "แยกปัญหา แก้ย่อย และรวม ไม่ใช่คำสั่ง runtime เฉพาะภาษา",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week14 pp.3–11:divide แบ่งปัญหา,conquer แก้ย่อย,combine รวม สำหรับมาตรฐาน mergesort แบ่งครึ่งโดย index ไม่ขึ้นกับค่าข้อมูล T(n)=2T(n/2)+Θ(n) เมื่อ n เป็นกำลังสอง มี log2n ระดับที่งานรวมระดับละΘ(n) จึงΘ(nlogn) ถ้า n ไม่เป็นกำลังสองใช้ floor/"
+      }
+    },
+    {
+      "id": "oop-python-advanced-sorting-exam-02",
+      "type": "choice",
+      "prompt": "MergeSort มาตรฐานแบ่งส่วนตามสิ่งใด?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "ค่ามากสุดเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "index ครึ่งหนึ่ง ไม่ใช้ pivotvalue",
+          "id": "b"
+        },
+        {
+          "text": "label ของ record",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ต่างจาก QuickSort ที่ partition ตาม pivot",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week14 pp.3–11:divide แบ่งปัญหา,conquer แก้ย่อย,combine รวม สำหรับมาตรฐาน mergesort แบ่งครึ่งโดย index ไม่ขึ้นกับค่าข้อมูล T(n)=2T(n/2)+Θ(n) เมื่อ n เป็นกำลังสอง มี log2n ระดับที่งานรวมระดับละΘ(n) จึงΘ(nlogn) ถ้า n ไม่เป็นกำลังสองใช้ floor/"
+      }
+    },
+    {
+      "id": "oop-python-advanced-sorting-exam-03",
+      "type": "numeric",
+      "prompt": "n=16 แบ่งครึ่งจน singleton มีกี่ระดับการแบ่งจาก root ถึง leaf?",
+      "reference": "concepts",
+      "answer": 4,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "16→8→4→2→1 ใช้ 4 ขั้นเท่ากับ log2(16)",
+      "difficulty": "easy",
+      "verification": {
+        "method": "python",
+        "evidence": "Week14 pp.3–11:divide แบ่งปัญหา,conquer แก้ย่อย,combine รวม สำหรับมาตรฐาน mergesort แบ่งครึ่งโดย index ไม่ขึ้นกับค่าข้อมูล T(n)=2T(n/2)+Θ(n) เมื่อ n เป็นกำลังสอง มี log2n ระดับที่งานรวมระดับละΘ(n) จึงΘ(nlogn) ถ้า n ไม่เป็นกำลังสองใช้ floor/",
+        "oracle": "int(log2(16))"
+      }
+    },
+    {
+      "id": "oop-python-advanced-sorting-exam-04",
+      "type": "choice",
+      "prompt": "Recurrence T(n)=2T(n/2)+Θ(n) ให้ growth ใดในแบบจำลองมาตรฐาน?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "Θ(n log n)",
+          "id": "a"
+        },
+        {
+          "text": "Θ(n²)",
+          "id": "b"
+        },
+        {
+          "text": "Θ(1)",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "มี log n ระดับและงานรวมต่อระดับΘ(n)",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week14 pp.3–11:divide แบ่งปัญหา,conquer แก้ย่อย,combine รวม สำหรับมาตรฐาน mergesort แบ่งครึ่งโดย index ไม่ขึ้นกับค่าข้อมูล T(n)=2T(n/2)+Θ(n) เมื่อ n เป็นกำลังสอง มี log2n ระดับที่งานรวมระดับละΘ(n) จึงΘ(nlogn) ถ้า n ไม่เป็นกำลังสองใช้ floor/"
+      }
+    },
+    {
+      "id": "oop-python-advanced-sorting-exam-05",
+      "type": "choice",
+      "prompt": "Basecase ของ recursive sort มักตรวจอะไร?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "ค่าแรกต้องเป็น 0",
+          "id": "a"
+        },
+        {
+          "text": "ขนาดไม่เกิน 1 หรือช่วงว่าง/หนึ่งค่า",
+          "id": "b"
+        },
+        {
+          "text": "ทุกค่าต้องไม่ซ้ำ",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ต้องหยุดและทำให้ปัญหาย่อยเล็กลง",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Merge ใช้≤ให้ฝั่งซ้ายก่อนเมื่อ key เท่ากัน;Quick แบบ Lomuto ใช้ pivot ท้ายและ≤ตาม source มี optionmedian-of-three คัด 3 ตำแหน่งเท่านั้น ไม่ใช้ builtin เรียง array ทั้งชุดแทน algorithm ทุก functioncopyinput จึงไม่อ้าง O(1)space ของ function "
+      }
+    },
+    {
+      "id": "oop-python-advanced-sorting-exam-06",
+      "type": "choice",
+      "prompt": "Merge สองฝั่งที่เรียงแล้วเลือกหัวต่ำกว่าเพราะอะไร?",
+      "reference": "merge",
+      "choices": [
+        {
+          "text": "เพราะทุกค่าด้านซ้ายต่ำกว่าด้านขวาเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "เพราะไม่ต้องตรวจความเรียงของฝั่ง",
+          "id": "b"
+        },
+        {
+          "text": "เป็นค่าน้อยสุดที่ยังเหลืออยู่ในสองฝั่ง",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "invariant ของสองลำดับเรียงทำให้เลือกต่อทีละตัวได้",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week14 pp.13–18,31 ใช้ input[8,3,5,1,9,2,7,4]:แบ่งซ้าย[8,3,5,1]และขวา[9,2,7,4] แบ่งจน singleton แล้วรวม\n\n| left ที่เรียงแล้ว | right ที่เรียงแล้ว | merge result |\n|---|---|---|\n| [8] | [3] | [3, 8] |\n| [5] | [1] | [1, 5] |\n| [3, 8] | [1, 5]"
+      }
+    },
+    {
+      "id": "oop-python-advanced-sorting-exam-07",
+      "type": "choice",
+      "prompt": "ต้องการ stablemerge เมื่อ key เท่ากันควรเลือกใดก่อน?",
+      "reference": "merge",
+      "choices": [
+        {
+          "text": "record ฝั่งซ้ายก่อน",
+          "id": "a"
+        },
+        {
+          "text": "ฝั่งขวาก่อนเสมอ",
+          "id": "b"
+        },
+        {
+          "text": "ลบหนึ่ง record ทิ้ง",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "รักษาลำดับเดิมที่แบ่งตาม index ไม่สลับ ties",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week14 pp.13–18,31 ใช้ input[8,3,5,1,9,2,7,4]:แบ่งซ้าย[8,3,5,1]และขวา[9,2,7,4] แบ่งจน singleton แล้วรวม\n\n| left ที่เรียงแล้ว | right ที่เรียงแล้ว | merge result |\n|---|---|---|\n| [8] | [3] | [3, 8] |\n| [5] | [1] | [1, 5] |\n| [3, 8] | [1, 5]"
+      }
+    },
+    {
+      "id": "oop-python-advanced-sorting-exam-08",
+      "type": "numeric",
+      "prompt": "Merge [1,2] กับ [3,4] เทียบหัวจนฝั่งหนึ่งว่าง ต้อง key comparisons กี่ครั้ง?",
+      "reference": "merge",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "เทียบ 1 กับ 3 แล้ว 2 กับ 3 จากนั้นต่อส่วนที่เหลือไม่เทียบ key เพิ่ม",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "Week14 pp.13–18,31 ใช้ input[8,3,5,1,9,2,7,4]:แบ่งซ้าย[8,3,5,1]และขวา[9,2,7,4] แบ่งจน singleton แล้วรวม\n\n| left ที่เรียงแล้ว | right ที่เรียงแล้ว | merge result |\n|---|---|---|\n| [8] | [3] | [3, 8] |\n| [5] | [1] | [1, 5] |\n| [3, 8] | [1, 5]",
+        "oracle": "merge_comparisons([1,2],[3,4])"
+      }
+    },
+    {
+      "id": "oop-python-advanced-sorting-exam-09",
+      "type": "numeric",
+      "prompt": "Merge [1,4] กับ [2,3] ต้อง key comparisons กี่ครั้ง?",
+      "reference": "merge",
+      "answer": 3,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "เทียบ 1/2,4/2,4/3 แล้วต่อ 4 จึง 3",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "Week14 pp.13–18,31 ใช้ input[8,3,5,1,9,2,7,4]:แบ่งซ้าย[8,3,5,1]และขวา[9,2,7,4] แบ่งจน singleton แล้วรวม\n\n| left ที่เรียงแล้ว | right ที่เรียงแล้ว | merge result |\n|---|---|---|\n| [8] | [3] | [3, 8] |\n| [5] | [1] | [1, 5] |\n| [3, 8] | [1, 5]",
+        "oracle": "merge_comparisons([1,4],[2,3])"
+      }
+    },
+    {
+      "id": "oop-python-advanced-sorting-exam-10",
+      "type": "choice",
+      "prompt": "หลัง partition ตาม pivot จบหนึ่งครั้ง รับรองว่า array ทั้งชุดเรียงหรือไม่?",
+      "reference": "quick",
+      "choices": [
+        {
+          "text": "ไม่ รับรองการแบ่งรอบ pivot ตาม invariant",
+          "id": "a"
+        },
+        {
+          "text": "เรียงครบทุกครั้ง",
+          "id": "b"
+        },
+        {
+          "text": "เรียงเฉพาะเมื่อไม่มี duplicates ไม่ได้",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ยังต้อง sort สองช่วงย่อยที่ไม่รวม pivot เดิม",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week14 pp.20–22:array[3,6,8,10,1,2,1],lo0,hi6,pivot1,i เริ่ม−1\n\n| ขั้น | การตัดสิน | สถานะสำคัญ |\n|---|---|---|\n|j0..3|3,6,8,10>1|i ยัง−1 ไม่ swap|\n|j4|1≤1|i0,swap0กับ4→[1,6,8,10,3,2,1]|\n|j5|2>1|i ยัง0|\n|วาง pivot|swap1กับ6|[1,1,8,10,3,2,6]"
+      }
+    },
+    {
+      "id": "oop-python-advanced-sorting-exam-11",
+      "type": "choice",
+      "prompt": "Lomuto แบบบทเลือก pivot จากที่ใดเมื่อไม่ใช้ medianoption?",
+      "reference": "quick",
+      "choices": [
+        {
+          "text": "กลาง array เสมอ",
+          "id": "a"
+        },
+        {
+          "text": "ตำแหน่งท้ายช่วง hi",
+          "id": "b"
+        },
+        {
+          "text": "ค่าต่ำสุดที่หาใหม่ทั้ง array",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ต้องระบุ policy ก่อนตรวจ trace",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week14 pp.20–22:array[3,6,8,10,1,2,1],lo0,hi6,pivot1,i เริ่ม−1\n\n| ขั้น | การตัดสิน | สถานะสำคัญ |\n|---|---|---|\n|j0..3|3,6,8,10>1|i ยัง−1 ไม่ swap|\n|j4|1≤1|i0,swap0กับ4→[1,6,8,10,3,2,1]|\n|j5|2>1|i ยัง0|\n|วาง pivot|swap1กับ6|[1,1,8,10,3,2,6]"
+      }
+    },
+    {
+      "id": "oop-python-advanced-sorting-exam-12",
+      "type": "choice",
+      "prompt": "Lomuto ใช้≤pivot เมื่อพบค่าที่เท่า pivot จะอยู่ฝั่งใดของ partition?",
+      "reference": "quick",
+      "choices": [
+        {
+          "text": "ต้องอยู่ขวาเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "ถูกลบทิ้ง",
+          "id": "b"
+        },
+        {
+          "text": "ฝั่งที่ยอมรับค่าที่≤pivot",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "duplicates มากอาจทำ split ไม่สมดุลตาม implementation นี้",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week14 pp.20–22:array[3,6,8,10,1,2,1],lo0,hi6,pivot1,i เริ่ม−1\n\n| ขั้น | การตัดสิน | สถานะสำคัญ |\n|---|---|---|\n|j0..3|3,6,8,10>1|i ยัง−1 ไม่ swap|\n|j4|1≤1|i0,swap0กับ4→[1,6,8,10,3,2,1]|\n|j5|2>1|i ยัง0|\n|วาง pivot|swap1กับ6|[1,1,8,10,3,2,6]"
+      }
+    },
+    {
+      "id": "oop-python-advanced-sorting-exam-13",
+      "type": "numeric",
+      "prompt": "Partition ช่วง array ยาว 7 แบบ Lomuto หนึ่งครั้ง เปรียบ key กับ pivot กี่ครั้ง?",
+      "reference": "quick",
+      "answer": 6,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "loop ทุกค่าที่ไม่รวม pivot ท้าย รวม n−1",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "Week14 pp.20–22:array[3,6,8,10,1,2,1],lo0,hi6,pivot1,i เริ่ม−1\n\n| ขั้น | การตัดสิน | สถานะสำคัญ |\n|---|---|---|\n|j0..3|3,6,8,10>1|i ยัง−1 ไม่ swap|\n|j4|1≤1|i0,swap0กับ4→[1,6,8,10,3,2,1]|\n|j5|2>1|i ยัง0|\n|วาง pivot|swap1กับ6|[1,1,8,10,3,2,6]",
+        "oracle": "7-1"
+      }
+    },
+    {
+      "id": "oop-python-advanced-sorting-exam-14",
+      "type": "choice",
+      "prompt": "Last-pivotQuickSort บนข้อมูลเรียงแล้วเสี่ยงอะไร?",
+      "reference": "tradeoffs",
+      "choices": [
+        {
+          "text": "รับรอง balancedtree",
+          "id": "a"
+        },
+        {
+          "text": "split n−1/0 ซ้ำจน timequadratic",
+          "id": "b"
+        },
+        {
+          "text": "ไม่มี recursion ใดเกิดขึ้น",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "pivot สุดขอบทำให้งานย่อยลดทีละหนึ่ง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.23–27:last pivot บน sorted/reverse/ค่าเท่ากันมากอาจแบ่ง n−1 กับ 0 ซ้ำ ทำ comparisonsn(n−1)/2 และ call stackO(n)\n\nMedian-of-three หรือ randompivot ช่วยหลายกรณี แต่ไม่รับรองทุก input เป็น O(nlogn) หรือป้องกัน worst case ของ Lomutoduplicate"
+      }
+    },
+    {
+      "id": "oop-python-advanced-sorting-exam-15",
+      "type": "numeric",
+      "prompt": "Last-pivotQuickSort บน sorted8 ค่า มี key comparisons รวมกี่ครั้งในแบบ n−1/0?",
+      "reference": "tradeoffs",
+      "answer": 28,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "7+6+...+1=28",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "pp.23–27:last pivot บน sorted/reverse/ค่าเท่ากันมากอาจแบ่ง n−1 กับ 0 ซ้ำ ทำ comparisonsn(n−1)/2 และ call stackO(n)\n\nMedian-of-three หรือ randompivot ช่วยหลายกรณี แต่ไม่รับรองทุก input เป็น O(nlogn) หรือป้องกัน worst case ของ Lomutoduplicate",
+        "oracle": "sum(range(8))"
+      }
+    },
+    {
+      "id": "oop-python-advanced-sorting-exam-16",
+      "type": "choice",
+      "prompt": "Randompivot หรือ median-of-three รับรอง worstO(nlogn) ทุก input หรือไม่?",
+      "reference": "tradeoffs",
+      "choices": [
+        {
+          "text": "ไม่ อาจช่วยหลายกรณีแต่ยังมี worstcase",
+          "id": "a"
+        },
+        {
+          "text": "รับรองทุก array",
+          "id": "b"
+        },
+        {
+          "text": "รับรองเฉพาะมี duplicates",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ไม่แปลง heuristic เป็นหลักประกันโดยไม่มี algorithmicguard",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.23–27:last pivot บน sorted/reverse/ค่าเท่ากันมากอาจแบ่ง n−1 กับ 0 ซ้ำ ทำ comparisonsn(n−1)/2 และ call stackO(n)\n\nMedian-of-three หรือ randompivot ช่วยหลายกรณี แต่ไม่รับรองทุก input เป็น O(nlogn) หรือป้องกัน worst case ของ Lomutoduplicate"
+      }
+    },
+    {
+      "id": "oop-python-advanced-sorting-exam-17",
+      "type": "choice",
+      "prompt": "MergeSortarraycopy ตามบทต้องรวม space ส่วนใด?",
+      "reference": "tradeoffs",
+      "choices": [
+        {
+          "text": "เฉพาะตัวแปร pivot",
+          "id": "a"
+        },
+        {
+          "text": "buffers/slices และ recursion ไม่อ้าง O(1) ทั้ง wrapper",
+          "id": "b"
+        },
+        {
+          "text": "ไม่มี space เพราะ divide ครึ่ง",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "แยก coreoperation จากการสร้าง copies และ trace",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.23–27:last pivot บน sorted/reverse/ค่าเท่ากันมากอาจแบ่ง n−1 กับ 0 ซ้ำ ทำ comparisonsn(n−1)/2 และ call stackO(n)\n\nMedian-of-three หรือ randompivot ช่วยหลายกรณี แต่ไม่รับรองทุก input เป็น O(nlogn) หรือป้องกัน worst case ของ Lomutoduplicate"
+      }
+    },
+    {
+      "id": "oop-python-advanced-sorting-exam-18",
+      "type": "choice",
+      "prompt": "Python sorted กับ list.sort ต่างที่ interface ใด?",
+      "reference": "timsort",
+      "choices": [
+        {
+          "text": "ทั้งคู่คืนlistใหม่เสมอ",
+          "id": "a"
+        },
+        {
+          "text": "list.sortคืนtuple",
+          "id": "b"
+        },
+        {
+          "text": "sortedคืนlistใหม่;list.sortแก้เดิมและคืนNone",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "อย่าตีความ None ว่า array หาย",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "Week14p.29 อธิบาย stable adaptive hybrid ที่ใช้ runs/insertion และ merge เหมาะข้อมูลที่มีช่วงเรียงอยู่แล้ว แต่ไม่ใช่แบ่งทุก array เป็น run32/64 คงที่อย่างเดียว:แนวคิด naturalruns และการปรับ run/mergepolicy เป็น implementationdetails ที่เปลี",
+        "oracle": "run(\"a=[2,1]\\nb=sorted(a)\\nr=a.sort()\\nprint(\\\"sortedคืนlistใหม่;list.sortแก้เดิมและคืนNone\\\" if b==[1,2] and a==[1,2] and r is None else \\\"wrong\\\")\")"
+      }
+    },
+    {
+      "id": "oop-python-advanced-sorting-exam-19",
+      "type": "choice",
+      "prompt": "Adaptive ของ Pythonsorting เชื่อมกับอะไรในบท?",
+      "reference": "timsort",
+      "choices": [
+        {
+          "text": "ใช้ประโยชน์จาก runs ที่เรียงอยู่แล้ว",
+          "id": "a"
+        },
+        {
+          "text": "เปลี่ยนเป็น hashsort ทุกครั้ง",
+          "id": "b"
+        },
+        {
+          "text": "ทุก array ถูกแบ่ง run คงที่เหมือนกันทั้งหมด",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ไม่ควรจำเพียง run32/64 เป็นคำอธิบายครบทุก implementation",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week14p.29 อธิบาย stable adaptive hybrid ที่ใช้ runs/insertion และ merge เหมาะข้อมูลที่มีช่วงเรียงอยู่แล้ว แต่ไม่ใช่แบ่งทุก array เป็น run32/64 คงที่อย่างเดียว:แนวคิด naturalruns และการปรับ run/mergepolicy เป็น implementationdetails ที่เปลี"
+      }
+    },
+    {
+      "id": "oop-python-advanced-sorting-exam-20",
+      "type": "choice",
+      "prompt": "รวม pivot ไว้ในช่วง recursive เดิมอีกอาจเกิดอะไร?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "text": "รับรอง stable",
+          "id": "a"
+        },
+        {
+          "text": "ปัญหาย่อยไม่เล็กลงและ recursion ไม่จบ",
+          "id": "b"
+        },
+        {
+          "text": "เพิ่ม capacity ให้ array อัตโนมัติ",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ต้อง exclude ตำแหน่ง pivot ที่วางแล้วอย่างถูกต้อง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ไม่มี base case;เลือกฝั่งขวาก่อนเมื่อ tie แล้วอ้าง stable;รวม pivot ซ้ำจน recursion ไม่เล็กลง;เข้าใจ partition ว่าเรียงหมด;อ้าง QuickspaceO(logn) ทุกกรณี;ลืม slice/copy;พิมพ์ data.sort แล้วคิดว่า None คือ array หาย;จำ timing จากสไลด์เป็นค่า"
+      }
+    },
+    {
+      "id": "oop-python-advanced-sorting-exam-21",
+      "type": "self",
+      "prompt": "แสดง stablemerge ของ records มี ties พร้อม trace ทั้งสองฝั่ง",
+      "reference": "merge",
+      "rubric": [
+        "ตรวจแต่ละฝั่งเรียงก่อน",
+        "เมื่อ tie เลือกซ้ายและคง identity",
+        "นับเฉพาะ key comparison ไม่รวมต่อ tail"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ตรวจแต่ละฝั่งเรียงก่อน เมื่อ tie เลือกซ้ายและคง identity นับเฉพาะ key comparison ไม่รวมต่อ tail",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Week14 pp.13–18,31 ใช้ input[8,3,5,1,9,2,7,4]:แบ่งซ้าย[8,3,5,1]และขวา[9,2,7,4] แบ่งจน singleton แล้วรวม\n\n| left ที่เรียงแล้ว | right ที่เรียงแล้ว | merge result |\n|---|---|---|\n| [8] | [3] | [3, 8] |\n| [5] | [1] | [1, 5] |\n| [3, 8] | [1, 5]"
+      }
+    },
+    {
+      "id": "oop-python-advanced-sorting-exam-22",
+      "type": "self",
+      "prompt": "เขียน invariant ของ Lomuto และตรวจหนึ่ง partition โดยไม่อ้างเรียงครบ",
+      "reference": "quick",
+      "rubric": [
+        "ประกาศ lo,hi,pivot และเงื่อนไข≤",
+        "แยกเขตที่รู้แล้วกับเขตยังไม่ scan",
+        "ตรวจ pivotposition และช่วง recursion ที่เล็กลง"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ประกาศ lo,hi,pivot และเงื่อนไข≤ แยกเขตที่รู้แล้วกับเขตยังไม่ scan ตรวจ pivotposition และช่วง recursion ที่เล็กลง",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Week14 pp.20–22:array[3,6,8,10,1,2,1],lo0,hi6,pivot1,i เริ่ม−1\n\n| ขั้น | การตัดสิน | สถานะสำคัญ |\n|---|---|---|\n|j0..3|3,6,8,10>1|i ยัง−1 ไม่ swap|\n|j4|1≤1|i0,swap0กับ4→[1,6,8,10,3,2,1]|\n|j5|2>1|i ยัง0|\n|วาง pivot|swap1กับ6|[1,1,8,10,3,2,6]"
+      }
+    },
+    {
+      "id": "oop-python-advanced-sorting-exam-23",
+      "type": "self",
+      "prompt": "เปรียบ space ของ Merge/Quick กับ tracecopies",
+      "reference": "tradeoffs",
+      "rubric": [
+        "แยก balanced/worstrecursion ของ Quick",
+        "รวม arraycopies/buffers ตาม implementation",
+        "ไม่ใช้ benchmark เวลาหนึ่งครั้งเป็นข้อพิสูจน์ Big-O"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: แยก balanced/worstrecursion ของ Quick รวม arraycopies/buffers ตาม implementation ไม่ใช้ benchmark เวลาหนึ่งครั้งเป็นข้อพิสูจน์ Big-O",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "pp.23–27:last pivot บน sorted/reverse/ค่าเท่ากันมากอาจแบ่ง n−1 กับ 0 ซ้ำ ทำ comparisonsn(n−1)/2 และ call stackO(n)\n\nMedian-of-three หรือ randompivot ช่วยหลายกรณี แต่ไม่รับรองทุก input เป็น O(nlogn) หรือป้องกัน worst case ของ Lomutoduplicate"
+      }
+    },
+    {
+      "id": "oop-python-advanced-sorting-exam-24",
+      "type": "self",
+      "prompt": "ออกแบบเลือก sort สำหรับ records ที่ต้อง stable และมี runs เดิม",
+      "reference": "timsort",
+      "rubric": [
+        "ระบุ key และ tiecontract",
+        "แยก sorted กับ in-placelist.sort",
+        "อธิบาย tradeoffs ไม่อ้างว่า Timsort ชนะทุก input"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ระบุ key และ tiecontract แยก sorted กับ in-placelist.sort อธิบาย tradeoffs ไม่อ้างว่า Timsort ชนะทุก input",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Week14p.29 อธิบาย stable adaptive hybrid ที่ใช้ runs/insertion และ merge เหมาะข้อมูลที่มีช่วงเรียงอยู่แล้ว แต่ไม่ใช่แบ่งทุก array เป็น run32/64 คงที่อย่างเดียว:แนวคิด naturalruns และการปรับ run/mergepolicy เป็น implementationdetails ที่เปลี"
+      }
+    }
+  ]
+}

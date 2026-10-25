@@ -1,0 +1,550 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "artificial-intelligence-final-kmeans",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "artificial-intelligence-final-kmeans-exam-01",
+      "type": "choice",
+      "prompt": "Centroid ใน K-Means มาตรฐานอัปเดตด้วยอะไร?",
+      "reference": "algorithm",
+      "choices": [
+        {
+          "text": "ค่าเฉลี่ยพิกัดสมาชิกกลุ่ม",
+          "id": "a"
+        },
+        {
+          "text": "จุดที่มี label มากที่สุด",
+          "id": "b"
+        },
+        {
+          "text": "ค่าเฉลี่ยระยะอย่างเดียว",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "คำนวณ mean ทีละ feature ไม่จำเป็นต้องตรงกับจุดข้อมูลจริง",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S09 pp.31–34: K-Means เป็น unsupervised learning ที่แบ่งข้อมูลเชิงตัวเลขเป็น k กลุ่ม แต่ละกลุ่มแทนด้วยค่าเฉลี่ย\n\nไม่ใช้ label เฉลยเหมือน classification กำหนด k และเลือกศูนย์กลางเริ่มต้น จากนั้น (1) assign แต่ละจุดให้ศูนย์กลางที่ใกล้ที่สุด ("
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-kmeans-exam-02",
+      "type": "choice",
+      "prompt": "หนึ่ง iteration ควรทำ assign และ update ตามลำดับใด?",
+      "reference": "algorithm",
+      "choices": [
+        {
+          "text": "update หลังอ่านทุกจุดทันทีแล้วใช้กับจุดถัดไป",
+          "id": "a"
+        },
+        {
+          "text": "assign ทุกจุดด้วย centroids ชุดเดิม แล้ว update พร้อมกัน",
+          "id": "b"
+        },
+        {
+          "text": "update เฉพาะ label ที่ทายถูก",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ต้องไม่ปะปน centroids คนละรอบใน assignment เดียว",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S09 pp.31–34: K-Means เป็น unsupervised learning ที่แบ่งข้อมูลเชิงตัวเลขเป็น k กลุ่ม แต่ละกลุ่มแทนด้วยค่าเฉลี่ย\n\nไม่ใช้ label เฉลยเหมือน classification กำหนด k และเลือกศูนย์กลางเริ่มต้น จากนั้น (1) assign แต่ละจุดให้ศูนย์กลางที่ใกล้ที่สุด ("
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-kmeans-exam-03",
+      "type": "choice",
+      "prompt": "K-Means ต้องกำหนดสิ่งใดก่อนเริ่มตามบท?",
+      "reference": "algorithm",
+      "choices": [
+        {
+          "text": "observedclass ของ query ทุกจุด",
+          "id": "a"
+        },
+        {
+          "text": "official answer ของ clusters",
+          "id": "b"
+        },
+        {
+          "text": "k และ centroids เริ่มต้นพร้อม metric",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "เป็น unsupervised แต่ยังต้องมี parameters และ initialization",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S09 pp.31–34: K-Means เป็น unsupervised learning ที่แบ่งข้อมูลเชิงตัวเลขเป็น k กลุ่ม แต่ละกลุ่มแทนด้วยค่าเฉลี่ย\n\nไม่ใช้ label เฉลยเหมือน classification กำหนด k และเลือกศูนย์กลางเริ่มต้น จากนั้น (1) assign แต่ละจุดให้ศูนย์กลางที่ใกล้ที่สุด ("
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-kmeans-exam-04",
+      "type": "numeric",
+      "prompt": "จุดผู้เขียน (3,4) ห่าง centroid(0,0) แบบ squared distance เท่าใด?",
+      "reference": "algorithm",
+      "answer": 25,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "3²+4²=25 SSE ใช้กำลังสอง ไม่ถอดรากก่อนรวม",
+      "difficulty": "easy",
+      "verification": {
+        "method": "python",
+        "evidence": "S09 pp.31–34: K-Means เป็น unsupervised learning ที่แบ่งข้อมูลเชิงตัวเลขเป็น k กลุ่ม แต่ละกลุ่มแทนด้วยค่าเฉลี่ย\n\nไม่ใช้ label เฉลยเหมือน classification กำหนด k และเลือกศูนย์กลางเริ่มต้น จากนั้น (1) assign แต่ละจุดให้ศูนย์กลางที่ใกล้ที่สุด (",
+        "oracle": "3**2+4**2"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-kmeans-exam-05",
+      "type": "numeric",
+      "prompt": "กลุ่มผู้เขียนมี x=[2,4,9] จงหา x ของ centroid",
+      "reference": "algorithm",
+      "answer": 5,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "เฉลี่ย(2+4+9)/3=5",
+      "difficulty": "easy",
+      "verification": {
+        "method": "python",
+        "evidence": "S09 pp.31–34: K-Means เป็น unsupervised learning ที่แบ่งข้อมูลเชิงตัวเลขเป็น k กลุ่ม แต่ละกลุ่มแทนด้วยค่าเฉลี่ย\n\nไม่ใช้ label เฉลยเหมือน classification กำหนด k และเลือกศูนย์กลางเริ่มต้น จากนั้น (1) assign แต่ละจุดให้ศูนย์กลางที่ใกล้ที่สุด (",
+        "oracle": "sum([2,4,9])/3"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-kmeans-exam-06",
+      "type": "choice",
+      "prompt": "จุดห่างสอง centroids เท่ากันควรทำอย่างไร?",
+      "reference": "algorithm",
+      "choices": [
+        {
+          "text": "ปล่อยอยู่สองกลุ่มพร้อมกัน",
+          "id": "a"
+        },
+        {
+          "text": "เปลี่ยนข้อมูลจนไม่เท่ากัน",
+          "id": "b"
+        },
+        {
+          "text": "ใช้ tie policy ที่ประกาศไว้และทำซ้ำได้",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "แต่ละจุดต้องได้ cluster หนึ่งตามกติกาของ implementation",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S09 pp.31–34: K-Means เป็น unsupervised learning ที่แบ่งข้อมูลเชิงตัวเลขเป็น k กลุ่ม แต่ละกลุ่มแทนด้วยค่าเฉลี่ย\n\nไม่ใช้ label เฉลยเหมือน classification กำหนด k และเลือกศูนย์กลางเริ่มต้น จากนั้น (1) assign แต่ละจุดให้ศูนย์กลางที่ใกล้ที่สุด ("
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-kmeans-exam-07",
+      "type": "choice",
+      "prompt": "X05 กับ A02 ใช้ centroids/units สลับกันได้หรือไม่?",
+      "reference": "x05",
+      "choices": [
+        {
+          "text": "ไม่ได้ เป็น datasets และ seeds ต่างกัน",
+          "id": "a"
+        },
+        {
+          "text": "ได้เพราะ k=3 เท่ากัน",
+          "id": "b"
+        },
+        {
+          "text": "ได้เมื่อใช้ Python",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "รักษาตัวแปรและหน่วยตาม source แต่ละชุด",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "X05 Sheet1!B1:C3 กำหนดศูนย์กลางเริ่มต้น (2,10),(5,8),(1,2) จุดตามแถว 6–13 คือ 1(2,10),2(2,5),3(8,4),4(5,8),5(7,5),6(6,4),7(1,2),8(4,9) ไม่มีหน่วยที่ source ระบุ จึงไม่สมมติเป็นหน่วย A02\n\nรอบแรกจุด 2: d²=[(2−2)²+(5−10)², (2−5)²+(5−8)², (2−1)"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-kmeans-exam-08",
+      "type": "numeric",
+      "prompt": "X05centroid เริ่ม C1=(2,10),C2=(5,8) ระหว่างสองจุดนี้มี d²เท่าใด?",
+      "reference": "x05",
+      "answer": 13,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "ผลต่าง−3,2 ยกกำลังสองรวม 9+4",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "X05 Sheet1!B1:C3 กำหนดศูนย์กลางเริ่มต้น (2,10),(5,8),(1,2) จุดตามแถว 6–13 คือ 1(2,10),2(2,5),3(8,4),4(5,8),5(7,5),6(6,4),7(1,2),8(4,9) ไม่มีหน่วยที่ source ระบุ จึงไม่สมมติเป็นหน่วย A02\n\nรอบแรกจุด 2: d²=[(2−2)²+(5−10)², (2−5)²+(5−8)², (2−1)",
+        "oracle": "(2-5)**2+(10-8)**2"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-kmeans-exam-09",
+      "type": "numeric",
+      "prompt": "กลุ่มสุดท้าย X05 {(2,10),(5,8),(4,9)} มีพิกัด y ของ mean เท่าใด?",
+      "reference": "x05",
+      "answer": 9,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "(10+8+9)/3=9",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "X05 Sheet1!B1:C3 กำหนดศูนย์กลางเริ่มต้น (2,10),(5,8),(1,2) จุดตามแถว 6–13 คือ 1(2,10),2(2,5),3(8,4),4(5,8),5(7,5),6(6,4),7(1,2),8(4,9) ไม่มีหน่วยที่ source ระบุ จึงไม่สมมติเป็นหน่วย A02\n\nรอบแรกจุด 2: d²=[(2−2)²+(5−10)², (2−5)²+(5−8)², (2−1)",
+        "oracle": "sum([10,8,9])/3"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-kmeans-exam-10",
+      "type": "choice",
+      "prompt": "X05 ไม่ได้ระบุหน่วย จึงควรเขียนรายงานอย่างไร?",
+      "reference": "x05",
+      "choices": [
+        {
+          "text": "ใช้พิกัดตาม source โดยไม่เติมหน่วย GB/นาที",
+          "id": "a"
+        },
+        {
+          "text": "เติม GB เพราะ A02 ใช้ GB",
+          "id": "b"
+        },
+        {
+          "text": "ถือว่าพิกัดเป็นป้ายคลาส",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ไม่ย้ายหน่วยจากอีก dataset มาใส่",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "X05 Sheet1!B1:C3 กำหนดศูนย์กลางเริ่มต้น (2,10),(5,8),(1,2) จุดตามแถว 6–13 คือ 1(2,10),2(2,5),3(8,4),4(5,8),5(7,5),6(6,4),7(1,2),8(4,9) ไม่มีหน่วยที่ source ระบุ จึงไม่สมมติเป็นหน่วย A02\n\nรอบแรกจุด 2: d²=[(2−2)²+(5−10)², (2−5)²+(5−8)², (2−1)"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-kmeans-exam-11",
+      "type": "choice",
+      "prompt": "Internet(GB) กับ Call(นาที) มี scale ต่างกัน ส่งผลใด?",
+      "reference": "a02",
+      "choices": [
+        {
+          "text": "หน่วยไม่มีผลเพราะเป็นตัวเลข",
+          "id": "a"
+        },
+        {
+          "text": "feature สเกลใหญ่อาจครอบงำระยะ",
+          "id": "b"
+        },
+        {
+          "text": "K-Meansnormalize เองเสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "source ไม่ได้ normalize ต้องระบุเมื่อทดลอง preprocessing ใหม่",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "A02 p.1 กำหนด k=3 และ seeds P01,P02,P03 ตามลำดับ ใช้ Internet หน่วย GB และ Call หน่วยนาที ไม่มี normalization ตามโจทย์ ระยะจึงขึ้นกับสเกล โดย Call อาจครอบงำมากกว่า Internet ห้ามนำผล X05 มาเป็นคำตอบชุดนี้\n\n| ลูกค้า | Internet (GB) | Call (นา"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-kmeans-exam-12",
+      "type": "choice",
+      "prompt": "การเปลี่ยน units จากนาทีเป็นวินาทีโดยไม่ scale feature อื่น อาจเปลี่ยน clusters หรือไม่?",
+      "reference": "a02",
+      "choices": [
+        {
+          "text": "ไม่มีทางเปลี่ยน",
+          "id": "a"
+        },
+        {
+          "text": "เปลี่ยนเฉพาะชื่อ cluster",
+          "id": "b"
+        },
+        {
+          "text": "อาจเปลี่ยน เพราะระยะถูกถ่วงต่างเดิม",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "Euclidean ขึ้นกับสเกล feature ไม่ใช่ labels",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "A02 p.1 กำหนด k=3 และ seeds P01,P02,P03 ตามลำดับ ใช้ Internet หน่วย GB และ Call หน่วยนาที ไม่มี normalization ตามโจทย์ ระยะจึงขึ้นกับสเกล โดย Call อาจครอบงำมากกว่า Internet ห้ามนำผล X05 มาเป็นคำตอบชุดนี้\n\n| ลูกค้า | Internet (GB) | Call (นา"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-kmeans-exam-13",
+      "type": "numeric",
+      "prompt": "กลุ่มผู้เขียน x=[1,3] centroid=2 มี SSE เท่าใด?",
+      "reference": "algorithm",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "(1−2)²+(3−2)²=2",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "S09 pp.31–34: K-Means เป็น unsupervised learning ที่แบ่งข้อมูลเชิงตัวเลขเป็น k กลุ่ม แต่ละกลุ่มแทนด้วยค่าเฉลี่ย\n\nไม่ใช้ label เฉลยเหมือน classification กำหนด k และเลือกศูนย์กลางเริ่มต้น จากนั้น (1) assign แต่ละจุดให้ศูนย์กลางที่ใกล้ที่สุด (",
+        "oracle": "sum((x-2)**2 for x in [1,3])"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-kmeans-exam-14",
+      "type": "choice",
+      "prompt": "Empty cluster ทำให้ update mean ตามสูตรทั่วไปเป็นอย่างไร?",
+      "reference": "algorithm",
+      "choices": [
+        {
+          "text": "mean เป็น 0 โดยนิยามเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "ไม่มี mean ที่คำนวณได้ ต้องมี policy ชัดเจน",
+          "id": "b"
+        },
+        {
+          "text": "ทุกจุดถูกลบทิ้ง",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "บทประกาศ policy ไม่แต่งศูนย์ใหม่โดยไม่อธิบาย",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S09 pp.31–34: K-Means เป็น unsupervised learning ที่แบ่งข้อมูลเชิงตัวเลขเป็น k กลุ่ม แต่ละกลุ่มแทนด้วยค่าเฉลี่ย\n\nไม่ใช้ label เฉลยเหมือน classification กำหนด k และเลือกศูนย์กลางเริ่มต้น จากนั้น (1) assign แต่ละจุดให้ศูนย์กลางที่ใกล้ที่สุด ("
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-kmeans-exam-15",
+      "type": "choice",
+      "prompt": "เหตุใดควรตรวจ assignment หรือ centroid คงตัวหลัง update?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "เพราะหนึ่งรอบถูกเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "เพื่อรับรอง global minimum",
+          "id": "b"
+        },
+        {
+          "text": "เพื่อยืนยันการหยุดตามเกณฑ์ที่ระบุ",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "convergence ของ run ไม่เท่ากับคำตอบดีที่สุดทุก initialization",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "โค้ดเสริมไม่พึ่ง sklearn และไม่รันโดยหน้าเว็บ คืน trace ที่ใช้สร้างตาราง ไม่ normalize โดยอัตโนมัติ"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-kmeans-exam-16",
+      "type": "choice",
+      "prompt": "เปลี่ยน initialcentroids แล้วได้ SSE ต่างกัน เป็นไปได้หรือไม่?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "ได้ อาจเข้าสู่ local optimum ต่างกัน",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ได้ถ้า k เท่าเดิม",
+          "id": "b"
+        },
+        {
+          "text": "แปลว่า source ผิดแน่นอน",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ต้องรายงาน seeds และหลาย runs เมื่อเปรียบ ไม่รับรอง run เดียว",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "โค้ดเสริมไม่พึ่ง sklearn และไม่รันโดยหน้าเว็บ คืน trace ที่ใช้สร้างตาราง ไม่ normalize โดยอัตโนมัติ"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-kmeans-exam-17",
+      "type": "numeric",
+      "prompt": "SSE ในสไลด์ k1=873.0,k2=173.1 ลดลงเท่าใด?",
+      "reference": "elbow",
+      "answer": 699.9,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "873.0−173.1=699.9 เป็นเลขรายงาน ไม่ใช่ SSE ของ A02",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "S09 pp.41–45 แสดง objective k=1:873.0, k=2:173.1, k=3:133.6 และชี้ elbow แถว 2 ตัวเลขนี้เป็นค่ารายงานในสไลด์ซึ่งไม่ได้แจกพิกัดครบ **ไม่ใช่** SSE ของ A02 หรือ X05 และไม่อ้างว่าคำนวณซ้ำตัวเลขนี้ได้จากภาพ\n\nการลด 699.9 แล้ว 39.5 ชี้ผลตอบแทนลดลง",
+        "oracle": "Fraction(8730,10)-Fraction(1731,10)"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-kmeans-exam-18",
+      "type": "choice",
+      "prompt": "Elbow ที่ดูเหมือน k=2 รับรองจำนวนกลุ่มจริงหรือไม่?",
+      "reference": "elbow",
+      "choices": [
+        {
+          "text": "รับรองทุกข้อมูล",
+          "id": "a"
+        },
+        {
+          "text": "รับรอง accuracy100%",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ เป็นเกณฑ์ประกอบและอาจไม่ชัดทุก dataset",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ต้องดูบริบทและความไวต่อ initialization",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S09 pp.41–45 แสดง objective k=1:873.0, k=2:173.1, k=3:133.6 และชี้ elbow แถว 2 ตัวเลขนี้เป็นค่ารายงานในสไลด์ซึ่งไม่ได้แจกพิกัดครบ **ไม่ใช่** SSE ของ A02 หรือ X05 และไม่อ้างว่าคำนวณซ้ำตัวเลขนี้ได้จากภาพ\n\nการลด 699.9 แล้ว 39.5 ชี้ผลตอบแทนลดลง"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-kmeans-exam-19",
+      "type": "choice",
+      "prompt": "เพิ่ม k แล้วค่า SSE ที่เหมาะสมอาจลด แต่เหตุใดไม่เลือก k=n เสมอ?",
+      "reference": "elbow",
+      "choices": [
+        {
+          "text": "SSE อย่างเดียวไม่สะท้อนประโยชน์หรือความซับซ้อนของกลุ่ม",
+          "id": "a"
+        },
+        {
+          "text": "เพราะ SSE ต้องเพิ่มเสมอ",
+          "id": "b"
+        },
+        {
+          "text": "เพราะทุกจุดต้องมี label ทางการ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "k=n ทำให้แต่ละจุดเป็น centroid ได้ แต่ไม่จำเป็นตอบโจทย์การจัดกลุ่ม",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S09 pp.41–45 แสดง objective k=1:873.0, k=2:173.1, k=3:133.6 และชี้ elbow แถว 2 ตัวเลขนี้เป็นค่ารายงานในสไลด์ซึ่งไม่ได้แจกพิกัดครบ **ไม่ใช่** SSE ของ A02 หรือ X05 และไม่อ้างว่าคำนวณซ้ำตัวเลขนี้ได้จากภาพ\n\nการลด 699.9 แล้ว 39.5 ชี้ผลตอบแทนลดลง"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-kmeans-exam-20",
+      "type": "choice",
+      "prompt": "ถ้ารายงาน SSE จาก centroids เก่ากับ members ใหม่ควรระบุอะไร?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "text": "ไม่ต้องเพราะ SSE เท่ากันเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "ขั้นของ assignment/centroid ที่ใช้ ไม่ปนคนละ iteration",
+          "id": "b"
+        },
+        {
+          "text": "ใช้ค่า worksheet คนละชุดแทน",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "การเปรียบ objective ต้องใช้สถานะที่ชัดเจนและสอดคล้อง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "- เอา centroid ใหม่มาใช้กับบางจุดภายใน assign รอบเดิม: ต้อง assign ทุกจุดจากชุดศูนย์กลางเดิมก่อน\n- เฉลี่ยระยะแทนเฉลี่ยพิกัด หรือใช้ SSE จากคนละขั้นโดยไม่บอก\n- หยุดหลังรอบแรกโดยไม่ตรวจซ้ำ; เก็บสมาชิกแต่ไม่ตรวจศูนย์กลาง\n- เทียบ SSE ข้าม datas"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-kmeans-exam-21",
+      "type": "self",
+      "prompt": "ตรวจทุก iteration ของ X05 โดยใช้ source coordinates เดิม",
+      "reference": "x05",
+      "rubric": [
+        "assign ครบ 8 จุดก่อน update",
+        "เฉลี่ย coordinates ตาม members และประกาศ tie",
+        "เทียบ members/centroids/SSE ที่ขั้นเดียวกัน"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: assign ครบ 8 จุดก่อน update เฉลี่ย coordinates ตาม members และประกาศ tie เทียบ members/centroids/SSE ที่ขั้นเดียวกัน",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "X05 Sheet1!B1:C3 กำหนดศูนย์กลางเริ่มต้น (2,10),(5,8),(1,2) จุดตามแถว 6–13 คือ 1(2,10),2(2,5),3(8,4),4(5,8),5(7,5),6(6,4),7(1,2),8(4,9) ไม่มีหน่วยที่ source ระบุ จึงไม่สมมติเป็นหน่วย A02\n\nรอบแรกจุด 2: d²=[(2−2)²+(5−10)², (2−5)²+(5−8)², (2−1)"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-kmeans-exam-22",
+      "type": "self",
+      "prompt": "ออกแบบการทดลอง scaling ของ A02 แยกจากเฉลย source",
+      "reference": "a02",
+      "rubric": [
+        "เก็บ units/seeds เดิมเป็น baseline",
+        "fittransform และประกาศ scale ที่ใช้",
+        "ไม่สรุปผลทดลองใหม่เป็นคำตอบอาจารย์"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: เก็บ units/seeds เดิมเป็น baseline fittransform และประกาศ scale ที่ใช้ ไม่สรุปผลทดลองใหม่เป็นคำตอบอาจารย์",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "A02 p.1 กำหนด k=3 และ seeds P01,P02,P03 ตามลำดับ ใช้ Internet หน่วย GB และ Call หน่วยนาที ไม่มี normalization ตามโจทย์ ระยะจึงขึ้นกับสเกล โดย Call อาจครอบงำมากกว่า Internet ห้ามนำผล X05 มาเป็นคำตอบชุดนี้\n\n| ลูกค้า | Internet (GB) | Call (นา"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-kmeans-exam-23",
+      "type": "self",
+      "prompt": "วาง tests สำหรับ duplicates,empty cluster และ iterationcap",
+      "reference": "python",
+      "rubric": [
+        "ตรวจทุกจุดมี cluster เดียว",
+        "ระบุ emptyclusterpolicy และ seeds",
+        "ถึง cap ต้องรายงานว่ายังไม่ยืนยัน convergence"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ตรวจทุกจุดมี cluster เดียว ระบุ emptyclusterpolicy และ seeds ถึง cap ต้องรายงานว่ายังไม่ยืนยัน convergence",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "โค้ดเสริมไม่พึ่ง sklearn และไม่รันโดยหน้าเว็บ คืน trace ที่ใช้สร้างตาราง ไม่ normalize โดยอัตโนมัติ"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-kmeans-exam-24",
+      "type": "self",
+      "prompt": "วิจารณ์กราฟ Elbow ที่ไม่มีพิกัดครบสำหรับคำนวณซ้ำ",
+      "reference": "elbow",
+      "rubric": [
+        "แยกค่าที่ source รายงานกับค่าที่ตรวจซ้ำได้",
+        "ไม่แต่ง dataset จากภาพ",
+        "อธิบายว่าการลด SSE ไม่ใช่หลักฐานจำนวนกลุ่มจริง"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: แยกค่าที่ source รายงานกับค่าที่ตรวจซ้ำได้ ไม่แต่ง dataset จากภาพ อธิบายว่าการลด SSE ไม่ใช่หลักฐานจำนวนกลุ่มจริง",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "S09 pp.41–45 แสดง objective k=1:873.0, k=2:173.1, k=3:133.6 และชี้ elbow แถว 2 ตัวเลขนี้เป็นค่ารายงานในสไลด์ซึ่งไม่ได้แจกพิกัดครบ **ไม่ใช่** SSE ของ A02 หรือ X05 และไม่อ้างว่าคำนวณซ้ำตัวเลขนี้ได้จากภาพ\n\nการลด 699.9 แล้ว 39.5 ชี้ผลตอบแทนลดลง"
+      }
+    }
+  ]
+}

@@ -11,7 +11,7 @@
 - ตรวจตัวอย่าง Drug และ Buy โดยรักษาข้อมูล/รหัสและลำดับแถวต้นฉบับ
 - อ่านโค้ด KNeighborsClassifier, train/test split และ accuracy โดยไม่สรุปประสิทธิภาพเกินหลักฐาน
 
-อ่าน [FINAL Regression](final-regression.md) เพื่อเปรียบเทียบ target แบบตัวเลขกับแบบคลาสได้ Learning Path ที่ต่อ Foundations → BFS/DFS → FINAL Regression → FINAL KNN เป็น **ลำดับเผยแพร่ชั่วคราว ไม่ใช่ลำดับสอนที่ยืนยันแล้ว** ไม่อ้างว่า BFS/DFS เป็น prerequisite ของ KNN
+อ่าน [FINAL Regression](final-regression.md) เพื่อเปรียบเทียบ target แบบตัวเลขกับแบบคลาสได้ บทเรียนแต่ละบทเปิดอ่านได้โดยอิสระ ไม่จำเป็นต้องอ่าน BFS/DFS ก่อน KNN และไม่ควรตีความลำดับเผยแพร่เป็นลำดับสอนที่ยืนยันแล้ว
 
 ## Supervised Learning และ Classification {#classification}
 S07 หน้า 2 ใช้ภาพแยกของลงถังเพื่ออธิบายการจัดสิ่งที่ยังไม่รู้กลุ่มให้เป็นหมวดหมู่ไม่ต่อเนื่อง (Discrete Classes) คำอธิบาย supervised ต่อไปนี้เขียนเสริมให้เชื่อมกับข้อมูลมีฉลากในหน้า 3 และ X01

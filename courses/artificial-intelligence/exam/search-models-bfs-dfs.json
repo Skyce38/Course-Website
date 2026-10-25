@@ -1,0 +1,572 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "artificial-intelligence-search-models-bfs-dfs",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs-exam-01",
+      "type": "choice",
+      "prompt": "ปัญหาเก็บกุญแจก่อนเปิดประตู ใช้ตำแหน่งอย่างเดียวเป็น state พอหรือไม่?",
+      "reference": "formulation",
+      "choices": [
+        {
+          "text": "ไม่พอ ต้องรวมสถานะการมีกุญแจ",
+          "id": "a"
+        },
+        {
+          "text": "พอทุกกรณี",
+          "id": "b"
+        },
+        {
+          "text": "พอถ้าใช้ DFS",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ตำแหน่งเดียวกันแต่กุญแจต่างกันมี actions ที่ทำได้ต่างกัน",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "หน้า 2–5: การค้นหาทำงานกับ **แบบจำลอง** ไม่ใช่เก็บรายละเอียดทั้งหมดของโลกจริง ต้องเลือก state ที่เพียงพอ ถ้าปัญหาขึ้นกับของที่เก็บแล้วหรือพลังงานที่เหลือ การใช้ตำแหน่งอย่างเดียวอาจรวมสถานะที่จริง ๆ ต่างกัน ข้อนี้เป็นคำอธิบายเสริมจากแนวคิด m"
+      }
+    },
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs-exam-02",
+      "type": "choice",
+      "prompt": "Goal test กับ Path cost ต่างกันอย่างไร?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "เป็นผลรวมขอบทั้งคู่",
+          "id": "a"
+        },
+        {
+          "text": "ตรวจถึงเป้าหมาย กับวัดต้นทุนเส้นทาง",
+          "id": "b"
+        },
+        {
+          "text": "เป็นรายชื่อเพื่อนบ้านทั้งคู่",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "เงื่อนไขเป้าหมายไม่ใช่ค่าต้นทุนของเส้นทาง",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ถอดความจากหน้า 2–4, 8, 11, 16, 18 และ 23\n\n| คำศัพท์ | ความหมาย |\n|---|---|\n| State | ตัวแทนสถานการณ์ปัจจุบันที่เก็บข้อมูลเพียงพอสำหรับเลือกการกระทำต่อไป |\n| State space | เซตของสถานะที่เป็นไปได้ในแบบจำลอง |\n| Successor function | ให้สถานะถั"
+      }
+    },
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs-exam-03",
+      "type": "choice",
+      "prompt": "ในแบบจำลอง Romania ถนนหนึ่งเส้นเป็นอะไร?",
+      "reference": "romania",
+      "choices": [
+        {
+          "text": "leaf ของทุก search tree",
+          "id": "a"
+        },
+        {
+          "text": "heuristic ที่เท่ากันทุกเมือง",
+          "id": "b"
+        },
+        {
+          "text": "การเปลี่ยน state พร้อมต้นทุนระยะทาง",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "เมืองเป็น state และถนนเชื่อมเมืองที่เข้าถึงได้",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "หน้า 6 ให้เมืองเป็น state ถนนเป็น successor ต้นทุนเป็นระยะทาง เริ่มที่ Arad และตรวจว่าอยู่ Bucharest หรือไม่ ภาพแผนที่เป็นกราฟถนน ไม่ใช่ search tree\n\n| องค์ประกอบ | แบบจำลองจากหน้า 6 |\n|---|---|\n| State space | เมืองบนแผนที่ |\n| Actions | เ"
+      }
+    },
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs-exam-04",
+      "type": "numeric",
+      "prompt": "เส้นทาง Arad→Sibiu→Rimnicu Vilcea→Pitesti→Bucharest มี cost 140,80,97,101 รวมเท่าใด?",
+      "reference": "romania",
+      "answer": 418,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "รวมต้นทุนถนน ไม่ใช้จำนวนขอบแทนระยะทาง",
+      "difficulty": "easy",
+      "verification": {
+        "method": "python",
+        "evidence": "หน้า 6 ให้เมืองเป็น state ถนนเป็น successor ต้นทุนเป็นระยะทาง เริ่มที่ Arad และตรวจว่าอยู่ Bucharest หรือไม่ ภาพแผนที่เป็นกราฟถนน ไม่ใช่ search tree\n\n| องค์ประกอบ | แบบจำลองจากหน้า 6 |\n|---|---|\n| State space | เมืองบนแผนที่ |\n| Actions | เ",
+        "oracle": "sum([140,80,97,101])"
+      }
+    },
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs-exam-05",
+      "type": "choice",
+      "prompt": "State เดียวอาจอยู่หลาย search nodes ได้เพราะเหตุใด?",
+      "reference": "graph-tree",
+      "choices": [
+        {
+          "text": "กราฟไม่มี state จริง",
+          "id": "a"
+        },
+        {
+          "text": "เข้าถึง state เดิมผ่านคนละเส้นทาง",
+          "id": "b"
+        },
+        {
+          "text": "ทุก node ต้องเป็นเมืองใหม่",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "Search node อาจเก็บ parent/path cost ต่างกัน แม้ state เท่ากัน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "หน้า 7–11: ในกราฟสถานะ state แต่ละตัวมีโหนดเดียว แต่โหนดใน search tree แทน **เส้นทาง/แผน** ที่มาถึง state นั้น จึงมีหลายโหนดที่ชื่อ state เหมือนกันได้ รากคือ start ลูกคือผลจาก successor แต่ละตัว ทั้งกราฟเต็มและต้นไม้เต็มอาจใหญ่เกินเก็บในหน่"
+      }
+    },
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs-exam-06",
+      "type": "choice",
+      "prompt": "BFS ควรเลือกโครงสร้าง frontier แบบใด?",
+      "reference": "frontier",
+      "choices": [
+        {
+          "text": "LIFO stack",
+          "id": "a"
+        },
+        {
+          "text": "ชุดข้อมูลที่เลือกสุ่มทุกครั้ง",
+          "id": "b"
+        },
+        {
+          "text": "FIFO queue",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "FIFO ทำให้พิจารณาตามระดับความลึก",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "คำอธิบาย implementation ต่อไปนี้เขียนเพิ่ม สอดคล้องกับ LIFO/FIFO หน้า 16/23\n\n- BFS ใช้ queue: เข้าท้าย ออกหัว กำหนด `parent` ตอน enqueue เพื่อเป็นทั้ง discovered set และข้อมูลย้อนเส้นทาง จึงไม่ enqueue state เดิมซ้ำ\n- DFS ตัวอย่างนี้ใช้ sta"
+      }
+    },
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs-exam-07",
+      "type": "choice",
+      "prompt": "DFS แบบ stack พิจารณางานใดก่อนตามพฤติกรรม LIFO?",
+      "reference": "frontier",
+      "choices": [
+        {
+          "text": "งานที่ใส่ท้ายสุด",
+          "id": "a"
+        },
+        {
+          "text": "งานที่ใส่ก่อนสุดเสมอ",
+          "id": "b"
+        },
+        {
+          "text": "งานต้นทุนน้อยสุดเสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ต้องระบุลำดับ push เพื่อให้ successor order ที่ต้องการ",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "คำอธิบาย implementation ต่อไปนี้เขียนเพิ่ม สอดคล้องกับ LIFO/FIFO หน้า 16/23\n\n- BFS ใช้ queue: เข้าท้าย ออกหัว กำหนด `parent` ตอน enqueue เพื่อเป็นทั้ง discovered set และข้อมูลย้อนเส้นทาง จึงไม่ enqueue state เดิมซ้ำ\n- DFS ตัวอย่างนี้ใช้ sta"
+      }
+    },
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs-exam-08",
+      "type": "choice",
+      "prompt": "BFS graph search mark discovered ตอน enqueue ช่วยอะไร?",
+      "reference": "bfs",
+      "choices": [
+        {
+          "text": "รับรอง cost ต่ำสุดเมื่อ weights ต่างกัน",
+          "id": "a"
+        },
+        {
+          "text": "ลดการใส่ state เดิมซ้ำใน frontier",
+          "id": "b"
+        },
+        {
+          "text": "ทำให้ไม่ต้องเก็บเส้นทาง",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "state ที่รอใน queue ก็ถือว่าพบแล้ว ไม่รอจน expanded",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "หน้า 22–23: เลือกสถานะที่ตื้นก่อน ใช้ FIFO queue จึงสำรวจชั้นความลึกตามลำดับ หน้า 24 เป็นภาพกราฟประกอบ หน้า 26 ให้ pseudocode ที่ตรวจ goal ของ successor เมื่อสร้าง ส่วนโค้ดในบทนี้ตรวจเมื่อ dequeue เพื่อให้ trace มีจุดตรวจเดียว ผลคำตอบยังมีค"
+      }
+    },
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs-exam-09",
+      "type": "choice",
+      "prompt": "DFS recursive บนต้นไม้ที่กิ่งแรกไม่สิ้นสุดอาจพลาดเป้าหมายกิ่งถัดไปเพราะอะไร?",
+      "reference": "dfs",
+      "choices": [
+        {
+          "text": "DFS ตรวจทุกระดับพร้อมกัน",
+          "id": "a"
+        },
+        {
+          "text": "DFS ใช้ heap เสมอ",
+          "id": "b"
+        },
+        {
+          "text": "ไม่กลับจากกิ่งแรกเพื่อสำรวจกิ่งอื่น",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "สมมติฐานจำกัดกราฟหรือความลึกมีผลต่อ completeness",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "หน้า 15–16: เลือกไปตามกิ่งลึกก่อน ใช้ LIFO stack หน้า 20 แสดงรูปแบบ recursive ที่ลอง successor และกลับมาลองตัวถัดไปเมื่อไม่สำเร็จ Python ด้านล่างใช้ frame stack เพื่อรักษาลำดับแบบ recursive โดยไม่อาศัย call stack ของ Python\n\nหาก A มีลูก C แ"
+      }
+    },
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs-exam-10",
+      "type": "choice",
+      "prompt": "BFS รับรองเส้นทาง cost ต่ำสุดในเงื่อนไขใดของบท?",
+      "reference": "comparison",
+      "choices": [
+        {
+          "text": "ทุกขอบมี cost เท่ากันและค้นหาครบตามระดับ",
+          "id": "a"
+        },
+        {
+          "text": "ขอบมีน้ำหนักบวกต่างกันก็ได้เสมอ",
+          "id": "b"
+        },
+        {
+          "text": "เปลี่ยน queue เป็น stack",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ระดับเทียบกับต้นทุนได้เมื่อแต่ละก้าวมีค่าเท่ากัน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ถอดความจากหน้า 18–19, 25, 28–30 พร้อมขยายเงื่อนไข หน้า 29 ถามว่าวิธีใดดีกว่าในสถานการณ์ใด ไม่ได้ให้คำตอบตายตัว หน้า 30 ใช้คำว่า shortest path ของ BFS ต้องอ่านร่วมกับเงื่อนไขต้นทุนหน้า 25\n\n| ประเด็น | BFS | DFS |\n|---|---|---|\n| Frontier | Q"
+      }
+    },
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs-exam-11",
+      "type": "numeric",
+      "prompt": "กราฟ S→A,B; A→C; B→D; C→G; D→G ทุกขอบ cost1 BFS ไป G สั้นสุดกี่ขอบ?",
+      "reference": "bfs",
+      "answer": 3,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "ทุกทางที่ถึง G ในกราฟนี้มี S→ชั้น 1→ชั้น 2→G รวม 3 ขอบ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "หน้า 22–23: เลือกสถานะที่ตื้นก่อน ใช้ FIFO queue จึงสำรวจชั้นความลึกตามลำดับ หน้า 24 เป็นภาพกราฟประกอบ หน้า 26 ให้ pseudocode ที่ตรวจ goal ของ successor เมื่อสร้าง ส่วนโค้ดในบทนี้ตรวจเมื่อ dequeue เพื่อให้ trace มีจุดตรวจเดียว ผลคำตอบยังมีค",
+        "oracle": "shortest({\"S\":[\"A\",\"B\"],\"A\":[\"C\"],\"B\":[\"D\"],\"C\":[\"G\"],\"D\":[\"G\"],\"G\":[]},\"S\",\"G\")"
+      }
+    },
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs-exam-12",
+      "type": "choice",
+      "prompt": "S→(A,B), A→(C), B→(D) เริ่ม queue=[S] หลังนำ S ออกและเพิ่ม successors ตามลำดับ queue เป็นอะไร?",
+      "reference": "bfs-trace",
+      "choices": [
+        {
+          "text": "[B, A]",
+          "id": "a"
+        },
+        {
+          "text": "[S, A, B]",
+          "id": "b"
+        },
+        {
+          "text": "[A, B]",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "นำ S ออกก่อน แล้วต่อ A และ B ที่ท้ายตามกติกา FIFO",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เริ่ม queue `[S]`, discovered `[S]` แต่ละแถวเป็นสถานะหลัง dequeue และเพิ่มลูก ยกเว้น G ที่หยุดทันทีเมื่อพบ goal สัญลักษณ์ในตาราง: u = state ที่นำออก, Q = queue, R = discovered\n\n| u | Q | R |\n|---|---|---|\n| S | A, B | S, A, B |\n| A | B, C |"
+      }
+    },
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs-exam-13",
+      "type": "choice",
+      "prompt": "ใช้ stack เพื่อเยี่ยม A ก่อน B จาก successors=[A,B] ต้อง push อย่างไร?",
+      "reference": "dfs-trace",
+      "choices": [
+        {
+          "text": "push B ก่อน A",
+          "id": "a"
+        },
+        {
+          "text": "push A ก่อน B",
+          "id": "b"
+        },
+        {
+          "text": "ไม่เกี่ยวกับลำดับ push",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "A ต้องอยู่บนสุดจึงถูก pop ก่อน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "แสดง stack ของ **frame ที่ยังทำงาน** แต่ละ frame มี iterator ของงานที่เหลืออยู่ด้วย จึงไม่ได้แสดง pending successors ทุกตัวเป็นโหนดแยก ในตัวอย่างนี้เจอ goal ก่อน backtrack; ถ้าลูกหมดให้ pop frame และกลับ frame ก่อนหน้า สัญลักษณ์: u = state "
+      }
+    },
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs-exam-14",
+      "type": "numeric",
+      "prompt": "กราฟกำหนดเอง S→A; A→S,G; G→[] ถ้ามี discovered set BFS จะพบ state ไม่ซ้ำทั้งหมดกี่ state?",
+      "reference": "example-graph",
+      "answer": 3,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "มี S,A,G การวนกลับไป S ไม่สร้าง state ใหม่",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "กราฟต่อไปนี้สร้างเพิ่มเพื่อให้เห็นความต่าง ไม่ใช่การถอดกราฟหน้า 10 เริ่ม S เป้าหมาย G ทุกขอบ cost = 1 กราฟมีทิศทางและวนกลับ S ได้ อ่านเพื่อนบ้าน **ซ้ายไปขวาตาม tuple** เท่านั้น\n\n\n\n### โค้ด BFS/DFS ร่วมกัน {#python-search}\nโค้ดตัวอย่างเขียนแ",
+        "oracle": "reachable({\"S\":[\"A\"],\"A\":[\"S\",\"G\"],\"G\":[]},\"S\")"
+      }
+    },
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs-exam-15",
+      "type": "choice",
+      "prompt": "เริ่มต้น S เป็นเป้าหมายอยู่แล้ว ควรคืนเส้นทางอย่างไร?",
+      "reference": "python-search",
+      "choices": [
+        {
+          "text": "[] หมายถึงค้นหาไม่สำเร็จเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "ต้องขยายเพื่อนบ้านก่อนจึงตอบได้",
+          "id": "b"
+        },
+        {
+          "text": "[S] มีศูนย์ขอบ",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "แยกเส้นทางศูนย์ก้าวที่สำเร็จออกจากกรณีไม่มีทาง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "โค้ดตัวอย่างเขียนและทดสอบใหม่ ใช้ Python 3 และ standard library เท่านั้น รันใน Python ของตนเอง ปุ่มคัดลอกไม่ได้รัน Python ในเว็บไซต์ State ต้อง hashable และไม่ใช้ `None` เพราะสงวนไว้เป็น parent ของรากและสัญญาณหมด iterator เลือก goal ที่เป็น"
+      }
+    },
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs-exam-16",
+      "type": "choice",
+      "prompt": "Parent map ใช้เพื่ออะไร?",
+      "reference": "python-search",
+      "choices": [
+        {
+          "text": "ย้อนสร้างเส้นทางจาก goal กลับ start",
+          "id": "a"
+        },
+        {
+          "text": "เรียง frontier ตาม cost เสมอ",
+          "id": "b"
+        },
+        {
+          "text": "นับ degrees เท่านั้น",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ลำดับเยี่ยมไม่ใช่เส้นทางคำตอบ ต้องตาม parent ที่เลือกไว้",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "โค้ดตัวอย่างเขียนและทดสอบใหม่ ใช้ Python 3 และ standard library เท่านั้น รันใน Python ของตนเอง ปุ่มคัดลอกไม่ได้รัน Python ในเว็บไซต์ State ต้อง hashable และไม่ใช้ `None` เพราะสงวนไว้เป็น parent ของรากและสัญญาณหมด iterator เลือก goal ที่เป็น"
+      }
+    },
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs-exam-17",
+      "type": "choice",
+      "prompt": "State ของ Tic-Tac-Toe ควรมีข้อมูลใดนอกจากกระดาน?",
+      "reference": "puzzles",
+      "choices": [
+        {
+          "text": "ชื่อไฟล์ Python เท่านั้น",
+          "id": "a"
+        },
+        {
+          "text": "ผู้เล่นที่จะเดิน",
+          "id": "b"
+        },
+        {
+          "text": "เวลารัน CPU เท่านั้น",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ผู้เล่นที่จะเดินเปลี่ยน successors ที่ถูกต้อง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "หน้า 12 แสดงต้นไม้กระดาน Tic-Tac-Toe ที่แตกกิ่งจากการวางหมาก ส่วนหน้า 13 ถาม states/operators/goal/path cost ของ 8-Puzzle และหน้า 14 แสดงการย้ายช่องว่าง ตัวอย่างการกำหนดปัญหาต่อไปนี้เป็นคำตอบที่ผู้เขียนจัดทำเพิ่ม\n\n- Tic-Tac-Toe: state ต้องร"
+      }
+    },
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs-exam-18",
+      "type": "choice",
+      "prompt": "ใน 8-Puzzle operator พื้นฐานตามแบบจำลองคืออะไร?",
+      "reference": "puzzles",
+      "choices": [
+        {
+          "text": "สลับเลขสองตัวใดก็ได้",
+          "id": "a"
+        },
+        {
+          "text": "ย้ายทุกชิ้นพร้อมกันโดยไม่ระบุ cost",
+          "id": "b"
+        },
+        {
+          "text": "ย้ายช่องว่างสลับกับช่องติดกันที่อนุญาต",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ต้องรักษากติกาการเปลี่ยน state ไม่แต่ง operator เพื่อให้คำตอบสั้น",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "หน้า 12 แสดงต้นไม้กระดาน Tic-Tac-Toe ที่แตกกิ่งจากการวางหมาก ส่วนหน้า 13 ถาม states/operators/goal/path cost ของ 8-Puzzle และหน้า 14 แสดงการย้ายช่องว่าง ตัวอย่างการกำหนดปัญหาต่อไปนี้เป็นคำตอบที่ผู้เขียนจัดทำเพิ่ม\n\n- Tic-Tac-Toe: state ต้องร"
+      }
+    },
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs-exam-19",
+      "type": "numeric",
+      "prompt": "ต้นไม้เต็ม branching factor3 ลึกสุด 2 มี nodes รวมทุกระดับกี่ตัว?",
+      "reference": "comparison",
+      "answer": 13,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "รวมราก 1 ระดับถัดไป 3 และระดับสอง 9 เป็น 13",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "ถอดความจากหน้า 18–19, 25, 28–30 พร้อมขยายเงื่อนไข หน้า 29 ถามว่าวิธีใดดีกว่าในสถานการณ์ใด ไม่ได้ให้คำตอบตายตัว หน้า 30 ใช้คำว่า shortest path ของ BFS ต้องอ่านร่วมกับเงื่อนไขต้นทุนหน้า 25\n\n| ประเด็น | BFS | DFS |\n|---|---|---|\n| Frontier | Q",
+        "oracle": "sum(3**i for i in range(3))"
+      }
+    },
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs-exam-20",
+      "type": "choice",
+      "prompt": "Frontier ว่างและยังไม่พบ goal ในกราฟจำกัดที่ค้นครบ หมายถึงอะไร?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "text": "ไม่มี goal ในโลกจริงทุกแบบจำลอง",
+          "id": "a"
+        },
+        {
+          "text": "ไม่มีทางจาก start ภายใต้แบบจำลองนี้",
+          "id": "b"
+        },
+        {
+          "text": "ให้คืน start เป็นคำตอบสำเร็จ",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ข้อสรุปผูกกับกราฟและ actions ที่กำหนด ไม่ขยายเกินแบบจำลอง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "- ใช้ `pop()` ท้าย list แล้วเรียกว่า BFS: ต้องนำหัว queue ออก เช่น `deque.popleft()`\n- บอกว่า DFS ลองตัวอักษรน้อยก่อน แต่ push A แล้ว B ลง stack ธรรมดา: B จะถูก pop ก่อน ต้องกำหนดกลไกให้ตรง trace\n- เรียกทุก state ที่ discovered ว่า expanded"
+      }
+    },
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs-exam-21",
+      "type": "self",
+      "prompt": "เปรียบ BFS กับ DFS สำหรับกราฟใหญ่ โดยแยก completeness, optimality และ memory assumptions",
+      "reference": "comparison",
+      "rubric": [
+        "ระบุว่าเป็น tree search หรือ graph search",
+        "แยก unit cost จาก weighted edges",
+        "อธิบาย frontier ที่ต้องเก็บ ไม่เหมารวมทุกกรณี"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ระบุว่าเป็น tree search หรือ graph search แยก unit cost จาก weighted edges อธิบาย frontier ที่ต้องเก็บ ไม่เหมารวมทุกกรณี",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ถอดความจากหน้า 18–19, 25, 28–30 พร้อมขยายเงื่อนไข หน้า 29 ถามว่าวิธีใดดีกว่าในสถานการณ์ใด ไม่ได้ให้คำตอบตายตัว หน้า 30 ใช้คำว่า shortest path ของ BFS ต้องอ่านร่วมกับเงื่อนไขต้นทุนหน้า 25\n\n| ประเด็น | BFS | DFS |\n|---|---|---|\n| Frontier | Q"
+      }
+    },
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs-exam-22",
+      "type": "self",
+      "prompt": "ออกแบบ tests ของ graph search สำหรับ start=goal, cycle, goal unreachable และหลายเส้นทาง",
+      "reference": "python-search",
+      "rubric": [
+        "ประกาศ successor order และช่วง goal test",
+        "ตรวจเส้นทางผ่านขอบที่มีจริงและเริ่ม/จบถูก",
+        "เทียบ BFS กับ independent shortest-distance oracle"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ประกาศ successor order และช่วง goal test ตรวจเส้นทางผ่านขอบที่มีจริงและเริ่ม/จบถูก เทียบ BFS กับ independent shortest-distance oracle",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "โค้ดตัวอย่างเขียนและทดสอบใหม่ ใช้ Python 3 และ standard library เท่านั้น รันใน Python ของตนเอง ปุ่มคัดลอกไม่ได้รัน Python ในเว็บไซต์ State ต้อง hashable และไม่ใช้ `None` เพราะสงวนไว้เป็น parent ของรากและสัญญาณหมด iterator เลือก goal ที่เป็น"
+      }
+    },
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs-exam-23",
+      "type": "self",
+      "prompt": "อธิบายด้วยกราฟรูปเพชรว่า discovered, expanded, search tree และ solution path ต่างกันอย่างไร",
+      "reference": "graph-tree",
+      "rubric": [
+        "ใช้ state ร่วมที่เข้าถึงได้จากสอง parent",
+        "แสดง frontier และช่วงการ mark",
+        "แยกเส้นทางคำตอบจากลำดับเยี่ยมทั้งหมด"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ใช้ state ร่วมที่เข้าถึงได้จากสอง parent แสดง frontier และช่วงการ mark แยกเส้นทางคำตอบจากลำดับเยี่ยมทั้งหมด",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "หน้า 7–11: ในกราฟสถานะ state แต่ละตัวมีโหนดเดียว แต่โหนดใน search tree แทน **เส้นทาง/แผน** ที่มาถึง state นั้น จึงมีหลายโหนดที่ชื่อ state เหมือนกันได้ รากคือ start ลูกคือผลจาก successor แต่ละตัว ทั้งกราฟเต็มและต้นไม้เต็มอาจใหญ่เกินเก็บในหน่"
+      }
+    },
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs-exam-24",
+      "type": "self",
+      "prompt": "ตรวจข้ออ้างว่าเส้นทางระยะ 418 ในบทสั้นที่สุดทั้ง Romania เพียงเพราะสั้นกว่า 450",
+      "reference": "romania",
+      "rubric": [
+        "ยืนยันการบวกต้นทุนของสองเส้นทาง",
+        "ชี้ว่าการเปรียบสองทางยังไม่ครอบคลุมทุกทาง",
+        "เสนอการค้นหาที่เหมาะกับ weighted graph โดยไม่อ้างว่า BFS รับรองได้"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ยืนยันการบวกต้นทุนของสองเส้นทาง ชี้ว่าการเปรียบสองทางยังไม่ครอบคลุมทุกทาง เสนอการค้นหาที่เหมาะกับ weighted graph โดยไม่อ้างว่า BFS รับรองได้",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "หน้า 6 ให้เมืองเป็น state ถนนเป็น successor ต้นทุนเป็นระยะทาง เริ่มที่ Arad และตรวจว่าอยู่ Bucharest หรือไม่ ภาพแผนที่เป็นกราฟถนน ไม่ใช่ search tree\n\n| องค์ประกอบ | แบบจำลองจากหน้า 6 |\n|---|---|\n| State space | เมืองบนแผนที่ |\n| Actions | เ"
+      }
+    }
+  ]
+}

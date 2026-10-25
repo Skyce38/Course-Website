@@ -1,0 +1,550 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-stack",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "oop-python-stack-exam-01",
+      "type": "choice",
+      "prompt": "LIFO หมายถึงลำดับใด?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "เข้าหลังออกก่อน",
+          "id": "a"
+        },
+        {
+          "text": "เข้าก่อนออกก่อน",
+          "id": "b"
+        },
+        {
+          "text": "priority ต่ำออกก่อนเสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "Stack จำกัดการเข้าออกที่ top",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week11 pp.3–17: ข้อมูลที่เข้าทีหลังออกก่อน (Last In, First Out: LIFO) เข้าถึงข้อมูลจากด้าน top โดย push เพิ่มค่า, pop คืนค่าและนำออก และ peek อ่านค่าโดยไม่ลบ ส่วน is_empty และ len ใช้ตรวจสถานะ\n\nStack ADT กำหนดพฤติกรรม ไม่ได้บังคับรูปแบบจัดเ"
+      }
+    },
+    {
+      "id": "oop-python-stack-exam-02",
+      "type": "choice",
+      "prompt": "StackADT กำหนด storage ว่าต้องเป็น linkedlist เท่านั้นหรือไม่?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "ต้อง linkedlist ทุกภาษา",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ กำหนดพฤติกรรมและ operations",
+          "id": "b"
+        },
+        {
+          "text": "ต้อง array ความจุคงที่เสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ArrayStack กับ LinkedStack ใช้ ADT เดียวกันได้",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week11 pp.3–17: ข้อมูลที่เข้าทีหลังออกก่อน (Last In, First Out: LIFO) เข้าถึงข้อมูลจากด้าน top โดย push เพิ่มค่า, pop คืนค่าและนำออก และ peek อ่านค่าโดยไม่ลบ ส่วน is_empty และ len ใช้ตรวจสถานะ\n\nStack ADT กำหนดพฤติกรรม ไม่ได้บังคับรูปแบบจัดเ"
+      }
+    },
+    {
+      "id": "oop-python-stack-exam-03",
+      "type": "choice",
+      "prompt": "LinkedStack ใช้ head เป็น top เพราะอะไร?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "เพราะ tail เข้าถึงไม่ได้ใน Python",
+          "id": "a"
+        },
+        {
+          "text": "เพื่อให้ทุก peek ลบข้อมูล",
+          "id": "b"
+        },
+        {
+          "text": "push/pop แก้ links ด้านหน้าโดยไม่หา predecessor ของ tail",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "เลือกตำแหน่งเพื่อให้ operations หลักคงที่ตามแบบจำลอง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "LinkedStack อิง Node/head ใน source ส่วน ArrayStack เป็น wrapper ของ list โค้ด Postfix อิง Lab11-1 โดยเพิ่มการตรวจค่า float ที่เป็น finite ตาม policy ที่ประกาศไว้\n\nTextEditor เก็บสำเนาสถานะข้อความที่แก้ไขไม่ได้ (immutable text snapshots) แล"
+      }
+    },
+    {
+      "id": "oop-python-stack-exam-04",
+      "type": "choice",
+      "prompt": "peek บน LinkedStack ว่างในบทเกิดอะไร?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "IndexError",
+          "id": "a"
+        },
+        {
+          "text": "คืน None เสมอ",
+          "id": "b"
+        },
+        {
+          "text": "เพิ่ม size เป็น 1",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "implementation มี emptyguard ไม่ใช้ค่าข้อมูลแยกว่างเพราะ None อาจเป็น data",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "LinkedStack อิง Node/head ใน source ส่วน ArrayStack เป็น wrapper ของ list โค้ด Postfix อิง Lab11-1 โดยเพิ่มการตรวจค่า float ที่เป็น finite ตาม policy ที่ประกาศไว้\n\nTextEditor เก็บสำเนาสถานะข้อความที่แก้ไขไม่ได้ (immutable text snapshots) แล"
+      }
+    },
+    {
+      "id": "oop-python-stack-exam-05",
+      "type": "numeric",
+      "prompt": "เริ่มว่าง push1,push2,pop,push3,peek จำนวนสมาชิกสุดท้ายเท่าใด?",
+      "reference": "python",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "หลัง pop เหลือ 1 แล้ว push3 มี 2 และ peek ไม่ลบ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "LinkedStack อิง Node/head ใน source ส่วน ArrayStack เป็น wrapper ของ list โค้ด Postfix อิง Lab11-1 โดยเพิ่มการตรวจค่า float ที่เป็น finite ตาม policy ที่ประกาศไว้\n\nTextEditor เก็บสำเนาสถานะข้อความที่แก้ไขไม่ได้ (immutable text snapshots) แล",
+        "oracle": "len(stack_trace([(\"push\",1),(\"push\",2),(\"pop\",None),(\"push\",3),(\"peek\",None)]))"
+      }
+    },
+    {
+      "id": "oop-python-stack-exam-06",
+      "type": "choice",
+      "prompt": "ข้อความ([)]สมดุลหรือไม่ และเหตุใด?",
+      "reference": "brackets",
+      "choices": [
+        {
+          "text": "สมดุลเพราะนับเปิดปิดเท่ากัน",
+          "id": "a"
+        },
+        {
+          "text": "สมดุลเพราะมีสองชนิด",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ เพราะวงเล็บปิดไม่ตรงชนิดบนสุด",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ต้องตรวจทั้งลำดับและชนิด ไม่ใช่นับรวมอย่างเดียว",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week11 pp.22–25, 37–41: อ่านอักขระทุกตัว เมื่อพบวงเล็บเปิดให้ push และเมื่อพบวงเล็บปิดต้องตรวจว่าตรงกับตัวบนสุด เมื่ออ่านจบ stack ต้องว่าง\n\nตัวอย่างนี้ข้ามอักขระอื่น จึงเป็นตัวตรวจวงเล็บ ไม่ใช่ตัววิเคราะห์ไวยากรณ์ Python หรือ HTML แบบสมบูรณ"
+      }
+    },
+    {
+      "id": "oop-python-stack-exam-07",
+      "type": "choice",
+      "prompt": "อ่านครบแล้ว stack ยังมีวงเล็บเปิดค้าง หมายถึงอะไร?",
+      "reference": "brackets",
+      "choices": [
+        {
+          "text": "ยังไม่สมดุล",
+          "id": "a"
+        },
+        {
+          "text": "สมดุลเพราะไม่เจอวงเล็บปิดผิด",
+          "id": "b"
+        },
+        {
+          "text": "ต้องล้าง stack แล้วตอบ True",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "เงื่อนไขสำเร็จต้องไม่มีทั้ง mismatch และ unclosedopen",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week11 pp.22–25, 37–41: อ่านอักขระทุกตัว เมื่อพบวงเล็บเปิดให้ push และเมื่อพบวงเล็บปิดต้องตรวจว่าตรงกับตัวบนสุด เมื่ออ่านจบ stack ต้องว่าง\n\nตัวอย่างนี้ข้ามอักขระอื่น จึงเป็นตัวตรวจวงเล็บ ไม่ใช่ตัววิเคราะห์ไวยากรณ์ Python หรือ HTML แบบสมบูรณ"
+      }
+    },
+    {
+      "id": "oop-python-stack-exam-08",
+      "type": "choice",
+      "prompt": "is_balanced ในบทข้ามอักขระอื่น รับรองเป็น Pythonparser ครบหรือไม่?",
+      "reference": "brackets",
+      "choices": [
+        {
+          "text": "รับรองทุก syntax",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ เป็นตัวตรวจวงเล็บตามกติกาง่ายๆ",
+          "id": "b"
+        },
+        {
+          "text": "รับรอง HTML ทุกรูปแบบ",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ไม่วิเคราะห์ strings/comments หรือไวยากรณ์ทั้งหมด",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week11 pp.22–25, 37–41: อ่านอักขระทุกตัว เมื่อพบวงเล็บเปิดให้ push และเมื่อพบวงเล็บปิดต้องตรวจว่าตรงกับตัวบนสุด เมื่ออ่านจบ stack ต้องว่าง\n\nตัวอย่างนี้ข้ามอักขระอื่น จึงเป็นตัวตรวจวงเล็บ ไม่ใช่ตัววิเคราะห์ไวยากรณ์ Python หรือ HTML แบบสมบูรณ"
+      }
+    },
+    {
+      "id": "oop-python-stack-exam-09",
+      "type": "numeric",
+      "prompt": "ข้อความ((())) มีขนาด stack สูงสุดกี่ตัวระหว่างตรวจ?",
+      "reference": "brackets",
+      "answer": 3,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "อ่านวงเล็บเปิดสามตัวก่อนเริ่ม pop",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "Week11 pp.22–25, 37–41: อ่านอักขระทุกตัว เมื่อพบวงเล็บเปิดให้ push และเมื่อพบวงเล็บปิดต้องตรวจว่าตรงกับตัวบนสุด เมื่ออ่านจบ stack ต้องว่าง\n\nตัวอย่างนี้ข้ามอักขระอื่น จึงเป็นตัวตรวจวงเล็บ ไม่ใช่ตัววิเคราะห์ไวยากรณ์ Python หรือ HTML แบบสมบูรณ",
+        "oracle": "bracket_peak(\"((()))\")"
+      }
+    },
+    {
+      "id": "oop-python-stack-exam-10",
+      "type": "numeric",
+      "prompt": "Postfix ผู้เขียน 8 2 / 3 + มีผลเท่าใด?",
+      "reference": "postfix",
+      "answer": 7,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "8/2=4 แล้ว 4+3=7 รักษาซ้าย/ขวา",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "Lab11-1 ระบุ token คั่นด้วย space,+−*/และ stack ใหม่ต่อ expression ตัวอย่าง source3 4 + 2 *:\n\n| token | การทำงาน | stack |\n|---|---|---|\n|3|push3|3|\n|4|push4|3,4|\n|+|right4,left3→7|7|\n|2|push2|7,2|\n|*|right2,left7→14|14|\n\n`10 3 -`ต้อง 10−3=",
+        "oracle": "postfix(\"8 2 / 3 +\")"
+      }
+    },
+    {
+      "id": "oop-python-stack-exam-11",
+      "type": "numeric",
+      "prompt": "ประเมิน postfix 3 4 2 * + โดยใช้ stack ของ operands ขนาด stack สูงสุดระหว่างอ่าน tokens เป็นเท่าใด?",
+      "reference": "postfix",
+      "answer": 3,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "หลังอ่าน 3,4,2 มีสามค่า แล้ว*นำออกสองคืนหนึ่ง และ+ลดเหลือผลเดียว ข้อนี้วัดพื้นที่ของ trace ไม่ใช่แค่ค่าคำตอบ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "Lab11-1 ระบุ token คั่นด้วย space,+−*/และ stack ใหม่ต่อ expression ตัวอย่าง source3 4 + 2 *:\n\n| token | การทำงาน | stack |\n|---|---|---|\n|3|push3|3|\n|4|push4|3,4|\n|+|right4,left3→7|7|\n|2|push2|7,2|\n|*|right2,left7→14|14|\n\n`10 3 -`ต้อง 10−3=",
+        "oracle": "postfix_peak(\"3 4 2 * +\")"
+      }
+    },
+    {
+      "id": "oop-python-stack-exam-12",
+      "type": "choice",
+      "prompt": "เมื่อพบ operator ใน postfix ค่าที่ pop ครั้งแรกคือ operand ใด?",
+      "reference": "postfix",
+      "choices": [
+        {
+          "text": "ซ้ายเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "ผลสุดท้ายของทุกนิพจน์",
+          "id": "b"
+        },
+        {
+          "text": "ขวา",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ต้อง pop ขวาแล้วซ้ายก่อนคำนวณ left op right",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Lab11-1 ระบุ token คั่นด้วย space,+−*/และ stack ใหม่ต่อ expression ตัวอย่าง source3 4 + 2 *:\n\n| token | การทำงาน | stack |\n|---|---|---|\n|3|push3|3|\n|4|push4|3,4|\n|+|right4,left3→7|7|\n|2|push2|7,2|\n|*|right2,left7→14|14|\n\n`10 3 -`ต้อง 10−3="
+      }
+    },
+    {
+      "id": "oop-python-stack-exam-13",
+      "type": "choice",
+      "prompt": "อ่านนิพจน์แล้ว stack เหลือสองตัวแต่ไม่มี token ต่อ ควรทำอย่างไร?",
+      "reference": "postfix",
+      "choices": [
+        {
+          "text": "ValueError เพราะต้องเหลือผลเดียว",
+          "id": "a"
+        },
+        {
+          "text": "คืนตัวบนสุดแล้วเงียบ",
+          "id": "b"
+        },
+        {
+          "text": "บวกสองตัวให้อัตโนมัติ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ไม่เติม operator ที่โจทย์ไม่ได้ให้",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Lab11-1 ระบุ token คั่นด้วย space,+−*/และ stack ใหม่ต่อ expression ตัวอย่าง source3 4 + 2 *:\n\n| token | การทำงาน | stack |\n|---|---|---|\n|3|push3|3|\n|4|push4|3,4|\n|+|right4,left3→7|7|\n|2|push2|7,2|\n|*|right2,left7→14|14|\n\n`10 3 -`ต้อง 10−3="
+      }
+    },
+    {
+      "id": "oop-python-stack-exam-14",
+      "type": "choice",
+      "prompt": "นิพจน์ใหม่ล้มเหลว last_result ควรเป็นอย่างไรในบท?",
+      "reference": "postfix",
+      "choices": [
+        {
+          "text": "เปลี่ยนเป็น 0 เสมอ",
+          "id": "a"
+        },
+        {
+          "text": "คงผลสำเร็จครั้งก่อน",
+          "id": "b"
+        },
+        {
+          "text": "ใช้ค่าที่ pop ล่าสุดแม้ยังไม่จบ",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ตั้ง last_result เฉพาะหลังตรวจทั้งนิพจน์ผ่าน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Lab11-1 ระบุ token คั่นด้วย space,+−*/และ stack ใหม่ต่อ expression ตัวอย่าง source3 4 + 2 *:\n\n| token | การทำงาน | stack |\n|---|---|---|\n|3|push3|3|\n|4|push4|3,4|\n|+|right4,left3→7|7|\n|2|push2|7,2|\n|*|right2,left7→14|14|\n\n`10 3 -`ต้อง 10−3="
+      }
+    },
+    {
+      "id": "oop-python-stack-exam-15",
+      "type": "numeric",
+      "prompt": "factorial(5) ตามสูตรฐาน 0/1 จงหาผลลัพธ์",
+      "reference": "call-stack",
+      "answer": 120,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "5×4×3×2×1=120 ไม่ใช่ผลรวม",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "Week11 pp.18–20:เมื่อ calculate_total เรียก calculate_tax แล้ว get_tax_rate เฟรมบนสุดที่กำลังทำงานต้องจบก่อนกลับ caller ไม่ได้แปลว่าตัวแปร local ทุก call เป็น global ชุดเดียว ตัวอย่าง factorial4 ของผู้เขียน: f4 รอ 4×f3→f3 รอ 3×f2→f2 รอ 2×f1",
+        "oracle": "factorial(5)"
+      }
+    },
+    {
+      "id": "oop-python-stack-exam-16",
+      "type": "choice",
+      "prompt": "เหตุใด recursion ต้องมี basecase และปัญหาย่อยเล็กลง?",
+      "reference": "call-stack",
+      "choices": [
+        {
+          "text": "เพื่อมีเส้นทางหยุด ไม่เรียกตัวเองไม่สิ้นสุด",
+          "id": "a"
+        },
+        {
+          "text": "เพื่อให้ไม่มี callstack เลย",
+          "id": "b"
+        },
+        {
+          "text": "เพื่อให้ local ทุก call เป็น global",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ยังมีข้อจำกัด recursiondepth จริงของ Python",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week11 pp.18–20:เมื่อ calculate_total เรียก calculate_tax แล้ว get_tax_rate เฟรมบนสุดที่กำลังทำงานต้องจบก่อนกลับ caller ไม่ได้แปลว่าตัวแปร local ทุก call เป็น global ชุดเดียว ตัวอย่าง factorial4 ของผู้เขียน: f4 รอ 4×f3→f3 รอ 3×f2→f2 รอ 2×f1"
+      }
+    },
+    {
+      "id": "oop-python-stack-exam-17",
+      "type": "numeric",
+      "prompt": "factorial(4) เรียกสูตรจนถึง factorial(1) ลึกพร้อมกันสูงสุดกี่เฟรมของ factorial?",
+      "reference": "call-stack",
+      "answer": 4,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "เฟรม f4,f3,f2,f1 รอผลตามลำดับ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "Week11 pp.18–20:เมื่อ calculate_total เรียก calculate_tax แล้ว get_tax_rate เฟรมบนสุดที่กำลังทำงานต้องจบก่อนกลับ caller ไม่ได้แปลว่าตัวแปร local ทุก call เป็น global ชุดเดียว ตัวอย่าง factorial4 ของผู้เขียน: f4 รอ 4×f3→f3 รอ 3×f2→f2 รอ 2×f1",
+        "oracle": "len([4,3,2,1])"
+      }
+    },
+    {
+      "id": "oop-python-stack-exam-18",
+      "type": "choice",
+      "prompt": "หลัง undo แล้วแก้ข้อความใหม่ ควรทำอย่างไรกับ redo ใน policy บท?",
+      "reference": "undo",
+      "choices": [
+        {
+          "text": "เก็บทุก redo เดิมมาใช้ทับได้เสมอ",
+          "id": "a"
+        },
+        {
+          "text": "ลบ undo ทั้งหมดด้วย",
+          "id": "b"
+        },
+        {
+          "text": "ล้าง redo เพราะสร้าง branch ใหม่",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ข้อความใหม่ไม่ใช่เส้นทางเดิมที่จะ redo ต่อ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.27–29,42–45:ก่อน action ใหม่เก็บ state เก่าใน undo และล้าง redo;undo ย้าย state ปัจจุบันไป redo แล้วคืน state เก่าจาก undo;redo กลับทิศ Trace ผู้เขียน:\n\nหากไม่ล้าง redo เมื่อแตก branch ใหม่อาจย้อนเข้า stateAB ที่ไม่ใช่เส้นทางแก้ไขปัจจุบั"
+      }
+    },
+    {
+      "id": "oop-python-stack-exam-19",
+      "type": "choice",
+      "prompt": "type_text(\"\") เมื่อข้อความไม่เปลี่ยน ต้องบันทึก undo ใหม่หรือไม่ในบท?",
+      "reference": "undo",
+      "choices": [
+        {
+          "text": "ไม่ ตาม no-op policy ผู้เขียน",
+          "id": "a"
+        },
+        {
+          "text": "ต้องทุกครั้งแม้ state เหมือนเดิม",
+          "id": "b"
+        },
+        {
+          "text": "ลบประวัติทั้งหมด",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ตรวจ new!=text ก่อนเก็บ snapshot",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.27–29,42–45:ก่อน action ใหม่เก็บ state เก่าใน undo และล้าง redo;undo ย้าย state ปัจจุบันไป redo แล้วคืน state เก่าจาก undo;redo กลับทิศ Trace ผู้เขียน:\n\nหากไม่ล้าง redo เมื่อแตก branch ใหม่อาจย้อนเข้า stateAB ที่ไม่ใช่เส้นทางแก้ไขปัจจุบั"
+      }
+    },
+    {
+      "id": "oop-python-stack-exam-20",
+      "type": "choice",
+      "prompt": "เก็บ immutable text snapshot ยาว m เพื่อ undo มีต้นทุนข้อมูลอย่างไร?",
+      "reference": "complexity",
+      "choices": [
+        {
+          "text": "ไม่มีต้นทุนข้อความ",
+          "id": "a"
+        },
+        {
+          "text": "อาจ O(m) ต่อ snapshot ไม่เหมารวม push ทั้งหมดเป็น O(1)",
+          "id": "b"
+        },
+        {
+          "text": "O(1) ทุก state เพราะเป็น stack",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "แยก corecontainer กับการสร้าง/เก็บข้อความ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "| งาน | เวลา | พื้นที่เพิ่มเติม |\n|---|---|---|\n|Linkedpush/pop/peek|O(1)|O(1)ต่อ operation,ทั้งหมด O(n)|\n|Arraypush|amortizedO(1),worstO(n)|resizebuffer เมื่อจำเป็น|\n|Arraypop/peek ท้าย|O(1)ในแบบจำลอง ADT;Python list มีรายละเอียด resize|ทั"
+      }
+    },
+    {
+      "id": "oop-python-stack-exam-21",
+      "type": "self",
+      "prompt": "ออกแบบ tests วงเล็บที่นับจำนวนเท่ากันแต่ลำดับผิด",
+      "reference": "brackets",
+      "rubric": [
+        "มี mismatch และวงเล็บปิดก่อนเปิด",
+        "มี unclosedopen และข้อความว่าง",
+        "ระบุขอบเขตว่าไม่ใช่ full parser"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: มี mismatch และวงเล็บปิดก่อนเปิด มี unclosedopen และข้อความว่าง ระบุขอบเขตว่าไม่ใช่ full parser",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Week11 pp.22–25, 37–41: อ่านอักขระทุกตัว เมื่อพบวงเล็บเปิดให้ push และเมื่อพบวงเล็บปิดต้องตรวจว่าตรงกับตัวบนสุด เมื่ออ่านจบ stack ต้องว่าง\n\nตัวอย่างนี้ข้ามอักขระอื่น จึงเป็นตัวตรวจวงเล็บ ไม่ใช่ตัววิเคราะห์ไวยากรณ์ Python หรือ HTML แบบสมบูรณ"
+      }
+    },
+    {
+      "id": "oop-python-stack-exam-22",
+      "type": "self",
+      "prompt": "วาง trace และ error tests ของ PostfixCalculator",
+      "reference": "postfix",
+      "rubric": [
+        "ตรวจ operandorder ของลบและหาร",
+        "ครอบคลุม token ผิด,operands ไม่พอ,เหลือเกินและหารศูนย์",
+        "failure ไม่แทน last_result ที่สำเร็จ"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ตรวจ operandorder ของลบและหาร ครอบคลุม token ผิด,operands ไม่พอ,เหลือเกินและหารศูนย์ failure ไม่แทน last_result ที่สำเร็จ",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Lab11-1 ระบุ token คั่นด้วย space,+−*/และ stack ใหม่ต่อ expression ตัวอย่าง source3 4 + 2 *:\n\n| token | การทำงาน | stack |\n|---|---|---|\n|3|push3|3|\n|4|push4|3,4|\n|+|right4,left3→7|7|\n|2|push2|7,2|\n|*|right2,left7→14|14|\n\n`10 3 -`ต้อง 10−3="
+      }
+    },
+    {
+      "id": "oop-python-stack-exam-23",
+      "type": "self",
+      "prompt": "แสดง state ของ text/undo/redo เมื่อพิมพ์ undo redo และแก้ branch ใหม่",
+      "reference": "undo",
+      "rubric": [
+        "เก็บ state เก่าก่อนแก้จริง",
+        "ย้าย state ไป stack อีกด้านเมื่อ undo/redo",
+        "ตรวจ no-op และล้าง redo เฉพาะ branch ใหม่"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: เก็บ state เก่าก่อนแก้จริง ย้าย state ไป stack อีกด้านเมื่อ undo/redo ตรวจ no-op และล้าง redo เฉพาะ branch ใหม่",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "pp.27–29,42–45:ก่อน action ใหม่เก็บ state เก่าใน undo และล้าง redo;undo ย้าย state ปัจจุบันไป redo แล้วคืน state เก่าจาก undo;redo กลับทิศ Trace ผู้เขียน:\n\nหากไม่ล้าง redo เมื่อแตก branch ใหม่อาจย้อนเข้า stateAB ที่ไม่ใช่เส้นทางแก้ไขปัจจุบั"
+      }
+    },
+    {
+      "id": "oop-python-stack-exam-24",
+      "type": "self",
+      "prompt": "เปรียบ ArrayStack กับ LinkedStack โดยรวม memory และ payloadcost",
+      "reference": "complexity",
+      "rubric": [
+        "แยก amortizedappend กับ linkedreferenceops",
+        "รวม Node/arraycapacityoverhead",
+        "ไม่เหมาว่าทุก payloadcopy คงที่หรือใช้ tailpopO(1) ใน singlylist"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: แยก amortizedappend กับ linkedreferenceops รวม Node/arraycapacityoverhead ไม่เหมาว่าทุก payloadcopy คงที่หรือใช้ tailpopO(1) ใน singlylist",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "| งาน | เวลา | พื้นที่เพิ่มเติม |\n|---|---|---|\n|Linkedpush/pop/peek|O(1)|O(1)ต่อ operation,ทั้งหมด O(n)|\n|Arraypush|amortizedO(1),worstO(n)|resizebuffer เมื่อจำเป็น|\n|Arraypop/peek ท้าย|O(1)ในแบบจำลอง ADT;Python list มีรายละเอียด resize|ทั"
+      }
+    }
+  ]
+}

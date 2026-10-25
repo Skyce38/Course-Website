@@ -1,0 +1,594 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-polymorphism-abc",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "oop-python-polymorphism-abc-exam-01",
+      "type": "choice",
+      "prompt": "Duck typing พิจารณาอะไรเป็นหลักในการใช้งาน?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "พฤติกรรม/interface ที่ object รองรับ",
+          "id": "a"
+        },
+        {
+          "text": "ชื่อไฟล์ที่สร้าง object",
+          "id": "b"
+        },
+        {
+          "text": "ต้องสืบทอด class เดียวกันเสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "client อาจเรียก method เดียวกันได้โดยไม่รู้ชนิด concrete",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.3–11: polymorphism คือการเรียก operation เดียวกันแล้วแต่ละ object ทำงานตาม implementation ของมัน เช่น s.area() แสดงพฤติกรรม Circle หรือ Rectangle โดยไม่ต้อง ifisinstance เป็นสายยาว ทุกครั้งที่เพิ่มชนิดใหม่ client ที่อิง interface เดิมไม่"
+      }
+    },
+    {
+      "id": "oop-python-polymorphism-abc-exam-02",
+      "type": "choice",
+      "prompt": "มี method ชื่อ area เพียงอย่างเดียวพอรับรอง contract ของ sum areas หรือไม่?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "พอแม้คืน str",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ ต้องคืนค่าชนิดและความหมายที่ client ใช้ได้",
+          "id": "b"
+        },
+        {
+          "text": "พอแม้ method ไม่รับ self",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ชื่อเหมือนกันไม่รับรอง behavior",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.3–11: polymorphism คือการเรียก operation เดียวกันแล้วแต่ละ object ทำงานตาม implementation ของมัน เช่น s.area() แสดงพฤติกรรม Circle หรือ Rectangle โดยไม่ต้อง ifisinstance เป็นสายยาว ทุกครั้งที่เพิ่มชนิดใหม่ client ที่อิง interface เดิมไม่"
+      }
+    },
+    {
+      "id": "oop-python-polymorphism-abc-exam-03",
+      "type": "choice",
+      "prompt": "ABC กับ abstractmethod ช่วยบังคับอะไรในบท?",
+      "reference": "abc",
+      "choices": [
+        {
+          "text": "รับรองสูตร area ถูกต้อง",
+          "id": "a"
+        },
+        {
+          "text": "ป้องกันทุก mutation",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ให้สร้าง instance ที่ยังมี abstract methods ค้างภายใต้ ABCMeta",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "บังคับโครงสร้างบางส่วน ไม่ตรวจความหมายของ implementation",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.13–24: Shape สืบทอด ABC เพื่อใช้ ABCMeta และทำเครื่องหมาย area/perimeter ด้วย abstractmethod จึงสร้าง Shape หรือ subclass ที่ยังไม่ทำครบไม่ได้ (TypeError) method ธรรมดา describe ใช้ร่วมกันได้\n\n`ABC`โดยไม่มี abstractmethod ที่ค้างอยู่ยังส"
+      }
+    },
+    {
+      "id": "oop-python-polymorphism-abc-exam-04",
+      "type": "choice",
+      "prompt": "ABC ที่ไม่มี abstract method ค้างอยู่สร้าง instance ได้หรือไม่?",
+      "reference": "abc",
+      "choices": [
+        {
+          "text": "ได้",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ได้เพราะมีชื่อ ABC",
+          "id": "b"
+        },
+        {
+          "text": "ได้เฉพาะมี area เสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "สถานะ abstract ที่ค้างเป็นเงื่อนไขสำคัญ ไม่ใช่ชื่อฐานอย่างเดียว",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.13–24: Shape สืบทอด ABC เพื่อใช้ ABCMeta และทำเครื่องหมาย area/perimeter ด้วย abstractmethod จึงสร้าง Shape หรือ subclass ที่ยังไม่ทำครบไม่ได้ (TypeError) method ธรรมดา describe ใช้ร่วมกันได้\n\n`ABC`โดยไม่มี abstractmethod ที่ค้างอยู่ยังส"
+      }
+    },
+    {
+      "id": "oop-python-polymorphism-abc-exam-05",
+      "type": "choice",
+      "prompt": "abstractmethod มี body ได้หรือไม่?",
+      "reference": "abc",
+      "choices": [
+        {
+          "text": "ไม่ได้ทุกกรณี",
+          "id": "a"
+        },
+        {
+          "text": "ได้ แต่ subclass ยังต้องจัดการสถานะ abstract ให้ครบ",
+          "id": "b"
+        },
+        {
+          "text": "มี body แล้ว concrete อัตโนมัติ",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "child อาจ reuse body ผ่าน super แต่ decoration ยังมีผล",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.13–24: Shape สืบทอด ABC เพื่อใช้ ABCMeta และทำเครื่องหมาย area/perimeter ด้วย abstractmethod จึงสร้าง Shape หรือ subclass ที่ยังไม่ทำครบไม่ได้ (TypeError) method ธรรมดา describe ใช้ร่วมกันได้\n\n`ABC`โดยไม่มี abstractmethod ที่ค้างอยู่ยังส"
+      }
+    },
+    {
+      "id": "oop-python-polymorphism-abc-exam-06",
+      "type": "choice",
+      "prompt": "ใช้ abstractmethod บน class ที่ไม่ใช้ ABCMeta รับรองการห้ามสร้าง instance หรือไม่?",
+      "reference": "abc",
+      "choices": [
+        {
+          "text": "รับรองเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "รับรองเมื่อ method คืน None",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ การบังคับต้องอาศัย metaclass ที่เกี่ยวข้อง",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "decorator อย่างเดียวไม่เท่ากับกลไกของ ABCMeta",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.13–24: Shape สืบทอด ABC เพื่อใช้ ABCMeta และทำเครื่องหมาย area/perimeter ด้วย abstractmethod จึงสร้าง Shape หรือ subclass ที่ยังไม่ทำครบไม่ได้ (TypeError) method ธรรมดา describe ใช้ร่วมกันได้\n\n`ABC`โดยไม่มี abstractmethod ที่ค้างอยู่ยังส"
+      }
+    },
+    {
+      "id": "oop-python-polymorphism-abc-exam-07",
+      "type": "choice",
+      "prompt": "Subclass ทำ area แต่ยังขาด perimeter ที่ abstract อยู่ จะสร้างได้หรือไม่?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "ไม่ได้ เกิด TypeError",
+          "id": "a"
+        },
+        {
+          "text": "ได้เพราะทำครบหนึ่ง method",
+          "id": "b"
+        },
+        {
+          "text": "ได้ถ้าไม่เรียก perimeter",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ต้องไม่มี abstract method ค้างอยู่ก่อนสร้าง",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "อิง pp.27–39 เพิ่มการปฏิเสธ bool/NaN/infinity อย่างเปิดเผยเพื่อให้ช่วงค่าชัด โค้ดเป็นตัวอย่างย่อยที่รันได้เอง ไม่ใช่ fullpayment/vehiclelab"
+      }
+    },
+    {
+      "id": "oop-python-polymorphism-abc-exam-08",
+      "type": "choice",
+      "prompt": "Shape.describe ที่เป็น concrete method ใช้ใน subclass ได้หรือไม่?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "ไม่ได้เพราะ class มี abstract methods",
+          "id": "a"
+        },
+        {
+          "text": "ได้ หากไม่ override ก็ใช้พฤติกรรมที่สืบทอด",
+          "id": "b"
+        },
+        {
+          "text": "ต้องคัดโค้ดทุกครั้ง",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ABC มีทั้ง concrete และ abstract methods ได้",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "อิง pp.27–39 เพิ่มการปฏิเสธ bool/NaN/infinity อย่างเปิดเผยเพื่อให้ช่วงค่าชัด โค้ดเป็นตัวอย่างย่อยที่รันได้เอง ไม่ใช่ fullpayment/vehiclelab"
+      }
+    },
+    {
+      "id": "oop-python-polymorphism-abc-exam-09",
+      "type": "numeric",
+      "prompt": "Rectangle width3,height5 จงหา area",
+      "reference": "trace",
+      "answer": 15,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "พื้นที่สี่เหลี่ยม=width×height=15 ตามสูตรที่ใช้ในบท",
+      "difficulty": "easy",
+      "verification": {
+        "method": "python",
+        "evidence": "| object | describe เรียก | area | perimeter |\n|---|---|---:|---:|\n| Circle(2) | Circle.area/perimeter | π×2²=4π≈12.566371 | 2π×2=4π |\n| Rectangle(3,4) | Rectangle.area/perimeter | 3×4=12 | 2(3+4)=14 |\n\nการแสดง 2 ตำแหน่งได้ 12.57 แต่คำนวณเก",
+        "oracle": "3*5"
+      }
+    },
+    {
+      "id": "oop-python-polymorphism-abc-exam-10",
+      "type": "numeric",
+      "prompt": "Rectangle width3,height5 จงหา perimeter",
+      "reference": "trace",
+      "answer": 16,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "เส้นรอบรูป=2×(3+5)=16",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "| object | describe เรียก | area | perimeter |\n|---|---|---:|---:|\n| Circle(2) | Circle.area/perimeter | π×2²=4π≈12.566371 | 2π×2=4π |\n| Rectangle(3,4) | Rectangle.area/perimeter | 3×4=12 | 2(3+4)=14 |\n\nการแสดง 2 ตำแหน่งได้ 12.57 แต่คำนวณเก",
+        "oracle": "2*(3+5)"
+      }
+    },
+    {
+      "id": "oop-python-polymorphism-abc-exam-11",
+      "type": "choice",
+      "prompt": "วงวน for shape in shapes: shape.area() แสดง polymorphism อย่างไร?",
+      "reference": "trace",
+      "choices": [
+        {
+          "text": "ต้องมี if type ทุกครั้ง",
+          "id": "a"
+        },
+        {
+          "text": "เรียก interface เดียวแต่ implementation ต่างกันตาม object",
+          "id": "b"
+        },
+        {
+          "text": "ทุก object ต้องคืนค่าเท่ากัน",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "client ไม่จำเป็นรู้สูตร concrete แต่ละชนิด",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "| object | describe เรียก | area | perimeter |\n|---|---|---:|---:|\n| Circle(2) | Circle.area/perimeter | π×2²=4π≈12.566371 | 2π×2=4π |\n| Rectangle(3,4) | Rectangle.area/perimeter | 3×4=12 | 2(3+4)=14 |\n\nการแสดง 2 ตำแหน่งได้ 12.57 แต่คำนวณเก"
+      }
+    },
+    {
+      "id": "oop-python-polymorphism-abc-exam-12",
+      "type": "choice",
+      "prompt": "isinstance(shape,Shape) ต่างจากมี method area อย่างไร?",
+      "reference": "types",
+      "choices": [
+        {
+          "text": "สองอย่างเท่ากันทุก object",
+          "id": "a"
+        },
+        {
+          "text": "มี area แล้วเป็น Shape ทันที",
+          "id": "b"
+        },
+        {
+          "text": "ตัวแรกตรวจ type relationship ไม่ใช่ duck behavior ทั้งหมด",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "object ที่ไม่ inherit อาจรองรับ interface แต่ไม่ผ่าน isinstance",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`isinstance(Circle(2),Shape)`เป็น True; `issubclass(Circle,Shape)`ตรวจความสัมพันธ์ของคลาส;ถ้าส่ง instance แทน class ให้ issubclass จะ TypeError การตรวจ type มีประโยชน์เมื่อจำเป็นแต่ไม่ใช่เหตุผลให้ hardcode การ dispatch ทุกชนิด\n\nพื้นที่สูตรเ"
+      }
+    },
+    {
+      "id": "oop-python-polymorphism-abc-exam-13",
+      "type": "choice",
+      "prompt": "issubclass รับ argument แรกเป็นอะไร?",
+      "reference": "types",
+      "choices": [
+        {
+          "text": "class",
+          "id": "a"
+        },
+        {
+          "text": "ยอดเงิน",
+          "id": "b"
+        },
+        {
+          "text": "ผล area ที่เป็น float",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "แยกการตรวจ class กับ instance",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`isinstance(Circle(2),Shape)`เป็น True; `issubclass(Circle,Shape)`ตรวจความสัมพันธ์ของคลาส;ถ้าส่ง instance แทน class ให้ issubclass จะ TypeError การตรวจ type มีประโยชน์เมื่อจำเป็นแต่ไม่ใช่เหตุผลให้ hardcode การ dispatch ทุกชนิด\n\nพื้นที่สูตรเ"
+      }
+    },
+    {
+      "id": "oop-python-polymorphism-abc-exam-14",
+      "type": "choice",
+      "prompt": "Implementation area คืนข้อความแทนตัวเลข อาจทำให้ sum ล้มเหลวอย่างไร?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "text": "ABC จะแปลงเป็น float ทุกครั้ง",
+          "id": "a"
+        },
+        {
+          "text": "ชนิดค่าคืนไม่ตรง contract ของการบวก",
+          "id": "b"
+        },
+        {
+          "text": "sum ไม่เคยตรวจชนิด",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "override ครบชื่อไม่ได้รับรองความหมายและชนิดผลคืน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ลืม implementperimeter แม้ area ครบ;เรียก Shape();ลืม import;คืน None เพราะ print แทน return;เก็บค่าใหม่โดยไม่ผ่าน property;ผูก client กับ classnames แทนพฤติกรรม;สรุปว่า ducktyping ไม่ต้องมี contract"
+      }
+    },
+    {
+      "id": "oop-python-polymorphism-abc-exam-15",
+      "type": "choice",
+      "prompt": "ถ้าต้องเพิ่ม Triangle โดยไม่แก้ client รวมพื้นที่ ควรคงอะไร?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "ชื่อทุก class ต้องเหมือนกัน",
+          "id": "a"
+        },
+        {
+          "text": "ให้ client อ่าน attributes ภายในเฉพาะชนิด",
+          "id": "b"
+        },
+        {
+          "text": "interface และ contract ของ area",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "การขยายผ่าน polymorphism ลด branching ที่ผูก concrete types",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "อิง pp.27–39 เพิ่มการปฏิเสธ bool/NaN/infinity อย่างเปิดเผยเพื่อให้ช่วงค่าชัด โค้ดเป็นตัวอย่างย่อยที่รันได้เอง ไม่ใช่ fullpayment/vehiclelab"
+      }
+    },
+    {
+      "id": "oop-python-polymorphism-abc-exam-16",
+      "type": "choice",
+      "prompt": "เรียก area ของ n objects แบบครั้งละ O(1) รวมต้นทุนเท่าใด?",
+      "reference": "types",
+      "choices": [
+        {
+          "text": "O(n)",
+          "id": "a"
+        },
+        {
+          "text": "O(1) เพราะเรียก method ชื่อเดียว",
+          "id": "b"
+        },
+        {
+          "text": "O(log n) เสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ต้องเยี่ยมแต่ละ object ส่วนสูตรบางรูปอาจมีต้นทุนต่างจากสมมติฐาน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`isinstance(Circle(2),Shape)`เป็น True; `issubclass(Circle,Shape)`ตรวจความสัมพันธ์ของคลาส;ถ้าส่ง instance แทน class ให้ issubclass จะ TypeError การตรวจ type มีประโยชน์เมื่อจำเป็นแต่ไม่ใช่เหตุผลให้ hardcode การ dispatch ทุกชนิด\n\nพื้นที่สูตรเ"
+      }
+    },
+    {
+      "id": "oop-python-polymorphism-abc-exam-17",
+      "type": "choice",
+      "prompt": "ทดสอบเฉพาะ instantiate ผ่าน พอพิสูจน์ area ถูกหรือไม่?",
+      "reference": "abc",
+      "choices": [
+        {
+          "text": "พอเพราะ abstractmethod ตรวจสูตร",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ ต้องตรวจ expected values และขอบเขตข้อมูล",
+          "id": "b"
+        },
+        {
+          "text": "พอเมื่อใช้ super",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ABC บังคับ interface บางส่วน ไม่พิสูจน์ทุกผลคำนวณ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.13–24: Shape สืบทอด ABC เพื่อใช้ ABCMeta และทำเครื่องหมาย area/perimeter ด้วย abstractmethod จึงสร้าง Shape หรือ subclass ที่ยังไม่ทำครบไม่ได้ (TypeError) method ธรรมดา describe ใช้ร่วมกันได้\n\n`ABC`โดยไม่มี abstractmethod ที่ค้างอยู่ยังส"
+      }
+    },
+    {
+      "id": "oop-python-polymorphism-abc-exam-18",
+      "type": "choice",
+      "prompt": "Class name ต่างกันขัดกับ polymorphism หรือไม่?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "text": "ขัด เพราะ method dispatch ใช้ชื่อ class เท่านั้น",
+          "id": "a"
+        },
+        {
+          "text": "ขัดถ้าไม่อยู่ไฟล์เดียว",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ ขอให้รองรับ contract ที่ client ใช้",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "polymorphism แยกการใช้งานจากชนิด concrete",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ลืม implementperimeter แม้ area ครบ;เรียก Shape();ลืม import;คืน None เพราะ print แทน return;เก็บค่าใหม่โดยไม่ผ่าน property;ผูก client กับ classnames แทนพฤติกรรม;สรุปว่า ducktyping ไม่ต้องมี contract"
+      }
+    },
+    {
+      "id": "oop-python-polymorphism-abc-exam-19",
+      "type": "choice",
+      "prompt": "Duck object ที่ไม่ได้สืบทอด Shape อาจผ่าน client ที่เรียก area ได้หรือไม่?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "ได้ ถ้าให้ behavior และผลคืนตรง contract",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ได้ทุกกรณี",
+          "id": "b"
+        },
+        {
+          "text": "ได้เพราะ Python เปลี่ยนฐานให้เอง",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "duck typing ไม่ได้เพิ่ม inheritance relationship ให้ object",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.3–11: polymorphism คือการเรียก operation เดียวกันแล้วแต่ละ object ทำงานตาม implementation ของมัน เช่น s.area() แสดงพฤติกรรม Circle หรือ Rectangle โดยไม่ต้อง ifisinstance เป็นสายยาว ทุกครั้งที่เพิ่มชนิดใหม่ client ที่อิง interface เดิมไม่"
+      }
+    },
+    {
+      "id": "oop-python-polymorphism-abc-exam-20",
+      "type": "choice",
+      "prompt": "เหตุใด Shape โดยตรงจึงมักถูกทำให้ abstract?",
+      "reference": "abc",
+      "choices": [
+        {
+          "text": "เพื่อลบทุก method ของลูก",
+          "id": "a"
+        },
+        {
+          "text": "เป็น contract ร่วม ไม่ใช่รูป concrete ที่มีสูตรเดียว",
+          "id": "b"
+        },
+        {
+          "text": "เพื่อรับรอง validation ทุก field",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "subclasses ให้สูตรของตนและอาจใช้ concrete methods ร่วม",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.13–24: Shape สืบทอด ABC เพื่อใช้ ABCMeta และทำเครื่องหมาย area/perimeter ด้วย abstractmethod จึงสร้าง Shape หรือ subclass ที่ยังไม่ทำครบไม่ได้ (TypeError) method ธรรมดา describe ใช้ร่วมกันได้\n\n`ABC`โดยไม่มี abstractmethod ที่ค้างอยู่ยังส"
+      }
+    },
+    {
+      "id": "oop-python-polymorphism-abc-exam-21",
+      "type": "self",
+      "prompt": "ออกแบบ Triangle ที่ใช้กับ client รวมพื้นที่เดิม",
+      "reference": "python",
+      "rubric": [
+        "ให้ area คืนตัวเลขตามสูตรและ validation ที่ระบุ",
+        "ทำ abstract methods ที่ contract ต้องการให้ครบ",
+        "ทดสอบรวมกับ Rectangle โดยไม่เพิ่ม type branch"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ให้ area คืนตัวเลขตามสูตรและ validation ที่ระบุ ทำ abstract methods ที่ contract ต้องการให้ครบ ทดสอบรวมกับ Rectangle โดยไม่เพิ่ม type branch",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "อิง pp.27–39 เพิ่มการปฏิเสธ bool/NaN/infinity อย่างเปิดเผยเพื่อให้ช่วงค่าชัด โค้ดเป็นตัวอย่างย่อยที่รันได้เอง ไม่ใช่ fullpayment/vehiclelab"
+      }
+    },
+    {
+      "id": "oop-python-polymorphism-abc-exam-22",
+      "type": "self",
+      "prompt": "อธิบายความต่างการบังคับ interface กับการตรวจความถูกสูตร",
+      "reference": "abc",
+      "rubric": [
+        "แสดง subclass ที่ override ครบแต่คืนชนิดผิด",
+        "ABC ไม่พิสูจน์ behavior ทั้งหมด",
+        "เสนอ value/exception tests เพิ่ม"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: แสดง subclass ที่ override ครบแต่คืนชนิดผิด ABC ไม่พิสูจน์ behavior ทั้งหมด เสนอ value/exception tests เพิ่ม",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "pp.13–24: Shape สืบทอด ABC เพื่อใช้ ABCMeta และทำเครื่องหมาย area/perimeter ด้วย abstractmethod จึงสร้าง Shape หรือ subclass ที่ยังไม่ทำครบไม่ได้ (TypeError) method ธรรมดา describe ใช้ร่วมกันได้\n\n`ABC`โดยไม่มี abstractmethod ที่ค้างอยู่ยังส"
+      }
+    },
+    {
+      "id": "oop-python-polymorphism-abc-exam-23",
+      "type": "self",
+      "prompt": "เปรียบ duck typing, isinstance และ issubclass ด้วยสถานการณ์เดียว",
+      "reference": "types",
+      "rubric": [
+        "ระบุ object กับ class ให้ถูก argument",
+        "มี duck object ที่ไม่ inherit แต่ใช้ client ได้",
+        "แยกชื่อ method ออกจาก contract"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ระบุ object กับ class ให้ถูก argument มี duck object ที่ไม่ inherit แต่ใช้ client ได้ แยกชื่อ method ออกจาก contract",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "`isinstance(Circle(2),Shape)`เป็น True; `issubclass(Circle,Shape)`ตรวจความสัมพันธ์ของคลาส;ถ้าส่ง instance แทน class ให้ issubclass จะ TypeError การตรวจ type มีประโยชน์เมื่อจำเป็นแต่ไม่ใช่เหตุผลให้ hardcode การ dispatch ทุกชนิด\n\nพื้นที่สูตรเ"
+      }
+    },
+    {
+      "id": "oop-python-polymorphism-abc-exam-24",
+      "type": "self",
+      "prompt": "วาง tests ของ area/perimeter หลายรูปและกรณีขอบ",
+      "reference": "trace",
+      "rubric": [
+        "ระบุ units และค่าที่คาด",
+        "แยก policy input จากสูตร",
+        "ทดสอบ client เดิมกับชนิดใหม่และไม่แก้ saved study data"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ระบุ units และค่าที่คาด แยก policy input จากสูตร ทดสอบ client เดิมกับชนิดใหม่และไม่แก้ saved study data",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "| object | describe เรียก | area | perimeter |\n|---|---|---:|---:|\n| Circle(2) | Circle.area/perimeter | π×2²=4π≈12.566371 | 2π×2=4π |\n| Rectangle(3,4) | Rectangle.area/perimeter | 3×4=12 | 2(3+4)=14 |\n\nการแสดง 2 ตำแหน่งได้ 12.57 แต่คำนวณเก"
+      }
+    }
+  ]
+}

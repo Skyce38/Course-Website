@@ -1,0 +1,550 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "artificial-intelligence-final-backpropagation",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "artificial-intelligence-final-backpropagation-exam-01",
+      "type": "choice",
+      "prompt": "ซ้อน affinelayers โดยไม่มี nonlinearity เพิ่มความสามารถแทนขอบเขตแบบใด?",
+      "reference": "networks",
+      "choices": [
+        {
+          "text": "ยังยุบเป็น affinemap เดียวได้",
+          "id": "a"
+        },
+        {
+          "text": "แทน XOR ได้แน่นอน",
+          "id": "b"
+        },
+        {
+          "text": "รับรองเป็น nonlinear เพราะมีหลาย layers",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "composition ของ affinemaps ยังเป็น affine จึงต้องมี nonlinearity เพื่อเพิ่มชนิดขอบเขต",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S10 pp.19–21 ต่อจากข้อจำกัด XOR: perceptron เดียวสร้าง linear decision surface เครือข่ายหลายชั้นรวมขอบเขตได้ซับซ้อนขึ้น\n\nS11 pp.2–5 แสดง weighted sum, nonlinear activation และ hidden layers ถ้าทุกชั้นเป็น affine map โดยไม่มี nonlinearity กา"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-backpropagation-exam-02",
+      "type": "choice",
+      "prompt": "Hiddenlayer ต่างจาก output layer อย่างไร?",
+      "reference": "networks",
+      "choices": [
+        {
+          "text": "ต้องมี label แยกสำหรับทุก hiddenunit",
+          "id": "a"
+        },
+        {
+          "text": "คำนวณตัวแทนภายในก่อนส่งไป output",
+          "id": "b"
+        },
+        {
+          "text": "ไม่รับ weights",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "hiddenrepresentation เรียนผ่าน error ที่ส่งย้อน ไม่ต้องมี target แยกทุก unit",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S10 pp.19–21 ต่อจากข้อจำกัด XOR: perceptron เดียวสร้าง linear decision surface เครือข่ายหลายชั้นรวมขอบเขตได้ซับซ้อนขึ้น\n\nS11 pp.2–5 แสดง weighted sum, nonlinear activation และ hidden layers ถ้าทุกชั้นเป็น affine map โดยไม่มี nonlinearity กา"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-backpropagation-exam-03",
+      "type": "numeric",
+      "prompt": "Sigmoid ที่ z=0 มีค่าเท่าใด?",
+      "reference": "sigmoid",
+      "answer": 0.5,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "1/(1+e^0)=1/2",
+      "difficulty": "easy",
+      "verification": {
+        "method": "python",
+        "evidence": "S10 pp.21–22 นิยาม\n\n\n\nที่ z0 ได้.5 และอนุพันธ์.25; เมื่อ|z|มาก output อิ่มตัว (saturation) ทำให้ gradient เล็ก นี่เป็นข้ออธิบายเพิ่มเติม ไม่ใช่การรับรองว่า sigmoid output คือ calibrated probability โดยอัตโนมัติ",
+        "oracle": "1/(1+exp(0))"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-backpropagation-exam-04",
+      "type": "numeric",
+      "prompt": "ถ้า sigmoid output=.8 อนุพันธ์ต่อ z เป็นเท่าใด?",
+      "reference": "sigmoid",
+      "answer": 0.16,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "σ′=σ(1−σ)=.8×.2=.16",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "S10 pp.21–22 นิยาม\n\n\n\nที่ z0 ได้.5 และอนุพันธ์.25; เมื่อ|z|มาก output อิ่มตัว (saturation) ทำให้ gradient เล็ก นี่เป็นข้ออธิบายเพิ่มเติม ไม่ใช่การรับรองว่า sigmoid output คือ calibrated probability โดยอัตโนมัติ",
+        "oracle": "Fraction(8,10)*(1-Fraction(8,10))"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-backpropagation-exam-05",
+      "type": "choice",
+      "prompt": "เมื่อ|z|ใหญ่มาก sigmoid เกิดอะไรที่กระทบ gradient?",
+      "reference": "sigmoid",
+      "choices": [
+        {
+          "text": "อนุพันธ์โตไม่จำกัด",
+          "id": "a"
+        },
+        {
+          "text": "อิ่มตัวและอนุพันธ์เล็ก",
+          "id": "b"
+        },
+        {
+          "text": "output ต้องเป็น negative",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "output เข้าใกล้ 0 หรือ 1 ทำให้σ(1−σ) เล็ก",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S10 pp.21–22 นิยาม\n\n\n\nที่ z0 ได้.5 และอนุพันธ์.25; เมื่อ|z|มาก output อิ่มตัว (saturation) ทำให้ gradient เล็ก นี่เป็นข้ออธิบายเพิ่มเติม ไม่ใช่การรับรองว่า sigmoid output คือ calibrated probability โดยอัตโนมัติ"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-backpropagation-exam-06",
+      "type": "choice",
+      "prompt": "Sigmoidoutput=.9 รับรองโอกาสถูกจริง 90%ทุกงานหรือไม่?",
+      "reference": "sigmoid",
+      "choices": [
+        {
+          "text": "รับรองตามฟังก์ชันทันที",
+          "id": "a"
+        },
+        {
+          "text": "รับรองถ้าใช้ hidden สองตัว",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ ต้องมี model และ calibration/evaluation รองรับ",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ค่าฟังก์ชันไม่ใช่การพิสูจน์ probability ที่สอบเทียบแล้ว",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S10 pp.21–22 นิยาม\n\n\n\nที่ z0 ได้.5 และอนุพันธ์.25; เมื่อ|z|มาก output อิ่มตัว (saturation) ทำให้ gradient เล็ก นี่เป็นข้ออธิบายเพิ่มเติม ไม่ใช่การรับรองว่า sigmoid output คือ calibrated probability โดยอัตโนมัติ"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-backpropagation-exam-07",
+      "type": "numeric",
+      "prompt": "L=.5(y−t)² โดย y=.2,t=.8 จงหา L",
+      "reference": "backprop",
+      "answer": 0.18,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "ผลต่าง−.6 กำลังสอง.36 หาร 2 ได้.18",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "S10 p.23 ใช้ squared error รวมข้อมูล/outputs พร้อมตัวคูณ 1/2; ตัวอย่างนี้ใช้หนึ่ง sample/หนึ่ง output จึง\n\n\n\nhidden h_j=σ(z_j), z_o=b_o+Σv_jh_j และ z_j=b_j+Σa_jix_i ใช้ chain rule\n\n\n\nGradient descent: θnew=θold−η∂L/∂θ สำหรับทุก parameter พร",
+        "oracle": "Fraction(1,2)*(Fraction(2,10)-Fraction(8,10))**2"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-backpropagation-exam-08",
+      "type": "choice",
+      "prompt": "Gradientdescent ใช้ sign ใดกับ gradient g=∂L/∂w?",
+      "reference": "backprop",
+      "choices": [
+        {
+          "text": "w ใหม่=w+ηg เสมอ",
+          "id": "a"
+        },
+        {
+          "text": "w ใหม่=w−ηg",
+          "id": "b"
+        },
+        {
+          "text": "w ใหม่=g/ηเสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ถ้านิยาม delta ด้วย t−y ต้องปรับ sign ให้สอดคล้อง ไม่สลับสูตร",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S10 p.23 ใช้ squared error รวมข้อมูล/outputs พร้อมตัวคูณ 1/2; ตัวอย่างนี้ใช้หนึ่ง sample/หนึ่ง output จึง\n\n\n\nhidden h_j=σ(z_j), z_o=b_o+Σv_jh_j และ z_j=b_j+Σa_jix_i ใช้ chain rule\n\n\n\nGradient descent: θnew=θold−η∂L/∂θ สำหรับทุก parameter พร"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-backpropagation-exam-09",
+      "type": "numeric",
+      "prompt": "y=.5,t=0 จงหา output gradient go=(y−t)y(1−y)",
+      "reference": "backprop",
+      "answer": 0.125,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "(.5−0)×.5×.5=.125",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "S10 p.23 ใช้ squared error รวมข้อมูล/outputs พร้อมตัวคูณ 1/2; ตัวอย่างนี้ใช้หนึ่ง sample/หนึ่ง output จึง\n\n\n\nhidden h_j=σ(z_j), z_o=b_o+Σv_jh_j และ z_j=b_j+Σa_jix_i ใช้ chain rule\n\n\n\nGradient descent: θnew=θold−η∂L/∂θ สำหรับทุก parameter พร",
+        "oracle": "Fraction(1,2)*Fraction(1,2)*Fraction(1,2)"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-backpropagation-exam-10",
+      "type": "numeric",
+      "prompt": "go=.1,hiddenactivation=.6 จงหา gradient ของ output weight ที่คูณ hidden นี้",
+      "reference": "backprop",
+      "answer": 0.06,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "∂L/∂v=go×h=.1×.6=.06",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "S10 p.23 ใช้ squared error รวมข้อมูล/outputs พร้อมตัวคูณ 1/2; ตัวอย่างนี้ใช้หนึ่ง sample/หนึ่ง output จึง\n\n\n\nhidden h_j=σ(z_j), z_o=b_o+Σv_jh_j และ z_j=b_j+Σa_jix_i ใช้ chain rule\n\n\n\nGradient descent: θnew=θold−η∂L/∂θ สำหรับทุก parameter พร",
+        "oracle": "Fraction(1,10)*Fraction(6,10)"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-backpropagation-exam-11",
+      "type": "numeric",
+      "prompt": "w=.4,gradient=.3,η=.2 gradient descent หนึ่งก้าวได้ w ใหม่เท่าใด?",
+      "reference": "backprop",
+      "answer": 0.34,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": ".4−.2×.3=.34",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "S10 p.23 ใช้ squared error รวมข้อมูล/outputs พร้อมตัวคูณ 1/2; ตัวอย่างนี้ใช้หนึ่ง sample/หนึ่ง output จึง\n\n\n\nhidden h_j=σ(z_j), z_o=b_o+Σv_jh_j และ z_j=b_j+Σa_jix_i ใช้ chain rule\n\n\n\nGradient descent: θnew=θold−η∂L/∂θ สำหรับทุก parameter พร",
+        "oracle": "Fraction(4,10)-Fraction(2,10)*Fraction(3,10)"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-backpropagation-exam-12",
+      "type": "choice",
+      "prompt": "Gradient ของ outputbias เทียบกับ go เป็นอย่างไรเมื่อ biasinput1?",
+      "reference": "backprop",
+      "choices": [
+        {
+          "text": "เท่ากับ go×0",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ต้อง updatebias",
+          "id": "b"
+        },
+        {
+          "text": "เท่ากับ go",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "∂z/∂b=1 จึง gradientbias=go",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S10 p.23 ใช้ squared error รวมข้อมูล/outputs พร้อมตัวคูณ 1/2; ตัวอย่างนี้ใช้หนึ่ง sample/หนึ่ง output จึง\n\n\n\nhidden h_j=σ(z_j), z_o=b_o+Σv_jh_j และ z_j=b_j+Σa_jix_i ใช้ chain rule\n\n\n\nGradient descent: θnew=θold−η∂L/∂θ สำหรับทุก parameter พร"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-backpropagation-exam-13",
+      "type": "choice",
+      "prompt": "Backpropagation กับ optimizer ต่างกันอย่างไร?",
+      "reference": "backprop",
+      "choices": [
+        {
+          "text": "backprop หา gradients;optimizer ใช้ gradients ปรับ parameters",
+          "id": "a"
+        },
+        {
+          "text": "เป็นชื่อเดียวกันทุกความหมาย",
+          "id": "b"
+        },
+        {
+          "text": "optimizer สร้าง labels",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "chainrule เป็นการหาอนุพันธ์ ไม่ใช่นโยบาย update ทุกแบบ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S10 p.23 ใช้ squared error รวมข้อมูล/outputs พร้อมตัวคูณ 1/2; ตัวอย่างนี้ใช้หนึ่ง sample/หนึ่ง output จึง\n\n\n\nhidden h_j=σ(z_j), z_o=b_o+Σv_jh_j และ z_j=b_j+Σa_jix_i ใช้ chain rule\n\n\n\nGradient descent: θnew=θold−η∂L/∂θ สำหรับทุก parameter พร"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-backpropagation-exam-14",
+      "type": "choice",
+      "prompt": "ขณะคำนวณหนึ่งก้าว ต้อง update ทีละ weight ทันทีหรือเก็บ gradients ก่อน?",
+      "reference": "worked",
+      "choices": [
+        {
+          "text": "updateoutput แล้วใช้ค่าใหม่หา hidden gradient",
+          "id": "a"
+        },
+        {
+          "text": "เก็บ gradients จาก parameters ชุดเดิมก่อน update พร้อมกัน",
+          "id": "b"
+        },
+        {
+          "text": "เปลี่ยน input ระหว่างหา gradient",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "การผสม weights คนละสถานะทำให้ไม่ใช่ gradient ของ loss เดิม",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ไม่ใช่ weights XOR ด้านบน ใช้ inputs(1,.5),target.8,η.2, sigmoid ทุก hidden/output, ไม่มี regularization:\n- hidden1 a11=.1,a12=.2,b1=.1 → z1=.1(1)+.2(.5)+.1=.3 → h1=.574442517\n- hidden2 a21=−.3,a22=.4,b2=−.2 → z2=−.3(1)+.4(.5)−.2=−.3 → h2=."
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-backpropagation-exam-15",
+      "type": "choice",
+      "prompt": "ถ้า input หนึ่งของ hiddenunit เป็น 0 gradient ของ weight นั้นตาม chainrule มีผลอย่างไร?",
+      "reference": "worked",
+      "choices": [
+        {
+          "text": "hiddenbias ต้องเป็น 0 ด้วย",
+          "id": "a"
+        },
+        {
+          "text": "ทุก gradient ทั้ง network เป็น 0",
+          "id": "b"
+        },
+        {
+          "text": "ตัวประกอบ input ทำให้ gradient นั้นเป็น 0",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "gradientweight เป็น hidden gradient×input ขณะที่ bias ยังมี input1",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ไม่ใช่ weights XOR ด้านบน ใช้ inputs(1,.5),target.8,η.2, sigmoid ทุก hidden/output, ไม่มี regularization:\n- hidden1 a11=.1,a12=.2,b1=.1 → z1=.1(1)+.2(.5)+.1=.3 → h1=.574442517\n- hidden2 a21=−.3,a22=.4,b2=−.2 → z2=−.3(1)+.4(.5)−.2=−.3 → h2=."
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-backpropagation-exam-16",
+      "type": "choice",
+      "prompt": "Central finite difference ประมาณอนุพันธ์ด้วยสูตรใด?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "[L(θ+ε)−L(θ−ε)]/(2ε)",
+          "id": "a"
+        },
+        {
+          "text": "[L(θ+ε)+L(θ−ε)]/2",
+          "id": "b"
+        },
+        {
+          "text": "L(θ)/ε",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ใช้ perturb สองด้านตรวจ gradient ไม่ใช่วิธีหลักแทน backprop",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "โค้ดตัวอย่างไม่ train ตัวเองในหน้าเว็บ ตัวตรวจออฟไลน์เปรียบเทียบ central finite differences [L(θ+ε)−L(θ−ε)]/(2ε), ε=10⁻⁶ กับ gradient ทุก 9parameters; finite difference เป็นเครื่องมือเช็ค ไม่แทน backprop ในการ train จริง"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-backpropagation-exam-17",
+      "type": "choice",
+      "prompt": "เลือกεเล็กเกินไปใน floatingpoint อาจมีปัญหาอะไร?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "รับรองความแม่นยำสูงขึ้นเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "การลบค่าใกล้กันทำให้ roundoff เด่น",
+          "id": "b"
+        },
+        {
+          "text": "ทำให้ gradient เป็น classlabel",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ต้องดูทั้ง truncation และ roundoff ไม่ถือว่าเล็กสุดดีที่สุด",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "โค้ดตัวอย่างไม่ train ตัวเองในหน้าเว็บ ตัวตรวจออฟไลน์เปรียบเทียบ central finite differences [L(θ+ε)−L(θ−ε)]/(2ε), ε=10⁻⁶ กับ gradient ทุก 9parameters; finite difference เป็นเครื่องมือเช็ค ไม่แทน backprop ในการ train จริง"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-backpropagation-exam-18",
+      "type": "choice",
+      "prompt": "ตัวอย่าง XOR แบบ threshold ใน source กับ sigmoidgradientexample สลับกันได้หรือไม่?",
+      "reference": "networks",
+      "choices": [
+        {
+          "text": "ได้เพราะ target เหมือนกัน",
+          "id": "a"
+        },
+        {
+          "text": "ได้เมื่อใช้สอง inputs",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ได้ ต้องแยก activation และ parameters ของแต่ละตัวอย่าง",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "stepfunction กับ sigmoid มีอนุพันธ์ต่างกัน และ weights ชุดหนึ่งไม่ใช่อีกชุด",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S10 pp.19–21 ต่อจากข้อจำกัด XOR: perceptron เดียวสร้าง linear decision surface เครือข่ายหลายชั้นรวมขอบเขตได้ซับซ้อนขึ้น\n\nS11 pp.2–5 แสดง weighted sum, nonlinear activation และ hidden layers ถ้าทุกชั้นเป็น affine map โดยไม่มี nonlinearity กา"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-backpropagation-exam-19",
+      "type": "choice",
+      "prompt": "คำนวณ hiddenerror ต้องลืม sigmoidderivative ได้หรือไม่?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "text": "ไม่ได้ chainrule ต้องมี h(1−h) สำหรับ sigmoid",
+          "id": "a"
+        },
+        {
+          "text": "ได้เพราะเป็น hidden layer",
+          "id": "b"
+        },
+        {
+          "text": "ได้เมื่อ gradient ติดลบ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ต้องคูณอนุพันธ์ของ activation ตาม graph การคำนวณ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "- ผสมδ=(t−y) กับ update ลบจนกลับทิศ หรือใช้ MSE loss แต่ขาดตัวคูณที่นิยามไว้\n- ลืม sigmoid derivative หรือ bias; ใช้ outputweight ใหม่หา hiddenerror\n- คิดว่า hidden target ต้องมี label แยก: error ส่งผ่าน chain rule ได้\n- อ้าง XORthreshold n"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-backpropagation-exam-20",
+      "type": "choice",
+      "prompt": "Loss ลดลงหนึ่งก้าวยืนยัน global minimum หรือไม่?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "text": "ยืนยันทุก initialization",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ เป็นการตรวจเฉพาะ localstep",
+          "id": "b"
+        },
+        {
+          "text": "ยืนยัน testaccuracy100%",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "nonconvexnetwork และข้อมูลใหม่ยังมีข้อจำกัด",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "- ผสมδ=(t−y) กับ update ลบจนกลับทิศ หรือใช้ MSE loss แต่ขาดตัวคูณที่นิยามไว้\n- ลืม sigmoid derivative หรือ bias; ใช้ outputweight ใหม่หา hiddenerror\n- คิดว่า hidden target ต้องมี label แยก: error ส่งผ่าน chain rule ได้\n- อ้าง XORthreshold n"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-backpropagation-exam-21",
+      "type": "self",
+      "prompt": "ทำ forwardpass ของตัวอย่างผู้เขียนแล้ววางตารางค่าทุก unit ก่อน update",
+      "reference": "worked",
+      "rubric": [
+        "ใช้ parameters และ inputs ชุดเดียวกัน",
+        "แสดง z,activation และ loss ตามนิยาม",
+        "ไม่ปน thresholdXOR กับ sigmoidnetwork"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ใช้ parameters และ inputs ชุดเดียวกัน แสดง z,activation และ loss ตามนิยาม ไม่ปน thresholdXOR กับ sigmoidnetwork",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ไม่ใช่ weights XOR ด้านบน ใช้ inputs(1,.5),target.8,η.2, sigmoid ทุก hidden/output, ไม่มี regularization:\n- hidden1 a11=.1,a12=.2,b1=.1 → z1=.1(1)+.2(.5)+.1=.3 → h1=.574442517\n- hidden2 a21=−.3,a22=.4,b2=−.2 → z2=−.3(1)+.4(.5)−.2=−.3 → h2=."
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-backpropagation-exam-22",
+      "type": "self",
+      "prompt": "อธิบาย hidden gradient จาก chainrule พร้อมตรวจ sign",
+      "reference": "backprop",
+      "rubric": [
+        "ส่ง output gradient ผ่าน weights เก่า",
+        "คูณอนุพันธ์ hiddenactivation และ input",
+        "แยก delta=t−y จาก gradient=y−t ให้สอดคล้อง update"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ส่ง output gradient ผ่าน weights เก่า คูณอนุพันธ์ hiddenactivation และ input แยก delta=t−y จาก gradient=y−t ให้สอดคล้อง update",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "S10 p.23 ใช้ squared error รวมข้อมูล/outputs พร้อมตัวคูณ 1/2; ตัวอย่างนี้ใช้หนึ่ง sample/หนึ่ง output จึง\n\n\n\nhidden h_j=σ(z_j), z_o=b_o+Σv_jh_j และ z_j=b_j+Σa_jix_i ใช้ chain rule\n\n\n\nGradient descent: θnew=θold−η∂L/∂θ สำหรับทุก parameter พร"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-backpropagation-exam-23",
+      "type": "self",
+      "prompt": "ออกแบบ gradientcheck ทุก parameter ด้วย central difference",
+      "reference": "python",
+      "rubric": [
+        "perturb ทีละ parameter และคืนค่าเดิมทุกครั้ง",
+        "เปรียบ analyticgradient ด้วย tolerance ที่ระบุ",
+        "ตรวจ bias ด้วยและอธิบายผลของε"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: perturb ทีละ parameter และคืนค่าเดิมทุกครั้ง เปรียบ analyticgradient ด้วย tolerance ที่ระบุ ตรวจ bias ด้วยและอธิบายผลของε",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "โค้ดตัวอย่างไม่ train ตัวเองในหน้าเว็บ ตัวตรวจออฟไลน์เปรียบเทียบ central finite differences [L(θ+ε)−L(θ−ε)]/(2ε), ε=10⁻⁶ กับ gradient ทุก 9parameters; finite difference เป็นเครื่องมือเช็ค ไม่แทน backprop ในการ train จริง"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-backpropagation-exam-24",
+      "type": "self",
+      "prompt": "อธิบายว่าทำไมเพิ่ม hidden layers อย่างเดียวไม่รับรองผล train",
+      "reference": "networks",
+      "rubric": [
+        "มี nonlinearity จึงเพิ่ม representation ได้",
+        "architecture ไม่แทนข้อมูล/optimizer/initialization",
+        "แยก trainingloss จาก generalization และไม่อ้างผลที่ source ไม่มี"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: มี nonlinearity จึงเพิ่ม representation ได้ architecture ไม่แทนข้อมูล/optimizer/initialization แยก trainingloss จาก generalization และไม่อ้างผลที่ source ไม่มี",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "S10 pp.19–21 ต่อจากข้อจำกัด XOR: perceptron เดียวสร้าง linear decision surface เครือข่ายหลายชั้นรวมขอบเขตได้ซับซ้อนขึ้น\n\nS11 pp.2–5 แสดง weighted sum, nonlinear activation และ hidden layers ถ้าทุกชั้นเป็น affine map โดยไม่มี nonlinearity กา"
+      }
+    }
+  ]
+}

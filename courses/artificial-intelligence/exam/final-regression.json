@@ -1,0 +1,517 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "artificial-intelligence-final-regression",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "artificial-intelligence-final-regression-exam-01",
+      "type": "choice",
+      "prompt": "ทำนายค่าอาหารเป็นตัวเลข ต่างจากทำนายคลาส Buy อย่างไร?",
+      "reference": "supervised",
+      "choices": [
+        {
+          "text": "เป็น regression แทน classification",
+          "id": "a"
+        },
+        {
+          "text": "ต้องไม่มี target",
+          "id": "b"
+        },
+        {
+          "text": "เป็น clustering เสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ทั้งสองเป็น supervised ได้ แต่ชนิด target และเกณฑ์ทำนายต่างกัน",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "คำอธิบายเสริมเชื่อมกับข้อมูลมีคู่ input–target ใน A03 และ C02/D03: แต่ละตัวอย่างมี feature หรือ X และค่าจริง Y ที่ใช้ฝึกให้แบบจำลองทำนาย Regression ทำนายค่าตัวเลข เช่น ค่าอาหารหรือ PerformanceIndex ต่างจาก classification ที่เลือกคลาส สูตร s"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-regression-exam-02",
+      "type": "choice",
+      "prompt": "Scatter plot ใช้แกน X และ Y เพื่อดูอะไร?",
+      "reference": "correlation",
+      "choices": [
+        {
+          "text": "พิสูจน์เหตุและผลทันที",
+          "id": "a"
+        },
+        {
+          "text": "รูปแบบความสัมพันธ์ของข้อมูลเป็นคู่",
+          "id": "b"
+        },
+        {
+          "text": "แทนค่าความน่าจะเป็น posterior",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ต้องอ่านแนวโน้มและ outliers ไม่สรุป causation จากภาพอย่างเดียว",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S06 หน้า 2 แสดงความสัมพันธ์แบบเส้นตรงบวก/ลบเทียบกับแบบโค้ง หน้า 3 เปรียบเทียบความสัมพันธ์แน่นกับกระจาย หน้า 4 แสดงภาพที่ไม่มีแนวโน้มเชิงเส้นชัดเจน และหน้า 5 ให้ภาพค่า r โดยประมาณ -1, -0.6, 0, +0.3, +1 อย่าอ่านค่าพิกัดของจุดจากภาพเป็น datase"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-regression-exam-03",
+      "type": "numeric",
+      "prompt": "ต้นไม้ S06 หน้า 7 มี x=[8,9,7,6,13,7,11,12], y=[35,49,27,33,60,21,45,51] จงหา Pearson r อย่างน้อย 6 ทศนิยม โดยไม่เติมหน่วยที่ source ไม่ระบุ",
+      "reference": "tree-correlation",
+      "answer": 0.8862312198430735,
+      "explanation": "ใช้ centered cross-products และ centered sums of squares ได้ r=1703/√(375×9847)≈.886231 เป็นความสัมพันธ์เชิงเส้นบวก ไม่พิสูจน์ causation",
+      "difficulty": "hard",
+      "verification": {
+        "method": "python",
+        "evidence": "หน้า 7 ให้ข้อมูล 8 ต้น: x = Trunk Diameter, y = Tree Height **ไม่ระบุหน่วยวัด** จึงไม่เติมเมตร/ฟุต/นิ้วเอง ตารางนี้ถอดเฉพาะข้อมูลและคำนวณผลคูณใหม่เพื่อให้ตรวจสูตรได้\n\n| x | y | xy |\n|---|---|---|\n| 8 | 35 | 280 |\n| 9 | 49 | 441 |\n| 7 | 27 |",
+        "oracle": "pearson([8,9,7,6,13,7,11,12],[35,49,27,33,60,21,45,51])"
+      },
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "artificial-intelligence-final-regression-exam-04",
+      "type": "choice",
+      "prompt": "X ทุกค่าเท่ากัน Pearson correlation ตามสูตรทั่วไปเป็นอย่างไร?",
+      "reference": "correlation",
+      "choices": [
+        {
+          "text": "ไม่กำหนดเพราะส่วนเบี่ยงเบนของ X เป็นศูนย์",
+          "id": "a"
+        },
+        {
+          "text": "เท่ากับ 1 เสมอ",
+          "id": "b"
+        },
+        {
+          "text": "เท่ากับ −1 เสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ตัวหารมีผลรวมกำลังสองของ X ที่เป็นศูนย์ จึงไม่ควรฝืนรายงาน r=0",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S06 หน้า 2 แสดงความสัมพันธ์แบบเส้นตรงบวก/ลบเทียบกับแบบโค้ง หน้า 3 เปรียบเทียบความสัมพันธ์แน่นกับกระจาย หน้า 4 แสดงภาพที่ไม่มีแนวโน้มเชิงเส้นชัดเจน และหน้า 5 ให้ภาพค่า r โดยประมาณ -1, -0.6, 0, +0.3, +1 อย่าอ่านค่าพิกัดของจุดจากภาพเป็น datase"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-regression-exam-05",
+      "type": "numeric",
+      "prompt": "เส้นผู้เขียน Ŷ=2+3X เมื่อ X=4 ทำนาย Ŷ เท่าใด?",
+      "reference": "simple-regression",
+      "answer": 14,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "แทนค่า X ลงในเส้น: 2+3×4=14",
+      "difficulty": "easy",
+      "verification": {
+        "method": "python",
+        "evidence": "หน้า 9 กำหนดตัวแปรอธิบายหนึ่งตัว หน้า 10 แสดงแนวโน้มบวก/ลบ แบบไม่เป็นเส้นตรง และไม่มีแนวโน้ม หน้า 11 ให้สมการเส้นประมาณจากตัวอย่างซึ่งใช้ประมาณเส้นของประชากร\n\n\n\n| สัญลักษณ์ | ความหมาย |\n|---|---|\n| y | ค่าจริงที่สังเกต |\n| ŷ | ค่าทำนายจากเส",
+        "oracle": "2+3*4"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-regression-exam-06",
+      "type": "choice",
+      "prompt": "ใน Ŷ=b0+b1X ค่า b0 แปลว่าอะไร?",
+      "reference": "simple-regression",
+      "choices": [
+        {
+          "text": "อัตราเปลี่ยน Y ต่อ X",
+          "id": "a"
+        },
+        {
+          "text": "สหสัมพันธ์ที่ต้องอยู่ในช่วง±1",
+          "id": "b"
+        },
+        {
+          "text": "ค่าทำนายเมื่อ X=0 ภายใต้โมเดล",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ความหมายเชิงบริบทเมื่อ X=0 อาจอยู่นอกช่วงข้อมูล ต้องระบุข้อจำกัด",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "หน้า 9 กำหนดตัวแปรอธิบายหนึ่งตัว หน้า 10 แสดงแนวโน้มบวก/ลบ แบบไม่เป็นเส้นตรง และไม่มีแนวโน้ม หน้า 11 ให้สมการเส้นประมาณจากตัวอย่างซึ่งใช้ประมาณเส้นของประชากร\n\n\n\n| สัญลักษณ์ | ความหมาย |\n|---|---|\n| y | ค่าจริงที่สังเกต |\n| ŷ | ค่าทำนายจากเส"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-regression-exam-07",
+      "type": "choice",
+      "prompt": "Slope มีหน่วยใดถ้า X เป็นพันบาทและ Y เป็นร้อยบาท?",
+      "reference": "simple-regression",
+      "choices": [
+        {
+          "text": "ร้อยบาทต่อพันบาท",
+          "id": "a"
+        },
+        {
+          "text": "พันบาทต่อร้อยบาท",
+          "id": "b"
+        },
+        {
+          "text": "ไม่มีหน่วยเสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "หน่วย slope คือหน่วย target หารหน่วย feature",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "หน้า 9 กำหนดตัวแปรอธิบายหนึ่งตัว หน้า 10 แสดงแนวโน้มบวก/ลบ แบบไม่เป็นเส้นตรง และไม่มีแนวโน้ม หน้า 11 ให้สมการเส้นประมาณจากตัวอย่างซึ่งใช้ประมาณเส้นของประชากร\n\n\n\n| สัญลักษณ์ | ความหมาย |\n|---|---|\n| y | ค่าจริงที่สังเกต |\n| ŷ | ค่าทำนายจากเส"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-regression-exam-08",
+      "type": "numeric",
+      "prompt": "Actual=9, Predicted=12 นิยาม residual=Actual−Predicted จงหา residual",
+      "reference": "prediction",
+      "answer": -3,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "9−12=−3 ค่าลบบอกว่าทำนายสูงกว่าค่าจริง",
+      "difficulty": "easy",
+      "verification": {
+        "method": "python",
+        "evidence": "สำหรับต้นไม้ที่ x = 10 ได้ ŷ ≈ −1.314667 + 4.541333×10 = 44.098667 ในหน่วยความสูงเดิมซึ่งไม่ได้ระบุชื่อ สำหรับแถว x = 8,y = 35 ได้ ŷ = 35.016 และ e = 35 − 35.016 = −0.016 แปลว่าเส้นทำนายสูงกว่าค่าจริงเล็กน้อย ไม่ใช่ error ติดลบแปลว่าคำนวณผิ",
+        "oracle": "9-12"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-regression-exam-09",
+      "type": "choice",
+      "prompt": "Residual บวกตามนิยาม Y−Ŷ หมายความว่าอย่างไร?",
+      "reference": "prediction",
+      "choices": [
+        {
+          "text": "โมเดลทำนายสูงกว่าค่าจริง",
+          "id": "a"
+        },
+        {
+          "text": "โมเดลไม่มีข้อผิดพลาด",
+          "id": "b"
+        },
+        {
+          "text": "โมเดลทำนายต่ำกว่าค่าจริง",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "เมื่อ Y มากกว่า Ŷ ผลต่างเป็นบวก",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "สำหรับต้นไม้ที่ x = 10 ได้ ŷ ≈ −1.314667 + 4.541333×10 = 44.098667 ในหน่วยความสูงเดิมซึ่งไม่ได้ระบุชื่อ สำหรับแถว x = 8,y = 35 ได้ ŷ = 35.016 และ e = 35 − 35.016 = −0.016 แปลว่าเส้นทำนายสูงกว่าค่าจริงเล็กน้อย ไม่ใช่ error ติดลบแปลว่าคำนวณผิ"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-regression-exam-10",
+      "type": "numeric",
+      "prompt": "ข้อมูลผู้เขียน X=[1,2,3],Y=[2,4,6] fit OLS พร้อม intercept จงหา slope",
+      "reference": "least-squares",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "ทุกคู่มี Y=2X จึงได้ slope2 และ intercept0",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "หน้า 12 เลือก b₀,b₁ ให้ผลรวมกำลังสอง residual น้อยที่สุด ไม่ใช่แค่ทำให้ผลรวม error บวก/ลบหักล้างเป็นศูนย์ หน้า 13 ให้สูตร slope/intercept\n\n\n\n\n\nต้องมี x ไม่คงที่ สูตรนี้ fit พร้อม intercept ในกรณี least squares ไม่ถ่วงน้ำหนัก หากคำนวณด้วยคอม",
+        "oracle": "ols_slope([1,2,3],[2,4,6])"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-regression-exam-11",
+      "type": "numeric",
+      "prompt": "ข้อมูลผู้เขียน X=[0,1,2],Y=[1,3,5] fit OLS พร้อม intercept จงหา intercept",
+      "reference": "least-squares",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "ค่าเฉลี่ย Y=3, X=1 และ slope2 จึง b0=3−2×1=1",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "หน้า 12 เลือก b₀,b₁ ให้ผลรวมกำลังสอง residual น้อยที่สุด ไม่ใช่แค่ทำให้ผลรวม error บวก/ลบหักล้างเป็นศูนย์ หน้า 13 ให้สูตร slope/intercept\n\n\n\n\n\nต้องมี x ไม่คงที่ สูตรนี้ fit พร้อม intercept ในกรณี least squares ไม่ถ่วงน้ำหนัก หากคำนวณด้วยคอม",
+        "oracle": "ols_intercept([0,1,2],[1,3,5])"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-regression-exam-12",
+      "type": "choice",
+      "prompt": "Least Squares ลดค่าใดเมื่อ fit เส้นตามบท?",
+      "reference": "least-squares",
+      "choices": [
+        {
+          "text": "ผลรวม residual ที่มีเครื่องหมายอย่างเดียว",
+          "id": "a"
+        },
+        {
+          "text": "ค่าเฉลี่ย X",
+          "id": "b"
+        },
+        {
+          "text": "ผลรวม residual กำลังสอง",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "การยกกำลังสองทำให้ error บวกและลบไม่หักล้างกัน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "หน้า 12 เลือก b₀,b₁ ให้ผลรวมกำลังสอง residual น้อยที่สุด ไม่ใช่แค่ทำให้ผลรวม error บวก/ลบหักล้างเป็นศูนย์ หน้า 13 ให้สูตร slope/intercept\n\n\n\n\n\nต้องมี x ไม่คงที่ สูตรนี้ fit พร้อม intercept ในกรณี least squares ไม่ถ่วงน้ำหนัก หากคำนวณด้วยคอม"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-regression-exam-13",
+      "type": "numeric",
+      "prompt": "Residuals=[−1,2,−3] จงหา MAE",
+      "reference": "errors",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "รวมค่าสัมบูรณ์ 1+2+3 แล้วหาร 3 ได้ 2",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "ส่วนนี้อ้าง X07 แทนการอ้างว่ามีบน S06: sheet `err!A2:B4` ให้ Actual = [2,2,0], Predicted = [2,0,2] สูตร C2:C4 เป็น actual−predicted, D เป็นค่าสัมบูรณ์ และ E เป็นกำลังสอง D5/E5 หาค่าเฉลี่ย ส่วน E9 = SQRT(E5)\n\n\n\n| Actual | Predicted | e |\n|--",
+        "oracle": "sum(abs(v) for v in [-1,2,-3])/3"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-regression-exam-14",
+      "type": "numeric",
+      "prompt": "Residuals=[−1,2,−3] จงหา MSE ที่หาร n",
+      "reference": "errors",
+      "answer": 4.666666666666667,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "รวมกำลังสอง 1+4+9 แล้วหาร 3 ได้ 14/3",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "ส่วนนี้อ้าง X07 แทนการอ้างว่ามีบน S06: sheet `err!A2:B4` ให้ Actual = [2,2,0], Predicted = [2,0,2] สูตร C2:C4 เป็น actual−predicted, D เป็นค่าสัมบูรณ์ และ E เป็นกำลังสอง D5/E5 หาค่าเฉลี่ย ส่วน E9 = SQRT(E5)\n\n\n\n| Actual | Predicted | e |\n|--",
+        "oracle": "sum(v*v for v in [-1,2,-3])/3"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-regression-exam-15",
+      "type": "numeric",
+      "prompt": "MSE=9 จงหา RMSE",
+      "reference": "errors",
+      "answer": 3,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "RMSE เป็นรากที่สองของ MSE และมีหน่วยเดียวกับ Y",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "ส่วนนี้อ้าง X07 แทนการอ้างว่ามีบน S06: sheet `err!A2:B4` ให้ Actual = [2,2,0], Predicted = [2,0,2] สูตร C2:C4 เป็น actual−predicted, D เป็นค่าสัมบูรณ์ และ E เป็นกำลังสอง D5/E5 หาค่าเฉลี่ย ส่วน E9 = SQRT(E5)\n\n\n\n| Actual | Predicted | e |\n|--",
+        "oracle": "sqrt(9)"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-regression-exam-16",
+      "type": "choice",
+      "prompt": "RMSE เทียบกับ MSE มีหน่วยอย่างไร?",
+      "reference": "errors",
+      "choices": [
+        {
+          "text": "RMSE หน่วย Y; MSE หน่วย Y กำลังสอง",
+          "id": "a"
+        },
+        {
+          "text": "ทั้งคู่หน่วย X",
+          "id": "b"
+        },
+        {
+          "text": "MSE ไม่มีหน่วยทุกกรณี",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "กำลังสองและการถอดรากเปลี่ยนหน่วยตามนิยาม",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ส่วนนี้อ้าง X07 แทนการอ้างว่ามีบน S06: sheet `err!A2:B4` ให้ Actual = [2,2,0], Predicted = [2,0,2] สูตร C2:C4 เป็น actual−predicted, D เป็นค่าสัมบูรณ์ และ E เป็นกำลังสอง D5/E5 หาค่าเฉลี่ย ส่วน E9 = SQRT(E5)\n\n\n\n| Actual | Predicted | e |\n|--"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-regression-exam-17",
+      "type": "choice",
+      "prompt": "ควรใช้สัมประสิทธิ์ปัดเศษหรือเต็มความละเอียดเพื่อเทียบผลคำนวณ?",
+      "reference": "rounding",
+      "choices": [
+        {
+          "text": "ปัดทุกผลย่อยให้หยาบที่สุด",
+          "id": "a"
+        },
+        {
+          "text": "ใช้เต็มความละเอียดก่อน แล้วปัดตอนรายงาน",
+          "id": "b"
+        },
+        {
+          "text": "สองวิธีไม่มีทางต่างกัน",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "การปัดซ้ำสะสมความคลาดเคลื่อน ต้องบอก precision ของ worksheet",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "X07 `C14:C15` คำนวณ slope/intercept เต็มความละเอียด แต่ `G3:G10` ใช้สูตรคงที่ `-3.12 + 0.51*X` ซึ่งปัดแล้ว `H` ใช้ Actual−Predicted และ `I` ใช้ ABS(error) ค่า MAE ใน `J11` จึงมาจาก **เส้นปัด** ไม่ใช่ใช้ C14/C15 โดยตรง\n\nตารางต่อไปนี้ใช้เส้นป"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-regression-exam-18",
+      "type": "numeric",
+      "prompt": "โมเดลผู้เขียน Ŷ=5+2X1−3X2 เมื่อ X1=4,X2=2 จงหา Ŷ",
+      "reference": "multiple",
+      "answer": 7,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "คูณแต่ละ feature ด้วย coefficient ของตนแล้วรวม 5+8−6",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "ส่วนนี้มาจาก C02/D03 ไม่ใช่การอ้างว่า S06 สอนตัวแปรอธิบายหลายตัว สคริปต์ C02 บรรทัด 6 เลือก feature 4 ตัว บรรทัด 8 เลือก `PerformanceIndex` บรรทัด 10–11 ใช้ `LinearRegression().fit(x,y)` และบรรทัด 13 ทำนายด้วย `[2,65,5,4]`\n\n\n\n| ตำแหน่ง | ชื",
+        "oracle": "5+2*4-3*2"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-regression-exam-19",
+      "type": "choice",
+      "prompt": "ตีความ coefficient X1 ใน multiple regression ควรตรึงอะไร?",
+      "reference": "multiple",
+      "choices": [
+        {
+          "text": "features อื่นไว้คงที่ภายใต้โมเดล",
+          "id": "a"
+        },
+        {
+          "text": "จำนวน rows เท่านั้น",
+          "id": "b"
+        },
+        {
+          "text": "เปลี่ยน features ทุกตัวพร้อมกัน",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "เป็นผลเปลี่ยนค่าทำนายต่อหนึ่งหน่วย X1 เมื่อ feature อื่นคงที่",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ส่วนนี้มาจาก C02/D03 ไม่ใช่การอ้างว่า S06 สอนตัวแปรอธิบายหลายตัว สคริปต์ C02 บรรทัด 6 เลือก feature 4 ตัว บรรทัด 8 เลือก `PerformanceIndex` บรรทัด 10–11 ใช้ `LinearRegression().fit(x,y)` และบรรทัด 13 ทำนายด้วย `[2,65,5,4]`\n\n\n\n| ตำแหน่ง | ชื"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-regression-exam-20",
+      "type": "choice",
+      "prompt": "Fit และวัด error บน 300 แถวเดียวกัน ยืนยันประสิทธิภาพข้อมูลใหม่หรือไม่?",
+      "reference": "full-dataset",
+      "choices": [
+        {
+          "text": "ยืนยัน test accuracy100%",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ นั่นเป็น training error ต้องมีการประเมินแยก",
+          "id": "b"
+        },
+        {
+          "text": "ยืนยัน causation",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "แยกข้อมูลฝึกกับข้อมูลประเมิน ไม่เรียก equivalent OLS ว่ารัน source sklearn script แล้ว",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ถ้ามี D03 ต้นฉบับ ให้รัน block ต่อจาก block NumPy ด้านบน และเรียกฟังก์ชันตาม comment โดยวาง CSV ใน working directory ของ Python ไม่ใช่แก้ path เว็บไซต์ โค้ดนี้เป็น implementation เสริมที่ใช้ feature/target และ OLS objective เดียวกับ C02 **ไ"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-regression-exam-21",
+      "type": "self",
+      "prompt": "อธิบายขั้น fit รายได้–ค่าอาหาร โดยรักษาหน่วยและไม่สลับ slope/intercept",
+      "reference": "household",
+      "rubric": [
+        "หา means และ centered sums",
+        "คำนวณ slope ก่อน intercept",
+        "ระบุ X พันบาทและ Y ร้อยบาทพร้อม precision"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: หา means และ centered sums คำนวณ slope ก่อน intercept ระบุ X พันบาทและ Y ร้อยบาทพร้อม precision",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "A03 หน้า 1 และ X07 `regression!B3:C10` ใช้ข้อมูลเดียวกัน X คือรายได้ **พันบาท** และ Y คือค่าอาหาร **ร้อยบาท** ไม่ใช่หน่วยเดียวกัน โจทย์ A03 ให้หาสมการ ส่วนตารางเฉลยต่อไปนี้คำนวณใหม่\n\n| X | Y | XY |\n|---|---|---|\n| 22 | 8 | 176 |\n| 23 | 10 |"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-regression-exam-22",
+      "type": "self",
+      "prompt": "ออกแบบการตรวจ script multiple regression ที่ชื่อ predictedCO2 ไม่ตรง target",
+      "reference": "python-multiple",
+      "rubric": [
+        "ตรวจชื่อ target จริง PerformanceIndex และ feature order",
+        "แยกการอ่าน source จากการ execute หรือ equivalent OLS",
+        "ไม่อ้างผล test set หากไม่มี held-out evaluation"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ตรวจชื่อ target จริง PerformanceIndex และ feature order แยกการอ่าน source จากการ execute หรือ equivalent OLS ไม่อ้างผล test set หากไม่มี held-out evaluation",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "เพื่อให้คัดลอกแล้วรันได้โดยไม่ต้องดาวน์โหลด CSV โค้ดเสริมนี้แสดง 8 แถวแรกของ D03 แบบตัวเลข ไม่มีตัวระบุบุคคล ใช้ NumPy `lstsq` แก้ OLS พร้อม intercept และตรวจ rank ไม่ใช้การกลับเมทริกซ์เอง ต้องมี NumPy ใน Python ของผู้เรียน แต่เว็บไซต์ไม่ได"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-regression-exam-23",
+      "type": "self",
+      "prompt": "เปรียบ MAE,MSE,RMSE ของโมเดลสองตัวอย่างที่มี outlier โดยไม่แก้ข้อมูล source",
+      "reference": "errors",
+      "rubric": [
+        "แสดง residuals และตัวหาร",
+        "อธิบายกำลังสองให้น้ำหนัก error ใหญ่มากขึ้น",
+        "ระบุหน่วยและแยก prediction accuracy จาก causation"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: แสดง residuals และตัวหาร อธิบายกำลังสองให้น้ำหนัก error ใหญ่มากขึ้น ระบุหน่วยและแยก prediction accuracy จาก causation",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ส่วนนี้อ้าง X07 แทนการอ้างว่ามีบน S06: sheet `err!A2:B4` ให้ Actual = [2,2,0], Predicted = [2,0,2] สูตร C2:C4 เป็น actual−predicted, D เป็นค่าสัมบูรณ์ และ E เป็นกำลังสอง D5/E5 หาค่าเฉลี่ย ส่วน E9 = SQRT(E5)\n\n\n\n| Actual | Predicted | e |\n|--"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-regression-exam-24",
+      "type": "self",
+      "prompt": "ออกแบบกรณีที่ Pearson r ต่ำแต่ข้อมูลสัมพันธ์แบบไม่เชิงเส้น แล้วเสนอวิธีอ่านอย่างระวัง",
+      "reference": "correlation",
+      "rubric": [
+        "อธิบาย scatter plot ไม่ใช้ r ค่าเดียวสรุปทั้งหมด",
+        "แยกความสัมพันธ์เชิงเส้นกับความเป็นอิสระ",
+        "ไม่อ้างว่าตัวอย่างผู้เขียนเป็นข้อมูลสไลด์"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: อธิบาย scatter plot ไม่ใช้ r ค่าเดียวสรุปทั้งหมด แยกความสัมพันธ์เชิงเส้นกับความเป็นอิสระ ไม่อ้างว่าตัวอย่างผู้เขียนเป็นข้อมูลสไลด์",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "S06 หน้า 2 แสดงความสัมพันธ์แบบเส้นตรงบวก/ลบเทียบกับแบบโค้ง หน้า 3 เปรียบเทียบความสัมพันธ์แน่นกับกระจาย หน้า 4 แสดงภาพที่ไม่มีแนวโน้มเชิงเส้นชัดเจน และหน้า 5 ให้ภาพค่า r โดยประมาณ -1, -0.6, 0, +0.3, +1 อย่าอ่านค่าพิกัดของจุดจากภาพเป็น datase"
+      }
+    }
+  ]
+}

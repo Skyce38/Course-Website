@@ -1,0 +1,594 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "artificial-intelligence-final-deep-learning-overview",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview-exam-01",
+      "type": "choice",
+      "prompt": "DeepLearning อยู่ในความสัมพันธ์ใด?",
+      "reference": "hierarchy",
+      "choices": [
+        {
+          "text": "DL เป็นส่วนหนึ่งของ ML และ ML เป็นส่วนหนึ่งของ AI",
+          "id": "a"
+        },
+        {
+          "text": "AI เป็นส่วนหนึ่งของ DL เสมอ",
+          "id": "b"
+        },
+        {
+          "text": "DL ไม่เกี่ยวกับ ML",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "มี AI และ ML อีกหลายเทคนิคที่ไม่ใช่ DL",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S11 p.6 วาง DL ภายใน ML ภายใน AI: AI เป็นขอบเขตกว้าง เช่นงาน reasoning/search; ML ใช้ข้อมูลเรียนรูปแบบ; DL ใช้ neuralnetworks หลายชั้นเพื่อเรียน representations ไม่ใช่ว่า AI=DL หรือการมีข้อมูลทำให้อัลกอริทึมเป็น DL ทันที DecisionTree/KNN ที"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview-exam-02",
+      "type": "choice",
+      "prompt": "งาน classification กับ regression ต่างที่อะไรในภาพรวม DL?",
+      "reference": "hierarchy",
+      "choices": [
+        {
+          "text": "จำนวน layers ต้องเท่ากับ target",
+          "id": "a"
+        },
+        {
+          "text": "target เป็นคลาสกับค่าตัวเลข",
+          "id": "b"
+        },
+        {
+          "text": "classification ไม่ต้องมี labels เสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ชนิดงานไม่ใช่ชื่อ architecture ที่รับรองวิธีเดียว",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S11 p.6 วาง DL ภายใน ML ภายใน AI: AI เป็นขอบเขตกว้าง เช่นงาน reasoning/search; ML ใช้ข้อมูลเรียนรูปแบบ; DL ใช้ neuralnetworks หลายชั้นเพื่อเรียน representations ไม่ใช่ว่า AI=DL หรือการมีข้อมูลทำให้อัลกอริทึมเป็น DL ทันที DecisionTree/KNN ที"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview-exam-03",
+      "type": "choice",
+      "prompt": "การนับความลึกของ network ควรระบุอะไร?",
+      "reference": "depth",
+      "choices": [
+        {
+          "text": "จำนวนไฟล์ Python",
+          "id": "a"
+        },
+        {
+          "text": "ชื่อผู้เขียนสไลด์",
+          "id": "b"
+        },
+        {
+          "text": "convention ว่ารวม input/weighted layers อย่างไร",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "คำว่า deep/shallow ต้องมีเกณฑ์นับ ไม่ใช้ตัวเลขลอยๆ",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.2–5 เริ่ม z=w0+Σwixi และ y=g(z) ถ้ามีแต่ linearmaps หลายชั้นจะยุบเป็น linearmap เดียว จึงใช้ nonlinearity สำหรับ boundary ซับซ้อน ภาพ p.3 กลุ่มสีแดง/เขียวและ p.4 เส้นแบ่งสาธิตความจำเป็น ไม่ใช่ dataset พร้อมพิกัดหรือผล accuracy\n\n| Activat"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview-exam-04",
+      "type": "numeric",
+      "prompt": "Affinemaps z1=4x−2,z2=2z1+3 รวมกันมี coefficient ของ x เท่าใด?",
+      "reference": "depth",
+      "answer": 8,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "แทน z1 จะได้ z2=8x−1 จึง coefficient8",
+      "difficulty": "easy",
+      "verification": {
+        "method": "python",
+        "evidence": "pp.2–5 เริ่ม z=w0+Σwixi และ y=g(z) ถ้ามีแต่ linearmaps หลายชั้นจะยุบเป็น linearmap เดียว จึงใช้ nonlinearity สำหรับ boundary ซับซ้อน ภาพ p.3 กลุ่มสีแดง/เขียวและ p.4 เส้นแบ่งสาธิตความจำเป็น ไม่ใช่ dataset พร้อมพิกัดหรือผล accuracy\n\n| Activat",
+        "oracle": "2*4"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview-exam-05",
+      "type": "numeric",
+      "prompt": "Network มี input layer หนึ่งชั้น, hidden layers3 ชั้นและ output layer1 ชั้น หากประกาศนับเฉพาะชั้นที่มี weights จะนับได้กี่ชั้น?",
+      "reference": "depth",
+      "answer": 4,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "ไม่นับ input ที่ส่งข้อมูลเฉยๆ จึง hidden3+output1=4 ต้องประกาศ convention ก่อนเทียบความลึก",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "pp.2–5 เริ่ม z=w0+Σwixi และ y=g(z) ถ้ามีแต่ linearmaps หลายชั้นจะยุบเป็น linearmap เดียว จึงใช้ nonlinearity สำหรับ boundary ซับซ้อน ภาพ p.3 กลุ่มสีแดง/เขียวและ p.4 เส้นแบ่งสาธิตความจำเป็น ไม่ใช่ dataset พร้อมพิกัดหรือผล accuracy\n\n| Activat",
+        "oracle": "3+1"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview-exam-06",
+      "type": "choice",
+      "prompt": "Nonlinearactivation ช่วยอะไรเมื่อซ้อน layers?",
+      "reference": "depth",
+      "choices": [
+        {
+          "text": "รับรองทุกข้อมูลถูกต้อง",
+          "id": "a"
+        },
+        {
+          "text": "เปลี่ยนทุก network เป็น RNN",
+          "id": "b"
+        },
+        {
+          "text": "ทำให้แทนความสัมพันธ์ที่ยุบเป็น affine เดียวไม่ได้",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "representation เพิ่มได้แต่ยังต้อง fit และ evaluate",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.2–5 เริ่ม z=w0+Σwixi และ y=g(z) ถ้ามีแต่ linearmaps หลายชั้นจะยุบเป็น linearmap เดียว จึงใช้ nonlinearity สำหรับ boundary ซับซ้อน ภาพ p.3 กลุ่มสีแดง/เขียวและ p.4 เส้นแบ่งสาธิตความจำเป็น ไม่ใช่ dataset พร้อมพิกัดหรือผล accuracy\n\n| Activat"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview-exam-07",
+      "type": "choice",
+      "prompt": "RNN เหมาะกับลักษณะข้อมูลใดตามแนวคิดใน source?",
+      "reference": "rnn",
+      "choices": [
+        {
+          "text": "ลำดับที่ตำแหน่งและบริบทก่อนหน้ามีความหมาย",
+          "id": "a"
+        },
+        {
+          "text": "เฉพาะข้อมูลไร้ลำดับเสมอ",
+          "id": "b"
+        },
+        {
+          "text": "เฉพาะรูป RGB เท่านั้น",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "state ส่งข้อมูลตามเวลา เช่น text/audio/time sequence",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S11 p.7 กล่าวถึง RecurrentNeuralNetwork สำหรับ text,audio และข้อมูลตามเวลา; อันดับมีความหมาย ต่างจากการมองแต่ละแถวอิสระ\n\nstate ส่งข้อมูลจากขั้นก่อนสู่ขั้นถัดไป แนวคิดเสริมแบบย่อคือ h_t=f(Wx_t+Uh_{t−1}+b) ใช้น้ำหนักร่วมตามเวลา ไม่ใช่สำเนา pa"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview-exam-08",
+      "type": "choice",
+      "prompt": "น้ำหนักของ RNN ตามเวลาควรเข้าใจอย่างไร?",
+      "reference": "rnn",
+      "choices": [
+        {
+          "text": "สร้าง weights อิสระใหม่ทุกตำแหน่งเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "แชร์ parameters ตาม timesteps ในแบบจำลองเดียว",
+          "id": "b"
+        },
+        {
+          "text": "ไม่มี weight เพราะมี state",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "state เปลี่ยนตาม input แต่ parameters ที่แชร์ไม่ใช่ state เดียวกัน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S11 p.7 กล่าวถึง RecurrentNeuralNetwork สำหรับ text,audio และข้อมูลตามเวลา; อันดับมีความหมาย ต่างจากการมองแต่ละแถวอิสระ\n\nstate ส่งข้อมูลจากขั้นก่อนสู่ขั้นถัดไป แนวคิดเสริมแบบย่อคือ h_t=f(Wx_t+Uh_{t−1}+b) ใช้น้ำหนักร่วมตามเวลา ไม่ใช่สำเนา pa"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview-exam-09",
+      "type": "choice",
+      "prompt": "Imagecaptioning ที่รับภาพหนึ่งภาพแล้วให้คำหลายคำเป็น mapping แบบใด?",
+      "reference": "rnn",
+      "choices": [
+        {
+          "text": "many-to-one",
+          "id": "a"
+        },
+        {
+          "text": "one-to-one เท่านั้น",
+          "id": "b"
+        },
+        {
+          "text": "one-to-many",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "พิจารณาจำนวน input/output เชิงลำดับ ไม่ใช่จำนวน pixels",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S11 p.7 กล่าวถึง RecurrentNeuralNetwork สำหรับ text,audio และข้อมูลตามเวลา; อันดับมีความหมาย ต่างจากการมองแต่ละแถวอิสระ\n\nstate ส่งข้อมูลจากขั้นก่อนสู่ขั้นถัดไป แนวคิดเสริมแบบย่อคือ h_t=f(Wx_t+Uh_{t−1}+b) ใช้น้ำหนักร่วมตามเวลา ไม่ใช่สำเนา pa"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview-exam-10",
+      "type": "choice",
+      "prompt": "Sentiment ทั้งประโยคต่างจาก label ทุก token อย่างไร?",
+      "reference": "rnn",
+      "choices": [
+        {
+          "text": "many-to-one เทียบกับ many-to-many",
+          "id": "a"
+        },
+        {
+          "text": "ทั้งคู่ one-to-one เสมอ",
+          "id": "b"
+        },
+        {
+          "text": "ไม่มีลำดับใดมีความหมาย",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "เป้าหมายออกหนึ่งผลรวมกับออกผลทุกตำแหน่งต่างกัน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S11 p.7 กล่าวถึง RecurrentNeuralNetwork สำหรับ text,audio และข้อมูลตามเวลา; อันดับมีความหมาย ต่างจากการมองแต่ละแถวอิสระ\n\nstate ส่งข้อมูลจากขั้นก่อนสู่ขั้นถัดไป แนวคิดเสริมแบบย่อคือ h_t=f(Wx_t+Uh_{t−1}+b) ใช้น้ำหนักร่วมตามเวลา ไม่ใช่สำเนา pa"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview-exam-11",
+      "type": "choice",
+      "prompt": "State ของ RNN แทนสิ่งใดในแนวคิดย่อของบท?",
+      "reference": "rnn",
+      "choices": [
+        {
+          "text": "เฉลยทุกคำในอนาคตที่รู้แน่นอน",
+          "id": "a"
+        },
+        {
+          "text": "ตัวแทนข้อมูลจากขั้นก่อนและ input ปัจจุบัน",
+          "id": "b"
+        },
+        {
+          "text": "weights ใหม่ที่ไม่แชร์",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ไม่ใช่การรับรองว่าจำบริบทยาวได้สมบูรณ์",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S11 p.7 กล่าวถึง RecurrentNeuralNetwork สำหรับ text,audio และข้อมูลตามเวลา; อันดับมีความหมาย ต่างจากการมองแต่ละแถวอิสระ\n\nstate ส่งข้อมูลจากขั้นก่อนสู่ขั้นถัดไป แนวคิดเสริมแบบย่อคือ h_t=f(Wx_t+Uh_{t−1}+b) ใช้น้ำหนักร่วมตามเวลา ไม่ใช่สำเนา pa"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview-exam-12",
+      "type": "choice",
+      "prompt": "Generator ใน GAN มีหน้าที่ใด?",
+      "reference": "gan",
+      "choices": [
+        {
+          "text": "ตัดสิน real/fake แทน D",
+          "id": "a"
+        },
+        {
+          "text": "ให้ officiallabel ของทุกข้อมูล",
+          "id": "b"
+        },
+        {
+          "text": "สร้างตัวอย่างจาก noise/latentinput",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "Generator และ Discriminator มีบทบาทต่างกัน",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S11 pp.9–10 อธิบาย GenerativeAdversarialNetwork เป็นกรอบ generativelearning เรียนโครงสร้างข้อมูลเพื่อสร้างตัวอย่างคล้าย distribution เดิม ภาพหน้า 10:noise→Generator→ภาพสร้าง; ภาพจริงจาก dataset และภาพสร้างป้อน Discriminator ซึ่งแยก real/fak"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview-exam-13",
+      "type": "choice",
+      "prompt": "Discriminator เรียนแยกอะไรในภาพอธิบาย?",
+      "reference": "gan",
+      "choices": [
+        {
+          "text": "ตัวอย่างจริงกับตัวอย่างที่ Generator สร้าง",
+          "id": "a"
+        },
+        {
+          "text": "training data กับ test data ตามชื่อไฟล์",
+          "id": "b"
+        },
+        {
+          "text": "ทุก class ของ Iris เสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "real/fake เป็นสัญญาณฝึกที่มาจากแหล่งตัวอย่าง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S11 pp.9–10 อธิบาย GenerativeAdversarialNetwork เป็นกรอบ generativelearning เรียนโครงสร้างข้อมูลเพื่อสร้างตัวอย่างคล้าย distribution เดิม ภาพหน้า 10:noise→Generator→ภาพสร้าง; ภาพจริงจาก dataset และภาพสร้างป้อน Discriminator ซึ่งแยก real/fak"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview-exam-14",
+      "type": "choice",
+      "prompt": "GAN สร้างภาพดูคล้ายจริงยืนยันคุณภาพหรือความจริงของทุกภาพหรือไม่?",
+      "reference": "gan",
+      "choices": [
+        {
+          "text": "ยืนยันว่าเป็นภาพเหตุการณ์จริง",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ ต้องประเมินข้อจำกัดและข้อมูลฝึก",
+          "id": "b"
+        },
+        {
+          "text": "ยืนยัน distribution ครบทุก mode",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ภาพสร้างเป็น output ของ model ไม่ใช่หลักฐานเหตุการณ์จริง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S11 pp.9–10 อธิบาย GenerativeAdversarialNetwork เป็นกรอบ generativelearning เรียนโครงสร้างข้อมูลเพื่อสร้างตัวอย่างคล้าย distribution เดิม ภาพหน้า 10:noise→Generator→ภาพสร้าง; ภาพจริงจาก dataset และภาพสร้างป้อน Discriminator ซึ่งแยก real/fak"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview-exam-15",
+      "type": "choice",
+      "prompt": "คำว่า generative ใน GAN หมายถึงอะไร?",
+      "reference": "gan",
+      "choices": [
+        {
+          "text": "ทำได้เฉพาะ regression ตัวเลข",
+          "id": "a"
+        },
+        {
+          "text": "เป็น algorithm ค้นหา graph",
+          "id": "b"
+        },
+        {
+          "text": "สร้างตัวอย่างโดยเรียนลักษณะ distribution",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ไม่ควรสับสนกับ discriminativeclassification อย่างเดียว",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S11 pp.9–10 อธิบาย GenerativeAdversarialNetwork เป็นกรอบ generativelearning เรียนโครงสร้างข้อมูลเพื่อสร้างตัวอย่างคล้าย distribution เดิม ภาพหน้า 10:noise→Generator→ภาพสร้าง; ภาพจริงจาก dataset และภาพสร้างป้อน Discriminator ซึ่งแยก real/fak"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview-exam-16",
+      "type": "choice",
+      "prompt": "ภาพ content/style/result ในสไลด์ให้ข้อมูลพอคำนวณ loss/epochs จริงหรือไม่?",
+      "reference": "style",
+      "choices": [
+        {
+          "text": "ไม่ หากไม่มีสูตร parameters และ settings ครบ",
+          "id": "a"
+        },
+        {
+          "text": "พอถ้าดูภาพสี",
+          "id": "b"
+        },
+        {
+          "text": "พอโดยตั้ง epochs200",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "เป็นตัวอย่างภาพ ไม่ใช่ training recipe ครบถ้วน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S11 p.11 แสดงกรอบ GAN และภาพ content/style/ผลลัพธ์ พร้อมอ้างบทความด้าน imagestyletransfer จึงใช้เป็นตัวอย่างการเปลี่ยนลักษณะภาพตาม style ไม่ถือเป็นหลักฐานว่า styletransfer ทุกวิธีต้องใช้ GAN ไม่สร้างขั้นตอน loss/weights/epochs จากภาพที่ไม่ม"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview-exam-17",
+      "type": "choice",
+      "prompt": "Styletransfer ทุกวิธีต้องเป็น GAN หรือไม่?",
+      "reference": "style",
+      "choices": [
+        {
+          "text": "ต้องเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ ภาพใน source ไม่ได้พิสูจน์ข้อสรุปครอบจักรวาล",
+          "id": "b"
+        },
+        {
+          "text": "ต้องเมื่อภาพมีสี",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "แยกตัวอย่างกรอบที่สไลด์เล่าจากนิยามของทุกวิธี",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S11 p.11 แสดงกรอบ GAN และภาพ content/style/ผลลัพธ์ พร้อมอ้างบทความด้าน imagestyletransfer จึงใช้เป็นตัวอย่างการเปลี่ยนลักษณะภาพตาม style ไม่ถือเป็นหลักฐานว่า styletransfer ทุกวิธีต้องใช้ GAN ไม่สร้างขั้นตอน loss/weights/epochs จากภาพที่ไม่ม"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview-exam-18",
+      "type": "choice",
+      "prompt": "ข้อมูลภาพเชิงพื้นที่ควรพิจารณาตระกูลใดจากบท?",
+      "reference": "comparison",
+      "choices": [
+        {
+          "text": "BFS เป็น classifier ภาพโดยนิยาม",
+          "id": "a"
+        },
+        {
+          "text": "K-Means เป็น RNN โดยนิยาม",
+          "id": "b"
+        },
+        {
+          "text": "CNN",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "CNN ใช้ localfilters ตามโครงสร้าง spatial แต่ไม่รับรองเหนือกว่าทุกงาน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "| ตระกูล | โครงสร้างเด่น | ข้อมูล/เป้าหมาย | ไม่ควรสรุป |\n|---|---|---|---|\n| MLP/feedforward | ส่งผ่าน hiddenlayers | tabular/vector tasks | ทุก MLP คือ deep หรือเหนือกว่า KNN |\n| RNN | state/recurrence ตามลำดับ | text/audio/time sequences"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview-exam-19",
+      "type": "choice",
+      "prompt": "Tabularvector สามารถใช้ MLP ได้ หมายความว่าต้องเป็น deep หรือไม่?",
+      "reference": "comparison",
+      "choices": [
+        {
+          "text": "ไม่ ต้องดูจำนวน hidden layers และ convention",
+          "id": "a"
+        },
+        {
+          "text": "ต้อง deep เสมอ",
+          "id": "b"
+        },
+        {
+          "text": "ต้องใช้ RNN เท่านั้น",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ชื่อ MLP ไม่ระบุความลึกทุก configuration",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "| ตระกูล | โครงสร้างเด่น | ข้อมูล/เป้าหมาย | ไม่ควรสรุป |\n|---|---|---|---|\n| MLP/feedforward | ส่งผ่าน hiddenlayers | tabular/vector tasks | ทุก MLP คือ deep หรือเหนือกว่า KNN |\n| RNN | state/recurrence ตามลำดับ | text/audio/time sequences"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview-exam-20",
+      "type": "choice",
+      "prompt": "ข้อมูลน้อยแต่เพิ่ม layers มากขึ้น รับรอง generalization ดีขึ้นหรือไม่?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "text": "รับรองเพราะ parameters มาก",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ ต้องตรวจ overfitting และผลประเมิน",
+          "id": "b"
+        },
+        {
+          "text": "รับรองเพราะเป็น AI",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ความสามารถแทนฟังก์ชันไม่ใช่การรับรองคุณภาพข้อมูลใหม่",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "จำชื่อโดยไม่ดู input/output; นับ inputlayer เป็น weightedlayer โดยไม่บอก; ซ้อน linear แล้วอ้าง nonlinear; สลับ G/D; คิด unsupervised ไม่มีสัญญาณ real/fake; ตีความ styletransfer รูปเดียวเป็นสูตร train ครบ; เชื่อ deep รับประกันผลดีเมื่อข้อมูล"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview-exam-21",
+      "type": "self",
+      "prompt": "จัด mapping ของงานแปลภาษาและ label ทุก token พร้อมอธิบายความยาวลำดับ",
+      "reference": "rnn",
+      "rubric": [
+        "ระบุ input/output เป็น sequence อย่างไร",
+        "แยก many-to-many แบบ aligned กับ length ต่างกัน",
+        "ไม่เติม architecturetraining ที่ source ไม่แจก"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ระบุ input/output เป็น sequence อย่างไร แยก many-to-many แบบ aligned กับ length ต่างกัน ไม่เติม architecturetraining ที่ source ไม่แจก",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "S11 p.7 กล่าวถึง RecurrentNeuralNetwork สำหรับ text,audio และข้อมูลตามเวลา; อันดับมีความหมาย ต่างจากการมองแต่ละแถวอิสระ\n\nstate ส่งข้อมูลจากขั้นก่อนสู่ขั้นถัดไป แนวคิดเสริมแบบย่อคือ h_t=f(Wx_t+Uh_{t−1}+b) ใช้น้ำหนักร่วมตามเวลา ไม่ใช่สำเนา pa"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview-exam-22",
+      "type": "self",
+      "prompt": "แสดงเชิงพีชคณิตว่าซ้อน affinemaps ยังเป็น affine และอธิบายบทบาท activation",
+      "reference": "depth",
+      "rubric": [
+        "แทนสมการแล้วรวม coefficients/constant",
+        "ชี้ว่าความลึกอย่างเดียวไม่สร้าง nonlinearity",
+        "กำหนด convention การนับ layers"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: แทนสมการแล้วรวม coefficients/constant ชี้ว่าความลึกอย่างเดียวไม่สร้าง nonlinearity กำหนด convention การนับ layers",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "pp.2–5 เริ่ม z=w0+Σwixi และ y=g(z) ถ้ามีแต่ linearmaps หลายชั้นจะยุบเป็น linearmap เดียว จึงใช้ nonlinearity สำหรับ boundary ซับซ้อน ภาพ p.3 กลุ่มสีแดง/เขียวและ p.4 เส้นแบ่งสาธิตความจำเป็น ไม่ใช่ dataset พร้อมพิกัดหรือผล accuracy\n\n| Activat"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview-exam-23",
+      "type": "self",
+      "prompt": "อธิบายวงจรบทบาท G และ D จากภาพโดยไม่อ้าง trainingresults ใหม่",
+      "reference": "gan",
+      "rubric": [
+        "noise เข้า G และภาพสร้างไป D",
+        "ภาพจริงจาก dataset เข้า D ด้วย",
+        "แยก source illustration จากรายละเอียด loss/optimizer ที่ไม่ได้ให้"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: noise เข้า G และภาพสร้างไป D ภาพจริงจาก dataset เข้า D ด้วย แยก source illustration จากรายละเอียด loss/optimizer ที่ไม่ได้ให้",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "S11 pp.9–10 อธิบาย GenerativeAdversarialNetwork เป็นกรอบ generativelearning เรียนโครงสร้างข้อมูลเพื่อสร้างตัวอย่างคล้าย distribution เดิม ภาพหน้า 10:noise→Generator→ภาพสร้าง; ภาพจริงจาก dataset และภาพสร้างป้อน Discriminator ซึ่งแยก real/fak"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview-exam-24",
+      "type": "self",
+      "prompt": "เลือก architecture เบื้องต้นสำหรับตาราง ภาพ และลำดับ พร้อมข้อจำกัด",
+      "reference": "comparison",
+      "rubric": [
+        "ผูก representation กับ MLP/CNN/RNN อย่างมีเหตุผล",
+        "ไม่ประกาศว่า architecture เดียวชนะทุกงาน",
+        "แยก choice จากหลักฐาน evaluation จริง"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ผูก representation กับ MLP/CNN/RNN อย่างมีเหตุผล ไม่ประกาศว่า architecture เดียวชนะทุกงาน แยก choice จากหลักฐาน evaluation จริง",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "| ตระกูล | โครงสร้างเด่น | ข้อมูล/เป้าหมาย | ไม่ควรสรุป |\n|---|---|---|---|\n| MLP/feedforward | ส่งผ่าน hiddenlayers | tabular/vector tasks | ทุก MLP คือ deep หรือเหนือกว่า KNN |\n| RNN | state/recurrence ตามลำดับ | text/audio/time sequences"
+      }
+    }
+  ]
+}

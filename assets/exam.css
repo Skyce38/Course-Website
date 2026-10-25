@@ -1,0 +1,11 @@
+/* Exam controls only. Reader, old practice and saved-data behavior stay shared. */
+.lesson-reader .exam-mode{font-size:var(--text-size);scroll-margin-top:var(--reader-header-offset,150px)}
+html[data-layout=modern] .lesson-reader .exam-mode{scroll-margin-top:20px}
+.lesson-reader .exam-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-block:20px}
+.exam-mode .exam-field{display:flex;flex-direction:column;gap:6px;min-width:0}.exam-mode .exam-field label{font-weight:600}.exam-mode .exam-field select{width:100%;min-width:0}
+.lesson-reader .exam-mode .exam-run{border:0;padding:0;margin:20px 0 0;box-shadow:none;font-size:inherit}
+.exam-mode legend{white-space:pre-wrap;tab-size:4}.exam-mode .practice-option span{white-space:pre-wrap}.exam-mode .practice-feedback{white-space:normal}
+.exam-mode .practice-position{font-variant-numeric:tabular-nums}.exam-mode [disabled]{opacity:.65}
+.exam-mode .exam-status{padding:10px;border:1px solid var(--line);border-radius:8px}
+@media(max-width:600px){.lesson-reader .exam-controls{grid-template-columns:minmax(0,1fr);gap:12px}.exam-mode>button{width:100%}}
+@media print{.exam-mode :is(.exam-controls,.exam-host,.practice-note,.exam-status,button){display:none}.exam-mode .exam-fallback[hidden]{display:block!important}}

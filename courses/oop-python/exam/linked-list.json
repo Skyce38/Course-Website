@@ -1,0 +1,571 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-linked-list",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "oop-python-linked-list-exam-01",
+      "type": "choice",
+      "prompt": "Node ใน singly linked list เก็บส่วนสำคัญใด?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "data และ next reference",
+          "id": "a"
+        },
+        {
+          "text": "เฉพาะ index ใน array",
+          "id": "b"
+        },
+        {
+          "text": "สำเนาของทุก Node ที่เหลือ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "เชื่อมโหนดทีละ next ไม่ได้เก็บทั้งลิสต์ซ้ำทุกจุด",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "| คำศัพท์ | ความหมายในบทเรียนนี้ |\n|---|---|\n| Node | object หนึ่งตัวที่เก็บ data และ reference ไป Node ถัดไป |\n| data | ข้อมูลใน Node เช่น 10 |\n| next | อ้างอิง Node ถัดไป หรือ None เมื่อสิ้นสุด |\n| head | reference ไป Node แรก; เป็น None "
+      }
+    },
+    {
+      "id": "oop-python-linked-list-exam-02",
+      "type": "choice",
+      "prompt": "tail.next ของลิสต์ไม่มี cycle ควรเป็นอะไร?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "head เสมอ",
+          "id": "a"
+        },
+        {
+          "text": "None",
+          "id": "b"
+        },
+        {
+          "text": "tail เองเสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "None เป็นเงื่อนไขจบตาม traversal ของบท",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "| คำศัพท์ | ความหมายในบทเรียนนี้ |\n|---|---|\n| Node | object หนึ่งตัวที่เก็บ data และ reference ไป Node ถัดไป |\n| data | ข้อมูลใน Node เช่น 10 |\n| next | อ้างอิง Node ถัดไป หรือ None เมื่อสิ้นสุด |\n| head | reference ไป Node แรก; เป็น None "
+      }
+    },
+    {
+      "id": "oop-python-linked-list-exam-03",
+      "type": "choice",
+      "prompt": "Node ต้องอยู่ติดกันในหน่วยความจำหรือไม่?",
+      "reference": "explanation",
+      "choices": [
+        {
+          "text": "ต้องติดกันเหมือนช่อง array",
+          "id": "a"
+        },
+        {
+          "text": "ต้องมี index คำนวณ address ตรงเสมอ",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ ต้องตาม references เพื่อไปโหนดถัดไป",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "เหตุนี้จึงไม่เข้าถึง index ใดๆ O(1) โดยไม่มีโครงสร้างเสริม",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Node แต่ละตัวไม่จำเป็นต้องอยู่ติดกันในหน่วยความจำ\n\nการเข้าถึงตัวถัดไปต้องตาม next จึงไม่สามารถกระโดดไป index ใด ๆ ใน O(1) เหมือน array ได้\n\n\n\nเมื่อเขียน **current = head** ตัวแปรทั้งสองอ้างอิง object เดียวกัน ไม่ได้คัดลอก Node การเขียน **cu"
+      }
+    },
+    {
+      "id": "oop-python-linked-list-exam-04",
+      "type": "choice",
+      "prompt": "current=head; current=current.next เปลี่ยนสิ่งใด?",
+      "reference": "explanation",
+      "choices": [
+        {
+          "text": "เปลี่ยน reference ของ current ไม่เปลี่ยน head หรือ link",
+          "id": "a"
+        },
+        {
+          "text": "ลบ Node แรก",
+          "id": "b"
+        },
+        {
+          "text": "เปลี่ยน head อัตโนมัติ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "การ rebind ตัวแปรต่างจาก mutation ของ field",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Node แต่ละตัวไม่จำเป็นต้องอยู่ติดกันในหน่วยความจำ\n\nการเข้าถึงตัวถัดไปต้องตาม next จึงไม่สามารถกระโดดไป index ใด ๆ ใน O(1) เหมือน array ได้\n\n\n\nเมื่อเขียน **current = head** ตัวแปรทั้งสองอ้างอิง object เดียวกัน ไม่ได้คัดลอก Node การเขียน **cu"
+      }
+    },
+    {
+      "id": "oop-python-linked-list-exam-05",
+      "type": "choice",
+      "prompt": "current.next=other ต่างจาก current=other อย่างไร?",
+      "reference": "explanation",
+      "choices": [
+        {
+          "text": "ทั้งคู่ deep copy ลิสต์",
+          "id": "a"
+        },
+        {
+          "text": "ตัวแรกแก้ link ใน Node; ตัวหลังเปลี่ยนตัวแปร current",
+          "id": "b"
+        },
+        {
+          "text": "ทั้งคู่เปลี่ยนทุก alias เป็น other",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ต้องระบุว่า assignment เปลี่ยน reference ในที่ใด",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Node แต่ละตัวไม่จำเป็นต้องอยู่ติดกันในหน่วยความจำ\n\nการเข้าถึงตัวถัดไปต้องตาม next จึงไม่สามารถกระโดดไป index ใด ๆ ใน O(1) เหมือน array ได้\n\n\n\nเมื่อเขียน **current = head** ตัวแปรทั้งสองอ้างอิง object เดียวกัน ไม่ได้คัดลอก Node การเขียน **cu"
+      }
+    },
+    {
+      "id": "oop-python-linked-list-exam-06",
+      "type": "choice",
+      "prompt": "เหตุใด loop ต้องตรวจ current is not None ก่อนอ่าน current.data?",
+      "reference": "examples",
+      "choices": [
+        {
+          "text": "ทำให้ทุก data เป็นตัวเลข",
+          "id": "a"
+        },
+        {
+          "text": "เพื่อเพิ่ม tail ทุกครั้ง",
+          "id": "b"
+        },
+        {
+          "text": "ป้องกันการอ่าน attribute จาก None",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "เมื่อ current เป็น None ไม่มี Node ให้ใช้งาน",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตัวอย่างต่อไปนี้เป็น Python ปกติสำหรับคัดลอกไปทดลองเอง เว็บไซต์แสดงโค้ดแต่ไม่รัน Python\n\n\n\nผลลัพธ์คือ 10, 20, 30 คนละบรรทัด เมื่อจบ loop current เป็น None แต่ head ยังชี้ Node 10 และ tail ยังชี้ Node 30\n\n### แทรกหลัง Node ที่รู้ตำแหน่งแล้ว "
+      }
+    },
+    {
+      "id": "oop-python-linked-list-exam-07",
+      "type": "numeric",
+      "prompt": "ลิสต์ผู้เขียนมี 5 โหนดไม่มี cycle traversal ที่พิมพ์หนึ่งค่าต่อโหนดจะพิมพ์กี่ค่า?",
+      "reference": "examples",
+      "answer": 5,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "เยี่ยมโหนดละหนึ่งครั้ง ไม่พิมพ์ None เป็นข้อมูลโหนดที่หก",
+      "difficulty": "easy",
+      "verification": {
+        "method": "python",
+        "evidence": "ตัวอย่างต่อไปนี้เป็น Python ปกติสำหรับคัดลอกไปทดลองเอง เว็บไซต์แสดงโค้ดแต่ไม่รัน Python\n\n\n\nผลลัพธ์คือ 10, 20, 30 คนละบรรทัด เมื่อจบ loop current เป็น None แต่ head ยังชี้ Node 10 และ tail ยังชี้ Node 30\n\n### แทรกหลัง Node ที่รู้ตำแหน่งแล้ว ",
+        "oracle": "len([2,4,6,8,10])"
+      }
+    },
+    {
+      "id": "oop-python-linked-list-exam-08",
+      "type": "numeric",
+      "prompt": "จาก head ไปโหนด index4 แบบ 0-based ต้องเลื่อน next กี่ครั้ง?",
+      "reference": "complexity",
+      "answer": 4,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "เริ่ม index0 แล้วเลื่อน 1,2,3,4 รวม 4 ครั้ง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "สมมติ list มี n Node, ไม่มี cycle, index i อยู่ในช่วง 0 ถึง n - 1, การอ่าน/เขียน reference และการทำงานต่อ Node ใช้ O(1) และไม่รวมต้นทุนการพิมพ์ข้อมูลที่ยาวตามขนาด data\n\n| Operation | เวลา | สมมติฐาน |\n|---|---|---|\n| Traversal / ค้นหาค่าที่",
+        "oracle": "len(range(4))"
+      }
+    },
+    {
+      "id": "oop-python-linked-list-exam-09",
+      "type": "choice",
+      "prompt": "แทรก new หลัง current ต้องต่อ new.next ไปที่ใดก่อน?",
+      "reference": "insertion",
+      "choices": [
+        {
+          "text": "new เอง",
+          "id": "a"
+        },
+        {
+          "text": "None ทุกกรณี",
+          "id": "b"
+        },
+        {
+          "text": "current.next เดิม",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "รักษาทางไปส่วนท้ายก่อนแก้ current.next",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "สมมติ current ชี้ Node 20 และต้องการแทรก Node 25 ระหว่าง 20 กับ 30 ต้องเก็บทางไป Node 30 ก่อนเปลี่ยน link ของ Node 20\n\n\n\nผลคือ 10 → 20 → 25 → 30 → None การแทรกที่ head ใช้ new_node.next = head แล้ว head = new_node; ถ้าเดิม list ว่างและเก็บ "
+      }
+    },
+    {
+      "id": "oop-python-linked-list-exam-10",
+      "type": "choice",
+      "prompt": "ถ้าแทรกหลัง tail ที่เก็บอยู่แล้ว ต้องปรับ reference ใดด้วย?",
+      "reference": "insertion",
+      "choices": [
+        {
+          "text": "tail ให้เป็น new_node",
+          "id": "a"
+        },
+        {
+          "text": "head เป็น None เสมอ",
+          "id": "b"
+        },
+        {
+          "text": "ทุก data ในลิสต์",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "โหนดใหม่กลายเป็นตัวท้าย ส่วน head ไม่จำเป็นเปลี่ยน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "สมมติ current ชี้ Node 20 และต้องการแทรก Node 25 ระหว่าง 20 กับ 30 ต้องเก็บทางไป Node 30 ก่อนเปลี่ยน link ของ Node 20\n\n\n\nผลคือ 10 → 20 → 25 → 30 → None การแทรกที่ head ใช้ new_node.next = head แล้ว head = new_node; ถ้าเดิม list ว่างและเก็บ "
+      }
+    },
+    {
+      "id": "oop-python-linked-list-exam-11",
+      "type": "choice",
+      "prompt": "แทรกที่ head ของลิสต์ไม่ว่าง ต้องเรียงสองคำสั่งอย่างไร?",
+      "reference": "insertion",
+      "choices": [
+        {
+          "text": "head=new แล้ว new.next=head",
+          "id": "a"
+        },
+        {
+          "text": "new.next=head แล้ว head=new",
+          "id": "b"
+        },
+        {
+          "text": "head=None แล้วจบ",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "สลับลำดับจะทำ new ชี้ตัวเองและเสียทางไปหัวเดิม",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "สมมติ current ชี้ Node 20 และต้องการแทรก Node 25 ระหว่าง 20 กับ 30 ต้องเก็บทางไป Node 30 ก่อนเปลี่ยน link ของ Node 20\n\n\n\nผลคือ 10 → 20 → 25 → 30 → None การแทรกที่ head ใช้ new_node.next = head แล้ว head = new_node; ถ้าเดิม list ว่างและเก็บ "
+      }
+    },
+    {
+      "id": "oop-python-linked-list-exam-12",
+      "type": "choice",
+      "prompt": "แทรก head ในลิสต์เดิมว่างและมี tail ต้องตั้งอะไร?",
+      "reference": "insertion",
+      "choices": [
+        {
+          "text": "tail ต้องคง None",
+          "id": "a"
+        },
+        {
+          "text": "head ต้องชี้ None หลังแทรก",
+          "id": "b"
+        },
+        {
+          "text": "head และ tail ให้ชี้ Node ใหม่",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "singleton มีหัวและท้ายเป็นโหนดเดียวกัน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "สมมติ current ชี้ Node 20 และต้องการแทรก Node 25 ระหว่าง 20 กับ 30 ต้องเก็บทางไป Node 30 ก่อนเปลี่ยน link ของ Node 20\n\n\n\nผลคือ 10 → 20 → 25 → 30 → None การแทรกที่ head ใช้ new_node.next = head แล้ว head = new_node; ถ้าเดิม list ว่างและเก็บ "
+      }
+    },
+    {
+      "id": "oop-python-linked-list-exam-13",
+      "type": "numeric",
+      "prompt": "ลิสต์มี 4 โหนด แทรก 1 โหนดหลังตำแหน่งที่รู้แล้ว โดยไม่ลบอะไร จะมีโหนด reachable กี่ตัว?",
+      "reference": "insertion",
+      "answer": 5,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "link ใหม่ต้องรักษา 4 ตัวเดิมแล้วเพิ่มอีก 1 ตัว",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "สมมติ current ชี้ Node 20 และต้องการแทรก Node 25 ระหว่าง 20 กับ 30 ต้องเก็บทางไป Node 30 ก่อนเปลี่ยน link ของ Node 20\n\n\n\nผลคือ 10 → 20 → 25 → 30 → None การแทรกที่ head ใช้ new_node.next = head แล้ว head = new_node; ถ้าเดิม list ว่างและเก็บ ",
+        "oracle": "4+1"
+      }
+    },
+    {
+      "id": "oop-python-linked-list-exam-14",
+      "type": "choice",
+      "prompt": "current.next=new; new.next=current.next ทำให้เกิดอะไร?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "text": "แทรกถูกทุกกรณี",
+          "id": "a"
+        },
+        {
+          "text": "new.next ชี้ new เอง",
+          "id": "b"
+        },
+        {
+          "text": "tail ถูกลบโดย garbage collector ทันที",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "current.next ถูกเปลี่ยนเป็น new ไปแล้ว จึงต้องเก็บ next เดิมก่อน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "- ลืม current = current.next ทำให้ loop ไม่จบเมื่อ list ไม่ว่าง\n- ใช้ head เป็นตัวเดินแล้วทำให้เสีย reference ไปจุดเริ่มต้น ใช้ current แทน\n- เข้าถึง current.data เมื่อ current เป็น None ทำให้เกิด AttributeError\n- สลับลำดับการแทรก: ถ้าตั้ง "
+      }
+    },
+    {
+      "id": "oop-python-linked-list-exam-15",
+      "type": "choice",
+      "prompt": "ค้นหาโหนดก่อนแทรกใช้ O(n) แล้วเปลี่ยน links O(1) รวมเวลาใด?",
+      "reference": "complexity",
+      "choices": [
+        {
+          "text": "O(1) เพราะแทรกอย่างเดียว",
+          "id": "a"
+        },
+        {
+          "text": "O(log n) เสมอ",
+          "id": "b"
+        },
+        {
+          "text": "O(n)",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ต้องรวมการค้นหาที่จำเป็น ไม่อ้างความเร็วโดยละสมมติฐาน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "สมมติ list มี n Node, ไม่มี cycle, index i อยู่ในช่วง 0 ถึง n - 1, การอ่าน/เขียน reference และการทำงานต่อ Node ใช้ O(1) และไม่รวมต้นทุนการพิมพ์ข้อมูลที่ยาวตามขนาด data\n\n| Operation | เวลา | สมมติฐาน |\n|---|---|---|\n| Traversal / ค้นหาค่าที่"
+      }
+    },
+    {
+      "id": "oop-python-linked-list-exam-16",
+      "type": "choice",
+      "prompt": "มี tail อยู่ช่วย append ได้ แต่รับรองลบ tail ของ singly list O(1) หรือไม่?",
+      "reference": "complexity",
+      "choices": [
+        {
+          "text": "ไม่ หากยังไม่มีโหนดก่อน tail ต้องค้นหาก่อน",
+          "id": "a"
+        },
+        {
+          "text": "รับรองทุกกรณี",
+          "id": "b"
+        },
+        {
+          "text": "รับรองเมื่อ data เป็น int",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ต้องหา predecessor เพื่อแก้ next และ tail",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "สมมติ list มี n Node, ไม่มี cycle, index i อยู่ในช่วง 0 ถึง n - 1, การอ่าน/เขียน reference และการทำงานต่อ Node ใช้ O(1) และไม่รวมต้นทุนการพิมพ์ข้อมูลที่ยาวตามขนาด data\n\n| Operation | เวลา | สมมติฐาน |\n|---|---|---|\n| Traversal / ค้นหาค่าที่"
+      }
+    },
+    {
+      "id": "oop-python-linked-list-exam-17",
+      "type": "choice",
+      "prompt": "ลืม current=current.next ใน loop ที่ลิสต์ไม่ว่าง จะเกิดอะไร?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "text": "ข้ามทุกโหนดเร็วขึ้น",
+          "id": "a"
+        },
+        {
+          "text": "วนซ้ำโหนดเดิมไม่จบ",
+          "id": "b"
+        },
+        {
+          "text": "Python เพิ่ม current ให้อัตโนมัติ",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ต้องมีความคืบหน้าสู่ None ภายใต้สมมติฐานไม่มี cycle",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "- ลืม current = current.next ทำให้ loop ไม่จบเมื่อ list ไม่ว่าง\n- ใช้ head เป็นตัวเดินแล้วทำให้เสีย reference ไปจุดเริ่มต้น ใช้ current แทน\n- เข้าถึง current.data เมื่อ current เป็น None ทำให้เกิด AttributeError\n- สลับลำดับการแทรก: ถ้าตั้ง "
+      }
+    },
+    {
+      "id": "oop-python-linked-list-exam-18",
+      "type": "choice",
+      "prompt": "มี cycle แต่หยุดเพียงเมื่อ None จะรับรอง termination หรือไม่?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "text": "รับรองถ้ามี tail variable",
+          "id": "a"
+        },
+        {
+          "text": "รับรองถ้าข้อมูลไม่ซ้ำ",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ อาจไม่ถึง None เลย",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "tail variable ไม่แก้ cycle ใน links ต้องตรวจโครงสร้างหรือใช้ algorithm ที่เหมาะ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "- ลืม current = current.next ทำให้ loop ไม่จบเมื่อ list ไม่ว่าง\n- ใช้ head เป็นตัวเดินแล้วทำให้เสีย reference ไปจุดเริ่มต้น ใช้ current แทน\n- เข้าถึง current.data เมื่อ current เป็น None ทำให้เกิด AttributeError\n- สลับลำดับการแทรก: ถ้าตั้ง "
+      }
+    },
+    {
+      "id": "oop-python-linked-list-exam-19",
+      "type": "numeric",
+      "prompt": "Traversal ลิสต์ n=7 ใช้ current หนึ่ง reference โดยไม่เก็บผลเพิ่ม auxiliary references กี่ตัว?",
+      "reference": "complexity",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "เก็บตัวเดินคงที่หนึ่งตัว ไม่คัดลอกทั้งลิสต์",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "สมมติ list มี n Node, ไม่มี cycle, index i อยู่ในช่วง 0 ถึง n - 1, การอ่าน/เขียน reference และการทำงานต่อ Node ใช้ O(1) และไม่รวมต้นทุนการพิมพ์ข้อมูลที่ยาวตามขนาด data\n\n| Operation | เวลา | สมมติฐาน |\n|---|---|---|\n| Traversal / ค้นหาค่าที่"
+      }
+    },
+    {
+      "id": "oop-python-linked-list-exam-20",
+      "type": "choice",
+      "prompt": "การแสดง data ที่เป็นข้อความยาวมากต้องรวมต้นทุนอะไรเพิ่ม?",
+      "reference": "complexity",
+      "choices": [
+        {
+          "text": "ไม่มีเพราะ data เป็น field",
+          "id": "a"
+        },
+        {
+          "text": "ความยาวข้อมูลที่พิมพ์ ไม่ใช่เฉพาะจำนวน Node",
+          "id": "b"
+        },
+        {
+          "text": "คิดเป็น O(1) เสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "สมมติฐาน O(1) ต่อ Node ของตารางไม่รวมข้อความที่โตตามขนาด",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "สมมติ list มี n Node, ไม่มี cycle, index i อยู่ในช่วง 0 ถึง n - 1, การอ่าน/เขียน reference และการทำงานต่อ Node ใช้ O(1) และไม่รวมต้นทุนการพิมพ์ข้อมูลที่ยาวตามขนาด data\n\n| Operation | เวลา | สมมติฐาน |\n|---|---|---|\n| Traversal / ค้นหาค่าที่"
+      }
+    },
+    {
+      "id": "oop-python-linked-list-exam-21",
+      "type": "self",
+      "prompt": "เขียน traversal ที่คง head และ links เดิม แล้วออกแบบตรวจผล",
+      "reference": "examples",
+      "rubric": [
+        "ใช้ current แยกจาก head และตรวจ None ก่อนอ่าน",
+        "เลื่อนหนึ่ง next หลังประมวลผล",
+        "ตรวจ empty,singleton และลิสต์หลายโหนดด้วย expectedsequence"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ใช้ current แยกจาก head และตรวจ None ก่อนอ่าน เลื่อนหนึ่ง next หลังประมวลผล ตรวจ empty,singleton และลิสต์หลายโหนดด้วย expectedsequence",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ตัวอย่างต่อไปนี้เป็น Python ปกติสำหรับคัดลอกไปทดลองเอง เว็บไซต์แสดงโค้ดแต่ไม่รัน Python\n\n\n\nผลลัพธ์คือ 10, 20, 30 คนละบรรทัด เมื่อจบ loop current เป็น None แต่ head ยังชี้ Node 10 และ tail ยังชี้ Node 30\n\n### แทรกหลัง Node ที่รู้ตำแหน่งแล้ว "
+      }
+    },
+    {
+      "id": "oop-python-linked-list-exam-22",
+      "type": "self",
+      "prompt": "ออกแบบ test แทรกหลังโหนดกลางและหลัง tail โดยไม่ทำส่วนท้ายหาย",
+      "reference": "insertion",
+      "rubric": [
+        "เก็บ next เดิมก่อนเปลี่ยน link",
+        "ปรับ tail เฉพาะเมื่อ current เป็น tail เดิม",
+        "ตรวจ reachable sequence,จำนวนโหนดและไม่มี cycle"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: เก็บ next เดิมก่อนเปลี่ยน link ปรับ tail เฉพาะเมื่อ current เป็น tail เดิม ตรวจ reachable sequence,จำนวนโหนดและไม่มี cycle",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "สมมติ current ชี้ Node 20 และต้องการแทรก Node 25 ระหว่าง 20 กับ 30 ต้องเก็บทางไป Node 30 ก่อนเปลี่ยน link ของ Node 20\n\n\n\nผลคือ 10 → 20 → 25 → 30 → None การแทรกที่ head ใช้ new_node.next = head แล้ว head = new_node; ถ้าเดิม list ว่างและเก็บ "
+      }
+    },
+    {
+      "id": "oop-python-linked-list-exam-23",
+      "type": "self",
+      "prompt": "อธิบายความต่างการ rebind ตัวแปรกับการเปลี่ยน field ด้วย alias สองตัว",
+      "reference": "insertion",
+      "rubric": [
+        "ระบุว่า alias เริ่มอ้าง object เดียวกัน",
+        "rebind ไม่เปลี่ยนอีกชื่อ",
+        "mutate next เป็นการแก้ object ร่วมและอาจเปลี่ยนลิสต์"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ระบุว่า alias เริ่มอ้าง object เดียวกัน rebind ไม่เปลี่ยนอีกชื่อ mutate next เป็นการแก้ object ร่วมและอาจเปลี่ยนลิสต์",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "สมมติ current ชี้ Node 20 และต้องการแทรก Node 25 ระหว่าง 20 กับ 30 ต้องเก็บทางไป Node 30 ก่อนเปลี่ยน link ของ Node 20\n\n\n\nผลคือ 10 → 20 → 25 → 30 → None การแทรกที่ head ใช้ new_node.next = head แล้ว head = new_node; ถ้าเดิม list ว่างและเก็บ "
+      }
+    },
+    {
+      "id": "oop-python-linked-list-exam-24",
+      "type": "self",
+      "prompt": "แจกแจงต้นทุน access,search,insert,append โดยระบุ references ที่มีอยู่ก่อน",
+      "reference": "complexity",
+      "rubric": [
+        "access index ต้องตาม next",
+        "แทรกหลัง knownnode เปลี่ยน links คงที่",
+        "รวมการค้นหาเมื่อยังไม่รู้ตำแหน่งและไม่เหมารวม tail ทุก operation"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: access index ต้องตาม next แทรกหลัง knownnode เปลี่ยน links คงที่ รวมการค้นหาเมื่อยังไม่รู้ตำแหน่งและไม่เหมารวม tail ทุก operation",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "สมมติ list มี n Node, ไม่มี cycle, index i อยู่ในช่วง 0 ถึง n - 1, การอ่าน/เขียน reference และการทำงานต่อ Node ใช้ O(1) และไม่รวมต้นทุนการพิมพ์ข้อมูลที่ยาวตามขนาด data\n\n| Operation | เวลา | สมมติฐาน |\n|---|---|---|\n| Traversal / ค้นหาค่าที่"
+      }
+    }
+  ]
+}

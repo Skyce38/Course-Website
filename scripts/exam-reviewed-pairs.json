@@ -1,0 +1,10 @@
+[
+  {
+    "ids": ["artificial-intelligence-final-hierarchical-clustering-exam-10", "artificial-intelligence-final-hierarchical-clustering-exam-11"],
+    "reason": "Same cross-pair data deliberately contrasts two different linkage definitions: min versus max. Neither is counted as evidence for the other algorithm."
+  },
+  {
+    "ids": ["artificial-intelligence-final-regression-exam-10", "artificial-intelligence-final-regression-exam-11"],
+    "reason": "OLS slope and intercept require different centered-sum/mean steps and interpretations; distinct target parameters, not a number-only clone."
+  }
+]

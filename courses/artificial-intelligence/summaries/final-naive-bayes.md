@@ -11,7 +11,7 @@
 - อธิบายกรณีศูนย์ การ normalize และขอบเขตการตีความคำตอบ
 - แยก CategoricalNB จาก GaussianNB และอ่านผล Python โดยไม่อ้าง accuracy เกินหลักฐาน
 
-ทบทวน [FINAL KNN](final-knn.md) เรื่อง features/labels ได้ Path Foundations → BFS/DFS → FINAL Regression → FINAL KNN → FINAL Naive Bayes เป็น **ลำดับเผยแพร่ชั่วคราว ไม่ใช่ลำดับสอนที่ยืนยันแล้ว** ไม่ใช่ข้ออ้างว่า BFS/DFS เป็น prerequisite ของหัวข้อนี้
+ทบทวน [FINAL KNN](final-knn.md) เรื่อง features/labels ได้ บทเรียนเหล่านี้อ่านแยกกันได้ ลำดับเผยแพร่ไม่ใช่ลำดับสอนที่ยืนยันแล้ว และ BFS/DFS ไม่ใช่ prerequisite ของหัวข้อนี้
 
 ## ทบทวน Classification และความน่าจะเป็น {#probability}
 คำอธิบายพื้นฐานส่วนนี้เขียนเสริมเพื่ออ่านสูตรใน S07 หน้า 6: Classification เลือก label จากชุดคลาสที่กำหนด ไม่ใช่ทำนายค่าเฉลี่ยตัวเลขแบบ regression และไม่ใช่โหวตเพื่อนบ้านแบบ KNN

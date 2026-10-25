@@ -1,0 +1,585 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-encapsulation-properties",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "oop-python-encapsulation-properties-exam-01",
+      "type": "choice",
+      "prompt": "_balance สื่ออะไรใน Python ตาม convention?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "เป็น non-public interface ที่ควรหลีกเลี่ยงจากภายนอก",
+          "id": "a"
+        },
+        {
+          "text": "เข้าถึงไม่ได้ด้วยภาษาเสมอ",
+          "id": "b"
+        },
+        {
+          "text": "ถูกเข้ารหัสลับ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "underscore ไม่ใช่ระบบควบคุมสิทธิ์หรือที่เก็บ secrets",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week2 pp.3–7: public `balance` เข้าถึงตรง; `_balance` เป็นสัญญาณ non-public ตาม convention; `__balance` ใน Account ถูก mangle เป็น `_Account__balance` เพื่อลดชื่อชนกับ subclass\n\nไม่ใช่ encryption/accesscontrol ภายนอกยังเข้าถึงชื่อที่ mangle"
+      }
+    },
+    {
+      "id": "oop-python-encapsulation-properties-exam-02",
+      "type": "choice",
+      "prompt": "__balance ใน Account ถูก name-mangle เป็นอะไร?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "__Account.balance",
+          "id": "a"
+        },
+        {
+          "text": "_Account__balance",
+          "id": "b"
+        },
+        {
+          "text": "balance_private_secret",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ลดชื่อชนกับ subclass ไม่ใช่ encryption",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week2 pp.3–7: public `balance` เข้าถึงตรง; `_balance` เป็นสัญญาณ non-public ตาม convention; `__balance` ใน Account ถูก mangle เป็น `_Account__balance` เพื่อลดชื่อชนกับ subclass\n\nไม่ใช่ encryption/accesscontrol ภายนอกยังเข้าถึงชื่อที่ mangle"
+      }
+    },
+    {
+      "id": "oop-python-encapsulation-properties-exam-03",
+      "type": "choice",
+      "prompt": "อ่าน a.balance ที่เป็น property ควรใช้ syntax ใด?",
+      "reference": "properties",
+      "choices": [
+        {
+          "text": "a.balance() เสมอ",
+          "id": "a"
+        },
+        {
+          "text": "Account.balance=()",
+          "id": "b"
+        },
+        {
+          "text": "a.balance",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "property ให้ syntax แบบ attribute แม้เบื้องหลังเรียก getter",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.9–19: `@property` ทำ method ให้เรียกอ่านด้วย syntax attribute; `@balance.setter` ต้องใช้ชื่อ property ที่ประกาศแล้ว เมื่อเขียน `a.balance=500` Python ส่ง 500 ให้ setter ไม่ต้องเรียก `a.balance()` หากไม่มี setter การ assign ชื่อ property "
+      }
+    },
+    {
+      "id": "oop-python-encapsulation-properties-exam-04",
+      "type": "choice",
+      "prompt": "เหตุใด constructor ควรใช้ setter ที่รวม validation?",
+      "reference": "properties",
+      "choices": [
+        {
+          "text": "ให้ state เริ่มต้นผ่าน invariant เดียวกับการแก้ภายหลัง",
+          "id": "a"
+        },
+        {
+          "text": "เพื่อข้ามทุกเงื่อนไข",
+          "id": "b"
+        },
+        {
+          "text": "เพื่อให้ count เพิ่มทุกครั้งเสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "การเขียน backing field โดยข้าม setter อาจยอมค่าไม่ถูกต้อง",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.9–19: `@property` ทำ method ให้เรียกอ่านด้วย syntax attribute; `@balance.setter` ต้องใช้ชื่อ property ที่ประกาศแล้ว เมื่อเขียน `a.balance=500` Python ส่ง 500 ให้ setter ไม่ต้องเรียก `a.balance()` หากไม่มี setter การ assign ชื่อ property "
+      }
+    },
+    {
+      "id": "oop-python-encapsulation-properties-exam-05",
+      "type": "choice",
+      "prompt": "setter เขียน self.balance=value ซ้ำภายใน balance setter จะเสี่ยงอะไร?",
+      "reference": "properties",
+      "choices": [
+        {
+          "text": "KeyError เสมอ",
+          "id": "a"
+        },
+        {
+          "text": "RecursionError",
+          "id": "b"
+        },
+        {
+          "text": "เปลี่ยนเป็น local variable ทันที",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ต้องเขียน backing field เพื่อไม่เรียก setter เดิมไม่สิ้นสุด",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "pp.9–19: `@property` ทำ method ให้เรียกอ่านด้วย syntax attribute; `@balance.setter` ต้องใช้ชื่อ property ที่ประกาศแล้ว เมื่อเขียน `a.balance=500` Python ส่ง 500 ให้ setter ไม่ต้องเรียก `a.balance()` หากไม่มี setter การ assign ชื่อ property ",
+        "oracle": "run(\"class A:\\n    @property\\n    def x(self): return 0\\n    @x.setter\\n    def x(self,v): self.x=v\\ntry: A().x=1\\nexcept Exception as e: print(type(e).__name__)\")"
+      }
+    },
+    {
+      "id": "oop-python-encapsulation-properties-exam-06",
+      "type": "choice",
+      "prompt": "Read-only property รับรองว่า object ข้างใน immutable ทั้งหมดหรือไม่?",
+      "reference": "properties",
+      "choices": [
+        {
+          "text": "รับรอง deep immutability",
+          "id": "a"
+        },
+        {
+          "text": "รับรองว่าไม่มี backing field",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ รับรองเพียงไม่มี setter ของชื่อ property นั้น",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ต้องแยกการ assign property กับ mutation ของค่าที่อ้างถึง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.9–19: `@property` ทำ method ให้เรียกอ่านด้วย syntax attribute; `@balance.setter` ต้องใช้ชื่อ property ที่ประกาศแล้ว เมื่อเขียน `a.balance=500` Python ส่ง 500 ให้ setter ไม่ต้องเรียก `a.balance()` หากไม่มี setter การ assign ชื่อ property "
+      }
+    },
+    {
+      "id": "oop-python-encapsulation-properties-exam-07",
+      "type": "choice",
+      "prompt": "ทำไมผู้เขียนจึงไม่ใช้ isinstance(value,(int,float)) เพียงอย่างเดียว?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "เพราะ bool ผ่าน isinstance และยังต้องตรวจ finite",
+          "id": "a"
+        },
+        {
+          "text": "เพราะ int ใช้บวกไม่ได้",
+          "id": "b"
+        },
+        {
+          "text": "เพราะ float ทุกตัวเป็น NaN",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "นโยบายตัวอย่างเพิ่ม type exact และ isfinite ชัดเจน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Source ใช้ isinstance(int,float) ซึ่งรับ bool ด้วย โค้ดผู้เขียนนี้ตั้งใจเข้มขึ้น:ปฏิเสธ bool และ NaN/infinity ด้วย typeexact/isfinite;ใช้ float เพื่อสาธิต ไม่อ้างว่าคือข้อกำหนดทางการเงินของแหล่ง"
+      }
+    },
+    {
+      "id": "oop-python-encapsulation-properties-exam-08",
+      "type": "choice",
+      "prompt": "รับ NaN เป็นยอดคงเหลือเหมาะกับ invariant นี้หรือไม่?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "เหมาะเพราะเป็น float",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ ต้องปฏิเสธตาม finite validation",
+          "id": "b"
+        },
+        {
+          "text": "เหมาะเมื่อเปรียบเทียบไม่ติดลบ",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "NaN มีพฤติกรรมเปรียบเทียบพิเศษ จึงต้องตรวจโดยตรง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Source ใช้ isinstance(int,float) ซึ่งรับ bool ด้วย โค้ดผู้เขียนนี้ตั้งใจเข้มขึ้น:ปฏิเสธ bool และ NaN/infinity ด้วย typeexact/isfinite;ใช้ float เพื่อสาธิต ไม่อ้างว่าคือข้อกำหนดทางการเงินของแหล่ง"
+      }
+    },
+    {
+      "id": "oop-python-encapsulation-properties-exam-09",
+      "type": "choice",
+      "prompt": "ตั้ง owner ของ Account ที่มี getter แต่ไม่มี setter เกิดอะไร?",
+      "reference": "trace",
+      "choices": [
+        {
+          "text": "สร้าง property ใหม่โดยอัตโนมัติ",
+          "id": "a"
+        },
+        {
+          "text": "เพิ่ม transaction_count",
+          "id": "b"
+        },
+        {
+          "text": "AttributeError",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "read-only interface ปฏิเสธ assignment ที่ชื่อนั้น",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "| การทำงาน | ยอด | count | ผล |\n|---|---:|---:|---|\n| constructor1000 | 1000 | 0 | ผ่าน setter |\n| deposit500 | 1500 | 1 | จำนวนบวก |\n| withdraw200 | 1300 | 2 | ไม่เกินยอด |\n| balance=−1 | 1300 | 2 | ValueError ก่อนเขียน |\n| withdraw1400 | "
+      }
+    },
+    {
+      "id": "oop-python-encapsulation-properties-exam-10",
+      "type": "numeric",
+      "prompt": "เริ่มยอด 80 ฝาก 20 สำเร็จ ถอน 25 สำเร็จ จงหายอด",
+      "reference": "trace",
+      "answer": 75,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "80+20−25=75 หลังผ่าน validation",
+      "difficulty": "easy",
+      "verification": {
+        "method": "python",
+        "evidence": "| การทำงาน | ยอด | count | ผล |\n|---|---:|---:|---|\n| constructor1000 | 1000 | 0 | ผ่าน setter |\n| deposit500 | 1500 | 1 | จำนวนบวก |\n| withdraw200 | 1300 | 2 | ไม่เกินยอด |\n| balance=−1 | 1300 | 2 | ValueError ก่อนเขียน |\n| withdraw1400 | ",
+        "oracle": "80+20-25"
+      }
+    },
+    {
+      "id": "oop-python-encapsulation-properties-exam-11",
+      "type": "numeric",
+      "prompt": "เริ่ม transaction_count0 แล้วฝากหนึ่งครั้ง ถอนหนึ่งครั้งสำเร็จ ตั้ง balance ผ่าน setter โดยตรงสองครั้ง count เป็นเท่าใด?",
+      "reference": "trace",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "เฉพาะ deposit/withdraw ที่สำเร็จเพิ่ม count ตาม contract",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "| การทำงาน | ยอด | count | ผล |\n|---|---:|---:|---|\n| constructor1000 | 1000 | 0 | ผ่าน setter |\n| deposit500 | 1500 | 1 | จำนวนบวก |\n| withdraw200 | 1300 | 2 | ไม่เกินยอด |\n| balance=−1 | 1300 | 2 | ValueError ก่อนเขียน |\n| withdraw1400 | ",
+        "oracle": "sum([1,1,0,0])"
+      }
+    },
+    {
+      "id": "oop-python-encapsulation-properties-exam-12",
+      "type": "choice",
+      "prompt": "withdraw เกินยอดควรปรับ transaction_count หรือไม่ตามโค้ด?",
+      "reference": "trace",
+      "choices": [
+        {
+          "text": "ปรับเพราะเรียก method แล้ว",
+          "id": "a"
+        },
+        {
+          "text": "ปรับเฉพาะเมื่อจับ exception",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ เพราะยังไม่สำเร็จ",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "validation และยอดไม่พอต้องไม่สร้างธุรกรรมสำเร็จปลอม",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "| การทำงาน | ยอด | count | ผล |\n|---|---:|---:|---|\n| constructor1000 | 1000 | 0 | ผ่าน setter |\n| deposit500 | 1500 | 1 | จำนวนบวก |\n| withdraw200 | 1300 | 2 | ไม่เกินยอด |\n| balance=−1 | 1300 | 2 | ValueError ก่อนเขียน |\n| withdraw1400 | "
+      }
+    },
+    {
+      "id": "oop-python-encapsulation-properties-exam-13",
+      "type": "choice",
+      "prompt": "Car.fuel_level0..100 กับยอดบัญชีมีข้อกำหนดเหมือนกันทุกค่าหรือไม่?",
+      "reference": "applications",
+      "choices": [
+        {
+          "text": "ไม่ ต้องใช้ invariant ตาม domain",
+          "id": "a"
+        },
+        {
+          "text": "เหมือนกันทุก domain",
+          "id": "b"
+        },
+        {
+          "text": "Car ไม่ต้อง validation เพราะเป็น property",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "reuse แนวคิด ไม่คัดช่วงค่าของบัญชีไปทุกชนิดข้อมูล",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Lab2-1 กำหนด Car.fuel_level0..100 และ mileage อ่านอย่างเดียว;Lab2-2Student และ Hw2Product มีช่วงค่าต่างกัน จึง reuse แนวคิด validation ไม่เอากฎเงินไปใช้กับทุก domain การอ่าน property ง่ายๆ O(1) แต่ computed property อาจต้องวนข้อมูลจึงไม่ใช่"
+      }
+    },
+    {
+      "id": "oop-python-encapsulation-properties-exam-14",
+      "type": "choice",
+      "prompt": "Computed property ที่รวมข้อมูล n รายการอาจมีต้นทุนอะไร?",
+      "reference": "applications",
+      "choices": [
+        {
+          "text": "O(1) ทุก property",
+          "id": "a"
+        },
+        {
+          "text": "O(n) แม้ syntax ดูเป็น attribute",
+          "id": "b"
+        },
+        {
+          "text": "O(log n) ตามชื่อ property",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "syntax ไม่ได้กำหนด complexity ต้องดูงานใน getter",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Lab2-1 กำหนด Car.fuel_level0..100 และ mileage อ่านอย่างเดียว;Lab2-2Student และ Hw2Product มีช่วงค่าต่างกัน จึง reuse แนวคิด validation ไม่เอากฎเงินไปใช้กับทุก domain การอ่าน property ง่ายๆ O(1) แต่ computed property อาจต้องวนข้อมูลจึงไม่ใช่"
+      }
+    },
+    {
+      "id": "oop-python-encapsulation-properties-exam-15",
+      "type": "choice",
+      "prompt": "TypeError กับ ValueError ควรแยกอย่างไร?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "text": "ใช้แทนกันทุกกรณีเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "ValueError เกิดเฉพาะ network",
+          "id": "b"
+        },
+        {
+          "text": "ชนิดไม่รับ กับค่าอยู่นอกช่วงที่รับ",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ช่วย caller เข้าใจชนิดของความผิดพลาดและเขียน tests",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Setter ก่อน getter/ใช้@property.setter ผิดชื่อ;ข้าม setter ใน __init__;return ค่าแทนการ set;เข้าใจ read-only ว่าไม่เปลี่ยนได้ด้วยวิธีใดเลย;จับ Exception กว้างจนกลบข้อผิดพลาดจริง"
+      }
+    },
+    {
+      "id": "oop-python-encapsulation-properties-exam-16",
+      "type": "choice",
+      "prompt": "Name mangling ใช้เก็บรหัสลับให้คนอ่าน object ไม่ได้จริงหรือไม่?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "ไม่ ยังเข้าถึงชื่อที่ถูก mangle ได้",
+          "id": "a"
+        },
+        {
+          "text": "ได้เพราะมีสอง underscores",
+          "id": "b"
+        },
+        {
+          "text": "ได้เมื่อ class เป็น subclass",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "เป็นเครื่องมือหลีกชื่อชน ไม่ใช่ security boundary",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week2 pp.3–7: public `balance` เข้าถึงตรง; `_balance` เป็นสัญญาณ non-public ตาม convention; `__balance` ใน Account ถูก mangle เป็น `_Account__balance` เพื่อลดชื่อชนกับ subclass\n\nไม่ใช่ encryption/accesscontrol ภายนอกยังเข้าถึงชื่อที่ mangle"
+      }
+    },
+    {
+      "id": "oop-python-encapsulation-properties-exam-17",
+      "type": "choice",
+      "prompt": "Getter คืนค่าตัวเลขด้วย return ทำให้ assignment ไป property ใช้ getter หรือ setter?",
+      "reference": "properties",
+      "choices": [
+        {
+          "text": "เรียก getter แล้วเขียนทับผลคืน",
+          "id": "a"
+        },
+        {
+          "text": "ใช้ setter ถ้าประกาศไว้",
+          "id": "b"
+        },
+        {
+          "text": "ข้าม setter ทุกครั้ง",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "a.balance=v ผ่าน descriptor จึงรวม validation ที่จุดเดียว",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.9–19: `@property` ทำ method ให้เรียกอ่านด้วย syntax attribute; `@balance.setter` ต้องใช้ชื่อ property ที่ประกาศแล้ว เมื่อเขียน `a.balance=500` Python ส่ง 500 ให้ setter ไม่ต้องเรียก `a.balance()` หากไม่มี setter การ assign ชื่อ property "
+      }
+    },
+    {
+      "id": "oop-python-encapsulation-properties-exam-18",
+      "type": "choice",
+      "prompt": "Python ให้ isinstance(True,int) เป็นอะไร?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "False",
+          "id": "a"
+        },
+        {
+          "text": "TypeError",
+          "id": "b"
+        },
+        {
+          "text": "True",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "bool เป็น subclass ของ int จึงอธิบายเหตุผลของ type-exact policy",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "Source ใช้ isinstance(int,float) ซึ่งรับ bool ด้วย โค้ดผู้เขียนนี้ตั้งใจเข้มขึ้น:ปฏิเสธ bool และ NaN/infinity ด้วย typeexact/isfinite;ใช้ float เพื่อสาธิต ไม่อ้างว่าคือข้อกำหนดทางการเงินของแหล่ง",
+        "oracle": "isinstance(True,int)"
+      }
+    },
+    {
+      "id": "oop-python-encapsulation-properties-exam-19",
+      "type": "numeric",
+      "prompt": "Account เริ่ม 60 ฝาก 10 สำเร็จ ถอน 100 ล้มเหลว แล้วฝาก 5 สำเร็จ จงหายอด",
+      "reference": "trace",
+      "answer": 75,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "ยอดหลังถอนที่ล้มเหลวยัง 70 แล้วฝาก 5 เป็น 75",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "| การทำงาน | ยอด | count | ผล |\n|---|---:|---:|---|\n| constructor1000 | 1000 | 0 | ผ่าน setter |\n| deposit500 | 1500 | 1 | จำนวนบวก |\n| withdraw200 | 1300 | 2 | ไม่เกินยอด |\n| balance=−1 | 1300 | 2 | ValueError ก่อนเขียน |\n| withdraw1400 | ",
+        "oracle": "60+10+5"
+      }
+    },
+    {
+      "id": "oop-python-encapsulation-properties-exam-20",
+      "type": "choice",
+      "prompt": "จับ Exception กว้างแล้วทำเหมือนสำเร็จมีความเสี่ยงใด?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "text": "ช่วยรักษา invariant โดยอัตโนมัติ",
+          "id": "a"
+        },
+        {
+          "text": "กลบข้อผิดพลาดจริงและทำให้ caller เข้าใจ state ผิด",
+          "id": "b"
+        },
+        {
+          "text": "เพิ่มความแม่นยำการเงิน",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ควรจัดการเฉพาะข้อผิดพลาดที่คาดและตรวจ state",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Setter ก่อน getter/ใช้@property.setter ผิดชื่อ;ข้าม setter ใน __init__;return ค่าแทนการ set;เข้าใจ read-only ว่าไม่เปลี่ยนได้ด้วยวิธีใดเลย;จับ Exception กว้างจนกลบข้อผิดพลาดจริง"
+      }
+    },
+    {
+      "id": "oop-python-encapsulation-properties-exam-21",
+      "type": "self",
+      "prompt": "ออกแบบ property ที่รักษาช่วงค่าตั้งแต่ constructor ถึงการแก้ภายหลัง",
+      "reference": "properties",
+      "rubric": [
+        "ระบุ backing field และ validation เดียว",
+        "ไม่มี recursion ใน setter",
+        "ทดสอบค่าขอบและค่าเดิมหลังการปฏิเสธ"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ระบุ backing field และ validation เดียว ไม่มี recursion ใน setter ทดสอบค่าขอบและค่าเดิมหลังการปฏิเสธ",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "pp.9–19: `@property` ทำ method ให้เรียกอ่านด้วย syntax attribute; `@balance.setter` ต้องใช้ชื่อ property ที่ประกาศแล้ว เมื่อเขียน `a.balance=500` Python ส่ง 500 ให้ setter ไม่ต้องเรียก `a.balance()` หากไม่มี setter การ assign ชื่อ property "
+      }
+    },
+    {
+      "id": "oop-python-encapsulation-properties-exam-22",
+      "type": "self",
+      "prompt": "ออกแบบ tests สำหรับ bool,NaN,infinity และตัวเลขที่ผ่านตาม policy ผู้เขียน",
+      "reference": "python",
+      "rubric": [
+        "ระบุว่าเข้มกว่าตัวอย่าง source บางส่วน",
+        "แยก type error กับ range error",
+        "ตรวจว่า state ไม่เปลี่ยนเมื่อไม่ผ่าน"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ระบุว่าเข้มกว่าตัวอย่าง source บางส่วน แยก type error กับ range error ตรวจว่า state ไม่เปลี่ยนเมื่อไม่ผ่าน",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Source ใช้ isinstance(int,float) ซึ่งรับ bool ด้วย โค้ดผู้เขียนนี้ตั้งใจเข้มขึ้น:ปฏิเสธ bool และ NaN/infinity ด้วย typeexact/isfinite;ใช้ float เพื่อสาธิต ไม่อ้างว่าคือข้อกำหนดทางการเงินของแหล่ง"
+      }
+    },
+    {
+      "id": "oop-python-encapsulation-properties-exam-23",
+      "type": "self",
+      "prompt": "ออกแบบ read-only mileage ของ Car โดยไม่อ้าง deep immutability",
+      "reference": "applications",
+      "rubric": [
+        "ซ่อน setter ของ public property",
+        "ระบุ method ภายในที่เปลี่ยน mileage ได้ตามสัญญา",
+        "อธิบายว่าภาษาไม่ได้สร้าง security boundary จาก underscore"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ซ่อน setter ของ public property ระบุ method ภายในที่เปลี่ยน mileage ได้ตามสัญญา อธิบายว่าภาษาไม่ได้สร้าง security boundary จาก underscore",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Lab2-1 กำหนด Car.fuel_level0..100 และ mileage อ่านอย่างเดียว;Lab2-2Student และ Hw2Product มีช่วงค่าต่างกัน จึง reuse แนวคิด validation ไม่เอากฎเงินไปใช้กับทุก domain การอ่าน property ง่ายๆ O(1) แต่ computed property อาจต้องวนข้อมูลจึงไม่ใช่"
+      }
+    },
+    {
+      "id": "oop-python-encapsulation-properties-exam-24",
+      "type": "self",
+      "prompt": "วาง trace ที่ตรวจยอดและ transaction_count หลังทุกคำสั่ง",
+      "reference": "trace",
+      "rubric": [
+        "แยก setter โดยตรงจากธุรกรรมสำเร็จ",
+        "ใส่ operation ที่ล้มเหลวหนึ่งครั้ง",
+        "ตรวจทั้งค่าและจำนวน ไม่ใช้เพียงไม่มี exception"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: แยก setter โดยตรงจากธุรกรรมสำเร็จ ใส่ operation ที่ล้มเหลวหนึ่งครั้ง ตรวจทั้งค่าและจำนวน ไม่ใช้เพียงไม่มี exception",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "| การทำงาน | ยอด | count | ผล |\n|---|---:|---:|---|\n| constructor1000 | 1000 | 0 | ผ่าน setter |\n| deposit500 | 1500 | 1 | จำนวนบวก |\n| withdraw200 | 1300 | 2 | ไม่เกินยอด |\n| balance=−1 | 1300 | 2 | ValueError ก่อนเขียน |\n| withdraw1400 | "
+      }
+    }
+  ]
+}

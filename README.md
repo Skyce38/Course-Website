@@ -123,4 +123,6 @@ Learning Paths and their ordered recommendations have been removed. Open every l
 
 ### Phase 6 — Practice Mode MVP
 
-The original Stack, Basic Sorting, KNN and Decision Tree pilot established immediate explanations, numeric validation, retry/incorrect-answer review, saved attempts and ungraded self-assessment. Phase 6B now extends that unchanged component to all 25 registered AI/OOP lessons: 150 questions (125 automatic, 25 self-assessments). Existing lesson content, pilot question revisions and reading data remain unchanged. See [the practice contract, storage and checks](docs/practice-mode.md) and [answer-verification coverage](docs/practice-expansion-coverage.md).
+### Phase 8 — Extended Exam Bank and Reading Polish
+
+All 25 registered lessons now also provide Topic Practice and 10/20/30/full mock sessions: **750 unique questions** (460 choice, 165 numeric, 125 ungraded self-assessments). The original 150 questions, revisions and saved attempts remain unchanged. Exam sessions use separate local keys and the shared grader. Generated readers have reviewed prose spacing, compact typography and keyboard-scrollable tables; original programs, equations, tables, solved exercises and stable anchors remain protected. See [coverage](docs/phase8-exam-coverage.md), [verification](docs/phase8-exam-verification.md), [storage/build contract](docs/extended-exam-bank.md) and [reading review](docs/phase8-reading-review.md).

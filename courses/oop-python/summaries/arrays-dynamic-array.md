@@ -2,21 +2,25 @@
 {"version":1,"id":"oop-python-arrays-dynamic-array","course":"oop-python","category":"summaries","slug":"arrays-dynamic-array","title":"Array, Dynamic Array และ Amortized Analysis","language":"th"}
 ---
 
-> บท array รวม Week7 physical pp.24–62กับ Week8 pp.3–24 โครงสร้าง doubling/shift และตัวเลข n8มาจาก source โค้ดปรับเป็นโมเดลการเรียนโดยใช้ Python list เป็น buffer ไม่ใช่การวัดหน่วยความจำจริงของ CPython หรือ Carray
+> บท array รวม Week7 physical pp.24–62 กับ Week8 pp.3–24 โครงสร้าง doubling/shift และตัวเลข n8 มาจาก source โค้ดปรับเป็นโมเดลการเรียนโดยใช้ Python list เป็น buffer ไม่ใช่การวัดหน่วยความจำจริงของ CPython หรือ Carray
 
 ## เป้าหมายการเรียนรู้ {#objectives}
 - แยก size/capacity,fixed/dynamic และ reference slots จาก object ที่ถูกชี้
 - ไล่ resize/insert/remove/search และรักษา invariants บน empty/singleton/boundaries
-- พิสูจน์ amortizedbound ไม่ปน averagecase และอ่าน row-major2D
-- ใช้__len__,__getitem__,__setitem__,__str__,__repr__ให้ตรง logicaldata
+- พิสูจน์ amortized bound ไม่ปน average case และอ่าน row-major2D
+- ใช้ __len__,__getitem__,__setitem__,__str__,__repr__ ให้ตรง logical data
 
 ## Memory Model และ Random Access {#concepts}
-Week7 pp.26–38:array มีช่องตำแหน่งต่อเนื่องในแบบจำลอง จึงคำนวณ base_address+i×element_size ได้โดยไม่เดินผ่านสมาชิกก่อนหน้า เป็นเหตุผลของ indexaccessO(1)เมื่อขนาดช่องคงที่ Python list เก็บ references ในช่อง ไม่ได้แปลว่า objects ที่มีชนิด/ขนาดต่างกันวางติดกันทั้งหมด สูตรนี้ไม่ใช่วิธีหา address จริงของ Python object จาก id ด้วยการบวกเอง
+Week7 pp.26–38:array มีช่องตำแหน่งต่อเนื่องในแบบจำลอง จึงคำนวณ base_address+i×element_size ได้โดยไม่เดินผ่านสมาชิกก่อนหน้า เป็นเหตุผลของ indexaccessO(1) เมื่อขนาดช่องคงที่
 
-FixedArray กำหนด capacity ตอนสร้างและปฏิเสธเมื่อเต็ม DynamicArray ขยาย buffer เมื่อจำเป็น จึงมี0≤size≤capacity;size นับค่าจริงและ capacity นับ slot ทั้งหมด ค่า None อาจเป็นค่าจริงใน array ได้จึงห้ามใช้ None แทนขนาด การสร้าง capacity slots O(capacity)เป็นคนละคำถามกับการอ่าน index หนึ่งครั้ง O(1)
+Python list เก็บ references ในช่อง ไม่ได้แปลว่า objects ที่มีชนิด/ขนาดต่างกันวางติดกันทั้งหมด
+
+สูตรนี้ไม่ใช่วิธีหา address จริงของ Python object จาก id ด้วยการบวกเอง
+
+FixedArray กำหนด capacity ตอนสร้างและปฏิเสธเมื่อเต็ม DynamicArray ขยาย buffer เมื่อจำเป็น จึงมี 0≤size≤capacity;size นับค่าจริงและ capacity นับ slot ทั้งหมด ค่า None อาจเป็นค่าจริงใน array ได้จึงห้ามใช้ None แทนขนาด การสร้าง capacity slots O(capacity) เป็นคนละคำถามกับการอ่าน index หนึ่งครั้ง O(1)
 
 ## Doubling และ Amortized Analysis {#amortized}
-Week7 pp.40–47,Week8 pp.3–8:เริ่ม capacity1 ถ้าเต็มให้ allocate2เท่า คัดลอกค่าจริงแล้ว append ใหม่ ตารางต่อไปนับ **การเขียนค่าใหม่+copylivecells** ตามแบบจำลอง source ไม่ใช่ทุก allocationinstruction หรือเวลา wallclock
+Week7 pp.40–47,Week8 pp.3–8:เริ่ม capacity1 ถ้าเต็มให้ allocate2 เท่า คัดลอกค่าจริงแล้ว append ใหม่ ตารางต่อไปนับ **การเขียนค่าใหม่+copy live cells** ตามแบบจำลอง source ไม่ใช่ทุก allocation instruction หรือเวลา wall-clock
 
 | append ครั้ง | size | capacity หลัง | copies รอบนี้ | cost รอบนี้ | cost สะสม |
 |---|---:|---:|---:|---:|---:|
@@ -29,9 +33,9 @@ Week7 pp.40–47,Week8 pp.3–8:เริ่ม capacity1 ถ้าเต็ม�
 |7|7|8|0|1|14|
 |8|8|8|0|1|15|
 
-n8จึง cost15/8=1.875ตาม Week8p.7 สำหรับ n>0ผลรวม copy1+2+4+...ที่เกิดจริง<2n ดังนั้น cost<3n เป็น O(n)ทั้งลำดับและ O(1)amortized ต่อ append แต่ append ที่ resize ใช้ O(n) ไม่ใช่ averagecase สุ่มและไม่รับรองทุก call เร็วเท่ากัน
+n8 จึง cost15/8=1.875 ตาม Week8p.7 สำหรับ n>0 ผลรวม copy1+2+4+...ที่เกิดจริง<2n ดังนั้น cost<3n เป็น O(n) ทั้งลำดับและ O(1)amortized ต่อ append แต่ append ที่ resize ใช้ O(n) ไม่ใช่ average case สุ่มและไม่รับรองทุก call เร็วเท่ากัน
 
-คำว่าเฉลี่ยเข้าใกล้3ใน source เป็นภาพรวม upperbound ไม่ใช่ limit เดียวที่ทุก prefix วิ่งเข้าหา:ที่ n เป็นกำลังสอง cost/n เข้าใกล้2 และหลัง resize ใหม่อาจใกล้3 ยังถูกครอบด้วยค่าคงที่ การเพิ่ม capacity ทีละ1กลับ copy รวม1+2+...+(n−1)=O(n²) โมเดล doubling นี้ไม่ใช่คำกล่าวว่า CPython ใช้ doubling เป๊ะ
+คำว่าเฉลี่ยเข้าใกล้ 3 ใน source เป็นภาพรวม upperbound ไม่ใช่ limit เดียวที่ทุก prefix วิ่งเข้าหา:ที่ n เป็นกำลังสอง cost/n เข้าใกล้ 2 และหลัง resize ใหม่อาจใกล้ 3 ยังถูกครอบด้วยค่าคงที่ การเพิ่ม capacity ทีละ 1 กลับ copy รวม 1+2+...+(n−1)=O(n²) โมเดล doubling นี้ไม่ใช่คำกล่าวว่า CPython ใช้ doubling เป๊ะ
 
 ## Python ที่รันเดี่ยวได้ {#python}
 อิง DynamicArray/dunder/source implementation และ localFixedArray เพิ่ม strictintegerindices(ไม่รับ bool),instrumentation และ boundaries นโยบาย index ของโมเดลนี้ **ไม่รับ negativeindex/slices** ต่างจาก Python list;FixedArray เต็มใช้ OverflowError ซึ่งเป็น policy ผู้เขียน
@@ -128,23 +132,23 @@ print(m._index((1,2)), m[1,2])  # 6 7
 ```
 
 ## Trace Insert และ Remove {#trace}
-เริ่ม[10,20,30,40],size4/capacity4 insert_at(1,99):growcapacity8ก่อน จากนั้นเลื่อนขวาเริ่มปลายสุด
+เริ่ม[10,20,30,40],size4/capacity4 insert_at(1,99):growcapacity8 ก่อน จากนั้นเลื่อนขวาเริ่มปลายสุด
 ```text
 40: index3 → 4    [10,20,30,40,40,...]
 30: index2 → 3    [10,20,30,30,40,...]
 20: index1 → 2    [10,20,20,30,40,...]
 99: ลงindex1     [10,99,20,30,40,...], size5
 ```
-ถ้าเลื่อนซ้ายไปขวาค่าที่จะคัดลอกจะถูกทับ เช่นได้20ซ้ำแทน30/40 Removeindex1เก็บ99ไว้ก่อน→เลื่อน index2→1,3→2,4→3→ลด size→clear ช่องท้าย ได้[10,20,30,40]และคืน99 ตรงแนว Week8 pp.18–24
+ถ้าเลื่อนซ้ายไปขวาค่าที่จะคัดลอกจะถูกทับ เช่นได้ 20 ซ้ำแทน 30/40 Removeindex1 เก็บ 99 ไว้ก่อน→เลื่อน index2→1,3→2,4→3→ลด size→clear ช่องท้าย ได้[10,20,30,40]และคืน 99 ตรงแนว Week8 pp.18–24
 
-Invariant:liveelements อยู่_data[0:size],ว่างหลัง size;pop ที่ท้ายไม่ต้องเลื่อนและไม่ shrink ในโมเดลนี้ จึง O(1) การคืนค่า removed ไม่ได้คัดลอก graph ของ object ถ้าเก็บ reference ก็คืน reference เดิม
+Invariant:liveelements อยู่ _data[0:size],ว่างหลัง size;pop ที่ท้ายไม่ต้องเลื่อนและไม่ shrink ในโมเดลนี้ จึง O(1) การคืนค่า removed ไม่ได้คัดลอก graph ของ object ถ้าเก็บ reference ก็คืน reference เดิม
 
 ## Search, 2D และการใช้ Composition {#matrix}
-Week8 pp.10–15:unsortedsearch อาจต้องตรวจทุกค่าจึง O(n),find คืน index แรกหรือ−1 ถ้าไม่พบ ไม่ใช้−1เป็น index ต่อโดยลืมตรวจ เพราะ Python list จะอ่านท้ายได้แต่โมเดลนี้ reject
+Week8 pp.10–15:unsortedsearch อาจต้องตรวจทุกค่าจึง O(n),find คืน index แรกหรือ−1 ถ้าไม่พบ ไม่ใช้−1 เป็น index ต่อโดยลืมตรวจ เพราะ Python list จะอ่านท้ายได้แต่โมเดลนี้ reject
 
-Row-majorflat_index=row×num_cols+col;matrix3×4ตำแหน่ง[1,2]ใช้ index1×4+2=6 ถ้าเป็น buffer ช่องละ8bytes และ base1000ในตัวอย่างสมมติ address=1048 **ไม่ใช่ id จริงของ Python** Nestedlists ของ Python อาจมี rows แยกกันและ`[[0]*4]*3`แชร์ row เดิม จึงไม่อนุมานว่าทุก matrix ใน Python เป็น contiguous2Dbuffer
+Row-majorflat_index=row×num_cols+col;matrix3×4 ตำแหน่ง[1,2]ใช้ index1×4+2=6 ถ้าเป็น buffer ช่องละ 8bytes และ base1000 ในตัวอย่างสมมติ address=1048 **ไม่ใช่ id จริงของ Python** Nestedlists ของ Python อาจมี rows แยกกันและ`[[0]*4]*3`แชร์ row เดิม จึงไม่อนุมานว่าทุก matrix ใน Python เป็น contiguous2Dbuffer
 
-Week8 pp.26–35ใช้ DynamicArray เป็น part ของ Stack เพื่อจำกัด interfacepush/pop ให้ LIFO ตัว array ยังคงเป็น storage;ไม่ต้อง inherit ทุก method จน callerinsert กลาง stack ได้ รายละเอียด Stack อยู่บทแยกที่อ้างทั้ง Week8/11
+Week8 pp.26–35 ใช้ DynamicArray เป็น part ของ Stack เพื่อจำกัด interfacepush/pop ให้ LIFO ตัว array ยังคงเป็น storage;ไม่ต้อง inherit ทุก method จน callerinsert กลาง stack ได้ รายละเอียด Stack อยู่บทแยกที่อ้างทั้ง Week8/11
 
 ## Complexity และข้อผิดพลาด {#complexity}
 | Operation | เวลาในโมเดลนี้ | หมายเหตุ |

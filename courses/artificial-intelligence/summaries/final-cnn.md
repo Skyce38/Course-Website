@@ -12,21 +12,23 @@
 - ตรวจข้อผิดพลาดตัวเลขใน source โดยไม่จำค่าที่ขัดกับสูตร
 
 ## ภาพ, Pixels และ CNN {#images}
-S11 pp.12–14 ยก CNN สำหรับข้อมูลเชิงพื้นที่ (spatialdata) เช่นภาพ/วิดีโอ ใช้ filters ดึง features แล้วส่งต่อ classifier ภาพกากบาท5×5เป็นตัวแทนเชิงตัวเลข:ช่องกากบาทกำหนด5และที่เหลือ1 เป็น **encoding สมมติ** ไม่ใช่มาตรฐานว่าสีฟ้าทุกภาพมี pixel5 ภาพ grayscale เป็น H×W; RGB มี3channels ซึ่งแต่ละ pixel เก็บสามค่า
+S11 pp.12–14 ยก CNN สำหรับข้อมูลเชิงพื้นที่ (spatialdata) เช่นภาพ/วิดีโอ ใช้ filters ดึง features แล้วส่งต่อ classifier
 
-ภาพ pipelinep.13แสดง convolution/ReLU/pooling หลายครั้งแล้ว flatten/FC/softmax ส่วน workedexamplepp.19–30ใช้ convolution→pooling→ReLU→FC ต้องตามลำดับของตัวอย่าง ไม่สรุปว่า CNN ทุกแบบมี layerorder เดียวกัน หน้าเว็บไม่ train โมเดลหรือแสดง accuracy ที่แต่งขึ้น
+ภาพกากบาท 5×5 เป็นตัวแทนเชิงตัวเลข:ช่องกากบาทกำหนด 5 และที่เหลือ 1 เป็น **encoding สมมติ** ไม่ใช่มาตรฐานว่าสีฟ้าทุกภาพมี pixel5 ภาพ grayscale เป็น H×W; RGB มี 3channels ซึ่งแต่ละ pixel เก็บสามค่า
+
+ภาพ pipelinep.13 แสดง convolution/ReLU/pooling หลายครั้งแล้ว flatten/FC/softmax ส่วน workedexamplepp.19–30 ใช้ convolution→pooling→ReLU→FC ต้องตามลำดับของตัวอย่าง ไม่สรุปว่า CNN ทุกแบบมี layerorder เดียวกัน หน้าเว็บไม่ train โมเดลหรือแสดง accuracy ที่แต่งขึ้น
 
 ## Kernel และ convention {#kernel}
-S11 pp.15–18,21–22 ใช้ kernel/filter เลื่อนไปคูณตำแหน่งตรงกันแล้วรวม (dotproduct) เรียก convolution ตามการใช้ชื่อใน CNN แต่การคำนวณแบบ **ไม่กลับ kernel** นี้คือ cross-correlation บทนี้ใช้ bias0,dilation1และสูตร
+S11 pp.15–18,21–22 ใช้ kernel/filter เลื่อนไปคูณตำแหน่งตรงกันแล้วรวม (dotproduct) เรียก convolution ตามการใช้ชื่อใน CNN แต่การคำนวณแบบ **ไม่กลับ kernel** นี้คือ cross-correlation บทนี้ใช้ bias0,dilation1 และสูตร
 
 $$
 Y_{ij}=\sum_{u=0}^{K_h-1}\sum_{v=0}^{K_w-1}X_{is+u-p,js+v-p}K_{uv}
 $$
 
-นอกขอบเป็น0เมื่อ padding; convolution เชิงคณิตศาสตร์กลับ kernel180°ก่อนคูณ sourcefilters กากบาทบางตัวสมมาตรจึงให้ผลเท่ากัน แต่ไม่ใช่ทุก kernel
+นอกขอบเป็น 0 เมื่อ padding; convolution เชิงคณิตศาสตร์กลับ kernel180°ก่อนคูณ sourcefilters กากบาทบางตัวสมมาตรจึงให้ผลเท่ากัน แต่ไม่ใช่ทุก kernel
 
 ### ตรวจความไม่สอดคล้องหน้า16
-Input4×4และ kernel ที่แสดง (แถวบนลงล่าง):
+Input4×4 และ kernel ที่แสดง (แถวบนลงล่าง):
 ```text
 X:                 K:
 1  5  9 13         9 8 7
@@ -34,9 +36,9 @@ X:                 K:
 3  7 11 15         3 2 1
 4  8 12 16
 ```
-ช่องแรกแบบไม่กลับ kernel: 1×9+5×8+9×7+2×6+6×5+10×4+3×3+7×2+11×1 =9+40+63+12+30+40+9+14+11=**228** ตรงตัวเลขในช่องภาพ แต่ caption เริ่มด้วย312ทั้งที่แสดง sum ข้างต้น จึงไม่ใช้312เป็นผล sum นี้ ถ้ากลับ kernel เป็น1..9จริงจะได้312 (คนละ convention)
+ช่องแรกแบบไม่กลับ kernel: 1×9+5×8+9×7+2×6+6×5+10×4+3×3+7×2+11×1 =9+40+63+12+30+40+9+14+11=**228** ตรงตัวเลขในช่องภาพ แต่ caption เริ่มด้วย 312 ทั้งที่แสดง sum ข้างต้น จึงไม่ใช้ 312 เป็นผล sum นี้ ถ้ากลับ kernel เป็น 1..9 จริงจะได้ 312 (คนละ convention)
 
-Outputvalidstride1ทั้งแผ่นของ cross-correlation:
+Outputvalidstride1 ทั้งแผ่นของ cross-correlation:
 ```text
    228    408
    273    453
@@ -45,7 +47,7 @@ Outputvalidstride1ทั้งแผ่นของ cross-correlation:
 pp.17–18 แสดง edge/gradientfilters เช่นแถว[1,0,−1]ซ้ำสามแถว และ transpose ที่ดูการเปลี่ยนอีกทิศ การกลับ kernel เปลี่ยนเครื่องหมายของ response จึงต้องบอก convention ไม่เดาค่า pixel ของภาพตัวอย่างที่ไม่ได้ให้ array
 
 ## Source กากบาท: Input และสาม Filters {#source-matrices}
-S11 pp.14–15,21–22: X ต่อไปนี้และ F1,F2,F3ตามลำดับ **ไม่ใช่** filtersRGB หน้า31
+S11 pp.14–15,21–22: X ต่อไปนี้และ F1,F2,F3 ตามลำดับ **ไม่ใช่** filtersRGB หน้า 31
 ```text
      1      1      5      1      1
      1      1      5      1      1
@@ -72,10 +74,10 @@ F3:
     -3     -3     -3
 ```
 
-F1ช่องซ้ายบน: −1×1+1×1−1×5+1×1+1×1+1×5−1×5+1×5−1×5=−3; ช่องกลางใช้ patch[1,5,1;5,5,5;1,5,1] ได้−1+5−1+5+5+5−1+5−1=21
+F1 ช่องซ้ายบน: −1×1+1×1−1×5+1×1+1×1+1×5−1×5+1×5−1×5=−3; ช่องกลางใช้ patch[1,5,1;5,5,5;1,5,1] ได้−1+5−1+5+5+5−1+5−1=21
 
 ### Valid convolution/correlation: stride1,padding0
-ขนาด(5−3)/1+1=3 จึงได้3×3ต่อ filter ผลทุกช่องตาม p.21–22:
+ขนาด(5−3)/1+1=3 จึงได้ 3×3 ต่อ filter ผลทุกช่องตาม p.21–22:
 OutputF1:
 ```text
     -3      5     -3
@@ -96,15 +98,23 @@ OutputF3:
 ```
 
 ## Padding, Stride และ Output Size {#shape}
-S11 p.23เติม zero1ชั้นรอบ5×5เป็น7×7 แล้วใช้ kernel3×3ทำให้ output5×5เมื่อ stride1 การ padding ไม่ได้รับรอง shape เท่าเดิมสำหรับทุก kernel/stride โดยไม่คำนวณ สูตรเสริมกรณี dilation1และ padding สมมาตร:
+S11 p.23 เติมศูนย์หนึ่งชั้นรอบ input ขนาด 5×5 ให้เป็น 7×7 แล้วใช้ kernel ขนาด 3×3 และ stride 1 จึงได้ output ขนาด 5×5
+
+การใช้ padding ไม่ได้รับรองว่า shape จะเท่าเดิมสำหรับทุก kernel หรือ stride ต้องคำนวณจากเงื่อนไขก่อน สูตรเสริมต่อไปนี้ใช้ dilation 1 และ padding เท่ากันทั้งสองด้าน:
 
 $$
 H_{out}=\left\lfloor\frac{H+2p-K_h}{s}\right\rfloor+1,\quad W_{out}=\left\lfloor\frac{W+2p-K_w}{s}\right\rfloor+1
 $$
 
-s คือระยะเลื่อน ไม่ใช่ขนาด kernel ตัวอย่าง5×5,k3,p0,s2ได้2×2; p1,s1ได้5×5; p1,s2ได้3×3 ใช้ floor เมื่อเลื่อนไม่ลงตัว และตรวจ kernelfit ก่อน ไม่มี dilation>1ใน workedexample นี้
+s คือระยะเลื่อน ไม่ใช่ขนาด kernel สำหรับ input ขนาด 5×5 และ kernel ขนาด 3×3 มีตัวอย่างดังนี้
 
-ผล padding1ของทั้งสาม filters ตรง p.23และ26:
+- padding 0, stride 2 → output 2×2
+- padding 1, stride 1 → output 5×5
+- padding 1, stride 2 → output 3×3
+
+ใช้ floor เมื่อเลื่อนไม่ลงตัว และตรวจว่า kernel วางใน input ที่เติมขอบแล้วได้ก่อน ตัวอย่างนี้ไม่ครอบคลุม dilation ที่มากกว่า 1
+
+ผลเมื่อใช้ padding 1 กับ filters ทั้งสามตรงกับ p.23 และ 26:
 PaddedF1:
 ```text
      2      2     10      2      2
@@ -130,12 +140,12 @@ PaddedF3:
      0      0      0      0      0
 ```
 
-ช่องบนซ้าย F1ใช้ patch[0,0,0;0,1,1;0,1,1] จึง0+0+0+0+1+1+0+1−1=2 ไม่มีการสร้าง pixel จริงใหม่ที่ขอบ
+ช่องบนซ้าย F1 ใช้ patch[0,0,0;0,1,1;0,1,1] จึง 0+0+0+0+1+1+0+1−1=2 ไม่มีการสร้าง pixel จริงใหม่ที่ขอบ
 
 ## Max/Average Pooling {#pooling}
 S11 pp.24–26 ใช้หน้าต่างเลือกค่าสูงสุดเพื่อลด spatialsize ไม่เรียน weights ใน pooling มาตรฐาน ต้องระบุ size/stride และ padding แยกจาก convolution
 
-p.25ให้ input4×4,size2,stride2:
+p.25 ให้ input4×4,size2,stride2:
 ```text
      0      2      1      3
      5      6      8      7
@@ -155,9 +165,9 @@ Average output (เก็บค่าจริง):
      2    2.5
 ```
 
-Top-leftavg=(0+2+5+6)/4=3.25;top-right=(1+3+8+7)/4=4.75 สไลด์แสดง3.3/4.8เมื่อปัดหนึ่งตำแหน่ง ไม่ใช่ค่าก่อนปัด Python round อาจใช้ tie-to-even จึงอย่าใช้รูปปัดเทียบเป็น error ของสูตร
+Top-leftavg=(0+2+5+6)/4=3.25;top-right=(1+3+8+7)/4=4.75 สไลด์แสดง 3.3/4.8 เมื่อปัดหนึ่งตำแหน่ง ไม่ใช่ค่าก่อนปัด Python round อาจใช้ tie-to-even จึงอย่าใช้รูปปัดเทียบเป็น error ของสูตร
 
-สำหรับ p.24,26 ใช้ paddedmaps5×5,size3,stride1(noadditionalpadding) →3×3ทุก map ผลทุกช่อง:
+สำหรับ p.24,26 ใช้ paddedmaps5×5,size3,stride1(noadditionalpadding) →3×3 ทุก map ผลทุกช่อง:
 MaxPooledF1:
 ```text
     21     21     21
@@ -177,7 +187,7 @@ MaxPooledF3:
     18      3     18
 ```
 
-F1ทุก window มี21จึงทั้งหมด21;F2แถวบน/ล่างมี12แต่แถวกลาง max2;F3ซ้าย/ขวามี18แต่ตรงกลาง max3 ไม่ใช่ใช้ maximum ทั้งภาพครั้งเดียวแทนแต่ละ window
+F1 ทุก window มี 21 จึงทั้งหมด 21;F2 แถวบน/ล่างมี 12 แต่แถวกลาง max2;F3 ซ้าย/ขวามี 18 แต่ตรงกลาง max3 ไม่ใช่ใช้ maximum ทั้งภาพครั้งเดียวแทนแต่ละ window
 
 ## ReLU, Flatten และ Fully Connected {#relu-fc}
 S11 pp.27–30: ReLU(x)=max(0,x) ทำทีละค่า ไม่เปลี่ยน shape ตัวอย่าง p.27:
@@ -189,16 +199,18 @@ S11 pp.27–30: ReLU(x)=max(0,x) ทำทีละค่า ไม่เปล�
 ```
 p.28 pooledmaps ข้างบนทุกค่าเป็นบวกจึงไม่เปลี่ยน แต่ถ้า ReLU ก่อน pooling/average อาจต่างได้ ต้องตาม order ที่ประกาศ
 
-p.29 Flatten เรียง features เป็น vector ไม่มี weights และไม่คำนวณค่าใหม่ บทนี้ประกาศ map-major ก่อนแล้ว row-major ภายใน map: 3×3×3=27ค่า
+p.29 Flatten เรียง features เป็น vector ไม่มี weights และไม่คำนวณค่าใหม่ บทนี้ประกาศ map-major ก่อนแล้ว row-major ภายใน map: 3×3×3=27 ค่า
 ```text
 F1: 21 21 21 21 21 21 21 21 21
 F2: 12 12 12  2  2  2 12 12 12
 F3: 18  3 18 18  3 18 18  3 18
 ```
-FC ใช้ z=b+Σwixi และ activation ตามงาน หน้า29วาด sigmoid หนึ่ง output แต่ไม่ได้ให้ FCweights/bias จึง **คำนวณ class จริงจาก maps อย่างเดียวไม่ได้** outputsigmoid เป็นค่าต่อเนื่องก่อน threshold ไม่ใช่0/1โดยตัวมันเอง; pipelinep.13ใช้ softmax อีกกรณี ไม่สลับนิยาม ตัวอย่างเสริม FC27inputs→1output มี27weights+1bias=28parameters;→2outputs มี56parameters
+FC ใช้ z=b+Σwixi และ activation ตามงาน หน้า 29 วาด sigmoid หนึ่ง output แต่ไม่ได้ให้ FCweights/bias จึง **คำนวณ class จริงจาก maps อย่างเดียวไม่ได้** outputsigmoid เป็นค่าต่อเนื่องก่อน threshold ไม่ใช่ 0/1 โดยตัวมันเอง; pipelinep.13 ใช้ softmax อีกกรณี ไม่สลับนิยาม ตัวอย่างเสริม FC27inputs→1output มี 27weights+1bias=28parameters;→2outputs มี 56parameters
 
 ## RGB และหลาย Output Maps {#rgb}
-S11 pp.31–33: RGB หนึ่ง pixel มี R/G/B สาม channels สำหรับหนึ่ง outputmap มี kernel ต่อ inputchannel คำนวณแล้ว **บวกตาม channels** และ bias หนึ่งค่า ไม่ใช่ได้สาม outputmaps อัตโนมัติ หน้า31 uses Rcross5,Gcross10,Bcross20; **F2=2F1,F3=3F1ของกากบาท** ต่างจาก F2/F3หน้า22
+S11 pp.31–33: RGB หนึ่ง pixel มี R/G/B สาม channels สำหรับหนึ่ง output map มี kernel ต่อ input channel คำนวณแล้ว **บวกตาม channels** และ bias หนึ่งค่า ไม่ใช่ได้สาม output maps อัตโนมัติ หน้า 31 ใช้ภาพกากบาทที่ R มีค่า 5, G มีค่า 10 และ B มีค่า 20
+
+ในตัวอย่าง **RGB หน้า 31** kernel ของ channel 2 และ 3 เป็นสองและสามเท่าของ kernel channel 1 ตามลำดับ อย่านำความสัมพันธ์นี้ไปใช้กับ filters F2/F3 ของตัวอย่างกากบาทหน้า 22 ซึ่งเป็นคนละชุด ดู matrices ของแต่ละตัวอย่างประกอบ ไม่ตัดสินจากชื่อ F1/F2/F3 เพียงอย่างเดียว
 
 RGBkernel ตัวอย่าง:
 Channel1 kernel:
@@ -219,7 +231,7 @@ Channel3 kernel:
      3      3      3
     -3      3     -3
 ```
-ผล valid3×3ของ R/G/B ตามลำดับ (ผู้เขียนคำนวณเพิ่มจาก sourcearrays โดย stride1,padding0,bias0):
+ผล valid3×3 ของ R/G/B ตามลำดับ (ผู้เขียนคำนวณเพิ่มจาก sourcearrays โดย stride1,padding0,bias0):
 ```text
     -3      5     -3
      5     21      5
@@ -242,9 +254,9 @@ Channel3 kernel:
    -73     85    -73
 ```
 
-เช่นกลาง=21+92+288=401 ไม่ใช่ concat เป็น9channels หน้า32แสดง3outputmaps จาก RGB ใช้3sets×3inputkernels=9แผ่น2D; terminologylibrary มักเรียก3filters ขนาด Kh×Kw×3 บทนี้บอกทั้งสองแบบเพื่อไม่สับสน หน้า33ซ้อนจาก3inputchannels→5maps→10maps ชั้นถัดไปรับ depth5 ไม่กลับไปรับแค่ RGB3เสมอ
+เช่นกลาง=21+92+288=401 ไม่ใช่ concat เป็น 9channels หน้า 32 แสดง 3outputmaps จาก RGB ใช้ 3sets×3inputkernels=9 แผ่น 2D; terminologylibrary มักเรียก 3filters ขนาด Kh×Kw×3 บทนี้บอกทั้งสองแบบเพื่อไม่สับสน หน้า 33 ซ้อนจาก 3inputchannels→5maps→10maps ชั้นถัดไปรับ depth5 ไม่กลับไปรับแค่ RGB3 เสมอ
 
-ตัวอย่างเสริม kernel3×3,RGB3→5maps มี3×3×3×5=135weights และ5bias รวม140;ชั้นต่อ5→10maps มี3×3×5×10+10=460parameters (ไม่เกี่ยวกับ H/W โดยตรงจาก weightsharing)
+ตัวอย่างเสริม kernel3×3,RGB3→5maps มี 3×3×3×5=135weights และ 5bias รวม 140;ชั้นต่อ 5→10maps มี 3×3×5×10+10=460parameters (ไม่เกี่ยวกับ H/W โดยตรงจาก weightsharing)
 
 ## Python: ตรวจทุก Matrix {#python}
 ตัวอย่างผู้เขียนไม่ใช้ framework และไม่ train โมเดล โค้ดตรวจด้วย SciPycorrelation อิสระใน offlineauthorcheck ไม่มี dependency ใหม่บนเว็บ
@@ -311,7 +323,7 @@ print('pool example',pool(pool_example),pool(pool_example,mode='average'))
 ```
 
 ## ข้อผิดพลาดที่พบบ่อย {#mistakes}
-สลับ row/column;กลับ kernel โดยไม่บอก;จำ caption312ทั้งที่ sum228;นำ F2/F3หน้า22ไปใช้ RGB หน้า31;ลืม floor/padding;pool ทั้งภาพแทน window;บวก channels ผิดเป็น concat;flatten แล้วทำค่าหาย;แต่ง FCprediction เมื่อไม่มี weights
+สลับ row/column;กลับ kernel โดยไม่บอก;จำ caption312 ทั้งที่ sum228;นำ F2/F3 หน้า 22 ไปใช้ RGB หน้า 31;ลืม floor/padding;pool ทั้งภาพแทน window;บวก channels ผิดเป็น concat;flatten แล้วทำค่าหาย;แต่ง FCprediction เมื่อไม่มี weights
 
 ## แบบฝึกพร้อมเฉลย: ผู้เขียนจัดทำอิสระ {#practice}
 ### ข้อ1 อ่านภาพและ shape

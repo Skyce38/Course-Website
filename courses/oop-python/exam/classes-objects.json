@@ -1,0 +1,575 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-classes-objects",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "oop-python-classes-objects-exam-01",
+      "type": "choice",
+      "prompt": "Attribute กับ method ต่างกันอย่างไร?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "attribute เก็บสถานะ ส่วน method กำหนดพฤติกรรม",
+          "id": "a"
+        },
+        {
+          "text": "method คือผลลัพธ์ที่คืนมาเท่านั้น",
+          "id": "b"
+        },
+        {
+          "text": "attribute ต้องเป็นตัวเลขเสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "owner/balance เป็นข้อมูล ส่วน deposit/withdraw เป็นพฤติกรรม",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week1 pp.3–13 ยกปัญหาบัญชีจำนวนมาก: owner/balance แยกจากฟังก์ชันจนจับคู่ผิดได้\n\nClass คือแบบแปลนที่รวมข้อมูลและพฤติกรรม; instance คือ object ที่สร้างจากแบบแปลนนั้น เช่น BankAccount หนึ่งคลาสสร้างบัญชีหลายตัว แต่ละตัวมีสถานะของตนเอง Attribut"
+      }
+    },
+    {
+      "id": "oop-python-classes-objects-exam-02",
+      "type": "choice",
+      "prompt": "a.deposit(50) มี self อ้างถึงอะไร?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "ชื่อ class เท่านั้น",
+          "id": "a"
+        },
+        {
+          "text": "instance a",
+          "id": "b"
+        },
+        {
+          "text": "จำนวน 50",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "การเรียกผ่าน instance ส่งผู้รับ method โดยอัตโนมัติ",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week1 pp.3–13 ยกปัญหาบัญชีจำนวนมาก: owner/balance แยกจากฟังก์ชันจนจับคู่ผิดได้\n\nClass คือแบบแปลนที่รวมข้อมูลและพฤติกรรม; instance คือ object ที่สร้างจากแบบแปลนนั้น เช่น BankAccount หนึ่งคลาสสร้างบัญชีหลายตัว แต่ละตัวมีสถานะของตนเอง Attribut"
+      }
+    },
+    {
+      "id": "oop-python-classes-objects-exam-03",
+      "type": "choice",
+      "prompt": "การรวม owner/balance เป็น object ช่วยลดปัญหาใด?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "ลบความจำเป็นในการตรวจข้อมูลทั้งหมด",
+          "id": "a"
+        },
+        {
+          "text": "ทำให้ทุกบัญชีแชร์ยอดเดียว",
+          "id": "b"
+        },
+        {
+          "text": "จับคู่ข้อมูลผิดเมื่อเก็บหลายตัวแปรแยกกัน",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ยังต้องมี contract และ validation ไม่ใช่ว่า class แก้ทุกข้อผิดพลาด",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week1 pp.3–13 ยกปัญหาบัญชีจำนวนมาก: owner/balance แยกจากฟังก์ชันจนจับคู่ผิดได้\n\nClass คือแบบแปลนที่รวมข้อมูลและพฤติกรรม; instance คือ object ที่สร้างจากแบบแปลนนั้น เช่น BankAccount หนึ่งคลาสสร้างบัญชีหลายตัว แต่ละตัวมีสถานะของตนเอง Attribut"
+      }
+    },
+    {
+      "id": "oop-python-classes-objects-exam-04",
+      "type": "choice",
+      "prompt": "เหตุใด constructor จึงตรวจ balance ก่อนกำหนด state?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "เพื่อปฏิเสธสถานะเริ่มต้นที่ผิด invariant",
+          "id": "a"
+        },
+        {
+          "text": "เพื่อให้ทุกยอดเป็น 0",
+          "id": "b"
+        },
+        {
+          "text": "เพื่อทำให้ attribute เป็น private อัตโนมัติ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ตัวอย่างเพิ่มการปฏิเสธยอดติดลบ เป็นนโยบายผู้เขียนที่ประกาศไว้",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "โค้ดสาธิตตามแนวโจทย์ p.15 เพิ่มการปฏิเสธยอดเริ่มต้นติดลบและใช้ exceptions แทนการ print แล้วเดินต่อ รับตัวเลขปกติตามสมมติฐาน; validation ชนิด/NaN และ encapsulation อยู่ในบท properties ฟังก์ชัน display_info คืนข้อความเพื่อให้ทดสอบได้ ไม่พิมพ์"
+      }
+    },
+    {
+      "id": "oop-python-classes-objects-exam-05",
+      "type": "choice",
+      "prompt": "ตาม BankAccount ในบท deposit(0) มีผลอย่างไร?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "นับว่าฝากสำเร็จ",
+          "id": "a"
+        },
+        {
+          "text": "ValueError และยอดไม่เปลี่ยน",
+          "id": "b"
+        },
+        {
+          "text": "AttributeError เพราะไม่มี method",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "method กำหนด amount>0 และตรวจเงื่อนไขก่อนเขียน state",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "โค้ดสาธิตตามแนวโจทย์ p.15 เพิ่มการปฏิเสธยอดเริ่มต้นติดลบและใช้ exceptions แทนการ print แล้วเดินต่อ รับตัวเลขปกติตามสมมติฐาน; validation ชนิด/NaN และ encapsulation อยู่ในบท properties ฟังก์ชัน display_info คืนข้อความเพื่อให้ทดสอบได้ ไม่พิมพ์"
+      }
+    },
+    {
+      "id": "oop-python-classes-objects-exam-06",
+      "type": "numeric",
+      "prompt": "บัญชีผู้เขียนเริ่ม 200 ฝาก 75 ถอน 40 สำเร็จ จงหายอดสุดท้าย",
+      "reference": "trace",
+      "answer": 235,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "200+75−40=235 ทั้งสอง operation ผ่านข้อกำหนด",
+      "difficulty": "easy",
+      "verification": {
+        "method": "python",
+        "evidence": "| คำสั่ง | a.balance | b.balance | เหตุผล |\n|---|---:|---:|---|\n| สร้าง a,b | 1000 | 300 | คนละ instance |\n| a.deposit(500) | 1500 | 300 | self คือ a |\n| a.withdraw(200) | 1300 | 300 | ลดเฉพาะ a |\n| alias=a | 1300 | 300 | ไม่เรียก __init__ ",
+        "oracle": "200+75-40"
+      }
+    },
+    {
+      "id": "oop-python-classes-objects-exam-07",
+      "type": "numeric",
+      "prompt": "a เริ่ม 50,b เริ่ม 80 สอง instances ต่างกัน ฝาก 20 เข้า a จงหายอด b",
+      "reference": "trace",
+      "answer": 80,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "ปรับ state ของ a ไม่ใช่ b และไม่ได้สร้าง alias",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "| คำสั่ง | a.balance | b.balance | เหตุผล |\n|---|---:|---:|---|\n| สร้าง a,b | 1000 | 300 | คนละ instance |\n| a.deposit(500) | 1500 | 300 | self คือ a |\n| a.withdraw(200) | 1300 | 300 | ลดเฉพาะ a |\n| alias=a | 1300 | 300 | ไม่เรียก __init__ ",
+        "oracle": "run(\"class A:\\n    def __init__(self,v): self.balance=v\\na,b=A(50),A(80)\\na.balance+=20\\nprint(b.balance)\")"
+      }
+    },
+    {
+      "id": "oop-python-classes-objects-exam-08",
+      "type": "choice",
+      "prompt": "ลิสต์ x=[]; y=x; y.append(7) หลังจากนั้น x คืออะไร?",
+      "reference": "references",
+      "choices": [
+        {
+          "text": "[]",
+          "id": "a"
+        },
+        {
+          "text": "[7]",
+          "id": "b"
+        },
+        {
+          "text": "None",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "สองชื่อชี้ลิสต์เดียวกัน การ append เปลี่ยน object ร่วม",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "pp.18–24 และ 30 แยก instance independence ออกจาก aliasing: object ใหม่เป็นอิสระ แต่สองชื่อที่อ้าง object เดิมย่อมเห็น mutation เดียวกัน ถ้า attributes เก็บ list ร่วมกันก็ยังแชร์ได้ด้วย การเขียน `del a` ลบชื่ออ้างอิง ไม่ได้บังคับทำลาย object",
+        "oracle": "run(\"x=[]\\ny=x\\ny.append(7)\\nprint(x)\")"
+      }
+    },
+    {
+      "id": "oop-python-classes-objects-exam-09",
+      "type": "choice",
+      "prompt": "a=[1]; b=a.copy(); b.append(2) ผลของ a เป็นอะไร?",
+      "reference": "references",
+      "choices": [
+        {
+          "text": "[1, 2]",
+          "id": "a"
+        },
+        {
+          "text": "[]",
+          "id": "b"
+        },
+        {
+          "text": "[1]",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "copy ลิสต์ชั้นนอกใหม่ การ append ไม่เปลี่ยนลิสต์ a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "pp.18–24 และ 30 แยก instance independence ออกจาก aliasing: object ใหม่เป็นอิสระ แต่สองชื่อที่อ้าง object เดิมย่อมเห็น mutation เดียวกัน ถ้า attributes เก็บ list ร่วมกันก็ยังแชร์ได้ด้วย การเขียน `del a` ลบชื่ออ้างอิง ไม่ได้บังคับทำลาย object",
+        "oracle": "run(\"a=[1]\\nb=a.copy()\\nb.append(2)\\nprint(a)\")"
+      }
+    },
+    {
+      "id": "oop-python-classes-objects-exam-10",
+      "type": "choice",
+      "prompt": "ถ้า attribute ของสอง object ชี้ list เดียวกัน state ยังอิสระทุกส่วนหรือไม่?",
+      "reference": "references",
+      "choices": [
+        {
+          "text": "ไม่ mutation ของ list นั้นมองเห็นร่วมกัน",
+          "id": "a"
+        },
+        {
+          "text": "อิสระเพราะเป็นคนละ instance เสมอ",
+          "id": "b"
+        },
+        {
+          "text": "list ถูกคัดลอกอัตโนมัติ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ต้องแยกเอกลักษณ์ instance กับ references ภายใน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.18–24 และ 30 แยก instance independence ออกจาก aliasing: object ใหม่เป็นอิสระ แต่สองชื่อที่อ้าง object เดิมย่อมเห็น mutation เดียวกัน ถ้า attributes เก็บ list ร่วมกันก็ยังแชร์ได้ด้วย การเขียน `del a` ลบชื่ออ้างอิง ไม่ได้บังคับทำลาย object"
+      }
+    },
+    {
+      "id": "oop-python-classes-objects-exam-11",
+      "type": "choice",
+      "prompt": "del a ลบสิ่งใดตามความหมายพื้นฐานของ Python?",
+      "reference": "references",
+      "choices": [
+        {
+          "text": "ทุก alias ของ object เดียวกัน",
+          "id": "a"
+        },
+        {
+          "text": "ชื่ออ้างอิง a ใน scope นั้น",
+          "id": "b"
+        },
+        {
+          "text": "ไฟล์ class ทั้งหมด",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "อายุ object ขึ้นกับ references/การเข้าถึงและ implementation ไม่ใช่คำสั่งทำลาย graph",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.18–24 และ 30 แยก instance independence ออกจาก aliasing: object ใหม่เป็นอิสระ แต่สองชื่อที่อ้าง object เดิมย่อมเห็น mutation เดียวกัน ถ้า attributes เก็บ list ร่วมกันก็ยังแชร์ได้ด้วย การเขียน `del a` ลบชื่ออ้างอิง ไม่ได้บังคับทำลาย object"
+      }
+    },
+    {
+      "id": "oop-python-classes-objects-exam-12",
+      "type": "choice",
+      "prompt": "ลืม self ใน signature แล้วเรียก method ผ่าน instance มักเกิด exception ใด?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "text": "KeyError",
+          "id": "a"
+        },
+        {
+          "text": "ZeroDivisionError",
+          "id": "b"
+        },
+        {
+          "text": "TypeError",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "จำนวน arguments ไม่ตรง เพราะ Python ส่งผู้รับ method เพิ่ม",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "- ลืม self ใน signature หรือ self. หน้า attribute ทำให้จำนวน arguments ไม่ตรง/ไม่มี attribute\n- `BankAccount.deposit(500)` ไม่ได้ส่ง instance; การเรียกผ่าน class ทำได้ถ้าส่ง instance อย่างถูกต้อง\n- `return self` ใน __init__ ทำให้ TypeError;",
+        "oracle": "run(\"class A:\\n    def f(): pass\\ntry: A().f()\\nexcept Exception as e: print(type(e).__name__)\")"
+      }
+    },
+    {
+      "id": "oop-python-classes-objects-exam-13",
+      "type": "choice",
+      "prompt": "เขียน local balance=10 ใน method จะสร้าง self.balance หรือไม่?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "text": "ไม่ ต้องกำหนด attribute ผ่าน self",
+          "id": "a"
+        },
+        {
+          "text": "สร้างโดยอัตโนมัติ",
+          "id": "b"
+        },
+        {
+          "text": "สร้างเฉพาะ class แรก",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ชื่อ local กับ attribute อยู่คนละการอ้างอิง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "- ลืม self ใน signature หรือ self. หน้า attribute ทำให้จำนวน arguments ไม่ตรง/ไม่มี attribute\n- `BankAccount.deposit(500)` ไม่ได้ส่ง instance; การเรียกผ่าน class ทำได้ถ้าส่ง instance อย่างถูกต้อง\n- `return self` ใน __init__ ทำให้ TypeError;"
+      }
+    },
+    {
+      "id": "oop-python-classes-objects-exam-14",
+      "type": "choice",
+      "prompt": "เรียก BankAccount.deposit(a,50) ได้หรือไม่ถ้า a ถูกชนิดและ state?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "text": "ไม่ได้ทุกกรณี",
+          "id": "a"
+        },
+        {
+          "text": "ได้ เพราะส่ง instance เป็น argument แรกชัดเจน",
+          "id": "b"
+        },
+        {
+          "text": "ได้โดยไม่ต้องมี a",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "เทียบกับ a.deposit(50) ในการส่งผู้รับ แต่ต้องรักษา contract",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "- ลืม self ใน signature หรือ self. หน้า attribute ทำให้จำนวน arguments ไม่ตรง/ไม่มี attribute\n- `BankAccount.deposit(500)` ไม่ได้ส่ง instance; การเรียกผ่าน class ทำได้ถ้าส่ง instance อย่างถูกต้อง\n- `return self` ใน __init__ ทำให้ TypeError;"
+      }
+    },
+    {
+      "id": "oop-python-classes-objects-exam-15",
+      "type": "numeric",
+      "prompt": "วนอ่านยอดบัญชี n=40 ตัวหนึ่งครั้ง ภายใต้ O(1) ต่ออ่าน จะอ่านยอดกี่ครั้ง?",
+      "reference": "complexity",
+      "answer": 40,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "แต่ละบัญชีเยี่ยมหนึ่งครั้ง ไม่รวมต้นทุนแสดงข้อความ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "การอ่าน/ปรับค่าบัญชีในตัวอย่างถือ O(1) ภายใต้ตัวเลขขนาดคงที่; แสดงชื่อยาว m ตัวอักษรใช้ O(m) การวนแสดง n บัญชีต้องเยี่ยมทุกบัญชี O(n) โดยยังต้องรวมต้นทุนข้อความ ไม่ใช้เวลาจากตัวอย่างเล็กเป็นข้อพิสูจน์ Big-O เงินแบบ float ใช้เพื่อการเรียน ไม",
+        "oracle": "len(range(40))"
+      }
+    },
+    {
+      "id": "oop-python-classes-objects-exam-16",
+      "type": "choice",
+      "prompt": "display_info ต้องสร้างชื่อยาว m ตัวอักษร ต้นทุนข้อความควรคิดอย่างไร?",
+      "reference": "complexity",
+      "choices": [
+        {
+          "text": "รวม O(m) ไม่เหมาว่าทุก method เป็น O(1)",
+          "id": "a"
+        },
+        {
+          "text": "O(1) เพราะอยู่ใน class",
+          "id": "b"
+        },
+        {
+          "text": "O(n²) เสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ต้องนับงานจริงและระบุขนาดข้อมูล",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "การอ่าน/ปรับค่าบัญชีในตัวอย่างถือ O(1) ภายใต้ตัวเลขขนาดคงที่; แสดงชื่อยาว m ตัวอักษรใช้ O(m) การวนแสดง n บัญชีต้องเยี่ยมทุกบัญชี O(n) โดยยังต้องรวมต้นทุนข้อความ ไม่ใช้เวลาจากตัวอย่างเล็กเป็นข้อพิสูจน์ Big-O เงินแบบ float ใช้เพื่อการเรียน ไม"
+      }
+    },
+    {
+      "id": "oop-python-classes-objects-exam-17",
+      "type": "choice",
+      "prompt": "get_balance ที่ใช้ return กับ method ที่ print อย่างเดียวต่างกันอย่างไร?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "print ส่งค่าตัวเลขกลับโดยอัตโนมัติ",
+          "id": "a"
+        },
+        {
+          "text": "return ส่งค่าให้ผู้เรียกใช้คำนวณต่อ",
+          "id": "b"
+        },
+        {
+          "text": "return ต้องพิมพ์หน้าจอด้วย",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "method ที่จบโดยไม่มี return value คืน None",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "โค้ดสาธิตตามแนวโจทย์ p.15 เพิ่มการปฏิเสธยอดเริ่มต้นติดลบและใช้ exceptions แทนการ print แล้วเดินต่อ รับตัวเลขปกติตามสมมติฐาน; validation ชนิด/NaN และ encapsulation อยู่ในบท properties ฟังก์ชัน display_info คืนข้อความเพื่อให้ทดสอบได้ ไม่พิมพ์"
+      }
+    },
+    {
+      "id": "oop-python-classes-objects-exam-18",
+      "type": "choice",
+      "prompt": "a.deposit กับ a.deposit(10) ต่างกันอย่างไร?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "ตัวแรกฝาก 0 ทันที",
+          "id": "a"
+        },
+        {
+          "text": "ทั้งคู่เป็นยอดคงเหลือ",
+          "id": "b"
+        },
+        {
+          "text": "ตัวแรกเป็น bound method ส่วนตัวหลังเรียกทำงาน",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "การอ้าง method ไม่เท่ากับการเรียก และค่าคืนขึ้นกับ implementation",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week1 pp.3–13 ยกปัญหาบัญชีจำนวนมาก: owner/balance แยกจากฟังก์ชันจนจับคู่ผิดได้\n\nClass คือแบบแปลนที่รวมข้อมูลและพฤติกรรม; instance คือ object ที่สร้างจากแบบแปลนนั้น เช่น BankAccount หนึ่งคลาสสร้างบัญชีหลายตัว แต่ละตัวมีสถานะของตนเอง Attribut"
+      }
+    },
+    {
+      "id": "oop-python-classes-objects-exam-19",
+      "type": "numeric",
+      "prompt": "บัญชีเริ่ม 100 ถอน 150 แล้วจับ ValueError ตามโค้ดบท จงหายอดที่เหลือ",
+      "reference": "trace",
+      "answer": 100,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "ตรวจยอดไม่พอก่อนลบ จึงไม่เกิด partial mutation",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "| คำสั่ง | a.balance | b.balance | เหตุผล |\n|---|---:|---:|---|\n| สร้าง a,b | 1000 | 300 | คนละ instance |\n| a.deposit(500) | 1500 | 300 | self คือ a |\n| a.withdraw(200) | 1300 | 300 | ลดเฉพาะ a |\n| alias=a | 1300 | 300 | ไม่เรียก __init__ ",
+        "oracle": "run(\"balance=100\\ntry:\\n    if 150>balance: raise ValueError\\n    balance-=150\\nexcept ValueError: pass\\nprint(balance)\")"
+      }
+    },
+    {
+      "id": "oop-python-classes-objects-exam-20",
+      "type": "choice",
+      "prompt": "Dictionary ใช้แทน class ได้ในทุกการออกแบบโดยไม่เสีย tradeoff หรือไม่?",
+      "reference": "references",
+      "choices": [
+        {
+          "text": "ได้เพราะ object ไม่มีพฤติกรรม",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ ต้องพิจารณา interface/invariants และรูปแบบข้อมูล",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ได้เพราะ dictionary เก็บข้อมูลไม่ได้",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "เป็นตัวเลือกออกแบบ ไม่ใช่คำสั่งว่า class เหนือกว่าทุกกรณี",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.18–24 และ 30 แยก instance independence ออกจาก aliasing: object ใหม่เป็นอิสระ แต่สองชื่อที่อ้าง object เดิมย่อมเห็น mutation เดียวกัน ถ้า attributes เก็บ list ร่วมกันก็ยังแชร์ได้ด้วย การเขียน `del a` ลบชื่ออ้างอิง ไม่ได้บังคับทำลาย object"
+      }
+    },
+    {
+      "id": "oop-python-classes-objects-exam-21",
+      "type": "self",
+      "prompt": "ออกแบบ trace สามบัญชีที่มี alias หนึ่งคู่ และแสดง mutation ทีละขั้น",
+      "reference": "trace",
+      "rubric": [
+        "ระบุชื่อที่ชี้ instance เดียวกันก่อน",
+        "แยกยอดของ instances อิสระ",
+        "ตรวจผลผ่าน alias โดยไม่อ้างว่าเป็น copy"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ระบุชื่อที่ชี้ instance เดียวกันก่อน แยกยอดของ instances อิสระ ตรวจผลผ่าน alias โดยไม่อ้างว่าเป็น copy",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "| คำสั่ง | a.balance | b.balance | เหตุผล |\n|---|---:|---:|---|\n| สร้าง a,b | 1000 | 300 | คนละ instance |\n| a.deposit(500) | 1500 | 300 | self คือ a |\n| a.withdraw(200) | 1300 | 300 | ลดเฉพาะ a |\n| alias=a | 1300 | 300 | ไม่เรียก __init__ "
+      }
+    },
+    {
+      "id": "oop-python-classes-objects-exam-22",
+      "type": "self",
+      "prompt": "ออกแบบ tests ของ deposit/withdraw ที่ล้มเหลวและสำเร็จ",
+      "reference": "python",
+      "rubric": [
+        "ครอบคลุมค่าศูนย์ ค่าลบ และยอดไม่พอ",
+        "ตรวจยอดก่อน/หลัง exception",
+        "แยกนโยบายตัวเลขแบบเรียนจากระบบเงินจริง"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ครอบคลุมค่าศูนย์ ค่าลบ และยอดไม่พอ ตรวจยอดก่อน/หลัง exception แยกนโยบายตัวเลขแบบเรียนจากระบบเงินจริง",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "โค้ดสาธิตตามแนวโจทย์ p.15 เพิ่มการปฏิเสธยอดเริ่มต้นติดลบและใช้ exceptions แทนการ print แล้วเดินต่อ รับตัวเลขปกติตามสมมติฐาน; validation ชนิด/NaN และ encapsulation อยู่ในบท properties ฟังก์ชัน display_info คืนข้อความเพื่อให้ทดสอบได้ ไม่พิมพ์"
+      }
+    },
+    {
+      "id": "oop-python-classes-objects-exam-23",
+      "type": "self",
+      "prompt": "เปรียบการเก็บบัญชีด้วย class กับ dictionary สำหรับงานขนาดเล็ก",
+      "reference": "concepts",
+      "rubric": [
+        "อธิบายการรวมข้อมูลและพฤติกรรม",
+        "แสดงวิธีรักษา invariant ของแต่ละทาง",
+        "ไม่อ้าง performance ที่ไม่ได้วัด"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: อธิบายการรวมข้อมูลและพฤติกรรม แสดงวิธีรักษา invariant ของแต่ละทาง ไม่อ้าง performance ที่ไม่ได้วัด",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Week1 pp.3–13 ยกปัญหาบัญชีจำนวนมาก: owner/balance แยกจากฟังก์ชันจนจับคู่ผิดได้\n\nClass คือแบบแปลนที่รวมข้อมูลและพฤติกรรม; instance คือ object ที่สร้างจากแบบแปลนนั้น เช่น BankAccount หนึ่งคลาสสร้างบัญชีหลายตัว แต่ละตัวมีสถานะของตนเอง Attribut"
+      }
+    },
+    {
+      "id": "oop-python-classes-objects-exam-24",
+      "type": "self",
+      "prompt": "อธิบายความต่าง constructor,method reference,method call และค่าที่คืน",
+      "reference": "mistakes",
+      "rubric": [
+        "__init__ ตั้ง state และต้องคืน None",
+        "bound method ผูกผู้รับแต่ยังไม่เรียก",
+        "ระบุว่า print ไม่ใช่ return ของข้อมูล"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: __init__ ตั้ง state และต้องคืน None bound method ผูกผู้รับแต่ยังไม่เรียก ระบุว่า print ไม่ใช่ return ของข้อมูล",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "- ลืม self ใน signature หรือ self. หน้า attribute ทำให้จำนวน arguments ไม่ตรง/ไม่มี attribute\n- `BankAccount.deposit(500)` ไม่ได้ส่ง instance; การเรียกผ่าน class ทำได้ถ้าส่ง instance อย่างถูกต้อง\n- `return self` ใน __init__ ทำให้ TypeError;"
+      }
+    }
+  ]
+}

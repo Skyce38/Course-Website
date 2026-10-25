@@ -10,7 +10,9 @@
 - อ่านข้อผิดพลาด TypeError/AttributeError จากโค้ด และอธิบายขอบเขตของแบบจำลอง
 
 ## แนวคิดสำคัญ: จากตัวแปรสู่ Object {#concepts}
-Week1 pp.3–13 ยกปัญหาบัญชีจำนวนมาก: owner/balance แยกจากฟังก์ชันจนจับคู่ผิดได้ Class คือแบบแปลนที่รวมข้อมูลและพฤติกรรม; instance คือ object ที่สร้างจากแบบแปลนนั้น เช่น BankAccount หนึ่งคลาสสร้างบัญชีหลายตัว แต่ละตัวมีสถานะของตนเอง Attribute คือ owner/balance; method คือ deposit/withdraw/get_balance ไม่ใช่ class=object หรือ method=ผลลัพธ์ของการเรียก
+Week1 pp.3–13 ยกปัญหาบัญชีจำนวนมาก: owner/balance แยกจากฟังก์ชันจนจับคู่ผิดได้
+
+Class คือแบบแปลนที่รวมข้อมูลและพฤติกรรม; instance คือ object ที่สร้างจากแบบแปลนนั้น เช่น BankAccount หนึ่งคลาสสร้างบัญชีหลายตัว แต่ละตัวมีสถานะของตนเอง Attribute คือ owner/balance; method คือ deposit/withdraw/get_balance ไม่ใช่ class=object หรือ method=ผลลัพธ์ของการเรียก
 
 `a.deposit(500)` เป็น bound-method call ซึ่งส่ง a เป็น argument แรกให้ method โดยอัตโนมัติ จึงเทียบได้กับ `BankAccount.deposit(a, 500)` ชื่อ self เป็น convention ไม่ใช่ keyword แต่ควรใช้เพื่ออ่านง่าย กฎนี้กล่าวถึง **instance methods**; classmethod/staticmethod เป็นข้อยกเว้นที่ไม่ได้ต้องการแทนพฤติกรรมบัญชีในตัวอย่างนี้
 
@@ -64,7 +66,7 @@ print(alias is a, a is b)                 # True False
 | alias.deposit(100) | 1400 | 300 | alias และ a ชี้ object เดียวกัน |
 
 ## Reference, อายุ และ Class vs Dictionary {#references}
-pp.18–24 และ30แยก instance independence ออกจาก aliasing: object ใหม่เป็นอิสระ แต่สองชื่อที่อ้าง object เดิมย่อมเห็น mutation เดียวกัน ถ้า attributes เก็บ list ร่วมกันก็ยังแชร์ได้ด้วย การเขียน `del a` ลบชื่ออ้างอิง ไม่ได้บังคับทำลาย object ถ้ายังมี alias; การเก็บกวาดหน่วยความจำขึ้นกับการเข้าถึงได้/implementation ไม่ควรพึ่งเวลาทำลายที่แน่นอน
+pp.18–24 และ 30 แยก instance independence ออกจาก aliasing: object ใหม่เป็นอิสระ แต่สองชื่อที่อ้าง object เดิมย่อมเห็น mutation เดียวกัน ถ้า attributes เก็บ list ร่วมกันก็ยังแชร์ได้ด้วย การเขียน `del a` ลบชื่ออ้างอิง ไม่ได้บังคับทำลาย object ถ้ายังมี alias; การเก็บกวาดหน่วยความจำขึ้นกับการเข้าถึงได้/implementation ไม่ควรพึ่งเวลาทำลายที่แน่นอน
 
 Dictionary เหมาะข้อมูล key/value ที่ยืดหยุ่น Class ช่วยกำหนด interface/invariants/พฤติกรรม แต่ไม่ได้เร็วกว่า dict ทุกกรณี และ public balance ของบทนี้ยังตั้งเป็นค่าผิดจากภายนอกได้ นั่นคือแรงจูงใจของบท encapsulation ไม่ใช่การรับรองว่ามี class แล้วข้อมูลปลอดภัยทันที
 
@@ -74,7 +76,7 @@ Dictionary เหมาะข้อมูล key/value ที่ยืดหย�
 ## ข้อผิดพลาดที่พบบ่อย {#mistakes}
 - ลืม self ใน signature หรือ self. หน้า attribute ทำให้จำนวน arguments ไม่ตรง/ไม่มี attribute
 - `BankAccount.deposit(500)` ไม่ได้ส่ง instance; การเรียกผ่าน class ทำได้ถ้าส่ง instance อย่างถูกต้อง
-- `return self` ใน__init__ ทำให้ TypeError; method ทั่วไปคืน object ได้แต่__init__ต้อง None
+- `return self` ใน __init__ ทำให้ TypeError; method ทั่วไปคืน object ได้แต่ __init__ ต้อง None
 - คิดว่า `b=a` คือสำเนา หรือว่าทุก attribute เป็น private โดยอัตโนมัติ
 
 ## แบบฝึกพร้อมเฉลย (ผู้เขียนจัดทำและตรวจอิสระ) {#practice}
@@ -100,7 +102,7 @@ Dictionary เหมาะข้อมูล key/value ที่ยืดหย�
 **เฉลย:** BankAccount("C")ได้ balance0 แยกจาก a; deposit(0)ถูกปฏิเสธเพราะ amount ต้อง>0 ในสัญญาของโค้ดนี้;__init__ที่ return1ทำให้ TypeError
 
 ## สรุปทบทวน {#summary}
-Class กำหนดพฤติกรรมร่วม; instance เก็บสถานะ;self อ้างผู้รับ method;__init__ตั้งค่าและคืน None;alias ไม่ใช่ copy ตรวจทั้งผลสำเร็จและข้อผิดพลาดโดยดูว่าสถานะเปลี่ยนเมื่อใด
+Class กำหนดพฤติกรรมร่วม; instance เก็บสถานะ;self อ้างผู้รับ method;__init__ ตั้งค่าและคืน None;alias ไม่ใช่ copy ตรวจทั้งผลสำเร็จและข้อผิดพลาดโดยดูว่าสถานะเปลี่ยนเมื่อใด
 
 ## แหล่งอ้างอิงและขอบเขต {#sources}
 - [Week1 physical pp.3–30](../slides/Week1.pdf#page=3) — class/object/self, BankAccount, lifecycle/style/dict/mistakes

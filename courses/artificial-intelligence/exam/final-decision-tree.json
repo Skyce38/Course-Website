@@ -1,0 +1,561 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "artificial-intelligence-final-decision-tree",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "artificial-intelligence-final-decision-tree-exam-01",
+      "type": "choice",
+      "prompt": "Internal node ของ Decision Tree แสดงอะไร?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "การทดสอบ attribute",
+          "id": "a"
+        },
+        {
+          "text": "class prediction สุดท้ายทุก node",
+          "id": "b"
+        },
+        {
+          "text": "training row เสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "branch คือผลทดสอบ ส่วน leaf ให้คำตอบ",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S08 pp.3–4,7: Decision Tree จำแนกข้อมูลด้วยการทดสอบ attribute ที่ internal node, branch แทน value/ผลทดสอบ, leaf แทน class; root คือจุดเริ่มด้านบน\n\nการเดินจาก root ถึง leaf คือเงื่อนไข AND ของเส้นทางหนึ่ง ข้อมูลฝึกมี labels จึงเป็น supervise"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-decision-tree-exam-02",
+      "type": "choice",
+      "prompt": "เหตุใด ID3 ในบทเป็น supervised learning?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "ไม่ใช้ target ใด",
+          "id": "a"
+        },
+        {
+          "text": "ใช้ labels ของตัวอย่างฝึกเลือก split",
+          "id": "b"
+        },
+        {
+          "text": "สุ่มแบ่งโดยไม่ดูคลาส",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "entropy ของ labels และ gain ใช้กำกับการสร้างต้นไม้",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S08 pp.3–4,7: Decision Tree จำแนกข้อมูลด้วยการทดสอบ attribute ที่ internal node, branch แทน value/ผลทดสอบ, leaf แทน class; root คือจุดเริ่มด้านบน\n\nการเดินจาก root ถึง leaf คือเงื่อนไข AND ของเส้นทางหนึ่ง ข้อมูลฝึกมี labels จึงเป็น supervise"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-decision-tree-exam-03",
+      "type": "choice",
+      "prompt": "ใน entropy เมื่อ count ของคลาสหนึ่งเป็นศูนย์ ควรจัด contribution ของคลาสนั้นอย่างไร?",
+      "reference": "entropy",
+      "answer": "a",
+      "explanation": "นิยาม contribution ของ p log₂p ที่ p=0 เป็น 0 ตามลิมิต จึงจัดการ pure nodes ได้โดยไม่หารหรือ log ศูนย์",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "สูตรจาก S08 pp.13–14 เขียนให้อ่านเป็นขั้นตอน ให้ pᶜ เป็นสัดส่วน class c ใน node S ใช้ log ฐาน 2 หน่วย bit\n\n\n\nเมื่อ count=0 ให้ contribution 0 ตามลิมิต 0 log 0 ไม่ใช่ประเมิน log(0) ตรง ๆ Pure node มี H=0; binary ครึ่งต่อครึ่งมี H=1 ต้องถ่วงน"
+      },
+      "choices": [
+        {
+          "id": "a",
+          "text": "ให้เป็น 0 ตามลิมิต ไม่ประเมิน log(0) ตรงๆ"
+        },
+        {
+          "id": "b",
+          "text": "ทำให้ entropy ทั้งหมดเป็น infinity เสมอ"
+        },
+        {
+          "id": "c",
+          "text": "ลบคลาสอื่นทั้งหมดทิ้ง"
+        }
+      ]
+    },
+    {
+      "id": "artificial-intelligence-final-decision-tree-exam-04",
+      "type": "numeric",
+      "prompt": "Node มี 3 คลาสเท่ากัน entropy เป็นเท่าใด? ตอบอย่างน้อย 6 ทศนิยม",
+      "reference": "entropy",
+      "answer": 1.584962500721156,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "แต่ละคลาส p=1/3 จึง H=log2(3)",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "สูตรจาก S08 pp.13–14 เขียนให้อ่านเป็นขั้นตอน ให้ pᶜ เป็นสัดส่วน class c ใน node S ใช้ log ฐาน 2 หน่วย bit\n\n\n\nเมื่อ count=0 ให้ contribution 0 ตามลิมิต 0 log 0 ไม่ใช่ประเมิน log(0) ตรง ๆ Pure node มี H=0; binary ครึ่งต่อครึ่งมี H=1 ต้องถ่วงน",
+        "oracle": "entropy([1,1,1])"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-decision-tree-exam-05",
+      "type": "choice",
+      "prompt": "ทำไม weighted entropy ต้องถ่วงด้วยขนาด child?",
+      "reference": "entropy",
+      "choices": [
+        {
+          "text": "เพื่อเพิ่ม entropy ทุกครั้ง",
+          "id": "a"
+        },
+        {
+          "text": "เพื่อให้แต่ละตัวอย่างมีน้ำหนักตามสัดส่วนจริง",
+          "id": "b"
+        },
+        {
+          "text": "เพราะทุก branch ต้องมีแถวเท่ากัน",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "เฉลี่ย children แบบไม่ถ่วงจะให้น้ำหนักกลุ่มเล็กเกินจริง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "สูตรจาก S08 pp.13–14 เขียนให้อ่านเป็นขั้นตอน ให้ pᶜ เป็นสัดส่วน class c ใน node S ใช้ log ฐาน 2 หน่วย bit\n\n\n\nเมื่อ count=0 ให้ contribution 0 ตามลิมิต 0 log 0 ไม่ใช่ประเมิน log(0) ตรง ๆ Pure node มี H=0; binary ครึ่งต่อครึ่งมี H=1 ต้องถ่วงน"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-decision-tree-exam-06",
+      "type": "numeric",
+      "prompt": "Parent H=1 แบ่งสองกลุ่มขนาดเท่ากันที่ H=.5 และ 0 จงหา IG",
+      "reference": "entropy",
+      "answer": 0.75,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "weighted H=.5×.5+.5×0=.25 จึง gain=1−.25",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "สูตรจาก S08 pp.13–14 เขียนให้อ่านเป็นขั้นตอน ให้ pᶜ เป็นสัดส่วน class c ใน node S ใช้ log ฐาน 2 หน่วย bit\n\n\n\nเมื่อ count=0 ให้ contribution 0 ตามลิมิต 0 log 0 ไม่ใช่ประเมิน log(0) ตรง ๆ Pure node มี H=0; binary ครึ่งต่อครึ่งมี H=1 ต้องถ่วงน",
+        "oracle": "1-(Fraction(1,2)*Fraction(1,2)+Fraction(1,2)*0)"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-decision-tree-exam-07",
+      "type": "choice",
+      "prompt": "ID3 เลือก feature ใดในขั้น greedy ของแต่ละ node?",
+      "reference": "entropy",
+      "choices": [
+        {
+          "text": "feature ที่ลด weighted entropy มากที่สุด",
+          "id": "a"
+        },
+        {
+          "text": "feature ที่ชื่อยาวที่สุด",
+          "id": "b"
+        },
+        {
+          "text": "feature ที่มี categories น้อยสุดเสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "คำนวณจากข้อมูลที่มาถึง node นั้น ไม่ใช้ gain รากแทนทุก subtree",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "สูตรจาก S08 pp.13–14 เขียนให้อ่านเป็นขั้นตอน ให้ pᶜ เป็นสัดส่วน class c ใน node S ใช้ log ฐาน 2 หน่วย bit\n\n\n\nเมื่อ count=0 ให้ contribution 0 ตามลิมิต 0 log 0 ไม่ใช่ประเมิน log(0) ตรง ๆ Pure node มี H=0; binary ครึ่งต่อครึ่งมี H=1 ต้องถ่วงน"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-decision-tree-exam-08",
+      "type": "choice",
+      "prompt": "Sunburn branch HairColor=red ไปยังผลใดตาม tree ในบท?",
+      "reference": "sunburn",
+      "choices": [
+        {
+          "text": "none (−)",
+          "id": "a"
+        },
+        {
+          "text": "sunburned (+)",
+          "id": "b"
+        },
+        {
+          "text": "ต้องทดสอบ Height เสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "red ในข้อมูลนี้เป็น pure leaf ไม่ต้องสร้างเงื่อนไขเพิ่ม",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "8 แถวตาม S08 p.6 อยู่ใน Python ด้านล่าง counts +3/−5 จึง H=−(3/8)log₂(3/8)−(5/8)log₂(5/8)=0.954434 HairColor แยก blonde 4 แถว (+2/−2), red 1 (+1), brown 3 (−3) จึง weighted H=(4/8)×1+(1/8)×0+(3/8)×0=0.5 และ IG=0.454434\n\n| Feature | Gain คำน"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-decision-tree-exam-09",
+      "type": "choice",
+      "prompt": "Sunburn blonde และ Lotion=yes ให้ผลอะไร?",
+      "reference": "sunburn",
+      "choices": [
+        {
+          "text": "sunburned (+)",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ขึ้นกับ Lotion",
+          "id": "b"
+        },
+        {
+          "text": "none (−)",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "เส้นทาง blonde→Lotion→yes จบที่คลาส−",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "8 แถวตาม S08 p.6 อยู่ใน Python ด้านล่าง counts +3/−5 จึง H=−(3/8)log₂(3/8)−(5/8)log₂(5/8)=0.954434 HairColor แยก blonde 4 แถว (+2/−2), red 1 (+1), brown 3 (−3) จึง weighted H=(4/8)×1+(1/8)×0+(3/8)×0=0.5 และ IG=0.454434\n\n| Feature | Gain คำน"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-decision-tree-exam-10",
+      "type": "numeric",
+      "prompt": "ใน subset blonde มี+2/−2 แล้ว Lotion แยกเป็น pure leaves ทั้งคู่ จงหา IG ภายใน subset",
+      "reference": "sunburn",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "parent entropy1 และ children entropy0 จึงลด 1bit",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "8 แถวตาม S08 p.6 อยู่ใน Python ด้านล่าง counts +3/−5 จึง H=−(3/8)log₂(3/8)−(5/8)log₂(5/8)=0.954434 HairColor แยก blonde 4 แถว (+2/−2), red 1 (+1), brown 3 (−3) จึง weighted H=(4/8)×1+(1/8)×0+(3/8)×0=0.5 และ IG=0.454434\n\n| Feature | Gain คำน",
+        "oracle": "entropy([2,2])-0"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-decision-tree-exam-11",
+      "type": "choice",
+      "prompt": "ต้นไม้หลายแบบ fit training เดียวกันได้ ควรสรุปอย่างไร?",
+      "reference": "sunburn",
+      "choices": [
+        {
+          "text": "ต้นไม้ใหญ่สุดถูกเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "ยังต้องเปรียบความซับซ้อนและผลข้อมูลใหม่",
+          "id": "b"
+        },
+        {
+          "text": "gain greedy รับรอง tree เล็กสุดทั้งโลก",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "Occam สนับสนุนความเรียบง่าย แต่ไม่รับรอง generalization ทุกชุด",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "8 แถวตาม S08 p.6 อยู่ใน Python ด้านล่าง counts +3/−5 จึง H=−(3/8)log₂(3/8)−(5/8)log₂(5/8)=0.954434 HairColor แยก blonde 4 แถว (+2/−2), red 1 (+1), brown 3 (−3) จึง weighted H=(4/8)×1+(1/8)×0+(3/8)×0=0.5 และ IG=0.454434\n\n| Feature | Gain คำน"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-decision-tree-exam-12",
+      "type": "choice",
+      "prompt": "PlayTennis เก็บ Day เป็น ID เหตุใดไม่ใช้เป็น feature โดยอัตโนมัติ?",
+      "reference": "tennis",
+      "choices": [
+        {
+          "text": "Day เป็น label เสมอ",
+          "id": "a"
+        },
+        {
+          "text": "ID เพิ่ม generalization แน่นอน",
+          "id": "b"
+        },
+        {
+          "text": "อาจจำแถวแทนรูปแบบที่ต้องการทำนาย",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ต้องแยกตัวระบุแถวจาก features ที่โจทย์กำหนด",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "A01 p.1/D01 ให้ 14 แถว Outlook/Temperature/Humidity/Wind → PlayTennis เก็บ Day เป็น ID ไม่เป็น feature ข้อมูลทั้งหมดอยู่ใน code example ตรวจตรงกับภาพ A01; A05 pp.1–3 เป็น worked artifact ที่ให้โครงสร้างสุดท้าย ส่วน A06 pp.1–4 เป็น handwritt"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-decision-tree-exam-13",
+      "type": "choice",
+      "prompt": "PlayTennis Outlook=Overcast ต้องดู Humidity ต่อหรือไม่ตามต้นไม้บท?",
+      "reference": "tennis",
+      "choices": [
+        {
+          "text": "ไม่ leaf เป็น Yes แล้ว",
+          "id": "a"
+        },
+        {
+          "text": "ต้อง เพราะทุก path ยาวเท่ากัน",
+          "id": "b"
+        },
+        {
+          "text": "ต้องถาม Day ก่อน",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "Overcast subset มี Yes ทั้งหมดจึงหยุดได้",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "A01 p.1/D01 ให้ 14 แถว Outlook/Temperature/Humidity/Wind → PlayTennis เก็บ Day เป็น ID ไม่เป็น feature ข้อมูลทั้งหมดอยู่ใน code example ตรวจตรงกับภาพ A01; A05 pp.1–3 เป็น worked artifact ที่ให้โครงสร้างสุดท้าย ส่วน A06 pp.1–4 เป็น handwritt"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-decision-tree-exam-14",
+      "type": "choice",
+      "prompt": "PlayTennis Sunny และ Humidity=Normal ทำนายอะไร?",
+      "reference": "tennis",
+      "choices": [
+        {
+          "text": "No",
+          "id": "a"
+        },
+        {
+          "text": "Yes",
+          "id": "b"
+        },
+        {
+          "text": "ต้องดู Wind ต่อเสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ใช้ branch ของ Sunny ไม่เอากฎ Rain มาปน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "A01 p.1/D01 ให้ 14 แถว Outlook/Temperature/Humidity/Wind → PlayTennis เก็บ Day เป็น ID ไม่เป็น feature ข้อมูลทั้งหมดอยู่ใน code example ตรวจตรงกับภาพ A01; A05 pp.1–3 เป็น worked artifact ที่ให้โครงสร้างสุดท้าย ส่วน A06 pp.1–4 เป็น handwritt"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-decision-tree-exam-15",
+      "type": "numeric",
+      "prompt": "Sunburn มี paths blonde/no,blonde/yes,red,brown จึงมี IF–THEN rules กี่ข้อ?",
+      "reference": "rules",
+      "answer": 4,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "หนึ่งกฎต่อ root-to-leaf path ทั้งสี่",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "S08 pp.16–17 ให้หนึ่ง IF–THEN ต่อ root-to-leaf path ของ Sunburn: (blonde AND lotion=yes)→none; (blonde AND lotion=no)→sunburned; red→sunburned; brown→none ตัวอย่าง PlayTennis เขียนได้ 5 กฎตาม 5 leaves ข้างบน แต่ละ path ใช้ AND และคนละ path ",
+        "oracle": "len([(\"blonde\",\"no\"),(\"blonde\",\"yes\"),(\"red\",),(\"brown\",)])"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-decision-tree-exam-16",
+      "type": "choice",
+      "prompt": "เงื่อนไขตาม path เดียวรวมกันด้วยอะไร?",
+      "reference": "rules",
+      "choices": [
+        {
+          "text": "AND",
+          "id": "a"
+        },
+        {
+          "text": "OR ทุกจุด",
+          "id": "b"
+        },
+        {
+          "text": "ไม่มีเงื่อนไขใด",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ต้องผ่านทุกการทดสอบบนเส้นทางก่อนถึง leaf",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S08 pp.16–17 ให้หนึ่ง IF–THEN ต่อ root-to-leaf path ของ Sunburn: (blonde AND lotion=yes)→none; (blonde AND lotion=no)→sunburned; red→sunburned; brown→none ตัวอย่าง PlayTennis เขียนได้ 5 กฎตาม 5 leaves ข้างบน แต่ละ path ใช้ AND และคนละ path "
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-decision-tree-exam-17",
+      "type": "choice",
+      "prompt": "พบ category ใหม่ใน predict ของ implementation ผู้เขียน ใช้ policy ใด?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "คืน label แรกของ dataset เสมอ",
+          "id": "a"
+        },
+        {
+          "text": "คืน majority ของ node ที่กำลังพิจารณา",
+          "id": "b"
+        },
+        {
+          "text": "อ้างว่า source ให้เฉลย category ใหม่นั้น",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "นี่เป็น fallback ที่ผู้เขียนประกาศ ไม่ใช่คำตอบอาจารย์สำหรับข้อมูลที่ไม่พบ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Implementation เสริม standard library: tie gain เลือกคอลัมน์ก่อน, tie majority เลือกชื่อ class ตามอักษร; unknown category ที่ predict ใช้ majority ของ node เป็น policy เสริม ไม่ใช่กฎในสไลด์ ไม่มีการ execute Python ในเว็บ\n\n\n\nถ้าไม่มี attribu"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-decision-tree-exam-18",
+      "type": "choice",
+      "prompt": "ไม่มี attributes เหลือแต่ labels ยังปน ควรทำอย่างไรใน ID3 นี้?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "วนเลือก feature เดิมไม่สิ้นสุด",
+          "id": "a"
+        },
+        {
+          "text": "เรียกว่าข้อมูลถูก 100%",
+          "id": "b"
+        },
+        {
+          "text": "ใช้ majority label ตาม tie policy",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "เป็น stopping condition ไม่ได้แก้ความขัดแย้งด้วยการแต่งข้อมูล",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Implementation เสริม standard library: tie gain เลือกคอลัมน์ก่อน, tie majority เลือกชื่อ class ตามอักษร; unknown category ที่ predict ใช้ majority ของ node เป็น policy เสริม ไม่ใช่กฎในสไลด์ ไม่มีการ execute Python ในเว็บ\n\n\n\nถ้าไม่มี attribu"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-decision-tree-exam-19",
+      "type": "numeric",
+      "prompt": "สอง children ขนาด 1 และ 3 มี entropy0 และ 1 ตามลำดับ จงหา weighted entropy",
+      "reference": "entropy",
+      "answer": 0.75,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "น้ำหนัก 1/4 และ 3/4 ได้ 0+.75",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "สูตรจาก S08 pp.13–14 เขียนให้อ่านเป็นขั้นตอน ให้ pᶜ เป็นสัดส่วน class c ใน node S ใช้ log ฐาน 2 หน่วย bit\n\n\n\nเมื่อ count=0 ให้ contribution 0 ตามลิมิต 0 log 0 ไม่ใช่ประเมิน log(0) ตรง ๆ Pure node มี H=0; binary ครึ่งต่อครึ่งมี H=1 ต้องถ่วงน",
+        "oracle": "Fraction(1,4)*0+Fraction(3,4)*1"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-decision-tree-exam-20",
+      "type": "choice",
+      "prompt": "Training fit14/14 บอก held-out accuracy ได้เท่าใด?",
+      "reference": "summary",
+      "choices": [
+        {
+          "text": "100%แน่นอน",
+          "id": "a"
+        },
+        {
+          "text": "ยังบอกไม่ได้หากไม่มีผล held-out",
+          "id": "b"
+        },
+        {
+          "text": "14%",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ผลฝึกตรงไม่ได้ยืนยันข้อมูลใหม่หรือ exam weighting",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "- Entropy วัดความปนของ labels; gain ลด weighted entropy และเลือก split เฉพาะข้อมูลที่ node นั้น\n- Sunburn: HairColor→Lotion; PlayTennis: Outlook→Humidity/Wind ตรวจ counts ก่อนเชื่อเลขปัดใน artifact\n- Path เป็น rule; fitting/Occam/greedy cho"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-decision-tree-exam-21",
+      "type": "self",
+      "prompt": "เขียนกฎ PlayTennis ทั้งห้า paths โดยไม่สลับ Sunny/Rain",
+      "reference": "tennis",
+      "rubric": [
+        "Overcast→Yes",
+        "Sunny ใช้ Humidity:High→No,Normal→Yes",
+        "Rain ใช้ Wind:Strong→No,Weak→Yes"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: Overcast→Yes Sunny ใช้ Humidity:High→No,Normal→Yes Rain ใช้ Wind:Strong→No,Weak→Yes",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "A01 p.1/D01 ให้ 14 แถว Outlook/Temperature/Humidity/Wind → PlayTennis เก็บ Day เป็น ID ไม่เป็น feature ข้อมูลทั้งหมดอยู่ใน code example ตรวจตรงกับภาพ A01; A05 pp.1–3 เป็น worked artifact ที่ให้โครงสร้างสุดท้าย ส่วน A06 pp.1–4 เป็น handwritt"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-decision-tree-exam-22",
+      "type": "self",
+      "prompt": "ตรวจ split ที่ดูเหมือน IG สูงจากการแบ่ง ID ของแต่ละแถว",
+      "reference": "entropy",
+      "rubric": [
+        "นับคลาสและ weighted entropy จากแถวจริง",
+        "ชี้ความเสี่ยง memorization และ high-cardinality split",
+        "เสนอ held-out evaluation โดยไม่อ้างว่า gain สูงรับรองโมเดลดีกว่า"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: นับคลาสและ weighted entropy จากแถวจริง ชี้ความเสี่ยง memorization และ high-cardinality split เสนอ held-out evaluation โดยไม่อ้างว่า gain สูงรับรองโมเดลดีกว่า",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "สูตรจาก S08 pp.13–14 เขียนให้อ่านเป็นขั้นตอน ให้ pᶜ เป็นสัดส่วน class c ใน node S ใช้ log ฐาน 2 หน่วย bit\n\n\n\nเมื่อ count=0 ให้ contribution 0 ตามลิมิต 0 log 0 ไม่ใช่ประเมิน log(0) ตรง ๆ Pure node มี H=0; binary ครึ่งต่อครึ่งมี H=1 ต้องถ่วงน"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-decision-tree-exam-23",
+      "type": "self",
+      "prompt": "ออกแบบ tests ตรวจต้นไม้ ID3 โดยแยก structure กับ predictions",
+      "reference": "python",
+      "rubric": [
+        "ตรวจ pure node และ majority/tie policy",
+        "ทดสอบ known และ unknown category",
+        "เทียบ training predictions กับ raw labels และระบุไม่ใช่ test accuracy"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ตรวจ pure node และ majority/tie policy ทดสอบ known และ unknown category เทียบ training predictions กับ raw labels และระบุไม่ใช่ test accuracy",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Implementation เสริม standard library: tie gain เลือกคอลัมน์ก่อน, tie majority เลือกชื่อ class ตามอักษร; unknown category ที่ predict ใช้ majority ของ node เป็น policy เสริม ไม่ใช่กฎในสไลด์ ไม่มีการ execute Python ในเว็บ\n\n\n\nถ้าไม่มี attribu"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-decision-tree-exam-24",
+      "type": "self",
+      "prompt": "ตรวจตัวเลข gain ที่ artifact ปัดหยาบไม่ตรงค่าคำนวณเต็ม",
+      "reference": "sources",
+      "rubric": [
+        "คงข้อมูล source ไม่ปรับ counts ให้ตรงตัวเลขปัด",
+        "ใช้ log2 และค่าเต็มก่อนรายงาน",
+        "แยกงานส่ง/เฉลยผู้เขียนจาก official answer key"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: คงข้อมูล source ไม่ปรับ counts ให้ตรงตัวเลขปัด ใช้ log2 และค่าเต็มก่อนรายงาน แยกงานส่ง/เฉลยผู้เขียนจาก official answer key",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "S08 `Final/Decision Tree Slide.pdf` pp.3–4 terms/if–then,5–6 Sunburn,7–12 ID3/trees/Occam,13–15 gain/subtrees,16–17 rules; A01 `Assignment/Assignment_DecisionTree.pdf` p.1; A04 `Assignment/example.pdf` pp.1–6; A05 `Assignment/Lab_Sol.pdf` p"
+      }
+    }
+  ]
+}

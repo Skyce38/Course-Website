@@ -1,0 +1,594 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-uml-solid",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "oop-python-uml-solid-exam-01",
+      "type": "choice",
+      "prompt": "ช่องสามส่วนของ UML class box ใช้อ่านอะไร?",
+      "reference": "uml",
+      "choices": [
+        {
+          "text": "ชื่อ class,attributes,operations",
+          "id": "a"
+        },
+        {
+          "text": "ชื่อไฟล์,commit,คะแนน",
+          "id": "b"
+        },
+        {
+          "text": "เฉพาะข้อมูลของ object หนึ่งตัว",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "เป็นแผนภาพชนิด ไม่ใช่ snapshot state ของ instance",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week6 pp.10–26:ดูชื่อ class→attributes/types→operations→visibility→เส้นสัมพันธ์→multiplicity `+`public,`-`private,`#`protected เป็น notation ออกแบบ;Pythonunderscore/mangling ไม่ได้ enforce แบบ Java ทุกอย่าง abstractclass/operation ใช้ตัวเอี"
+      }
+    },
+    {
+      "id": "oop-python-uml-solid-exam-02",
+      "type": "choice",
+      "prompt": "UML visibility +,−,# ตรงกับระดับใดตามลำดับ?",
+      "reference": "uml",
+      "choices": [
+        {
+          "id": "a",
+          "text": "public,private,protected"
+        },
+        {
+          "id": "b",
+          "text": "private,public,protected"
+        },
+        {
+          "id": "c",
+          "text": "protected,private,public"
+        }
+      ],
+      "answer": "a",
+      "explanation": "อ่าน notation ตามแผนภาพ: +public,−private,#protected แต่ยังต้องพิจารณากลไกของภาษา ไม่ใช่วาดแล้ว Pythonenforce เอง",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week6 pp.10–26:ดูชื่อ class→attributes/types→operations→visibility→เส้นสัมพันธ์→multiplicity `+`public,`-`private,`#`protected เป็น notation ออกแบบ;Pythonunderscore/mangling ไม่ได้ enforce แบบ Java ทุกอย่าง abstractclass/operation ใช้ตัวเอี"
+      }
+    },
+    {
+      "id": "oop-python-uml-solid-exam-03",
+      "type": "choice",
+      "prompt": "Class หรือ operation ที่เขียนเป็นตัวเอียงหรือมี annotation ว่า abstract ใน UML สื่ออะไร?",
+      "reference": "uml",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เป็น contract เชิงนามธรรม ต้องนำไปใช้ด้วยกลไกภาษาที่สอดคล้อง"
+        },
+        {
+          "id": "b",
+          "text": "ทุก instance ของมันถูกลบทันที"
+        },
+        {
+          "id": "c",
+          "text": "ทุก attribute เป็น public โดยอัตโนมัติ"
+        }
+      ],
+      "answer": "a",
+      "explanation": "UML สื่อการออกแบบ abstract class/operation ไม่ใช่ตัวรันที่บังคับ Python เอง ต้องเชื่อมกับ ABC/abstractmethod เมื่อ implement",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week6 pp.10–26:ดูชื่อ class→attributes/types→operations→visibility→เส้นสัมพันธ์→multiplicity `+`public,`-`private,`#`protected เป็น notation ออกแบบ;Pythonunderscore/mangling ไม่ได้ enforce แบบ Java ทุกอย่าง abstractclass/operation ใช้ตัวเอี"
+      }
+    },
+    {
+      "id": "oop-python-uml-solid-exam-04",
+      "type": "choice",
+      "prompt": "เพชรของ aggregation/composition อยู่ที่ปลายใด?",
+      "reference": "uml",
+      "choices": [
+        {
+          "text": "whole/owner",
+          "id": "a"
+        },
+        {
+          "text": "part เสมอ",
+          "id": "b"
+        },
+        {
+          "text": "ปลายใดก็ได้ไม่มีความหมาย",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ตรวจทิศ ownership ก่อนแปลลูกศรหรือเพชร",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week6 pp.10–26:ดูชื่อ class→attributes/types→operations→visibility→เส้นสัมพันธ์→multiplicity `+`public,`-`private,`#`protected เป็น notation ออกแบบ;Pythonunderscore/mangling ไม่ได้ enforce แบบ Java ทุกอย่าง abstractclass/operation ใช้ตัวเอี"
+      }
+    },
+    {
+      "id": "oop-python-uml-solid-exam-05",
+      "type": "choice",
+      "prompt": "ลูกศรสามเหลี่ยม inheritance ชี้ไปที่ใคร?",
+      "reference": "uml",
+      "choices": [
+        {
+          "text": "subclass เสมอ",
+          "id": "a"
+        },
+        {
+          "text": "base/general class",
+          "id": "b"
+        },
+        {
+          "text": "object ที่สร้างล่าสุด",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "แสดง is-a/generalization ไม่ใช่ has-a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week6 pp.10–26:ดูชื่อ class→attributes/types→operations→visibility→เส้นสัมพันธ์→multiplicity `+`public,`-`private,`#`protected เป็น notation ออกแบบ;Pythonunderscore/mangling ไม่ได้ enforce แบบ Java ทุกอย่าง abstractclass/operation ใช้ตัวเอี"
+      }
+    },
+    {
+      "id": "oop-python-uml-solid-exam-06",
+      "type": "choice",
+      "prompt": "SRP ใช้จำนวน methods ต่อ class เป็นเกณฑ์ตายตัวหรือไม่?",
+      "reference": "srp",
+      "choices": [
+        {
+          "text": "ต้องมี method เดียว",
+          "id": "a"
+        },
+        {
+          "text": "ต้องมีสอง methods เสมอ",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ ใช้เหตุผลของการเปลี่ยนความรับผิดชอบ",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "methods หลายตัวอาจมีความรับผิดชอบร่วมที่เปลี่ยนเหตุผลเดียว",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week6 pp.28–35 แยก Report การคำนวณ,Formatter รูปแบบ,Repository การเก็บ,Notifier การแจ้งเตือน เพราะ requirements เหล่านี้เปลี่ยนคนละเหตุผล\n\nSRP ไม่ใช่มี method เดียวต่อ class และไม่ควรแยก count/total/average เป็นสาม class โดยไม่มีเหตุผลต่างก"
+      }
+    },
+    {
+      "id": "oop-python-uml-solid-exam-07",
+      "type": "choice",
+      "prompt": "แยก Formatter ออกจาก Repository ช่วยเรื่องใด?",
+      "reference": "srp",
+      "choices": [
+        {
+          "text": "แยกการเปลี่ยนรูปแบบจากการเก็บข้อมูล",
+          "id": "a"
+        },
+        {
+          "text": "รับรองโปรแกรมเร็วขึ้นทุกกรณี",
+          "id": "b"
+        },
+        {
+          "text": "ลบความจำเป็นของ tests",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "เป็นการจัดขอบเขตการเปลี่ยน ไม่ใช่ข้อพิสูจน์ Big-O",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week6 pp.28–35 แยก Report การคำนวณ,Formatter รูปแบบ,Repository การเก็บ,Notifier การแจ้งเตือน เพราะ requirements เหล่านี้เปลี่ยนคนละเหตุผล\n\nSRP ไม่ใช่มี method เดียวต่อ class และไม่ควรแยก count/total/average เป็นสาม class โดยไม่มีเหตุผลต่างก"
+      }
+    },
+    {
+      "id": "oop-python-uml-solid-exam-08",
+      "type": "choice",
+      "prompt": "แยก count,total,average เป็นสาม class โดยไม่มีเหตุผลต่างกัน อาจเกิดอะไร?",
+      "reference": "srp",
+      "choices": [
+        {
+          "text": "เป็น SRP ที่ดีที่สุดเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "เพิ่ม coupling/ความซับซ้อนเกินจำเป็น",
+          "id": "b"
+        },
+        {
+          "text": "ลด memory แน่นอน",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ต้องพิจารณาเหตุผลของการเปลี่ยน ไม่แตก class ตามทุก method",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week6 pp.28–35 แยก Report การคำนวณ,Formatter รูปแบบ,Repository การเก็บ,Notifier การแจ้งเตือน เพราะ requirements เหล่านี้เปลี่ยนคนละเหตุผล\n\nSRP ไม่ใช่มี method เดียวต่อ class และไม่ควรแยก count/total/average เป็นสาม class โดยไม่มีเหตุผลต่างก"
+      }
+    },
+    {
+      "id": "oop-python-uml-solid-exam-09",
+      "type": "choice",
+      "prompt": "เพิ่ม output channel ใหม่โดย client ไม่รู้ concrete type ต้องคงอะไร?",
+      "reference": "ocp",
+      "choices": [
+        {
+          "text": "ชื่อไฟล์ของทุก class เดิม",
+          "id": "a"
+        },
+        {
+          "text": "if branch ใหม่ใน client ทุกครั้ง",
+          "id": "b"
+        },
+        {
+          "text": "interface/contract ที่ client เรียก",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ขยาย implementation ผ่านจุดที่ออกแบบไว้",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.37–43 และ Week7 pp.14–23:ถ้าต้องเพิ่ม output/channel ใหม่แล้วกลับไปแก้ ifemail/sms/...ทุกครั้ง อาจแยก interface ให้เพิ่ม implementation ใหม่ โดย client ไม่ต้องรู้ชนิด OCP ไม่ใช่ห้ามแก้โค้ดใดตลอดกาล:การแก้ bug หรือเปลี่ยนสัญญาฐานยังทำได้ห"
+      }
+    },
+    {
+      "id": "oop-python-uml-solid-exam-10",
+      "type": "choice",
+      "prompt": "Composition root รับ configuration ใหม่เมื่อเพิ่ม channel ขัด OCP เสมอหรือไม่?",
+      "reference": "ocp",
+      "choices": [
+        {
+          "text": "ไม่ การประกอบระบบอาจต้องรับชนิดใหม่",
+          "id": "a"
+        },
+        {
+          "text": "ขัดทุกการเปลี่ยนบรรทัด",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ต้องมี configuration อีก",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "OCP ไม่ใช่ห้ามแก้โค้ดทั้งหมดตลอดกาล",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.37–43 และ Week7 pp.14–23:ถ้าต้องเพิ่ม output/channel ใหม่แล้วกลับไปแก้ ifemail/sms/...ทุกครั้ง อาจแยก interface ให้เพิ่ม implementation ใหม่ โดย client ไม่ต้องรู้ชนิด OCP ไม่ใช่ห้ามแก้โค้ดใดตลอดกาล:การแก้ bug หรือเปลี่ยนสัญญาฐานยังทำได้ห"
+      }
+    },
+    {
+      "id": "oop-python-uml-solid-exam-11",
+      "type": "choice",
+      "prompt": "พบ bug ใน implementation เดิมควรตีความ OCP อย่างไร?",
+      "reference": "ocp",
+      "choices": [
+        {
+          "text": "ห้ามแก้เพราะ OCP",
+          "id": "a"
+        },
+        {
+          "text": "แก้ได้โดยประเมินผลกระทบต่อ contract",
+          "id": "b"
+        },
+        {
+          "text": "ต้องสร้างทั้งแอปใหม่",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "แยกการแก้บั๊กกับการเพิ่มเงื่อนไข concrete types ซ้ำ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.37–43 และ Week7 pp.14–23:ถ้าต้องเพิ่ม output/channel ใหม่แล้วกลับไปแก้ ifemail/sms/...ทุกครั้ง อาจแยก interface ให้เพิ่ม implementation ใหม่ โดย client ไม่ต้องรู้ชนิด OCP ไม่ใช่ห้ามแก้โค้ดใดตลอดกาล:การแก้ bug หรือเปลี่ยนสัญญาฐานยังทำได้ห"
+      }
+    },
+    {
+      "id": "oop-python-uml-solid-exam-12",
+      "type": "choice",
+      "prompt": "LSP สนใจสิ่งใดมากกว่าแค่ subclass ถูก syntax?",
+      "reference": "lsp",
+      "choices": [
+        {
+          "text": "จำนวน lines ของลูก",
+          "id": "a"
+        },
+        {
+          "text": "ชื่อ attribute เหมือนกันทั้งหมด",
+          "id": "b"
+        },
+        {
+          "text": "พฤติกรรมที่ client ของฐานคาดหวัง",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ต้องรักษา contract เมื่อทดแทนชนิดฐาน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week7 pp.3–13:การสืบทอดที่ถูก syntax ยังละเมิดความคาดหวัง client ได้ Square ทางคณิตศาสตร์เป็น rectangle แต่ mutableRectangle ที่ width/height แก้แยกกันมี contract ต่างจาก Square ที่ผูกสองค่า วิธีแก้คือแยกชนิดผ่าน Shape ร่วมและไม่ให้ Square "
+      }
+    },
+    {
+      "id": "oop-python-uml-solid-exam-13",
+      "type": "choice",
+      "prompt": "Bird ที่รับรอง fly แต่ Penguin ทำไม่ได้ ชี้ปัญหาใด?",
+      "reference": "lsp",
+      "choices": [
+        {
+          "text": "contract ฐานไม่เหมาะกับทุก subtype",
+          "id": "a"
+        },
+        {
+          "text": "Python ห้ามใช้ชื่อ Bird",
+          "id": "b"
+        },
+        {
+          "text": "ทุกนกต้องถูกลบจากระบบ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "อาจแยกความสามารถ Flyable แทนการรับรองผิดในฐาน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week7 pp.3–13:การสืบทอดที่ถูก syntax ยังละเมิดความคาดหวัง client ได้ Square ทางคณิตศาสตร์เป็น rectangle แต่ mutableRectangle ที่ width/height แก้แยกกันมี contract ต่างจาก Square ที่ผูกสองค่า วิธีแก้คือแยกชนิดผ่าน Shape ร่วมและไม่ให้ Square "
+      }
+    },
+    {
+      "id": "oop-python-uml-solid-exam-14",
+      "type": "numeric",
+      "prompt": "Rectangle width5,height4 มีพื้นที่เท่าใด?",
+      "reference": "trace",
+      "answer": 20,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "คูณ width×height=20 ตาม contract ของ client",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "Push.format(\"A\",\"hello\") คืน Push:A:hello→service ส่งค่าเดียวให้ logger→entries มี 1 รายการ เพิ่ม Email/SMS โดยใช้ service เดิมได้ ไม่มี ifbranch ตามชื่อชนิด ข้อมูลไม่ถูกส่งออกเครือข่าย\n\nclient_area ตั้ง width5 แล้ว height4:Rectangle ได้ 20",
+        "oracle": "5*4"
+      }
+    },
+    {
+      "id": "oop-python-uml-solid-exam-15",
+      "type": "numeric",
+      "prompt": "CoupledSquare ตั้ง width5 แล้ว height4 โดยเก็บ side เดียว มีพื้นที่เท่าใด?",
+      "reference": "trace",
+      "answer": 16,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "การตั้งครั้งหลังทำ side4 จึง 4×4=16",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "Push.format(\"A\",\"hello\") คืน Push:A:hello→service ส่งค่าเดียวให้ logger→entries มี 1 รายการ เพิ่ม Email/SMS โดยใช้ service เดิมได้ ไม่มี ifbranch ตามชื่อชนิด ข้อมูลไม่ถูกส่งออกเครือข่าย\n\nclient_area ตั้ง width5 แล้ว height4:Rectangle ได้ 20",
+        "oracle": "4*4"
+      }
+    },
+    {
+      "id": "oop-python-uml-solid-exam-16",
+      "type": "choice",
+      "prompt": "Counterexample หนึ่งที่ client ฐานทำงานไม่ตรงคาดมีความหมายใด?",
+      "reference": "trace",
+      "choices": [
+        {
+          "text": "พอหักล้างข้ออ้างว่าทดแทนได้ทุกกรณี",
+          "id": "a"
+        },
+        {
+          "text": "ต้องมี 1000 ตัวอย่างก่อนเสมอ",
+          "id": "b"
+        },
+        {
+          "text": "ไม่สำคัญถ้า isinstance ผ่าน",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "การพิสูจน์ข้ออ้างสากลผิดใช้กรณีโต้แย้งที่ถูกต้องหนึ่งกรณี",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Push.format(\"A\",\"hello\") คืน Push:A:hello→service ส่งค่าเดียวให้ logger→entries มี 1 รายการ เพิ่ม Email/SMS โดยใช้ service เดิมได้ ไม่มี ifbranch ตามชื่อชนิด ข้อมูลไม่ถูกส่งออกเครือข่าย\n\nclient_area ตั้ง width5 แล้ว height4:Rectangle ได้ 20"
+      }
+    },
+    {
+      "id": "oop-python-uml-solid-exam-17",
+      "type": "choice",
+      "prompt": "NotificationService ในบทส่ง email จริงหรือไม่?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "ส่งจริงทุกครั้ง",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ เป็น simulation คืนข้อความและเก็บ memory log",
+          "id": "b"
+        },
+        {
+          "text": "เขียนฐานข้อมูลบน server",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ไม่ขยายตัวอย่างสาธิตเป็นระบบภายนอกที่ไม่ได้ทำ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "โค้ด Channel อิงแนว NotificationService แต่ใช้ format/MemoryLog เพื่อตรวจโดยไม่เกิด externalactions ส่วน CoupledSquare เป็นตัวอย่าง **ผิด contract โดยเจตนา** ไม่ใช่แบบนำไปใช้จริง"
+      }
+    },
+    {
+      "id": "oop-python-uml-solid-exam-18",
+      "type": "choice",
+      "prompt": "Format ข้อความยาว m ตัวอักษรควรรวมต้นทุนอะไร?",
+      "reference": "complexity",
+      "choices": [
+        {
+          "text": "O(1) เพราะใช้ polymorphism",
+          "id": "a"
+        },
+        {
+          "text": "O(log m) จาก UML",
+          "id": "b"
+        },
+        {
+          "text": "งานตามความยาว O(m)",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "การแยก class ไม่ทำให้การสร้างข้อความหายไป",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "การจัดรูปข้อความ m ตัวอักษรใช้ O(m);เพิ่ม loglistamortizedO(1) ไม่นับข้อความ;เก็บ k ข้อความใช้พื้นที่ตามความยาวรวม การแบ่ง class ไม่ลด Big-O โดยอัตโนมัติและมี indirection/objects เพิ่มบ้าง ห้ามอ้าง refactor ประหยัด memory หรือเร็วขึ้นโดยไม่"
+      }
+    },
+    {
+      "id": "oop-python-uml-solid-exam-19",
+      "type": "choice",
+      "prompt": "UML private− ทำให้ Python attributes เข้าถึงไม่ได้เองหรือไม่?",
+      "reference": "uml",
+      "choices": [
+        {
+          "text": "ไม่ ต้องแยก notation กับกลไกภาษา",
+          "id": "a"
+        },
+        {
+          "text": "ใช่ทุกภาษา",
+          "id": "b"
+        },
+        {
+          "text": "ใช่เมื่อวาดเพชรทึบ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "Python underscore/mangling ไม่ enforce เหมือนทุกภาษาที่มี private",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week6 pp.10–26:ดูชื่อ class→attributes/types→operations→visibility→เส้นสัมพันธ์→multiplicity `+`public,`-`private,`#`protected เป็น notation ออกแบบ;Pythonunderscore/mangling ไม่ได้ enforce แบบ Java ทุกอย่าง abstractclass/operation ใช้ตัวเอี"
+      }
+    },
+    {
+      "id": "oop-python-uml-solid-exam-20",
+      "type": "choice",
+      "prompt": "บทนี้สอน ISP/DIP ลึกเท่ากับ SRP/OCP/LSP หรือไม่?",
+      "reference": "sources",
+      "choices": [
+        {
+          "text": "ลึกครบทุกหลักการพร้อม implementation",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ แหล่งที่ใช้มีเพียงภาพรวมบางส่วน",
+          "id": "b"
+        },
+        {
+          "text": "ไม่มีชื่อ SOLID ใดเลย",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ไม่แต่งรายละเอียดหรือเฉลย ISP/DIP ที่เกิน source scope",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "- [Week6 physical pp.3–47](../slides/Week6.pdf#page=3) — UML,relationships,SRP/OCP และ overview\n- [Week7 physical pp.3–23](../slides/Week7.pdf#page=3) — LSP,Square/Rectangle,Bird,NotificationService\n- แหล่ง lab เพิ่มเติม (local-only ไม่เผยแ"
+      }
+    },
+    {
+      "id": "oop-python-uml-solid-exam-21",
+      "type": "self",
+      "prompt": "อ่านแผนภาพ Team/Player กับ Order/OrderLine พร้อม multiplicity",
+      "reference": "uml",
+      "rubric": [
+        "เลือก whole/part และทิศเพชรถูก",
+        "แยก aggregation/composition ตาม ownership ที่กำหนด",
+        "อธิบาย validation ที่ยังต้องเขียนใน Python"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: เลือก whole/part และทิศเพชรถูก แยก aggregation/composition ตาม ownership ที่กำหนด อธิบาย validation ที่ยังต้องเขียนใน Python",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Week6 pp.10–26:ดูชื่อ class→attributes/types→operations→visibility→เส้นสัมพันธ์→multiplicity `+`public,`-`private,`#`protected เป็น notation ออกแบบ;Pythonunderscore/mangling ไม่ได้ enforce แบบ Java ทุกอย่าง abstractclass/operation ใช้ตัวเอี"
+      }
+    },
+    {
+      "id": "oop-python-uml-solid-exam-22",
+      "type": "self",
+      "prompt": "Refactor report ที่คำนวณ format และส่งออก โดยไม่แตก class เกินเหตุ",
+      "reference": "srp",
+      "rubric": [
+        "แจกแจงเหตุผลเปลี่ยนแต่ละส่วน",
+        "คง interface และผลเดิมที่ client ต้องการ",
+        "ระบุ tests ไม่อ้างความเร็วดีขึ้นโดยไม่มีหลักฐาน"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: แจกแจงเหตุผลเปลี่ยนแต่ละส่วน คง interface และผลเดิมที่ client ต้องการ ระบุ tests ไม่อ้างความเร็วดีขึ้นโดยไม่มีหลักฐาน",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Week6 pp.28–35 แยก Report การคำนวณ,Formatter รูปแบบ,Repository การเก็บ,Notifier การแจ้งเตือน เพราะ requirements เหล่านี้เปลี่ยนคนละเหตุผล\n\nSRP ไม่ใช่มี method เดียวต่อ class และไม่ควรแยก count/total/average เป็นสาม class โดยไม่มีเหตุผลต่างก"
+      }
+    },
+    {
+      "id": "oop-python-uml-solid-exam-23",
+      "type": "self",
+      "prompt": "ออกแบบ channel ใหม่และ tests โดยไม่แก้ service ตามชื่อชนิด",
+      "reference": "ocp",
+      "rubric": [
+        "เพิ่ม implementation ของ interface เดิม",
+        "ปรับ composition/configuration อย่างชัดเจน",
+        "ทดสอบข้อความและ side effects ของ memory log"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: เพิ่ม implementation ของ interface เดิม ปรับ composition/configuration อย่างชัดเจน ทดสอบข้อความและ side effects ของ memory log",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "pp.37–43 และ Week7 pp.14–23:ถ้าต้องเพิ่ม output/channel ใหม่แล้วกลับไปแก้ ifemail/sms/...ทุกครั้ง อาจแยก interface ให้เพิ่ม implementation ใหม่ โดย client ไม่ต้องรู้ชนิด OCP ไม่ใช่ห้ามแก้โค้ดใดตลอดกาล:การแก้ bug หรือเปลี่ยนสัญญาฐานยังทำได้ห"
+      }
+    },
+    {
+      "id": "oop-python-uml-solid-exam-24",
+      "type": "self",
+      "prompt": "อธิบาย Square/Rectangle โดยแยกคณิตศาสตร์จาก mutable software contract",
+      "reference": "lsp",
+      "rubric": [
+        "ระบุการตั้ง width/height อย่างอิสระของ client",
+        "แสดง counterexample ตามลำดับคำสั่ง",
+        "เสนอ hierarchy/interface ที่ไม่รับรองสิ่งที่ subtype ทำไม่ได้"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ระบุการตั้ง width/height อย่างอิสระของ client แสดง counterexample ตามลำดับคำสั่ง เสนอ hierarchy/interface ที่ไม่รับรองสิ่งที่ subtype ทำไม่ได้",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Week7 pp.3–13:การสืบทอดที่ถูก syntax ยังละเมิดความคาดหวัง client ได้ Square ทางคณิตศาสตร์เป็น rectangle แต่ mutableRectangle ที่ width/height แก้แยกกันมี contract ต่างจาก Square ที่ผูกสองค่า วิธีแก้คือแยกชนิดผ่าน Shape ร่วมและไม่ให้ Square "
+      }
+    }
+  ]
+}

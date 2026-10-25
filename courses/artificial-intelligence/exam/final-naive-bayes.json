@@ -1,0 +1,561 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "artificial-intelligence-final-naive-bayes",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "artificial-intelligence-final-naive-bayes-exam-01",
+      "type": "choice",
+      "prompt": "P(A|C) ใช้ตัวหารใดเมื่อประมาณจากความถี่?",
+      "reference": "probability",
+      "choices": [
+        {
+          "text": "จำนวนตัวอย่างในคลาส C",
+          "id": "a"
+        },
+        {
+          "text": "จำนวนค่า A ทุกคลาสเสมอ",
+          "id": "b"
+        },
+        {
+          "text": "จำนวน features",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "เงื่อนไข C จำกัด sample space ให้เหลือคลาสนั้น",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "คำอธิบายพื้นฐานส่วนนี้เขียนเสริมเพื่ออ่านสูตรใน S07 หน้า 6: Classification เลือก label จากชุดคลาสที่กำหนด ไม่ใช่ทำนายค่าเฉลี่ยตัวเลขแบบ regression และไม่ใช่โหวตเพื่อนบ้านแบบ KNN\n\n- ความน่าจะเป็นอยู่ระหว่าง 0 ถึง 1; ผลรวมของคลาสที่ไม่ทับกันแ"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-naive-bayes-exam-02",
+      "type": "choice",
+      "prompt": "Prior หมายถึงอะไร?",
+      "reference": "bayes",
+      "choices": [
+        {
+          "text": "posterior หลัง normalize",
+          "id": "a"
+        },
+        {
+          "text": "ความน่าจะเป็นคลาสก่อนพิจารณา query features",
+          "id": "b"
+        },
+        {
+          "text": "ระยะเพื่อนบ้าน",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "แยก prior จาก likelihood และ posterior",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S07 หน้า 6 ให้สูตร Bayes สำหรับ X ซึ่งเป็นเวกเตอร์ features\n\n\n\n| คำศัพท์ | ความหมาย |\n|---|---|\n| Prior P(C) | ความน่าจะเป็นคลาสก่อนใช้ features ของ query |\n| Likelihood P(X given C) | โอกาสได้ features นี้เมื่อกำหนดคลาส ไม่ใช่ posterior |\n"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-naive-bayes-exam-03",
+      "type": "choice",
+      "prompt": "Evidence P(X) มีบทบาทใดใน Bayes theorem?",
+      "reference": "bayes",
+      "choices": [
+        {
+          "text": "ตัวเลือก k ของ KNN",
+          "id": "a"
+        },
+        {
+          "text": "จำนวน categories ของทุกคอลัมน์",
+          "id": "b"
+        },
+        {
+          "text": "ตัวหารร่วมเมื่อเปรียบคลาสสำหรับ X เดียวกัน",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "เมื่อเป็นบวกตัวหารร่วมไม่เปลี่ยน argmax",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S07 หน้า 6 ให้สูตร Bayes สำหรับ X ซึ่งเป็นเวกเตอร์ features\n\n\n\n| คำศัพท์ | ความหมาย |\n|---|---|\n| Prior P(C) | ความน่าจะเป็นคลาสก่อนใช้ features ของ query |\n| Likelihood P(X given C) | โอกาสได้ features นี้เมื่อกำหนดคลาส ไม่ใช่ posterior |\n"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-naive-bayes-exam-04",
+      "type": "choice",
+      "prompt": "สมมติฐาน Naive Bayes ระบุ independence แบบใด?",
+      "reference": "independence",
+      "choices": [
+        {
+          "text": "features เป็นอิสระแบบมีเงื่อนไขเมื่อกำหนดคลาส",
+          "id": "a"
+        },
+        {
+          "text": "features อิสระโดยไม่มีเงื่อนไขเสมอ",
+          "id": "b"
+        },
+        {
+          "text": "class อิสระจาก features เสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "เป็นสมมติฐานของแบบจำลอง ไม่ใช่ข้อเท็จจริงที่ fit แล้วพิสูจน์ได้",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "หน้า 6 ใช้ถ้อยคำว่า features ภายในคลาสไม่เกี่ยวข้องกัน คำอธิบายเชิงสูตรที่ขยายความคือ **เมื่อทราบคลาส C แล้ว** แบบจำลองสมมติว่า features เป็นอิสระแบบมีเงื่อนไข จึงเขียน joint likelihood เป็นผลคูณ\n\n\n\nไม่ได้สมมติว่า features อิสระจากกันแบบไม่"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-naive-bayes-exam-05",
+      "type": "numeric",
+      "prompt": "scores ของคลาส A=.12,B=.08 จงหา normalized posterior ของ A",
+      "reference": "scores",
+      "answer": 0.6,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "หาร.12 ด้วยผลรวม.20 ได้.6",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "สูตรเลือกคลาสใน S07 หน้า 7 คือเลือก score มากที่สุด ตัวหารร่วมบวกไม่เปลี่ยนการจัดอันดับ จึงไม่จำเป็นต้อง normalize หากต้องการเพียง argmax\n\n\n\nZ นี้เป็น evidence **ภายใต้แบบจำลอง Naive Bayes ที่ใช้ผลคูณ** ไม่จำเป็นต้องเท่าความถี่ร่วมของ query",
+        "oracle": "Fraction(12,100)/(Fraction(12,100)+Fraction(8,100))"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-naive-bayes-exam-06",
+      "type": "choice",
+      "prompt": "ทุก class score เป็นศูนย์ จะ normalize อย่างไรโดยไม่เปลี่ยนโมเดล?",
+      "reference": "scores",
+      "choices": [
+        {
+          "text": "ให้.5 ทุกคลาสโดยอัตโนมัติ",
+          "id": "a"
+        },
+        {
+          "text": "หารด้วยจำนวน features",
+          "id": "b"
+        },
+        {
+          "text": "normalize ไม่ได้เพราะตัวหารเป็นศูนย์",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ต้องรายงานปัญหาหรือประกาศ smoothing/model policy เพิ่ม ไม่แต่ง posterior",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "สูตรเลือกคลาสใน S07 หน้า 7 คือเลือก score มากที่สุด ตัวหารร่วมบวกไม่เปลี่ยนการจัดอันดับ จึงไม่จำเป็นต้อง normalize หากต้องการเพียง argmax\n\n\n\nZ นี้เป็น evidence **ภายใต้แบบจำลอง Naive Bayes ที่ใช้ผลคูณ** ไม่จำเป็นต้องเท่าความถี่ร่วมของ query"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-naive-bayes-exam-07",
+      "type": "numeric",
+      "prompt": "Judy มีคลาส−5 แถว โดย Hair=Brown มี 3 แถว จงหา P(Brown|−)",
+      "reference": "judy-counts",
+      "answer": 0.6,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "ใช้ 3/5 ไม่ใช่ 3/8",
+      "difficulty": "easy",
+      "verification": {
+        "method": "python",
+        "evidence": "จำนวน + = 3 และ − = 5 จึง prior 3/8 และ 5/8 ตารางแสดง **counts**; หารคอลัมน์ + ด้วย 3 และคอลัมน์ − ด้วย 5 เพื่อได้ conditional probabilities ของแต่ละ feature\n\n| Feature=value | + | − |\n|---|---|---|\n| Hair=Blonde | 2 | 2 |\n| Hair=Brown | 0 ",
+        "oracle": "Fraction(3,5)"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-naive-bayes-exam-08",
+      "type": "numeric",
+      "prompt": "Judy มี raw scores 1/18 และ 1/125 จงหา normalized posterior ของคลาส−",
+      "reference": "judy-calculation",
+      "answer": 0.1258741258741259,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "นำ 1/125 หารผลรวมทั้งสอง ได้ 18/143",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "ไม่ใช้ smoothing เพื่อทำซ้ำตัวเลขในหน้า 7\n\n\n\nจึงเลือก **+** ตรงกับผลที่สไลด์แสดง ไม่ใช่เปรียบเทียบ prior อย่างเดียว การ normalize ต่อไปนี้ผู้เขียนคำนวณเพิ่ม ไม่ใช่ค่าที่หน้า 7 พิมพ์ไว้\n\n\n\nผลรวมเท่ากับ 1 ภายใต้โมเดล แม้ไม่มีแถวฝึกที่ตรง quer",
+        "oracle": "Fraction(1,125)/(Fraction(1,18)+Fraction(1,125))"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-naive-bayes-exam-09",
+      "type": "choice",
+      "prompt": "Name ของ Judy เป็น feature ในแบบจำลองหรือไม่?",
+      "reference": "judy",
+      "choices": [
+        {
+          "text": "ใช่ ใช้สะกดชื่อคำนวณคะแนน",
+          "id": "a"
+        },
+        {
+          "text": "ใช่ แทน prior ทั้งหมด",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ ใช้ Hair,Height,Weight,Lotion",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "Name เป็นตัวระบุแถว ไม่ควรเพิ่ม feature ที่ source ไม่กำหนด",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "**ตรวจชื่อจากภาพ:** request/แผนหลักสูตรเดิมเรียกว่า July แต่ชื่อ query ในภาพสไลด์สะกด **Judy** เราคงคำ July เป็นชื่ออ้างอิงแผนงานเท่านั้น Name ไม่ใช่ feature จึงไม่กระทบผลคำนวณ Features ตามต้นฉบับคือ Hair, Height, Weight, Lotion และ label ค"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-naive-bayes-exam-10",
+      "type": "choice",
+      "prompt": "ป้าย + และ− ใน source มีความหมายทางการแพทย์ที่พิสูจน์ได้หรือไม่?",
+      "reference": "judy",
+      "choices": [
+        {
+          "text": "ไม่ควรเติมความหมายที่ source ไม่ระบุ",
+          "id": "a"
+        },
+        {
+          "text": "+คือโรคร้ายแน่นอน",
+          "id": "b"
+        },
+        {
+          "text": "−คือสุขภาพดีแน่นอน",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "บทใช้ labels ตามตารางเท่านั้น ไม่สร้างข้อสรุปด้านสุขภาพ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "**ตรวจชื่อจากภาพ:** request/แผนหลักสูตรเดิมเรียกว่า July แต่ชื่อ query ในภาพสไลด์สะกด **Judy** เราคงคำ July เป็นชื่ออ้างอิงแผนงานเท่านั้น Name ไม่ใช่ feature จึงไม่กระทบผลคำนวณ Features ตามต้นฉบับคือ Hair, Height, Weight, Lotion และ label ค"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-naive-bayes-exam-11",
+      "type": "numeric",
+      "prompt": "Buy ไม่ smooth มี P(Y)=.5 และ likelihoods .8,.8,.4,.4 จงหา raw score Y",
+      "reference": "buy-raw",
+      "answer": 0.0512,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "คูณ prior กับ likelihoods ทั้งสี่ .5×.8×.8×.4×.4",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "X03 NaiveBayes!G3:K3 และ G6:K6 ใช้ prior และความถี่ของ query ผลคูณอยู่ M3/M6 ส่วน **L3/L6 มีสูตรเพียง `=` จึงใช้เป็นคำตอบที่ตรวจแล้วไม่ได้** เราไม่แก้ต้นฉบับ และตรวจ raw counts/ผลคูณใหม่ แทนเชื่อ cached values โดยลำพัง\n\n\n\nถ้าใช้ unsmoothed ",
+        "oracle": "Fraction(1,2)*Fraction(4,5)*Fraction(4,5)*Fraction(2,5)*Fraction(2,5)"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-naive-bayes-exam-12",
+      "type": "choice",
+      "prompt": "Buy unsmoothed ได้ posterior Y=1 รับรองลูกค้าซื้อแน่นอนหรือไม่?",
+      "reference": "buy-raw",
+      "choices": [
+        {
+          "text": "รับรอง test accuracy100%",
+          "id": "a"
+        },
+        {
+          "text": "รับรองข้อมูลใหม่ทุกแถว",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ เป็นผลภายใต้โมเดลที่อีกคลาสมี zero count",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "posterior ของโมเดลไม่ใช่ความแน่นอนของโลกจริง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "X03 NaiveBayes!G3:K3 และ G6:K6 ใช้ prior และความถี่ของ query ผลคูณอยู่ M3/M6 ส่วน **L3/L6 มีสูตรเพียง `=` จึงใช้เป็นคำตอบที่ตรวจแล้วไม่ได้** เราไม่แก้ต้นฉบับ และตรวจ raw counts/ผลคูณใหม่ แทนเชื่อ cached values โดยลำพัง\n\n\n\nถ้าใช้ unsmoothed "
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-naive-bayes-exam-13",
+      "type": "numeric",
+      "prompt": "คลาสมี 5 แถว feature มี 3categories และค่าหนึ่ง count2 เมื่อα=1 likelihood เป็นเท่าใด?",
+      "reference": "smoothing",
+      "answer": 0.375,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "(count+α)/(Nclass+αK)=(2+1)/(5+3)=3/8",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "คำอธิบายเสริมที่จำเป็นเพื่อเทียบกับ C01: ใช้ additive smoothing กับ **conditional probabilities** โดย category universe ของ feature j มี Kj ค่าที่ประกาศไว้\n\n\n\nα=0 คือ raw counts; α=1 คือ Laplace smoothing ในตัวอย่างนี้ เราคง prior เป็น clas",
+        "oracle": "Fraction(2+1,5+1*3)"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-naive-bayes-exam-14",
+      "type": "choice",
+      "prompt": "Kj ใน additive smoothing ควรใช้อะไร?",
+      "reference": "smoothing",
+      "choices": [
+        {
+          "text": "จำนวนคลาสเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "จำนวน categories ที่ประกาศของ feature j",
+          "id": "b"
+        },
+        {
+          "text": "จำนวน features เสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "แต่ละคอลัมน์อาจมีจำนวน category ต่างกัน เช่น Origin มี 3",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "คำอธิบายเสริมที่จำเป็นเพื่อเทียบกับ C01: ใช้ additive smoothing กับ **conditional probabilities** โดย category universe ของ feature j มี Kj ค่าที่ประกาศไว้\n\n\n\nα=0 คือ raw counts; α=1 คือ Laplace smoothing ในตัวอย่างนี้ เราคง prior เป็น clas"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-naive-bayes-exam-15",
+      "type": "choice",
+      "prompt": "Feature หนึ่งมี conditional count0 และไม่ smooth จะเกิดอะไรกับผลคูณคลาสนั้น?",
+      "reference": "zero-example",
+      "choices": [
+        {
+          "text": "ไม่เปลี่ยน score",
+          "id": "a"
+        },
+        {
+          "text": "score กลายเป็น 1",
+          "id": "b"
+        },
+        {
+          "text": "เป็นศูนย์แม้ features อื่นมี likelihood บวก",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ผลคูณมีตัวประกอบศูนย์ ควรตรวจ policy ก่อนตีความ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "มี feature Color หนึ่งตัว ข้อมูลฝึก Red→A และ Blue→B; **ประกาศล่วงหน้า** ว่า category ที่เป็นไปได้คือ Red,Blue,Green Query Green ไม่เคยปรากฏในทั้งสองคลาส\n\n- α=0: score ทั้งคู่ 0, Z=0 จึงไม่มี posterior จากการหาร ต้องแจ้งข้อจำกัด ไม่สรุปว่า "
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-naive-bayes-exam-16",
+      "type": "choice",
+      "prompt": "รหัส OrdinalEncoder ใช้ใน CategoricalNB อย่างไร?",
+      "reference": "encoding",
+      "choices": [
+        {
+          "text": "เป็น category indices ไม่ใช่ระยะต่อเนื่อง",
+          "id": "a"
+        },
+        {
+          "text": "ใช้เป็นระยะ Euclidean",
+          "id": "b"
+        },
+        {
+          "text": "ใช้เป็นค่าเฉลี่ยความสูงเสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "รหัสอ้างหมวดหมู่เพื่อการนับ ต้องรักษา mapping ระหว่าง train/query",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "C01 ใช้ OrdinalEncoder แล้ว `.astype(int)` ก่อน CategoricalNB แต่ละ feature จึงเป็น category index ไม่ใช่ตัวเลขสำหรับคำนวณระยะอย่าง KNN หรือค่าต่อเนื่องสำหรับ Gaussian\n\nเมื่อ fit X01 ด้วย encoder default ในเวอร์ชันที่ตรวจ ได้ Model A/B→0/1,"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-naive-bayes-exam-17",
+      "type": "choice",
+      "prompt": "Query มี category ใหม่ที่ encoder default ไม่รู้จัก ควรทำอย่างไร?",
+      "reference": "encoding",
+      "choices": [
+        {
+          "text": "ใส่−1 แล้วใช้ CategoricalNB ได้แน่นอน",
+          "id": "a"
+        },
+        {
+          "text": "รายงานหรือออกแบบ unknown-category policy อย่างชัดเจน",
+          "id": "b"
+        },
+        {
+          "text": "เปลี่ยนรหัสทุกแถวโดยไม่ fit",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "default encoder อาจ error และ CategoricalNB คาดรหัสไม่ติดลบ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "C01 ใช้ OrdinalEncoder แล้ว `.astype(int)` ก่อน CategoricalNB แต่ละ feature จึงเป็น category index ไม่ใช่ตัวเลขสำหรับคำนวณระยะอย่าง KNN หรือค่าต่อเนื่องสำหรับ Gaussian\n\nเมื่อ fit X01 ด้วย encoder default ในเวอร์ชันที่ตรวจ ได้ Model A/B→0/1,"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-naive-bayes-exam-18",
+      "type": "choice",
+      "prompt": "Gaussian density ณ จุดหนึ่งมากกว่า 1 ได้หรือไม่?",
+      "reference": "gaussian",
+      "choices": [
+        {
+          "text": "ไม่ได้ทุกกรณี",
+          "id": "a"
+        },
+        {
+          "text": "ได้เฉพาะ label ที่เป็นบวก",
+          "id": "b"
+        },
+        {
+          "text": "ได้ density ไม่ใช่ probability ของจุดนั้น",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ความน่าจะเป็นมาจากการอินทิเกรต density ในช่วง ไม่ใช่ค่า density จุดเดียว",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S07 หน้า 8 เปลี่ยนไปใช้ **GaussianNB กับ Iris** ไม่ใช่ตาราง categorical ของ Judy หรือ Buy สูตร density ต่อไปนี้เป็นคำอธิบายเสริมเพื่ออ่านสมมติฐานของโค้ด ไม่ใช่สูตรที่พิมพ์อยู่บนหน้า 8\n\n\n\nGaussianNB ประมาณ mean/variance ของแต่ละ feature ภายใ"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-naive-bayes-exam-19",
+      "type": "choice",
+      "prompt": "CategoricalNB(alpha=1) เทียบ worksheetα=0 ต่างเพราะอะไร?",
+      "reference": "python-categorical",
+      "choices": [
+        {
+          "text": "smooth conditional probabilities ต่างกัน",
+          "id": "a"
+        },
+        {
+          "text": "ข้อมูลต้องเสียหายแน่นอน",
+          "id": "b"
+        },
+        {
+          "text": "ใช้ภาษา Python จึงเปลี่ยน labels",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ต้องเทียบโมเดลและ parameters เดียวกันก่อนกล่าวว่าคำตอบไม่ตรง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "รันต่อจาก block ด้านบน ใช้ feature/target/query เดียวกับ C01 ส่วน Naive Bayes บรรทัด 50–59 แต่ระบุค่า default ของ model ให้ชัด ไม่อ่าน source workbook จากหน้าเว็บหรือรัน Python ใน browser ต้องมี scikit-learn ใน Python ของผู้เรียน\n\n\n\nผลที่ตร"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-naive-bayes-exam-20",
+      "type": "choice",
+      "prompt": "GaussianNB บน Iris กับ CategoricalNB บน Buy ใช้แทนกันโดยไม่ประกาศได้หรือไม่?",
+      "reference": "python-gaussian",
+      "choices": [
+        {
+          "text": "ได้เพราะชื่อ NB เหมือนกัน",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ได้ สมมติฐาน feature distributions ต่างกัน",
+          "id": "b"
+        },
+        {
+          "text": "ได้ถ้าใช้ seed42",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "โมเดลต่อเนื่องกับหมวดหมู่มี likelihood คนละแบบ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "โค้ด Iris รักษา test_size=0.3, random_state=42 และ GaussianNB() ตาม source ไม่เติม stratify/scaling ส่วน density example และ train-score print เขียนเพิ่มเพื่อการเรียน เวอร์ชันที่ตรวจใช้ priors=None และ var_smoothing=1e-9 ซึ่งเพิ่มค่าปรับ va"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-naive-bayes-exam-21",
+      "type": "self",
+      "prompt": "ใช้ตัวอย่างสองคลาสอธิบาย prior,likelihood,evidence,posterior โดยไม่สลับเงื่อนไข",
+      "reference": "bayes",
+      "rubric": [
+        "ประกาศค่าที่อยู่ในช่วงและผลรวมที่ต้องครบ",
+        "คูณ likelihood กับ prior ก่อน normalize",
+        "แยก score ดิบจาก posterior"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ประกาศค่าที่อยู่ในช่วงและผลรวมที่ต้องครบ คูณ likelihood กับ prior ก่อน normalize แยก score ดิบจาก posterior",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "S07 หน้า 6 ให้สูตร Bayes สำหรับ X ซึ่งเป็นเวกเตอร์ features\n\n\n\n| คำศัพท์ | ความหมาย |\n|---|---|\n| Prior P(C) | ความน่าจะเป็นคลาสก่อนใช้ features ของ query |\n| Likelihood P(X given C) | โอกาสได้ features นี้เมื่อกำหนดคลาส ไม่ใช่ posterior |\n"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-naive-bayes-exam-22",
+      "type": "self",
+      "prompt": "ตรวจ Buy ใหม่เมื่อเปลี่ยนα โดยไม่ใช้สูตร L3/L6 ที่ไม่สมบูรณ์",
+      "reference": "smoothing",
+      "rubric": [
+        "อ่าน raw counts และ Kj แยก feature",
+        "รักษา prior policy เดิมและประกาศα",
+        "เทียบผลคูณและ normalized posterior ไม่เรียกเป็น observed accuracy"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: อ่าน raw counts และ Kj แยก feature รักษา prior policy เดิมและประกาศα เทียบผลคูณและ normalized posterior ไม่เรียกเป็น observed accuracy",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "คำอธิบายเสริมที่จำเป็นเพื่อเทียบกับ C01: ใช้ additive smoothing กับ **conditional probabilities** โดย category universe ของ feature j มี Kj ค่าที่ประกาศไว้\n\n\n\nα=0 คือ raw counts; α=1 คือ Laplace smoothing ในตัวอย่างนี้ เราคง prior เป็น clas"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-naive-bayes-exam-23",
+      "type": "self",
+      "prompt": "อธิบายผลของการใส่ feature ซ้ำสองคอลัมน์ต่อ Naive Bayes",
+      "reference": "independence",
+      "rubric": [
+        "ชี้ว่า likelihood เดิมถูกคูณซ้ำ",
+        "อธิบายสมมติฐาน independence ที่น่าสงสัย",
+        "ไม่อ้างว่า posterior มั่นใจสูงเท่ากับการประเมินถูกต้อง"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ชี้ว่า likelihood เดิมถูกคูณซ้ำ อธิบายสมมติฐาน independence ที่น่าสงสัย ไม่อ้างว่า posterior มั่นใจสูงเท่ากับการประเมินถูกต้อง",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "หน้า 6 ใช้ถ้อยคำว่า features ภายในคลาสไม่เกี่ยวข้องกัน คำอธิบายเชิงสูตรที่ขยายความคือ **เมื่อทราบคลาส C แล้ว** แบบจำลองสมมติว่า features เป็นอิสระแบบมีเงื่อนไข จึงเขียน joint likelihood เป็นผลคูณ\n\n\n\nไม่ได้สมมติว่า features อิสระจากกันแบบไม่"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-naive-bayes-exam-24",
+      "type": "self",
+      "prompt": "ออกแบบ tests ของ NB สำหรับ zero scores, unknown categories และผลคูณขนาดเล็ก",
+      "reference": "python-manual",
+      "rubric": [
+        "แยกข้อจำกัด encoding กับ model",
+        "ตรวจ normalization เฉพาะผลรวมบวก",
+        "พิจารณา log scores สำหรับความเสถียรโดยอธิบายว่าเป็นส่วนเสริม"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: แยกข้อจำกัด encoding กับ model ตรวจ normalization เฉพาะผลรวมบวก พิจารณา log scores สำหรับความเสถียรโดยอธิบายว่าเป็นส่วนเสริม",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "โค้ดเสริม standard library นี้ใช้ category universe ชัดเจน และรองรับ α เป็นจำนวนเต็มไม่ติดลบเพื่อคำนวณ exact fractions ถ้า Z=0 จะ error แทนแอบเปลี่ยนกฎ สังเกตว่า July/Judy และ Buy เป็นคนละ dataset และ label คนละชุด\n\n\n\n### Python: Categorica"
+      }
+    }
+  ]
+}

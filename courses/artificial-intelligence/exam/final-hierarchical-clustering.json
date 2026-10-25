@@ -1,0 +1,550 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "artificial-intelligence-final-hierarchical-clustering",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering-exam-01",
+      "type": "choice",
+      "prompt": "Clustering ในบทต่างจาก supervised classification อย่างไร?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "จัดกลุ่มจาก X โดยไม่มี teacher labels กำกับการฝึก",
+          "id": "a"
+        },
+        {
+          "text": "ต้องใช้ y ทุกแถวเลือกกลุ่ม",
+          "id": "b"
+        },
+        {
+          "text": "ทุกกลุ่มเป็น label ความจริงเสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "คลัสเตอร์ที่ได้ขึ้นกับตัวแทนและเกณฑ์ความคล้าย ไม่ใช่เฉลยที่กำหนดไว้",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S09 pp.2–5: supervised มี (X,Y) เช่น classification/regression; unsupervised ใช้ X โดยไม่มี teacher labels\n\nClustering ต้องการคล้ายกันมากภายในกลุ่มและคล้ายกันน้อยข้ามกลุ่ม หน้า 4 ยก people/images/language/species ไม่ได้มีคำตอบกลุ่มเดียวที่ถ"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering-exam-02",
+      "type": "choice",
+      "prompt": "เป้าหมายความคล้ายของ clustering คืออะไร?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "ทุกจุดมีระยะเท่ากัน",
+          "id": "a"
+        },
+        {
+          "text": "ภายในกลุ่มคล้ายกัน และข้ามกลุ่มต่างกัน",
+          "id": "b"
+        },
+        {
+          "text": "แบ่งตามชื่อแถวเท่านั้น",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ต้องกำหนด representation และเกณฑ์วัดก่อนตีความกลุ่ม",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S09 pp.2–5: supervised มี (X,Y) เช่น classification/regression; unsupervised ใช้ X โดยไม่มี teacher labels\n\nClustering ต้องการคล้ายกันมากภายในกลุ่มและคล้ายกันน้อยข้ามกลุ่ม หน้า 4 ยก people/images/language/species ไม่ได้มีคำตอบกลุ่มเดียวที่ถ"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering-exam-03",
+      "type": "numeric",
+      "prompt": "จุดผู้เขียน (1,2),(4,6) มี Manhattan distance เท่าใด?",
+      "reference": "distance",
+      "answer": 7,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "รวมค่าสัมบูรณ์ 3+4=7 ต่างจาก Euclidean5",
+      "difficulty": "easy",
+      "verification": {
+        "method": "python",
+        "evidence": "pp.6–9 อธิบายว่าความคล้ายขึ้นกับตัวแทน/เกณฑ์และให้คุณสมบัติ metric: nonnegative, symmetry, d(x,x)=0, identity of indiscernibles และ triangle inequality รูปคน/ข้อความ/genes เป็นตัวอย่าง representation ไม่ใช่การวัดหน่วยเดียวกันทั้งหมด\n\nสูตร E",
+        "oracle": "sum(abs(a-b) for a,b in zip([1,2],[4,6]))"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering-exam-04",
+      "type": "choice",
+      "prompt": "Distance แบบ metric ต้องมี symmetry ตามข้อใด?",
+      "reference": "distance",
+      "choices": [
+        {
+          "text": "d(A,B)=d(B,A)",
+          "id": "a"
+        },
+        {
+          "text": "d(A,B)=−d(B,A)",
+          "id": "b"
+        },
+        {
+          "text": "d(A,A)=1",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ระยะกลับทิศมีค่าเท่ากันและระยะตัวเองเป็นศูนย์",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.6–9 อธิบายว่าความคล้ายขึ้นกับตัวแทน/เกณฑ์และให้คุณสมบัติ metric: nonnegative, symmetry, d(x,x)=0, identity of indiscernibles และ triangle inequality รูปคน/ข้อความ/genes เป็นตัวอย่าง representation ไม่ใช่การวัดหน่วยเดียวกันทั้งหมด\n\nสูตร E"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering-exam-05",
+      "type": "choice",
+      "prompt": "ระยะ metric เป็นศูนย์ระหว่างจุดต่างกันได้หรือไม่ตาม identity of indiscernibles?",
+      "reference": "distance",
+      "choices": [
+        {
+          "text": "ได้เสมอ",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ได้ หากเป็นจุดต่างกันจริงใน space ที่นิยาม",
+          "id": "b"
+        },
+        {
+          "text": "ได้เมื่อ label เดียวกัน",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ต้องระบุ space และ representation ไม่ใช้ label แทนเอกลักษณ์จุด",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.6–9 อธิบายว่าความคล้ายขึ้นกับตัวแทน/เกณฑ์และให้คุณสมบัติ metric: nonnegative, symmetry, d(x,x)=0, identity of indiscernibles และ triangle inequality รูปคน/ข้อความ/genes เป็นตัวอย่าง representation ไม่ใช่การวัดหน่วยเดียวกันทั้งหมด\n\nสูตร E"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering-exam-06",
+      "type": "choice",
+      "prompt": "Pearson correlation ของเวกเตอร์ค่าคงที่ควรจัดการอย่างไร?",
+      "reference": "distance",
+      "choices": [
+        {
+          "text": "ให้ correlation1 เสมอ",
+          "id": "a"
+        },
+        {
+          "text": "ใช้เป็น Euclidean0 ทันที",
+          "id": "b"
+        },
+        {
+          "text": "ระบุว่าไม่กำหนดตามสูตรและกำหนด policy",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ส่วนเบี่ยงเบนเป็นศูนย์ทำให้ตัวหารเป็นศูนย์ ไม่แอบเติมตัวเลข",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.6–9 อธิบายว่าความคล้ายขึ้นกับตัวแทน/เกณฑ์และให้คุณสมบัติ metric: nonnegative, symmetry, d(x,x)=0, identity of indiscernibles และ triangle inequality รูปคน/ข้อความ/genes เป็นตัวอย่าง representation ไม่ใช่การวัดหน่วยเดียวกันทั้งหมด\n\nสูตร E"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering-exam-07",
+      "type": "choice",
+      "prompt": "Agglomerative เริ่มจากสถานะใด?",
+      "reference": "hierarchy",
+      "choices": [
+        {
+          "text": "แต่ละจุดเป็นคลัสเตอร์ของตนเอง",
+          "id": "a"
+        },
+        {
+          "text": "ทุกจุดเป็นกลุ่มเดียวแล้วแยก",
+          "id": "b"
+        },
+        {
+          "text": "ต้องรู้คลาสคำตอบก่อน",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "จากนั้นรวมคู่ที่ใกล้ตาม linkage ซ้ำ",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.12–18: agglomerative เริ่มหนึ่งจุดต่อ cluster แล้วรวมคู่ที่ใกล้ที่สุดซ้ำจนเหลือกลุ่มเดียว; divisive เริ่มกลุ่มใหญ่แล้วแบ่งลง ไม่ใช่เพียงกลับลำดับขั้นของ agglomerative ทุกอัลกอริทึม ต้นไม้เก็บการรวมหลายระดับ ต่างจาก partition เดียว การเลื"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering-exam-08",
+      "type": "choice",
+      "prompt": "Divisive ตรงกับวิธีใด?",
+      "reference": "hierarchy",
+      "choices": [
+        {
+          "text": "เริ่ม singleton แล้วรวม",
+          "id": "a"
+        },
+        {
+          "text": "เริ่มกลุ่มใหญ่แล้วแบ่งลง",
+          "id": "b"
+        },
+        {
+          "text": "ย้อนทุกขั้นของ agglomerative แบบเดียวกันแน่นอน",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "เป็นแนวทางแบ่ง ไม่ใช่การรับรองว่า reverse ของทุกอัลกอริทึม",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.12–18: agglomerative เริ่มหนึ่งจุดต่อ cluster แล้วรวมคู่ที่ใกล้ที่สุดซ้ำจนเหลือกลุ่มเดียว; divisive เริ่มกลุ่มใหญ่แล้วแบ่งลง ไม่ใช่เพียงกลับลำดับขั้นของ agglomerative ทุกอัลกอริทึม ต้นไม้เก็บการรวมหลายระดับ ต่างจาก partition เดียว การเลื"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering-exam-09",
+      "type": "numeric",
+      "prompt": "เริ่ม 8singleton หลังรวมทีละคู่ 5 ครั้ง เหลือกี่กลุ่ม?",
+      "reference": "hierarchy",
+      "answer": 3,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "แต่ละ merge ลดจำนวนคลัสเตอร์ลง 1 จึง 8−5",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "pp.12–18: agglomerative เริ่มหนึ่งจุดต่อ cluster แล้วรวมคู่ที่ใกล้ที่สุดซ้ำจนเหลือกลุ่มเดียว; divisive เริ่มกลุ่มใหญ่แล้วแบ่งลง ไม่ใช่เพียงกลับลำดับขั้นของ agglomerative ทุกอัลกอริทึม ต้นไม้เก็บการรวมหลายระดับ ต่างจาก partition เดียว การเลื",
+        "oracle": "8-5"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering-exam-10",
+      "type": "numeric",
+      "prompt": "Cross-pair distances=[2,5,8,9] จงหา single linkage",
+      "reference": "linkage",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "single ใช้ minimum ของทุก cross-pair ไม่เฉลี่ย",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "ให้ A,B เป็นกลุ่มไม่ทับกัน ใช้ระยะคู่สมาชิกเดิมตาม pp.19–21\n\n\n\n\n\nSingle อาจเกิด chaining/กลุ่มยาว Complete ใช้คู่ไกลสุดจึงมักได้กลุ่มแน่นกว่า Average เฉลี่ยทุก cross-pair ไม่ใช่ระยะระหว่าง centroid และไม่ใช่เฉลี่ยสอง cluster เท่ากันโดยไม่สน",
+        "oracle": "min([2,5,8,9])"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering-exam-11",
+      "type": "numeric",
+      "prompt": "Cross-pair distances=[2,5,8,9] จงหา complete linkage",
+      "reference": "linkage",
+      "answer": 9,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "complete ใช้ maximum จึง 9",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "ให้ A,B เป็นกลุ่มไม่ทับกัน ใช้ระยะคู่สมาชิกเดิมตาม pp.19–21\n\n\n\n\n\nSingle อาจเกิด chaining/กลุ่มยาว Complete ใช้คู่ไกลสุดจึงมักได้กลุ่มแน่นกว่า Average เฉลี่ยทุก cross-pair ไม่ใช่ระยะระหว่าง centroid และไม่ใช่เฉลี่ยสอง cluster เท่ากันโดยไม่สน",
+        "oracle": "max([2,5,8,9])"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering-exam-12",
+      "type": "choice",
+      "prompt": "Average linkage ของสองกลุ่มขนาดต่างกัน คำนวณอย่างไร?",
+      "reference": "linkage",
+      "choices": [
+        {
+          "text": "เฉลี่ยระยะ centroid เสมอ",
+          "id": "a"
+        },
+        {
+          "text": "เฉลี่ยสองค่ากลุ่มโดยไม่ดูขนาดเสมอ",
+          "id": "b"
+        },
+        {
+          "text": "เฉลี่ยระยะทุก cross-pair ของสมาชิกเดิม",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "จำนวนคู่เท่ากับ|A||B| ไม่ใช่ระยะระหว่าง means",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ให้ A,B เป็นกลุ่มไม่ทับกัน ใช้ระยะคู่สมาชิกเดิมตาม pp.19–21\n\n\n\n\n\nSingle อาจเกิด chaining/กลุ่มยาว Complete ใช้คู่ไกลสุดจึงมักได้กลุ่มแน่นกว่า Average เฉลี่ยทุก cross-pair ไม่ใช่ระยะระหว่าง centroid และไม่ใช่เฉลี่ยสอง cluster เท่ากันโดยไม่สน"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering-exam-13",
+      "type": "numeric",
+      "prompt": "A มี 2 จุด B มี 3 จุด average linkage ต้องรวม cross-pairs กี่คู่?",
+      "reference": "linkage",
+      "answer": 6,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "แต่ละจุด A จับคู่ได้ 3 จุด B รวม 2×3",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "ให้ A,B เป็นกลุ่มไม่ทับกัน ใช้ระยะคู่สมาชิกเดิมตาม pp.19–21\n\n\n\n\n\nSingle อาจเกิด chaining/กลุ่มยาว Complete ใช้คู่ไกลสุดจึงมักได้กลุ่มแน่นกว่า Average เฉลี่ยทุก cross-pair ไม่ใช่ระยะระหว่าง centroid และไม่ใช่เฉลี่ยสอง cluster เท่ากันโดยไม่สน",
+        "oracle": "2*3"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering-exam-14",
+      "type": "choice",
+      "prompt": "เหตุใดไม่เลือก diagonal0 เป็นคู่ merge แรกของ matrix?",
+      "reference": "matrix-first",
+      "choices": [
+        {
+          "text": "ศูนย์เป็นค่าผิดเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "เป็นระยะจุดถึงตัวเอง ไม่ใช่คู่คลัสเตอร์ต่างกัน",
+          "id": "b"
+        },
+        {
+          "text": "matrix ไม่จำเป็นต้องสมมาตร",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "เลือก off-diagonal ระหว่างกลุ่มคนละกลุ่มเท่านั้น",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เรียกวัตถุรูปการ์ตูนตามลำดับซ้ายไปขวาว่า A,B,C,D,E (IDs ผู้เขียนกำหนด ไม่ใช่ชื่อในสไลด์) Upper triangle คือ AB8,AC8,AD7,AE7,BC2,BD4,BE4,CD3,CE3,DE1 เติมอีกครึ่งด้วย symmetry และ diagonal0\n\nเริ่มรวม D,E ที่ 1 และ B,C ที่ 2 จากนั้นระยะ BC↔DE:"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering-exam-15",
+      "type": "choice",
+      "prompt": "นำ matrix หน้า 14 มาผสมกับ matrix หน้า 22 ระหว่างคำนวณได้หรือไม่?",
+      "reference": "worked",
+      "choices": [
+        {
+          "text": "ได้เพราะจำนวนจุดเท่ากัน",
+          "id": "a"
+        },
+        {
+          "text": "ได้เมื่อใช้ single linkage",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ได้ เป็นตัวอย่างคนละชุด",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ต้องใช้ระยะต้นฉบับชุดเดียวตลอด trace",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ matrix อีกชุดซึ่งมีชื่อ 1..5 ตามสไลด์ ไม่สลับกับตัวเลขหน้า 14\n\n\n\n**Single ตาม source:** รวม(1,2) ที่ 2 แล้ว d(12,3)=min(6,3)=3, d(12,4)=min(10,9)=9, d(12,5)=min(9,8)=8 จึงรวม 12 กับ 3 ที่ 3 ขณะนี้ d(123,4)=min(10,9,7)=7,d(123,5)=min(9,8"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering-exam-16",
+      "type": "choice",
+      "prompt": "Tie ระหว่างคู่ระยะเท่ากันควรรายงานอย่างไร?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "ประกาศ policy เช่นลำดับ tuple IDs ให้ทำซ้ำได้",
+          "id": "a"
+        },
+        {
+          "text": "สลับตามชื่อคลาสคำตอบ",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ต้องระบุเพราะไม่มีผลใดเลย",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ลำดับการรวมบางขั้นอาจต่างกันได้เมื่อเท่ากัน ต้องโปร่งใส",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Code เสริมนี้คำนวณจาก cross-pairs ของสมาชิกเดิม เลือก tie ตามลำดับ tupleIDs ให้ผลซ้ำได้ Fraction ใช้เพื่อรักษา exact ระยะทศนิยมที่ให้มา ไม่สร้าง training UI หรือ graph renderer"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering-exam-17",
+      "type": "choice",
+      "prompt": "แกนความสูงของ dendrogram ในบทหมายถึงอะไร?",
+      "reference": "dendrogram",
+      "choices": [
+        {
+          "text": "ความน่าจะเป็นถูกต้อง",
+          "id": "a"
+        },
+        {
+          "text": "ระยะที่ใช้รวมคลัสเตอร์ตาม linkage",
+          "id": "b"
+        },
+        {
+          "text": "ตำแหน่ง x ของใบ",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ไม่ใช้ความสูงแทนจำนวนแถวหรือ posterior",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.26–29 ให้ height เป็น distance ระหว่างกลุ่ม ไม่ใช่ x-position ของใบหรือ probability ถ้า cutsingleexample ที่ h=4.5 จะมี{1,2,3}กับ{4,5}; ที่ h=3.5 ยังมี 3 กลุ่มคือ{1,2,3},{4},{5} ประกาศ convention ว่ารวมทุก merge ที่ height≤h ถ้าตัดที่ he"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering-exam-18",
+      "type": "numeric",
+      "prompt": "เริ่ม 5 กลุ่ม merge heights=[2,3,4,5] cut ที่ h=3 และรวม height≤h เหลือกี่กลุ่ม?",
+      "reference": "dendrogram",
+      "answer": 3,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "รับ merge ที่ 2 และ 3 สองครั้ง จาก 5 เหลือ 3",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "pp.26–29 ให้ height เป็น distance ระหว่างกลุ่ม ไม่ใช่ x-position ของใบหรือ probability ถ้า cutsingleexample ที่ h=4.5 จะมี{1,2,3}กับ{4,5}; ที่ h=3.5 ยังมี 3 กลุ่มคือ{1,2,3},{4},{5} ประกาศ convention ว่ารวมทุก merge ที่ height≤h ถ้าตัดที่ he",
+        "oracle": "5-sum(v<=3 for v in [2,3,4,5])"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering-exam-19",
+      "type": "choice",
+      "prompt": "กิ่งสูงเพียงอย่างเดียวรับรองว่าเป็น outlier หรือไม่?",
+      "reference": "dendrogram",
+      "choices": [
+        {
+          "text": "ไม่ ต้องดู representation,metric และบริบท",
+          "id": "a"
+        },
+        {
+          "text": "รับรองทุกกรณี",
+          "id": "b"
+        },
+        {
+          "text": "รับรองว่าข้อมูลบันทึกผิด",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "โครงสร้างภาพขึ้นกับ distance/linkage ไม่ใช่ป้ายจริงโดยตัวมันเอง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.26–29 ให้ height เป็น distance ระหว่างกลุ่ม ไม่ใช่ x-position ของใบหรือ probability ถ้า cutsingleexample ที่ h=4.5 จะมี{1,2,3}กับ{4,5}; ที่ h=3.5 ยังมี 3 กลุ่มคือ{1,2,3},{4},{5} ประกาศ convention ว่ารวมทุก merge ที่ height≤h ถ้าตัดที่ he"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering-exam-20",
+      "type": "choice",
+      "prompt": "Single linkage มีความเสี่ยง chaining เพราะอะไร?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "text": "ใช้ค่าสูงสุดทุกคู่",
+          "id": "a"
+        },
+        {
+          "text": "ใช้คู่ที่ใกล้ที่สุดจึงเชื่อมกลุ่มผ่านจุดสะพานได้",
+          "id": "b"
+        },
+        {
+          "text": "บังคับทุกกลุ่มเป็นทรงกลม",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ไม่จำเป็นว่าทุกสมาชิกสองกลุ่มใกล้กันทั้งหมด",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "- ใช้ similarity สูงเป็น distance สูง หรือไม่บอกว่า correlation แปลงเป็น distance อย่างไร\n- เอา matrix หน้า 14 กับ 22 มาปนกัน; คิด distance จากรูปภาพที่ไม่มีพิกัด\n- single=min,complete=max,average=ทุก cross-pair อย่าสลับสูตรหรือใช้ centroid"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering-exam-21",
+      "type": "self",
+      "prompt": "ตรวจว่า proposed distance เป็น metric โดยไม่ตัดสินจาก symmetry อย่างเดียว",
+      "reference": "distance",
+      "rubric": [
+        "ตรวจ nonnegativity และ identity",
+        "ตรวจ symmetry และ triangle inequality",
+        "แยก similarity จาก distance และระบุค่าที่ไม่กำหนด"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ตรวจ nonnegativity และ identity ตรวจ symmetry และ triangle inequality แยก similarity จาก distance และระบุค่าที่ไม่กำหนด",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "pp.6–9 อธิบายว่าความคล้ายขึ้นกับตัวแทน/เกณฑ์และให้คุณสมบัติ metric: nonnegative, symmetry, d(x,x)=0, identity of indiscernibles และ triangle inequality รูปคน/ข้อความ/genes เป็นตัวอย่าง representation ไม่ใช่การวัดหน่วยเดียวกันทั้งหมด\n\nสูตร E"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering-exam-22",
+      "type": "self",
+      "prompt": "ไล่ single,complete,average บน matrix เดียวและอธิบายจุดที่ลำดับต่างกัน",
+      "reference": "linkage",
+      "rubric": [
+        "เลือกคู่ต่ำสุดนอก diagonal",
+        "อัปเดตจากสมาชิกเดิมและถ่วง average ถูก",
+        "ประกาศ tie และตรวจทุกจุดอยู่กลุ่มเดียวไม่ซ้ำ"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: เลือกคู่ต่ำสุดนอก diagonal อัปเดตจากสมาชิกเดิมและถ่วง average ถูก ประกาศ tie และตรวจทุกจุดอยู่กลุ่มเดียวไม่ซ้ำ",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ให้ A,B เป็นกลุ่มไม่ทับกัน ใช้ระยะคู่สมาชิกเดิมตาม pp.19–21\n\n\n\n\n\nSingle อาจเกิด chaining/กลุ่มยาว Complete ใช้คู่ไกลสุดจึงมักได้กลุ่มแน่นกว่า Average เฉลี่ยทุก cross-pair ไม่ใช่ระยะระหว่าง centroid และไม่ใช่เฉลี่ยสอง cluster เท่ากันโดยไม่สน"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering-exam-23",
+      "type": "self",
+      "prompt": "อธิบายการเลือก cut และข้อจำกัดของ hierarchical clustering",
+      "reference": "dendrogram",
+      "rubric": [
+        "ประกาศเงื่อนไข height≤h หรือ<ให้ชัด",
+        "นับ clusters จาก merges ที่รับ",
+        "ไม่อ้าง k หรือ outliers ที่รับรองจากภาพเพียงอย่างเดียว"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ประกาศเงื่อนไข height≤h หรือ<ให้ชัด นับ clusters จาก merges ที่รับ ไม่อ้าง k หรือ outliers ที่รับรองจากภาพเพียงอย่างเดียว",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "pp.26–29 ให้ height เป็น distance ระหว่างกลุ่ม ไม่ใช่ x-position ของใบหรือ probability ถ้า cutsingleexample ที่ h=4.5 จะมี{1,2,3}กับ{4,5}; ที่ h=3.5 ยังมี 3 กลุ่มคือ{1,2,3},{4},{5} ประกาศ convention ว่ารวมทุก merge ที่ height≤h ถ้าตัดที่ he"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering-exam-24",
+      "type": "self",
+      "prompt": "เปรียบการจัดกลุ่มภาพ คน และยีนโดยไม่แต่งพิกัดจากรูปในสไลด์",
+      "reference": "concepts",
+      "rubric": [
+        "ระบุ feature representation ที่ต้องมี",
+        "ชี้ผลของ scale และ distance",
+        "แยกข้อมูลที่ source ให้จากการออกแบบตัวอย่างเสริม"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ระบุ feature representation ที่ต้องมี ชี้ผลของ scale และ distance แยกข้อมูลที่ source ให้จากการออกแบบตัวอย่างเสริม",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "S09 pp.2–5: supervised มี (X,Y) เช่น classification/regression; unsupervised ใช้ X โดยไม่มี teacher labels\n\nClustering ต้องการคล้ายกันมากภายในกลุ่มและคล้ายกันน้อยข้ามกลุ่ม หน้า 4 ยก people/images/language/species ไม่ได้มีคำตอบกลุ่มเดียวที่ถ"
+      }
+    }
+  ]
+}
