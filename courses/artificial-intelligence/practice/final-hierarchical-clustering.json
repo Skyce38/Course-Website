@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "artificial-intelligence-final-hierarchical-clustering",
+  "title": "Hierarchical Clustering: distance และ linkage",
+  "questions": [
+    {
+      "id": "hc-distance",
+      "type": "numeric",
+      "prompt": "จุด (1,2) กับ (4,6) มี Euclidean distance เท่าใด? ใช้ระยะจริง ไม่ใช่กำลังสองหรือ Manhattan",
+      "reference": "distance",
+      "answer": 5,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "ผลต่างแต่ละแกนคือ 3,4 จึง Euclidean=√(3²+4²)=5 ส่วน squared distance=25 และ Manhattan=3+4=7 เป็นคนละ metric"
+    },
+    {
+      "id": "hc-first",
+      "type": "choice",
+      "prompt": "ใน matrix ตัวอย่างหน้า 22 ที่ off-diagonal ต่ำสุดคือ d(1,2)=2 และ diagonal=0 ควรรวมกลุ่มแรกอย่างไร?",
+      "reference": "worked",
+      "choices": [
+        {
+          "id": "a",
+          "text": "รวม 1 กับตัวเองเพราะ diagonal ต่ำที่สุด"
+        },
+        {
+          "id": "b",
+          "text": "รวม 1 กับ 2 ที่ระยะ 2 โดยไม่นับ self-distance เป็น candidate"
+        },
+        {
+          "id": "c",
+          "text": "รวมสองกลุ่มที่มีสมาชิกมากที่สุดก่อน"
+        }
+      ],
+      "answer": "b",
+      "explanation": "การรวมต้องเป็นคนละกลุ่ม จึงไม่นับ diagonal=0 คู่ 1,2 เป็น off-diagonal ต่ำสุดที่ 2 ไม่ใช่เลือกจากจำนวนสมาชิก"
+    },
+    {
+      "id": "hc-average",
+      "type": "numeric",
+      "prompt": "หลังรวม {1,2} ระยะถึงจุด 3 มี cross-pairs d(1,3)=6 และ d(2,3)=3 จงหา average linkage",
+      "reference": "linkage",
+      "answer": 4.5,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "average=(6+3)/2=4.5 ขณะที่ single=min=3 และ complete=max=6 จึงอาจได้ลำดับการรวมต่างกันแม้เริ่มจาก matrix เดียวกัน"
+    },
+    {
+      "id": "hc-final",
+      "type": "numeric",
+      "prompt": "ระหว่างกลุ่ม {1,2,3} และ {4,5} มีระยะ cross-pairs [10,9,9,8,7,5] จงหา average linkage โดยถ่วงทุกคู่สมาชิกเท่ากัน",
+      "reference": "worked",
+      "answer": 8,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "มี 3×2=6 คู่ รวมระยะได้ 48 จึง average=48/6=8 ไม่ใช่ min=5 หรือ max=10 และไม่เฉลี่ยกลุ่มย่อยที่มีขนาดต่างกันอย่างไม่ถ่วงน้ำหนัก"
+    },
+    {
+      "id": "hc-cut",
+      "type": "choice",
+      "prompt": "Single linkage มี merge heights [2,3,4,5] จาก 5 singleton clusters ถ้ารับ merges ที่ height≤4.5 จะเหลือกี่กลุ่ม?",
+      "reference": "dendrogram",
+      "choices": [
+        {
+          "id": "a",
+          "text": "1 กลุ่ม เพราะมี merge height 5 อยู่ในแผนภาพ"
+        },
+        {
+          "id": "b",
+          "text": "2 กลุ่ม คือ {1,2,3} กับ {4,5}"
+        },
+        {
+          "id": "c",
+          "text": "3 กลุ่ม เพราะ cut ต้องเป็นจำนวนเต็ม"
+        }
+      ],
+      "answer": "b",
+      "explanation": "สาม merges ที่ 2,3,4 ผ่าน cut จึงเหลือ 5−3=2 กลุ่ม Merge สุดท้ายที่ 5 ยังไม่ผ่าน threshold; ความสูงไม่ใช่จำนวนสมาชิกหรือเปอร์เซ็นต์ความผิด"
+    },
+    {
+      "id": "hc-linkages",
+      "type": "self",
+      "prompt": "ใช้ distances จาก {1,2} ถึง 3 เป็น [6,3] และ d(4,5)=4 อธิบายลำดับถัดไปของ single/complete/average และข้อจำกัดการตีความกิ่งสูง",
+      "reference": "worked",
+      "explanation": "single ให้ d(12,3)=3 จึงรวม 3 ก่อน ส่วน complete=6 และ average=4.5 มากกว่า d(4,5)=4 จึงรวม 4,5 ก่อน กิ่งรวมสูงอาจชี้ความห่างภายใต้ metric/linkage นี้ ไม่พิสูจน์ว่าข้อมูลผิดหรือเป็น outlier แน่นอน",
+      "rubric": [
+        "คำนวณ single=3,complete=6,average=4.5",
+        "เทียบกับ 4 แล้วระบุลำดับการรวมที่แตกต่าง",
+        "ระบุ metric/linkage/cut และไม่อ้างกิ่งสูงเป็น probability หรือข้อผิดพลาดแน่นอน"
+      ]
+    }
+  ]
+}

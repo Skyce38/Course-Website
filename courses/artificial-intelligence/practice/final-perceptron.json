@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "artificial-intelligence-final-perceptron",
+  "title": "Perceptron: threshold, update และขอบเขตหลักฐาน",
+  "questions": [
+    {
+      "id": "pc-forward",
+      "type": "numeric",
+      "prompt": "ใช้ z=w0+w1x1+w2x2, w=(0.1,0.1,0.1), x=(0,1) จงหา pre-activation z",
+      "reference": "perceptron",
+      "answer": 0.2,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "z=.1+.1×0+.1×1=.2 เมื่อใช้ strict y=1 ถ้า z>0 จะได้ y=1 แต่ข้อนี้ขอ z ไม่ใช่ class output"
+    },
+    {
+      "id": "pc-bias",
+      "type": "numeric",
+      "prompt": "จาก w=(.1,.1,.1), x=(0,1), target=0, strict y=1 ถ้า z>0, α=.5 ใช้ e=t−y และ sequential update จงหา w0 ใหม่",
+      "reference": "and",
+      "answer": -0.4,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "z=.2→y=1,e=−1; bias input=1 จึง w0new=.1+.5(−1)(1)=−.4 ส่วน w1=.1 และ w2=−.4 ต้องปรับ bias ด้วย"
+    },
+    {
+      "id": "pc-boundary",
+      "type": "numeric",
+      "prompt": "เส้นแบ่งจาก weights สุดท้าย X06 คือ −1.4+1.1x1+.6x2=0 เมื่อ x1=1 จงหาค่า x2 บนเส้นแบ่ง ไม่ใช่ target",
+      "reference": "boundary",
+      "answer": 0.5,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "แทน x1=1 ได้ .6x2=1.4−1.1=.3 จึง x2=.5 เป็นพิกัดบนเส้น ไม่ใช่ label และใช้ความหมาย bias เดิม"
+    },
+    {
+      "id": "pc-zero",
+      "type": "choice",
+      "prompt": "ภายใต้ convention strict y=1 เมื่อ z>0 ถ้า z=0 และ target=1 จะเกิดอะไร?",
+      "reference": "perceptron",
+      "choices": [
+        {
+          "id": "a",
+          "text": "y=1 และไม่ปรับ เพราะใช้ ≥0 โดยอัตโนมัติ"
+        },
+        {
+          "id": "b",
+          "text": "y=0,e=1 จึงปรับด้วย α[1,x1,x2]"
+        },
+        {
+          "id": "c",
+          "text": "ไม่สามารถคำนวณ e ที่ z=0"
+        }
+      ],
+      "answer": "b",
+      "explanation": "strict >0 ให้ y=0 ที่ขอบ จึง e=1 และต้อง update หากเปลี่ยนเป็น ≥0 จะเป็นอีก convention ที่ให้ y=1,e=0 ห้ามเทียบจำนวน epochs ราวกับเป็นโมเดลเดียวกัน"
+    },
+    {
+      "id": "pc-lab",
+      "type": "choice",
+      "prompt": "จากหลักฐาน L01 Neural Training Lab ที่ยังขาด dataset/ภาพ settings ควรรายงานผลอย่างไร?",
+      "reference": "lab-evidence",
+      "choices": [
+        {
+          "id": "a",
+          "text": "รับรองว่า X06 ต้องใช้ 139 epochs และ weights เหมือน L01"
+        },
+        {
+          "id": "b",
+          "text": "คัดค่าในรายงานมาเป็นผลที่ทำซ้ำแล้วโดยไม่ต้องมี inputs"
+        },
+        {
+          "id": "c",
+          "text": "คงป้าย source-limited และไม่รับรองค่าทดลอง/epochs เมื่อข้อมูลหรือ settings ไม่ครบ"
+        }
+      ],
+      "answer": "c",
+      "explanation": "L01 กับ X06 ใช้เงื่อนไขต่างกัน และหลักฐานบางส่วนหาย ต้องคงข้อจำกัด source-limited ไม่แต่ง dataset/settings หรืออ้างผลทำซ้ำ X06 มี trace ที่ระบุแยกต่างหาก ไม่ใช้ตัวเลขรายงานแทน"
+    },
+    {
+      "id": "pc-xor",
+      "type": "self",
+      "prompt": "อธิบายว่าเหตุใดเพิ่ม epochs หรือ learning rate อย่างเดียวไม่ทำให้ single linear-threshold perceptron จำแนก XOR ครบ และควรรายงาน training run อย่างไร",
+      "reference": "boundary",
+      "explanation": "XOR มี constraints สำหรับสองจุดบวกและสองจุดลบที่ขัดกันเมื่อรวมอสมการ จึงไม่มีเส้นเดียวแยกครบ ต้องเปลี่ยน representation/architecture ไม่ใช่เพียงปรับ α ต้องบอก threshold,initial weights,bias convention,ลำดับข้อมูลและเกณฑ์หยุด; ไม่เติมผลทดลอง L01 ที่ source จำกัด",
+      "rubric": [
+        "อธิบายข้อจำกัดเชิงเรขาคณิตหรืออสมการของ XOR",
+        "ไม่อ้างว่าเพิ่ม epochs/α แก้ linear separability ได้",
+        "ระบุ settings/run assumptions และขอบเขต source-limited"
+      ]
+    }
+  ]
+}

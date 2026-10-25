@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "artificial-intelligence-final-backpropagation",
+  "title": "Backpropagation: loss, gradients และ update",
+  "questions": [
+    {
+      "id": "bp-loss",
+      "type": "numeric",
+      "prompt": "output sigmoid มี z=0,target t=1 และ L=1/2(y−t)² จงหา L ของตัวอย่างเดียว",
+      "reference": "sigmoid",
+      "answer": 0.125,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "sigmoid(0)=.5 จึง L=.5(.5−1)²=.125 ไม่ใช่ .25 ซึ่งจะได้หากนิยาม loss ไม่มีตัวคูณ1/2"
+    },
+    {
+      "id": "bp-output-gradient",
+      "type": "numeric",
+      "prompt": "กำหนด y=.5,t=1,hidden activation h=.4 และ L=1/2(y−t)² จงหา ∂L/∂v สำหรับ output weight v ที่คูณ h",
+      "reference": "backprop",
+      "answer": -0.05,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "go=(y−t)y(1−y)=(−.5)(.5)(.5)=−.125 แล้ว ∂L/∂v=go×h=−.125×.4=−.05 เก็บเครื่องหมายตาม gradient convention"
+    },
+    {
+      "id": "bp-hidden-gradient",
+      "type": "numeric",
+      "prompt": "ใช้ h=.4, output weight เก่า v=.8, go=−.125 และ input x=2 จงหา gradient ของ hidden weight ที่คูณ x",
+      "reference": "backprop",
+      "answer": -0.048,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "gh=h(1−h)vgo=.4×.6×.8×(−.125)=−.024 จึง gradientweight=gh×2=−.048 และ gradientbias=−.024 ต้องใช้ v เก่า"
+    },
+    {
+      "id": "bp-update",
+      "type": "choice",
+      "prompt": "ถ้า v=.8, ∂L/∂v=−.05 และ η=.1 ทำ gradient descent หนึ่งก้าวจะได้ v ใหม่เท่าใด?",
+      "reference": "backprop",
+      "choices": [
+        {
+          "id": "a",
+          "text": ".795 เพราะต้องลบ magnitude .005 เสมอ"
+        },
+        {
+          "id": "b",
+          "text": ".805 เพราะ .8−.1(−.05)=.805"
+        },
+        {
+          "id": "c",
+          "text": ".85 เพราะไม่ต้องคูณ η"
+        }
+      ],
+      "answer": "b",
+      "explanation": "gradient descent ลบ η×gradient เมื่อ gradient เป็นลบ weight จึงเพิ่ม .005 ได้ .805 ถ้าใช้ δ=t−y ต้องเปลี่ยนเครื่องหมาย update ให้สอดคล้อง ไม่ผสมสอง convention"
+    },
+    {
+      "id": "bp-old-weights",
+      "type": "choice",
+      "prompt": "ระหว่างคำนวณ hidden gradient สำหรับ loss ที่พารามิเตอร์เดิม ควรใช้ output weights ใด?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ใช้ weights เดิมจนคำนวณ gradients ของก้าวนี้ครบ แล้วจึง update"
+        },
+        {
+          "id": "b",
+          "text": "ใช้ output weights ใหม่ทันทีเพื่อให้ได้ gradient ของ loss เดิม"
+        },
+        {
+          "id": "c",
+          "text": "เลือกเก่าหรือใหม่ก็ได้โดย finite difference จะตรงเสมอ"
+        }
+      ],
+      "answer": "a",
+      "explanation": "chain rule ของก้าวเดียวประเมินที่พารามิเตอร์เดียวกัน ใช้ weights เก่าในการส่ง error ย้อน หากรีบใช้ v ใหม่ จะไม่ใช่ gradient ของ loss ที่ θ เดิมและอาจไม่ตรง finite-difference check"
+    },
+    {
+      "id": "bp-check",
+      "type": "self",
+      "prompt": "วางแผนตรวจ forward pass, gradient และ update หนึ่งก้าวด้วย finite differences พร้อมแยก step XOR ใน source ออกจาก sigmoid network ที่ใช้ gradient",
+      "reference": "worked",
+      "explanation": "เก็บ parameters เดิม หา forward/loss ตาม convention แล้วคำนวณทุก gradient ที่จุดเดิม ตรวจเชิงตัวเลขด้วย (L(θ+ε)−L(θ−ε))/(2ε) ก่อน update พร้อมกันด้วย−ηgradient Step activation ของ XOR ไม่ใช่ sigmoid และใช้ gradient มาตรฐานที่จุดตัดแบบเดียวกันไม่ได้ ไม่แต่ง weights/ผล train ที่แหล่งไม่แจก",
+      "rubric": [
+        "ประกาศ activation/loss/bias/input และใช้ค่าก่อนปัด",
+        "แยก gradient check จาก update และเปรียบ finite differences ด้วย ε ที่เหมาะสม",
+        "แยก source step network กับตัวอย่าง sigmoid ของผู้เขียน ไม่อ้างว่า execute/train source ที่ไม่มีข้อมูล"
+      ]
+    }
+  ]
+}

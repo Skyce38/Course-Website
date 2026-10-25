@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "artificial-intelligence-final-deep-learning-overview",
+  "title": "Deep Learning: สถาปัตยกรรมและข้อจำกัดหลักฐาน",
+  "questions": [
+    {
+      "id": "dl-hierarchy",
+      "type": "choice",
+      "prompt": "จัด deep CNN, KNN และ BFS ในขอบเขต AI/ML/DL อย่างไร?",
+      "reference": "hierarchy",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทุกวิธีเป็น DL เพราะใช้คอมพิวเตอร์"
+        },
+        {
+          "id": "b",
+          "text": "deep CNN อยู่ DL⊂ML⊂AI; KNN อยู่ ML แต่ไม่ใช่ DL; BFS เป็น AI search โดยตัวมันเองไม่ต้องเรียนจากข้อมูล"
+        },
+        {
+          "id": "c",
+          "text": "BFS เป็น ML เสมอเพราะมี frontier"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ต้องแยกการค้นหากับการเรียนจากข้อมูล Deep CNN เป็นกรณี DL, KNN เป็น ML ที่ไม่ใช่ DL และ BFS ไม่กลายเป็น ML เพียงเพราะค้นหลาย state"
+    },
+    {
+      "id": "dl-affine",
+      "type": "choice",
+      "prompt": "ซ้อน z1=2x+1 แล้ว z2=3z1−4 โดยไม่มี nonlinearity จะเกิดอะไร?",
+      "reference": "depth",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ได้ z2=6x−1 ยังเป็น affine map ไม่ได้แก้ boundary โค้งเพียงเพราะเพิ่มชั้น"
+        },
+        {
+          "id": "b",
+          "text": "กลายเป็น nonlinear เสมอเพราะมีสองชั้น"
+        },
+        {
+          "id": "c",
+          "text": "เท่ากับ ReLU(x) ทุกค่า"
+        }
+      ],
+      "answer": "a",
+      "explanation": "แทนสมการได้3(2x+1)−4=6x−1 เป็น affine เหมือนเดิม ตัวอย่างx=2ได้11 ต้องเพิ่ม nonlinearity/representation ที่เหมาะสม ไม่ใช่อ้างความสามารถจากจำนวนชั้นล้วน ๆ"
+    },
+    {
+      "id": "dl-rnn",
+      "type": "choice",
+      "prompt": "งาน sentiment ทั้งประโยค, NER ทุก token และแปล 3 token เป็น 5 token ตรงกับ mapping ใดตามลำดับ?",
+      "reference": "rnn",
+      "choices": [
+        {
+          "id": "a",
+          "text": "one-to-many,one-to-one,many-to-one"
+        },
+        {
+          "id": "b",
+          "text": "many-to-one,aligned many-to-many,unaligned many-to-many"
+        },
+        {
+          "id": "c",
+          "text": "many-to-many ทุกแบบต้องยาวเท่ากัน"
+        }
+      ],
+      "answer": "b",
+      "explanation": "sentiment รวมลำดับเป็นหนึ่ง output; NER มี label ตามตำแหน่งแต่ละ token; translation อาจยาวต่างกันและไม่ align ตรงตำแหน่ง ต้องประกาศ mapping ไม่สลับความหมาย"
+    },
+    {
+      "id": "dl-gan",
+      "type": "choice",
+      "prompt": "ในภาพอธิบาย GAN ใครรับ noise และ D ได้สัญญาณ real/fake จากไหน?",
+      "reference": "gan",
+      "choices": [
+        {
+          "id": "a",
+          "text": "D รับ noise เพื่อสร้างภาพ และไม่มี target ใด ๆ"
+        },
+        {
+          "id": "b",
+          "text": "G รับ noise เพื่อสร้างภาพ; D รับภาพจริง/สร้าง และรู้ real/fake จากแหล่งภาพแม้ไม่มี human class label ภายนอก"
+        },
+        {
+          "id": "c",
+          "text": "G กับ D เป็น classifier เดียวกันทุกหน้าที่"
+        }
+      ],
+      "answer": "b",
+      "explanation": "G สร้างตัวอย่างจาก noise ส่วน D แยกจริงกับสร้าง เป้า real/fake กำหนดได้จากกระบวนการป้อนข้อมูล ไม่ได้แปลว่าการเรียกกรอบ unsupervised ทำให้ D ไม่มี training signal"
+    },
+    {
+      "id": "dl-style-evidence",
+      "type": "choice",
+      "prompt": "ภาพ Style Transfer ใน source ยืนยันได้หรือไม่ว่าทุกวิธีต้องใช้ GAN และฝึก 200 epochs?",
+      "reference": "style",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ยืนยันทั้ง GAN และ 200 epochs เพราะภาพผลลัพธ์เพียงพอ"
+        },
+        {
+          "id": "b",
+          "text": "ยืนยันจำนวน epochs แต่ไม่ยืนยันสถาปัตยกรรม"
+        },
+        {
+          "id": "c",
+          "text": "ไม่ยืนยัน ภาพเป็นตัวอย่างและไม่ได้แจก settings/ผล epochs ที่ครบ"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ภาพตัวอย่างช่วยสื่อแนวคิด แต่ไม่ใช่ training protocol ครบ ไม่อนุมานว่าทุก style transfer ใช้ GAN หรือเติมตัวเลข200epochs/accuracy ที่ไม่มีในหลักฐาน"
+    },
+    {
+      "id": "dl-architecture",
+      "type": "self",
+      "prompt": "เลือกสถาปัตยกรรมเบื้องต้นสำหรับภาพเชิงพื้นที่และข้อมูลลำดับ แล้วอธิบายการนับความลึก,nonlinearity และสิ่งที่ยังอ้างไม่ได้จากภาพสไลด์",
+      "reference": "comparison",
+      "explanation": "CNN เหมาะกับ inductive bias เชิงพื้นที่ ส่วน RNN ใช้บริบทตามลำดับ แต่ต้องพิจารณางาน/ข้อมูลจริง บอกจำนวน hidden/weighted layers และactivationให้ชัด ไม่ถือชื่อ one-layer ของภาพเป็น convention สากล ไม่รับรอง performance/epochs จากภาพอย่างเดียว",
+      "rubric": [
+        "เชื่อมสถาปัตยกรรมกับโครงสร้างข้อมูลและ mapping ของงาน",
+        "ระบุ convention ความลึกและบทบาท nonlinearity",
+        "แยกคำอธิบายแนวคิดจากผลการทดลองที่ยังไม่ทราบ"
+      ]
+    }
+  ]
+}
