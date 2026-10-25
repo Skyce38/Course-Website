@@ -590,6 +590,61 @@
       "reader": "read/oop-python/arrays-dynamic-array.html",
       "generatedLesson": 1,
       "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/summaries/arrays-dynamic-array.md"
+    },
+    {
+      "id": "oop-python-stack",
+      "course": "oop-python",
+      "category": "summaries",
+      "title": "FINAL: Stack, Recursion และ Undo/Redo",
+      "path": "summaries/stack.md",
+      "format": "MD",
+      "reader": "read/oop-python/stack.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/summaries/stack.md"
+    },
+    {
+      "id": "oop-python-queue",
+      "course": "oop-python",
+      "category": "summaries",
+      "title": "FINAL: Queue, Circular Queue, Deque และ Priority Queue",
+      "path": "summaries/queue.md",
+      "format": "MD",
+      "reader": "read/oop-python/queue.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/summaries/queue.md"
+    },
+    {
+      "id": "oop-python-complexity-basic-sorting",
+      "course": "oop-python",
+      "category": "summaries",
+      "title": "FINAL: Big-O และ Bubble, Selection, Insertion Sort",
+      "path": "summaries/complexity-basic-sorting.md",
+      "format": "MD",
+      "reader": "read/oop-python/complexity-basic-sorting.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/summaries/complexity-basic-sorting.md"
+    },
+    {
+      "id": "oop-python-advanced-sorting",
+      "course": "oop-python",
+      "category": "summaries",
+      "title": "FINAL: Merge Sort, Quick Sort และ Timsort",
+      "path": "summaries/advanced-sorting.md",
+      "format": "MD",
+      "reader": "read/oop-python/advanced-sorting.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/summaries/advanced-sorting.md"
+    },
+    {
+      "id": "oop-python-hash-tables",
+      "course": "oop-python",
+      "category": "summaries",
+      "title": "FINAL: Hash Tables, Collisions และ Dictionaries",
+      "path": "summaries/hash-tables.md",
+      "format": "MD",
+      "reader": "read/oop-python/hash-tables.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/summaries/hash-tables.md"
     }
   ]
 }

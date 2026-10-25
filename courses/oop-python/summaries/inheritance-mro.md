@@ -144,7 +144,7 @@ SourceSavings ตรวจขั้นต่ำ500 แต่ BankAccount ฐา�
 **เฉลย:** ไม่เท่ากัน Client ฐานที่ถอนทั้งหมดได้จะล้มเหลวกับ Savings ขั้นต่ำ500 แม้ isinstance เป็น True ต้องปรับ contract/policy ไม่แก้โดยซ่อน exception หรืออ้างว่า client ผิดโดยอัตโนมัติ
 
 ## สรุปทบทวน {#summary}
-ตรวจ is-a และ contract→reuse ฐาน→override เฉพาะจุด→super ตาม MRO→ใช้ property ฐาน→testedgecases และทดแทนชนิดจริง อย่าคัดลอก privatefields และอย่าสับสนการสืบทอดกับการคัดลอก object
+ตรวจ is-a และ contract→reuse ฐาน→override เฉพาะจุด→super ตาม MRO→ใช้ property ฐาน→testedgecases และทดแทนชนิดจริง อย่าคัดลอก private fields และอย่าสับสนการสืบทอดกับการคัดลอก object
 
 ## แหล่งอ้างอิงและขอบเขต {#sources}
 - [Week3 physical pp.3–40](../slides/Week3.pdf#page=3) — inheritance/is-a,super/override,MRO,Savings และ mistakes

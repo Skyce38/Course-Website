@@ -7,7 +7,7 @@
 ## เป้าหมายการเรียนรู้ {#objectives}
 - เรียกพฤติกรรมผ่าน interface ร่วมโดยไม่เพิ่ม if ชนิดทุกครั้ง
 - แยก ducktyping,ABC,abstractmethod และการตรวจชนิด
-- คำนวณพื้นที่/เส้นรอบรูป ติดตาม dynamicdispatch และทดสอบ abstract/invalidinputs
+- คำนวณพื้นที่/เส้นรอบรูป ติดตาม dynamic dispatch และทดสอบ abstract/invalidinputs
 
 ## Polymorphism และ Duck Typing {#concepts}
 pp.3–11: polymorphism คือการเรียก operation เดียวกันแล้วแต่ละ object ทำงานตาม implementation ของมัน เช่น s.area()แสดงพฤติกรรม Circle หรือ Rectangle โดยไม่ต้อง ifisinstance เป็นสายยาว ทุกครั้งที่เพิ่มชนิดใหม่ client ที่อิง interface เดิมไม่ควรต้องรู้สูตรใหม่

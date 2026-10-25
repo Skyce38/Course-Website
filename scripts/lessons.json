@@ -18,5 +18,10 @@
   "courses/oop-python/summaries/polymorphism-abc.md",
   "courses/oop-python/summaries/object-relationships.md",
   "courses/oop-python/summaries/uml-solid.md",
-  "courses/oop-python/summaries/arrays-dynamic-array.md"
+  "courses/oop-python/summaries/arrays-dynamic-array.md",
+  "courses/oop-python/summaries/stack.md",
+  "courses/oop-python/summaries/queue.md",
+  "courses/oop-python/summaries/complexity-basic-sorting.md",
+  "courses/oop-python/summaries/advanced-sorting.md",
+  "courses/oop-python/summaries/hash-tables.md"
 ]

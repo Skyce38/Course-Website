@@ -89,6 +89,8 @@ pp.39–41เน้นว่าไม่มี externalreference ใน interfac
 ## ต้นทุนและการประยุกต์ {#complexity}
 Team การตรวจซ้ำ/ลบด้วย list ต้อง O(n),สร้าง tuplesnapshotO(n);การเข้าถึง object ที่รู้อยู่แล้ว O(1)ภายใต้แบบจำลองนี้ House.total_area เป็น O(r)สำหรับ r ห้อง ไม่ใช่ O(1)เพียงเพราะเป็น property LabLibrary/Gym/Clinic มีหลายความสัมพันธ์พร้อมกัน:หนังสือ/สมาชิกอาจ aggregate แต่ record ที่ระบบสร้างมี composition ตามโจทย์ ต้องดูสัญญาแต่ละ task ไม่ใช้คำว่า has-a แล้วตัดสินทั้งหมด
 
+ในห้าสถานการณ์ source pp.51–55: Playlist/Song เป็น aggregation; Invoice/InvoiceLine, Car/Engine และ University/Department เป็น composition ตามเงื่อนไขการสร้าง/ไม่ย้าย/ยุบตามเจ้าของที่โจทย์ระบุ; Doctor/Patient เป็น association เมื่อใช้ผ่าน examine โดยไม่เก็บ reference เป็น attribute การสรุปนี้อาศัยเงื่อนไขโจทย์ ไม่ใช่ชื่อ nouns เพียงอย่างเดียว
+
 ## ข้อผิดพลาดที่พบบ่อย {#mistakes}
 คืน list ภายในให้ caller ลบทิ้งได้;สร้าง part ใหม่แทนเก็บ reference เดิม;สืบทอด Customer จาก Account เพียงเพราะมี account;คิด tuple ทำให้ทุก object ข้างใน immutable;ถือ del เป็นคำสั่งทำลาย graph ทุกตัว
 
@@ -104,7 +106,7 @@ Team การตรวจซ้ำ/ลบด้วย list ต้อง O(n),�
 
 ### ข้อ3 Doctor/Patient และ Car/Engine
 
-**เฉลย:** p.53 Doctor/Patient เป็น association จากการพบรักษา;Car/Enginep.54ต้องประกาศ ownership/replacementpolicy ก่อนเลือก aggregation/composition ไม่ตัดสินเพียงคำว่า has-a
+**เฉลย:** p.53 Doctor/Patient เป็น association เพราะ examine ใช้ Patient โดยไม่เก็บไว้; p.54 Car สร้าง Engine ใน__init__และไม่ย้าย Engine ระหว่างรถในระบบนี้ จึงเป็น composition ตามสัญญาที่กำหนด ไม่ใช่ต้องเดา ownership ใหม่จากชื่อ Car/Engine
 
 ### ข้อ4 ผลของ tuple snapshot
 
