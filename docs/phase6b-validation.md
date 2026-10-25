@@ -32,4 +32,6 @@ Chrome/Playwright uses isolated test profiles and controlled GitHub responses. Q
 
 ## Limits
 
+Final review: READY for one focused PR from `codex/phase6b-complete-practice`. The cumulative change contains 21 new sidecars, 21 regenerated readers, five test/verification files and seven documentation files. Shared website runtime, styles, build implementation and cache versions remain unchanged. No source documents, credentials, personal machine paths, screenshots or temporary environments are included. Local stage commits preserve resumable A/B/C/D/E/F checkpoints; no merge/deployment is authorized.
+
 Safari, Firefox, physical devices and formal screen-reader certification were not tested. Numeric validation remains the original bounded IEEE-754 exact/tolerance system, not symbolic/code grading. Cross-tab behavior retains the documented best-effort local-edit/last-write policy. Native embedded PDF internal scrolling keeps its existing tracking limitation. No new teaching PDFs/datasets, framework, dependencies, visualizers, runtime features, cache-version changes, Learning Paths, merge or deployment are part of this expansion.
