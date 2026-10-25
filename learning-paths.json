@@ -16,7 +16,9 @@
         "artificial-intelligence-final-knn",
         "artificial-intelligence-final-naive-bayes",
         "artificial-intelligence-final-decision-tree",
-        "artificial-intelligence-final-hierarchical-clustering"
+        "artificial-intelligence-final-hierarchical-clustering",
+        "artificial-intelligence-final-kmeans",
+        "artificial-intelligence-final-perceptron"
       ]
     }
   ]

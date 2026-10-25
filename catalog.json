@@ -458,6 +458,28 @@
       "reader": "read/artificial-intelligence/final-hierarchical-clustering.html",
       "generatedLesson": 1,
       "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/artificial-intelligence/summaries/final-hierarchical-clustering.md"
+    },
+    {
+      "id": "artificial-intelligence-final-kmeans",
+      "course": "artificial-intelligence",
+      "category": "summaries",
+      "title": "FINAL: K-Means และวิธี Elbow",
+      "path": "summaries/final-kmeans.md",
+      "format": "MD",
+      "reader": "read/artificial-intelligence/final-kmeans.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/artificial-intelligence/summaries/final-kmeans.md"
+    },
+    {
+      "id": "artificial-intelligence-final-perceptron",
+      "course": "artificial-intelligence",
+      "category": "summaries",
+      "title": "FINAL: โครงข่ายประสาทเทียมและ Perceptron",
+      "path": "summaries/final-perceptron.md",
+      "format": "MD",
+      "reader": "read/artificial-intelligence/final-perceptron.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/artificial-intelligence/summaries/final-perceptron.md"
     }
   ]
 }
