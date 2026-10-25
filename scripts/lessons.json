@@ -3,5 +3,13 @@
   "courses/artificial-intelligence/summaries/ai-foundations-agents.md",
   "courses/artificial-intelligence/summaries/search-models-bfs-dfs.md",
   "courses/artificial-intelligence/summaries/final-regression.md",
-  "courses/artificial-intelligence/summaries/final-knn.md"
+  "courses/artificial-intelligence/summaries/final-knn.md",
+  "courses/artificial-intelligence/summaries/final-naive-bayes.md",
+  "courses/artificial-intelligence/summaries/final-decision-tree.md",
+  "courses/artificial-intelligence/summaries/final-hierarchical-clustering.md",
+  "courses/artificial-intelligence/summaries/final-kmeans.md",
+  "courses/artificial-intelligence/summaries/final-perceptron.md",
+  "courses/artificial-intelligence/summaries/final-backpropagation.md",
+  "courses/artificial-intelligence/summaries/final-deep-learning-overview.md",
+  "courses/artificial-intelligence/summaries/final-cnn.md"
 ]

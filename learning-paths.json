@@ -13,7 +13,15 @@
         "artificial-intelligence-ai-foundations-agents",
         "artificial-intelligence-search-models-bfs-dfs",
         "artificial-intelligence-final-regression",
-        "artificial-intelligence-final-knn"
+        "artificial-intelligence-final-knn",
+        "artificial-intelligence-final-naive-bayes",
+        "artificial-intelligence-final-decision-tree",
+        "artificial-intelligence-final-hierarchical-clustering",
+        "artificial-intelligence-final-kmeans",
+        "artificial-intelligence-final-perceptron",
+        "artificial-intelligence-final-backpropagation",
+        "artificial-intelligence-final-deep-learning-overview",
+        "artificial-intelligence-final-cnn"
       ]
     }
   ]

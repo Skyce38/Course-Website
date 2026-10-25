@@ -1,0 +1,11 @@
+# FINAL Similarity & Hierarchical Clustering coverage
+
+Stable ID `artificial-intelligence-final-hierarchical-clustering`; [Markdown](../courses/artificial-intelligence/summaries/final-hierarchical-clustering.md), [reader](../read/artificial-intelligence/final-hierarchical-clustering.html). Five authored exercises and one runnable Python example.
+
+S09 `Final/clustering.pdf` visually inspected pp.2–30 and p.46: pp.2–5 learning types/tasks/named-only methods; pp.6–11 representation/distance/metric/correlation; pp.12–18 hierarchy and first matrix; pp.19–21 single/complete/average; pp.22–25 source single-link matrix trace; pp.26–29 dendrogram/cuts/limitations/outlier; p.30 genes; p.46 review. Source p.1 credits Seyoung Kim and derived slides by William Cohen, Ziv Bar-Joseph and Eric Xing; no slide imagery copied.
+
+Two matrices remain distinct. P.14 objects receive authored A–E IDs in left-to-right order: AB8,AC8,AD7,AE7,BC2,BD4,BE4,CD3,CE3,DE1; DE merges at1,BC at2, their cross distances [4,4,3,3] yield single3/complete4/average3.5. P.22 matrix uses source IDs1–5: 12=2,13=6,14=10,15=9,23=3,24=9,25=8,34=7,35=5,45=4. Source single heights2,3,4,5; authored complete extension2,4,6,10; average extension2,4,4.5,8. Every cross-pair is calculated from the original matrix, not a centroid heuristic. Average final sum48/6=8.
+
+Manhattan/vector examples, explicit normalized Pearson formula, complete/average numerical extensions, deterministic lexicographic tie handling and cut≤threshold convention are authored supplements. S09 p.10's compact sigma notation is clarified, not copied into an unnormalized correlation coefficient. 1−r is not guaranteed a metric; constant-vector r undefined. No invented point coordinates from illustrations; source matrix data is authoritative. Dendrogram heights are linkage distances, not probabilities. Gene patterns suggest hypotheses, not proven function. Runtime of the simple educational algorithm is not claimed equal to optimized linkage software.
+
+Validation: Stage B author check compares every source merge height and 75 bounded seeded linkage cases with independent SciPy, plus malformed/empty/singleton matrices. Full browser/core compatibility is checked once for the combined release; no shared reader code is changed.
