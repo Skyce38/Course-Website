@@ -54,7 +54,7 @@
       "answer": 14.333333333333334,
       "absoluteTolerance": 0.000001,
       "relativeTolerance": 0,
-      "explanation": "centroids=(11/3,9),(7,13/3),(1.5,3.5); SSE รายกลุ่ม=20/3,8/3,5 จึงรวม43/3≈14.333333 ใช้ค่าศูนย์กลางเต็มก่อนปัด ไม่ใช้ distances จาก seeds เดิม"
+      "explanation": "centroids=(11/3,9),(7,13/3),(1.5,3.5); SSE รายกลุ่ม=20/3,8/3,5 จึงรวม 43/3≈14.333333 ใช้ค่าศูนย์กลางเต็มก่อนปัด ไม่ใช้ distances จาก seeds เดิม"
     },
     {
       "id": "km-stop",
@@ -76,7 +76,7 @@
         }
       ],
       "answer": "b",
-      "explanation": "ต้องแยก assignment และ centroid update แล้วตรวจเกณฑ์หยุด ตัวอย่าง X05 รอบ4ยืนยันสมาชิก/ศูนย์กลางเดิม Initialization และ feature scale มีผล; SSE ลดไม่ได้รับรอง global optimum"
+      "explanation": "ต้องแยก assignment และ centroid update แล้วตรวจเกณฑ์หยุด ตัวอย่าง X05 รอบ 4 ยืนยันสมาชิก/ศูนย์กลางเดิม Initialization และ feature scale มีผล; SSE ลดไม่ได้รับรอง global optimum"
     },
     {
       "id": "km-audit",

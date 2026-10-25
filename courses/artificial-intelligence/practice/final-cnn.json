@@ -12,27 +12,27 @@
       "answer": 228,
       "absoluteTolerance": 0,
       "relativeTolerance": 0,
-      "explanation": "คูณตำแหน่งตรงกันได้9+40+63+12+30+40+9+14+11=228 ค่า312จะได้เมื่อกลับ kernel180°ซึ่งเป็นอีก convention ไม่คัด caption ที่ขัดกับ sum"
+      "explanation": "คูณตำแหน่งตรงกันได้ 9+40+63+12+30+40+9+14+11=228 ค่า 312 จะได้เมื่อกลับ kernel180°ซึ่งเป็นอีก convention ไม่คัด caption ที่ขัดกับ sum"
     },
     {
       "id": "cn-size",
       "type": "numeric",
-      "prompt": "Input7×7,kernel3×3,stride2,padding1แต่ละด้าน,dilation1 จงหาความกว้าง output ต่อ filter",
+      "prompt": "Input7×7,kernel3×3,stride2,padding1 แต่ละด้าน,dilation1 จงหาความกว้าง output ต่อ filter",
       "reference": "shape",
       "answer": 4,
       "absoluteTolerance": 0,
       "relativeTolerance": 0,
-      "explanation": "floor((7+2×1−3)/2)+1=floor(6/2)+1=4 ความสูงก็4 ต้องใช้ floor และไม่สลับ stride กับ kernel size"
+      "explanation": "floor((7+2×1−3)/2)+1=floor(6/2)+1=4 ความสูงก็ 4 ต้องใช้ floor และไม่สลับ stride กับ kernel size"
     },
     {
       "id": "cn-parameters",
       "type": "numeric",
-      "prompt": "ใช้ kernel3×3 กับ RGB3 input channels เพื่อสร้าง4 output maps มี biasหนึ่งค่าต่อ output map จงหาจำนวนพารามิเตอร์ทั้งหมด",
+      "prompt": "ใช้ kernel3×3 กับ RGB3 input channels เพื่อสร้าง 4 output maps มี bias หนึ่งค่าต่อ output map จงหาจำนวนพารามิเตอร์ทั้งหมด",
       "reference": "rgb",
       "answer": 112,
       "absoluteTolerance": 0,
       "relativeTolerance": 0,
-      "explanation": "weights=3×3×3×4=108 และbias4 รวม112 Weight sharing ทำให้ไม่ต้องคูณจำนวนตำแหน่งH/Wของ feature maps"
+      "explanation": "weights=3×3×3×4=108 และ bias4 รวม 112 Weight sharing ทำให้ไม่ต้องคูณจำนวนตำแหน่ง H/W ของ feature maps"
     },
     {
       "id": "cn-pool",
@@ -54,7 +54,7 @@
         }
       ],
       "answer": "a",
-      "explanation": "max(1,3,8,7)=8; average=(1+3+8+7)/4=19/4=4.75 ตัวเลข4.8เป็นผลปัดหนึ่งตำแหน่ง ไม่ใช่ค่าคำนวณเต็ม"
+      "explanation": "max(1,3,8,7)=8; average=(1+3+8+7)/4=19/4=4.75 ตัวเลข 4.8 เป็นผลปัดหนึ่งตำแหน่ง ไม่ใช่ค่าคำนวณเต็ม"
     },
     {
       "id": "cn-fc-evidence",
@@ -76,18 +76,18 @@
         }
       ],
       "answer": "b",
-      "explanation": "Flatten เพียงจัดข้อมูลเป็น vector ไม่สร้าง prediction ส่วน FC ต้องใช้ weights/bias และactivation/thresholdตามงาน Source ไม่แจกพารามิเตอร์ครบจึงไม่แต่ง class result"
+      "explanation": "Flatten เพียงจัดข้อมูลเป็น vector ไม่สร้าง prediction ส่วน FC ต้องใช้ weights/bias และ activation/threshold ตามงาน Source ไม่แจกพารามิเตอร์ครบจึงไม่แต่ง class result"
     },
     {
       "id": "cn-order",
       "type": "self",
       "prompt": "อธิบาย channel sum,flatten และผลของการสลับ ReLU กับ average pooling โดยใช้ตัวอย่าง [-2,2] พร้อมระบุ convention ของ kernel",
       "reference": "relu-fc",
-      "explanation": "หนึ่ง output map รวมผลจาก kernels ทุก input channel และbiasของmapนั้น ไม่ concat เป็นหลายmapsโดยอัตโนมัติ Flattenจัดลำดับค่าตามconventionไม่มีweights ตัวอย่างaverageก่อนReLUให้0 แต่ReLUก่อนaverageให้1 จึงสลับไม่เหมือนเสมอ และต้องบอกว่าcorrelationไม่กลับkernelหรือconvolutionกลับ180°",
+      "explanation": "หนึ่ง output map รวมผลจาก kernels ทุก input channel และ bias ของ map นั้น ไม่ concat เป็นหลาย maps โดยอัตโนมัติ Flatten จัดลำดับค่าตาม convention ไม่มี weights ตัวอย่าง average ก่อน ReLU ให้ 0 แต่ ReLU ก่อน average ให้ 1 จึงสลับไม่เหมือนเสมอ และต้องบอกว่า correlation ไม่กลับ kernel หรือ convolution กลับ 180°",
       "rubric": [
         "อธิบายการรวม channels ต่อหนึ่ง output map และการนับ shape",
-        "แสดงผล0เทียบ1ของตัวอย่าง ReLU/average",
-        "ระบุ kernel/flatten/order convention และไม่คำนวณclassเมื่อขาดFCparameters"
+        "แสดงผล 0 เทียบ 1 ของตัวอย่าง ReLU/average",
+        "ระบุ kernel/flatten/order convention และไม่คำนวณ class เมื่อขาด FCparameters"
       ]
     }
   ]

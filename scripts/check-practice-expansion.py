@@ -34,7 +34,7 @@ def numeric(qid,value):
  if q['absoluteTolerance']==0:assert q['answer']==float(value)
  covered.add(qid)
 def choice(qid,proposition,concept=False):
- q=questions[qid];assert q['type']=='choice';matches=[c for c in q['choices'] if proposition in c['text']];assert len(matches)==1,(qid,proposition)
+ q=questions[qid];assert q['type']=='choice';canonical=lambda text:''.join(text.split());matches=[c for c in q['choices'] if canonical(proposition) in canonical(c['text'])];assert len(matches)==1,(qid,proposition)
  assert q['answer']==matches[0]['id'],(qid,q['answer'],matches[0]['id']);covered.add(qid)
  if concept:concepts.add(qid)
 def sigmoid(z):return 1/(1+math.exp(-z))

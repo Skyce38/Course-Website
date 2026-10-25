@@ -24,7 +24,7 @@
         }
       ],
       "answer": "b",
-      "explanation": "current เป็น reference สำหรับเดิน แค่ย้าย current ไม่ได้เปลี่ยน head หรือ next ของ Node เดิม ดังนั้น head ยังชี้10 และ current เป็นNoneเมื่อเงื่อนไข loop เป็นFalse"
+      "explanation": "current เป็น reference สำหรับเดิน แค่ย้าย current ไม่ได้เปลี่ยน head หรือ next ของ Node เดิม ดังนั้น head ยังชี้ 10 และ current เป็น None เมื่อเงื่อนไข loop เป็น False"
     },
     {
       "id": "ll-empty",
@@ -34,7 +34,7 @@
       "answer": 0,
       "absoluteTolerance": 0,
       "relativeTolerance": 0,
-      "explanation": "เงื่อนไขเป็นFalseตั้งแต่แรกจึงพิมพ์0ครั้ง และไม่เข้าถึง current.data ของNone ไม่ใช่พิมพ์ None หนึ่งครั้ง"
+      "explanation": "เงื่อนไขเป็น False ตั้งแต่แรกจึงพิมพ์ 0 ครั้ง และไม่เข้าถึง current.data ของ None ไม่ใช่พิมพ์ None หนึ่งครั้ง"
     },
     {
       "id": "ll-remaining",
@@ -44,7 +44,7 @@
       "answer": 2,
       "absoluteTolerance": 0,
       "relativeTolerance": 0,
-      "explanation": "head.next เดิมคือ20 ส่วน head.next.next คือ30 จึงได้เส้นทางจาก head เป็น10→30→None พบ2Node นี่คือจำนวนที่เข้าถึงจาก head ไม่ใช่การรับรองว่า Python ทำลาย Node20 ทันที"
+      "explanation": "head.next เดิมคือ 20 ส่วน head.next.next คือ 30 จึงได้เส้นทางจาก head เป็น 10→30→None พบ 2Node นี่คือจำนวนที่เข้าถึงจาก head ไม่ใช่การรับรองว่า Python ทำลาย Node20 ทันที"
     },
     {
       "id": "ll-insert",
@@ -66,7 +66,7 @@
         }
       ],
       "answer": "b",
-      "explanation": "ต้องเก็บทางไปส่วนท้ายเดิมไว้ใน new_node.next ก่อน แล้วจึงให้ current.next ชี้Nodeใหม่ หากทำกลับกัน new_node.next อาจชี้ตัวเอง เกิด cycle และเสียการเข้าถึงส่วนท้าย"
+      "explanation": "ต้องเก็บทางไปส่วนท้ายเดิมไว้ใน new_node.next ก่อน แล้วจึงให้ current.next ชี้ Node ใหม่ หากทำกลับกัน new_node.next อาจชี้ตัวเอง เกิด cycle และเสียการเข้าถึงส่วนท้าย"
     },
     {
       "id": "ll-tail",
@@ -88,14 +88,14 @@
         }
       ],
       "answer": "b",
-      "explanation": "tail บอก Node ท้ายแต่ไม่บอก predecessor ต้องเดินจากheadหาNodeก่อนท้าย ซึ่งเป็นO(n) ไม่สรุปจากการแก้referenceไม่กี่ครั้งว่าoperationรวมเป็นO(1)"
+      "explanation": "tail บอก Node ท้ายแต่ไม่บอก predecessor ต้องเดินจาก head หา Node ก่อนท้าย ซึ่งเป็น O(n) ไม่สรุปจากการแก้ reference ไม่กี่ครั้งว่า operation รวมเป็น O(1)"
     },
     {
       "id": "ll-audit",
       "type": "self",
       "prompt": "อธิบาย empty/single-node traversal และแผนแทรก Node หลังค่าที่รู้เพียง data โดยแยกต้นทุนค้นหากับแก้ link",
       "reference": "practice",
-      "explanation": "ว่างไม่อ่านdata;หนึ่งNodeพิมพ์ครั้งเดียวแล้วcurrentเป็นNone การแทรกหลังknown nodeแก้linksO(1)แต่ถ้ารู้แค่ค่าdataอาจต้องค้นหาO(n)ก่อน รักษาhead/tailและทางไปส่วนท้ายเดิม ไม่สร้างcycle;บอกassumptionว่าไม่มีcycleในการtraversalนี้",
+      "explanation": "ว่างไม่อ่าน data;หนึ่ง Node พิมพ์ครั้งเดียวแล้ว current เป็น None การแทรกหลัง known node แก้ linksO(1)แต่ถ้ารู้แค่ค่า data อาจต้องค้นหา O(n)ก่อน รักษา head/tail และทางไปส่วนท้ายเดิม ไม่สร้าง cycle;บอก assumption ว่าไม่มี cycle ในการ traversal นี้",
       "rubric": [
         "ตรวจ None ก่อนอ่าน data และอธิบาย head/current แยกกัน",
         "แสดงลำดับ reference ที่ไม่ทำส่วนท้ายหายหรือเกิด self-cycle",

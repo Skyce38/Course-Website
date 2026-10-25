@@ -46,7 +46,7 @@
         }
       ],
       "answer": "a",
-      "explanation": "แทนสมการได้3(2x+1)−4=6x−1 เป็น affine เหมือนเดิม ตัวอย่างx=2ได้11 ต้องเพิ่ม nonlinearity/representation ที่เหมาะสม ไม่ใช่อ้างความสามารถจากจำนวนชั้นล้วน ๆ"
+      "explanation": "แทนสมการได้ 3(2x+1)−4=6x−1 เป็น affine เหมือนเดิม ตัวอย่าง x=2 ได้ 11 ต้องเพิ่ม nonlinearity/representation ที่เหมาะสม ไม่ใช่อ้างความสามารถจากจำนวนชั้นล้วน ๆ"
     },
     {
       "id": "dl-rnn",
@@ -112,14 +112,14 @@
         }
       ],
       "answer": "c",
-      "explanation": "ภาพตัวอย่างช่วยสื่อแนวคิด แต่ไม่ใช่ training protocol ครบ ไม่อนุมานว่าทุก style transfer ใช้ GAN หรือเติมตัวเลข200epochs/accuracy ที่ไม่มีในหลักฐาน"
+      "explanation": "ภาพตัวอย่างช่วยสื่อแนวคิด แต่ไม่ใช่ training protocol ครบ ไม่อนุมานว่าทุก style transfer ใช้ GAN หรือเติมตัวเลข 200epochs/accuracy ที่ไม่มีในหลักฐาน"
     },
     {
       "id": "dl-architecture",
       "type": "self",
       "prompt": "เลือกสถาปัตยกรรมเบื้องต้นสำหรับภาพเชิงพื้นที่และข้อมูลลำดับ แล้วอธิบายการนับความลึก,nonlinearity และสิ่งที่ยังอ้างไม่ได้จากภาพสไลด์",
       "reference": "comparison",
-      "explanation": "CNN เหมาะกับ inductive bias เชิงพื้นที่ ส่วน RNN ใช้บริบทตามลำดับ แต่ต้องพิจารณางาน/ข้อมูลจริง บอกจำนวน hidden/weighted layers และactivationให้ชัด ไม่ถือชื่อ one-layer ของภาพเป็น convention สากล ไม่รับรอง performance/epochs จากภาพอย่างเดียว",
+      "explanation": "CNN เหมาะกับ inductive bias เชิงพื้นที่ ส่วน RNN ใช้บริบทตามลำดับ แต่ต้องพิจารณางาน/ข้อมูลจริง บอกจำนวน hidden/weighted layers และ activation ให้ชัด ไม่ถือชื่อ one-layer ของภาพเป็น convention สากล ไม่รับรอง performance/epochs จากภาพอย่างเดียว",
       "rubric": [
         "เชื่อมสถาปัตยกรรมกับโครงสร้างข้อมูลและ mapping ของงาน",
         "ระบุ convention ความลึกและบทบาท nonlinearity",

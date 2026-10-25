@@ -7,123 +7,123 @@
     {
       "id": "us-uml",
       "type": "choice",
-      "prompt": "อ่านUMLตามcontract Team/Playerที่partอิสระ และOrder/OrderLineที่เจ้าของสร้างจัดการ ควรใช้สัญลักษณ์อย่างไร?",
+      "prompt": "อ่าน UML ตาม contract Team/Player ที่ part อิสระ และ Order/OrderLine ที่เจ้าของสร้างจัดการ ควรใช้สัญลักษณ์อย่างไร?",
       "reference": "uml",
       "choices": [
         {
           "id": "a",
-          "text": "เพชรโปร่งที่Teamสำหรับaggregation;เพชรทึบที่Orderสำหรับcomposition;ลูกศรinheritanceชี้ฐาน"
+          "text": "เพชรโปร่งที่ Team สำหรับ aggregation;เพชรทึบที่ Order สำหรับ composition;ลูกศร inheritance ชี้ฐาน"
         },
         {
           "id": "b",
-          "text": "เพชรทึบที่Playerเสมอและinheritanceชี้child"
+          "text": "เพชรทึบที่ Player เสมอและ inheritance ชี้ child"
         },
         {
           "id": "c",
-          "text": "ทุกความสัมพันธ์ใช้ลูกศรเดียวกันจึงไม่ต้องดูownership"
+          "text": "ทุกความสัมพันธ์ใช้ลูกศรเดียวกันจึงไม่ต้องดู ownership"
         }
       ],
       "answer": "a",
-      "explanation": "เพชรวางที่ฝั่งwhole/ownerและแยกโปร่งกับทึบตามความสัมพันธ์ที่ประกาศ inheritanceชี้ฐาน ไม่ตัดสินจากชื่อตัวแปรหรือมีcontainerเพียงอย่างเดียว"
+      "explanation": "เพชรวางที่ฝั่ง whole/owner และแยกโปร่งกับทึบตามความสัมพันธ์ที่ประกาศ inheritance ชี้ฐาน ไม่ตัดสินจากชื่อตัวแปรหรือมี container เพียงอย่างเดียว"
     },
     {
       "id": "us-srp",
       "type": "choice",
-      "prompt": "Reportคำนวณข้อมูล,formatCSVและบันทึกไฟล์อาจเปลี่ยนคนละเหตุผล ข้อใดตีความSRPถูก?",
+      "prompt": "Report คำนวณข้อมูล,formatCSV และบันทึกไฟล์อาจเปลี่ยนคนละเหตุผล ข้อใดตีความ SRP ถูก?",
       "reference": "srp",
       "choices": [
         {
           "id": "a",
-          "text": "classที่มีมากกว่าหนึ่งmethodผิดSRPเสมอ"
+          "text": "class ที่มีมากกว่าหนึ่ง method ผิด SRP เสมอ"
         },
         {
           "id": "b",
-          "text": "พิจารณาเหตุผลของการเปลี่ยน/ความรับผิดชอบที่ต่างกัน ไม่ใช่นับmethodอย่างเดียว"
+          "text": "พิจารณาเหตุผลของการเปลี่ยน/ความรับผิดชอบที่ต่างกัน ไม่ใช่นับ method อย่างเดียว"
         },
         {
           "id": "c",
-          "text": "รวมทุกอย่างไว้classเดียวจะรับรองSRPอัตโนมัติ"
+          "text": "รวมทุกอย่างไว้ class เดียวจะรับรอง SRP อัตโนมัติ"
         }
       ],
       "answer": "b",
-      "explanation": "SRPคือแยกresponsibilitiesที่อาจเปลี่ยนต่างเหตุผล ไม่ใช่กฎหนึ่งmethodต่อclass งานคำนวณ/format/storageอาจแยกตามบริบท แต่หลายmethodของresponsibilityเดียวไม่ผิดโดยอัตโนมัติ"
+      "explanation": "SRP คือแยก responsibilities ที่อาจเปลี่ยนต่างเหตุผล ไม่ใช่กฎหนึ่ง method ต่อ class งานคำนวณ/format/storage อาจแยกตามบริบท แต่หลาย method ของ responsibility เดียวไม่ผิดโดยอัตโนมัติ"
     },
     {
       "id": "us-ocp",
       "type": "choice",
-      "prompt": "ข้อใดอธิบายOCPตามบทได้เหมาะสม?",
+      "prompt": "ข้อใดอธิบาย OCP ตามบทได้เหมาะสม?",
       "reference": "ocp",
       "choices": [
         {
           "id": "a",
-          "text": "ห้ามแก้sourceเดิมทุกกรณีแม้มีbug"
+          "text": "ห้ามแก้ source เดิมทุกกรณีแม้มี bug"
         },
         {
           "id": "b",
-          "text": "เพิ่มclassให้มากที่สุดแล้วไม่ต้องมีcontract"
+          "text": "เพิ่ม class ให้มากที่สุดแล้วไม่ต้องมี contract"
         },
         {
           "id": "c",
-          "text": "ออกแบบจุดขยายเพื่อลดการแก้clientซ้ำ แต่ยังแก้bugformatterได้ ไม่ใช่ข้อห้ามแก้โค้ดตายตัว"
+          "text": "ออกแบบจุดขยายเพื่อลดการแก้ client ซ้ำ แต่ยังแก้ bugformatter ได้ ไม่ใช่ข้อห้ามแก้โค้ดตายตัว"
         }
       ],
       "answer": "c",
-      "explanation": "OCPใช้abstraction/extensionpointที่รักษาcontract ไม่ใช่ห้ามmaintenanceหรือbugfix การเลือกclassใหม่ที่compositionrootทำได้โดยไม่ต้องเพิ่มifทุกชนิดในservice"
+      "explanation": "OCP ใช้ abstraction/extensionpoint ที่รักษา contract ไม่ใช่ห้าม maintenance หรือ bugfix การเลือก class ใหม่ที่ compositionroot ทำได้โดยไม่ต้องเพิ่ม if ทุกชนิดใน service"
     },
     {
       "id": "us-square",
       "type": "choice",
-      "prompt": "Clientตั้งwidth5,height4แล้วคาดarea20 Rectangleให้20 แต่Squareที่ผูกside (CoupledSquareในโค้ด) ให้4ทั้งสองด้านจึงได้16 ข้อสรุปใดถูก?",
+      "prompt": "Client ตั้ง width5,height4 แล้วคาด area20 Rectangle ให้ 20 แต่ Square ที่ผูก side (CoupledSquare ในโค้ด) ให้ 4 ทั้งสองด้านจึงได้ 16 ข้อสรุปใดถูก?",
       "reference": "lsp",
       "choices": [
         {
           "id": "a",
-          "text": "SquareแทนRectangleได้เสมอเพราะisinstanceTrue"
+          "text": "Square แทน Rectangle ได้เสมอเพราะ isinstanceTrue"
         },
         {
           "id": "b",
-          "text": "observablecontractของclientผิดเมื่อแทนSquare แม้typecheckผ่าน จึงเป็นLSPcounterexampleนี้"
+          "text": "observablecontract ของ client ผิดเมื่อแทน Square แม้ typecheck ผ่าน จึงเป็น LSPcounterexample นี้"
         },
         {
           "id": "c",
-          "text": "area16ทำให้Pythonคำนวณเลขผิด"
+          "text": "area16 ทำให้ Python คำนวณเลขผิด"
         }
       ],
       "answer": "b",
-      "explanation": "Rectanglecontractในclientอนุญาตแก้width/heightอิสระ Squareผูกสองด้านจึงเปลี่ยนpostconditionของoperation การสืบทอดทางsyntaxไม่เพียงพอจะรับรองLSP ไม่ใช่ข้อห้ามคณิตศาสตร์ว่าทุกSquareไม่เป็นRectangle"
+      "explanation": "Rectanglecontract ใน client อนุญาตแก้ width/height อิสระ Square ผูกสองด้านจึงเปลี่ยน postcondition ของ operation การสืบทอดทาง syntax ไม่เพียงพอจะรับรอง LSP ไม่ใช่ข้อห้ามคณิตศาสตร์ว่าทุก Square ไม่เป็น Rectangle"
     },
     {
       "id": "us-cost",
       "type": "choice",
-      "prompt": "เพิ่มChannelclassเพื่อขยายformatterแล้ว งานformatข้อความยาวmต้องอ่าน/สร้างข้อความตามความยาว ข้อใดถูก?",
+      "prompt": "เพิ่ม Channelclass เพื่อขยาย formatter แล้ว งาน format ข้อความยาว m ต้องอ่าน/สร้างข้อความตามความยาว ข้อใดถูก?",
       "reference": "complexity",
       "choices": [
         {
           "id": "a",
-          "text": "การเพิ่มclassทำให้runtimeเป็นO(1)โดยอัตโนมัติ"
+          "text": "การเพิ่ม class ทำให้ runtime เป็น O(1)โดยอัตโนมัติ"
         },
         {
           "id": "b",
-          "text": "designprincipleไม่เปลี่ยนต้นทุนงานจริง อาจยังO(m) และต้องระบุcontract/implementation"
+          "text": "designprinciple ไม่เปลี่ยนต้นทุนงานจริง อาจยัง O(m) และต้องระบุ contract/implementation"
         },
         {
           "id": "c",
-          "text": "OCPรับรองว่าไม่มีallocationเกิดขึ้น"
+          "text": "OCP รับรองว่าไม่มี allocation เกิดขึ้น"
         }
       ],
       "answer": "b",
-      "explanation": "SRP/OCP/LSPเป็นเรื่องdesign/contracts ไม่ใช่สูตรลดoperationcount การformat/สร้างข้อความยาวmยังต้องพิจารณาO(m)และallocationตามimplementation ไม่อ้างว่ามีclassจึงconstanttime"
+      "explanation": "SRP/OCP/LSP เป็นเรื่อง design/contracts ไม่ใช่สูตรลด operationcount การ format/สร้างข้อความยาว m ยังต้องพิจารณา O(m)และ allocation ตาม implementation ไม่อ้างว่ามี class จึง constanttime"
     },
     {
       "id": "us-push",
       "type": "self",
-      "prompt": "ออกแบบเพิ่มPushChannelให้notifyโดยไม่เพิ่มtypebranchในservice แล้ววางtestsด้านข้อความ,side effectsและLSP พร้อมอ่านUMLownershipอย่างมีเหตุผล",
+      "prompt": "ออกแบบเพิ่ม PushChannel ให้ notify โดยไม่เพิ่ม typebranch ใน service แล้ววาง tests ด้านข้อความ,side effects และ LSP พร้อมอ่าน UMLownership อย่างมีเหตุผล",
       "reference": "python",
-      "explanation": "Pushต้องทำformatตามChannelcontractและให้clientcompositionเลือกinstanceใหม่ notifyเรียกprotocolเดิม บทตัวอย่างPush:A:helloถูกบันทึกหนึ่งครั้ง ต้องทดสอบผลและจำนวนsideeffectsโดยไม่เสริมpreconditionที่clientเดิมไม่รู้ การแยกsender/formatterไม่ยกเลิกต้นทุนข้อความ",
+      "explanation": "Push ต้องทำ format ตาม Channelcontract และให้ clientcomposition เลือก instance ใหม่ notify เรียก protocol เดิม บทตัวอย่าง Push:A:hello ถูกบันทึกหนึ่งครั้ง ต้องทดสอบผลและจำนวน sideeffects โดยไม่เสริม precondition ที่ client เดิมไม่รู้ การแยก sender/formatter ไม่ยกเลิกต้นทุนข้อความ",
       "rubric": [
-        "เสนอextensionpointและclientcompositionที่ไม่เพิ่มifตามชนิดทุกครั้ง",
-        "ทดสอบข้อความ/sideeffectsและobservablecontractเพื่อดูLSP",
-        "เชื่อมUML/SRP/ownershipกับขอบเขตงาน ไม่รับรองperformanceหรือGCโดยไม่มีหลักฐาน"
+        "เสนอ extensionpoint และ clientcomposition ที่ไม่เพิ่ม if ตามชนิดทุกครั้ง",
+        "ทดสอบข้อความ/sideeffects และ observablecontract เพื่อดู LSP",
+        "เชื่อม UML/SRP/ownership กับขอบเขตงาน ไม่รับรอง performance หรือ GC โดยไม่มีหลักฐาน"
       ]
     }
   ]

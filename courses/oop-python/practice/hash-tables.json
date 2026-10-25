@@ -7,7 +7,7 @@
     {
       "id": "ht-collision",
       "type": "choice",
-      "prompt": "Hash สมมติให้ h(A)=10,h(B)=18 ที่ capacity8 จึงได้ bucket2ทั้งคู่ ข้อใดถูก?",
+      "prompt": "Hash สมมติให้ h(A)=10,h(B)=18 ที่ capacity8 จึงได้ bucket2 ทั้งคู่ ข้อใดถูก?",
       "reference": "concepts",
       "choices": [
         {
@@ -24,39 +24,39 @@
         }
       ],
       "answer": "b",
-      "explanation": "10mod8=18mod8=2 แต่hash/bucketเท่ากันไม่รับรองequality ต้องใช้chaining/probingและเปรียบkeyตามcontract ไม่ทิ้งentryเก่าหรือถือว่าเป็นduplicateโดยอัตโนมัติ"
+      "explanation": "10mod8=18mod8=2 แต่ hash/bucket เท่ากันไม่รับรอง equality ต้องใช้ chaining/probing และเปรียบ key ตาม contract ไม่ทิ้ง entry เก่าหรือถือว่าเป็น duplicate โดยอัตโนมัติ"
     },
     {
       "id": "ht-tombstone",
       "type": "choice",
-      "prompt": "Linear Probing มี Aที่2,Bที่3,Cที่4 แล้วลบA ถ้าจะ updateB ควรทำอย่างไร?",
+      "prompt": "Linear Probing มี A ที่ 2,B ที่ 3,C ที่ 4 แล้วลบ A ถ้าจะ updateB ควรทำอย่างไร?",
       "reference": "trace",
       "choices": [
         {
           "id": "a",
-          "text": "ใส่ B ใหม่ที่ช่อง2ทันที ทำให้มี Bซ้ำได้"
+          "text": "ใส่ B ใหม่ที่ช่อง 2 ทันที ทำให้มี B ซ้ำได้"
         },
         {
           "id": "b",
-          "text": "เปลี่ยนช่อง2เป็นNoneแล้วหยุดค้นหา"
+          "text": "เปลี่ยนช่อง 2 เป็น None แล้วหยุดค้นหา"
         },
         {
           "id": "c",
-          "text": "เก็บ tombstone และค้นต่อจนพบ Bที่3ก่อน update โดย sizeไม่เพิ่ม"
+          "text": "เก็บ tombstone และค้นต่อจนพบ B ที่ 3 ก่อน update โดย size ไม่เพิ่ม"
         }
       ],
       "answer": "c",
-      "explanation": "tombstoneรักษาทางprobeไปยังB/C การreuseช่องลบต้องเป็นcandidateขณะแสวงหาkeyเดิมจนจบตามกติกา มิฉะนั้นอาจสร้างkeyซ้ำ การupdateBไม่ใช่insertkeyใหม่จึงไม่เพิ่มsize"
+      "explanation": "tombstone รักษาทาง probe ไปยัง B/C การ reuse ช่องลบต้องเป็น candidate ขณะแสวงหา key เดิมจนจบตามกติกา มิฉะนั้นอาจสร้าง key ซ้ำ การ updateB ไม่ใช่ insertkey ใหม่จึงไม่เพิ่ม size"
     },
     {
       "id": "ht-load",
       "type": "numeric",
-      "prompt": "Chaining cap4 มี3keys เมื่อเพิ่ม keyที่4และpolicyขยายcapacityเป็น8 หลังrehashให้หา load factor α=n/capacity",
+      "prompt": "Chaining cap4 มี 3keys เมื่อเพิ่ม key ที่ 4 และ policy ขยาย capacity เป็น 8 หลัง rehash ให้หา load factor α=n/capacity",
       "reference": "load",
       "answer": 0.5,
       "absoluteTolerance": 0.000001,
       "relativeTolerance": 0,
-      "explanation": "หลังเพิ่มมีn4และcapacity8จึงα=.5 ไม่ใช่.75จากก่อนinsert การupdatekeyเก่าไม่เพิ่มnและไม่บังคับresizeแบบinsertใหม่"
+      "explanation": "หลังเพิ่มมี n4 และ capacity8 จึงα=.5 ไม่ใช่.75 จากก่อน insert การ updatekey เก่าไม่เพิ่ม n และไม่บังคับ resize แบบ insert ใหม่"
     },
     {
       "id": "ht-hashability",
@@ -70,7 +70,7 @@
         },
         {
           "id": "b",
-          "text": "(1,2) ใช้เป็น key ได้ แต่ tupleที่มีlistอย่าง ([1,2],) ใช้ไม่ได้; custom identity-hashed object อาจ mutable ได้"
+          "text": "(1,2) ใช้เป็น key ได้ แต่ tuple ที่มี list อย่าง ([1,2],) ใช้ไม่ได้; custom identity-hashed object อาจ mutable ได้"
         },
         {
           "id": "c",
@@ -78,12 +78,12 @@
         }
       ],
       "answer": "b",
-      "explanation": "ต้องดูhash/equalitycontractและสมาชิก ไม่ใช่แค่ชื่อtype (1,2)hashableแต่tupleที่มีlistไม่hashable Customobjectอาจใช้identityhashได้แม้มีattributesเปลี่ยนได้ และequalkeysต้องมีsamehash"
+      "explanation": "ต้องดู hash/equalitycontract และสมาชิก ไม่ใช่แค่ชื่อ type (1,2)hashable แต่ tuple ที่มี list ไม่ hashable Customobject อาจใช้ identityhash ได้แม้มี attributes เปลี่ยนได้ และ equalkeys ต้องมี samehash"
     },
     {
       "id": "ht-bounded",
       "type": "choice",
-      "prompt": "ค้น keyที่ไม่มีใน Linear Probing ที่เต็มหรือมีแต่ tombstones ควรทำอย่างไร?",
+      "prompt": "ค้น key ที่ไม่มีใน Linear Probing ที่เต็มหรือมีแต่ tombstones ควรทำอย่างไร?",
       "reference": "resolution",
       "choices": [
         {
@@ -92,7 +92,7 @@
         },
         {
           "id": "b",
-          "text": "สรุปว่าkeyมีอยู่เพราะมีtombstone"
+          "text": "สรุปว่า key มีอยู่เพราะมี tombstone"
         },
         {
           "id": "c",
@@ -100,18 +100,18 @@
         }
       ],
       "answer": "c",
-      "explanation": "ไม่มีempty slotไม่ได้แปลว่าจะพบkey จึงต้องมีขอบเขตprobeหนึ่งรอบtableและแยกfull/update/missingให้ถูก ไม่ปล่อยinfinite loop; fulltableยังupdateexistingkeyได้"
+      "explanation": "ไม่มี empty slot ไม่ได้แปลว่าจะพบ key จึงต้องมีขอบเขต probe หนึ่งรอบ table และแยก full/update/missing ให้ถูก ไม่ปล่อย infinite loop; fulltable ยัง updateexistingkey ได้"
     },
     {
       "id": "ht-contract",
       "type": "self",
-      "prompt": "อธิบาย expected lookup O(1) เทียบ worst case,ผลของload/resize และความต่าง dict/OrderedDict/Linked List โดยไม่แต่ง project requirements",
+      "prompt": "อธิบาย expected lookup O(1) เทียบ worst case,ผลของ load/resize และความต่าง dict/OrderedDict/Linked List โดยไม่แต่ง project requirements",
       "reference": "comparison",
-      "explanation": "expectedO(1)ต้องมีhashdistribution/load assumptions;ชนกันหนักอาจO(n) resizeต้องrehashตามcapacityใหม่ dictรักษาinsertion orderแต่ไม่ใช่APIเดียวกับOrderedDict.move_to_end ส่วนLinkedListค้นตามค่าอาจO(n)แม้แก้knownnodeO(1)ไม่มีNewsManager/DailyFeedsourceให้แต่งrequirements",
+      "explanation": "expectedO(1)ต้องมี hashdistribution/load assumptions;ชนกันหนักอาจ O(n) resize ต้อง rehash ตาม capacity ใหม่ dict รักษา insertion order แต่ไม่ใช่ API เดียวกับ OrderedDict.move_to_end ส่วน LinkedList ค้นตามค่าอาจ O(n)แม้แก้ knownnodeO(1)ไม่มี NewsManager/DailyFeedsource ให้แต่ง requirements",
       "rubric": [
-        "ระบุ expected/worst-case และhash/load assumptions",
+        "ระบุ expected/worst-case และ hash/load assumptions",
         "แยก update,insert,delete/tombstone กับ rehash",
-        "เปรียบordering/interface/searchcostตามหลักฐาน ไม่แต่งprojectที่ไม่มีsource"
+        "เปรียบ ordering/interface/searchcost ตามหลักฐาน ไม่แต่ง project ที่ไม่มี source"
       ]
     }
   ]

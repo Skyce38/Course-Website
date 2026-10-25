@@ -12,7 +12,7 @@
       "answer": 7,
       "absoluteTolerance": 0,
       "relativeTolerance": 0,
-      "explanation": "เลือก1,2,3,4,5,7,8ผ่าน7comparisons แล้วleftหมด ต่อ9จากrightโดยไม่เทียบkeyเพิ่ม ดังนั้นcaptionที่ว่าขวาหมดก่อนขัดกับtraceนี้"
+      "explanation": "เลือก 1,2,3,4,5,7,8 ผ่าน 7comparisons แล้ว left หมด ต่อ 9 จาก right โดยไม่เทียบ key เพิ่ม ดังนั้น caption ที่ว่าขวาหมดก่อนขัดกับ trace นี้"
     },
     {
       "id": "as-partition",
@@ -34,7 +34,7 @@
         }
       ],
       "answer": "a",
-      "explanation": "pivotท้าย1 ถูกย้ายเข้าindex1หลังเก็บค่าที่≤1ไว้ฝั่งซ้าย ได้[1,1,8,10,3,2,6] เป็นpartitionไม่ใช่fullsort ต้องเรียกrecursiveกับส่วนที่เหลือ"
+      "explanation": "pivot ท้าย 1 ถูกย้ายเข้า index1 หลังเก็บค่าที่≤1 ไว้ฝั่งซ้าย ได้[1,1,8,10,3,2,6] เป็น partition ไม่ใช่ fullsort ต้องเรียก recursive กับส่วนที่เหลือ"
     },
     {
       "id": "as-worst",
@@ -44,7 +44,7 @@
       "answer": 10,
       "absoluteTolerance": 0,
       "relativeTolerance": 0,
-      "explanation": "แต่ละpartitionมี4,3,2,1keycomparisonsตามขนาดsubarrayที่ลดทีละ1 รวม10 กรณีนี้แตกn−1/0 ไม่ใช่แบ่งครึ่ง"
+      "explanation": "แต่ละ partition มี 4,3,2,1keycomparisons ตามขนาด subarray ที่ลดทีละ 1 รวม 10 กรณีนี้แตก n−1/0 ไม่ใช่แบ่งครึ่ง"
     },
     {
       "id": "as-python",
@@ -66,17 +66,17 @@
         }
       ],
       "answer": "a",
-      "explanation": "Python sorting รับรองstabilityของequalkeys sortedสร้างลิสต์ใหม่ ส่วนlist.sortทำin-placeและคืนNone ไม่เอาคำรับรองนี้ไปใช้กับQuickimplementationทุกแบบหรืออ้างว่าทุกsortstable"
+      "explanation": "Python sorting รับรอง stability ของ equalkeys sorted สร้างลิสต์ใหม่ ส่วน list.sort ทำ in-place และคืน None ไม่เอาคำรับรองนี้ไปใช้กับ Quickimplementation ทุกแบบหรืออ้างว่าทุก sortstable"
     },
     {
       "id": "as-space",
       "type": "choice",
-      "prompt": "Recursive Quick Sort เมื่อpartitionแตก n−1/0 ซ้ำ ๆ มี call-stack space worst case เท่าใด หากยังไม่รวม trace copies?",
+      "prompt": "Recursive Quick Sort เมื่อ partition แตก n−1/0 ซ้ำ ๆ มี call-stack space worst case เท่าใด หากยังไม่รวม trace copies?",
       "reference": "tradeoffs",
       "choices": [
         {
           "id": "a",
-          "text": "O(1) เพราะ partition ทำในarrayเดิม"
+          "text": "O(1) เพราะ partition ทำใน array เดิม"
         },
         {
           "id": "b",
@@ -88,18 +88,18 @@
         }
       ],
       "answer": "c",
-      "explanation": "corepartitionอาจใช้พื้นที่คงที่แต่recursivecallstackในกรณีเอียงลึกO(n);O(logn)ต้องมีเงื่อนไขต้นไม้สมดุล หากเก็บtraceสำเนาทุกขั้นก็มีoverheadเพิ่มนอกcore"
+      "explanation": "corepartition อาจใช้พื้นที่คงที่แต่ recursivecallstack ในกรณีเอียงลึก O(n);O(logn)ต้องมีเงื่อนไขต้นไม้สมดุล หากเก็บ trace สำเนาทุกขั้นก็มี overhead เพิ่มนอก core"
     },
     {
       "id": "as-compare",
       "type": "self",
       "prompt": "เปรียบ Merge กับ Quick/Timsort ในเรื่อง stability,recursion memory,duplicate pivots และการอ่าน benchmark พร้อมแยก core จาก trace",
       "reference": "tradeoffs",
-      "explanation": "Mergeใช้≤เพื่อเก็บequalkeysจากฝั่งซ้ายก่อนและเวอร์ชันcopy/sliceมีO(n)peak;QuickอาจลึกO(n)และduplicateทั้งหมดทำให้แย่แม้เลือกmedianที่ค่าเท่ากัน Timsort/Pythonstableใช้ประโยชน์จากrunsตามimplementation เงื่อนไข37.4xในsourceเป็นrunรายงานไม่ใช่ผลรับรองทุกเครื่อง",
+      "explanation": "Merge ใช้≤เพื่อเก็บ equalkeys จากฝั่งซ้ายก่อนและเวอร์ชัน copy/slice มี O(n)peak;Quick อาจลึก O(n)และ duplicate ทั้งหมดทำให้แย่แม้เลือก median ที่ค่าเท่ากัน Timsort/Pythonstable ใช้ประโยชน์จาก runs ตาม implementation เงื่อนไข 37.4x ใน source เป็น run รายงานไม่ใช่ผลรับรองทุกเครื่อง",
       "rubric": [
-        "ระบุ stability และmemory assumptions ของimplementationที่เปรียบ",
-        "อธิบาย duplicate/worst-case และแยก trace overhead จากcore",
-        "ไม่ทำbenchmark claimทั่วไปจากrunเดียวหรือสลับAPIของ sorted/list.sort"
+        "ระบุ stability และ memory assumptions ของ implementation ที่เปรียบ",
+        "อธิบาย duplicate/worst-case และแยก trace overhead จาก core",
+        "ไม่ทำ benchmark claim ทั่วไปจาก run เดียวหรือสลับ API ของ sorted/list.sort"
       ]
     }
   ]

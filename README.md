@@ -123,4 +123,4 @@ Learning Paths and their ordered recommendations have been removed. Open every l
 
 ### Phase 6 — Practice Mode MVP
 
-Stack, Basic Sorting, KNN and Decision Tree readers include optional practice with immediate explanations, numeric validation, retry/incorrect-answer review, explicit attempt history and ungraded self-assessment. Existing lesson content and reading data remain unchanged. See [the practice contract, storage and checks](docs/practice-mode.md). This pilot covers four lessons only.
+The original Stack, Basic Sorting, KNN and Decision Tree pilot established immediate explanations, numeric validation, retry/incorrect-answer review, saved attempts and ungraded self-assessment. Phase 6B now extends that unchanged component to all 25 registered AI/OOP lessons: 150 questions (125 automatic, 25 self-assessments). Existing lesson content, pilot question revisions and reading data remain unchanged. See [the practice contract, storage and checks](docs/practice-mode.md) and [answer-verification coverage](docs/practice-expansion-coverage.md).

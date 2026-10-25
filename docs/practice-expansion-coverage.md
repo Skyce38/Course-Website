@@ -42,8 +42,6 @@ Self-assessments: ll-audit, qu-invariants, as-compare, ht-contract, ar-growth. T
 
 Self-assessments: co-contract, ep-validation, im-savings, pa-triangle, or-design, us-push. Rubrics distinguish type from behavior, read-only from immutability/security, domain ownership from GC, and design principles from runtime guarantees.
 
-## Verification method
-
 ## Stage D — AI Foundations
 
 | Lesson | Automatic IDs / objectives | Heading evidence | Independent verification |

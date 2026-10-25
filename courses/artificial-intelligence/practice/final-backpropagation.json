@@ -12,7 +12,7 @@
       "answer": 0.125,
       "absoluteTolerance": 0.000001,
       "relativeTolerance": 0,
-      "explanation": "sigmoid(0)=.5 จึง L=.5(.5−1)²=.125 ไม่ใช่ .25 ซึ่งจะได้หากนิยาม loss ไม่มีตัวคูณ1/2"
+      "explanation": "sigmoid(0)=.5 จึง L=.5(.5−1)²=.125 ไม่ใช่ .25 ซึ่งจะได้หากนิยาม loss ไม่มีตัวคูณ 1/2"
     },
     {
       "id": "bp-output-gradient",

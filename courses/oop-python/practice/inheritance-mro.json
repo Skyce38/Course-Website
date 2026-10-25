@@ -7,7 +7,7 @@
     {
       "id": "im-mro",
       "type": "choice",
-      "prompt": "diamondตามบท: B(A),C(A),D(B,C) โดยinheritanceร่วมกันเป็นปกติ MROของDคืออะไร?",
+      "prompt": "diamond ตามบท: B(A),C(A),D(B,C) โดย inheritance ร่วมกันเป็นปกติ MRO ของ D คืออะไร?",
       "reference": "practice",
       "choices": [
         {
@@ -24,106 +24,106 @@
         }
       ],
       "answer": "b",
-      "explanation": "Pythonใช้C3MROที่รักษาลำดับฐาน D(B,C) และจัดAหลังลูกที่เกี่ยวข้อง จึงD,B,C,A,object ไม่แทรกAก่อนCเพียงเพราะBสืบทอดA"
+      "explanation": "Python ใช้ C3MRO ที่รักษาลำดับฐาน D(B,C) และจัด A หลังลูกที่เกี่ยวข้อง จึง D,B,C,A,object ไม่แทรก A ก่อน C เพียงเพราะ B สืบทอด A"
     },
     {
       "id": "im-super",
       "type": "choice",
-      "prompt": "ภายในB.chain เมื่อถูกเรียกผ่านD().chainตามdiamondข้างต้น super()จะเดินต่อที่ใด?",
+      "prompt": "ภายใน B.chain เมื่อถูกเรียกผ่าน D().chain ตาม diamond ข้างต้น super()จะเดินต่อที่ใด?",
       "reference": "python",
       "choices": [
         {
           "id": "a",
-          "text": "C เพราะsuperเดินตามMROของinstanceในcontextนี้"
+          "text": "C เพราะ super เดินตาม MRO ของ instance ใน context นี้"
         },
         {
           "id": "b",
-          "text": "Aเสมอเพราะเป็นฐานที่เขียนตรงของB"
+          "text": "A เสมอเพราะเป็นฐานที่เขียนตรงของ B"
         },
         {
           "id": "c",
-          "text": "Dเพราะต้องวนกลับไปลูก"
+          "text": "D เพราะต้องวนกลับไปลูก"
         }
       ],
       "answer": "a",
-      "explanation": "superไม่เท่ากับการเรียกฐานที่ระบุชื่อโดยตรง ในMROของD ตำแหน่งหลังBคือC จึงcooperativechainเป็นD,B,C,A"
+      "explanation": "super ไม่เท่ากับการเรียกฐานที่ระบุชื่อโดยตรง ใน MRO ของ D ตำแหน่งหลัง B คือ C จึง cooperativechain เป็น D,B,C,A"
     },
     {
       "id": "im-lsp",
       "type": "choice",
-      "prompt": "SavingsAccountเป็นsubclassและisinstance(...,Account)เป็นTrue แต่เพิ่มเงื่อนไขว่าถอนแล้วต้องเหลือ500 ข้อใดถูก?",
+      "prompt": "SavingsAccount เป็น subclass และ isinstance(...,Account)เป็น True แต่เพิ่มเงื่อนไขว่าถอนแล้วต้องเหลือ 500 ข้อใดถูก?",
       "reference": "contracts",
       "choices": [
         {
           "id": "a",
-          "text": "ผ่านLSPทุกกรณีเพียงเพราะisinstanceเป็นTrue"
+          "text": "ผ่าน LSP ทุกกรณีเพียงเพราะ isinstance เป็น True"
         },
         {
           "id": "b",
-          "text": "clientฐานที่อนุญาตถอนหมดอาจล้มเหลว จึงต้องพิจารณาcontract/LSP ไม่ใช่ดูinheritanceอย่างเดียว"
+          "text": "client ฐานที่อนุญาตถอนหมดอาจล้มเหลว จึงต้องพิจารณา contract/LSP ไม่ใช่ดู inheritance อย่างเดียว"
         },
         {
           "id": "c",
-          "text": "ต้องซ่อนexceptionจึงจะพิสูจน์LSP"
+          "text": "ต้องซ่อน exception จึงจะพิสูจน์ LSP"
         }
       ],
       "answer": "b",
-      "explanation": "การเพิ่มpreconditionทำให้clientที่ทำได้ตามฐานอาจใช้subclassไม่ได้ จึงเป็นLSPconcernในcontractนั้น ต้องออกแบบpolicy/contractใหม่อย่างชัดเจน ไม่ซ่อนความผิดหรือโทษclientอัตโนมัติ"
+      "explanation": "การเพิ่ม precondition ทำให้ client ที่ทำได้ตามฐานอาจใช้ subclass ไม่ได้ จึงเป็น LSPconcern ใน contract นั้น ต้องออกแบบ policy/contract ใหม่อย่างชัดเจน ไม่ซ่อนความผิดหรือโทษ client อัตโนมัติ"
     },
     {
       "id": "im-private",
       "type": "choice",
-      "prompt": "ถ้าBaseเก็บself.__countและChildเขียนself.__countของตนตามname mangling ข้อใดถูก?",
+      "prompt": "ถ้า Base เก็บ self.__count และ Child เขียน self.__count ของตนตาม name mangling ข้อใดถูก?",
       "reference": "contracts",
       "choices": [
         {
           "id": "a",
-          "text": "ชื่อทั้งสองจำเป็นต้องเป็นfieldเดียวกันเสมอ"
+          "text": "ชื่อทั้งสองจำเป็นต้องเป็น field เดียวกันเสมอ"
         },
         {
           "id": "b",
-          "text": "ChildลบprivatefieldของBaseโดยอัตโนมัติ"
+          "text": "Child ลบ privatefield ของ Base โดยอัตโนมัติ"
         },
         {
           "id": "c",
-          "text": "อาจเป็นคนละชื่อเช่น_Base__countกับ_Child__count ไม่ใช่การoverridefieldฐานด้วยชื่อเดียวกัน"
+          "text": "อาจเป็นคนละชื่อเช่น_Base__count กับ_Child__count ไม่ใช่การ overridefield ฐานด้วยชื่อเดียวกัน"
         }
       ],
       "answer": "c",
-      "explanation": "doubleunderscoreถูกmangleตามclassที่นิยาม จึงต้องเข้าใจชื่อจริงและใช้interface/cooperativeinitialization ไม่สรุปว่าprivatefieldฐานหายหรือถูกแทนเพราะลูกเขียน__count"
+      "explanation": "doubleunderscore ถูก mangle ตาม class ที่นิยาม จึงต้องเข้าใจชื่อจริงและใช้ interface/cooperativeinitialization ไม่สรุปว่า privatefield ฐานหายหรือถูกแทนเพราะลูกเขียน__count"
     },
     {
       "id": "im-zero",
       "type": "choice",
-      "prompt": "SavingsAccountอนุญาตrate0 และapply_interestตามนโยบายในบท เมื่อดอกเบี้ยเป็น0ควรเกิดอะไร?",
+      "prompt": "SavingsAccount อนุญาต rate0 และ apply_interest ตามนโยบายในบท เมื่อดอกเบี้ยเป็น 0 ควรเกิดอะไร?",
       "reference": "trace",
       "choices": [
         {
           "id": "a",
-          "text": "คืน0โดยไม่เรียกdeposit0และไม่เพิ่มcount"
+          "text": "คืน 0 โดยไม่เรียก deposit0 และไม่เพิ่ม count"
         },
         {
           "id": "b",
-          "text": "เรียกdeposit0แม้ละเมิดcontractamount>0"
+          "text": "เรียก deposit0 แม้ละเมิด contractamount>0"
         },
         {
           "id": "c",
-          "text": "เพิ่มcountเพราะอ่านrateหนึ่งครั้ง"
+          "text": "เพิ่ม count เพราะอ่าน rate หนึ่งครั้ง"
         }
       ],
       "answer": "a",
-      "explanation": "บทประกาศzero-interestเป็นno-op:คืน0ไม่depositและไม่เพิ่มcount เพื่อประสานrate0ที่setterยอมกับdepositที่รับเฉพาะจำนวนบวก ไม่ใช้ทางแก้เงียบ ๆที่ไม่ระบุนโยบาย"
+      "explanation": "บทประกาศ zero-interest เป็น no-op:คืน 0 ไม่ deposit และไม่เพิ่ม count เพื่อประสาน rate0 ที่ setter ยอมกับ deposit ที่รับเฉพาะจำนวนบวก ไม่ใช้ทางแก้เงียบ ๆที่ไม่ระบุนโยบาย"
     },
     {
       "id": "im-savings",
       "type": "self",
-      "prompt": "ไล่Savingsเริ่ม10000,rate.03,apply_interestหนึ่งครั้งแล้วwithdraw9800 พร้อมcountและขอบเหลือ500 แล้วอธิบายsuper/init/MROและLSPที่เกี่ยวข้อง",
+      "prompt": "ไล่สถานะ SavingsAccount ที่เริ่มยอด 10000 และ rate=0.03: เรียก apply_interest() หนึ่งครั้ง แล้ว withdraw(9800) ระบุยอด/count และการถอนจนเหลือ 500 พร้อมอธิบาย super, initialization, MRO และ LSP ที่เกี่ยวข้อง",
       "reference": "trace",
-      "explanation": "interest300ทำbalance10300,count1;withdraw9800เหลือ500,count2;withdraw1ถัดไปถูกปฏิเสธโดยstateเดิมไม่เปลี่ยน ต้องใช้baseinterfaceที่รักษาvalidation/count และinitializeตามcontract รู้ว่าsuperเดินตามMROและminimum500อาจเสริมpreconditionผิดLSPกับฐานที่ถอนหมดได้",
+      "explanation": "interest300 ทำ balance10300,count1;withdraw9800 เหลือ 500,count2;withdraw1 ถัดไปถูกปฏิเสธโดย state เดิมไม่เปลี่ยน ต้องใช้ baseinterface ที่รักษา validation/count และ initialize ตาม contract รู้ว่า super เดินตาม MRO และ minimum500 อาจเสริม precondition ผิด LSP กับฐานที่ถอนหมดได้",
       "rubric": [
-        "คำนวณbalance/count/exceptionทั้งขอบ500และzero-interestอย่างตรงcontract",
-        "อธิบายcooperativeinit/MRO ไม่เรียกฐานซ้ำโดยไม่ตั้งใจ",
-        "แยกis-a/typecheckจากbehavioralsubstitutabilityและไม่ซ่อนexception"
+        "คำนวณ balance/count/exception ทั้งขอบ 500 และ zero-interest อย่างตรง contract",
+        "อธิบาย cooperativeinit/MRO ไม่เรียกฐานซ้ำโดยไม่ตั้งใจ",
+        "แยก is-a/typecheck จาก behavioralsubstitutability และไม่ซ่อน exception"
       ]
     }
   ]
