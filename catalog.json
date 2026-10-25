@@ -502,6 +502,17 @@
       "reader": "read/artificial-intelligence/final-deep-learning-overview.html",
       "generatedLesson": 1,
       "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/artificial-intelligence/summaries/final-deep-learning-overview.md"
+    },
+    {
+      "id": "artificial-intelligence-final-cnn",
+      "course": "artificial-intelligence",
+      "category": "summaries",
+      "title": "FINAL: CNN และการคำนวณภาพ (Image Operations)",
+      "path": "summaries/final-cnn.md",
+      "format": "MD",
+      "reader": "read/artificial-intelligence/final-cnn.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/artificial-intelligence/summaries/final-cnn.md"
     }
   ]
 }
