@@ -4,7 +4,7 @@ Scope: 14 tracked lecture PDFs, **610 physical pages**; Week1–8 and Week10–1
 
 ## Source/topic inventory and lesson boundaries
 
-IDs use prefix `oop-python-`. New lessons are independent catalog resources, not a prescribed learning sequence. Status before authoring: planned; only `linked-list` is already published. Existing broad Final summary and20-question practice sheet remain unchanged.
+IDs use prefix `oop-python-`. New lessons are independent catalog resources, not a prescribed learning sequence. Status:7 Weeks1–8 chapters implemented in this branch (pending merge);5 Weeks11–15 chapters planned. `linked-list` is already published. Existing broad Final summary and20-question practice sheet remain unchanged.
 
 | Source (pages) | Verified topic locators | Dedicated lesson ID / coverage decision |
 |---|---|---|
