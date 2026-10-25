@@ -35,9 +35,24 @@ function home(term){const matchingCourses=courses.filter(c=>(c.name+' '+c.thai+'
 function courseView(c,cat,term){$('#breadcrumbs').textContent=c.name;const items=allResources.filter(r=>r.course===c.id&&(cat==='all'||r.category===cat)&&(!term||[r.title,r.path,r.scope].join(' ').toLowerCase().includes(term)));return '<a class="back-link" href="#">← กลับคลังเรียน</a><section class="course-header"><span class="course-symbol" style="--course-color:'+c.color+'">'+e(c.short)+'</span><div><span class="eyebrow">SUBJECT COLLECTION '+e(c.code)+'</span><h1>'+e(c.name)+'</h1><p>'+e(c.thai)+'</p></div></section><p class="small-note">'+e(c.description)+'</p>'+courseProgress(c)+'<div class="course-toolbar"><span id="sync-status" role="status">'+(loaded[c.id]===true?'ตรวจรายการล่าสุดจาก GitHub แล้ว':loaded[c.id]==='fallback'?'แสดงรายการที่นำเข้าไว้ · ยังดึงรายการใหม่ไม่ได้':'กำลังตรวจรายการจาก GitHub…')+'</span></div><nav class="category-tabs" aria-label="หมวดเอกสาร"><a class="category-tab '+(cat==='all'?'active':'')+'" href="#course/'+c.id+'">ทั้งหมด <span>'+allResources.filter(r=>r.course===c.id).length+'</span></a>'+categories.map(x=>'<a class="category-tab '+(cat===x.id?'active':'')+'" href="#course/'+c.id+'/'+x.id+'">'+x.icon+' '+x.name+' <span>'+allResources.filter(r=>r.course===c.id&&r.category===x.id).length+'</span></a>').join('')+'<button id="refresh" type="button" class="icon-button" data-i18n-aria-label="refreshFiles" data-i18n-title="refreshFiles">↻</button></nav>'+listHTML(items)}
 function render(){LearningStudy.configure(allResources,courses);const route=location.hash.slice(1).split('/');currentCourse=route[0]==='course'?courses.find(c=>c.id===route[1]):null;currentCategory=categories.some(c=>c.id===route[2])?route[2]:'all';const term=$('#search').value.trim().toLowerCase();document.querySelectorAll('[data-course-link]').forEach(a=>a.classList.toggle('active',a.dataset.courseLink===currentCourse?.id));$('#home-link').classList.toggle('active',!currentCourse&&route[0]!=='saved');$('#saved-link').classList.toggle('active',route[0]==='saved');if(currentCourse&&route.length<=3&&(!route[2]||categories.some(c=>c.id===route[2])))$('#view').innerHTML=courseView(currentCourse,currentCategory,term);else if(route[0]==='saved'){$('#breadcrumbs').textContent='รายการที่บันทึก';$('#view').innerHTML='<div class="section-heading"><div><span class="eyebrow">YOUR READING LIST</span><h2>รายการที่บันทึกไว้</h2><p>กดดาวข้างเอกสารเพื่อเก็บไว้อ่านต่อ บันทึกแยกตามเบราว์เซอร์</p></div></div>'+listHTML(allResources.filter(r=>bookmarks.includes(r.id)&&(!term||r.title.toLowerCase().includes(term))))}else if(route[0]){$('#breadcrumbs').textContent='ไม่พบหน้า';$('#view').innerHTML='<div class="empty"><h2>ไม่พบหน้า</h2><a href="#">← กลับคลังเรียน</a></div>'}else $('#view').innerHTML=home(term);bindMarks();const button=$('#refresh');if(button){button.disabled=syncing;button.setAttribute('aria-busy',String(syncing));button.onclick=()=>syncCourse(currentCourse,true);}LearningStudy.refreshControls();LearningI18n.apply();applyModernShell();}
 function mergeCourseResources(c,tree){if(!Array.isArray(tree))throw Error('Invalid tree');const prefix='courses/'+c.id+'/';const known=new Set(catalog.resources.filter(r=>r.course===c.id).map(r=>r.path));const dynamic=tree.filter(x=>x.type==='blob'&&x.path.startsWith(prefix)).map(x=>({...x,relative:x.path.slice(prefix.length)})).filter(x=>categories.some(cat=>x.relative.startsWith(cat.id+'/'))&&!/(^|\/)(README\.md|\.gitkeep)$/i.test(x.relative)&&!known.has(x.relative)).map(x=>({id:c.id+'-'+x.relative,course:c.id,category:x.relative.split('/')[0],title:x.relative.split('/').pop().replace(/\.[^.]+$/,''),scope:'ไฟล์จาก GitHub',path:x.relative,format:(x.relative.split('.').pop()||'FILE').toUpperCase().slice(0,5),github:'https://github.com/Skyce38/Course-Website/blob/main/'+prefix+x.relative.split('/').map(encodeURIComponent).join('/')}));allResources=[...allResources.filter(r=>r.course!==c.id||!r.dynamic),...dynamic.map(r=>({...r,dynamic:true}))];}
+function renderPreservingResourceFocus(){
+  const active=document.activeElement,view=$('#view'),route=location.hash;
+  const actionable=node=>node&&node.tabIndex>=0&&!node.matches(':disabled,[aria-disabled="true"]')&&!node.closest('[hidden],[inert],[aria-hidden="true"]')&&node.getClientRects().length&&getComputedStyle(node).visibility==='visible';
+  const attribute=active?.closest('.resource-row')&&actionable(active)&&['data-complete','data-bookmark','data-study-open'].find(name=>active.hasAttribute(name));
+  const id=attribute&&active.getAttribute(attribute);
+  const contextOf=node=>(node.closest('.recent-reading')?'recent':'catalog')+':'+(node.closest('.resource-buttons')?'actions':'title');
+  const context=id&&contextOf(active);
+  const matching=()=>[...view.querySelectorAll('['+attribute+']')].filter(node=>node.getAttribute(attribute)===id&&contextOf(node)===context);
+  const occurrence=id?matching().indexOf(active):-1;
+  // Capture and restore within this synchronous render, never across the GitHub await.
+  render();
+  if(occurrence<0||location.hash!==route||(document.activeElement!==active&&document.activeElement!==document.body))return;
+  const replacement=matching()[occurrence];
+  if(actionable(replacement))replacement.focus({preventScroll:true});
+}
 async function syncCourse(c,force=false){
   if(syncing)return;
-  syncing=true; courses.forEach(course=>loaded[course.id]='loading'); render();
+  syncing=true; courses.forEach(course=>loaded[course.id]='loading'); renderPreservingResourceFocus();
   try{
     // Hydrate from cache below, then revalidate once for the whole library, including home/search.
     const response=await fetch('https://api.github.com/repos/Skyce38/Course-Website/git/trees/main?recursive=1',{headers:{Accept:'application/vnd.github+json'},cache:'no-cache',signal:AbortSignal.timeout(12000)});
@@ -48,7 +63,7 @@ async function syncCourse(c,force=false){
     try{localStorage.setItem('skyce-learning-tree-single',JSON.stringify({time:Date.now(),tree:json.tree}))}catch{}
     courses.forEach(course=>loaded[course.id]=true);
   }catch(error){courses.forEach(course=>loaded[course.id]='fallback')}
-  finally{syncing=false;render()}
+  finally{syncing=false;renderPreservingResourceFocus()}
   if(force)notify(loaded[c?.id]===true?'อัปเดตรายการไฟล์แล้ว':'ยังเชื่อมต่อ GitHub ไม่ได้ ลองรีเฟรชภายหลัง');
 }
 try{const cached=JSON.parse(localStorage.getItem('skyce-learning-tree-single')||'null');if(Array.isArray(cached?.tree))courses.forEach(c=>mergeCourseResources(c,cached.tree))}catch{}
