@@ -86,4 +86,4 @@ Ready for PR preparation; no commit, push, merge or deployment performed. Browse
 
 - [x] Inventory14OOP PDFs/610physicalpages and accessible local labs; no Week9 invented.
 - [x] Remove path-only configuration/runtime/controls; retain catalog access, independent history/Continue Reading, bookmarks, completion and exact resume. Seeded legacy-data checks pass in both layouts.
-- [ ] Complete12source-supported OOP lessons and focused correctness/browser/integrity checks. Existing Linked List and AI content remain unchanged.
+- [x] Complete 12 source-supported OOP lessons and focused correctness/browser/integrity checks. Existing Linked List and AI content remain unchanged. See [Phase 5 validation](docs/phase5-oop-validation.md).

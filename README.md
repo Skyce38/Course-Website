@@ -117,4 +117,6 @@ Run `node scripts/build.cjs` and `node scripts/check.cjs`. Only sources in `scri
 
 ### Phase 5 — Direct catalog navigation
 
+The OOP catalog adds 12 Thai lessons with 65 independently verified solved exercises. See [lesson coverage](docs/oop-lesson-coverage.md) and [final validation](docs/phase5-oop-validation.md). Run the standard build/check commands above, plus `python scripts/check-oop-foundations.py` and `python scripts/check-oop-data-structures.py` (Python 3, standard library only).
+
 Learning Paths and their ordered recommendations have been removed. Open every lesson independently through its course/category/search or permanent URL. Recently Opened → Continue Reading, bookmarks, manual completion, course progress and HTML/PDF reading positions retain their original storage keys and behavior. No saved-data reset or replacement sequencing system is introduced. See [catalog navigation](docs/catalog-navigation.md) and [verified OOP source map](docs/oop-curriculum-map.md).

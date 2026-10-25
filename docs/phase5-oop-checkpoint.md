@@ -8,7 +8,7 @@ Base main: c68346e389cc37c1fd6093acf6df61cff51b3795. Branch: codex/phase5-oop-ex
 | B Remove path dependencies | Validated: obsolete runtime/config/docs/tests removed; build/checks and seeded Classic/Modern legacy-state browser checks pass; study.js unchanged |
 | C Weeks1–8 lessons | Validated:7 chapters/35 solved exercises, standalone Python outputs/exceptions and3200 array reference operations; build/check and21 reader viewport cases pass |
 | D Weeks11–15 lessons | Validated:5 chapters/30 solved exercises; stack/queue/Fraction/undo/sorting/hash independent oracles; build/check and15 reader viewport cases pass |
-| E Correctness/integration/state/browser QA | Pending |
-| PR | Not created; no merge/deploy authorized |
+| E Correctness/integration/state/browser QA | Validated: final build/check, two deterministic builds, 65 solved exercises and independent Python oracles; seeded legacy-state/browser checks, PDF/source/protected-worktree integrity pass. See [validation report](phase5-oop-validation.md). |
+| PR | One focused PR authorized after the final scoped commit; no merge/deploy authorized |
 
 Continue automatically after each validated scoped local commit. Existing skyce-learning-study/bookmark/preference data must not be migrated or cleared. AI lesson Markdown and OOP Linked List content/anchors remain unchanged; generated HTML may change only shared navigation/assets.
