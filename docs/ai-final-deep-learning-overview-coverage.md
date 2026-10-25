@@ -1,0 +1,7 @@
+# FINAL Deep Learning / RNN / GAN overview coverage
+
+Stable ID `artificial-intelligence-final-deep-learning-overview`; [lesson](../courses/artificial-intelligence/summaries/final-deep-learning-overview.md). Five authored conceptual exercises/solutions; no invented training procedure or measurements.
+
+S11 `Final/Intro_DeepLearning_Slides.pdf`, visually inspected physical pp.2–11: weighted neuron2; nonlinear separation3–4; shallow/deep5; AI/ML/DL and families6; sequential RNN7; five mapping configurations8; GAN9–10; style-transfer example11. Source diagram's 'one-layer' naming explicitly explained as one hidden layer, no arbitrary universal depth threshold. RNN state equation, affine-composition calculation and cautions are authored prerequisite explanations. One-to-one is shown as traditional network, not inherently recurrent. Music/sentiment/NER/translation examples match source; authored Thai token examples identified. GAN real/fake targets distinguished from external task labels. Source style-transfer example is not claimed universal to all style-transfer methods.
+
+No original copyrighted diagrams reproduced. Credits: RNN/GAN Tushar Kute/mitu Skillologies; mapping chart references Stanford CS230; p.11 cites a style-transfer paper. Source-limited overview does not imply full RNN/GAN implementation, Transformer coverage, guaranteed quality or reproducible training epochs. Stage D checks illustrative affine arithmetic; concepts/solutions reviewed against all relevant slide images. Combined browser QA verifies shared rendering/navigation.

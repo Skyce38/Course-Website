@@ -18,7 +18,9 @@
         "artificial-intelligence-final-decision-tree",
         "artificial-intelligence-final-hierarchical-clustering",
         "artificial-intelligence-final-kmeans",
-        "artificial-intelligence-final-perceptron"
+        "artificial-intelligence-final-perceptron",
+        "artificial-intelligence-final-backpropagation",
+        "artificial-intelligence-final-deep-learning-overview"
       ]
     }
   ]

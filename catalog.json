@@ -480,6 +480,28 @@
       "reader": "read/artificial-intelligence/final-perceptron.html",
       "generatedLesson": 1,
       "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/artificial-intelligence/summaries/final-perceptron.md"
+    },
+    {
+      "id": "artificial-intelligence-final-backpropagation",
+      "course": "artificial-intelligence",
+      "category": "summaries",
+      "title": "FINAL: Multilayer Networks และ Backpropagation",
+      "path": "summaries/final-backpropagation.md",
+      "format": "MD",
+      "reader": "read/artificial-intelligence/final-backpropagation.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/artificial-intelligence/summaries/final-backpropagation.md"
+    },
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview",
+      "course": "artificial-intelligence",
+      "category": "summaries",
+      "title": "FINAL: ภาพรวม Deep Learning, RNN และ GAN",
+      "path": "summaries/final-deep-learning-overview.md",
+      "format": "MD",
+      "reader": "read/artificial-intelligence/final-deep-learning-overview.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/artificial-intelligence/summaries/final-deep-learning-overview.md"
     }
   ]
 }
