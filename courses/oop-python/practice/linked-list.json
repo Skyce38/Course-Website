@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-linked-list",
+  "title": "Linked List: traversal, references และ boundary cases",
+  "questions": [
+    {
+      "id": "ll-head",
+      "type": "choice",
+      "prompt": "ใน demo head→10→20→30→None เมื่อใช้ current เดินจนจบ แต่ไม่แก้ head หรือ links หลัง loop ข้อใดถูก?",
+      "reference": "question-head",
+      "choices": [
+        {
+          "id": "a",
+          "text": "head กลายเป็น None เพราะ current เป็น None"
+        },
+        {
+          "id": "b",
+          "text": "head ยังชี้ Node 10 ส่วน current เป็น None"
+        },
+        {
+          "id": "c",
+          "text": "head เปลี่ยนเป็น Node 30 โดยอัตโนมัติ"
+        }
+      ],
+      "answer": "b",
+      "explanation": "current เป็น reference สำหรับเดิน แค่ย้าย current ไม่ได้เปลี่ยน head หรือ next ของ Node เดิม ดังนั้น head ยังชี้ 10 และ current เป็น None เมื่อเงื่อนไข loop เป็น False"
+    },
+    {
+      "id": "ll-empty",
+      "type": "numeric",
+      "prompt": "เมื่อ head=None ใช้ current=head; while current is not None: print(current.data); current=current.next จะพิมพ์ data กี่ครั้ง?",
+      "reference": "question-empty",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "เงื่อนไขเป็น False ตั้งแต่แรกจึงพิมพ์ 0 ครั้ง และไม่เข้าถึง current.data ของ None ไม่ใช่พิมพ์ None หนึ่งครั้ง"
+    },
+    {
+      "id": "ll-remaining",
+      "type": "numeric",
+      "prompt": "เริ่ม head→10→20→30→None และมี Node 20 อยู่จริง ทำ head.next=head.next.next โดยไม่แก้ links อื่น จาก head จะ traversal พบกี่ Node? ตัวอย่างนี้ผู้เขียนดัดแปลงเพื่อฝึก reference",
+      "reference": "explanation",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "head.next เดิมคือ 20 ส่วน head.next.next คือ 30 จึงได้เส้นทางจาก head เป็น 10→30→None พบ 2Node นี่คือจำนวนที่เข้าถึงจาก head ไม่ใช่การรับรองว่า Python ทำลาย Node20 ทันที"
+    },
+    {
+      "id": "ll-insert",
+      "type": "choice",
+      "prompt": "ถ้ามี current ที่ชี้ Node อยู่แล้ว และ new_node เป็น Node ใหม่ ต้องแทรกหลัง current โดยไม่ทำให้ส่วนท้ายหาย ลำดับใดถูก?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "id": "a",
+          "text": "current.next=new_node แล้ว new_node.next=current.next"
+        },
+        {
+          "id": "b",
+          "text": "new_node.next=current.next แล้ว current.next=new_node"
+        },
+        {
+          "id": "c",
+          "text": "ตั้ง head=None ก่อนทุกครั้ง"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ต้องเก็บทางไปส่วนท้ายเดิมไว้ใน new_node.next ก่อน แล้วจึงให้ current.next ชี้ Node ใหม่ หากทำกลับกัน new_node.next อาจชี้ตัวเอง เกิด cycle และเสียการเข้าถึงส่วนท้าย"
+    },
+    {
+      "id": "ll-tail",
+      "type": "choice",
+      "prompt": "Singly Linked List ที่มีเพียง head/tail แต่ไม่มี prev การลบ Node ท้ายโดยทั่วไปมีต้นทุนอะไร?",
+      "reference": "question-tail",
+      "choices": [
+        {
+          "id": "a",
+          "text": "O(1) เสมอ เพราะมี tail"
+        },
+        {
+          "id": "b",
+          "text": "O(n) เพราะต้องหา Node ก่อนท้ายเพื่อเปลี่ยน next และ tail"
+        },
+        {
+          "id": "c",
+          "text": "O(log n) เพราะเดินจาก head เป็นการค้นหาแบบหารครึ่ง"
+        }
+      ],
+      "answer": "b",
+      "explanation": "tail บอก Node ท้ายแต่ไม่บอก predecessor ต้องเดินจาก head หา Node ก่อนท้าย ซึ่งเป็น O(n) ไม่สรุปจากการแก้ reference ไม่กี่ครั้งว่า operation รวมเป็น O(1)"
+    },
+    {
+      "id": "ll-audit",
+      "type": "self",
+      "prompt": "อธิบาย empty/single-node traversal และแผนแทรก Node หลังค่าที่รู้เพียง data โดยแยกต้นทุนค้นหากับแก้ link",
+      "reference": "practice",
+      "explanation": "ว่างไม่อ่าน data;หนึ่ง Node พิมพ์ครั้งเดียวแล้ว current เป็น None การแทรกหลัง known node แก้ linksO(1)แต่ถ้ารู้แค่ค่า data อาจต้องค้นหา O(n)ก่อน รักษา head/tail และทางไปส่วนท้ายเดิม ไม่สร้าง cycle;บอก assumption ว่าไม่มี cycle ในการ traversal นี้",
+      "rubric": [
+        "ตรวจ None ก่อนอ่าน data และอธิบาย head/current แยกกัน",
+        "แสดงลำดับ reference ที่ไม่ทำส่วนท้ายหายหรือเกิด self-cycle",
+        "แยก known-node link update จาก search-by-value และระบุ Big-O assumptions"
+      ]
+    }
+  ]
+}

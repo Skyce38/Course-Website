@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-encapsulation-properties",
+  "title": "Encapsulation และ Properties: validation กับสัญญา",
+  "questions": [
+    {
+      "id": "ep-constructor",
+      "type": "choice",
+      "prompt": "Account(\"x\",\"A\",−1) ตามโค้ดบทนี้ที่ constructor ส่งค่าผ่าน balance setter มีผลอย่างไร?",
+      "reference": "properties",
+      "choices": [
+        {
+          "id": "a",
+          "text": "สร้างบัญชียอดติดลบสำเร็จเพราะ setter ใช้ได้เฉพาะภายหลัง"
+        },
+        {
+          "id": "b",
+          "text": "เกิด ValueError ระหว่างสร้าง เพราะ validation ใช้ตั้งแต่ constructor"
+        },
+        {
+          "id": "c",
+          "text": "ชื่อ private ทำให้ Python แก้ค่า−1 เป็น 0 เอง"
+        }
+      ],
+      "answer": "b",
+      "explanation": "constructor เรียก setter จึงใช้ invariant เดียวกับการแก้ภายหลัง ค่าติดลบถูกปฏิเสธ ไม่ได้ข้ามกฎเพียงเพราะกำลังสร้าง object และ private ไม่ได้แก้ตัวเลขให้อัตโนมัติ"
+    },
+    {
+      "id": "ep-balance",
+      "type": "numeric",
+      "prompt": "Account เริ่ม 100 ฝาก 20 สำเร็จ ถอน 30 สำเร็จ แล้วถอน 100 ล้มเหลวเพราะเกินยอด จงหายอดหลังจับ exception ของครั้งสุดท้าย",
+      "reference": "trace",
+      "answer": 90,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "100+20−30=90 การถอน 100 ล้มเหลวก่อนแก้ state จึงยัง 90 ไม่ใช่−10 และไม่ย้อนสอง operation ที่สำเร็จก่อนหน้า"
+    },
+    {
+      "id": "ep-count",
+      "type": "numeric",
+      "prompt": "ตาม contractcount นับเฉพาะ deposit/withdraw ที่สำเร็จ: เริ่ม count0 ฝาก 20 ถอน 30 สำเร็จ ถอน 100 ล้มเหลว แล้วตั้ง balance=200 ผ่าน setter โดยตรง จงหา count สุดท้าย",
+      "reference": "practice",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "มีธุรกรรมสำเร็จเพียง 2 ครั้ง การถอนล้มเหลวไม่เพิ่ม count และการตั้ง property โดยตรงไม่ใช่ transaction ตามนิยามนี้ จึง count2 แม้ balance เปลี่ยนเป็น 200"
+    },
+    {
+      "id": "ep-property-call",
+      "type": "choice",
+      "prompt": "ถ้า a.balance เป็น property ที่คืนค่าตัวเลข และค่าปัจจุบัน 100 การเขียน a.balance() จะเกิดอะไร?",
+      "reference": "properties",
+      "choices": [
+        {
+          "id": "a",
+          "text": "TypeError เพราะพยายามเรียกตัวเลขเหมือน function"
+        },
+        {
+          "id": "b",
+          "text": "ได้ 100 เพราะ property ต้องใส่วงเล็บเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "เปลี่ยน balance เป็น None"
+        }
+      ],
+      "answer": "a",
+      "explanation": "อ่าน property ด้วย a.balance getter ถูกเรียกโดย attribute access แล้ว การเติม()พยายามเรียกค่าตัวเลขจึง TypeError ต่างจาก method ชื่อ get_balance()"
+    },
+    {
+      "id": "ep-private",
+      "type": "choice",
+      "prompt": "owner เป็น read-only property และเก็บด้วย__owner ข้อใดถูกเกี่ยวกับ mangling และ security?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Python เข้ารหัส owner จนไม่มีทางเข้าถึงจากภายนอก"
+        },
+        {
+          "id": "b",
+          "text": "การ assigna.owner ใช้ setter ที่ไม่มีโดยอัตโนมัติ"
+        },
+        {
+          "id": "c",
+          "text": "ไม่มี public setter จึง assignowner ไม่ได้ตาม interface;name mangling ไม่ใช่ security และยังฝืนเข้าถึงชื่อที่ถูก mangle ได้"
+        }
+      ],
+      "answer": "c",
+      "explanation": "read-only ช่วยกำหนด interface และป้องกันการแก้ผ่าน property แต่ชื่อ_Account__owner ยังเป็นชื่อที่ Python ใช้ ไม่ใช่ระบบสิทธิ์/การเข้ารหัส การฝืนข้าม interface ไม่ใช่การใช้งานที่รับรอง"
+    },
+    {
+      "id": "ep-validation",
+      "type": "self",
+      "prompt": "เสนอ tests สำหรับ balance=\"100\",True,−1 และ NaN โดยตรวจทั้ง exception/state เดิม และอธิบายว่าทำไม read-only property ไม่รับรอง deep immutability",
+      "reference": "python",
+      "explanation": "ตาม policy บทนี้ string/bool เกิด TypeError ส่วน negative/nonfinite เกิด ValueError และต้องไม่เปลี่ยนค่าเดิม เพราะ bool เป็น subclass ของ int จึงต้องตรวจเจาะจงหากต้องห้าม Read-onlyproperty ห้ามเปลี่ยนผ่าน setter ไม่ได้แปลว่า object ย่อยหรือชื่อ mangled เปลี่ยนไม่ได้",
+      "rubric": [
+        "แยก type error กับ range/nonfinite error ตาม contract ที่ประกาศ",
+        "ตรวจ state ไม่เปลี่ยนทุกกรณีและอธิบาย bool/int",
+        "แยก interface read-only,name mangling และ deep immutability โดยไม่อ้าง security"
+      ]
+    }
+  ]
+}

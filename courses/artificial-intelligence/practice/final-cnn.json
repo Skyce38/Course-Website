@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "artificial-intelligence-final-cnn",
+  "title": "CNN: convention, shape และพารามิเตอร์",
+  "questions": [
+    {
+      "id": "cn-correlation",
+      "type": "numeric",
+      "prompt": "patch X=[[1,5,9],[2,6,10],[3,7,11]], kernel K=[[9,8,7],[6,5,4],[3,2,1]],bias=0 ใช้ cross-correlation ไม่กลับ kernel จงหาผลช่องนี้",
+      "reference": "kernel",
+      "answer": 228,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "คูณตำแหน่งตรงกันได้ 9+40+63+12+30+40+9+14+11=228 ค่า 312 จะได้เมื่อกลับ kernel180°ซึ่งเป็นอีก convention ไม่คัด caption ที่ขัดกับ sum"
+    },
+    {
+      "id": "cn-size",
+      "type": "numeric",
+      "prompt": "Input7×7,kernel3×3,stride2,padding1 แต่ละด้าน,dilation1 จงหาความกว้าง output ต่อ filter",
+      "reference": "shape",
+      "answer": 4,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "floor((7+2×1−3)/2)+1=floor(6/2)+1=4 ความสูงก็ 4 ต้องใช้ floor และไม่สลับ stride กับ kernel size"
+    },
+    {
+      "id": "cn-parameters",
+      "type": "numeric",
+      "prompt": "ใช้ kernel3×3 กับ RGB3 input channels เพื่อสร้าง 4 output maps มี bias หนึ่งค่าต่อ output map จงหาจำนวนพารามิเตอร์ทั้งหมด",
+      "reference": "rgb",
+      "answer": 112,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "weights=3×3×3×4=108 และ bias4 รวม 112 Weight sharing ทำให้ไม่ต้องคูณจำนวนตำแหน่ง H/W ของ feature maps"
+    },
+    {
+      "id": "cn-pool",
+      "type": "choice",
+      "prompt": "หน้าต่าง pooling [[1,3],[8,7]] ให้ max และ average แบบไม่ปัดเท่าใด?",
+      "reference": "pooling",
+      "choices": [
+        {
+          "id": "a",
+          "text": "max8 และ average4.75"
+        },
+        {
+          "id": "b",
+          "text": "max8 และ average4.8 เป็นค่าก่อนปัด"
+        },
+        {
+          "id": "c",
+          "text": "max19 และ average8"
+        }
+      ],
+      "answer": "a",
+      "explanation": "max(1,3,8,7)=8; average=(1+3+8+7)/4=19/4=4.75 ตัวเลข 4.8 เป็นผลปัดหนึ่งตำแหน่ง ไม่ใช่ค่าคำนวณเต็ม"
+    },
+    {
+      "id": "cn-fc-evidence",
+      "type": "choice",
+      "prompt": "รู้เพียง feature maps หลัง pooling และรูป FC แต่ไม่มี FC weights/bias จะคำนวณ class จริงจากภาพนั้นได้หรือไม่?",
+      "reference": "relu-fc",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ได้เพราะ flatten มี weights กำหนด class ให้แล้ว"
+        },
+        {
+          "id": "b",
+          "text": "ยังไม่ได้ ต้องมีพารามิเตอร์/activation/เกณฑ์ตัดสินของส่วนถัดไป"
+        },
+        {
+          "id": "c",
+          "text": "ได้ถ้าเลือก pixel สูงสุดเป็น class เสมอ"
+        }
+      ],
+      "answer": "b",
+      "explanation": "Flatten เพียงจัดข้อมูลเป็น vector ไม่สร้าง prediction ส่วน FC ต้องใช้ weights/bias และ activation/threshold ตามงาน Source ไม่แจกพารามิเตอร์ครบจึงไม่แต่ง class result"
+    },
+    {
+      "id": "cn-order",
+      "type": "self",
+      "prompt": "อธิบาย channel sum,flatten และผลของการสลับ ReLU กับ average pooling โดยใช้ตัวอย่าง [-2,2] พร้อมระบุ convention ของ kernel",
+      "reference": "relu-fc",
+      "explanation": "หนึ่ง output map รวมผลจาก kernels ทุก input channel และ bias ของ map นั้น ไม่ concat เป็นหลาย maps โดยอัตโนมัติ Flatten จัดลำดับค่าตาม convention ไม่มี weights ตัวอย่าง average ก่อน ReLU ให้ 0 แต่ ReLU ก่อน average ให้ 1 จึงสลับไม่เหมือนเสมอ และต้องบอกว่า correlation ไม่กลับ kernel หรือ convolution กลับ 180°",
+      "rubric": [
+        "อธิบายการรวม channels ต่อหนึ่ง output map และการนับ shape",
+        "แสดงผล 0 เทียบ 1 ของตัวอย่าง ReLU/average",
+        "ระบุ kernel/flatten/order convention และไม่คำนวณ class เมื่อขาด FCparameters"
+      ]
+    }
+  ]
+}

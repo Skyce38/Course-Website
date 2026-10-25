@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-classes-objects",
+  "title": "Classes และ Objects: state, methods และ references",
+  "questions": [
+    {
+      "id": "co-instance",
+      "type": "choice",
+      "prompt": "จาก a=BankAccount(\"A\",0) ข้อใดแยก class/object/reference ได้ถูก?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "id": "a",
+          "text": "BankAccount คือ class, การเรียกสร้าง instance และ a เป็นชื่อที่อ้างถึง instance"
+        },
+        {
+          "id": "b",
+          "text": "a คือ class ที่เป็นสำเนาแบบแปลนทุกครั้งที่อ่าน"
+        },
+        {
+          "id": "c",
+          "text": "BankAccount(\"A\",0) เป็นเพียง dictionary โดยไม่มี methods"
+        }
+      ],
+      "answer": "a",
+      "explanation": "class กำหนดโครงสร้าง/พฤติกรรม การเรียก constructor สร้าง instance ส่วน a เป็นชื่อ reference ไม่ใช่แบบแปลน ไม่สมมติว่าการ assign ชื่อสร้างสำเนา object"
+    },
+    {
+      "id": "co-balance",
+      "type": "numeric",
+      "prompt": "ใช้ BankAccount ตามบท เริ่ม balance1000 จากนั้น deposit500 และ withdraw200 โดยทั้งสอง operation สำเร็จ จงหายอดคงเหลือ",
+      "reference": "trace",
+      "answer": 1300,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "1000+500−200=1300 แต่หากถอน 1400 ครั้งถัดไปจะ ValueError ก่อนลดเงิน ยอดต้องยัง 1300 การคำนวณนี้ยึด contract จำนวนเงินบวกและไม่ถอนเกินยอด"
+    },
+    {
+      "id": "co-alias",
+      "type": "choice",
+      "prompt": "หลัง alias=a แล้ว del a ถ้ายังไม่มีการลบ reference อื่นทั้งหมด ข้อใดถูก?",
+      "reference": "references",
+      "choices": [
+        {
+          "id": "a",
+          "text": "object ต้องถูกทำลายทันทีและ alias ใช้ไม่ได้"
+        },
+        {
+          "id": "b",
+          "text": "alias ยังอ้าง object เดิมได้ การ assign ไม่ได้ cloneobject"
+        },
+        {
+          "id": "c",
+          "text": "alias กลายเป็น class โดยอัตโนมัติ"
+        }
+      ],
+      "answer": "b",
+      "explanation": "del a ลบชื่อ a ไม่ได้สั่งทำลาย object ที่ alias ยังอ้างอยู่ การเรียก method ผ่าน alias จึงยังใช้ state เดิมได้ ไม่รับรองเวลาทำลาย object จากการลบชื่อเดียว"
+    },
+    {
+      "id": "co-init",
+      "type": "choice",
+      "prompt": "ถ้า __init__ ของ class ผู้เขียนคืนค่า 1 แทน None การเรียกสร้าง instance จะเกิดอะไรใน Python?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ได้ instance ที่มีค่า 1 เป็น return หลักตามปกติ"
+        },
+        {
+          "id": "b",
+          "text": "ได้ integer1 แทน instance เสมอ"
+        },
+        {
+          "id": "c",
+          "text": "เกิด TypeError เพราะ __init__ ต้องคืน None"
+        }
+      ],
+      "answer": "c",
+      "explanation": "__init__เป็น initializer ของ instance ที่สร้างแล้ว ต้องคืน None;return1 ทำให้ TypeError อย่าสับสนกับฟังก์ชัน factory หรือ__new__ที่เป็นคนละ operation"
+    },
+    {
+      "id": "co-local",
+      "type": "choice",
+      "prompt": "ถ้า __init__ เขียน balance=balance เป็นเพียง local และไม่มีการกำหนด attribute จากที่อื่น ต่อมาอ่าน obj.balance จะเกิดอะไร?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "id": "a",
+          "text": "AttributeError เพราะยังไม่ได้สร้าง instance attribute ด้วย self.balance"
+        },
+        {
+          "id": "b",
+          "text": "ได้ค่า 0 อัตโนมัติทุก attribute"
+        },
+        {
+          "id": "c",
+          "text": "เปลี่ยน class attribute ของทุก object ให้เท่ากันเสมอ"
+        }
+      ],
+      "answer": "a",
+      "explanation": "assignment ชื่อล้วนใน method ไม่ได้เท่ากับ self.balance ต้องผูก attribute กับ instance โดยชัดเจน ภายใต้เงื่อนไขว่าไม่มี attribute จากแหล่งอื่นจึงอ่านแล้ว AttributeError"
+    },
+    {
+      "id": "co-contract",
+      "type": "self",
+      "prompt": "ออกแบบ test BankAccount สอง instance และ alias โดยครอบคลุม default balance,deposit0,withdraw เกินยอด และอธิบายว่าการใช้ class ต่างจาก dictionary อย่างไร",
+      "reference": "python",
+      "explanation": "แต่ละ instance ควรแยกยอด default0;alias ของหนึ่ง instance แก้ state เดียวกัน deposit0/withdraw เกินยอดผิด contract โดยไม่เปลี่ยนยอด class รวม methods และ invariants ได้แต่ไม่ใช่ว่า dictionary ทำทุกอย่างไม่ได้ ต้องระบุ validation/interface และพฤติกรรมจริง",
+      "rubric": [
+        "ทดสอบ instance independence กับ alias identity แยกกัน",
+        "ตรวจ exceptions และ state ไม่เปลี่ยนเมื่อ operation ล้มเหลว",
+        "อธิบาย class/state/method/contract โดยไม่อ้างว่า class ปลอดภัยเองอัตโนมัติ"
+      ]
+    }
+  ]
+}

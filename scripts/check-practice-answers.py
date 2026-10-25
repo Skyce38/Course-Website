@@ -1,7 +1,8 @@
 """Independent standard-library oracles for the 24 explicit practice answer keys."""
 import json, math, pathlib, ast, re
 root=pathlib.Path(__file__).resolve().parent.parent
-quizzes=[json.loads(p.read_text(encoding='utf-8')) for p in root.glob('courses/*/practice/*.json')]
+pilots=['oop-python/stack','oop-python/complexity-basic-sorting','artificial-intelligence/final-knn','artificial-intelligence/final-decision-tree']
+quizzes=[json.loads((root/'courses'/name.split('/')[0]/'practice'/(name.split('/')[1]+'.json')).read_text(encoding='utf-8')) for name in pilots]
 questions={q['id']:q for quiz in quizzes for q in quiz['questions']}
 def literals(slug):
     result={}

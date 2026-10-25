@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "artificial-intelligence-final-naive-bayes",
+  "title": "Naive Bayes: prior, likelihood และ smoothing",
+  "questions": [
+    {
+      "id": "nb-independence",
+      "type": "choice",
+      "prompt": "สมมติฐาน Naive ของตัวจำแนกหมายถึงข้อใด?",
+      "reference": "independence",
+      "choices": [
+        {
+          "id": "a",
+          "text": "features เป็นอิสระกันโดยไม่มีเงื่อนไขทุกกรณี"
+        },
+        {
+          "id": "b",
+          "text": "features เป็นอิสระแบบมีเงื่อนไขเมื่อกำหนด class เพื่อแยก likelihood เป็นผลคูณ"
+        },
+        {
+          "id": "c",
+          "text": "ทุก class ต้องมี prior เท่ากัน"
+        }
+      ],
+      "answer": "b",
+      "explanation": "Naive Bayes สมมติ conditional independence เมื่อทราบ class จึงคูณ P(xj|class) ได้ ไม่ใช่อ้าง independence แบบไม่มีเงื่อนไข หรือบังคับ prior เท่ากัน"
+    },
+    {
+      "id": "nb-prior",
+      "type": "numeric",
+      "prompt": "ตาราง Judy มี class + จำนวน 3 แถว และ − จำนวน 5 แถว จงหา empirical prior P(+) แบบไม่ smooth (ตอบสัดส่วน 0–1)",
+      "reference": "judy",
+      "answer": 0.375,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "P(+)=3/(3+5)=3/8=0.375 ตัวหารคือจำนวนทุก class ไม่ใช่จำนวนแถว Blonde หรือจำนวน feature"
+    },
+    {
+      "id": "nb-posterior",
+      "type": "numeric",
+      "prompt": "Query Judy ทั้งสี่ feature แบบไม่ smooth มี s+=1/18 และ s−=1/125 จง normalize หา P(+|query) ของโมเดลนี้ (อย่างน้อย 6 ตำแหน่ง)",
+      "reference": "scores",
+      "answer": 0.8741258741258742,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "Z=1/18+1/125=143/2250; posterior+=(1/18)/(143/2250)=125/143≈0.8741258741 ส่วน −=18/143 ตัวเลข 1/18 เป็น score ก่อน normalize ไม่ใช่ posterior ที่รวมเป็น 1 แล้ว"
+    },
+    {
+      "id": "nb-laplace",
+      "type": "numeric",
+      "prompt": "Buy ใช้ prior Y=N=1/2, Laplace α=1 และ vocabulary sizes [2,2,2,3] ได้ sY=225/5488 กับ sN=30/5488 จงหา normalized posterior Y (อย่างน้อย 6 ตำแหน่ง)",
+      "reference": "smoothing",
+      "answer": 0.8823529411764706,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "หารด้วยผลรวม scores ได้ 225/(225+30)=15/17≈0.8823529412 จาก conditional denominators [7,7,7,8] เมื่อ class count=5 ไม่ใช่ posterior 1 แบบ unsmoothed และไม่ได้บวก α ให้ prior เอง"
+    },
+    {
+      "id": "nb-zero",
+      "type": "choice",
+      "prompt": "หาก scores ของทุก class เป็น 0 แบบไม่ smooth ควรทำอย่างไร?",
+      "reference": "smoothing",
+      "choices": [
+        {
+          "id": "a",
+          "text": "normalize เป็น probability 0 ทุก class แล้วถือว่าถูกต้อง"
+        },
+        {
+          "id": "b",
+          "text": "หารด้วย 0 เพื่อให้ได้ class ที่มีคะแนนสูงสุด"
+        },
+        {
+          "id": "c",
+          "text": "แจ้งว่า Z=0 normalize ไม่ได้ และพิจารณา smoothing/vocabulary กับกติกา tie ที่ประกาศ"
+        }
+      ],
+      "answer": "c",
+      "explanation": "Z=Σscores=0 ทำให้การ normalize ไม่กำหนด ควรตรวจ zero counts และนโยบาย smoothing/vocabulary ไม่สร้าง probability ที่รวมเป็น 0 แล้วเรียกว่า posterior; เมื่อ smooth จนเสมอก็ยังต้องมีกติกา tie"
+    },
+    {
+      "id": "nb-models",
+      "type": "self",
+      "prompt": "เทียบ CategoricalNB กับ GaussianNB และอธิบายว่าทำไม class order, vocabulary, smoothing และ train/test split ต้องระบุ ก่อนตีความ probabilities",
+      "reference": "gaussian",
+      "explanation": "CategoricalNB ใช้ conditional counts ต่อหมวด ส่วน Gaussian ใช้ density จาก mean/variance ไม่ใช่จำนวนแถวที่เท่ากับค่าต่อเนื่อง probability vector ต้องอ่านตาม classes_ และ posterior ของ query ไม่ใช่ held-out accuracy; ผล split หนึ่งไม่รับรองข้อมูลใหม่",
+      "rubric": [
+        "แยก count probability จาก Gaussian density",
+        "ระบุ class order/vocabulary/α และนโยบาย unknown/tie",
+        "แยก posterior, prediction และ test accuracy ไม่เรียกเฉลยผู้เขียนว่า official key"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "artificial-intelligence-search-models-bfs-dfs",
+  "title": "Search Models, BFS และ DFS: assumptions กับคำตอบ",
+  "questions": [
+    {
+      "id": "sd-bfs-edges",
+      "type": "numeric",
+      "prompt": "กราฟมีทิศทาง:0→(1,2),1→(2,3),2→(3),3→(4),4→(0,1,5),5→() เริ่ม 0 หา 5;BFS ตรวจ successors ตัวเลขน้อยก่อน,markdiscovered ตอน enqueue และตรวจ goal ตอน dequeue เส้นทางคำตอบมีกี่ขอบ?",
+      "reference": "question-source-graph",
+      "answer": 4,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "BFS เก็บ parent แรกจึงได้ path0→1→3→4→5 รวม 4 ขอบ ไม่ใช่นับจำนวน states ใน visitorder หรือใช้ path ของ DFS แม้ visitorder อาจเหมือนกัน"
+    },
+    {
+      "id": "sd-dfs-edges",
+      "type": "numeric",
+      "prompt": "ใช้กราฟมีทิศทาง 0→(1,2),1→(2,3),2→(3),3→(4),4→(0,1,5),5→() DFS แบบ recursive/frame ตามบท ตรวจเพื่อนบ้านตัวเลขน้อยก่อนและข้าม globallydiscovered เริ่ม 0 หา 5 เส้นทางแรกมีกี่ขอบ?",
+      "reference": "question-source-graph",
+      "answer": 5,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "DFS ลงกิ่งแรก 0→1→2→3→4→5 และข้าม 4→0,1 ที่เคยพบ เส้นทางแรกจึง 5 ขอบ ไม่รับรองน้อยที่สุด และไม่ใช้ visitorder แทน parentpath โดยอัตโนมัติ"
+    },
+    {
+      "id": "sd-grid",
+      "type": "numeric",
+      "prompt": "กริด 5×5 เริ่ม(0,0)จบ(4,4),กำแพง={(0,3),(0,4),(1,4),(2,1),(3,1),(3,3),(4,3)} เดิน 4 ทิศไม่ทแยง cost1 ภายใต้ graphsearch ในบท BFS หาเส้นทางสั้นสุดกี่ก้าว? ใช้(row,column)",
+      "reference": "question-source-grid",
+      "answer": 8,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "ต้องลงสุทธิ 4 และขวาสุทธิ 4 จึงอย่างน้อย 8 ก้าว และมีทางถูกกฎ(0,0)→(0,1)→(0,2)→(1,2)→(1,3)→(2,3)→(2,4)→(3,4)→(4,4)ยาว 8 จึงถึง lowerbound ไม่อ้าง DFS สั้นสุดทุกกราฟเพราะกริดนี้ได้ 8 เช่นกัน"
+    },
+    {
+      "id": "sd-cost",
+      "type": "choice",
+      "prompt": "กราฟ S→G cost9,S→A cost1,A→G cost1 และ BFS ไม่อ่าน weights โดย successors ของ S คือ(G,A) ข้อใดถูก?",
+      "reference": "question-cost",
+      "choices": [
+        {
+          "id": "a",
+          "text": "BFS รับรอง leastcost9 เพราะพบ G ก่อน"
+        },
+        {
+          "id": "b",
+          "text": "BFS ได้ S→G ลึก 1 แต่ cost9 ส่วน S→A→Gcost2;ตื้นที่สุดไม่เท่ากับ leastcost เมื่อ edgecost ต่างกัน"
+        },
+        {
+          "id": "c",
+          "text": "BFS จะอ่าน cost แล้วเปลี่ยนเป็น Dijkstra เอง"
+        }
+      ],
+      "answer": "b",
+      "explanation": "BFS นี้จัดลำดับตามจำนวนขอบไม่ใช้ weights จึงอาจได้ path ลึก 1 ที่แพงกว่า path ลึก 2 ข้อรับรอง optimality ต้องมีเงื่อนไข unit/equalpositiveedgecost หรือ objective จำนวนก้าว ไม่อ้าง leastcost แบบทั่วไป"
+    },
+    {
+      "id": "sd-completeness",
+      "type": "choice",
+      "prompt": "กราฟจำกัดพร้อม visited เทียบกับต้นไม้ที่กิ่งแรกมี state ใหม่ไม่สิ้นสุด ข้อใดถูกสำหรับ DFS?",
+      "reference": "question-guarantees",
+      "choices": [
+        {
+          "id": "a",
+          "text": "มี visited แล้วครบถ้วนทุกกราฟ/ต้นไม้อนันต์เสมอ"
+        },
+        {
+          "id": "b",
+          "text": "DFS ไม่จบแม้กราฟมีแค่ X↔Y และมี visited ที่ถูกต้อง"
+        },
+        {
+          "id": "c",
+          "text": "visited ช่วยให้กราฟจำกัดจบได้ แต่ไม่ได้แก้กิ่งอนันต์ที่ไม่วน จึงต้องระบุ assumptions"
+        }
+      ],
+      "answer": "c",
+      "explanation": "การกัน cycle ไม่เท่ากับกัน infiniteacyclicbranch DFS อาจไม่ไปถึง goal กิ่งอื่น กราฟจำกัดที่ตรวจซ้ำเหมาะสมจบได้ ส่วน depthlimit อาจตัด goal จึงไม่รับรอง completeness โดยไม่บอก domain/algorithm"
+    },
+    {
+      "id": "sd-trace",
+      "type": "self",
+      "prompt": "เขียน frontier/visited/parenttrace สำหรับกราฟตัวอย่าง และแยก visitorder,discovered,searchtree กับ solutionpath พร้อมอธิบาย successororder และ boundarycases",
+      "reference": "frontier",
+      "explanation": "frontier เก็บงานรอ discovered อาจรวม state ที่ยังไม่ visit Parenttree สะท้อนการพบครั้งแรกไม่ใช่ทุกขอบ originalgraph ย้อน parent จาก goal เป็น path ไม่ใช่คืน visitorder ทั้งหมด ต้องบอก goaltesttiming/order,finite/visitedpolicy รวม start=goal และ unreachable;เฉลย sourcegraph/grid ในบทเป็นคำตอบที่ผู้เขียนตรวจใหม่ภายใต้ assumptions ไม่ใช่ officialkey",
+      "rubric": [
+        "แสดง trace และ parentpath ที่ไม่สับสนกับ visitorder หรือทุกขอบใน graph",
+        "ประกาศ successororder,goaltesttiming และ duplicatepolicy",
+        "ตรวจ start=goal/unreachable/cycle และไม่อ้าง optimality/completeness เกินเงื่อนไข"
+      ]
+    }
+  ]
+}

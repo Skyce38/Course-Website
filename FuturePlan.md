@@ -92,4 +92,10 @@ Ready for PR preparation; no commit, push, merge or deployment performed. Browse
 
 - [x] Validate a reusable component on Stack, Basic Sorting, KNN and Decision Tree only: 20 automatically graded questions and four ungraded self-assessments, immediate explanations, retry, incorrect-answer review and locally saved progress/attempts.
 - [x] Preserve all original lesson content, study/bookmark/legacy quiz data and direct catalog navigation; verify Classic/Modern, TH/EN, Light/Dark, palettes and responsive keyboard behavior. See [Practice Mode](docs/practice-mode.md).
-- [ ] Consider further lessons only after review of the four-pilot system; no expansion or automatic deployment is included in this MVP.
+- [x] Review the deployed four-pilot system before expansion; no automatic deployment is included.
+
+## Phase 6B — Complete Practice Coverage
+
+- [x] Add 21 source-grounded practice sets, preserving the original four pilots and the shared component: 25 lessons / 150 questions, including 125 automatic and 25 rubric-based self-assessments.
+- [x] Verify all new keys with independent arithmetic/code checks and source-reviewed conceptual evidence; preserve original Markdown/article content, IDs, data namespaces and source-limited lab caveats. See [coverage](docs/practice-expansion-coverage.md).
+- [x] Representative browser/integrity/regression QA; retain the existing component and cache version. PR review remains required before merge/deployment.

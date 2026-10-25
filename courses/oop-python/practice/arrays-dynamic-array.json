@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-arrays-dynamic-array",
+  "title": "Dynamic Array: doubling, indices และ aliasing",
+  "questions": [
+    {
+      "id": "ar-cost",
+      "type": "numeric",
+      "prompt": "Dynamic Array เริ่ม capacity1,size0 และขยายสองเท่าเมื่อเต็ม ให้ copy เก่าหนึ่งค่าเป็น 1 หน่วยและ write ใหม่หนึ่งค่าเป็น 1 หน่วย append8 ค่าใช้ copy+write รวมกี่หน่วย?",
+      "reference": "amortized",
+      "answer": 15,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "resizecopy ครั้งละ 1,2,4 รวม 7 และ write ใหม่ 8 ครั้งรวม 8 จึง 15 ไม่ใช่ทุก append มีต้นทุน 1;ครั้งที่ 5 ต้อง copy4+write1=5"
+    },
+    {
+      "id": "ar-row-major",
+      "type": "numeric",
+      "prompt": "Matrix3 แถว 4 คอลัมน์เก็บ row-major และใช้ zero-based indices ตำแหน่ง row1,column2 มี flat index เท่าใด?",
+      "reference": "matrix",
+      "answer": 6,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "flat index=row×จำนวนคอลัมน์+column=1×4+2=6 ไม่ใช้จำนวนแถว 3 เป็น stride ของแถว"
+    },
+    {
+      "id": "ar-amortized",
+      "type": "choice",
+      "prompt": "ข้อใดอธิบาย amortized O(1) ของ append แบบ doubling ได้ถูก?",
+      "reference": "amortized",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทุก call มีต้นทุน O(1)แม้ต้อง copy ข้อมูลเดิมทั้งหมด"
+        },
+        {
+          "id": "b",
+          "text": "ต้นทุนรวมของลำดับ n appends เป็น O(n) แม้บาง call เป็น O(n);ไม่ต้องสมมติ input สุ่ม"
+        },
+        {
+          "id": "c",
+          "text": "หมายถึง expected เวลาจาก input สุ่มเสมอ"
+        }
+      ],
+      "answer": "b",
+      "explanation": "doubling ทำให้ผลรวม copy เป็นอนุกรมเรขาคณิต<2n บวก write n จึง<3n สำหรับ model นี้ เป็น sequence bound ไม่ใช่รับรองแต่ละ call หรือ probabilisticaverage"
+    },
+    {
+      "id": "ar-indices",
+      "type": "choice",
+      "prompt": "ตาม customarraycontract ในบท ถ้า array ว่าง operation ใดใช้ได้ และข้อใดไม่ควรยกจาก Pythonlist มาสมมติเอง?",
+      "reference": "complexity",
+      "choices": [
+        {
+          "id": "a",
+          "text": "insert_at(0,x)ใช้ได้เพราะ i=size;get(0)ล้มเหลว และ negativeindex ไม่ได้รองรับโดยอัตโนมัติ"
+        },
+        {
+          "id": "b",
+          "text": "get(0)คืน None เสมอแทน error"
+        },
+        {
+          "id": "c",
+          "text": "insert_at(0,x)ต้องล้มเหลวเพราะยังไม่มี index ที่ 0"
+        }
+      ],
+      "answer": "a",
+      "explanation": "insertion ยอมให้ 0≤i≤size ส่วน get ต้อง 0≤i<size array ว่างจึง insert0 ได้แต่ get0IndexError และ model นี้ไม่ได้สัญญาว่ามี negativeindex/slicing แบบ Pythonlist;None เป็น livevalue ได้"
+    },
+    {
+      "id": "ar-alias",
+      "type": "choice",
+      "prompt": "หลัง rows=[[0]*4]*3 แล้ว rows[0][0]=9 จะเกิดอะไร และแก้การสร้างแถวอย่างไร?",
+      "reference": "matrix",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เปลี่ยนเฉพาะแถว 0 เสมอเพราะ list คัดลอกทุกระดับ"
+        },
+        {
+          "id": "b",
+          "text": "ทุกแถวที่ column0 กลายเป็น 9 เพราะแชร์ sublist เดียว;ใช้ comprehension สร้างแต่ละแถวแยกกัน"
+        },
+        {
+          "id": "c",
+          "text": "เกิด IndexError เพราะ rows ไม่มี row0"
+        }
+      ],
+      "answer": "b",
+      "explanation": "การคูณ outerlist ทำสำเนา references ไป sublist เดียว จึงเห็นค่า 9 จากทั้ง 3 แถว สร้าง[[0]*4 for _ in range(3)]จะได้คนละ sublist ไม่ใช่เพียง copyouterlist ภายหลัง"
+    },
+    {
+      "id": "ar-growth",
+      "type": "self",
+      "prompt": "เปรียบ doubling กับขยาย capacity ทีละ 1 และอธิบายต้นทุน insert/remove กลาง array รวมทั้งพื้นที่ว่างและ None livevalue",
+      "reference": "trace",
+      "explanation": "doubling มี copy รวมเชิงเรขาคณิตจึง amortizedappendO(1)ภายใต้ model ส่วนเพิ่มทีละ 1 อาจ copy1+...+(n−1)=O(n²) insert/remove กลางต้อง shift เช่น index1 ใน[10,20,30,40]เลื่อน 3 ค่า ต้องแยก size/capacity และอย่าใช้ None ตัดสิน live slot เพราะ None เป็นค่าข้อมูลได้",
+      "rubric": [
+        "แสดงผลรวมต้นทุนและแยก single-call จาก sequence",
+        "อธิบายทิศทาง shift และขอบเขต indices เมื่อ insert/remove",
+        "แยก size/capacity/liveNone และไม่อ้าง doubling เป็น allocationpolicy ตรงของ CPython"
+      ]
+    }
+  ]
+}

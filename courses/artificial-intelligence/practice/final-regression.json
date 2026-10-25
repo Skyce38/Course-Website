@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "artificial-intelligence-final-regression",
+  "title": "Regression: สัมประสิทธิ์ การทำนาย และความคลาดเคลื่อน",
+  "questions": [
+    {
+      "id": "rg-correlation",
+      "type": "choice",
+      "prompt": "ถ้า Pearson r ใกล้ 0 ข้อสรุปใดถูกต้องที่สุดตามบทเรียน?",
+      "reference": "correlation",
+      "choices": [
+        {
+          "id": "a",
+          "text": "x กับ y เป็นอิสระเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "อาจไม่มีแนวโน้มเชิงเส้นชัด แต่ยังมีความสัมพันธ์แบบโค้งได้"
+        },
+        {
+          "id": "c",
+          "text": "x ไม่สามารถใช้ทำนาย y ด้วยโมเดลใดเลย"
+        }
+      ],
+      "answer": "b",
+      "explanation": "r วัดความสัมพันธ์เชิงเส้น รูปโค้งอาจให้ r ใกล้ 0 ได้ และ correlation ไม่ได้ยืนยัน causation ต้องดู scatter plot/สมมติฐาน ไม่อนุมานความเป็นอิสระจาก r เพียงตัวเดียว"
+    },
+    {
+      "id": "rg-slope",
+      "type": "numeric",
+      "prompt": "ใช้ข้อมูลรายได้ X=[22,23,18,9,14,20,21,16] (พันบาท) และค่าอาหาร Y=[8,10,7,2,4,6,7,4] (ร้อยบาท) fit OLS พร้อม intercept ไม่ถ่วงน้ำหนัก จงหา slope เต็มความละเอียดก่อนปัด (อย่างน้อย 6 ตำแหน่ง)",
+      "reference": "household",
+      "answer": 0.510088781275222,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "ค่าเฉลี่ย X=17.875,Y=6; Sxy=79 และ Sxx=154.875 จึง b1=79/154.875=632/1239≈0.5100887813 ร้อยบาทต่อรายได้เพิ่ม 1 พันบาท ไม่ใช่เปอร์เซ็นต์"
+    },
+    {
+      "id": "rg-prediction",
+      "type": "numeric",
+      "prompt": "ใช้เส้นเต็มความละเอียดของข้อมูลรายได้–ค่าอาหาร: b0=−3863/1239, b1=632/1239 เมื่อ X=18 (พันบาท) จงหา Ŷ ในหน่วยร้อยบาท ไม่ใช่บาท (อย่างน้อย 6 ตำแหน่ง)",
+      "reference": "household",
+      "answer": 6.063761097659403,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "Ŷ=(−3863+632×18)/1239=6.0637610977 ร้อยบาท หรือประมาณ 606.3761 บาท ข้อนี้ใช้เส้นเต็ม ไม่ใช่เส้นปัด −3.12+0.51X ที่ให้ 6.06"
+    },
+    {
+      "id": "rg-mse",
+      "type": "numeric",
+      "prompt": "Actual=[2,2,0], Predicted=[2,0,2] นิยาม residual=Actual−Predicted และ MSE หาร n จงหา MSE (อย่างน้อย 6 ตำแหน่ง)",
+      "reference": "errors",
+      "answer": 2.6666666666666665,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "residual=[0,2,−2] จึง SSE=0+4+4=8 และ MSE=8/3≈2.666667 ไม่ใช่ signed mean 0, MAE=4/3 หรือ RMSE=√(8/3)≈1.632993 ไม่เติมหน่วยที่ตารางไม่ได้กำหนด"
+    },
+    {
+      "id": "rg-multiple",
+      "type": "choice",
+      "prompt": "Multiple Linear Regression หมายถึงอะไร และยังเป็น linear ในส่วนใด?",
+      "reference": "supervised",
+      "choices": [
+        {
+          "id": "a",
+          "text": "มี target หลายตัวเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "มีตัวแปรอธิบายหลายตัว และ linear ในสัมประสิทธิ์ของแบบจำลอง"
+        },
+        {
+          "id": "c",
+          "text": "ต้องมี correlation เท่ากับ 1 ทุก feature"
+        }
+      ],
+      "answer": "b",
+      "explanation": "Simple ใช้ feature อธิบายหนึ่งตัว Multiple ใช้หลายตัว ไม่ได้แปลว่ามีหลาย target สมการยัง linear ใน coefficients และไม่รับรอง prediction ที่แม่นสมบูรณ์"
+    },
+    {
+      "id": "rg-rounding",
+      "type": "self",
+      "prompt": "อธิบายการตีความ slope/intercept และ residual ของตัวอย่างรายได้–ค่าอาหาร แล้วบอกว่าจะเปรียบเทียบเส้นเต็มกับเส้นปัดและผลบนข้อมูลใหม่อย่างไร",
+      "reference": "rounding",
+      "explanation": "slope 0.510088... มีหน่วยร้อยบาทต่อพันบาท Intercept ที่ X=0 ต้องพิจารณาช่วงข้อมูล residual ใช้ Actual−Predicted เส้นเต็มลด SSE/MSE ใน sample ภายใต้ OLS ที่ระบุ แต่ไม่จำเป็นต้องลด MAE มากกว่าเส้นปัด และ training error ไม่รับรองข้อมูลใหม่",
+      "rubric": [
+        "รักษาหน่วยและนิยาม residual พร้อมอธิบายเครื่องหมาย",
+        "แยกเส้นเต็มจาก −3.12+0.51X และไม่ปัดระหว่างขั้นเพื่อบังคับคำตอบ",
+        "แยกการ fit sample ออกจาก causation/การประเมินข้อมูลใหม่"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "artificial-intelligence-final-kmeans",
+  "title": "K-Means: assignment, centroid และ SSE",
+  "questions": [
+    {
+      "id": "km-assignment",
+      "type": "choice",
+      "prompt": "X05 จุด (2,5) กับ seeds C1=(2,10), C2=(5,8), C3=(1,2) ควรจัดเข้ากลุ่มใดเมื่อเลือก squared distance ต่ำสุด?",
+      "reference": "x05",
+      "choices": [
+        {
+          "id": "a",
+          "text": "C1 เพราะพิกัด x เท่ากัน"
+        },
+        {
+          "id": "b",
+          "text": "C2 เพราะเป็น seed กลาง"
+        },
+        {
+          "id": "c",
+          "text": "C3 เพราะ d²=[25,18,10] ต่ำสุดที่ 10"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ต้องใช้ทุกแกน ผลต่างกำลังสองรวมคือ 25,18,10 จึงเลือก C3 ไม่ได้เลือก C2 จากความรู้สึกว่าอยู่กลางภาพ; การใช้ระยะจริงให้ลำดับเดียวกัน"
+    },
+    {
+      "id": "km-centroid",
+      "type": "numeric",
+      "prompt": "X05 รอบแรก C2 มีสมาชิก (8,4),(5,8),(7,5),(6,4),(4,9) จงหาพิกัด x ของ centroid หลัง update",
+      "reference": "x05",
+      "answer": 6,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "ค่า x เฉลี่ย=(8+5+7+6+4)/5=30/5=6 ค่า y เฉลี่ยก็เป็น 6 จึง centroid=(6,6) ไม่ใช่เฉลี่ยหมายเลขแถว"
+    },
+    {
+      "id": "km-cluster-sse",
+      "type": "numeric",
+      "prompt": "X05 C3 มีจุด (2,5),(1,2) และ centroid=(1.5,3.5) จงหา SSE ของกลุ่มนี้",
+      "reference": "x05",
+      "answer": 5,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "แต่ละจุดห่างกำลังสอง .5²+1.5²=2.5 รวมสองจุดเป็น 5 ต้องรวม squared distances ไม่ใช่ระยะ√2.5"
+    },
+    {
+      "id": "km-total-sse",
+      "type": "numeric",
+      "prompt": "X05 กลุ่มสุดท้ายคือ {(2,10),(5,8),(4,9)}, {(8,4),(7,5),(6,4)}, {(2,5),(1,2)} ใช้ mean ของแต่ละกลุ่มและหา SSE รวม (อย่างน้อย 6 ตำแหน่ง)",
+      "reference": "x05",
+      "answer": 14.333333333333334,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "centroids=(11/3,9),(7,13/3),(1.5,3.5); SSE รายกลุ่ม=20/3,8/3,5 จึงรวม 43/3≈14.333333 ใช้ค่าศูนย์กลางเต็มก่อนปัด ไม่ใช้ distances จาก seeds เดิม"
+    },
+    {
+      "id": "km-stop",
+      "type": "choice",
+      "prompt": "ข้อใดถูกต้องเกี่ยวกับการหยุดและ initialization ของ K-Means ในบทเรียน?",
+      "reference": "algorithm",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ได้ครบ k กลุ่มแล้วจบโดยไม่ต้องตรวจสมาชิกอีก"
+        },
+        {
+          "id": "b",
+          "text": "ควรตรวจเกณฑ์หยุดที่ประกาศ เช่น assignments/centroids คงเดิม และผลยังขึ้นกับ seeds/สเกลได้"
+        },
+        {
+          "id": "c",
+          "text": "เมื่อ SSE ลดหนึ่งครั้งรับรองว่าเจอ global optimum"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ต้องแยก assignment และ centroid update แล้วตรวจเกณฑ์หยุด ตัวอย่าง X05 รอบ 4 ยืนยันสมาชิก/ศูนย์กลางเดิม Initialization และ feature scale มีผล; SSE ลดไม่ได้รับรอง global optimum"
+    },
+    {
+      "id": "km-audit",
+      "type": "self",
+      "prompt": "อธิบายหนึ่งรอบของ K-Means แล้วเสนอวิธีรายงาน empty cluster, tie, feature scale และการเลือก k โดยไม่อ้างว่า elbow รับรองจำนวนกลุ่มจริง",
+      "reference": "algorithm",
+      "explanation": "ใช้ centroids เดิมจัดทุกจุด ก่อนคำนวณ means ใหม่และ SSE หลัง update ต้องประกาศนโยบาย tie/empty cluster และเงื่อนไขหยุด ตรวจหลาย seeds และสเกล feature ได้ ค่าหรือภาพ elbow เป็นหลักฐานประกอบ ไม่ใช่จำนวนกลุ่มจริงที่พิสูจน์แล้ว",
+      "rubric": [
+        "แยก assignment ด้วยศูนย์กลางเดิมจาก update และ SSE ใหม่",
+        "ระบุ tie/empty-cluster policy ไม่แต่งว่าต้นฉบับกำหนดทุกกรณี",
+        "อธิบายข้อจำกัดของ elbow/seeds/scaling และไม่รับรอง global optimum"
+      ]
+    }
+  ]
+}

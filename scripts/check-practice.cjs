@@ -3,14 +3,19 @@ const fs=require('node:fs'),path=require('node:path'),os=require('node:os'),asse
 const C=require('../assets/practice-contract.js'),{render}=require('./practice-build.cjs'),{metadata,markdown,buildLessons}=require('./lesson-build.cjs');
 const catalog=JSON.parse(fs.readFileSync('catalog.json','utf8')),files=[];
 for(const course of ['oop-python','artificial-intelligence'])for(const file of fs.readdirSync('courses/'+course+'/practice'))if(file.endsWith('.json'))files.push(`courses/${course}/practice/${file}`);
-assert.equal(files.length,4,'MVP remains scoped to four lessons');
+const registered=JSON.parse(fs.readFileSync('scripts/lessons.json','utf8')).map(source=>metadata(fs.readFileSync(source,'utf8')).meta.id);
+assert.equal(files.length,Number(process.env.PRACTICE_EXPECTED_COUNT||registered.length),'Every registered lesson needs one practice sidecar (stage checks may explicitly set the interim count)');
+const seen=new Set();
 let questions=0;
 for(const file of files){
   const data=C.validate(JSON.parse(fs.readFileSync(file,'utf8'))),resource=catalog.resources.find(r=>r.id===data.lesson);assert.ok(resource);
+  assert.ok(registered.includes(data.lesson),'Practice must belong to a registered lesson');
   const source=`courses/${resource.course}/${resource.path}`,parsed=metadata(fs.readFileSync(source,'utf8')),headings=markdown(parsed.body,{root:process.cwd(),source,output:resource.reader,catalog}).headings;
   const html=render(data,headings);assert.ok(fs.readFileSync(resource.reader,'utf8').includes(html));assert.equal(data.questions.length,6);assert.equal(data.questions.filter(q=>q.type==='self').length,1);
   const answers={};
   for(const q of data.questions){
+    assert.ok(!seen.has(q.id),'Question IDs must be globally unique');seen.add(q.id);
+    assert.match(q.prompt,/[\u0e00-\u0e7f]/);assert.match(q.explanation,/[\u0e00-\u0e7f]/);
     questions++;if(q.type==='self'){assert.equal(C.grade(q,'anything'),null);continue}
     assert.equal(C.grade(q,String(q.answer)),true);assert.equal(C.grade(q,''),null);
     answers[q.id]={draft:String(q.answer),submitted:true,rating:null};
@@ -26,7 +31,7 @@ for(const file of files){
   const longChoice=structuredClone(data.questions.find(q=>q.type==='choice'));longChoice.choices[0].id='a'.repeat(100);longChoice.answer=longChoice.choices[0].id;
   const longData={...data,questions:[longChoice]};C.validate(longData);assert.equal(C.summary(longData,C.responses(longData,{[longChoice.id]:{draft:longChoice.answer,submitted:true}})).correct,1);
   for(const patch of [{version:2},{lesson:'../bad'},{revision:0},{unknown:1},{questions:[data.questions[0],data.questions[0]]}])assert.throws(()=>C.validate({...data,...patch}));
-  const numeric=data.questions.find(q=>q.type==='numeric');for(const patch of [{answer:Infinity},{absoluteTolerance:-1},{relativeTolerance:2},{choices:[]}])assert.throws(()=>C.validate({...data,questions:[{...numeric,...patch}]}));
+  const numeric=data.questions.find(q=>q.type==='numeric');if(numeric)for(const patch of [{answer:Infinity},{absoluteTolerance:-1},{relativeTolerance:2},{choices:[]}])assert.throws(()=>C.validate({...data,questions:[{...numeric,...patch}]}));
   assert.throws(()=>render(data,[]));assert.throws(()=>render(data,[...headings,{id:'practice-mode'}]));
   const injection=structuredClone(data);injection.questions[0].prompt='</script><img src=x onerror=alert(1)>';const safe=render(injection,headings);assert.ok(!safe.includes('<img'));assert.ok(safe.includes('\\u003c/script>'));assert.ok(safe.includes('&lt;img'));
 }
@@ -51,4 +56,4 @@ try{
   fs.writeFileSync(path.join(temp,sidecar),JSON.stringify({...data,questions:[{...data.questions[0],reference:'missing'}]}));assert.throws(()=>buildLessons(cloned,temp),/Missing practice reference/);assert.equal(fs.readFileSync(output,'utf8'),before);
   fs.unlinkSync(path.join(temp,sidecar));buildLessons(cloned,temp);assert.ok(!fs.readFileSync(output,'utf8').includes('practice-contract.js'));
 }finally{fs.rmSync(temp,{recursive:true,force:true})}
-console.log(`PASS: four practice sidecars / ${questions} authored questions; validation/XSS/references, exact/absolute/relative numeric boundaries, derived scores, stale/malformed state and capped attempts`);
+console.log(`PASS: ${files.length} practice sidecars / ${questions} authored questions; registry/unique IDs/Thai content, validation/XSS/references, numeric boundaries, derived scores, stale/malformed state and capped attempts`);
