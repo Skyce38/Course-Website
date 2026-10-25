@@ -209,6 +209,32 @@ if 'C' in stages:
  log=n['MemoryLog']();service=n['NotificationService'](log);assert service.notify(n['Push'](),'A','hello')=='Push:A:hello' and log.entries==['Push:A:hello']
  for qid,proposition in [('us-uml','เพชรโปร่งที่Team'),('us-srp','พิจารณาเหตุผลของการเปลี่ยน'),('us-ocp','ออกแบบจุดขยาย'),('us-cost','designprincipleไม่เปลี่ยนต้นทุนงานจริง')]:choice(qid,proposition,True)
 
+if 'D' in stages:
+ # Definitions/philosophical limits are independently source-reviewed propositions.
+ for qid,proposition in [('aa-scope','ยังไม่พอ ผลเฉพาะงาน'),('aa-approaches','Thinking humanly โดย'),('aa-turing','พฤติกรรมเลียนแบบอย่างเดียวไม่ยืนยัน'),('aa-ml','MLเป็นส่วนหนึ่งของAI')]:choice(qid,proposition,True)
+ numeric('aa-utility',F(7,10)*70+F(3,10)*50)
+ # Enumerate simple paths as an independent oracle for this finite six-node graph.
+ graph={0:(1,2),1:(2,3),2:(3,),3:(4,),4:(0,1,5),5:()};paths=[]
+ def enumerate_paths(path):
+  if path[-1]==5:paths.append(path);return
+  for child in graph[path[-1]]:
+   if child not in path:enumerate_paths(path+[child])
+ enumerate_paths([0]);numeric('sd-bfs-edges',min(len(p)-1 for p in paths));numeric('sd-dfs-edges',len(paths[0])-1)
+ assert min(paths,key=len)==[0,1,3,4,5] and paths[0]==[0,1,2,3,4,5]
+ blocked={(0,3),(0,4),(1,4),(2,1),(3,1),(3,3),(4,3)};cells={(r,c) for r in range(5) for c in range(5)}-blocked
+ # Repeated distance relaxation avoids reusing the source's frontier/parent implementation.
+ distance={(0,0):0}
+ for _ in range(len(cells)):
+  previous=dict(distance)
+  for r,c in cells:
+   for dr,dc in [(0,1),(1,0),(0,-1),(-1,0)]:
+    neighbor=(r+dr,c+dc)
+    if neighbor in previous:distance[(r,c)]=min(distance.get((r,c),math.inf),previous[neighbor]+1)
+  if distance==previous:break
+ numeric('sd-grid',distance[(4,4)]);assert distance[(4,4)]==abs(4-0)+abs(4-0)
+ assert 1<2 and 9>1+1;choice('sd-cost','BFSได้S→Gลึก1แต่cost9')
+ assert graph[4][:2]==(0,1);choice('sd-completeness','visitedช่วยให้กราฟจำกัดจบได้',True)
+
 # Each self-assessment is intentionally not autograded. Source/rubric review is documented.
 for data in selected:
  for q in data['questions']:

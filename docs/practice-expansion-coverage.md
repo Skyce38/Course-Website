@@ -44,7 +44,18 @@ Self-assessments: co-contract, ep-validation, im-savings, pa-triangle, or-design
 
 ## Verification method
 
-`python scripts/check-practice-expansion.py --stage A` checks every implemented Stage A automatic key, reporting executable arithmetic/code evidence separately from source-reviewed conceptual propositions. A Python result alone cannot prove a philosophical definition or documentary claim. Conceptual distractors/rationales were separately compared with their referenced lesson sections; the ledger states that evidence explicitly.
+## Stage D — AI Foundations
+
+| Lesson | Automatic IDs / objectives | Heading evidence | Independent verification |
+|---|---|---|---|
+| ai-foundations-agents | aa-scope/approaches/turing/utility/ml | scope, four-approaches, turing-test, utility-example, ai-ml | Source-reviewed scope/approach/behavior-versus-understanding/taxonomy propositions; exact probability-weighted utility from the explicitly authored robot example, not invented slide data |
+| search-models-bfs-dfs | sd-bfs-edges/dfs-edges/grid/cost/completeness | question-source-graph, question-source-grid, question-cost, question-guarantees | Enumerated finite simple paths independently establish BFS minimum/first DFS path; repeated grid distance relaxation plus Manhattan bound; weighted counterexample and reviewed completeness assumptions |
+
+Self-assessments: aa-agent, sd-trace. The page-7 ChatGPT claim remains unsupported as documented, the page-16 objective question remains unanswered by the source, and the authored BFS/DFS/grid answers are not presented as official keys. Search order, goal-test timing, duplicate policy, costs and finite/infinite assumptions are explicit.
+
+## Verification method
+
+`python scripts/check-practice-expansion.py --all` checks all 105 new automatic keys, reporting executable arithmetic/code evidence separately from 31 source-reviewed conceptual propositions. `--stage A/B/C/D` supports scoped checkpoints. A Python result alone cannot prove a philosophical definition or documentary claim. Conceptual distractors/rationales were separately compared with their referenced lesson sections; the ledger states that evidence explicitly. The 21 three-part rubrics are reviewed but deliberately not automatically graded.
 
 `node scripts/check.cjs` checks schema, registry identity, global question-ID uniqueness, Thai content, real anchors, safe escaping, score/state invariants and deterministic isolated builds. During an incomplete stage only, set `PRACTICE_EXPECTED_COUNT` to the actual interim total. Final validation must use the default count derived from the full lesson registry.
 
