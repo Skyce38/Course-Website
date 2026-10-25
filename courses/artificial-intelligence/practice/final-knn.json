@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "artificial-intelligence-final-knn",
+  "title": "KNN Classification",
+  "questions": [
+    {
+      "id": "k-vote",
+      "type": "choice",
+      "prompt": "ตัวอย่าง Buy ใช้ k=3 โดยเพื่อนบ้าน R1,R4,R8 มี label Y ทั้งหมด การทำนายและสิ่งที่ยังสรุปไม่ได้คืออะไร?",
+      "reference": "buy-worked",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทำนาย Y แต่ยังยืนยัน test accuracy ไม่ได้เพราะ query ไม่มี observed label"
+        },
+        {
+          "id": "b",
+          "text": "ทำนาย Y และรับรอง test accuracy 100%"
+        },
+        {
+          "id": "c",
+          "text": "ทำนาย N เพราะต้องเลือกแถวแรกเท่านั้น"
+        }
+      ],
+      "answer": "a",
+      "explanation": "เสียง Y ชนะ 3:0 จึงทำนาย Y แต่ช่อง Buy ของ query ยังเป็น ?? ไม่มี observed label สำหรับวัดความถูกต้อง ห้ามใช้ proposed answer เป็นหลักฐานอิสระ"
+    },
+    {
+      "id": "k-encoding",
+      "type": "choice",
+      "prompt": "Buy query กับ R2 ต่างกัน Color และ Origin รวม 2 หมวด เมื่อใช้ full one-hot จะมี squared Euclidean distance เท่าใด?",
+      "reference": "question-distance",
+      "choices": [
+        {
+          "id": "a",
+          "text": "2"
+        },
+        {
+          "id": "b",
+          "text": "4"
+        },
+        {
+          "id": "c",
+          "text": "8"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ต่างหนึ่งหมวดใน full one-hot เปลี่ยนสองตำแหน่ง จึงมี d²=2 ต่อหมวด เมื่อแตกต่างสองหมวดได้ d²=4 และ d=2 ไม่ใช่ √2"
+    },
+    {
+      "id": "k-test",
+      "type": "choice",
+      "prompt": "ข้อใดถูกเกี่ยวกับ accuracy ของตัวอย่าง Iris split 70/30 ในบทเรียน?",
+      "reference": "iris",
+      "choices": [
+        {
+          "id": "a",
+          "text": "training accuracy คือ test accuracy เสมอ"
+        },
+        {
+          "id": "b",
+          "text": "ผล test ของ split เดียวรับรองข้อมูลใหม่ทุกชุด"
+        },
+        {
+          "id": "c",
+          "text": "ต้องแยก train/test และระบุ split, seed และ k"
+        }
+      ],
+      "answer": "c",
+      "explanation": "training accuracy และ test accuracy วัดคนละข้อมูล ผล 45/45 ของ split ที่กำหนดไม่รับรองความแม่นยำ 100% ในประชากรใหม่ และไม่ใช่ผลที่สไลด์พิมพ์รับรอง"
+    },
+    {
+      "id": "k-distance",
+      "type": "numeric",
+      "prompt": "Drug R8 กับ query มีผลต่าง Age เท่ากับ 5 และผลต่าง Na เท่ากับ 0.070 ตาม representation ในบทเรียน ส่วน feature อื่นเท่ากัน จงหา Euclidean distance (ทศนิยมอย่างน้อย 6 ตำแหน่ง)",
+      "reference": "question-drug",
+      "answer": 5.000489975992353,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "d²=5²+0.070²=25.0049 ดังนั้น d=√25.0049≈5.000490 ใช้ feature/rหัส/หน่วยตามตัวอย่างเดิม ไม่สลับ encoding เพื่อให้ได้ระยะอื่น"
+    },
+    {
+      "id": "k-accuracy",
+      "type": "numeric",
+      "prompt": "ตัวอย่าง Iris ที่กำหนด train ถูก 99 จาก 105 จงหา training accuracy เป็นสัดส่วน 0–1 ไม่ใช่เปอร์เซ็นต์ (อย่างน้อย 6 ตำแหน่ง)",
+      "reference": "question-accuracy",
+      "answer": 0.9428571428571428,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "99/105=0.942857142857... หรือประมาณ 94.2857% แต่ข้อนี้ขอเป็นสัดส่วน จึงตอบ 0.942857 ผลนี้เป็น train score ของเงื่อนไขที่ระบุ ไม่ใช่ test score"
+    },
+    {
+      "id": "k-ties",
+      "type": "self",
+      "prompt": "ถ้า k=3 ได้ labels A,B,C อย่างละหนึ่งเสียง และมีระยะเสมอกันตรงขอบ k ควรอธิบายคำตอบอย่างไร?",
+      "reference": "question-ties",
+      "explanation": "k คี่ไม่ได้ป้องกัน multi-class voting tie แบบ 1:1:1 ต้องประกาศทั้งกติกาเลือกแถวเมื่อระยะเสมอ และกติกาโหวตเสมอ helper ในบทใช้ลำดับแถวเดิม และเลือกชื่อ class ตามลำดับอักษร จึงได้ A ภายใต้ policy นี้เท่านั้น ไม่อ้างว่าเป็นกฎของทุก library",
+      "rubric": [
+        "แยก boundary-distance tie ออกจาก vote tie",
+        "ระบุ convention ของตัวอย่างอย่างชัดเจน",
+        "ไม่รับรองว่าทุก library หรือทุกลำดับ train ให้คำตอบเดียวกัน"
+      ]
+    }
+  ]
+}

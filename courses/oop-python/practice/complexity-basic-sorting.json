@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-complexity-basic-sorting",
+  "title": "Basic Sorting และตัวนับ",
+  "questions": [
+    {
+      "id": "b-pass",
+      "type": "choice",
+      "prompt": "Bubble Sort เรียงน้อยไปมากจาก [5,3,8,1,2] โดยวนซ้ายไปขวา หนึ่ง pass แรกครบแล้วได้ลิสต์ใด?",
+      "reference": "bubble",
+      "choices": [
+        {
+          "id": "a",
+          "text": "[3,5,1,2,8]"
+        },
+        {
+          "id": "b",
+          "text": "[1,2,3,5,8]"
+        },
+        {
+          "id": "c",
+          "text": "[3,5,8,1,2]"
+        }
+      ],
+      "answer": "a",
+      "explanation": "เปรียบคู่ติดกัน: 5/3 สลับ, 5/8 ไม่สลับ, 8/1 สลับ, 8/2 สลับ จึงได้ [3,5,1,2,8] ค่าสูงสุด 8 อยู่ท้ายแล้ว แต่ทั้งลิสต์ยังไม่จำเป็นต้องเรียง"
+    },
+    {
+      "id": "b-stability",
+      "type": "choice",
+      "prompt": "Selection Sort แบบสลับ minimum กับตำแหน่งต้นในบทเรียน เรียง [(2,A),(2,B),(1,C)] ตาม key ตัวเลขแล้วได้อะไร?",
+      "reference": "selection",
+      "choices": [
+        {
+          "id": "a",
+          "text": "[(1,C),(2,A),(2,B)] เสมอ"
+        },
+        {
+          "id": "b",
+          "text": "[(1,C),(2,B),(2,A)] จึงไม่ stable"
+        },
+        {
+          "id": "c",
+          "text": "ทำไม่ได้เพราะมี key เท่ากัน"
+        }
+      ],
+      "answer": "b",
+      "explanation": "รอบแรกสลับ C กับ A ได้ C,B,A ทำให้ B มาก่อน A ทั้งที่ key=2 เท่ากัน แสดง counterexample ว่า implementation นี้ไม่ stable"
+    },
+    {
+      "id": "b-space",
+      "type": "choice",
+      "prompt": "ถ้า core ของ Basic Sort ใช้ auxiliary space O(1) แต่ฟังก์ชันตัวอย่าง copy input n รายการก่อนเรียง พื้นที่เพิ่มเติมของฟังก์ชันทั้งตัวคืออะไร?",
+      "reference": "complexity",
+      "choices": [
+        {
+          "id": "a",
+          "text": "O(1) เพราะ core ไม่สร้าง array ใหม่"
+        },
+        {
+          "id": "b",
+          "text": "O(log n) เสมอ"
+        },
+        {
+          "id": "c",
+          "text": "O(n) เมื่อรวมสำเนา input"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ต้องนับสำเนา input ขนาด n ด้วย จึงเป็น O(n) สำหรับฟังก์ชันทั้งตัว แม้ core แบบทำใน array เดิมจะใช้ O(1); หากเก็บทุก pass ยังอาจมี overhead มากขึ้น"
+    },
+    {
+      "id": "b-comparisons",
+      "type": "numeric",
+      "prompt": "Selection Sort ตามบทเรียน สำหรับ n=100 เปรียบเทียบ key ทั้งหมดกี่ครั้ง? ไม่นับการตรวจเงื่อนไข loop",
+      "reference": "selection",
+      "answer": 4950,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "จำนวนครั้งคือ 99+98+...+1 = 100×99/2 = 4950 เป็น key comparisons ไม่ใช่จำนวน swaps ซึ่งมีได้ไม่เกิน 99 ครั้ง"
+    },
+    {
+      "id": "b-swaps",
+      "type": "numeric",
+      "prompt": "Bubble Sort สำหรับ [5,3,8,1,2] ตามบทเรียน สลับค่าจริงทั้งหมดกี่ครั้ง?",
+      "reference": "bubble",
+      "answer": 7,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "มี inversions 7 คู่: (5,3),(5,1),(5,2),(3,1),(3,2),(8,1),(8,2) การสลับคู่ติดกันแต่ละครั้งแก้หนึ่ง inversion จึงมี 7 swaps ไม่ใช่ 10 comparisons"
+    },
+    {
+      "id": "b-trace",
+      "type": "self",
+      "prompt": "ไล่ Insertion Sort ของ [5,3,8,1,2] ทีละ pass พร้อมแยก key comparisons ออกจาก shifts แล้วอธิบาย best case",
+      "reference": "insertion",
+      "explanation": "หลังแต่ละ pass: [3,5,8,1,2], [3,5,8,1,2], [1,3,5,8,2], [1,2,3,5,8] ตามนิยามตัวนับในบทได้ 9 key comparisons และ 7 shifts ข้อมูลที่เรียงแล้วมี n−1 comparisons และไม่มี shift; ต้องระบุว่ากำลังนับ operation ใด",
+      "rubric": [
+        "แสดง sorted prefix หลังแต่ละ pass ถูกต้อง",
+        "นับ key comparisons 9 และ shifts 7 ตามเงื่อนไขโค้ด",
+        "อธิบาย best case โดยไม่สับสนกับเวลาหน่วยวินาที"
+      ]
+    }
+  ]
+}

@@ -13,7 +13,7 @@
 <script src="../../assets/study.js?v={{VERSION}}"></script>
 <script src="../../assets/readers.js?v={{VERSION}}" defer></script>
 <script src="../../assets/lesson.js?v={{VERSION}}" defer></script>
-{{COMPONENTS}}{{RICH_CONTENT}}
+{{COMPONENTS}}{{RICH_CONTENT}}{{PRACTICE_ASSETS}}
 </head>
 <body class="lesson-reader html-reader">
 <a class="lesson-skip" href="#main-content" data-i18n="skipContent">ข้ามไปเนื้อหา</a>
@@ -27,7 +27,7 @@
   <header class="topbar"><div class="lesson-breadcrumb"><button class="icon-button menu-button" id="menu" type="button" data-i18n-aria-label="readerContents" aria-label="สารบัญบทเรียน" aria-controls="sidebar" aria-expanded="false">☰</button><div class="breadcrumbs"><a href="../../" data-i18n="learn">เรียน</a><span id="breadcrumbs">{{COURSE}}</span></div></div><div class="top-actions"><button class="icon-button" type="button" id="theme">☾ Dark</button></div></header>
   <main class="content reader-content" id="main-content">
     <div class="reader-top"><a class="back-link" href="../../#course/{{COURSE_ID}}/{{CATEGORY_ID}}">← {{COURSE}} / {{CATEGORY}}</a><div class="reader-font"><button type="button" class="icon-button" id="font-less" data-i18n-aria-label="decreaseFont" aria-label="ลดขนาดตัวอักษร">A−</button><span id="font-value">17</span><button type="button" class="icon-button" id="font-more" data-i18n-aria-label="increaseFont" aria-label="เพิ่มขนาดตัวอักษร">A+</button><button type="button" class="icon-button" id="print" data-i18n="printLesson">พิมพ์</button></div></div>
-    <article class="reading-page prose" lang="{{LANG}}"><h1>{{TITLE}}</h1>{{BODY}}</article>
+    <article class="reading-page prose" lang="{{LANG}}"><h1>{{TITLE}}</h1>{{BODY}}</article>{{PRACTICE}}
   </main>
 </div>
 </body></html>

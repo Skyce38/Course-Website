@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-stack",
+  "title": "Stack และการประยุกต์",
+  "questions": [
+    {
+      "id": "s-lifo",
+      "type": "choice",
+      "prompt": "เริ่ม Stack ว่าง แล้ว push A, B, C ตามลำดับ จากนั้น pop หนึ่งครั้ง เมื่อ peek จะได้อะไร และเหลือกี่ตัว?",
+      "reference": "practice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "C และเหลือ 3 ตัว"
+        },
+        {
+          "id": "b",
+          "text": "B และเหลือ 2 ตัว"
+        },
+        {
+          "id": "c",
+          "text": "A และเหลือ 2 ตัว"
+        }
+      ],
+      "answer": "b",
+      "explanation": "LIFO ทำให้ pop คืน C จากนั้น peek คืน B โดยไม่ลบข้อมูล จึงยังเหลือ B และ A รวม 2 ตัว"
+    },
+    {
+      "id": "s-brackets",
+      "type": "choice",
+      "prompt": "ตามนโยบาย bracket matcher ในบทเรียน สตริงใดมีจำนวนวงเล็บเปิด/ปิดเท่ากัน แต่จับคู่ไม่ถูกชนิดหรือลำดับ?",
+      "reference": "brackets",
+      "choices": [
+        {
+          "id": "a",
+          "text": "([{}])"
+        },
+        {
+          "id": "b",
+          "text": "hello"
+        },
+        {
+          "id": "c",
+          "text": "([)]"
+        }
+      ],
+      "answer": "c",
+      "explanation": "([)] มีจำนวนเปิด/ปิดเท่ากัน แต่เมื่อพบ ) จะอยู่บน [ จึงไม่ใช่คู่กัน ต้องใช้ Stack ตรวจชนิดและลำดับ ไม่ใช่นับจำนวนอย่างเดียว"
+    },
+    {
+      "id": "s-postfix",
+      "type": "numeric",
+      "prompt": "ประเมิน Postfix: 5 1 2 + 4 * + 3 - ได้ค่าเท่าใด?",
+      "reference": "postfix",
+      "answer": 14,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "1+2=3, 3×4=12, 5+12=17 และ 17−3=14 เวลาทำ operator ให้ pop ตัวขวาก่อนตัวซ้าย"
+    },
+    {
+      "id": "s-factorial",
+      "type": "numeric",
+      "prompt": "factorial(4) ที่ใช้ base case n<=1 คืนค่าเท่าใด? ตอบเฉพาะค่าผลลัพธ์ ไม่ใช่จำนวนเฟรม",
+      "reference": "call-stack",
+      "answer": 24,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "factorial(4)=4×3×2×1=24 ส่วนจำนวนเฟรมที่ซ้อนกันของตัวอย่างนี้คือ 4 เฟรม (ไม่นับเฟรมระบบ) เป็นคนละคำถาม"
+    },
+    {
+      "id": "s-undo",
+      "type": "choice",
+      "prompt": "เริ่มข้อความว่าง: type A, type B, undo, type C, redo ตาม Undo/Redo contract ในบทเรียน ข้อความสุดท้ายคืออะไร?",
+      "reference": "undo",
+      "choices": [
+        {
+          "id": "a",
+          "text": "AB"
+        },
+        {
+          "id": "b",
+          "text": "AC"
+        },
+        {
+          "id": "c",
+          "text": "ABC"
+        }
+      ],
+      "answer": "b",
+      "explanation": "หลัง undo เหลือ A การพิมพ์ C สร้าง branch ใหม่และล้าง redo จึงได้ AC; redo ที่ว่างเป็น no-op ไม่เรียก B กลับมา"
+    },
+    {
+      "id": "s-explain",
+      "type": "self",
+      "prompt": "อธิบายหรือเขียน pseudocode สำหรับ Postfix 10 3 - พร้อมบอกว่าจะป้องกัน Stack underflow อย่างไร",
+      "reference": "postfix",
+      "explanation": "ต้อง pop right=3 ก่อน left=10 แล้วคำนวณ left−right=7 ตรวจว่ามี operand อย่างน้อย 2 ตัวก่อนทำ operator และเมื่อจบต้องเหลือคำตอบเดียว ตัวอย่าง evaluator ใช้ Stack ใหม่ทุกครั้งและไม่เขียน last_result หากประเมินไม่สำเร็จ",
+      "rubric": [
+        "ระบุลำดับ right ก่อน left และได้ 7",
+        "ตรวจ operand ไม่พอก่อน pop และตรวจค่าที่เหลือเมื่อจบ",
+        "อธิบายเองตาม rubric; ระบบไม่รันหรือให้คะแนนโค้ด"
+      ]
+    }
+  ]
+}

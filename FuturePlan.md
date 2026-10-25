@@ -87,3 +87,9 @@ Ready for PR preparation; no commit, push, merge or deployment performed. Browse
 - [x] Inventory14OOP PDFs/610physicalpages and accessible local labs; no Week9 invented.
 - [x] Remove path-only configuration/runtime/controls; retain catalog access, independent history/Continue Reading, bookmarks, completion and exact resume. Seeded legacy-data checks pass in both layouts.
 - [x] Complete 12 source-supported OOP lessons and focused correctness/browser/integrity checks. Existing Linked List and AI content remain unchanged. See [Phase 5 validation](docs/phase5-oop-validation.md).
+
+## Phase 6 — Interactive Practice MVP
+
+- [x] Validate a reusable component on Stack, Basic Sorting, KNN and Decision Tree only: 20 automatically graded questions and four ungraded self-assessments, immediate explanations, retry, incorrect-answer review and locally saved progress/attempts.
+- [x] Preserve all original lesson content, study/bookmark/legacy quiz data and direct catalog navigation; verify Classic/Modern, TH/EN, Light/Dark, palettes and responsive keyboard behavior. See [Practice Mode](docs/practice-mode.md).
+- [ ] Consider further lessons only after review of the four-pilot system; no expansion or automatic deployment is included in this MVP.

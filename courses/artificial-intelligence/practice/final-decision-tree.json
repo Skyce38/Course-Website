@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "artificial-intelligence-final-decision-tree",
+  "title": "Decision Tree และ Information Gain",
+  "questions": [
+    {
+      "id": "d-entropy",
+      "type": "choice",
+      "prompt": "ใช้ log ฐาน 2: Entropy ของ [+,+,+] และ [+,+,−,−] เป็นเท่าใดตามลำดับ?",
+      "reference": "q1",
+      "choices": [
+        {
+          "id": "a",
+          "text": "1 และ 0 bit"
+        },
+        {
+          "id": "b",
+          "text": "0 และ 1 bit"
+        },
+        {
+          "id": "c",
+          "text": "0 และ 0 bit"
+        }
+      ],
+      "answer": "b",
+      "explanation": "pure node มี p=1 จึง −1 log₂1=0 ส่วน binary balanced มีสอง class ที่ p=.5 จึงได้ 1 bit ส่วน count=0 ให้ contribution 0 ตามลิมิต ไม่ประเมิน log(0) ตรง ๆ"
+    },
+    {
+      "id": "d-root",
+      "type": "choice",
+      "prompt": "Sunburn ตามข้อมูล 8 แถวในบทเรียนเลือก feature ใดเป็น root ด้วย Information Gain สูงสุด?",
+      "reference": "sunburn",
+      "choices": [
+        {
+          "id": "a",
+          "text": "HairColor"
+        },
+        {
+          "id": "b",
+          "text": "Weight"
+        },
+        {
+          "id": "c",
+          "text": "Height"
+        }
+      ],
+      "answer": "a",
+      "explanation": "HairColor มี gain≈.454434 สูงกว่า Lotion≈.347590, Height≈.265712 และ Weight≈.015712 ค่าปัดในเอกสารบางชิ้นไม่ใช่เหตุให้แก้ข้อมูลหรือปัดระหว่างขั้น"
+    },
+    {
+      "id": "d-rule",
+      "type": "choice",
+      "prompt": "จากต้นไม้ PlayTennis ในบทเรียน เมื่อ Outlook=Rain และ Wind=Strong ควรทำนายอะไร?",
+      "reference": "q5",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Yes ทุกครั้งในโลกจริง"
+        },
+        {
+          "id": "b",
+          "text": "No ตามต้นไม้ที่สร้างจากชุดข้อมูลนี้"
+        },
+        {
+          "id": "c",
+          "text": "ต้องทดสอบ Temperature เสมอ"
+        }
+      ],
+      "answer": "b",
+      "explanation": "path นี้คือ IF Outlook=Rain AND Wind=Strong THEN No ไม่ต้องเติม feature ที่ไม่ได้ทดสอบ และเป็นกฎจากชุดฝึก ไม่ใช่กฎอากาศสากล"
+    },
+    {
+      "id": "d-gain",
+      "type": "numeric",
+      "prompt": "Sunburn parent มี +3/−5 และ HairColor แบ่ง blonde 4 แถว (+2/−2), red 1 แถว (+1), brown 3 แถว (−3) จงหา Information Gain หน่วย bit (อย่างน้อย 6 ตำแหน่ง)",
+      "reference": "sunburn",
+      "answer": 0.45443400292496505,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "Hparent=−(3/8)log₂(3/8)−(5/8)log₂(5/8)=.9544340029; Hafter=(4/8)×1=0.5 ดังนั้น gain=.4544340029 bit"
+    },
+    {
+      "id": "d-weighted",
+      "type": "numeric",
+      "prompt": "PlayTennis: Sunny ขนาด 5 มี Yes2/No3, Overcast ขนาด 4 เป็น Yes ทั้งหมด, Rain ขนาด 5 มี Yes3/No2 จงหา weighted entropy หลังแบ่ง Outlook (อย่างน้อย 6 ตำแหน่ง)",
+      "reference": "tennis",
+      "answer": 0.6935361388961918,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "Hของ Sunny และ Rain≈.9709505945 และ Overcast=0 จึง Hafter=(5/14)×.9709505945+(4/14)×0+(5/14)×.9709505945=.6935361389 bit ข้อนี้ไม่ใช่ gain ซึ่งต้องนำ parent entropy มาลบอีกครั้ง"
+    },
+    {
+      "id": "d-unknown",
+      "type": "self",
+      "prompt": "ต้นไม้ได้ training 14/14 แล้วพบ query ที่ Outlook=Snow ซึ่งไม่เคยอยู่ใน source ควรรายงานและประเมินอย่างไร?",
+      "reference": "q6",
+      "explanation": "policy ของโค้ดในบทคืน majority ที่ root คือ Yes แต่ source ไม่ได้กำหนด Snow จึงต้องระบุว่าเป็น fallback policy ไม่ใช่คำตอบที่ผู้สอนรับรอง training 14/14 ไม่เท่ากับ held-out accuracy ควรมี validation/test ที่แยกจากชุดฝึกและตรวจ unknown categories",
+      "rubric": [
+        "ระบุ unknown-category policy ไม่ปลอมเป็น source answer",
+        "แยก training fit ออกจาก held-out accuracy",
+        "อธิบายการทดสอบข้อมูลใหม่และข้อจำกัด ไม่อ้าง generalization จาก 14/14"
+      ]
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 const fs = require('node:fs'), path = require('node:path');
 const {validate} = require('../assets/lesson-contract.js');
 const rich = require('./lesson-rich.cjs');
-const VERSION = 'phase5-catalog-1';
+const VERSION = 'phase6-practice-1';
 const esc = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const json = value => JSON.stringify(value).replace(/</g,'\\u003c').replace(/\u2028/g,'\\u2028').replace(/\u2029/g,'\\u2029');
 function metadata(source) {
@@ -123,10 +123,20 @@ function buildLessons(catalog, root = process.cwd()) {
     const resource={id:meta.id,course:meta.course,category:meta.category,title:meta.title,path:`${meta.category}/${meta.slug}.md`,format:'MD',reader:output,generatedLesson:1,github:`https://github.com/${catalog.owner}/${course.repo}/blob/main/${source}`};
     const rendered=markdown(body,{source,output,root,catalog});
     if (!rendered.headings.length) throw Error('Lesson requires headings');
+    const practiceFile=path.join(root,'courses',meta.course,'practice',meta.slug+'.json');
+    let practice='';
+    if(fs.existsSync(practiceFile)){
+      const data=JSON.parse(fs.readFileSync(practiceFile,'utf8'));
+      if(data.lesson!==meta.id)throw Error('Practice lesson identity mismatch');
+      practice='\n'+require('./practice-build.cjs').render(data,rendered.headings);
+    }
     const values={MARKER:marker,TITLE:esc(meta.title),LANG:meta.language,COURSE:esc(course.name),COURSE_ID:esc(course.id),CATEGORY:esc(category.name),CATEGORY_ID:esc(category.id),VERSION,BODY:rendered.html,TOC:tocHTML(rendered.headings),COMPONENTS:rendered.interactive?'<script src="../../assets/lesson-contract.js?v='+VERSION+'" defer></script><script src="../../assets/lesson-components.js?v='+VERSION+'" defer></script>':''};
     if (rendered.interactive) values.COMPONENTS='<link rel="stylesheet" href="../../assets/lesson-components.css?v='+VERSION+'">'+values.COMPONENTS;
     values.RICH_CONTENT=rendered.features.length?'<link rel="stylesheet" href="../../assets/lesson-rich.css?v=rich-lesson-1">':'';
     if(rendered.features.includes('math')) values.RICH_CONTENT='<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css?v=0.19.1">'+values.RICH_CONTENT;
+    values.PRACTICE=practice;
+    values.PRACTICE_ASSETS=practice?'<link rel="stylesheet" href="../../assets/practice.css?v='+VERSION+'"><script src="../../assets/practice-contract.js?v='+VERSION+'" defer></script><script src="../../assets/practice.js?v='+VERSION+'" defer></script>':'';
+    if(practice)values.TOC+='<a href="#practice-mode" data-i18n="practiceTitle">โหมดฝึกทำโจทย์</a>';
     const template=fs.readFileSync(path.join(root,'templates/lesson.html'),'utf8').replace(/\r\n/g,'\n');
     const html=template.replace(/\{\{([A-Z_]+)\}\}/g,(_,key)=>{ if (!(key in values)) throw Error('Unknown template token'); return values[key]; });
     plans.push({target,html,resource,old});
