@@ -34,7 +34,7 @@ for (const resource of catalog.resources) {
 for (const file of htmlFiles) {
   const html = fs.readFileSync(file, 'utf8');
   for (const [,asset] of html.matchAll(/(?:src|href)="([^" ]*assets\/(?:preferences\.(?:js|css)|layouts\.css|readers\.(?:js|css)|(?:practice(?:-contract)?|lesson(?:-(?:components|contract))?)\.(?:js|css)|i18n\.js|study\.js|settings\.js|pdf(?:-source)?\.js)[^" ]*)"/g)) {
-    assert.equal(new URL(asset,'https://example.test/').searchParams.get('v'),'phase6-practice-1',file+': version shared UI assets together to prevent stale bundles');
+    assert.equal(new URL(asset,'https://example.test/').searchParams.get('v'),'phase8-exam-1',file+': version shared UI assets together to prevent stale bundles');
   }
   for (const match of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) new vm.Script(match[1], {filename: file});
   const markup = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, script => script.startsWith('<script src=') ? script : '');
@@ -115,3 +115,5 @@ require('./check-lessons.cjs');
 require('./check-lesson-rich.cjs');
 require('./check-catalog-navigation.cjs');
 require('./check-practice.cjs');
+require('./check-reading.cjs');
+require('./check-exam.cjs');

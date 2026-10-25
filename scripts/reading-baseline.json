@@ -23,7 +23,8 @@
     "code": "afd4d83411e63e6295ddab24d3c98e6c588ce4f818761d1b7a9d82a8a3b39411",
     "math": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "tables": "d85c5a506ceca0699b88fe9afa36cf75b822f88aa265a7daf78c90848f716f1f",
-    "solutions": "64f5e2357f8ecfbb4329941d1ae2fc9c870c8f720b2dae1f1d7693de76b2b4e0"
+    "solutions": "64f5e2357f8ecfbb4329941d1ae2fc9c870c8f720b2dae1f1d7693de76b2b4e0",
+    "practice": "15fd2dec335bbeb534c48698cad6d71dcc23bae5892e4eb0ae0d154f1f1af30a"
   },
   {
     "source": "courses/artificial-intelligence/summaries/ai-foundations-agents.md",
@@ -64,7 +65,8 @@
     "code": "9d882df96ed57fe3081e568eebfd97e125a37dd0ef111d8f05142fd12019fa69",
     "math": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "tables": "82da4dabaf3d8f3bb74ad90987579500e0c97affdb88f60e961a8524bc938b65",
-    "solutions": "1dcf96d54bf490cc112474f4b658b43062f46e5395f81d115be1b169f625de74"
+    "solutions": "1dcf96d54bf490cc112474f4b658b43062f46e5395f81d115be1b169f625de74",
+    "practice": "df50398fb77323dc307b2bf7fb8b141747536b0d95f83d5cf32a9a25f23f8fea"
   },
   {
     "source": "courses/artificial-intelligence/summaries/search-models-bfs-dfs.md",
@@ -101,7 +103,8 @@
     "code": "4bc0ca3b0c314db952f64affee65d7d0ad401098a8c7ce614d6a82a79d8e97b6",
     "math": "c5fa51431c9249acc0952e589fbece6bdd81891e0c3e8fe675ccf2fba56d5a62",
     "tables": "74c887df19488705301d82bb520eac65e7c012056fd2a3fc220f418edc964dd8",
-    "solutions": "76ca936a90d3aa0fb519e8a1a3cf79f1f97ee7536615614df7fd63abb1f818e6"
+    "solutions": "76ca936a90d3aa0fb519e8a1a3cf79f1f97ee7536615614df7fd63abb1f818e6",
+    "practice": "35807b55a608963871902d452ea598c84ccec40a34d5d0940f10d06baf73e823"
   },
   {
     "source": "courses/artificial-intelligence/summaries/final-regression.md",
@@ -137,7 +140,8 @@
     "code": "37e94cc09805e7cda464126126f02d13afc95ea2a3fbcc4bf54e659914dd38e4",
     "math": "17fdb2df8b596af47d80d13fbb26d44fe4f22cf5c55ffb75970f2c6026d41073",
     "tables": "2c690c183b266d7fde51129f6f52f90beeafe08dc89692bc0988835154aef4b8",
-    "solutions": "1ce9e60dfb74a6c35406aed90929ce6f10f1d70281435df22a372da36575d002"
+    "solutions": "1ce9e60dfb74a6c35406aed90929ce6f10f1d70281435df22a372da36575d002",
+    "practice": "af0b119c93d797a24f9a8e5a032391471d698915a0daf53b149272ff1bc9326d"
   },
   {
     "source": "courses/artificial-intelligence/summaries/final-knn.md",
@@ -172,7 +176,8 @@
     "code": "f66a39b4e7b7be82a5776b42fe3a985ac3d59e1e870f20d92dec7ed7236dcd6b",
     "math": "c25111d2d4ca217c5beaa82b25027e2c55fb1b5e7f51ade20d101158d5731afd",
     "tables": "c33b1e5d3d3d2101587510317ba98b4435b8ae21e8fc3ece56a6c16114c1ed80",
-    "solutions": "8fb55a5b97298f85f21a73147eac2d3aa377e22348fa1bb0d5cd35ac825b3804"
+    "solutions": "8fb55a5b97298f85f21a73147eac2d3aa377e22348fa1bb0d5cd35ac825b3804",
+    "practice": "3572078e04e8ba4449cc9ba80096b2ab9a1ad6de5e2d3d907c55800dcb778da1"
   },
   {
     "source": "courses/artificial-intelligence/summaries/final-naive-bayes.md",
@@ -211,7 +216,8 @@
     "code": "7b96afef4aca2f3eaf128e988e6c78a28b883fe895701b5cdbc9684032c8574d",
     "math": "56c7242b7c47748b71388ce52374c1775ef9e1cde2d15cf249175727583a0442",
     "tables": "fd86aeb7a193c61f2d1fefc490ddc6d3c0f264ae151793e92fa42a3681a47a9d",
-    "solutions": "7464269a8a3293414f1a2998e23bf1e4d9f394aa922cce9640b04592c14f23f0"
+    "solutions": "7464269a8a3293414f1a2998e23bf1e4d9f394aa922cce9640b04592c14f23f0",
+    "practice": "9f1d32ae94c02fbeb5fabe56d542f220eda9ecd53934c90f0435bd26f6c18fdf"
   },
   {
     "source": "courses/artificial-intelligence/summaries/final-decision-tree.md",
@@ -237,7 +243,8 @@
     "code": "66e3fd779bc7f122bf29de2ea65c93be040d3b8475442c780c548874f2854dce",
     "math": "56d724a269c549c53a61c1692bdfcad00098aa8058031d887f50ffe5dfecd4bc",
     "tables": "3bd18f86e69747947888af9a715aaab8d4b537ec4df499feda644e2b95876645",
-    "solutions": "cc9ddf009b911fbe600d96906bb36b0ad00daec23ab2620be71c2e72aefc8894"
+    "solutions": "cc9ddf009b911fbe600d96906bb36b0ad00daec23ab2620be71c2e72aefc8894",
+    "practice": "64eb8f5e954f7fec32f8ab17997cf622314032b0b6b9228a77d449b9611b327f"
   },
   {
     "source": "courses/artificial-intelligence/summaries/final-hierarchical-clustering.md",
@@ -265,7 +272,8 @@
     "code": "e0bafadf7bcd4419177fccab0d44fb08cf3feecc69ad07be577444acbdb7ddd1",
     "math": "6181e32cbfa8b9bd31f780a5d7fbf2b9160940e0c4236f8df645f3f9f393a3fa",
     "tables": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "solutions": "1071b09d7355baa744af518ea33764db23f2528a044c8d729ec33a457468e317"
+    "solutions": "1071b09d7355baa744af518ea33764db23f2528a044c8d729ec33a457468e317",
+    "practice": "9d7e132c7f43ecae19c4450a3765367cd0681c023d9466fd057dd4730124ed83"
   },
   {
     "source": "courses/artificial-intelligence/summaries/final-kmeans.md",
@@ -285,7 +293,8 @@
     "code": "b09f12ffb974ca547f7ac4e3510af51aa3a3e7fa384674573f01c8b39b72f3ec",
     "math": "02079a46648b51fd7401f09c53ab068922734d20d85a5533a1120f8918ff71ed",
     "tables": "9c9039d29a084bdc8e8809540f7cfc7bae7bc1bea0a5c2cee52aa2c25fca73ee",
-    "solutions": "7e1662a439ffc15f2253248a4fd1630f93c98397f88f467e3b15e4580e2cdb3d"
+    "solutions": "7e1662a439ffc15f2253248a4fd1630f93c98397f88f467e3b15e4580e2cdb3d",
+    "practice": "c9e7a0eb1df210037e35557126fe37359457dfc60149d93602cf7098bc0a226f"
   },
   {
     "source": "courses/artificial-intelligence/summaries/final-perceptron.md",
@@ -306,7 +315,8 @@
     "code": "382643affc4889e519bf811b16d59f74316faadb10b3b9b9b4bb44f54f467ea1",
     "math": "84d217597e2c6001b167912b966d05be866a74fc1976a5e70cdf62f610cb0ba0",
     "tables": "6e33936329e73668119a7c9843b4ea7b9d79b943674fbd65806429ef0afbf602",
-    "solutions": "a5d0badd508c7c5e05fb3121d9d8b3ea6d014b2a36db01ef5a4827660414c52f"
+    "solutions": "a5d0badd508c7c5e05fb3121d9d8b3ea6d014b2a36db01ef5a4827660414c52f",
+    "practice": "86714021fb44949bd2b71238a96ddcacc0480e0d7d73707d027fb94b54989d92"
   },
   {
     "source": "courses/artificial-intelligence/summaries/final-backpropagation.md",
@@ -326,7 +336,8 @@
     "code": "45add972e8820f4927488881c388e60128aeef789e692376a478517e7d925c76",
     "math": "9a45e45d338fb14d8efaef09ec8eee5c46d161319665b54334962705c25d95b5",
     "tables": "d6d05e5b0967bb9ceafc59d794b8327e51a210cbb37f824e0d08f13497e34510",
-    "solutions": "462dd3a9477ba5f0d553abd11d090771527042c38bd74dfff5b83600a366edb5"
+    "solutions": "462dd3a9477ba5f0d553abd11d090771527042c38bd74dfff5b83600a366edb5",
+    "practice": "9bbdc028351b05778346021a5cf9f335879351f096d3bb29127f92a6beeb166b"
   },
   {
     "source": "courses/artificial-intelligence/summaries/final-deep-learning-overview.md",
@@ -347,7 +358,8 @@
     "code": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "math": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "tables": "31c6078a1d1b8145044c3b597aee6588b9dd157fe70eb2b2901a345b62dcd19b",
-    "solutions": "4fadeca41f4941eeab793f97286da196714f7bcf3c90e75d60696b462e1e9632"
+    "solutions": "4fadeca41f4941eeab793f97286da196714f7bcf3c90e75d60696b462e1e9632",
+    "practice": "8b1349e5bfdaa87ab68cba47f68f536d6fb479a1ade637d395bb039812863806"
   },
   {
     "source": "courses/artificial-intelligence/summaries/final-cnn.md",
@@ -370,7 +382,8 @@
     "code": "3a7c023d13ca938a22ef079f41e2a08fe3921365c4f873233fb66cd9cd3705f4",
     "math": "21783be032e928e750999862f8bfc5d4d6b80c59ae9bda0b1018c13772ce915f",
     "tables": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "solutions": "a6272a16e1ff983664ea56ca5055978987bb951eec490d5a19ce1007eea78a7e"
+    "solutions": "a6272a16e1ff983664ea56ca5055978987bb951eec490d5a19ce1007eea78a7e",
+    "practice": "2dadc785f61959dd1c83bfe3845515d007855d0bdad2c63221a3e60903c54784"
   },
   {
     "source": "courses/oop-python/summaries/classes-objects.md",
@@ -390,7 +403,8 @@
     "code": "f3aca1cce4676e9b7d1db17a4b12f17b6f4c695072e1ed813fccec4dd1a817c3",
     "math": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "tables": "e3f694dfae9bc4e42468264bf66897cf3295ef0b6ea1c33b6d03edca71bf2db9",
-    "solutions": "a807a6956c2a5d7c40a6411de9a7ae7c3d809f11254947774a8b7f89bedca878"
+    "solutions": "a807a6956c2a5d7c40a6411de9a7ae7c3d809f11254947774a8b7f89bedca878",
+    "practice": "6408eabe6a972b21d529af96f766e472f92188cc76be8e3992028bedd398057d"
   },
   {
     "source": "courses/oop-python/summaries/encapsulation-properties.md",
@@ -410,7 +424,8 @@
     "code": "8c317ce5f1e87c7610ed37d9b6520ad8e5238c3d6dc53e0bb45d1baa20e71253",
     "math": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "tables": "e245ea3efa3caa3db098452bef41a4995d5ea2eefbdf7c86d95bce59d6e4714d",
-    "solutions": "5b6508ee577583c9c6823072892c8b97a7b3485a4c3944d6d1e8b1ed610d5e7c"
+    "solutions": "5b6508ee577583c9c6823072892c8b97a7b3485a4c3944d6d1e8b1ed610d5e7c",
+    "practice": "471ff114486ca6d76d256bc9afaf5dce2f1484ff3c4c7909319212e5474e4fc9"
   },
   {
     "source": "courses/oop-python/summaries/inheritance-mro.md",
@@ -429,7 +444,8 @@
     "code": "75c8f392e1173e592fc30c78d4eb97ae5faf3ea83f5adfe3fe0eece3b0c58345",
     "math": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "tables": "10ed05ef00d547748b93e584971fd2a9a23922edac641c97ef74f69f6b29af99",
-    "solutions": "239f966e06d543ee3cbc0976230cf48c17ed89a6ef20f0cb40b2640a176fd6d7"
+    "solutions": "239f966e06d543ee3cbc0976230cf48c17ed89a6ef20f0cb40b2640a176fd6d7",
+    "practice": "0ec69ffcd87c1ddc0deba43a134efb4534fb1a73d132efe3e0fe0e73b78b95b6"
   },
   {
     "source": "courses/oop-python/summaries/polymorphism-abc.md",
@@ -449,7 +465,8 @@
     "code": "4a81894d91f28a2c10190614a0b41453105859d999b2f2db7c8c65464c95f10d",
     "math": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "tables": "293b175cab5c3fb1a6fb12fdcd6ca33530eb7ae7c59b4430898d84f5ee136d6c",
-    "solutions": "f0831542bb06e6c6a66e498ba4cd933ee8925782da9ea6f48bb3c69d0fe7befe"
+    "solutions": "f0831542bb06e6c6a66e498ba4cd933ee8925782da9ea6f48bb3c69d0fe7befe",
+    "practice": "2cc85548fda13b1d52e111527b845fb0b728f75590571000b2053b345d133036"
   },
   {
     "source": "courses/oop-python/summaries/object-relationships.md",
@@ -470,7 +487,8 @@
     "code": "b0b1d90ed0d146dc0a058b3cb017cdc2795bce71b205455e89458a1af278c3fa",
     "math": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "tables": "f97792fed7ddfb88cc1d0e3ef7e4dd12812ec95f28c5b20efb9ef596cc77ea3b",
-    "solutions": "fce112dbcead65dbe5cdf250c89ce574b12c75f58ed6df3486f88e5ef2be4669"
+    "solutions": "fce112dbcead65dbe5cdf250c89ce574b12c75f58ed6df3486f88e5ef2be4669",
+    "practice": "fc9eec90d3c63fa2b48030d3301d046baaada8c3f581ee4afcf3dbe79a4880ed"
   },
   {
     "source": "courses/oop-python/summaries/uml-solid.md",
@@ -491,7 +509,8 @@
     "code": "80f521d502007490037fee2f4c03c09b05052b7eda9617fdc950794df4421bd1",
     "math": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "tables": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "solutions": "3a016e7eff9d48e8c39e8d27b501e0ca7300218fa3992f794b9bf88dbe4f6c81"
+    "solutions": "3a016e7eff9d48e8c39e8d27b501e0ca7300218fa3992f794b9bf88dbe4f6c81",
+    "practice": "deda7833319756327d7796f6d237a1e6e1bda7f4aae4a0268947d1567341a979"
   },
   {
     "source": "courses/oop-python/summaries/arrays-dynamic-array.md",
@@ -511,7 +530,8 @@
     "code": "cf4f9dbe2a1e37036d80253d4081419b25640f6bb80ff1a687cc89e98d3491ae",
     "math": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "tables": "c93c12b8ff28080a24c3a401969e8749a1be74e1dc7e19a263d1dc64590bb2ec",
-    "solutions": "14e1ef77a3222b8d4b81e422c0186c745f791a72dbfbe75b48168e77f8795753"
+    "solutions": "14e1ef77a3222b8d4b81e422c0186c745f791a72dbfbe75b48168e77f8795753",
+    "practice": "c11106b849d0e97409dd653d718deef63a98792d89d61691a9688d65d233c823"
   },
   {
     "source": "courses/oop-python/summaries/stack.md",
@@ -532,7 +552,8 @@
     "code": "8ab74d5502ed75099d7df107eef40f279e5cb1aefb4a8f3b733da52416b9755b",
     "math": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "tables": "57801b961673db1ebedebeb8db8331f820447f33040e34abc0fbc8dfdecde338",
-    "solutions": "217726811ea96c8653d21011e955eb3b4322c91aef446fa20ef9440b72efbc0c"
+    "solutions": "217726811ea96c8653d21011e955eb3b4322c91aef446fa20ef9440b72efbc0c",
+    "practice": "36746588feb038ec3f5351e08488b685f9c33b6823112f4f9a75d4a5031e7711"
   },
   {
     "source": "courses/oop-python/summaries/queue.md",
@@ -553,7 +574,8 @@
     "code": "a054f3af756d6bb45a690d8abd40301b9d4e96df7ae5836c9d0be9dbb03c3385",
     "math": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "tables": "61b9b7ba72ca3bddd54a907f81a1f04ce573d8a8ab0203b04c87263f683b73f1",
-    "solutions": "2843b5da13aa27d9d9d047e9ff76407df04cd9b5fec43589dbce7bae573e1659"
+    "solutions": "2843b5da13aa27d9d9d047e9ff76407df04cd9b5fec43589dbce7bae573e1659",
+    "practice": "5dd6a661794080d46cd0b250fb01e44872109c7e1621495a23586f9bc13a6957"
   },
   {
     "source": "courses/oop-python/summaries/complexity-basic-sorting.md",
@@ -574,7 +596,8 @@
     "code": "ffbd15dc8bfea8a916137e9549ca268aca442bd214c50b274c9c4a44c230381a",
     "math": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "tables": "ae6273512f1e9fc97471c55d789614beccc60e6832027df6b173eef99750b711",
-    "solutions": "34c87572531edda81e9d130b09d66fdd7fd78c95918b8c97e4eb0e76050a355c"
+    "solutions": "34c87572531edda81e9d130b09d66fdd7fd78c95918b8c97e4eb0e76050a355c",
+    "practice": "952e9413596d6bf91eb8c0c1ec5f44ea27bee940559efc2b8da85df7c12a9653"
   },
   {
     "source": "courses/oop-python/summaries/advanced-sorting.md",
@@ -595,7 +618,8 @@
     "code": "8654099a50e0d8f8a5f58428b1ee841228555d6103f9f266ad9cfe1974fcbdc9",
     "math": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "tables": "af0a46e75a774e0119b890aacd94c6c46d79deeaf4f029a8685baabbda7e8abb",
-    "solutions": "ce43bdbaaa474ead18461725a512e8864beb7ef8224d3f8727f9e0aeba193e39"
+    "solutions": "ce43bdbaaa474ead18461725a512e8864beb7ef8224d3f8727f9e0aeba193e39",
+    "practice": "5f1638ab9b686d12575ed375246387a1fe30e5342a005fda879eb9160f751af5"
   },
   {
     "source": "courses/oop-python/summaries/hash-tables.md",
@@ -617,6 +641,7 @@
     "code": "32a81d2bbca426b3e46f223c6f945204d3a466181d8f6eef37c59fecf3599ca4",
     "math": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "tables": "8d236f71928cdc8730cb3f463d6e2d49a19c84bca2f888ca8ebaa32237f5ced7",
-    "solutions": "26088d33eb7de050127c6b3f8492f446d80033c6787acc0a0a1a2f21cbf214dc"
+    "solutions": "26088d33eb7de050127c6b3f8492f446d80033c6787acc0a0a1a2f21cbf214dc",
+    "practice": "d03f8087a92fefaeb427a9a70c4a2dabb256ac64ec5a6b95188d08c4a42289a4"
   }
 ]

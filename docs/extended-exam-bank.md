@@ -14,7 +14,7 @@ Expose the existing practice component as a mount/destroy API with optional stor
 
 New session configuration uses `skyce-learning-exam-config-v1:<lesson>` with bank revision, explicit selected question IDs and a random session token. Each run uses `skyce-learning-exam-v1:<lesson>:<token>`. Keep at most ten selectable exam sessions per lesson; each run reuses the existing ten-attempt limit. Restore the same IDs/order on refresh and reopening. Validate tokens, IDs, revisions, counts, mode and topic before reading a run. A newer unsupported configuration is not overwritten. Invalid data falls back with a visible notice; denied storage remains usable in memory. Original practice keys are never consulted for writes or deleted.
 
-New mock sessions require an explicit action; changing a selector does not discard the current run. Previous sessions can be reopened. Cross-tab configuration changes notify the user without replacing the active exam; per-run answer updates follow the shared component's focus-preserving policy. Concurrent edits remain local-storage last-write/best-effort, not transactions.
+New mock sessions require an explicit action; changing a selector does not discard the current run. Previous sessions can be reopened. Cross-tab configuration changes notify the user without replacing the active exam. Starting/reopening sessions then requires a reload, so a stale tab cannot overwrite the newer list. Controls retain focus with `aria-disabled` and guarded handlers; answering the active run can continue. The same guard checks the live configuration before writing, including changes whose storage event has not arrived. Per-run answer updates follow the shared component's focus-preserving policy. Concurrent edits remain local-storage last-write/best-effort, not transactions.
 
 ## Content and verification
 
@@ -31,3 +31,17 @@ Reading edits are semantic Markdown prose edits plus CSS scoped to generated `.l
 5. Build twice, original practice/independent checks, sync focus, exam/browser/storage/reading regressions, before/after screenshots.
 
 Only after both content expansion and reading polish pass will the branch be pushed for review. No automatic merge/deployment.
+
+## Sidecar and runtime contract
+
+An extension has `version:1`, a positive `revision`, the stable `lesson` ID, unchanged `baseRevision:1`, and an array of new questions. Each new item uses PracticeContract fields plus `difficulty` (`easy`, `medium`, `hard`) and `verification` (`method`, literal lesson `evidence`, optional offline Python `oracle`). Published original items are never copied into or modified by the sidecar. `ExamContract.prepare` strips authoring metadata from browser question data and builds topic titles from real headings. No oracle is executed by or shipped in the generated runtime payload. Static fallback shares the escaped Practice renderer; solutions require opening native details intentionally.
+
+`ExamContract.choose` performs Fisher–Yates sampling without replacement (10/20/30/full) or selects one actual topic. Saved configurations store the selected IDs in display order. `StudyPractice.mount` receives that subset, an exam-only storage key and ID prefix; its returned `destroy` aborts the two global listeners before a different subset mounts. Original question controls, IDs, data and default bootstrap are unchanged. Scores always derive from the current validated subset; rubrics remain ungraded.
+
+Only the latest ten session configurations are selectable. On an explicit new session, an evicted run's exam-only key is removed; original study/practice data is never touched. Each run keeps ten completed automatic attempts. Empty sessions need only their configuration saved until there is an answer/navigation change. Invalid or stale configurations recover with notice; newer configurations are read-only. This is best-effort local persistence, not archival or transactional storage.
+
+## Reproduction
+
+Run `node scripts/build.cjs`, `node scripts/check.cjs`, both original Python answer checks and `python scripts/check-exam-answers.py`. `node scripts/exam-report.cjs` deterministically refreshes the inventory/ledger. The raw JSON banks and offline oracles are committed; no temporary authoring script or preview is required to reproduce the build. Optional Playwright: set `PLAYWRIGHT_MODULE` and `STUDY_BASE_URL` then run `node scripts/check-exam-browser.cjs` plus the existing practice/sync-focus suites. No dependency installation is required when using an existing runtime.
+
+Scope limits: no exam timer/security, account/cloud storage, automatic free-form/code grading or inferred mastery percentages. Thai question content remains Thai while the shared interface switches TH/EN. JavaScript is needed for selection/scoring/local persistence; native static questions/solutions and all lesson prose remain readable without it.

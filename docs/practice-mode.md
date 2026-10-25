@@ -1,5 +1,7 @@
 # Practice Mode
 
+Phase 8 adds a separate [Extended Exam Bank](extended-exam-bank.md) to every registered reader: 30 questions per lesson / 750 unique questions, including the unchanged original 150 below. The shared component now exposes a mount/destroy API; its default scoring and original storage contract remain intact. Prose/typography are polished separately while original code, formulas, data tables and solved exercises are protected by baseline checks. Do not expand the original six-question files or bump their revisions merely to add questions; use an exam sidecar.
+
 All 25 registered AI/OOP readers have practice sidecars. Phase 6B adds 21 sets to the original four-pilot MVP (Stack, Basic Sorting, KNN and Decision Tree). The four pilot sidecars, IDs/answers/revisions and shared component are unchanged. Existing Markdown, solved exercises, resource IDs and catalog metadata remain unchanged.
 
 Every set has six author-created questions: five automatically graded and one self-assessment. Formats follow the subject; conceptual lessons are not forced to have numeric questions. These are adaptations/new practice grounded in the linked verified lesson, not official exam questions or answer keys. Thai lesson/practice content stays Thai when the shared interface switches to English. See the original lesson source sections for attribution and lecturer/material limitations, plus the [expansion coverage ledger](practice-expansion-coverage.md).
@@ -16,7 +18,7 @@ Every set has six author-created questions: five automatically graded and one se
 - Schema: `version: 1`, positive integer `revision`, `lesson`, Thai `title` and `questions`. Question fields: stable `id`, `type` (`choice`, `numeric`, `self`), `prompt`, existing heading ID `reference`, and `explanation`. Choice questions require unique `{id,text}` choices and one answer ID. Numeric questions require a finite `answer`, nonnegative `absoluteTolerance` and `relativeTolerance`. Self questions require a rubric and have no answer key.
 - `assets/practice-contract.js` validates data at build and runtime. Unknown fields, duplicate IDs, invalid keys/tolerances and missing heading references fail the build. Content is escaped text, never executable HTML/Python. No remote runtime service or new dependency is used.
 - The builder appends practice outside the existing lesson article, adds a TOC entry and loads practice assets only for readers with sidecars (all 25 registered readers now; manually maintained readers/legacy quiz pages remain unchanged). Static questions, choices, solutions and rubrics are usable through native details elements without JavaScript. Invalid runtime data leaves that fallback intact.
-- Bump the sidecar revision whenever questions, keys, tolerances or rubrics change; update independent checks at the same time. Do not repurpose question IDs silently. Shared UI cache versions are coordinated as `phase6-practice-1`; vendored math assets retain their own version.
+- Bump the sidecar revision whenever questions, keys, tolerances or rubrics change; update independent checks at the same time. Do not repurpose question IDs silently. Shared UI cache versions are coordinated as `phase8-exam-1`; vendored math assets retain their own version.
 
 ## Scoring and interaction
 

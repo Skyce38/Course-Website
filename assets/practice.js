@@ -4,10 +4,10 @@
   const C=window.PracticeContract,t=(key,values)=>LearningI18n.t(key,values);
   const text=(node,value)=>{if(node.textContent!==value)node.textContent=value};
   const el=(tag,cls)=>{const node=document.createElement(tag);if(cls)node.className=cls;return node};
-  document.querySelectorAll('.practice-mode').forEach(root=>{
+  function mount(root,provided,options={}){
     if(root.dataset.practiceReady)return;
-    let data;try{data=C.validate(JSON.parse(root.querySelector('.practice-data').textContent))}catch{return}
-    const key='skyce-learning-practice-v1:'+data.lesson;
+    let data;try{data=C.validate(provided||JSON.parse(root.querySelector('.practice-data').textContent))}catch{return}
+    const key=options.storageKey||'skyce-learning-practice-v1:'+data.lesson,events=new AbortController();
     let persistent=true,notice='',invalid='',state;
     function read(raw){
       if(raw===null)return C.clean(data,null);
@@ -32,7 +32,8 @@
       const option=el('option');option.value=q.id;option.textContent=String(index+1);select.append(option);
       const fieldset=el('fieldset'),legend=el('legend'),feedback=el('div','practice-feedback'),result=el('strong'),answer=el('p'),explanation=el('p'),reference=el('a','practice-reference'),inputs=[];
       fieldset.dataset.question=q.id;legend.lang='th';legend.textContent=q.prompt;fieldset.append(legend);
-      const prefix='quiz-'+data.lesson+'-'+q.id;feedback.id=prefix+'-feedback';feedback.setAttribute('role','status');feedback.setAttribute('aria-live','polite');
+      const level=options.questionLabel?el('p','practice-note'):null;if(level)fieldset.append(level);
+      const prefix=(options.idPrefix||'quiz-')+data.lesson+'-'+q.id;feedback.id=prefix+'-feedback';feedback.setAttribute('role','status');feedback.setAttribute('aria-live','polite');
       function edit(value){state.responses[q.id]={draft:value,submitted:false,rating:null};state.recorded=false;invalid='';notice='';save();render()}
       if(q.type==='choice')for(const choice of q.choices){
         const label=el('label','practice-option'),input=el('input'),span=el('span');input.type='radio';input.name=prefix;input.value=choice.id;input.addEventListener('change',()=>edit(choice.id));span.lang='th';span.textContent=choice.text;label.append(input,span);fieldset.append(label);inputs.push(input);
@@ -50,7 +51,7 @@
         for(const rating of ['understood','revisit']){const button=el('button','icon-button');button.type='button';button.dataset.rating=rating;button.onclick=()=>{state.responses[q.id].rating=rating;state.recorded=false;notice='';save();render()};ratings.push(button);feedback.append(button)}
       }
       reference.href='#'+q.reference;fieldset.append(feedback,reference);form.append(fieldset);
-      views.set(q.id,{...views.get(q.id),fieldset,feedback,result,answer,reference,inputs,ratings,option});
+      views.set(q.id,{...views.get(q.id),fieldset,feedback,result,answer,reference,inputs,ratings,option,level});
     }
     const actions=el('div','practice-actions'),submit=el('button','icon-button'),retry=el('button','icon-button');submit.type='submit';retry.type='button';actions.append(submit,retry);form.append(actions);
     const navigation=el('div','practice-actions'),previous=el('button','icon-button'),next=el('button','icon-button'),review=el('button','icon-button'),finish=el('button','icon-button'),restart=el('button','icon-button');
@@ -65,6 +66,7 @@
       text(message,notice?t(notice):'');message.hidden=!notice;
       for(const item of data.questions){
         const v=views.get(item.id),r=state.responses[item.id]||{draft:'',submitted:false,rating:null};
+        if(v.level)text(v.level,options.questionLabel(item));
         v.fieldset.hidden=item.id!==q.id;v.fieldset.disabled=item.id!==q.id;v.option.disabled=!available.includes(item.id);
         for(const input of v.inputs){if(item.type==='choice')input.checked=input.value===r.draft;else if(input.value!==r.draft)input.value=r.draft;input.setAttribute('aria-invalid',String(invalid===item.id))}
         if(v.label){text(v.label,t(item.type==='numeric'?'practiceNumeric':'practiceSelfResponse'));text(v.hint,item.type==='self'?t('practiceSelfHelp'):t('practiceNumericHelp')+' '+t(item.absoluteTolerance||item.relativeTolerance?'practiceTolerance':'practiceExact',{absolute:item.absoluteTolerance,relative:item.relativeTolerance}))}
@@ -113,8 +115,11 @@
         if(active.matches('input,textarea,[data-rating]')){if(state.responses[state.current])incoming.responses[state.current]=state.responses[state.current];else delete incoming.responses[state.current];incoming.recorded=false}
       }
       state=incoming;invalid='';notice=notice||'practiceOtherTab';render();
-    });
-    document.addEventListener('preferenceschange',render);
-    root.dataset.practiceReady='true';root.querySelector('.practice-fallback').hidden=true;render();
-  });
+    },{signal:events.signal});
+    document.addEventListener('preferenceschange',render,{signal:events.signal});
+    root.dataset.practiceReady='true';if(root.querySelector('.practice-fallback'))root.querySelector('.practice-fallback').hidden=true;render();
+    return {destroy(){events.abort();ui.remove();delete root.dataset.practiceReady}};
+  }
+  window.StudyPractice={mount};
+  document.querySelectorAll('.practice-mode:not(.exam-mode)').forEach(root=>mount(root));
 })();

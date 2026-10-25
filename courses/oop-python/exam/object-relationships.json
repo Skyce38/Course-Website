@@ -1,0 +1,594 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-object-relationships",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "oop-python-object-relationships-exam-01",
+      "type": "choice",
+      "prompt": "Attribute ที่เก็บ object อื่น เก็บอะไรเป็นหลักใน Python?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "reference ไปยัง object นั้น",
+          "id": "a"
+        },
+        {
+          "text": "สำเนาใหม่อัตโนมัติทุกครั้ง",
+          "id": "b"
+        },
+        {
+          "text": "ชื่อไฟล์ของ class เท่านั้น",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "การ assign object ไม่ใช่การ deep copy",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week5 pp.3–18 ยก order / address / item และการเก็บ object ไว้เป็น attribute แยกข้อมูลกับพฤติกรรมตามขอบเขตที่เปลี่ยนจริง เช่น อ้าง Address object แทนการใช้หลายลิสต์ขนานกัน ซึ่ง index อาจคลาดกันได้\n\nAttribute เก็บ reference ไม่ใช่สำเนา object"
+      }
+    },
+    {
+      "id": "oop-python-object-relationships-exam-02",
+      "type": "choice",
+      "prompt": "ความสัมพันธ์ยังไม่มีค่าและเก็บ None ควรตรวจอะไรก่อนใช้?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "เรียก method ได้เหมือน object ปกติ",
+          "id": "a"
+        },
+        {
+          "text": "ตรวจ None ก่อนเรียก method ของ object ที่คาด",
+          "id": "b"
+        },
+        {
+          "text": "แปลง None เป็น class เสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "None ไม่รองรับ interface ของ part ที่ยังไม่มี",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week5 pp.3–18 ยก order / address / item และการเก็บ object ไว้เป็น attribute แยกข้อมูลกับพฤติกรรมตามขอบเขตที่เปลี่ยนจริง เช่น อ้าง Address object แทนการใช้หลายลิสต์ขนานกัน ซึ่ง index อาจคลาดกันได้\n\nAttribute เก็บ reference ไม่ใช่สำเนา object"
+      }
+    },
+    {
+      "id": "oop-python-object-relationships-exam-03",
+      "type": "choice",
+      "prompt": "Association รับรองว่าต้องเป็นการใช้งานชั่วคราวเสมอหรือไม่?",
+      "reference": "relationships",
+      "choices": [
+        {
+          "text": "รับรองเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "รับรองว่าเป็น composition",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ ต้องดู domain และอายุ reference",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "Association เป็นความสัมพันธ์ทั่วไป ไม่จำกัดทุกกรณีให้เหมือนตัวอย่างชั่วคราว",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "| แบบ | เจตนา | ตัวอย่างที่ source ใช้ | สิ่งที่ต้องประกาศ |\n|---|---|---|---|\n| Association | objects รู้จัก/ใช้งานกัน | โอนระหว่างบัญชี/ใช้ service | ใครเรียกใครและมี reference นานเท่าใด |\n| Aggregation | whole เก็บ part ที่มีตัวตนอิสระ |"
+      }
+    },
+    {
+      "id": "oop-python-object-relationships-exam-04",
+      "type": "choice",
+      "prompt": "UML multiplicity 0..1 หมายถึงอะไร?",
+      "reference": "relationships",
+      "choices": [
+        {
+          "text": "มีศูนย์หรือหนึ่ง part ที่ปลายสัมพันธ์นั้น",
+          "id": "a"
+        },
+        {
+          "text": "ต้องมีหนึ่งเสมอ",
+          "id": "b"
+        },
+        {
+          "text": "มีได้ไม่จำกัด",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "notation บอกจำนวนที่อนุญาต ต้องทำ validation เอง",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "| แบบ | เจตนา | ตัวอย่างที่ source ใช้ | สิ่งที่ต้องประกาศ |\n|---|---|---|---|\n| Association | objects รู้จัก/ใช้งานกัน | โอนระหว่างบัญชี/ใช้ service | ใครเรียกใครและมี reference นานเท่าใด |\n| Aggregation | whole เก็บ part ที่มีตัวตนอิสระ |"
+      }
+    },
+    {
+      "id": "oop-python-object-relationships-exam-05",
+      "type": "choice",
+      "prompt": "UML multiplicity 1..* ต่างจาก 0..* ที่อะไร?",
+      "reference": "relationships",
+      "choices": [
+        {
+          "text": "จำนวนสูงสุดหนึ่งเท่ากัน",
+          "id": "a"
+        },
+        {
+          "text": "ขั้นต่ำหนึ่งเทียบกับยอมให้ไม่มี",
+          "id": "b"
+        },
+        {
+          "text": "เป็นรูปแบบ private ทั้งคู่",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "เครื่องหมาย * ไม่จำกัดจำนวนสูงสุด แต่ค่าต่ำสุดต่างกัน",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "| แบบ | เจตนา | ตัวอย่างที่ source ใช้ | สิ่งที่ต้องประกาศ |\n|---|---|---|---|\n| Association | objects รู้จัก/ใช้งานกัน | โอนระหว่างบัญชี/ใช้ service | ใครเรียกใครและมี reference นานเท่าใด |\n| Aggregation | whole เก็บ part ที่มีตัวตนอิสระ |"
+      }
+    },
+    {
+      "id": "oop-python-object-relationships-exam-06",
+      "type": "choice",
+      "prompt": "Team รับ Player ที่สร้างแล้วและย้ายทีมได้ เหมาะกับเจตนาใด?",
+      "reference": "relationships",
+      "choices": [
+        {
+          "text": "Player is-a Team",
+          "id": "a"
+        },
+        {
+          "text": "Composition ที่ห้าม part อยู่อิสระเสมอ",
+          "id": "b"
+        },
+        {
+          "text": "Aggregation",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "Player มีตัวตนอิสระและทีมเก็บ reference ของคนเดิม",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "| แบบ | เจตนา | ตัวอย่างที่ source ใช้ | สิ่งที่ต้องประกาศ |\n|---|---|---|---|\n| Association | objects รู้จัก/ใช้งานกัน | โอนระหว่างบัญชี/ใช้ service | ใครเรียกใครและมี reference นานเท่าใด |\n| Aggregation | whole เก็บ part ที่มีตัวตนอิสระ |"
+      }
+    },
+    {
+      "id": "oop-python-object-relationships-exam-07",
+      "type": "choice",
+      "prompt": "ทำไม Team.add_player ควรเก็บ p เดิมแทน Player(p.name)?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "เพื่อรักษา identity และ state เช่น goals",
+          "id": "a"
+        },
+        {
+          "text": "เพื่อลบชื่อผู้เล่น",
+          "id": "b"
+        },
+        {
+          "text": "เพราะสร้าง object ใหม่ไม่ได้ใน Python",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "การสร้างใหม่อาจรีเซ็ตข้อมูลและทำให้ไม่ใช่คนเดิม",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Team.add_player รับ object เดิม;House.add_room รับข้อมูลแล้วสร้าง part นโยบายเพิ่มของผู้เขียน:Team ไม่รับสมาชิกเดิมซ้ำ และส่ง tuple ออกแทน list ภายใน ไม่เปลี่ยนกฎ source ให้เป็น ownership ที่ภาษา enforce เอง"
+      }
+    },
+    {
+      "id": "oop-python-object-relationships-exam-08",
+      "type": "choice",
+      "prompt": "Team.players คืน tuple แทน list ภายใน ช่วยอะไร?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "ทำให้ Player ทุกตัว immutable",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ให้ client append/remove ผ่าน container ที่คืนมาโดยตรง",
+          "id": "b"
+        },
+        {
+          "text": "ทำให้การอ่านเป็น O(1) ทุกกรณี",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "container snapshot กับสมาชิกข้างในเป็นคนละระดับ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Team.add_player รับ object เดิม;House.add_room รับข้อมูลแล้วสร้าง part นโยบายเพิ่มของผู้เขียน:Team ไม่รับสมาชิกเดิมซ้ำ และส่ง tuple ออกแทน list ภายใน ไม่เปลี่ยนกฎ source ให้เป็น ownership ที่ภาษา enforce เอง"
+      }
+    },
+    {
+      "id": "oop-python-object-relationships-exam-09",
+      "type": "choice",
+      "prompt": "p อยู่ใน snapshot tuple แล้ว p.score เปลี่ยน goals snapshot เห็นค่าหรือไม่?",
+      "reference": "trace",
+      "choices": [
+        {
+          "text": "ไม่เห็นเพราะ tuple deep copy",
+          "id": "a"
+        },
+        {
+          "text": "ไม่เห็นเพราะ tuple ไม่มี methods",
+          "id": "b"
+        },
+        {
+          "text": "เห็น เพราะยังอ้าง Player เดิม",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "tuple ไม่คัดลอก mutable objects ข้างใน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เริ่ม p(goals0)→เพิ่มเข้า A ยัง objectp เดิม→p.score ทำ goals1 ซึ่ง A เห็นด้วย→remove ออก A→เพิ่มเข้า B ยัง is p และ goals1 ไม่มีการสร้าง Player ใหม่ระหว่างย้าย การทำ `Player(p.name)`แทนจะเริ่ม goals0 และทำประวัติหาย\n\nHouse สร้าง 3rooms พื้"
+      }
+    },
+    {
+      "id": "oop-python-object-relationships-exam-10",
+      "type": "numeric",
+      "prompt": "Player เริ่ม goals0 score สำเร็จ 3 ครั้งแล้วถูกย้ายทีมโดยเก็บ identity เดิม goals เป็นเท่าใด?",
+      "reference": "trace",
+      "answer": 3,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "ย้าย container ไม่สร้าง Player ใหม่ จึงรักษาจำนวน goals",
+      "difficulty": "easy",
+      "verification": {
+        "method": "python",
+        "evidence": "เริ่ม p(goals0)→เพิ่มเข้า A ยัง objectp เดิม→p.score ทำ goals1 ซึ่ง A เห็นด้วย→remove ออก A→เพิ่มเข้า B ยัง is p และ goals1 ไม่มีการสร้าง Player ใหม่ระหว่างย้าย การทำ `Player(p.name)`แทนจะเริ่ม goals0 และทำประวัติหาย\n\nHouse สร้าง 3rooms พื้",
+        "oracle": "0+3"
+      }
+    },
+    {
+      "id": "oop-python-object-relationships-exam-11",
+      "type": "choice",
+      "prompt": "ลิสต์ a=[p]; b=list(a) ข้อใดถูกเกี่ยวกับสมาชิก?",
+      "reference": "trace",
+      "choices": [
+        {
+          "text": "b[0] เป็น Player ใหม่เสมอ",
+          "id": "a"
+        },
+        {
+          "text": "b เป็น container ใหม่แต่ b[0] is p",
+          "id": "b"
+        },
+        {
+          "text": "a และ b เป็นลิสต์เดียวกัน",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "shallow copy คัด references ของสมาชิก ไม่ใช่ deep copy",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เริ่ม p(goals0)→เพิ่มเข้า A ยัง objectp เดิม→p.score ทำ goals1 ซึ่ง A เห็นด้วย→remove ออก A→เพิ่มเข้า B ยัง is p และ goals1 ไม่มีการสร้าง Player ใหม่ระหว่างย้าย การทำ `Player(p.name)`แทนจะเริ่ม goals0 และทำประวัติหาย\n\nHouse สร้าง 3rooms พื้"
+      }
+    },
+    {
+      "id": "oop-python-object-relationships-exam-12",
+      "type": "choice",
+      "prompt": "Composition เป็นสัญญาระดับใดในบท?",
+      "reference": "lifetime",
+      "choices": [
+        {
+          "text": "คำสั่ง GC ที่ภาษาอนุมานจาก UML",
+          "id": "a"
+        },
+        {
+          "text": "การรับรองลบ references ทุกแห่ง",
+          "id": "b"
+        },
+        {
+          "text": "ownership/lifecycle ตาม domain และ interface",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "Python ไม่บังคับ part ownership จากคำอธิบาย UML ให้เอง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.39–41 เน้นว่าไม่มี external reference ใน interface ตัวอย่างจึงหมดการเข้าถึง room เมื่อ house หมดไป แต่ Python ไม่ห้ามสร้าง Room ลอยๆหรือเก็บ alias ถ้าโค้ดเปิดทาง `del house`ลบ reference หนึ่งชื่อ ไม่รับรอง part ถูกทำลายทันทีเมื่อยังมี al"
+      }
+    },
+    {
+      "id": "oop-python-object-relationships-exam-13",
+      "type": "choice",
+      "prompt": "House หายไปจากชื่อหนึ่งแต่ยังมี alias ถึง Room จะสรุปอย่างไร?",
+      "reference": "lifetime",
+      "choices": [
+        {
+          "text": "Room ยังอาจเข้าถึงได้ ไม่รับรองถูกทำลายทันที",
+          "id": "a"
+        },
+        {
+          "text": "Room ต้องถูกทำลายทันที",
+          "id": "b"
+        },
+        {
+          "text": "alias ถูกลบอัตโนมัติ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ต้องแยก domain ownership จากการจัดการหน่วยความจำ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.39–41 เน้นว่าไม่มี external reference ใน interface ตัวอย่างจึงหมดการเข้าถึง room เมื่อ house หมดไป แต่ Python ไม่ห้ามสร้าง Room ลอยๆหรือเก็บ alias ถ้าโค้ดเปิดทาง `del house`ลบ reference หนึ่งชื่อ ไม่รับรอง part ถูกทำลายทันทีเมื่อยังมี al"
+      }
+    },
+    {
+      "id": "oop-python-object-relationships-exam-14",
+      "type": "choice",
+      "prompt": "Team ตรวจสมาชิกซ้ำด้วย list ที่มี n คน ต้นทุน worst case ใด?",
+      "reference": "complexity",
+      "choices": [
+        {
+          "text": "O(1) ทุกครั้ง",
+          "id": "a"
+        },
+        {
+          "text": "O(n)",
+          "id": "b"
+        },
+        {
+          "text": "O(log n) เพราะเป็น class",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ต้องตรวจ equality/identity ตาม policy ซึ่งอาจ scan จนท้าย",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Team การตรวจซ้ำ/ลบด้วย list ต้อง O(n),สร้าง tuplesnapshotO(n);การเข้าถึง object ที่รู้อยู่แล้ว O(1) ภายใต้แบบจำลองนี้ House.total_area เป็น O(r) สำหรับ r ห้อง ไม่ใช่ O(1) เพียงเพราะเป็น property LabLibrary/Gym/Clinic มีหลายความสัมพันธ์พร้อม"
+      }
+    },
+    {
+      "id": "oop-python-object-relationships-exam-15",
+      "type": "numeric",
+      "prompt": "สร้าง tuple snapshot ของ reference n=12 รายการ ต้องคัด references กี่รายการ?",
+      "reference": "complexity",
+      "answer": 12,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "สร้าง container ใหม่ต้องเยี่ยมทั้ง 12 รายการ ไม่ใช่ copy Player ทั้ง 12 ตัว",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "Team การตรวจซ้ำ/ลบด้วย list ต้อง O(n),สร้าง tuplesnapshotO(n);การเข้าถึง object ที่รู้อยู่แล้ว O(1) ภายใต้แบบจำลองนี้ House.total_area เป็น O(r) สำหรับ r ห้อง ไม่ใช่ O(1) เพียงเพราะเป็น property LabLibrary/Gym/Clinic มีหลายความสัมพันธ์พร้อม",
+        "oracle": "len(range(12))"
+      }
+    },
+    {
+      "id": "oop-python-object-relationships-exam-16",
+      "type": "choice",
+      "prompt": "House.total_area ต้องรวม r ห้อง computed property นี้ต้นทุนใด?",
+      "reference": "complexity",
+      "choices": [
+        {
+          "text": "O(r)",
+          "id": "a"
+        },
+        {
+          "text": "O(1) เพราะเรียกเหมือน attribute",
+          "id": "b"
+        },
+        {
+          "text": "O(log r) เสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ต้องอ่านพื้นที่แต่ละห้อง เว้นแต่มี cache ที่ออกแบบต่างจากตัวอย่าง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Team การตรวจซ้ำ/ลบด้วย list ต้อง O(n),สร้าง tuplesnapshotO(n);การเข้าถึง object ที่รู้อยู่แล้ว O(1) ภายใต้แบบจำลองนี้ House.total_area เป็น O(r) สำหรับ r ห้อง ไม่ใช่ O(1) เพียงเพราะเป็น property LabLibrary/Gym/Clinic มีหลายความสัมพันธ์พร้อม"
+      }
+    },
+    {
+      "id": "oop-python-object-relationships-exam-17",
+      "type": "choice",
+      "prompt": "Customer มี Account ควรสรุป Customer สืบทอด Account หรือไม่?",
+      "reference": "relationships",
+      "choices": [
+        {
+          "text": "ควรเพราะมีชื่อคล้ายกัน",
+          "id": "a"
+        },
+        {
+          "text": "ไม่จาก has-a เพียงอย่างเดียว ต้องดู is-a และ contract",
+          "id": "b"
+        },
+        {
+          "text": "ควรเพราะทั้งสองเป็น object",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ความสัมพันธ์ใช้งาน/ถือครองไม่ใช่การทดแทนชนิด",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "| แบบ | เจตนา | ตัวอย่างที่ source ใช้ | สิ่งที่ต้องประกาศ |\n|---|---|---|---|\n| Association | objects รู้จัก/ใช้งานกัน | โอนระหว่างบัญชี/ใช้ service | ใครเรียกใครและมี reference นานเท่าใด |\n| Aggregation | whole เก็บ part ที่มีตัวตนอิสระ |"
+      }
+    },
+    {
+      "id": "oop-python-object-relationships-exam-18",
+      "type": "choice",
+      "prompt": "คืน list ภายในให้ client โดยตรง เสี่ยงอะไร?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "text": "ป้องกันการแก้ state ทุกอย่าง",
+          "id": "a"
+        },
+        {
+          "text": "ทำให้ references เป็น private",
+          "id": "b"
+        },
+        {
+          "text": "client แก้ membership โดยข้าม validation",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "encapsulation ต้องดูสิ่งที่ interface เปิดให้แก้",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "คืน list ภายในให้ caller ลบทิ้งได้;สร้าง part ใหม่แทนเก็บ reference เดิม;สืบทอด Customer จาก Account เพียงเพราะมี account;คิด tuple ทำให้ทุก object ข้างใน immutable;ถือ del เป็นคำสั่งทำลาย graph ทุกตัว"
+      }
+    },
+    {
+      "id": "oop-python-object-relationships-exam-19",
+      "type": "choice",
+      "prompt": "ระบบ Library อาจมีทั้ง aggregation และ composition พร้อมกันได้หรือไม่?",
+      "reference": "relationships",
+      "choices": [
+        {
+          "text": "ได้ ต้องแยก Book กับ records ตามสัญญาแต่ละ task",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ได้ทั้งระบบต้องใช้แบบเดียว",
+          "id": "b"
+        },
+        {
+          "text": "ได้เพราะทุก class ต้อง inherit กัน",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "เลือกตาม entity และ ownership ไม่เหมาทั้งระบบจากคำว่า has-a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "| แบบ | เจตนา | ตัวอย่างที่ source ใช้ | สิ่งที่ต้องประกาศ |\n|---|---|---|---|\n| Association | objects รู้จัก/ใช้งานกัน | โอนระหว่างบัญชี/ใช้ service | ใครเรียกใครและมี reference นานเท่าใด |\n| Aggregation | whole เก็บ part ที่มีตัวตนอิสระ |"
+      }
+    },
+    {
+      "id": "oop-python-object-relationships-exam-20",
+      "type": "choice",
+      "prompt": "Team ปฏิเสธ Player object เดิมซ้ำตาม policy ผู้เขียน ทำให้เกิดอะไร?",
+      "reference": "trace",
+      "choices": [
+        {
+          "text": "สร้าง Player สำเนาใหม่",
+          "id": "a"
+        },
+        {
+          "text": "ไม่เพิ่มสมาชิกซ้ำจาก reference เดิม",
+          "id": "b"
+        },
+        {
+          "text": "ห้ามผู้เล่นชื่อเหมือนกันทุกคนโดยอัตโนมัติ",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ต้องแยก identity policy กับชื่อที่เท่ากัน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เริ่ม p(goals0)→เพิ่มเข้า A ยัง objectp เดิม→p.score ทำ goals1 ซึ่ง A เห็นด้วย→remove ออก A→เพิ่มเข้า B ยัง is p และ goals1 ไม่มีการสร้าง Player ใหม่ระหว่างย้าย การทำ `Player(p.name)`แทนจะเริ่ม goals0 และทำประวัติหาย\n\nHouse สร้าง 3rooms พื้"
+      }
+    },
+    {
+      "id": "oop-python-object-relationships-exam-21",
+      "type": "self",
+      "prompt": "วิเคราะห์ Clinic ที่มีคนไข้ แพทย์ และ appointment โดยไม่เหมาทุก has-a เป็น composition",
+      "reference": "relationships",
+      "rubric": [
+        "ประกาศ entity ที่มีตัวตนอิสระ",
+        "ระบุ record ที่ระบบสร้างจัดการเอง",
+        "กำหนด multiplicity และ validation ตาม scenario"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ประกาศ entity ที่มีตัวตนอิสระ ระบุ record ที่ระบบสร้างจัดการเอง กำหนด multiplicity และ validation ตาม scenario",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "| แบบ | เจตนา | ตัวอย่างที่ source ใช้ | สิ่งที่ต้องประกาศ |\n|---|---|---|---|\n| Association | objects รู้จัก/ใช้งานกัน | โอนระหว่างบัญชี/ใช้ service | ใครเรียกใครและมี reference นานเท่าใด |\n| Aggregation | whole เก็บ part ที่มีตัวตนอิสระ |"
+      }
+    },
+    {
+      "id": "oop-python-object-relationships-exam-22",
+      "type": "self",
+      "prompt": "ออกแบบ test ที่แยก container copy กับ part copy",
+      "reference": "trace",
+      "rubric": [
+        "สร้าง alias และ shallow container snapshot",
+        "mutate part แล้วตรวจสิ่งที่ snapshot เห็น",
+        "ลบสมาชิกจาก original และตรวจ snapshot เดิม"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: สร้าง alias และ shallow container snapshot mutate part แล้วตรวจสิ่งที่ snapshot เห็น ลบสมาชิกจาก original และตรวจ snapshot เดิม",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "เริ่ม p(goals0)→เพิ่มเข้า A ยัง objectp เดิม→p.score ทำ goals1 ซึ่ง A เห็นด้วย→remove ออก A→เพิ่มเข้า B ยัง is p และ goals1 ไม่มีการสร้าง Player ใหม่ระหว่างย้าย การทำ `Player(p.name)`แทนจะเริ่ม goals0 และทำประวัติหาย\n\nHouse สร้าง 3rooms พื้"
+      }
+    },
+    {
+      "id": "oop-python-object-relationships-exam-23",
+      "type": "self",
+      "prompt": "อธิบาย lifecycle ของ composition ใน Python ให้ไม่ขัดกับ aliases",
+      "reference": "lifetime",
+      "rubric": [
+        "แยก ownership contract กับ reachability",
+        "ไม่ใช้ del เป็นคำสั่งทำลายทุก object",
+        "ออกแบบ interface ลด external aliases ถ้าต้องการ"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: แยก ownership contract กับ reachability ไม่ใช้ del เป็นคำสั่งทำลายทุก object ออกแบบ interface ลด external aliases ถ้าต้องการ",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "pp.39–41 เน้นว่าไม่มี external reference ใน interface ตัวอย่างจึงหมดการเข้าถึง room เมื่อ house หมดไป แต่ Python ไม่ห้ามสร้าง Room ลอยๆหรือเก็บ alias ถ้าโค้ดเปิดทาง `del house`ลบ reference หนึ่งชื่อ ไม่รับรอง part ถูกทำลายทันทีเมื่อยังมี al"
+      }
+    },
+    {
+      "id": "oop-python-object-relationships-exam-24",
+      "type": "self",
+      "prompt": "ออกแบบ read interface ของ Team/House ที่รักษา state ภายใน",
+      "reference": "python",
+      "rubric": [
+        "ไม่คืน mutable membership list โดยตรง",
+        "ชี้ว่าค่าที่คืนยังอาจอ้าง mutable parts",
+        "ระบุต้นทุน snapshot และ computed properties"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ไม่คืน mutable membership list โดยตรง ชี้ว่าค่าที่คืนยังอาจอ้าง mutable parts ระบุต้นทุน snapshot และ computed properties",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Team.add_player รับ object เดิม;House.add_room รับข้อมูลแล้วสร้าง part นโยบายเพิ่มของผู้เขียน:Team ไม่รับสมาชิกเดิมซ้ำ และส่ง tuple ออกแทน list ภายใน ไม่เปลี่ยนกฎ source ให้เป็น ownership ที่ภาษา enforce เอง"
+      }
+    }
+  ]
+}

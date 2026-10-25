@@ -25,7 +25,7 @@ S11 pp.2–5 แสดง weighted sum, nonlinear activation และ hidden la
 | 1,0 | .5 → 1 | −.5 → 0 | .5 → 1 |
 | 1,1 | 1.5 → 1 | .5 → 1 | −1.5 → 0 |
 
-นี่เป็นการตรวจ network ที่กำหนดแล้ว ไม่ใช่ผล train ด้วย backpropagation Threshold ไม่ differentiable ที่0 และอนุพันธ์0เกือบทุกจุด จึงใช้ smooth sigmoid ในบทเรียน gradient ถัดไป ห้ามแทน threshold ด้วย sigmoid โดยใช้ weights เดิมแล้วอ้าง output XOR เหมือนกัน
+นี่เป็นการตรวจ network ที่กำหนดแล้ว ไม่ใช่ผล train ด้วย backpropagation Threshold ไม่ differentiable ที่ 0 และอนุพันธ์ 0 เกือบทุกจุด จึงใช้ smooth sigmoid ในบทเรียน gradient ถัดไป ห้ามแทน threshold ด้วย sigmoid โดยใช้ weights เดิมแล้วอ้าง output XOR เหมือนกัน
 
 ## Sigmoid และอนุพันธ์ {#sigmoid}
 S10 pp.21–22 นิยาม
@@ -34,10 +34,10 @@ $$
 \sigma(z)=\frac{1}{1+e^{-z}},\qquad \sigma'(z)=\sigma(z)(1-\sigma(z))
 $$
 
-ที่ z0ได้.5และอนุพันธ์.25; เมื่อ|z|มาก output อิ่มตัว (saturation) ทำให้ gradient เล็ก นี่เป็นข้ออธิบายเพิ่มเติม ไม่ใช่การรับรองว่า sigmoid output คือ calibrated probability โดยอัตโนมัติ
+ที่ z0 ได้.5 และอนุพันธ์.25; เมื่อ|z|มาก output อิ่มตัว (saturation) ทำให้ gradient เล็ก นี่เป็นข้ออธิบายเพิ่มเติม ไม่ใช่การรับรองว่า sigmoid output คือ calibrated probability โดยอัตโนมัติ
 
 ## Loss, Sign และ Backpropagation {#backprop}
-S10 p.23 ใช้ squared error รวมข้อมูล/outputs พร้อมตัวคูณ1/2; ตัวอย่างนี้ใช้หนึ่ง sample/หนึ่ง output จึง
+S10 p.23 ใช้ squared error รวมข้อมูล/outputs พร้อมตัวคูณ 1/2; ตัวอย่างนี้ใช้หนึ่ง sample/หนึ่ง output จึง
 
 $$
 L=\frac12(y-t)^2,\quad g_o=\frac{\partial L}{\partial z_o}=(y-t)y(1-y)
@@ -49,7 +49,7 @@ $$
 g_j=h_j(1-h_j)v_jg_o,\quad \frac{\partial L}{\partial v_j}=g_oh_j,\quad \frac{\partial L}{\partial a_{ji}}=g_jx_i,\quad \frac{\partial L}{\partial b_o}=g_o,\quad \frac{\partial L}{\partial b_j}=g_j
 $$
 
-Gradient descent: θnew=θold−η∂L/∂θ สำหรับทุก parameter พร้อมกัน S10 p.24 ใช้ δ_o=(t−y)y(1−y)=−g_o และ update **บวก** ηδx จึงทิศเดียวกัน ไม่ใช่สูตรขัดกัน ต้องคำนวณ hidden error จาก output weights **เก่า** เก็บ gradients ทั้งหมดแล้วจึง update; bias ใช้ input คงที่1 ส่วน loss รวม/เฉลี่ย batch ต่างกันด้วย scale ต้องประกาศก่อนเทียบ learning rate
+Gradient descent: θnew=θold−η∂L/∂θ สำหรับทุก parameter พร้อมกัน S10 p.24 ใช้ δ_o=(t−y)y(1−y)=−g_o และ update **บวก** ηδx จึงทิศเดียวกัน ไม่ใช่สูตรขัดกัน ต้องคำนวณ hidden error จาก output weights **เก่า** เก็บ gradients ทั้งหมดแล้วจึง update; bias ใช้ input คงที่ 1 ส่วน loss รวม/เฉลี่ย batch ต่างกันด้วย scale ต้องประกาศก่อนเทียบ learning rate
 
 ## คำนวณหนึ่งก้าวทีละขั้น: ตัวอย่างผู้เขียน {#worked}
 ไม่ใช่ weights XOR ด้านบน ใช้ inputs(1,.5),target.8,η.2, sigmoid ทุก hidden/output, ไม่มี regularization:
@@ -75,7 +75,7 @@ Gradient descent: θnew=θold−η∂L/∂θ สำหรับทุก paramet
 Feedforward อีกครั้งด้วย **ทุกค่าใหม่** ได้ L=.025035809 ลดลงในตัวอย่างนี้ ไม่อ้างว่า learning rate ใดก็ลด loss หรือหา global minimum ได้ S10 p.23 เตือน local minima; neural loss ไม่เป็น convex โดยทั่วไปและ gradient เล็กอาจเป็น saddle/plateau ได้ด้วย
 
 ## Python และการตรวจอิสระ {#python}
-โค้ดตัวอย่างไม่ train ตัวเองในหน้าเว็บ ตัวตรวจออฟไลน์เปรียบเทียบ central finite differences [L(θ+ε)−L(θ−ε)]/(2ε), ε=10⁻⁶ กับ gradient ทุก9parameters; finite difference เป็นเครื่องมือเช็ค ไม่แทน backprop ในการ train จริง
+โค้ดตัวอย่างไม่ train ตัวเองในหน้าเว็บ ตัวตรวจออฟไลน์เปรียบเทียบ central finite differences [L(θ+ε)−L(θ−ε)]/(2ε), ε=10⁻⁶ กับ gradient ทุก 9parameters; finite difference เป็นเครื่องมือเช็ค ไม่แทน backprop ในการ train จริง
 
 ```python
 from math import exp
@@ -132,7 +132,7 @@ for xx in [(0,0),(0,1),(1,0),(1,1)]:
 ```
 
 ## ข้อผิดพลาดที่พบบ่อย {#mistakes}
-- ผสมδ=(t−y)กับ update ลบจนกลับทิศ หรือใช้ MSE loss แต่ขาดตัวคูณที่นิยามไว้
+- ผสมδ=(t−y) กับ update ลบจนกลับทิศ หรือใช้ MSE loss แต่ขาดตัวคูณที่นิยามไว้
 - ลืม sigmoid derivative หรือ bias; ใช้ outputweight ใหม่หา hiddenerror
 - คิดว่า hidden target ต้องมี label แยก: error ส่งผ่าน chain rule ได้
 - อ้าง XORthreshold network เป็นผล train sigmoid หรือหยุดเมื่อ sample เดียวถูก

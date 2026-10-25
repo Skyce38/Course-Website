@@ -11,9 +11,9 @@
 - วิเคราะห์เวลาทั้ง core operation และการแปลงข้อมูลเพื่อแสดงผล
 
 ## FIFO และ Linked Queue {#concepts}
-Week12 pp.3–18:เข้าก่อนออกก่อน (First In, First Out) enqueue เพิ่ม rear, dequeue คืนและนำ front ออก,peek อ่าน front มี head/tail ทำให้ linkedqueue เพิ่มท้าย/ลบต้น O(1)โดยไม่เดินหาแต่ละตำแหน่ง ต่างจาก stack ที่ push/pop ที่ head เดียวกัน
+Week12 pp.3–18:เข้าก่อนออกก่อน (First In, First Out) enqueue เพิ่ม rear, dequeue คืนและนำ front ออก,peek อ่าน front มี head/tail ทำให้ linkedqueue เพิ่มท้าย/ลบต้น O(1) โดยไม่เดินหาแต่ละตำแหน่ง ต่างจาก stack ที่ push/pop ที่ head เดียวกัน
 
-Python list.append ท้าย amortizedO(1)แต่ pop(0)ต้องเลื่อนสมาชิก O(n) การเปลี่ยนชื่อ method เป็น dequeue ไม่ได้เปลี่ยนกลไกนี้ ข้อมูลเมื่อเหลือหนึ่งตัวแล้ว dequeue ต้องตั้งทั้ง head และ tail เป็น None มิฉะนั้น enqueue ใหม่อาจต่อท้าย node ที่ไม่ได้อยู่ใน queue แล้ว
+Python list.append ท้าย amortizedO(1) แต่ pop(0) ต้องเลื่อนสมาชิก O(n) การเปลี่ยนชื่อ method เป็น dequeue ไม่ได้เปลี่ยนกลไกนี้ ข้อมูลเมื่อเหลือหนึ่งตัวแล้ว dequeue ต้องตั้งทั้ง head และ tail เป็น None มิฉะนั้น enqueue ใหม่อาจต่อท้าย node ที่ไม่ได้อยู่ใน queue แล้ว
 
 ## Circular Queue และตัวชี้ {#circular}
 pp.20–24,43–45:reuse ช่องว่างใน array ด้วย modulo ไม่ขยาย capacity และไม่เลื่อนสมาชิกทุก dequeue ในโค้ดนี้ rear หมายถึง **ช่องที่จะใส่ครั้งถัดไป** ไม่ใช่ตำแหน่งสมาชิกสุดท้าย front คือค่าที่จะออกถัดไป
@@ -21,7 +21,7 @@ pp.20–24,43–45:reuse ช่องว่างใน array ด้วย modul
 `rear=(rear+1)%capacity`, `front=(front+1)%capacity` โดย size แยกสถานะ empty0/fullcapacity เพราะ front==rear พบได้ทั้งสองสถานะ Capacity ต้องเป็น positiveinteger ก่อน allocate;clear ช่องที่นำออกเพื่อปล่อย reference แต่ None ใน livequeue ยังเป็นข้อมูลได้เพราะใช้ size นับ
 
 ## Python ที่รันเดี่ยวได้ {#python}
-อิง source Node/Queue/CircularQueue/PriorityQueue เพิ่ม strictpositivecapacity และ integerpriority เป็น policy ที่ระบุชัด ไม่ overwrite เมื่อ full ต่างจาก boundeddeque(maxlen)ที่อาจทิ้งค่าคนละนโยบาย
+อิง source Node/Queue/CircularQueue/PriorityQueue เพิ่ม strict positive capacity และ integer priority เป็น policy ที่ระบุชัด ไม่ overwrite เมื่อ full ต่างจาก boundeddeque(maxlen) ที่อาจทิ้งค่าคนละนโยบาย
 
 ```python
 from collections import deque
@@ -110,7 +110,7 @@ print(d.popleft(),d.pop(),list(d))       # VIP C ['A','B']
 ```
 
 ## Trace Circular จาก Source {#trace}
-Week12 pp.20–22เริ่ม cap5 A,B,C,D,E เต็ม;dequeue สามครั้งนำ A,B,C ออก จากนั้น enqueueF,G
+Week12 pp.20–22 เริ่ม cap5 A,B,C,D,E เต็ม;dequeue สามครั้งนำ A,B,C ออก จากนั้น enqueueF,G
 
 | ขั้น | buffer กายภาพ | front | rear(ช่องถัดไป) | size | ลำดับ FIFO |
 |---|---|---:|---:|---:|---|
@@ -119,7 +119,7 @@ Week12 pp.20–22เริ่ม cap5 A,B,C,D,E เต็ม;dequeue สาม�
 |ใส่ F|F _ _ D E|3|1|3|D E F|
 |ใส่ G|F G _ D E|3|2|4|D E F G|
 
-ลำดับทางกายภาพไม่ใช่ logicalorder การแสดงผลต้องเดิน `(front+i)%capacity` เพียง size ครั้ง Source บาง diagramrear ชี้ค่าตัวสุดท้าย แต่ classcode ใช้ช่องถัดไป จึงประกาศนิยามก่อน trace ไม่สลับสอง conventions
+ลำดับทางกายภาพไม่ใช่ logical order การแสดงผลต้องเดิน `(front+i)%capacity` เพียง size ครั้ง Source บาง diagramrear ชี้ค่าตัวสุดท้าย แต่ classcode ใช้ช่องถัดไป จึงประกาศนิยามก่อน trace ไม่สลับสอง conventions
 
 ## Deque และการเลือก ADT {#deque}
 pp.26–30:double-endedqueue เพิ่ม/ลบได้สองปลาย:append/appendleft,pop/popleft;peek ใช้[0]/[-1]เมื่อไม่ว่าง เหมาะคิวทั่วไป/ประวัติ/งานสองปลาย ตรงข้ามกับ APIStack หรือ Queue ที่ตั้งใจจำกัดการใช้
@@ -129,9 +129,9 @@ pp.26–30:double-endedqueue เพิ่ม/ลบได้สองปลา�
 ตัวอย่างที่มีจริง:PrintJobScheduler ใช้ FIFO;RestaurantWaitlist มีการจัดการสองปลาย;BoundedUndoHistory จำกัดประวัติเก่า นี่คือโจทย์ local ที่ตรวจแล้ว ไม่ใช่การสร้าง requirementsNewsManager ซึ่งไม่พบ source
 
 ## Priority Queue และ Tie Breaking {#priority}
-pp.32–37,47–49:heapq เป็น min-heap จึง priority เลขน้อยออกก่อน Tuple(priority,arrival_order,item)ทำให้เมื่อ priority เท่ากันออกก่อนตาม arrivalorder และไม่ต้องเปรียบเทียบ item ที่อาจเป็น dict/object ไม่มี ordering
+pp.32–37,47–49:heapq เป็น min-heap จึง priority เลขน้อยออกก่อน Tuple(priority,arrival_order,item) ทำให้เมื่อ priority เท่ากันออกก่อนตาม arrivalorder และไม่ต้องเปรียบเทียบ item ที่อาจเป็น dict/object ไม่มี ordering
 
-A(priority2,counter0),B(1,1),C(2,2)→B,A,C ไม่ใช่ FIFO ล้วนและไม่ใช่ C ก่อน A เพราะชื่อมากกว่า `peek/dequeue`คืน(item,priority)ตาม interfaceclass;heap เก็บ(priority,counter,item)เป็น implementation ภายใน ถ้าต้องการคะแนนมากก่อนอาจแปลงเป็น negativekey อย่างชัดเจน ไม่เปลี่ยนกฎแอบๆ HospitalTriage ใช้ระดับฉุกเฉินตาม task ที่ระบุ ไม่อนุมาน policy ทางการแพทย์จริงจากตัวเลขจำลอง
+A(priority2,counter0),B(1,1),C(2,2)→B,A,C ไม่ใช่ FIFO ล้วนและไม่ใช่ C ก่อน A เพราะชื่อมากกว่า `peek/dequeue`คืน(item,priority) ตาม interfaceclass;heap เก็บ(priority,counter,item) เป็น implementation ภายใน ถ้าต้องการคะแนนมากก่อนอาจแปลงเป็น negativekey อย่างชัดเจน ไม่เปลี่ยนกฎแอบๆ HospitalTriage ใช้ระดับฉุกเฉินตาม task ที่ระบุ ไม่อนุมาน policy ทางการแพทย์จริงจากตัวเลขจำลอง
 
 ## Complexity และข้อผิดพลาด {#complexity}
 | งาน | เวลา | สมมติฐาน |
@@ -144,7 +144,7 @@ A(priority2,counter0),B(1,1),C(2,2)→B,A,C ไม่ใช่ FIFO ล้วน
 |heap enqueue/dequeue|O(log n)coreheap|listgrowth อาจ resize;รวมเป็น amortized/expectedimplementationcost ที่ระบุ|
 |heap peek|O(1)|ไม่ลบ root|
 
-พื้นที่ทั้งหมด O(n)หรือ O(capacity)ของ circular ข้อผิดพลาด:ลืม resettail,ใช้ front==rear ตัดสิน empty โดยไม่ดู size,mod0,อ่าน rawbuffer เป็น FIFO,overwritefull โดยไม่ได้ตกลง,ไม่ใส่ counter จน payload ถูกเปรียบเทียบหรือ tie ไม่เป็น FIFO
+พื้นที่ทั้งหมด O(n) หรือ O(capacity) ของ circular ข้อผิดพลาด:ลืม resettail,ใช้ front==rear ตัดสิน empty โดยไม่ดู size,mod0,อ่าน rawbuffer เป็น FIFO,overwritefull โดยไม่ได้ตกลง,ไม่ใส่ counter จน payload ถูกเปรียบเทียบหรือ tie ไม่เป็น FIFO
 
 ## แบบฝึกพร้อมเฉลย (ผู้เขียนจัดทำและตรวจอิสระ) {#practice}
 
@@ -173,7 +173,7 @@ A(priority2,counter0),B(1,1),C(2,2)→B,A,C ไม่ใช่ FIFO ล้วน
 **เฉลย:** capacity0→ValueError,bool→TypeError ตาม policy;dequeue ว่าง IndexError,enqueuecircular เต็ม OverflowError และ state เดิมไม่เปลี่ยน items()O(n)ไม่ได้ทำให้ enqueue หนึ่งครั้งกลายเป็น O(n)ถ้าไม่เรียก items ภายใน
 
 ## สรุปทบทวน {#summary}
-เลือก FIFO/deque/priority ก่อนเลือก storage;linked ต้อง headtail สอดคล้อง;circular ระบุ rear นิยามและ size;heap ใช้(priority,counter,item)เมื่ออยากได้ FIFO ใน tie ตรวจ empty/full/wrap และ complexity ของ method ที่เรียกจริง
+เลือก FIFO/deque/priority ก่อนเลือก storage;linked ต้อง headtail สอดคล้อง;circular ระบุ rear นิยามและ size;heap ใช้(priority,counter,item) เมื่ออยากได้ FIFO ใน tie ตรวจ empty/full/wrap และ complexity ของ method ที่เรียกจริง
 
 ## แหล่งอ้างอิงและขอบเขต {#sources}
 - [Week12 physical pp.3–49](../slides/Week12.pdf#page=3) — FIFO,linkedqueue,circular,dequeue/deque,heappriority/counter และ classes

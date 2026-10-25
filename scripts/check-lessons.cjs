@@ -37,6 +37,8 @@ try {
   fs.writeFileSync(path.join(temp,'scripts/lessons.json'),JSON.stringify([source])); // Keep this isolated fixture independent of other registered lessons.
   const practice='courses/oop-python/practice/linked-list.json';
   if(fs.existsSync(practice)){fs.mkdirSync(path.dirname(path.join(temp,practice)),{recursive:true});fs.copyFileSync(practice,path.join(temp,practice));}
+  const exam='courses/oop-python/exam/linked-list.json';
+  if(fs.existsSync(exam)){fs.mkdirSync(path.dirname(path.join(temp,exam)),{recursive:true});fs.copyFileSync(exam,path.join(temp,exam));}
   for(const file of ['courses/oop-python/summaries/final-week10-15.md','courses/oop-python/slides/Week10.pdf']) { fs.mkdirSync(path.dirname(path.join(temp,file)),{recursive:true});fs.writeFileSync(path.join(temp,file),'Fixture only'); }
   const data=structuredClone(catalog);buildLessons(data,temp);
   const target=path.join(temp,output),html=fs.readFileSync(target,'utf8'),before=JSON.stringify(data);

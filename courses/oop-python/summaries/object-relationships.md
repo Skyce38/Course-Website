@@ -6,8 +6,8 @@
 
 ## เป้าหมายการเรียนรู้ {#objectives}
 - แยก is-a จาก has-a และการใช้งาน object ชั่วคราว
-- ติดตาม reference/sharedstate และผลของการ copycontainer
-- เลือก ownership/multiplicity ให้เข้ากับ domain และอธิบาย Pythonlifetime อย่างถูกต้อง
+- ติดตาม reference/shared state และผลของการ copy container
+- เลือก ownership/multiplicity ให้เข้ากับ domain และอธิบาย Python lifetime อย่างถูกต้อง
 
 ## ทำไมไม่ยัดทุกอย่างใน Class เดียว {#concepts}
 Week5 pp.3–18 ยก order / address / item และการเก็บ object ไว้เป็น attribute แยกข้อมูลกับพฤติกรรมตามขอบเขตที่เปลี่ยนจริง เช่น อ้าง Address object แทนการใช้หลายลิสต์ขนานกัน ซึ่ง index อาจคลาดกันได้
@@ -21,7 +21,7 @@ Attribute เก็บ reference ไม่ใช่สำเนา object ให
 | Aggregation | whole เก็บ part ที่มีตัวตนอิสระ | Team รับ Player ที่สร้างแล้ว | part ย้าย/แชร์ได้ตาม businessrules |
 | Composition | whole รับผิดชอบสร้าง/จัดการ part | House สร้าง Room ภายใน | ownership/lifecycle ตาม interface ที่ออกแบบ |
 
-Association เป็นความสัมพันธ์ทั่วไป ไม่จำเป็นว่าต้องชั่วคราวเสมอ กรอบเปรียบเทียบ source pp.20–42เน้น whole–part เพื่อการสอน UMLmultiplicity เช่น0..1,1,0..*,1..*บอกจำนวนที่อนุญาต ไม่ได้สร้าง validation ใน Python ให้อัตโนมัติ
+Association เป็นความสัมพันธ์ทั่วไป ไม่จำเป็นว่าต้องชั่วคราวเสมอ กรอบเปรียบเทียบ source pp.20–42 เน้น whole–part เพื่อการสอน UML multiplicity เช่น 0..1,1,0..*,1..*บอกจำนวนที่อนุญาต ไม่ได้สร้าง validation ใน Python ให้อัตโนมัติ
 
 ## Python: เก็บ Object เดิม ไม่สร้างซ้ำ {#python}
 Team.add_player รับ object เดิม;House.add_room รับข้อมูลแล้วสร้าง part นโยบายเพิ่มของผู้เขียน:Team ไม่รับสมาชิกเดิมซ้ำ และส่ง tuple ออกแทน list ภายใน ไม่เปลี่ยนกฎ source ให้เป็น ownership ที่ภาษา enforce เอง
@@ -79,17 +79,17 @@ print(h.room_count, h.total_area)  # 3 38
 ```
 
 ## Trace Identity และ Container Copy {#trace}
-เริ่ม p(goals0)→เพิ่มเข้า A ยัง objectp เดิม→p.score ทำ goals1ซึ่ง A เห็นด้วย→remove ออก A→เพิ่มเข้า B ยัง is p และ goals1 ไม่มีการสร้าง Player ใหม่ระหว่างย้าย การทำ `Player(p.name)`แทนจะเริ่ม goals0และทำประวัติหาย
+เริ่ม p(goals0)→เพิ่มเข้า A ยัง objectp เดิม→p.score ทำ goals1 ซึ่ง A เห็นด้วย→remove ออก A→เพิ่มเข้า B ยัง is p และ goals1 ไม่มีการสร้าง Player ใหม่ระหว่างย้าย การทำ `Player(p.name)`แทนจะเริ่ม goals0 และทำประวัติหาย
 
-House สร้าง3rooms พื้นที่20,12,6ตาม sourcepp.37–38 รวม38 การสร้าง room สี่เหลี่ยม?source ไม่ได้ให้รูปทรง จึงไม่แต่ง width/height เพื่อคำนวณพื้นที่ใหม่ `total_area`รวมข้อมูล area ที่มีอยู่
+House สร้าง 3rooms พื้นที่ 20,12,6 ตาม sourcepp.37–38 รวม 38 การสร้าง room สี่เหลี่ยม?source ไม่ได้ให้รูปทรง จึงไม่แต่ง width/height เพื่อคำนวณพื้นที่ใหม่ `total_area`รวมข้อมูล area ที่มีอยู่
 
-`team.players`เป็น tuple ใหม่ที่ป้องกัน append ลง container ภายในโดยตรง แต่สมาชิกยังเป็น reference เดิม การเรียก team.players[0].score()ยังแก้ Player ได้ Copycontainer ไม่ใช่ deepcopy;ถ้าต้องการ immutableview ต้องออกแบบให้คืนข้อมูลค่าเช่น room_summaries
+`team.players`เป็น tuple ใหม่ที่ป้องกัน append ลง container ภายในโดยตรง แต่สมาชิกยังเป็น reference เดิม การเรียก team.players[0].score() ยังแก้ Player ได้ Copycontainer ไม่ใช่ deepcopy;ถ้าต้องการ immutableview ต้องออกแบบให้คืนข้อมูลค่าเช่น room_summaries
 
 ## Composition ไม่ใช่ Garbage-Collection Command {#lifetime}
-pp.39–41เน้นว่าไม่มี externalreference ใน interface ตัวอย่างจึงหมดการเข้าถึง room เมื่อ house หมดไป แต่ Python ไม่ห้ามสร้าง Room ลอยๆหรือเก็บ alias ถ้าโค้ดเปิดทาง `del house`ลบ reference หนึ่งชื่อ ไม่รับรอง part ถูกทำลายทันทีเมื่อยังมี alias อยู่ แยกความเป็นเจ้าของเชิง domain ออกจากการจัดสรร/เก็บกวาดหน่วยความจำ และอย่าใช้ private เป็นเหตุผลว่าบังคับ ownership ได้100%
+pp.39–41 เน้นว่าไม่มี external reference ใน interface ตัวอย่างจึงหมดการเข้าถึง room เมื่อ house หมดไป แต่ Python ไม่ห้ามสร้าง Room ลอยๆหรือเก็บ alias ถ้าโค้ดเปิดทาง `del house`ลบ reference หนึ่งชื่อ ไม่รับรอง part ถูกทำลายทันทีเมื่อยังมี alias อยู่ แยกความเป็นเจ้าของเชิง domain ออกจากการจัดสรร/เก็บกวาดหน่วยความจำ และอย่าใช้ private เป็นเหตุผลว่าบังคับ ownership ได้ 100%
 
 ## ต้นทุนและการประยุกต์ {#complexity}
-Team การตรวจซ้ำ/ลบด้วย list ต้อง O(n),สร้าง tuplesnapshotO(n);การเข้าถึง object ที่รู้อยู่แล้ว O(1)ภายใต้แบบจำลองนี้ House.total_area เป็น O(r)สำหรับ r ห้อง ไม่ใช่ O(1)เพียงเพราะเป็น property LabLibrary/Gym/Clinic มีหลายความสัมพันธ์พร้อมกัน:หนังสือ/สมาชิกอาจ aggregate แต่ record ที่ระบบสร้างมี composition ตามโจทย์ ต้องดูสัญญาแต่ละ task ไม่ใช้คำว่า has-a แล้วตัดสินทั้งหมด
+Team การตรวจซ้ำ/ลบด้วย list ต้อง O(n),สร้าง tuplesnapshotO(n);การเข้าถึง object ที่รู้อยู่แล้ว O(1) ภายใต้แบบจำลองนี้ House.total_area เป็น O(r) สำหรับ r ห้อง ไม่ใช่ O(1) เพียงเพราะเป็น property LabLibrary/Gym/Clinic มีหลายความสัมพันธ์พร้อมกัน:หนังสือ/สมาชิกอาจ aggregate แต่ record ที่ระบบสร้างมี composition ตามโจทย์ ต้องดูสัญญาแต่ละ task ไม่ใช้คำว่า has-a แล้วตัดสินทั้งหมด
 
 ในห้าสถานการณ์ source pp.51–55: Playlist/Song เป็น aggregation; Invoice/InvoiceLine, Car/Engine และ University/Department เป็น composition ตามเงื่อนไขการสร้าง/ไม่ย้าย/ยุบตามเจ้าของที่โจทย์ระบุ; Doctor/Patient เป็น association เมื่อใช้ผ่าน examine โดยไม่เก็บ reference เป็น attribute การสรุปนี้อาศัยเงื่อนไขโจทย์ ไม่ใช่ชื่อ nouns เพียงอย่างเดียว
 

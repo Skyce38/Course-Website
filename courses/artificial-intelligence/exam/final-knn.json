@@ -1,0 +1,550 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "artificial-intelligence-final-knn",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "artificial-intelligence-final-knn-exam-01",
+      "type": "choice",
+      "prompt": "Classification ทำนายสิ่งใด?",
+      "reference": "classification",
+      "choices": [
+        {
+          "text": "คลาสจากชุด labels ที่กำหนด",
+          "id": "a"
+        },
+        {
+          "text": "ระยะของทุกคู่เท่านั้น",
+          "id": "b"
+        },
+        {
+          "text": "ค่าตัวเลขต่อเนื่องเสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ต้องแยกชนิด target จาก regression",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S07 หน้า 2 ใช้ภาพแยกของลงถังเพื่ออธิบายการจัดสิ่งที่ยังไม่รู้กลุ่มให้เป็นหมวดหมู่ไม่ต่อเนื่อง (Discrete Classes) คำอธิบาย supervised ต่อไปนี้เขียนเสริมให้เชื่อมกับข้อมูลมีฉลากในหน้า 3 และ X01\n\n- ตัวอย่างฝึกมี features X และ label y ที่รู้แล"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-knn-exam-02",
+      "type": "choice",
+      "prompt": "ในตาราง Drug ควรใช้ Drug เป็นส่วนของระยะ query หรือไม่?",
+      "reference": "features",
+      "choices": [
+        {
+          "text": "ใช้เพื่อให้ระยะใกล้เฉลย",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ เพราะ Drug เป็น target",
+          "id": "b"
+        },
+        {
+          "text": "ใช้แทน Age ทั้งหมด",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ใส่คำตอบใน features ทำให้ข้อมูลรั่ว ไม่ใช่การทำนายที่ถูกต้อง",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S07 หน้า 3 แสดง Age, Sex, BP, Cholesterol, Na, K เป็น inputs และ Drug เป็น categorical target ส่วน X01/C01 ใช้ Model, Color, Type, Origin ทำนาย Buy\n\n| ตัวอย่าง | Features | Label |\n|---|---|---|\n| Drug | Age, Sex, BP, Cholesterol, Na, K | D"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-knn-exam-03",
+      "type": "choice",
+      "prompt": "KNN จัดเพื่อนบ้านจาก training data ด้วยอะไร?",
+      "reference": "algorithm",
+      "choices": [
+        {
+          "text": "ชื่อคลาสเรียงอักษรก่อน",
+          "id": "a"
+        },
+        {
+          "text": "ทุกแถวมีน้ำหนักโหวตเท่ากันโดยไม่เลือก k",
+          "id": "b"
+        },
+        {
+          "text": "ระยะตาม representation และ metric ที่ประกาศ",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ต้องวัดระยะและจัดอันดับก่อนเลือกเพื่อนบ้าน",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ขั้นตอนจากภาพ S07 หน้า 4: มีข้อมูลติดฉลาก → วัดระยะ query → หาเพื่อนบ้านใกล้ → โหวต label คำอธิบาย implementation ต่อไปนี้เขียนเพิ่ม\n\n1. เลือก features และ representation/encoding ที่ชัดเจน แล้วกำหนด k ไม่เกินจำนวนข้อมูลฝึก\n2. คำนวณระยะ que"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-knn-exam-04",
+      "type": "numeric",
+      "prompt": "จุดผู้เขียน (0,0) กับ (6,8) มี Euclidean distance เท่าใด?",
+      "reference": "algorithm",
+      "answer": 10,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "ระยะคือรากของ 36+64 ไม่ใช่ผลรวม 14",
+      "difficulty": "easy",
+      "verification": {
+        "method": "python",
+        "evidence": "ขั้นตอนจากภาพ S07 หน้า 4: มีข้อมูลติดฉลาก → วัดระยะ query → หาเพื่อนบ้านใกล้ → โหวต label คำอธิบาย implementation ต่อไปนี้เขียนเพิ่ม\n\n1. เลือก features และ representation/encoding ที่ชัดเจน แล้วกำหนด k ไม่เกินจำนวนข้อมูลฝึก\n2. คำนวณระยะ que",
+        "oracle": "sqrt(6**2+8**2)"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-knn-exam-05",
+      "type": "numeric",
+      "prompt": "เวกเตอร์ผู้เขียน [1,2,3] กับ [1,5,7] มี squared Euclidean distance เท่าใด?",
+      "reference": "algorithm",
+      "answer": 25,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "ผลต่าง 0,−3,−4 ยกกำลังสองรวมเป็น 25",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "ขั้นตอนจากภาพ S07 หน้า 4: มีข้อมูลติดฉลาก → วัดระยะ query → หาเพื่อนบ้านใกล้ → โหวต label คำอธิบาย implementation ต่อไปนี้เขียนเพิ่ม\n\n1. เลือก features และ representation/encoding ที่ชัดเจน แล้วกำหนด k ไม่เกินจำนวนข้อมูลฝึก\n2. คำนวณระยะ que",
+        "oracle": "sum((a-b)**2 for a,b in zip([1,2,3],[1,5,7]))"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-knn-exam-06",
+      "type": "choice",
+      "prompt": "Ordinal encoding ของหมวดหมู่ที่ไม่มีลำดับทำให้ KNN เสี่ยงอะไร?",
+      "reference": "encoding",
+      "choices": [
+        {
+          "text": "ลบผลของ feature ทุกตัว",
+          "id": "a"
+        },
+        {
+          "text": "รับรองระยะเท่ากันทุกหมวด",
+          "id": "b"
+        },
+        {
+          "text": "สร้างระยะเชิงตัวเลขที่ไม่สะท้อนความหมาย",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "รหัสตัวเลขอาจทำให้หมวดหนึ่งดูใกล้อีกหมวดโดยไม่มีเหตุผลทาง domain",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "### Buy: One-hot ของ X03/C01 {#buy-encoding}\nX03 KNN!G:O ใช้ 9 ตัวเลข ตามลำดับนี้ ไม่ทิ้ง dummy column ใด\n\n\n\nเมื่อหมวดหมู่หนึ่งเปลี่ยนจาก A เป็น B ใน one-hot เต็ม สองตำแหน่งจะเปลี่ยนจาก 1→0 และ 0→1 จึงเพิ่ม **d² = 2** ไม่ใช่ 1 ถ้าต่างกัน m "
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-knn-exam-07",
+      "type": "numeric",
+      "prompt": "One-hot เต็มต่างกันหนึ่งหมวด เช่น [1,0,0] กับ [0,1,0] มี squared distance เท่าใด?",
+      "reference": "buy-encoding",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "มีผลต่างสองช่องคือ 1 กับ−1 จึงรวมกำลังสองเป็น 2",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "X03 KNN!G:O ใช้ 9 ตัวเลข ตามลำดับนี้ ไม่ทิ้ง dummy column ใด\n\n\n\nเมื่อหมวดหมู่หนึ่งเปลี่ยนจาก A เป็น B ใน one-hot เต็ม สองตำแหน่งจะเปลี่ยนจาก 1→0 และ 0→1 จึงเพิ่ม **d² = 2** ไม่ใช่ 1 ถ้าต่างกัน m หมวดหมู่ของ Buy จะได้ d²=2m และ d=√(2m)\n\nตัวอ",
+        "oracle": "sum((a-b)**2 for a,b in zip([1,0,0],[0,1,0]))"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-knn-exam-08",
+      "type": "choice",
+      "prompt": "จะนำระยะ Drug ไปเทียบกับ Buy โดยถือ encoding เหมือนกันได้หรือไม่?",
+      "reference": "drug-encoding",
+      "choices": [
+        {
+          "text": "ได้ถ้าจำนวนแถวเท่ากัน",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ได้ ต้องรักษา feature order และ encoding ของแต่ละชุด",
+          "id": "b"
+        },
+        {
+          "text": "ได้เพราะ KNN ไม่อ่านค่าตัวเลข",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "Drug ใช้ mixed encoding จาก X04 ส่วน Buy ใช้ full one-hot ตามข้อมูลที่ตรวจ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "X04 ใช้ Sex_F/Sex_M แบบ one-hot แต่ BP/Cholesterol เป็นตัวเลขที่เข้ารหัสไว้ เมื่อเทียบกับคำในภาพ S07 หน้า 3 พบ BP: LOW=1, NORMAL=2, HIGH=3 และ Cholesterol ที่ปรากฏมี NORMAL=2, HIGH=3 ไม่อ้าง mapping ระดับอื่นที่ไม่พบ\n\nการเข้ารหัสเป็น 1/2/3 "
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-knn-exam-09",
+      "type": "choice",
+      "prompt": "k=1 มีผลต่อความไวต่อ noise อย่างไรโดยทั่วไป?",
+      "reference": "choosing-k",
+      "choices": [
+        {
+          "text": "รับรองผลดีกว่า k อื่นทุกข้อมูล",
+          "id": "a"
+        },
+        {
+          "text": "เท่ากับใช้ค่าเฉลี่ยทุกแถว",
+          "id": "b"
+        },
+        {
+          "text": "ไวต่อเพื่อนบ้านใกล้สุดเพียงตัวเดียว",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "การเลือก k ต้องประเมินกับข้อมูล ไม่ใช้กฎเลขเดียวรับรองทุกงาน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S07 หน้า 4 มีภาพกลุ่ม Class A/B ซ้ายล่างที่ระบุ k=3 และภาพด้านขวาที่ระบุ **5 neighbors** ข้อมูลในภาพเหล่านี้ไม่มีตารางพิกัดให้คำนวณซ้ำ จึงใช้อธิบายกระบวนการ ไม่แต่งพิกัดหรือระยะทางจากรูป ภาพไม่ใช่ dataset Iris หน้า 5\n\n- **Drug X04:** query "
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-knn-exam-10",
+      "type": "choice",
+      "prompt": "k เป็นเลขคี่รับรองว่าไม่มี tie ในทุก classification หรือไม่?",
+      "reference": "choosing-k",
+      "choices": [
+        {
+          "text": "ไม่ หากมีหลายคลาสหรือระยะเสมอที่ขอบ k ยังต้องมี policy",
+          "id": "a"
+        },
+        {
+          "text": "รับรองทุกกรณี",
+          "id": "b"
+        },
+        {
+          "text": "รับรองเมื่อใช้สามคลาสขึ้นไป",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "เลขคี่ช่วยกรณีโหวตสองคลาสบางแบบ แต่ไม่แก้ทุกความเสมอ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S07 หน้า 4 มีภาพกลุ่ม Class A/B ซ้ายล่างที่ระบุ k=3 และภาพด้านขวาที่ระบุ **5 neighbors** ข้อมูลในภาพเหล่านี้ไม่มีตารางพิกัดให้คำนวณซ้ำ จึงใช้อธิบายกระบวนการ ไม่แต่งพิกัดหรือระยะทางจากรูป ภาพไม่ใช่ dataset Iris หน้า 5\n\n- **Drug X04:** query "
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-knn-exam-11",
+      "type": "choice",
+      "prompt": "Drug R2 และ R3 ต่างกันเล็กน้อย เหตุใดไม่ควรปัดเป็น 11.09 ก่อนเรียง?",
+      "reference": "drug-worked",
+      "choices": [
+        {
+          "text": "การถอดรากต้องให้จำนวนเต็มเท่านั้น",
+          "id": "a"
+        },
+        {
+          "text": "อาจทำลำดับเพื่อนบ้านและขอบ k เปลี่ยน",
+          "id": "b"
+        },
+        {
+          "text": "ต้องเรียงตามชื่อยาแทน",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "จัดอันดับจากค่าความละเอียดเต็มก่อนปัดรายงาน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Query ใน S07 หน้า 3/X04 row 13 คือ Age=36, Sex=F, BP=LOW, Cholesterol=HIGH, Na=0.697, K=0.069 เวกเตอร์ที่เข้ารหัสคือ `[36,1,0,1,3,0.697,0.069]` เรียง Age, Sex_F, Sex_M, BP, Cholesterol, Na, K\n\nกำหนด R1..R10 = แถวข้อมูล X04 rows 2..11 ตามลำด"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-knn-exam-12",
+      "type": "numeric",
+      "prompt": "Drug R8 ต่างจาก query ที่ Age5 และ Na.070 เท่านั้น จงหา d²",
+      "reference": "drug-worked",
+      "answer": 25.0049,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "ผลรวมกำลังสอง 5²+.07²=25.0049 ช่องอื่นต่าง 0",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "Query ใน S07 หน้า 3/X04 row 13 คือ Age=36, Sex=F, BP=LOW, Cholesterol=HIGH, Na=0.697, K=0.069 เวกเตอร์ที่เข้ารหัสคือ `[36,1,0,1,3,0.697,0.069]` เรียง Age, Sex_F, Sex_M, BP, Cholesterol, Na, K\n\nกำหนด R1..R10 = แถวข้อมูล X04 rows 2..11 ตามลำด",
+        "oracle": "Fraction(5)**2+Fraction(7,100)**2"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-knn-exam-13",
+      "type": "choice",
+      "prompt": "จากอันดับ Drug R8,R10,R4,R3,R2 ถ้าใช้ k=1 แทน k=5 จะโหวตจากแถวใด?",
+      "reference": "drug-worked",
+      "choices": [
+        {
+          "text": "R8 เพียงแถวเดียว",
+          "id": "a"
+        },
+        {
+          "text": "ทั้งห้าแถวเท่าเดิม",
+          "id": "b"
+        },
+        {
+          "text": "R2 เพราะเลขแถวน้อย",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "k กำหนดจำนวนเพื่อนบ้าน ไม่ใช่พารามิเตอร์ที่เปลี่ยนป้ายทุกแถว",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Query ใน S07 หน้า 3/X04 row 13 คือ Age=36, Sex=F, BP=LOW, Cholesterol=HIGH, Na=0.697, K=0.069 เวกเตอร์ที่เข้ารหัสคือ `[36,1,0,1,3,0.697,0.069]` เรียง Age, Sex_F, Sex_M, BP, Cholesterol, Na, K\n\nกำหนด R1..R10 = แถวข้อมูล X04 rows 2..11 ตามลำด"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-knn-exam-14",
+      "type": "numeric",
+      "prompt": "Buy แถวที่ต่าง query สามหมวดภายใต้ full one-hot มี d² เท่าใด?",
+      "reference": "buy-worked",
+      "answer": 6,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "แต่ละหมวดที่ต่างเพิ่ม squared distance2 รวม 3×2",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "X01 Train มี 10 แถว; Test row 2 ถาม A/Red/General/Thailand โดย Buy? เป็น `??` ไม่ใช่ label จริง X03 มี encoded table และคำตอบเสนอไว้ แต่ต้องคำนวณตรวจเอง X02 เป็นสำเนา byte-identical ของ X01 **ไม่ใช่ข้อมูลฝึกเพิ่มอีก 10 แถวหรือหลักฐานอิสระ**",
+        "oracle": "3*sum((a-b)**2 for a,b in zip([1,0],[0,1]))"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-knn-exam-15",
+      "type": "choice",
+      "prompt": "Buy? ใน test row เป็น ?? คำนวณ test accuracy จาก query นี้ได้หรือไม่?",
+      "reference": "buy-worked",
+      "choices": [
+        {
+          "text": "ได้ 100%เพราะโหวต Y",
+          "id": "a"
+        },
+        {
+          "text": "ได้ 50%เพราะมีสองคลาส",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ได้ ยังไม่มี observed label ให้เทียบ",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "คำทำนายไม่ใช่ ground truth ต้องมี labels ที่สังเกตจริง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "X01 Train มี 10 แถว; Test row 2 ถาม A/Red/General/Thailand โดย Buy? เป็น `??` ไม่ใช่ label จริง X03 มี encoded table และคำตอบเสนอไว้ แต่ต้องคำนวณตรวจเอง X02 เป็นสำเนา byte-identical ของ X01 **ไม่ใช่ข้อมูลฝึกเพิ่มอีก 10 แถวหรือหลักฐานอิสระ**"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-knn-exam-16",
+      "type": "choice",
+      "prompt": "ควร fit encoder กับข้อมูลใดก่อน transform test?",
+      "reference": "python-sklearn",
+      "choices": [
+        {
+          "text": "training data โดยคง mapping เดียวกัน",
+          "id": "a"
+        },
+        {
+          "text": "fit แยก test ให้รหัสใหม่",
+          "id": "b"
+        },
+        {
+          "text": "fit labels รวมเป็น features",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "mapping คนละแบบทำให้ระยะผิดและอาจรั่วข้อมูล",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ส่วน KNN ของ C01 บรรทัด 12–43 อ่าน input.xlsx แล้วเลือก 4 features, OneHotEncoder(handle_unknown='ignore'), KNeighborsClassifier(k=3) และ query ที่กำหนด โค้ดปรับด้านล่างใช้ข้อมูลที่ฝังใน block ก่อนหน้าแทนการอ่านไฟล์ จึงรันต่อกันได้ ใช้ scik"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-knn-exam-17",
+      "type": "numeric",
+      "prompt": "ตัวอย่างผู้เขียน: test30 แถว ทายถูก 24 แถว accuracy เป็นเท่าใดในหน่วยเปอร์เซ็นต์?",
+      "reference": "iris",
+      "answer": 80,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "accuracy=24/30×100=80 ไม่ใช้จำนวนแถว train เป็นตัวหาร",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "S07 หน้า 5 ใช้ `load_iris()` ซึ่งมีข้อมูลติดมากับ scikit-learn ไม่ใช่ Drug table หรือ Buy worksheet ตามตัวอย่างมี 150 แถว 4 features และ 3 คลาส รายละเอียดเพิ่มเติมที่ตรวจจาก metadata ของ load_iris: features คือ sepal length/width (ความยาว/ก",
+        "oracle": "Fraction(24,30)*100"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-knn-exam-18",
+      "type": "choice",
+      "prompt": "random_state=42 ใน train_test_split มีหน้าที่ใด?",
+      "reference": "iris",
+      "choices": [
+        {
+          "text": "รับรอง accuracy42%",
+          "id": "a"
+        },
+        {
+          "text": "รับรอง generalization เสมอ",
+          "id": "b"
+        },
+        {
+          "text": "ทำ split ซ้ำได้ภายใต้ข้อมูลและสภาพแวดล้อมเดียวกัน",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "seed ไม่ใช่คะแนนและไม่ได้แทนการประเมินหลาย split",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S07 หน้า 5 ใช้ `load_iris()` ซึ่งมีข้อมูลติดมากับ scikit-learn ไม่ใช่ Drug table หรือ Buy worksheet ตามตัวอย่างมี 150 แถว 4 features และ 3 คลาส รายละเอียดเพิ่มเติมที่ตรวจจาก metadata ของ load_iris: features คือ sepal length/width (ความยาว/ก"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-knn-exam-19",
+      "type": "choice",
+      "prompt": "นำ X02 ที่ซ้ำ X01 มาเพิ่ม training rows เป็นหลักฐานใหม่เหมาะสมหรือไม่?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "text": "ไม่ เป็นข้อมูลซ้ำไม่ใช่หลักฐานอิสระ",
+          "id": "a"
+        },
+        {
+          "text": "เหมาะเพราะชื่อไฟล์ต่างกัน",
+          "id": "b"
+        },
+        {
+          "text": "เหมาะเพื่อรับรองคะแนนสูงขึ้น",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "การทำสำเนาเพิ่มน้ำหนักซ้ำและไม่เพิ่มตัวอย่างอิสระ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "- นำ Buy หรือ Drug label เข้าคำนวณระยะ หรืออ่าน Buy?=?? ว่าเป็นคำตอบจริง\n- ปะปน k=5 ของ Drug/ภาพกับ k=3 ของ Buy/Iris โดยไม่ระบุ\n- นำ X02 สำเนา X01 มาเพิ่มน้ำหนักโหวตเสมือนเป็นตัวอย่างใหม่\n- ให้รหัสหมวดหมู่ 1/2/3 แล้วลืมว่าทำให้ระยะต่างกัน; "
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-knn-exam-20",
+      "type": "choice",
+      "prompt": "ใช้ cached worksheet answer แทนตรวจสูตรไม่สมบูรณ์ได้หรือไม่?",
+      "reference": "mistakes",
+      "choices": [
+        {
+          "text": "ได้ทุกเซลล์",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ได้ ต้องตรวจ raw data และคำนวณใหม่",
+          "id": "b"
+        },
+        {
+          "text": "ได้เมื่อคำตอบตรงความคาดหวัง",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "X03 มีบางสูตรไม่ครบ จึงไม่เชื่อผลสะสมโดยไม่ตรวจ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "- นำ Buy หรือ Drug label เข้าคำนวณระยะ หรืออ่าน Buy?=?? ว่าเป็นคำตอบจริง\n- ปะปน k=5 ของ Drug/ภาพกับ k=3 ของ Buy/Iris โดยไม่ระบุ\n- นำ X02 สำเนา X01 มาเพิ่มน้ำหนักโหวตเสมือนเป็นตัวอย่างใหม่\n- ให้รหัสหมวดหมู่ 1/2/3 แล้วลืมว่าทำให้ระยะต่างกัน; "
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-knn-exam-21",
+      "type": "self",
+      "prompt": "ออกแบบการจัดอันดับเมื่อระยะเท่ากัน โดยไม่ใช้ rounded display values",
+      "reference": "algorithm",
+      "rubric": [
+        "ประกาศ metric และ feature order",
+        "เรียง full-precision distance แล้วใช้ stable row order เป็น policy",
+        "เลือก k ก่อนโหวตและแยก tie ของระยะกับ tie ของคลาส"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ประกาศ metric และ feature order เรียง full-precision distance แล้วใช้ stable row order เป็น policy เลือก k ก่อนโหวตและแยก tie ของระยะกับ tie ของคลาส",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ขั้นตอนจากภาพ S07 หน้า 4: มีข้อมูลติดฉลาก → วัดระยะ query → หาเพื่อนบ้านใกล้ → โหวต label คำอธิบาย implementation ต่อไปนี้เขียนเพิ่ม\n\n1. เลือก features และ representation/encoding ที่ชัดเจน แล้วกำหนด k ไม่เกินจำนวนข้อมูลฝึก\n2. คำนวณระยะ que"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-knn-exam-22",
+      "type": "self",
+      "prompt": "เสนอวิธีเปรียบผล KNN ก่อนและหลัง scaling สำหรับข้อมูลหน่วยต่างกัน",
+      "reference": "encoding",
+      "rubric": [
+        "อธิบาย feature ที่สเกลใหญ่อาจครอบงำระยะ",
+        "fit preprocessing บน train เท่านั้น",
+        "รายงานว่าเป็นการทดลองเพิ่ม ไม่ใช่เปลี่ยนคำตอบ Drug ต้นฉบับ"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: อธิบาย feature ที่สเกลใหญ่อาจครอบงำระยะ fit preprocessing บน train เท่านั้น รายงานว่าเป็นการทดลองเพิ่ม ไม่ใช่เปลี่ยนคำตอบ Drug ต้นฉบับ",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "### Buy: One-hot ของ X03/C01 {#buy-encoding}\nX03 KNN!G:O ใช้ 9 ตัวเลข ตามลำดับนี้ ไม่ทิ้ง dummy column ใด\n\n\n\nเมื่อหมวดหมู่หนึ่งเปลี่ยนจาก A เป็น B ใน one-hot เต็ม สองตำแหน่งจะเปลี่ยนจาก 1→0 และ 0→1 จึงเพิ่ม **d² = 2** ไม่ใช่ 1 ถ้าต่างกัน m "
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-knn-exam-23",
+      "type": "self",
+      "prompt": "อธิบายความต่าง training accuracy กับ held-out test accuracy และสิ่งที่ split เดียวบอกไม่ได้",
+      "reference": "iris",
+      "rubric": [
+        "ระบุชุดข้อมูลของตัวหาร",
+        "ไม่ใช้ query ที่ไม่มี label นับเป็นถูก",
+        "แยกตัวอย่างในสไลด์จากการรันใหม่และระบุ environment"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ระบุชุดข้อมูลของตัวหาร ไม่ใช้ query ที่ไม่มี label นับเป็นถูก แยกตัวอย่างในสไลด์จากการรันใหม่และระบุ environment",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "S07 หน้า 5 ใช้ `load_iris()` ซึ่งมีข้อมูลติดมากับ scikit-learn ไม่ใช่ Drug table หรือ Buy worksheet ตามตัวอย่างมี 150 แถว 4 features และ 3 คลาส รายละเอียดเพิ่มเติมที่ตรวจจาก metadata ของ load_iris: features คือ sepal length/width (ความยาว/ก"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-knn-exam-24",
+      "type": "self",
+      "prompt": "วาง tests ตรวจ KNN แบบ manual เทียบตัวอ้างอิงโดยคง encoding เดิม",
+      "reference": "python-manual",
+      "rubric": [
+        "ตรวจทุก squared distance แยกจากโหวต",
+        "ทดสอบ k=1,k เท่าจำนวนข้อมูลและ tie",
+        "ตรวจว่าการเรียงไม่ใช้ label เพื่อช่วยเลือกเพื่อนบ้าน"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ตรวจทุก squared distance แยกจากโหวต ทดสอบ k=1,k เท่าจำนวนข้อมูลและ tie ตรวจว่าการเรียงไม่ใช้ label เพื่อช่วยเลือกเพื่อนบ้าน",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "โค้ดผู้เขียนนี้ใช้ standard library แสดงข้อมูล Drug/Buy ตามแหล่งและ tie conventions ข้างต้น คัดลอกไป Python ได้โดยไม่ต้องเปิด workbook ตัว Drug ใช้ k=5 ตัว Buy ใช้ k=3 ไม่มีการรัน Python ในหน้าเว็บไซต์\n\n\n\nผลที่ตรวจใหม่คือ Drug k=5 → drugC แ"
+      }
+    }
+  ]
+}

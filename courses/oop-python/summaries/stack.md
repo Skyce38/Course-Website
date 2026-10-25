@@ -2,23 +2,27 @@
 {"version":1,"id":"oop-python-stack","course":"oop-python","category":"summaries","slug":"stack","title":"FINAL: Stack, Recursion และ Undo/Redo","language":"th"}
 ---
 
-> FINAL: Week11ทุกหัวข้อหลักและ Week8stackwrapper ขยาย Postfix จาก Lab11-1ที่มีจริง โค้ด/trace/เฉลยผู้เขียนตรวจอิสระ ไม่ใช่ข้อสอบจริงหรือเฉลยทางการ ไม่สร้าง interactivecomponent ที่แสดง algorithm ผิด
+> FINAL: Week11 ทุกหัวข้อหลักและ Week8stackwrapper ขยาย Postfix จาก Lab11-1 ที่มีจริง โค้ด/trace/เฉลยผู้เขียนตรวจอิสระ ไม่ใช่ข้อสอบจริงหรือเฉลยทางการ ไม่สร้าง interactivecomponent ที่แสดง algorithm ผิด
 
 ## เป้าหมายการเรียนรู้ {#objectives}
 - ใช้ LIFO และ Stack ADT แยกจาก รูปแบบจัดเก็บข้อมูล (storage implementation)
 - ไล่การทำงานของ push / pop / peek และ empty/singleton โดยไม่ให้ head/size ผิด
 - อธิบาย call stack/recursion,balancedbrackets,postfix และ undo/redo
-- แยก worstcase/amortized และต้นทุนข้อมูล snapshot
+- แยก worst case/amortized และต้นทุนข้อมูล snapshot
 
 ## LIFO และ Stack ADT {#concepts}
 Week11 pp.3–17: ข้อมูลที่เข้าทีหลังออกก่อน (Last In, First Out: LIFO) เข้าถึงข้อมูลจากด้าน top โดย push เพิ่มค่า, pop คืนค่าและนำออก และ peek อ่านค่าโดยไม่ลบ ส่วน is_empty และ len ใช้ตรวจสถานะ
 
 Stack ADT กำหนดพฤติกรรม ไม่ได้บังคับรูปแบบจัดเก็บ Python list ใช้ท้ายลิสต์เป็น top ส่วน linked stack ใช้ head เป็น top เพื่อให้ push และ pop ไม่ต้องค้นหาโหนดก่อน tail
 
-เพิ่ม10,20,30→top30→pop คืน30→peek20→size2;pop/peek ว่างต้องมี policy ชัด ตัว ADT ในบทนี้ raiseIndexError แต่ undo ที่ไม่มีประวัติเป็น no-op เพื่อให้ UI ไม่ล้มตามแนว sourcepp.44–45 ห้ามใช้ None แทน empty โดยไม่บอก เพราะ None อาจเป็นข้อมูลจริง
+ตัวอย่างเพิ่มค่า 10, 20, 30 ตามลำดับ จะได้ top เป็น 30 เมื่อ pop จะคืน 30 แล้ว peek อ่าน 20 โดยไม่ลบ ดังนั้น size ยังเป็น 2
+
+เมื่อ stack ว่าง การเรียก pop หรือ peek ต้องมี policy ชัดเจน ตัวอย่างในบทนี้ใช้ IndexError ส่วน undo ที่ไม่มีประวัติเป็น no-op เพื่อให้ UI ไม่ล้มตามแนว source pp.44–45 อย่าใช้ None แทนสถานะว่างโดยไม่ประกาศ เพราะ None อาจเป็นข้อมูลจริง
 
 ## Python: สอง Implementations และ Applications {#python}
-LinkedStack อิง Node/head ใน source;ArrayStack เป็น wrapper ของ list;Postfix ตาม Lab11-1โดยใช้ float/finitecheck เป็น policy เสริม;TextEditor เก็บ immutabletextsnapshots และไม่นับ no-op ไม่ใช้ eval หรือรัน Python จากเว็บ
+LinkedStack อิง Node/head ใน source ส่วน ArrayStack เป็น wrapper ของ list โค้ด Postfix อิง Lab11-1 โดยเพิ่มการตรวจค่า float ที่เป็น finite ตาม policy ที่ประกาศไว้
+
+TextEditor เก็บสำเนาสถานะข้อความที่แก้ไขไม่ได้ (immutable text snapshots) และไม่นับ no-op ตัวอย่างเหล่านี้ไม่ใช้ eval หรือรัน Python จากหน้าเว็บ
 
 ```python
 from math import isfinite
@@ -143,10 +147,10 @@ Week11 pp.22–25, 37–41: อ่านอักขระทุกตัว เ
 |] | pop[ตรง | ( |
 |) | pop(ตรง | ว่าง→True |
 
-`([)]`ล้มเมื่อเจอ)แต่ top เป็น[;`)`ล้มเพราะ empty;`((`ล้มตอนจบเพราะยังค้าง;`hello`และ emptystring ได้ True ตาม policyignoreotherchars ไม่เอาอัลกอริทึมนี้อ้างว่าตรวจ nestedHTML ได้ครบ (HTMLtagvalidator เป็นอีก lab ที่มีรายละเอียดเพิ่ม)
+`([)]`ล้มเมื่อเจอ) แต่ top เป็น[;`)`ล้มเพราะ empty;`((`ล้มตอนจบเพราะยังค้าง;`hello`และ emptystring ได้ True ตาม policyignoreotherchars ไม่เอาอัลกอริทึมนี้อ้างว่าตรวจ nestedHTML ได้ครบ (HTMLtagvalidator เป็นอีก lab ที่มีรายละเอียดเพิ่ม)
 
 ## Postfix: ลำดับตัวถูกดำเนินการ {#postfix}
-Lab11-1ระบุ token คั่นด้วย space,+−*/และ stack ใหม่ต่อ expression ตัวอย่าง source3 4 + 2 *:
+Lab11-1 ระบุ token คั่นด้วย space,+−*/และ stack ใหม่ต่อ expression ตัวอย่าง source3 4 + 2 *:
 
 | token | การทำงาน | stack |
 |---|---|---|
@@ -156,12 +160,12 @@ Lab11-1ระบุ token คั่นด้วย space,+−*/และ stack �
 |2|push2|7,2|
 |*|right2,left7→14|14|
 
-`10 3 -`ต้อง10−3=7 ไม่ใช่3−10;`8 2 /`คือ4.0ใช้ true division ไม่ใช่ floor division ต้องจบเหลือผลเดียว มิฉะนั้น invalid (`1 2`),operator ก่อน operand พอไม่ได้ (`1 +`),token แปลไม่ได้ต้อง error,หาร0เป็น ZeroDivisionError last_result เปลี่ยนเฉพาะเมื่อประเมินสำเร็จทั้งหมด ครั้งถัดไปไม่ reuseoperands เก่า
+`10 3 -`ต้อง 10−3=7 ไม่ใช่ 3−10;`8 2 /`คือ 4.0 ใช้ true division ไม่ใช่ floor division ต้องจบเหลือผลเดียว มิฉะนั้น invalid (`1 2`),operator ก่อน operand พอไม่ได้ (`1 +`),token แปลไม่ได้ต้อง error,หาร 0 เป็น ZeroDivisionError last_result เปลี่ยนเฉพาะเมื่อประเมินสำเร็จทั้งหมด ครั้งถัดไปไม่ reuseoperands เก่า
 
 ## Call Stack และ Recursion {#call-stack}
-Week11 pp.18–20:เมื่อ calculate_total เรียก calculate_tax แล้ว get_tax_rate เฟรมบนสุดที่กำลังทำงานต้องจบก่อนกลับ caller ไม่ได้แปลว่าตัวแปร local ทุก call เป็น global ชุดเดียว ตัวอย่าง factorial4ของผู้เขียน: f4รอ4×f3→f3รอ3×f2→f2รอ2×f1→f1คืน1→f2คืน2→f3คืน6→f4คืน24
+Week11 pp.18–20:เมื่อ calculate_total เรียก calculate_tax แล้ว get_tax_rate เฟรมบนสุดที่กำลังทำงานต้องจบก่อนกลับ caller ไม่ได้แปลว่าตัวแปร local ทุก call เป็น global ชุดเดียว ตัวอย่าง factorial4 ของผู้เขียน: f4 รอ 4×f3→f3 รอ 3×f2→f2 รอ 2×f1→f1 คืน 1→f2 คืน 2→f3 คืน 6→f4 คืน 24
 
-basecase ต้องถึงได้;f0=1;negativeinput ถูก reject Python มี recursionlimit ขึ้นกับ runtime ไม่รับรองจำนวน1000ใช้ได้ทุก call และไม่แก้ infinite recursion ด้วยการเพิ่ม limit เฉยๆ พื้นที่ call stackO(n)สำหรับ factorial เชิงเส้นนี้
+base case ต้องถึงได้;f0=1;negativeinput ถูก reject Python มี recursionlimit ขึ้นกับ runtime ไม่รับรองจำนวน 1000 ใช้ได้ทุก call และไม่แก้ infinite recursion ด้วยการเพิ่ม limit เฉยๆ พื้นที่ call stackO(n) สำหรับ factorial เชิงเส้นนี้
 
 ## Undo / Redo และข้อกำหนด State {#undo}
 pp.27–29,42–45:ก่อน action ใหม่เก็บ state เก่าใน undo และล้าง redo;undo ย้าย state ปัจจุบันไป redo แล้วคืน state เก่าจาก undo;redo กลับทิศ Trace ผู้เขียน:
@@ -183,7 +187,7 @@ redo: ยัง 'AC' (ไม่มีประวัติให้ทำซ้�
 |Postfix ktoken|O(k)เมื่อ arithmetic/parsebounded|O(k)|
 |Undo/redo ย้าย reference ข้อความ|O(1)corestackamortized|history เก็บ reference ถึงข้อความเก่า|
 
-การสร้างข้อความยาว L ด้วย concatenation/slicing ยัง O(L);เก็บหลาย snapshot มีพื้นที่ตามข้อมูลที่ยังอ้างถึง ไม่สรุป texteditor ทั้งระบบ O(1) ข้อผิดพลาดหลัก:pop ท้าย linkedlist จนต้องหาตัวก่อนท้าย;ลืมเช็ค empty;สลับ left/rightpostfix;ลืม finalstackcount;ไม่ล้าง redo หรือไม่มี basecase
+การสร้างข้อความยาว L ด้วย concatenation/slicing ยัง O(L);เก็บหลาย snapshot มีพื้นที่ตามข้อมูลที่ยังอ้างถึง ไม่สรุป texteditor ทั้งระบบ O(1) ข้อผิดพลาดหลัก:pop ท้าย linkedlist จนต้องหาตัวก่อนท้าย;ลืมเช็ค empty;สลับ left/rightpostfix;ลืม finalstackcount;ไม่ล้าง redo หรือไม่มี base case
 
 ## แบบฝึกพร้อมเฉลย (ผู้เขียนจัดทำและตรวจอิสระ) {#practice}
 

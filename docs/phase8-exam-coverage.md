@@ -567,4 +567,49 @@ Existing questions: `ht-collision` → `concepts`; `ht-tombstone` → `trace`; `
 
 ## Checkpoint status
 
-A: baseline audit recorded. B: compatibility design in [extended-exam-bank.md](extended-exam-bank.md). C–I: implementation and verification in progress; no overall PASS is claimed here.
+A: baseline audit recorded. B: compatibility design in [extended-exam-bank.md](extended-exam-bank.md). C–G: implemented. H–I: final browser/regression validation and release review recorded separately.
+
+## Final bank inventory and objective coverage
+
+25 registered readers each expose the unchanged six-question Study Practice and a 30-question Extended Bank (the same original six plus 24 new questions). Unique inventory is 750, not 900. Topic selectors use real heading IDs and stable question IDs, not inferred curriculum paths.
+
+| Lesson | Original | Added | Full bank | Explicit topic groups |
+|---|---:|---:|---:|---:|
+| [Linked List — เข้าใจ Node และไล่ Python ทีละขั้น](../read/oop-python/linked-list.html#exam-mode) | 6 | 24 | 30 | 10 |
+| [พื้นฐานปัญญาประดิษฐ์และตัวกระทำอัจฉริยะ (AI & Intelligent Agents)](../read/artificial-intelligence/ai-foundations-agents.html#exam-mode) | 6 | 24 | 30 | 15 |
+| [แบบจำลองปัญหาและการค้นหา BFS/DFS (Search Models & Uninformed Search)](../read/artificial-intelligence/search-models-bfs-dfs.html#exam-mode) | 6 | 24 | 30 | 18 |
+| [FINAL: สหสัมพันธ์ การถดถอยเชิงเส้นและพหุคูณ (Correlation & Linear Regression)](../read/artificial-intelligence/final-regression.html#exam-mode) | 6 | 24 | 30 | 12 |
+| [FINAL: การจำแนกและเพื่อนบ้านใกล้ที่สุด (Classification & KNN)](../read/artificial-intelligence/final-knn.html#exam-mode) | 6 | 24 | 30 | 17 |
+| [FINAL: การจำแนกแบบนาอีฟเบย์ (Naive Bayes Classification)](../read/artificial-intelligence/final-naive-bayes.html#exam-mode) | 6 | 24 | 30 | 15 |
+| [FINAL: ต้นไม้ตัดสินใจ Entropy และ Information Gain (Decision Tree & ID3)](../read/artificial-intelligence/final-decision-tree.html#exam-mode) | 6 | 24 | 30 | 11 |
+| [FINAL: ความคล้ายและการจัดกลุ่มลำดับชั้น (Similarity & Hierarchical Clustering)](../read/artificial-intelligence/final-hierarchical-clustering.html#exam-mode) | 6 | 24 | 30 | 9 |
+| [FINAL: K-Means และวิธี Elbow](../read/artificial-intelligence/final-kmeans.html#exam-mode) | 6 | 24 | 30 | 6 |
+| [FINAL: โครงข่ายประสาทเทียมและ Perceptron](../read/artificial-intelligence/final-perceptron.html#exam-mode) | 6 | 24 | 30 | 7 |
+| [FINAL: Multilayer Networks และ Backpropagation](../read/artificial-intelligence/final-backpropagation.html#exam-mode) | 6 | 24 | 30 | 6 |
+| [FINAL: ภาพรวม Deep Learning, RNN และ GAN](../read/artificial-intelligence/final-deep-learning-overview.html#exam-mode) | 6 | 24 | 30 | 7 |
+| [FINAL: CNN และการคำนวณภาพ (Image Operations)](../read/artificial-intelligence/final-cnn.html#exam-mode) | 6 | 24 | 30 | 8 |
+| [คลาส ออบเจ็กต์ และ Reference (Classes & Objects)](../read/oop-python/classes-objects.html#exam-mode) | 6 | 24 | 30 | 6 |
+| [Encapsulation และ Properties](../read/oop-python/encapsulation-properties.html#exam-mode) | 6 | 24 | 30 | 7 |
+| [การสืบทอด Override และ MRO (Inheritance)](../read/oop-python/inheritance-mro.html#exam-mode) | 6 | 24 | 30 | 6 |
+| [Polymorphism, Duck Typing และ Abstract Classes](../read/oop-python/polymorphism-abc.html#exam-mode) | 6 | 24 | 30 | 6 |
+| [Reference และความสัมพันธ์ระหว่าง Object](../read/oop-python/object-relationships.html#exam-mode) | 6 | 24 | 30 | 8 |
+| [UML และหลักออกแบบ SRP, OCP, LSP](../read/oop-python/uml-solid.html#exam-mode) | 6 | 24 | 30 | 8 |
+| [Array, Dynamic Array และ Amortized Analysis](../read/oop-python/arrays-dynamic-array.html#exam-mode) | 6 | 24 | 30 | 6 |
+| [FINAL: Stack, Recursion และ Undo/Redo](../read/oop-python/stack.html#exam-mode) | 6 | 24 | 30 | 8 |
+| [FINAL: Queue, Circular Queue, Deque และ Priority Queue](../read/oop-python/queue.html#exam-mode) | 6 | 24 | 30 | 7 |
+| [FINAL: Big-O และ Bubble, Selection, Insertion Sort](../read/oop-python/complexity-basic-sorting.html#exam-mode) | 6 | 24 | 30 | 6 |
+| [FINAL: Merge Sort, Quick Sort และ Timsort](../read/oop-python/advanced-sorting.html#exam-mode) | 6 | 24 | 30 | 7 |
+| [FINAL: Hash Tables, Collisions และ Dictionaries](../read/oop-python/hash-tables.html#exam-mode) | 6 | 24 | 30 | 8 |
+
+Totals: {"choice":460,"numeric":165,"self":125}. New difficulty: {"easy":142,"medium":357,"hard":101}. New verification methods: {"python":127,"source-review":373,"rubric-review":100}. Original 125 graded keys retain their committed independent checks; original 25 rubrics remain ungraded.
+
+## Coverage review and limitations
+
+- AI: definitions/four approaches/Turing/logic/agents/utility; problem formulation/Romania/BFS/DFS/frontiers/graph assumptions; correlation/tree example/OLS/units/residuals/error metrics/multiple regression; KNN encodings/distances/ranking/k/ties/Drug/Buy/test accuracy; NB probabilities/Judy/Buy/smoothing/encoding/Gaussian; ID3/entropy/gain/Sunburn/PlayTennis/rules/unknown categories; clustering metrics/linkages/matrices/dendrogram cuts; K-Means assignments/means/SSE/seeds/scale/Elbow; perceptron strict threshold/update/bias/AND/XOR/source-limited lab; backprop forward/chain rule/sign/gradient checks; DL hierarchy/depth/RNN mappings/GAN/style limits; CNN matrices/correlation/shapes/pooling/ReLU/RGB/flatten/FC counts.
+- OOP: class/object/self/initialization/aliases; encapsulation/property/invariants/exceptions; inheritance/override/cooperative MRO/contracts; polymorphism/duck typing/ABC; relationships/identity/ownership/copies; UML/SRP/OCP/LSP; arrays/size-capacity/shifting/amortized/row-major; linked references/traversal/insertion/complexity; Stack/brackets/postfix/call frames/undo-redo; FIFO/circular/deque/priority/tie policies; complexity/basic sort traces/stability/counters; Merge/Quick/recursion/Timsort/space; hash/equality/chaining/probing/tombstones/load/rehash/dict.
+- Topic coverage is based on substantive tested reasoning and rubric criteria, not just keyword mentions. Source tables/code are covered through focused traces, numerical checks and explanation rubrics rather than reprinting every row as a separate question. Parent-section references include relevant nested material; the direct-reference baseline table above is intentionally not a claim that a missing heading reference means all content beneath it is absent.
+- Not expanded: unverified teaching/exam weights, absent neural-lab figures/settings or replay results, official answers to open source questions, full ISP/DIP treatment beyond the original overview, new visualizers or secure exams. No new source datasets or performance claims.
+- Duplicate review: exact and number-normalized prompt templates are rejected. Reviewed related questions distinguish different objectives (MAE vs MSE, copy vs alias, bias vs weight, scalar vs parameter count); repeated vocabulary alone is not a duplicate. No new question is an old question with only its numbers changed.
+- Reading clarification: the CNN RGB paragraph now explicitly distinguishes scaled RGB channel kernels on page31 from the different F2/F3 filters on page22. This is verified directly against the already-preserved matrices; no equation, matrix or result changed.
+
+See [verification ledger](phase8-exam-verification.md), [compatibility architecture](extended-exam-bank.md) and [reading review](phase8-reading-review.md).

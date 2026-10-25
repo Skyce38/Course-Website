@@ -10,7 +10,7 @@
 - เลือก root/subtree ของ ID3 จาก counts ที่ถูกต้อง
 - ตรวจ Sunburn/PlayTennis และอธิบายขอบเขต training fit
 
-ทบทวน [Naive Bayes](final-naive-bayes.md) เรื่อง class counts ได้ Path ต่อบทนี้เป็นลำดับเผยแพร่ชั่วคราว ไม่ใช่ลำดับสอนที่ยืนยัน ไม่เพิ่มบท Midterm
+ทบทวน [Naive Bayes](final-naive-bayes.md) เรื่อง class counts ได้ แต่ละบทเปิดอ่านได้อย่างอิสระ ลำดับเผยแพร่ไม่ใช่ลำดับสอนที่ยืนยัน ไม่เพิ่มบท Midterm
 
 ## แนวคิดและคำศัพท์ {#concepts}
 S08 pp.3–4,7: Decision Tree จำแนกข้อมูลด้วยการทดสอบ attribute ที่ internal node, branch แทน value/ผลทดสอบ, leaf แทน class; root คือจุดเริ่มด้านบน

@@ -2,7 +2,7 @@
 {"version":1,"id":"oop-python-complexity-basic-sorting","course":"oop-python","category":"summaries","slug":"complexity-basic-sorting","title":"FINAL: Big-O และ Bubble, Selection, Insertion Sort","language":"th"}
 ---
 
-> FINAL: Week13 physical pp.3–41 เป็นหลัก;ตัวอย่างนักเรียน/คลังสินค้ามาจาก Lab13-1/13-2และ Leaderboard จาก Hw13ในฐานะการประยุกต์ ไม่เผยแพร่ไฟล์งานหรือข้อมูลส่วนตัว Code/เฉลยปรับและตรวจอิสระ
+> FINAL: Week13 physical pp.3–41 เป็นหลัก;ตัวอย่างนักเรียน/คลังสินค้ามาจาก Lab13-1/13-2 และ Leaderboard จาก Hw13 ในฐานะการประยุกต์ ไม่เผยแพร่ไฟล์งานหรือข้อมูลส่วนตัว Code/เฉลยปรับและตรวจอิสระ
 
 ## เป้าหมายการเรียนรู้ {#objectives}
 - อธิบาย Big-O ในฐานะ growthbound พร้อมสมมติฐาน ไม่ใช้ benchmark แทนพิสูจน์
@@ -11,11 +11,11 @@
 - เลือกวิธีตาม near-sorteddata/ต้นทุนย้าย และทดสอบ empty/duplicate/boundaries
 
 ## Time, Space และ Cases {#complexity}
-Week13 pp.3–13:O(1),O(log n),O(n),O(n log n),O(n²)บอกอัตราการโตไม่ใช่วินาที
+Week13 pp.3–13:O(1),O(log n),O(n),O(n log n),O(n²) บอกอัตราการโตไม่ใช่วินาที
 
-Big-O เป็น upperbound ไม่ได้มีความหมายว่า worstcase โดยตัวมันเอง ต้องระบุว่าเรากำลัง boundbest/average/worst หรือ amortized แม้3n+2เป็น O(n²)ได้แต่ใช้ tightboundΘ(n)อธิบายได้แม่นกว่า
+Big-O เป็น upperbound ไม่ได้มีความหมายว่า worst case โดยตัวมันเอง ต้องระบุว่าเรากำลัง boundbest/average/worst หรือ amortized แม้ 3n+2 เป็น O(n²) ได้แต่ใช้ tightboundΘ(n) อธิบายได้แม่นกว่า
 
-loopn รอบทำงานคงที่ให้Θ(n);สามเหลี่ยม(n−1)+(n−2)+...+1=n(n−1)/2ให้Θ(n²);การหารช่วงลงครึ่งทุกครั้งให้ logn เมื่อมีเงื่อนไขครบ ไม่ท่องว่าทุก nestedloop ต้อง n² เพราะขอบเขต loop อาจต่างกัน ตัวอย่าง comparison จำนวนมากไม่ใช่เวลาจริงหากต้นทุนเปรียบเทียบต่างกัน
+loopn รอบทำงานคงที่ให้Θ(n);สามเหลี่ยม(n−1)+(n−2)+...+1=n(n−1)/2 ให้Θ(n²);การหารช่วงลงครึ่งทุกครั้งให้ logn เมื่อมีเงื่อนไขครบ ไม่ท่องว่าทุก nestedloop ต้อง n² เพราะขอบเขต loop อาจต่างกัน ตัวอย่าง comparison จำนวนมากไม่ใช่เวลาจริงหากต้นทุนเปรียบเทียบต่างกัน
 
 | Algorithm | Best | Average (สุ่มลำดับทั่วไป) | Worst | Stable ตามโค้ดนี้ |
 |---|---|---|---|---|
@@ -23,7 +23,7 @@ loopn รอบทำงานคงที่ให้Θ(n);สามเหล�
 |Selection|min scanΘ(n²)|Θ(n²)|Θ(n²)|ไม่ใช่|
 |Insertion|Θ(n)|Θ(n²)|Θ(n²)|ใช่ เลื่อนเฉพาะค่ามากกว่า|
 
-ในตารางสมมติ key/arithmetic comparisonO(1) บนข้อมูล n ที่โตขึ้น นอกเหนือจาก empty/singleton ที่ทำงานคงที่ โค้ดนี้ copyinput จึง auxspaceO(n)ทั้ง function;corein-place ที่ไม่ copy ใช้ O(1) ส่วน trace=True เก็บ snapshot หลาย pass ใช้ O(n²)ได้ เป็น overhead เพื่อการเรียน ไม่อ้าง spaceO(1)ของทั้ง function เหมือน comment ย่อในบางสไลด์
+ในตารางสมมติ key/arithmetic comparisonO(1) บนข้อมูล n ที่โตขึ้น นอกเหนือจาก empty/singleton ที่ทำงานคงที่ โค้ดนี้ copy input จึง auxspaceO(n) ทั้ง function;corein-place ที่ไม่ copy ใช้ O(1) ส่วน trace=True เก็บ snapshot หลาย pass ใช้ O(n²) ได้ เป็น overhead เพื่อการเรียน ไม่อ้าง spaceO(1) ของทั้ง function เหมือน comment ย่อในบางสไลด์
 
 ## Python และกติกาตัวนับ {#python}
 comparisons นับเฉพาะการเทียบ key;ไม่นับ loopguard/typecheck/copy swaps นับเฉพาะสลับคนละ index;shifts คือย้ายสมาชิกเก่าใน insertion ไม่เรียกทุก assignment ว่า swap ผู้เขียนเพิ่ม key/trace เพื่อใช้ objects โดยยังเก็บเงื่อนไขหลักตาม source
@@ -92,7 +92,9 @@ print(selection_sort(inventory,key=lambda x:days_left(x[1],x[2]))[0])
 ```
 
 ## Bubble Sort: Invariant และทุก Pass {#bubble}
-Week13 pp.15–19:เทียบคู่ติดกันจากซ้ายไปขวา ค่ามากสุดของส่วนยังไม่เรียงลอยไปท้าย หลัง passi ได้ suffix ที่ถูกตำแหน่งแล้วจึงลด innerbound ไม่พบ swap ทั้ง pass จึงหยุดได้ การเห็นสองตัวแรกเรียงกันยังหยุดไม่ได้
+Week13 pp.15–19: เปรียบเทียบคู่ติดกันจากซ้ายไปขวา ค่ามากสุดของส่วนที่ยังไม่เรียงจะลอยไปท้าย หลัง pass ที่ i จะได้ suffix ที่อยู่ถูกตำแหน่ง จึงลดขอบเขตของลูปด้านในได้
+
+ถ้าตรวจครบหนึ่ง pass แล้วไม่มี swap จึงหยุดได้ การเห็นเพียงสองตัวแรกเรียงกันยังไม่เพียงพอให้หยุด
 
 | Pass | Array หลัง pass |
 |---|---|
@@ -103,10 +105,12 @@ Week13 pp.15–19:เทียบคู่ติดกันจากซ้า�
 
 ตัวนับสุดท้าย: {'comparisons': 10, 'swaps': 7}
 
-pass แรกเปรียบ4ครั้งและ swap3;pass สองเปรียบ3/swap2;pass สามเปรียบ2/swap2;pass สุดท้ายเปรียบ1/swap0ยืนยันเสร็จ รวม10comparisons/7swaps ไม่ปนกับ input6ค่าของ source codep.34ซึ่งมี15comparisons/8swaps การใช้>ทำให้คนส่วนสูงเท่ากันไม่สลับกัน
+pass แรกเปรียบเทียบ 4 ครั้งและ swap 3 ครั้ง; pass สองเปรียบเทียบ 3 ครั้งและ swap 2 ครั้ง; pass สามเปรียบเทียบ 2 ครั้งและ swap 2 ครั้ง ส่วน pass สุดท้ายเปรียบเทียบ 1 ครั้งและไม่มี swap จึงยืนยันว่าเรียงเสร็จ รวมเป็น 10 comparisons และ 7 swaps
+
+อย่าปนกับ input 6 ค่าของ source code p.34 ซึ่งมี 15 comparisons และ 8 swaps การใช้เงื่อนไข > ทำให้คนที่มีส่วนสูงเท่ากันไม่สลับลำดับกัน
 
 ## Selection Sort: เลือก Minimum {#selection}
-pp.21–25:prefix ซ้ายเรียงแล้ว;scan ส่วนขวาหา minimum หนึ่งครั้งต่อ pass แล้ว swap มาไว้ต้นส่วนที่ยังไม่เรียง จำนวน comparisons ไม่ขึ้นกับลำดับ input และเท่ากับ n(n−1)/2 แต่ swaps≤n−1(อาจ0เมื่อ minimum อยู่แล้ว)
+pp.21–25:prefix ซ้ายเรียงแล้ว;scan ส่วนขวาหา minimum หนึ่งครั้งต่อ pass แล้ว swap มาไว้ต้นส่วนที่ยังไม่เรียง จำนวน comparisons ไม่ขึ้นกับลำดับ input และเท่ากับ n(n−1)/2 แต่ swaps≤n−1(อาจ 0 เมื่อ minimum อยู่แล้ว)
 
 | Pass | Array หลัง pass |
 |---|---|
@@ -131,17 +135,17 @@ pp.27–31:ถือว่าก่อน indexi เรียงแล้ว ด
 
 ตัวนับสุดท้าย: {'comparisons': 9, 'shifts': 7}
 
-บน source5ค่าได้7shifts แต่9key comparisons ตามนิยาม (มี failedcomparison เมื่อเจอค่าที่≤key ด้วย) input เรียงแล้วเปรียบ n−1และ shift0;reverseunique ทำ shifts เท่าจำนวน inversions=n(n−1)/2 Empty/singleton ผ่านโดยไม่มี comparison
+บน source5 ค่าได้ 7shifts แต่ 9key comparisons ตามนิยาม (มี failedcomparison เมื่อเจอค่าที่≤key ด้วย) input เรียงแล้วเปรียบ n−1 และ shift0;reverseunique ทำ shifts เท่าจำนวน inversions=n(n−1)/2 Empty/singleton ผ่านโดยไม่มี comparison
 
 ## Case Studies จาก Lab ที่มีจริง {#applications}
 Lab13-1PhotoLineup ใช้ height(cm),strict>และ earlytermination;ชื่อ/ส่วนสูงใน Python เป็นชุดตัวอย่างผู้เขียน A160,B150,C160 เรียงแล้ว B,A,C รักษา A ก่อน C ตาม stability จำนวน pass รวมรอบยืนยันไม่ swap ด้วย ไม่สร้างชื่อบุคคลจริง
 
-Lab13-2Warehouse เลือก stock/daily_usage(days)ต่ำก่อน;usage0→infinity ตาม source ไม่ใช่0วัน ตัวอย่างผู้เขียน A10/2=5,B6/3=2,C9/0=∞,D4/2=2 จึง priorityB,D,A,C โดย selection นี้อาจเปลี่ยนลำดับ tie ในชุดอื่น ห้ามอ้างว่า stable;ใช้การเคลื่อนย้าย≤n−1swaps เป็นเหตุผลของโจทย์ ไม่ใช่รับรอง selection เร็วที่สุดทุกระบบ
+Lab13-2Warehouse เลือก stock/daily_usage(days) ต่ำก่อน;usage0→infinity ตาม source ไม่ใช่ 0 วัน ตัวอย่างผู้เขียน A10/2=5,B6/3=2,C9/0=∞,D4/2=2 จึง priorityB,D,A,C โดย selection นี้อาจเปลี่ยนลำดับ tie ในชุดอื่น ห้ามอ้างว่า stable;ใช้การเคลื่อนย้าย≤n−1swaps เป็นเหตุผลของโจทย์ ไม่ใช่รับรอง selection เร็วที่สุดทุกระบบ
 
 Hw13Leaderboard ใช้ insertion ของผู้เล่นที่เปลี่ยนคนเดียวลงในลำดับคะแนนมากไปน้อย ต้องบอก tiepolicy/การเอาคนเก่าออกก่อน ไม่อ้าง fullresort ทุกครั้ง การหาตำแหน่งและเลื่อนยัง O(n)worst แม้เกือบเรียงแล้วมักน้อยกว่าเต็ม n² ผู้เขียนไม่แต่ง results11comparisons เป็นค่ารับประกันทุก dataset
 
 ## ข้อผิดพลาดที่พบบ่อย {#mistakes}
-สับสน swap กับ shift;ลืม failedcomparison;นับ selfswap ต่างกันแล้วเทียบตัวเลขตรงๆ;หยุด bubble ก่อนครบ pass;คิด selectionbestO(n);บอก insertion/merge ทุกแบบ stable แม้เงื่อนไข tie ผิด;ลืม copyinput/tracecost
+สับสน swap กับ shift;ลืม failedcomparison;นับ selfswap ต่างกันแล้วเทียบตัวเลขตรงๆ;หยุด bubble ก่อนครบ pass;คิด selectionbestO(n);บอก insertion/merge ทุกแบบ stable แม้เงื่อนไข tie ผิด;ลืม copy input/trace cost
 
 ## แบบฝึกพร้อมเฉลย (ผู้เขียนจัดทำและตรวจอิสระ) {#practice}
 
@@ -170,7 +174,7 @@ Hw13Leaderboard ใช้ insertion ของผู้เล่นที่เ�
 **เฉลย:** corebasic-sort ที่ทำใน array เดิมใช้ O(1)aux แต่ functions ตัวอย่าง copyinputO(n);trace หลาย pass อาจ O(n²) 3n+2เป็นΘ(n)เมื่อ operationcost คงที่ ไม่เท่ากับ n วินาที
 
 ## สรุปทบทวน {#summary}
-นิยาม n/operation/case→ยืนยัน invariant→ไล่ทุก pass→แยก comparison/swap/shift→ทดสอบ tie→รวม copy/tracecost ไม่เลือก algorithm จาก Big-O อย่างเดียวโดยไม่ดูข้อมูลและต้นทุนย้าย
+นิยาม n/operation/case→ยืนยัน invariant→ไล่ทุก pass→แยก comparison/swap/shift→ทดสอบ tie→รวม copy/trace cost ไม่เลือก algorithm จาก Big-O อย่างเดียวโดยไม่ดูข้อมูลและต้นทุนย้าย
 
 ## แหล่งอ้างอิงและขอบเขต {#sources}
 - [Week13 physical pp.3–41](../slides/Week13.pdf#page=3) — growth/Big-O,cases,bubble/selection/insertion,traces,stability/code

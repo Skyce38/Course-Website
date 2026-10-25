@@ -99,3 +99,10 @@ Ready for PR preparation; no commit, push, merge or deployment performed. Browse
 - [x] Add 21 source-grounded practice sets, preserving the original four pilots and the shared component: 25 lessons / 150 questions, including 125 automatic and 25 rubric-based self-assessments.
 - [x] Verify all new keys with independent arithmetic/code checks and source-reviewed conceptual evidence; preserve original Markdown/article content, IDs, data namespaces and source-limited lab caveats. See [coverage](docs/practice-expansion-coverage.md).
 - [x] Representative browser/integrity/regression QA; retain the existing component and cache version. PR review remains required before merge/deployment.
+
+## Phase 8 — Extended Exam Bank and Reading Polish
+
+- [x] 25 source-grounded 30-question banks: 600 additions plus the unchanged original150, topic selectors and 10/20/30/full mock sessions using the shared grader.
+- [x] Separate exam sessions/storage, deterministic validation/coverage ledger, original attempt compatibility, explicit ungraded rubrics and source-limited lab caveats.
+- [x] Generated-reader typography and reviewed Thai/English prose spacing; preserve programs, math, tables, solutions and anchors through baseline hashes. See [coverage](docs/phase8-exam-coverage.md) and [compatibility](docs/extended-exam-bank.md).
+- [x] Final visual/regression review and focused PR preparation; user review remains required before merge/deployment. See [QA](docs/phase8-qa.md).

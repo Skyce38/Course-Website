@@ -6,20 +6,20 @@
 
 ## เป้าหมายการเรียนรู้ {#objectives}
 - เลือก inheritance ด้วย is-a และสัญญาพฤติกรรม ไม่ใช่แค่เห็น attributes เหมือนกัน
-- ติดตาม initialization,override,super และ MRO ใน single/multipleinheritance
+- ติดตาม initialization,override,super และ MRO ใน single/multiple inheritance
 - คำนวณดอกเบี้ย/ขั้นต่ำพร้อมนับธุรกรรม และแยกข้อจำกัดของตัวอย่างออกจากกฎทั่วไป
 
 ## Inheritance และการออกแบบสัญญา {#concepts}
-Week3 pp.3–16 แก้ copy-paste ด้วย subclass: `class SavingsAccount(BankAccount)` สืบทอด method/property ที่ค้นพบตาม MRO แต่ instance ยังมี objectidentity ของมันเอง ไม่ได้คัดลอก instance บัญชีแม่อีกตัวขึ้นมา `isinstance(s,BankAccount)`เป็น True และ `issubclass(SavingsAccount,BankAccount)`เป็น True แต่ชนิดอย่างเดียวไม่พิสูจน์ LSP
+Week3 pp.3–16 แก้ copy-paste ด้วย subclass: `class SavingsAccount(BankAccount)` สืบทอด method/property ที่ค้นพบตาม MRO แต่ instance ยังมี object identity ของมันเอง ไม่ได้คัดลอก instance บัญชีแม่อีกตัวขึ้นมา `isinstance(s,BankAccount)`เป็น True และ `issubclass(SavingsAccount,BankAccount)`เป็น True แต่ชนิดอย่างเดียวไม่พิสูจน์ LSP
 
 Override คือนิยามชื่อ method เดิมใน child อาจแทนทั้งหมดหรือขยายด้วย super เช่น source ให้ withdraw ตรวจขั้นต่ำก่อนใช้ logic ฐาน และ apply_interest เรียก deposit เพื่อนับธุรกรรม
 
 ไม่ควรอ้างว่าทุก override ต้องเรียก super เสมอ ขึ้นกับสัญญาของ operation
 
-`super()`คืน proxy ที่ค้นหาลำดับถัดไปใน MRO ไม่ใช่ object พ่ออีกตัว และไม่จำเป็นต้องตรงกับ parent ที่คิดไว้โดยชื่อ ใน diamondD(B,C)ลำดับ D,B,C,A,object ทำให้ super ใน B ไป C การเรียก A.method(self)ตรงอาจข้าม C/ทำ base ซ้ำ ควรใช้ cooperativeinterfaces ที่รับ arguments เข้ากันได้
+`super()`คืน proxy ที่ค้นหาลำดับถัดไปใน MRO ไม่ใช่ object พ่ออีกตัว และไม่จำเป็นต้องตรงกับ parent ที่คิดไว้โดยชื่อ ใน diamondD(B,C) ลำดับ D,B,C,A,object ทำให้ super ใน B ไป C การเรียก A.method(self) ตรงอาจข้าม C/ทำ base ซ้ำ ควรใช้ cooperative interfaces ที่รับ arguments เข้ากันได้
 
 ## ตัวอย่าง Savings และ Diamond {#python}
-จาก sourcephysicalpp.25–30: rate ช่วง0..0.10;ดอกเบี้ยจาก balance×rate;ถอนแล้วเหลืออย่างน้อย500 ปรับ type/finite validation ตามบทก่อน และกรณี interest0ให้ no-op เพราะ source ยอม rate0แต่ deposit0ผิดสัญญาบัญชี อย่าเรียก deposit(0)แล้วอ้างว่าเป็นธุรกรรมสำเร็จ
+จาก sourcephysicalpp.25–30: rate ช่วง 0..0.10;ดอกเบี้ยจาก balance×rate;ถอนแล้วเหลืออย่างน้อย 500 ปรับ type/finite validation ตามบทก่อน และกรณี interest0 ให้ no-op เพราะ source ยอม rate0 แต่ deposit0 ผิดสัญญาบัญชี อย่าเรียก deposit(0) แล้วอ้างว่าเป็นธุรกรรมสำเร็จ
 
 ```python
 from math import isfinite
@@ -113,12 +113,12 @@ print(D().chain())                                        # ['D', 'B', 'C', 'A']
 | withdraw9800 | 500 | .03 | 2 | child ตรวจขั้นต่ำแล้วเรียกฐาน |
 | withdraw1 | 500 | .03 | 2 | childraise ก่อนหักเงินจริง |
 
-ค่า300/10300มาจากชุด Nana10000,.03ใน physicalp.30;การถอน9800และ diamond เป็นตัวอย่างเสริมสำหรับ boundary/MRO ไม่อ้างว่าเป็นเฉลย lab
+ค่า 300/10300 มาจากชุด Nana10000,.03 ใน physicalp.30;การถอน 9800 และ diamond เป็นตัวอย่างเสริมสำหรับ boundary/MRO ไม่อ้างว่าเป็นเฉลย lab
 
 ## Private, Init Order และ LSP {#contracts}
 Parent__balance ถูก mangle ตามชื่อ parent การเขียน self.__balance ใน Savings สร้างคนละชื่อและไม่แก้ balance จริง จึงใช้ property ฐาน `super().__init__`อยู่ก่อนใช้ attributes ที่ฐานเตรียมให้ในตัวอย่างนี้ แต่ไม่ใช่ข้อห้ามสากลว่าไม่มีโค้ดใดนำหน้ามันได้
 
-SourceSavings ตรวจขั้นต่ำ500 แต่ BankAccount ฐานอนุญาตถอนหมดบัญชี ถ้า client ยึดสัญญาฐานว่า withdraw ยอดที่มีทั้งหมดต้องสำเร็จ การแทนด้วย Savings จะทำให้ล้มเหลว:นี่คือการเพิ่ม precondition ที่ขัด LSP ควรแยก policy หรือกำหนดสัญญาฐานให้รองรับอย่างชัดเจน ไม่สรุปว่าสืบทอดได้ทาง syntax แล้วทดแทนได้ทุกงาน การออกแบบมรดกตาม domain ต้องตรวจพฤติกรรมด้วย
+SourceSavings ตรวจขั้นต่ำ 500 แต่ BankAccount ฐานอนุญาตถอนหมดบัญชี ถ้า client ยึดสัญญาฐานว่า withdraw ยอดที่มีทั้งหมดต้องสำเร็จ การแทนด้วย Savings จะทำให้ล้มเหลว:นี่คือการเพิ่ม precondition ที่ขัด LSP ควรแยก policy หรือกำหนดสัญญาฐานให้รองรับอย่างชัดเจน ไม่สรุปว่าสืบทอดได้ทาง syntax แล้วทดแทนได้ทุกงาน การออกแบบมรดกตาม domain ต้องตรวจพฤติกรรมด้วย
 
 ## ต้นทุนและข้อผิดพลาด {#complexity}
 ตัวอย่างบัญชีถือ arithmetic คงที่ O(1);การค้น method มีต้นทุนตามขนาด hierarchy ไม่ใช่จำนวนบัญชี ไม่ใช้จำนวนคลาสแทน n ของข้อมูล ข้อผิดพลาดหลักคือลืม init ฐานก่อนใช้ property,ส่ง args ผิด,เขียน private ฐานซ้ำ,ใช้ inheritance กับ has-a เช่น Customer ไม่ใช่ BankAccount และเข้าใจ MRO เป็นค้นพ่อโดยตรงเสมอ

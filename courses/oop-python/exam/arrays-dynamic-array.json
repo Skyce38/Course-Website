@@ -1,0 +1,550 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-arrays-dynamic-array",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "oop-python-arrays-dynamic-array-exam-01",
+      "type": "choice",
+      "prompt": "Random access ของ array แบบช่องขนาดคงที่อาศัยอะไร?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "คำนวณตำแหน่งจาก base และ index",
+          "id": "a"
+        },
+        {
+          "text": "เดิน next ทุกช่องก่อนหน้า",
+          "id": "b"
+        },
+        {
+          "text": "ค้นชื่อ key ในทุกช่อง",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ตำแหน่งช่องคำนวณตรงได้ แต่ไม่ใช่การบวก id ของ Python object",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week7 pp.26–38:array มีช่องตำแหน่งต่อเนื่องในแบบจำลอง จึงคำนวณ base_address+i×element_size ได้โดยไม่เดินผ่านสมาชิกก่อนหน้า เป็นเหตุผลของ indexaccessO(1) เมื่อขนาดช่องคงที่\n\nPython list เก็บ references ในช่อง ไม่ได้แปลว่า objects ที่มีชนิด/ข"
+      }
+    },
+    {
+      "id": "oop-python-arrays-dynamic-array-exam-02",
+      "type": "choice",
+      "prompt": "Python list มี references ต่อเนื่อง หมายความว่า referenced objects ต้องต่อเนื่องด้วยหรือไม่?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "ต้องอยู่ติดกันทุก object",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ เป็นคนละส่วนของ memory model",
+          "id": "b"
+        },
+        {
+          "text": "ทุก object ต้องมีขนาดเท่ากัน",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ช่องเก็บ references ไม่ใช่เนื้อ object ทุกตัว",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week7 pp.26–38:array มีช่องตำแหน่งต่อเนื่องในแบบจำลอง จึงคำนวณ base_address+i×element_size ได้โดยไม่เดินผ่านสมาชิกก่อนหน้า เป็นเหตุผลของ indexaccessO(1) เมื่อขนาดช่องคงที่\n\nPython list เก็บ references ในช่อง ไม่ได้แปลว่า objects ที่มีชนิด/ข"
+      }
+    },
+    {
+      "id": "oop-python-arrays-dynamic-array-exam-03",
+      "type": "choice",
+      "prompt": "size กับ capacity ต่างกันอย่างไร?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "สองชื่อของจำนวนเดียวกันเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "capacity คือ index สุดท้ายที่มีค่าเสมอ",
+          "id": "b"
+        },
+        {
+          "text": "จำนวนค่าจริง กับจำนวนช่องที่จัดสรร",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "รักษา 0≤size≤capacity ไม่ใช้ None นับค่าจริง",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week7 pp.26–38:array มีช่องตำแหน่งต่อเนื่องในแบบจำลอง จึงคำนวณ base_address+i×element_size ได้โดยไม่เดินผ่านสมาชิกก่อนหน้า เป็นเหตุผลของ indexaccessO(1) เมื่อขนาดช่องคงที่\n\nPython list เก็บ references ในช่อง ไม่ได้แปลว่า objects ที่มีชนิด/ข"
+      }
+    },
+    {
+      "id": "oop-python-arrays-dynamic-array-exam-04",
+      "type": "choice",
+      "prompt": "ถ้า None เป็นสมาชิกข้อมูลจริง จะใช้ None ตัดสิน size ได้หรือไม่?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "ไม่ได้ ต้องเก็บ logical size แยก",
+          "id": "a"
+        },
+        {
+          "text": "ได้เพราะ None ห้ามอยู่ใน array",
+          "id": "b"
+        },
+        {
+          "text": "ได้เมื่อ capacity เป็นเลขคู่",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ข้อมูลกับช่องว่างทาง implementation ต้องไม่ปนกัน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week7 pp.26–38:array มีช่องตำแหน่งต่อเนื่องในแบบจำลอง จึงคำนวณ base_address+i×element_size ได้โดยไม่เดินผ่านสมาชิกก่อนหน้า เป็นเหตุผลของ indexaccessO(1) เมื่อขนาดช่องคงที่\n\nPython list เก็บ references ในช่อง ไม่ได้แปลว่า objects ที่มีชนิด/ข"
+      }
+    },
+    {
+      "id": "oop-python-arrays-dynamic-array-exam-05",
+      "type": "numeric",
+      "prompt": "แบบจำลอง base100,ช่อง 4bytes,index3 มี address ของช่องเท่าใด?",
+      "reference": "concepts",
+      "answer": 112,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "base+i×slot=100+3×4=112 เป็นโมเดล ไม่ใช่ id arithmetic ของ Python",
+      "difficulty": "easy",
+      "verification": {
+        "method": "python",
+        "evidence": "Week7 pp.26–38:array มีช่องตำแหน่งต่อเนื่องในแบบจำลอง จึงคำนวณ base_address+i×element_size ได้โดยไม่เดินผ่านสมาชิกก่อนหน้า เป็นเหตุผลของ indexaccessO(1) เมื่อขนาดช่องคงที่\n\nPython list เก็บ references ในช่อง ไม่ได้แปลว่า objects ที่มีชนิด/ข",
+        "oracle": "100+3*4"
+      }
+    },
+    {
+      "id": "oop-python-arrays-dynamic-array-exam-06",
+      "type": "numeric",
+      "prompt": "เริ่ม capacity1 และ doubling เมื่อ append ครบ 9 ค่า capacity เป็นเท่าใด?",
+      "reference": "amortized",
+      "answer": 16,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "ขยาย 1→2→4→8→16 เมื่อเพิ่มค่าที่ 9",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "Week7 pp.40–47,Week8 pp.3–8:เริ่ม capacity1 ถ้าเต็มให้ allocate2 เท่า คัดลอกค่าจริงแล้ว append ใหม่ ตารางต่อไปนับ **การเขียนค่าใหม่+copy live cells** ตามแบบจำลอง source ไม่ใช่ทุก allocation instruction หรือเวลา wall-clock\n\n| append ครั้ง | ",
+        "oracle": "2**ceil(log2(9))"
+      }
+    },
+    {
+      "id": "oop-python-arrays-dynamic-array-exam-07",
+      "type": "choice",
+      "prompt": "Append หนึ่งครั้งที่ resize มี worst cost ใดตามแบบจำลอง?",
+      "reference": "amortized",
+      "choices": [
+        {
+          "text": "O(n) จากการคัดลอก live entries",
+          "id": "a"
+        },
+        {
+          "text": "O(1) ทุกครั้ง",
+          "id": "b"
+        },
+        {
+          "text": "O(log n) เพราะ capacity เป็นกำลังสอง",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "amortized O(1) ไม่ได้แปลว่าทุก call มีค่าใช้จ่ายเท่ากัน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week7 pp.40–47,Week8 pp.3–8:เริ่ม capacity1 ถ้าเต็มให้ allocate2 เท่า คัดลอกค่าจริงแล้ว append ใหม่ ตารางต่อไปนับ **การเขียนค่าใหม่+copy live cells** ตามแบบจำลอง source ไม่ใช่ทุก allocation instruction หรือเวลา wall-clock\n\n| append ครั้ง | "
+      }
+    },
+    {
+      "id": "oop-python-arrays-dynamic-array-exam-08",
+      "type": "choice",
+      "prompt": "Amortized analysis ต่างจาก average-case แบบสุ่มอย่างไร?",
+      "reference": "amortized",
+      "choices": [
+        {
+          "text": "ต้องมี probability distribution เสมอ",
+          "id": "a"
+        },
+        {
+          "text": "bound ต้นทุนรวมของลำดับ ไม่ต้องสมมติการสุ่ม input",
+          "id": "b"
+        },
+        {
+          "text": "เท่ากับ benchmark เวลาเฉลี่ยเท่านั้น",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "แยกการเฉลี่ยข้าม operations กับการเฉลี่ยข้าม inputs",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week7 pp.40–47,Week8 pp.3–8:เริ่ม capacity1 ถ้าเต็มให้ allocate2 เท่า คัดลอกค่าจริงแล้ว append ใหม่ ตารางต่อไปนับ **การเขียนค่าใหม่+copy live cells** ตามแบบจำลอง source ไม่ใช่ทุก allocation instruction หรือเวลา wall-clock\n\n| append ครั้ง | "
+      }
+    },
+    {
+      "id": "oop-python-arrays-dynamic-array-exam-09",
+      "type": "numeric",
+      "prompt": "ขยาย capacity ทีละ 1 เพื่อ append5 ค่า จากว่าง มี copies รวมก่อนใส่ค่าใหม่กี่ครั้ง?",
+      "reference": "amortized",
+      "answer": 10,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "คัดลอก 0+1+2+3+4=10 จึงโตแบบ quadratic ถ้าทำต่อ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "Week7 pp.40–47,Week8 pp.3–8:เริ่ม capacity1 ถ้าเต็มให้ allocate2 เท่า คัดลอกค่าจริงแล้ว append ใหม่ ตารางต่อไปนับ **การเขียนค่าใหม่+copy live cells** ตามแบบจำลอง source ไม่ใช่ทุก allocation instruction หรือเวลา wall-clock\n\n| append ครั้ง | ",
+        "oracle": "sum(range(5))"
+      }
+    },
+    {
+      "id": "oop-python-arrays-dynamic-array-exam-10",
+      "type": "choice",
+      "prompt": "แบบจำลอง doubling ในบทรับรองว่า CPython ใช้ doubling เป๊ะหรือไม่?",
+      "reference": "amortized",
+      "choices": [
+        {
+          "text": "ไม่ เป็นโมเดลการเรียน ไม่ใช่รายละเอียด implementation ทุกเวอร์ชัน",
+          "id": "a"
+        },
+        {
+          "text": "รับรองทุกเวอร์ชัน",
+          "id": "b"
+        },
+        {
+          "text": "รับรองเพราะใช้ชื่อ Python",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ต้องแยกแบบจำลองวิเคราะห์จาก library จริง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week7 pp.40–47,Week8 pp.3–8:เริ่ม capacity1 ถ้าเต็มให้ allocate2 เท่า คัดลอกค่าจริงแล้ว append ใหม่ ตารางต่อไปนับ **การเขียนค่าใหม่+copy live cells** ตามแบบจำลอง source ไม่ใช่ทุก allocation instruction หรือเวลา wall-clock\n\n| append ครั้ง | "
+      }
+    },
+    {
+      "id": "oop-python-arrays-dynamic-array-exam-11",
+      "type": "choice",
+      "prompt": "Insert ที่ index i ใน array ต้องเลื่อนค่าทางใดเพื่อไม่ทับข้อมูล?",
+      "reference": "trace",
+      "choices": [
+        {
+          "text": "จาก i ไปท้ายโดยไม่เก็บค่า",
+          "id": "a"
+        },
+        {
+          "text": "จากท้ายกลับมาทาง i แล้วใส่ค่าใหม่",
+          "id": "b"
+        },
+        {
+          "text": "ไม่เลื่อนและเขียนทับทันที",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ทิศการเลื่อนช่วยรักษาสมาชิกเก่า",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เริ่ม[10,20,30,40],size4/capacity4 insert_at(1,99):growcapacity8 ก่อน จากนั้นเลื่อนขวาเริ่มปลายสุด\n\nถ้าเลื่อนซ้ายไปขวาค่าที่จะคัดลอกจะถูกทับ เช่นได้ 20 ซ้ำแทน 30/40 Removeindex1 เก็บ 99 ไว้ก่อน→เลื่อน index2→1,3→2,4→3→ลด size→clear ช่องท้าย"
+      }
+    },
+    {
+      "id": "oop-python-arrays-dynamic-array-exam-12",
+      "type": "numeric",
+      "prompt": "Array size6 insert ที่ index2 ต้องเลื่อนสมาชิกเดิมกี่ตัว?",
+      "reference": "trace",
+      "answer": 4,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "สมาชิก index2,3,4,5 รวม 4 ตัวต้องขยับขวา",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "เริ่ม[10,20,30,40],size4/capacity4 insert_at(1,99):growcapacity8 ก่อน จากนั้นเลื่อนขวาเริ่มปลายสุด\n\nถ้าเลื่อนซ้ายไปขวาค่าที่จะคัดลอกจะถูกทับ เช่นได้ 20 ซ้ำแทน 30/40 Removeindex1 เก็บ 99 ไว้ก่อน→เลื่อน index2→1,3→2,4→3→ลด size→clear ช่องท้าย",
+        "oracle": "6-2"
+      }
+    },
+    {
+      "id": "oop-python-arrays-dynamic-array-exam-13",
+      "type": "numeric",
+      "prompt": "Array size6 remove ที่ index2 ต้องเลื่อนสมาชิกด้านขวากลับกี่ตัว?",
+      "reference": "trace",
+      "answer": 3,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "index3,4,5 รวม 3 ตัวเลื่อนซ้าย",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "เริ่ม[10,20,30,40],size4/capacity4 insert_at(1,99):growcapacity8 ก่อน จากนั้นเลื่อนขวาเริ่มปลายสุด\n\nถ้าเลื่อนซ้ายไปขวาค่าที่จะคัดลอกจะถูกทับ เช่นได้ 20 ซ้ำแทน 30/40 Removeindex1 เก็บ 99 ไว้ก่อน→เลื่อน index2→1,3→2,4→3→ลด size→clear ช่องท้าย",
+        "oracle": "6-2-1"
+      }
+    },
+    {
+      "id": "oop-python-arrays-dynamic-array-exam-14",
+      "type": "choice",
+      "prompt": "__getitem__ ควรตรวจ index เทียบกับสิ่งใดในโมเดลนี้?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "capacity อย่างเดียว",
+          "id": "a"
+        },
+        {
+          "text": "logical size และ policy ของ index",
+          "id": "b"
+        },
+        {
+          "text": "จำนวน None ทั้ง buffer",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ช่องที่จัดสรรไว้แต่ยังไม่มีค่าไม่ใช่สมาชิกที่อ่านได้",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "อิง DynamicArray/dunder/source implementation และ localFixedArray เพิ่ม strictintegerindices(ไม่รับ bool),instrumentation และ boundaries นโยบาย index ของโมเดลนี้ **ไม่รับ negativeindex/slices** ต่างจาก Python list;FixedArray เต็มใช้ Overflo"
+      }
+    },
+    {
+      "id": "oop-python-arrays-dynamic-array-exam-15",
+      "type": "choice",
+      "prompt": "__len__ ของ DynamicArray ควรคืนอะไร?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "capacity ทั้งหมด",
+          "id": "a"
+        },
+        {
+          "text": "จำนวนการ resize",
+          "id": "b"
+        },
+        {
+          "text": "จำนวนสมาชิกจริง",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ตรงกับ logical data ของ container",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "อิง DynamicArray/dunder/source implementation และ localFixedArray เพิ่ม strictintegerindices(ไม่รับ bool),instrumentation และ boundaries นโยบาย index ของโมเดลนี้ **ไม่รับ negativeindex/slices** ต่างจาก Python list;FixedArray เต็มใช้ Overflo"
+      }
+    },
+    {
+      "id": "oop-python-arrays-dynamic-array-exam-16",
+      "type": "numeric",
+      "prompt": "Row-major matrix มี 5columns ตำแหน่ง row2,col3 แบบ 0-based มี offset กี่ช่อง?",
+      "reference": "matrix",
+      "answer": 13,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "offset=row×columns+col=2×5+3",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "Week8 pp.10–15:unsortedsearch อาจต้องตรวจทุกค่าจึง O(n),find คืน index แรกหรือ−1 ถ้าไม่พบ ไม่ใช้−1 เป็น index ต่อโดยลืมตรวจ เพราะ Python list จะอ่านท้ายได้แต่โมเดลนี้ reject\n\nRow-majorflat_index=row×num_cols+col;matrix3×4 ตำแหน่ง[1,2]ใช้ in",
+        "oracle": "2*5+3"
+      }
+    },
+    {
+      "id": "oop-python-arrays-dynamic-array-exam-17",
+      "type": "choice",
+      "prompt": "Python [[0]*3]*2 มีความเสี่ยงใดเมื่อแก้แถวหนึ่ง?",
+      "reference": "matrix",
+      "choices": [
+        {
+          "text": "สร้างสองแถวอิสระเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "สองช่องอ้าง row list เดียวกัน",
+          "id": "b"
+        },
+        {
+          "text": "matrix กลายเป็น tuple",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ต้องสร้างแต่ละ row ใหม่ เช่น comprehension",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week8 pp.10–15:unsortedsearch อาจต้องตรวจทุกค่าจึง O(n),find คืน index แรกหรือ−1 ถ้าไม่พบ ไม่ใช้−1 เป็น index ต่อโดยลืมตรวจ เพราะ Python list จะอ่านท้ายได้แต่โมเดลนี้ reject\n\nRow-majorflat_index=row×num_cols+col;matrix3×4 ตำแหน่ง[1,2]ใช้ in"
+      }
+    },
+    {
+      "id": "oop-python-arrays-dynamic-array-exam-18",
+      "type": "choice",
+      "prompt": "Search ค่าที่ไม่มีใน unsorted array size n worst-case ใด?",
+      "reference": "complexity",
+      "choices": [
+        {
+          "text": "O(1) เพราะ random access",
+          "id": "a"
+        },
+        {
+          "text": "O(log n) โดยไม่ต้องเรียง",
+          "id": "b"
+        },
+        {
+          "text": "O(n)",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "random access ไม่ทำให้รู้ index ของค่าที่ต้องการ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "| Operation | เวลาในโมเดลนี้ | หมายเหตุ |\n|---|---|---|\n|get/set/len|O(1)|index ต้องอยู่ใน logicalsize|\n|append|amortizedO(1),worstO(n)|resizecopy|\n|insert/remove ตำแหน่ง i|O(n−i)และอาจ resizeO(n)|เลื่อนข้อมูล|\n|pop ท้าย|O(1)|ไม่ shrink|\n|f"
+      }
+    },
+    {
+      "id": "oop-python-arrays-dynamic-array-exam-19",
+      "type": "choice",
+      "prompt": "Stack wrapper ที่เก็บ DynamicArray เป็นความสัมพันธ์แบบใดโดยเจตนาการ reuse?",
+      "reference": "matrix",
+      "choices": [
+        {
+          "text": "Composition/has-a",
+          "id": "a"
+        },
+        {
+          "text": "Stack is-a every array โดยบังคับ",
+          "id": "b"
+        },
+        {
+          "text": "ไม่มี reference ระหว่าง objects",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "wrapper จำกัด interface แม้ใช้ container ภายใน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week8 pp.10–15:unsortedsearch อาจต้องตรวจทุกค่าจึง O(n),find คืน index แรกหรือ−1 ถ้าไม่พบ ไม่ใช้−1 เป็น index ต่อโดยลืมตรวจ เพราะ Python list จะอ่านท้ายได้แต่โมเดลนี้ reject\n\nRow-majorflat_index=row×num_cols+col;matrix3×4 ตำแหน่ง[1,2]ใช้ in"
+      }
+    },
+    {
+      "id": "oop-python-arrays-dynamic-array-exam-20",
+      "type": "choice",
+      "prompt": "Trace copies ของ array ทุก pass อาจเพิ่มต้นทุนหรือไม่?",
+      "reference": "complexity",
+      "choices": [
+        {
+          "text": "ไม่เพิ่มเพราะใช้เพื่อสอน",
+          "id": "a"
+        },
+        {
+          "text": "เพิ่มได้ ต้องแยกจาก core operations",
+          "id": "b"
+        },
+        {
+          "text": "เพิ่มแค่สี UI",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "การเก็บ snapshots ใช้ทั้งเวลาและพื้นที่จริง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "| Operation | เวลาในโมเดลนี้ | หมายเหตุ |\n|---|---|---|\n|get/set/len|O(1)|index ต้องอยู่ใน logicalsize|\n|append|amortizedO(1),worstO(n)|resizecopy|\n|insert/remove ตำแหน่ง i|O(n−i)และอาจ resizeO(n)|เลื่อนข้อมูล|\n|pop ท้าย|O(1)|ไม่ shrink|\n|f"
+      }
+    },
+    {
+      "id": "oop-python-arrays-dynamic-array-exam-21",
+      "type": "self",
+      "prompt": "พิสูจน์ amortized append ของ doubling โดยไม่อ้างทุก call O(1)",
+      "reference": "amortized",
+      "rubric": [
+        "รวม copies ที่ขนาด 1,2,4,...",
+        "รวมการเขียนค่าที่ append ใหม่ด้วย",
+        "แยก worst single operation กับต้นทุนรวมและสมมติฐาน"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: รวม copies ที่ขนาด 1,2,4,... รวมการเขียนค่าที่ append ใหม่ด้วย แยก worst single operation กับต้นทุนรวมและสมมติฐาน",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Week7 pp.40–47,Week8 pp.3–8:เริ่ม capacity1 ถ้าเต็มให้ allocate2 เท่า คัดลอกค่าจริงแล้ว append ใหม่ ตารางต่อไปนับ **การเขียนค่าใหม่+copy live cells** ตามแบบจำลอง source ไม่ใช่ทุก allocation instruction หรือเวลา wall-clock\n\n| append ครั้ง | "
+      }
+    },
+    {
+      "id": "oop-python-arrays-dynamic-array-exam-22",
+      "type": "self",
+      "prompt": "ออกแบบ tests insert/remove ที่ empty,singleton,first,last",
+      "reference": "trace",
+      "rubric": [
+        "ตรวจ bounds และลำดับ logical values",
+        "ตรวจ size/capacity invariants หลังทุกขั้น",
+        "เทียบ list อ้างอิงโดยไม่อ่านช่อง buffer เกิน size"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ตรวจ bounds และลำดับ logical values ตรวจ size/capacity invariants หลังทุกขั้น เทียบ list อ้างอิงโดยไม่อ่านช่อง buffer เกิน size",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "เริ่ม[10,20,30,40],size4/capacity4 insert_at(1,99):growcapacity8 ก่อน จากนั้นเลื่อนขวาเริ่มปลายสุด\n\nถ้าเลื่อนซ้ายไปขวาค่าที่จะคัดลอกจะถูกทับ เช่นได้ 20 ซ้ำแทน 30/40 Removeindex1 เก็บ 99 ไว้ก่อน→เลื่อน index2→1,3→2,4→3→ลด size→clear ช่องท้าย"
+      }
+    },
+    {
+      "id": "oop-python-arrays-dynamic-array-exam-23",
+      "type": "self",
+      "prompt": "อธิบาย row aliasing กับ row-major addressing ว่าต่างระดับอย่างไร",
+      "reference": "matrix",
+      "rubric": [
+        "row-major เป็นโมเดลตำแหน่งช่อง",
+        "nested Python lists อาจมี references แชร์",
+        "ให้ตัวอย่างสร้างแถวอิสระและไม่บวก id จริง"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: row-major เป็นโมเดลตำแหน่งช่อง nested Python lists อาจมี references แชร์ ให้ตัวอย่างสร้างแถวอิสระและไม่บวก id จริง",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Week8 pp.10–15:unsortedsearch อาจต้องตรวจทุกค่าจึง O(n),find คืน index แรกหรือ−1 ถ้าไม่พบ ไม่ใช้−1 เป็น index ต่อโดยลืมตรวจ เพราะ Python list จะอ่านท้ายได้แต่โมเดลนี้ reject\n\nRow-majorflat_index=row×num_cols+col;matrix3×4 ตำแหน่ง[1,2]ใช้ in"
+      }
+    },
+    {
+      "id": "oop-python-arrays-dynamic-array-exam-24",
+      "type": "self",
+      "prompt": "วาง tests ของ dunder interface ที่ไม่เปิด unusedbuffer เป็นข้อมูล",
+      "reference": "python",
+      "rubric": [
+        "len/get/set/str/repr สอดคล้อง logical size",
+        "อนุญาต None เป็นข้อมูลหาก contract รับ",
+        "แยก capacity,validation และต้นทุนข้อความ"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: len/get/set/str/repr สอดคล้อง logical size อนุญาต None เป็นข้อมูลหาก contract รับ แยก capacity,validation และต้นทุนข้อความ",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "อิง DynamicArray/dunder/source implementation และ localFixedArray เพิ่ม strictintegerindices(ไม่รับ bool),instrumentation และ boundaries นโยบาย index ของโมเดลนี้ **ไม่รับ negativeindex/slices** ต่างจาก Python list;FixedArray เต็มใช้ Overflo"
+      }
+    }
+  ]
+}

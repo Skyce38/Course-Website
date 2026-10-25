@@ -1,0 +1,572 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-queue",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "oop-python-queue-exam-01",
+      "type": "choice",
+      "prompt": "FIFO แตกต่างจาก Stack ที่ใด?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "สมาชิกเข้าก่อนออกก่อน",
+          "id": "a"
+        },
+        {
+          "text": "สมาชิกเข้าหลังออกก่อน",
+          "id": "b"
+        },
+        {
+          "text": "ค่า priority มากสุดก่อนเสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "Queue แยกด้านรับกับด้านนำออก",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week12 pp.3–18:เข้าก่อนออกก่อน (First In, First Out) enqueue เพิ่ม rear, dequeue คืนและนำ front ออก,peek อ่าน front มี head/tail ทำให้ linkedqueue เพิ่มท้าย/ลบต้น O(1) โดยไม่เดินหาแต่ละตำแหน่ง ต่างจาก stack ที่ push/pop ที่ head เดียวกัน\n\nP"
+      }
+    },
+    {
+      "id": "oop-python-queue-exam-02",
+      "type": "choice",
+      "prompt": "LinkedQueue เก็บ tail เพื่อช่วย operation ใด?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "search ทุกค่า O(1)",
+          "id": "a"
+        },
+        {
+          "text": "enqueue ที่ท้ายโดยไม่ scan ทั้งลิสต์",
+          "id": "b"
+        },
+        {
+          "text": "dequeue จากท้ายเสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "head ใช้ด้านนำออกและ tail ใช้ต่อ Node ใหม่",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week12 pp.3–18:เข้าก่อนออกก่อน (First In, First Out) enqueue เพิ่ม rear, dequeue คืนและนำ front ออก,peek อ่าน front มี head/tail ทำให้ linkedqueue เพิ่มท้าย/ลบต้น O(1) โดยไม่เดินหาแต่ละตำแหน่ง ต่างจาก stack ที่ push/pop ที่ head เดียวกัน\n\nP"
+      }
+    },
+    {
+      "id": "oop-python-queue-exam-03",
+      "type": "choice",
+      "prompt": "Dequeue ตัวสุดท้ายแล้วไม่ล้าง tail เสี่ยงอะไร?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "ทำให้ size เพิ่มอัตโนมัติ",
+          "id": "a"
+        },
+        {
+          "text": "ไม่มีผลในทุก implementation",
+          "id": "b"
+        },
+        {
+          "text": "tail ยังชี้ Node ที่ไม่ใช่สมาชิกและ enqueue ครั้งต่อไปผิด",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "emptyinvariant ต้องทำ head และ tail สอดคล้องกัน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week12 pp.3–18:เข้าก่อนออกก่อน (First In, First Out) enqueue เพิ่ม rear, dequeue คืนและนำ front ออก,peek อ่าน front มี head/tail ทำให้ linkedqueue เพิ่มท้าย/ลบต้น O(1) โดยไม่เดินหาแต่ละตำแหน่ง ต่างจาก stack ที่ push/pop ที่ head เดียวกัน\n\nP"
+      }
+    },
+    {
+      "id": "oop-python-queue-exam-04",
+      "type": "numeric",
+      "prompt": "cap7,rear6 เพิ่มหนึ่งครั้งตาม rear=(rear+1)%cap ได้ rear เท่าใด?",
+      "reference": "circular",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "(6+1)%7=0 กลับต้น buffer",
+      "difficulty": "easy",
+      "verification": {
+        "method": "python",
+        "evidence": "pp.20–24,43–45:reuse ช่องว่างใน array ด้วย modulo ไม่ขยาย capacity และไม่เลื่อนสมาชิกทุก dequeue ในโค้ดนี้ rear หมายถึง **ช่องที่จะใส่ครั้งถัดไป** ไม่ใช่ตำแหน่งสมาชิกสุดท้าย front คือค่าที่จะออกถัดไป\n\n`rear=(rear+1)%capacity`, `front=(front",
+        "oracle": "(6+1)%7"
+      }
+    },
+    {
+      "id": "oop-python-queue-exam-05",
+      "type": "numeric",
+      "prompt": "cap5,front4,size3 logicalitem ตัวที่ 2 แบบ 0-based อยู่ physicalindex ใด?",
+      "reference": "circular",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "(front+i)%cap=(4+2)%5=1",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "pp.20–24,43–45:reuse ช่องว่างใน array ด้วย modulo ไม่ขยาย capacity และไม่เลื่อนสมาชิกทุก dequeue ในโค้ดนี้ rear หมายถึง **ช่องที่จะใส่ครั้งถัดไป** ไม่ใช่ตำแหน่งสมาชิกสุดท้าย front คือค่าที่จะออกถัดไป\n\n`rear=(rear+1)%capacity`, `front=(front",
+        "oracle": "(4+2)%5"
+      }
+    },
+    {
+      "id": "oop-python-queue-exam-06",
+      "type": "choice",
+      "prompt": "rear ในโค้ด CircularQueue ของบทหมายถึงอะไร?",
+      "reference": "circular",
+      "choices": [
+        {
+          "text": "สมาชิกตัวสุดท้ายเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "จำนวนสมาชิกที่เคย enqueue ทั้งหมด",
+          "id": "b"
+        },
+        {
+          "text": "ช่องที่จะเขียนครั้งถัดไป",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ต้องประกาศ convention เพราะ diagram บางแห่งใช้คนละนิยาม",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.20–24,43–45:reuse ช่องว่างใน array ด้วย modulo ไม่ขยาย capacity และไม่เลื่อนสมาชิกทุก dequeue ในโค้ดนี้ rear หมายถึง **ช่องที่จะใส่ครั้งถัดไป** ไม่ใช่ตำแหน่งสมาชิกสุดท้าย front คือค่าที่จะออกถัดไป\n\n`rear=(rear+1)%capacity`, `front=(front"
+      }
+    },
+    {
+      "id": "oop-python-queue-exam-07",
+      "type": "choice",
+      "prompt": "ทำไมต้องใช้ size แยกเมื่อ front==rear?",
+      "reference": "circular",
+      "choices": [
+        {
+          "text": "สภาพว่างและเต็มอาจมี front==rear เหมือนกัน",
+          "id": "a"
+        },
+        {
+          "text": "เพราะ None ห้ามเป็นข้อมูล",
+          "id": "b"
+        },
+        {
+          "text": "เพราะ modulo ใช้กับ rear ไม่ได้",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "อีก policy อาจสำรองช่อง แต่บทเลือก size ชัดเจน",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.20–24,43–45:reuse ช่องว่างใน array ด้วย modulo ไม่ขยาย capacity และไม่เลื่อนสมาชิกทุก dequeue ในโค้ดนี้ rear หมายถึง **ช่องที่จะใส่ครั้งถัดไป** ไม่ใช่ตำแหน่งสมาชิกสุดท้าย front คือค่าที่จะออกถัดไป\n\n`rear=(rear+1)%capacity`, `front=(front"
+      }
+    },
+    {
+      "id": "oop-python-queue-exam-08",
+      "type": "choice",
+      "prompt": "enqueue เมื่อ CircularQueue เต็มในบทมีผลอะไร?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "ทิ้งสมาชิกเก่าสุดอัตโนมัติ",
+          "id": "a"
+        },
+        {
+          "text": "OverflowError ไม่ overwrite สมาชิก",
+          "id": "b"
+        },
+        {
+          "text": "เพิ่ม capacity เองทุกครั้ง",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ต่างจาก bounded deque ที่อาจ discard อีกด้านตามนโยบาย",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "อิง source Node/Queue/CircularQueue/PriorityQueue เพิ่ม strict positive capacity และ integer priority เป็น policy ที่ระบุชัด ไม่ overwrite เมื่อ full ต่างจาก boundeddeque(maxlen) ที่อาจทิ้งค่าคนละนโยบาย"
+      }
+    },
+    {
+      "id": "oop-python-queue-exam-09",
+      "type": "choice",
+      "prompt": "เมื่อ dequeue แล้ว clear ช่องเป็น None ทำเพื่ออะไร?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "ใช้ None เป็นตัวนับ size เพียงอย่างเดียว",
+          "id": "a"
+        },
+        {
+          "text": "ทำให้ queue ไม่รับ None เป็นข้อมูล",
+          "id": "b"
+        },
+        {
+          "text": "ปล่อย reference ของค่าที่นำออก",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "size ยังแยก liveitems ออกจากช่อง unused",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "อิง source Node/Queue/CircularQueue/PriorityQueue เพิ่ม strict positive capacity และ integer priority เป็น policy ที่ระบุชัด ไม่ overwrite เมื่อ full ต่างจาก boundeddeque(maxlen) ที่อาจทิ้งค่าคนละนโยบาย"
+      }
+    },
+    {
+      "id": "oop-python-queue-exam-10",
+      "type": "choice",
+      "prompt": "Physicalbuffer ต้องเรียงตรงกับ FIFOlogicalorder เสมอหรือไม่?",
+      "reference": "trace",
+      "choices": [
+        {
+          "text": "ไม่ เมื่อ wrap-around ต้องอ่านจาก front ตาม size",
+          "id": "a"
+        },
+        {
+          "text": "ต้องเหมือนกันทุกช่อง",
+          "id": "b"
+        },
+        {
+          "text": "อ่านทุก capacity แล้วข้าม None ก็พอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "None อาจเป็นข้อมูลจริง จึงไม่ควรใช้เป็นตัวแบ่งลำดับ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week12 pp.20–22 เริ่ม cap5 A,B,C,D,E เต็ม;dequeue สามครั้งนำ A,B,C ออก จากนั้น enqueueF,G\n\n| ขั้น | buffer กายภาพ | front | rear(ช่องถัดไป) | size | ลำดับ FIFO |\n|---|---|---:|---:|---:|---|\n|เต็ม|A B C D E|0|0|5|A B C D E|\n|ลบ3|_ _ _ D E|3"
+      }
+    },
+    {
+      "id": "oop-python-queue-exam-11",
+      "type": "numeric",
+      "prompt": "cap4 เริ่ม empty enqueue3 ครั้ง dequeue1 ครั้ง enqueue1 ครั้ง size สุดท้ายเท่าใด?",
+      "reference": "circular",
+      "answer": 3,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "size=0+3−1+1=3 ยังไม่เต็ม",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "pp.20–24,43–45:reuse ช่องว่างใน array ด้วย modulo ไม่ขยาย capacity และไม่เลื่อนสมาชิกทุก dequeue ในโค้ดนี้ rear หมายถึง **ช่องที่จะใส่ครั้งถัดไป** ไม่ใช่ตำแหน่งสมาชิกสุดท้าย front คือค่าที่จะออกถัดไป\n\n`rear=(rear+1)%capacity`, `front=(front",
+        "oracle": "0+3-1+1"
+      }
+    },
+    {
+      "id": "oop-python-queue-exam-12",
+      "type": "choice",
+      "prompt": "deque.appendleft แล้ว popleft ทำงานที่ปลายใด?",
+      "reference": "deque",
+      "choices": [
+        {
+          "text": "ด้านขวาทั้งคู่",
+          "id": "a"
+        },
+        {
+          "text": "เพิ่มซ้ายแต่ลบขวา",
+          "id": "b"
+        },
+        {
+          "text": "ด้านซ้ายทั้งสอง operation",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ต้องแยก append/pop ของสองฝั่งให้ชัด",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.26–30:double-endedqueue เพิ่ม/ลบได้สองปลาย:append/appendleft,pop/popleft;peek ใช้[0]/[-1]เมื่อไม่ว่าง เหมาะคิวทั่วไป/ประวัติ/งานสองปลาย ตรงข้ามกับ APIStack หรือ Queue ที่ตั้งใจจำกัดการใช้\n\nความเป็น deque ไม่ได้ทำให้ค้น/ลบค่ากลาง O(1) ข้อ"
+      }
+    },
+    {
+      "id": "oop-python-queue-exam-13",
+      "type": "choice",
+      "prompt": "Deque ช่วยให้ค้นค่ากลาง O(1) โดยอัตโนมัติหรือไม่?",
+      "reference": "deque",
+      "choices": [
+        {
+          "text": "ไม่ การรองรับสองปลายไม่ใช่ randomsearch",
+          "id": "a"
+        },
+        {
+          "text": "ได้เสมอ",
+          "id": "b"
+        },
+        {
+          "text": "ได้เมื่อข้อมูลเป็น int",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ต้องดู operation ไม่สรุปจากชื่อ ADT",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.26–30:double-endedqueue เพิ่ม/ลบได้สองปลาย:append/appendleft,pop/popleft;peek ใช้[0]/[-1]เมื่อไม่ว่าง เหมาะคิวทั่วไป/ประวัติ/งานสองปลาย ตรงข้ามกับ APIStack หรือ Queue ที่ตั้งใจจำกัดการใช้\n\nความเป็น deque ไม่ได้ทำให้ค้น/ลบค่ากลาง O(1) ข้อ"
+      }
+    },
+    {
+      "id": "oop-python-queue-exam-14",
+      "type": "choice",
+      "prompt": "Min-heap นำ priority ใดออกก่อน?",
+      "reference": "priority",
+      "choices": [
+        {
+          "text": "ตัวเลขมากกว่าเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "ตัวเลขน้อยกว่า",
+          "id": "b"
+        },
+        {
+          "text": "เข้าก่อนเสมอโดยไม่ดู priority",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ถ้าต้องการมากก่อนต้องประกาศการแปลง priority",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.32–37,47–49:heapq เป็น min-heap จึง priority เลขน้อยออกก่อน Tuple(priority,arrival_order,item) ทำให้เมื่อ priority เท่ากันออกก่อนตาม arrivalorder และไม่ต้องเปรียบเทียบ item ที่อาจเป็น dict/object ไม่มี ordering\n\nA(priority2,counter0),B(1"
+      }
+    },
+    {
+      "id": "oop-python-queue-exam-15",
+      "type": "choice",
+      "prompt": "ใช้ counter ใน(priority,counter,item) ช่วยกรณีใด?",
+      "reference": "priority",
+      "choices": [
+        {
+          "text": "ทำให้ทุก priority เท่ากัน",
+          "id": "a"
+        },
+        {
+          "text": "แทน size ของ heap",
+          "id": "b"
+        },
+        {
+          "text": "tiepriority และหลีกเลี่ยงเปรียบ payload ที่ไม่มี ordering",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "counter แยกก่อนถึง item และรักษาลำดับเข้าภายใน tie",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.32–37,47–49:heapq เป็น min-heap จึง priority เลขน้อยออกก่อน Tuple(priority,arrival_order,item) ทำให้เมื่อ priority เท่ากันออกก่อนตาม arrivalorder และไม่ต้องเปรียบเทียบ item ที่อาจเป็น dict/object ไม่มี ordering\n\nA(priority2,counter0),B(1"
+      }
+    },
+    {
+      "id": "oop-python-queue-exam-16",
+      "type": "choice",
+      "prompt": "PriorityQueue ในบทรับ bool เป็น integerpriority หรือไม่?",
+      "reference": "priority",
+      "choices": [
+        {
+          "text": "ไม่ ใช้ typeexact เป็น policy ผู้เขียน",
+          "id": "a"
+        },
+        {
+          "text": "รับเสมอเพราะ isinstanceTrue,int",
+          "id": "b"
+        },
+        {
+          "text": "ไม่มีการตรวจชนิดใด",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "source-derived แนวคิดกับ validation เพิ่มต้องแยกให้ชัด",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.32–37,47–49:heapq เป็น min-heap จึง priority เลขน้อยออกก่อน Tuple(priority,arrival_order,item) ทำให้เมื่อ priority เท่ากันออกก่อนตาม arrivalorder และไม่ต้องเปรียบเทียบ item ที่อาจเป็น dict/object ไม่มี ordering\n\nA(priority2,counter0),B(1"
+      }
+    },
+    {
+      "id": "oop-python-queue-exam-17",
+      "type": "choice",
+      "prompt": "ใช้ Pythonlist.pop(0) ทำ FIFO มีต้นทุนใดต่อครั้ง worst?",
+      "reference": "complexity",
+      "choices": [
+        {
+          "text": "O(1) เพราะมี index0",
+          "id": "a"
+        },
+        {
+          "text": "O(n) เพราะเลื่อน references",
+          "id": "b"
+        },
+        {
+          "text": "O(log n) เสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "deque/linkedfrontqueue หลีกเลี่ยงการเลื่อนทั้งแถว",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "| งาน | เวลา | สมมติฐาน |\n|---|---|---|\n|linked enqueue/dequeue/peek|O(1)|มี head/tail และ size;allocation คงที่ตาม model|\n|circular enqueue/dequeue/peek|O(1)|capacity คงที่ ไม่มี resize|\n|สร้าง circularbuffer|O(capacity)|เติม None เริ่มต้น"
+      }
+    },
+    {
+      "id": "oop-python-queue-exam-18",
+      "type": "choice",
+      "prompt": "Heapenqueue/dequeue โดยทั่วไปในแบบจำลองมีต้นทุนใด?",
+      "reference": "complexity",
+      "choices": [
+        {
+          "text": "O(1)worst ทุกครั้ง",
+          "id": "a"
+        },
+        {
+          "text": "O(n²) เสมอ",
+          "id": "b"
+        },
+        {
+          "text": "O(log n)",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ต้องรักษา heaporder ตามความสูง ไม่ใช่ FIFO ธรรมดา",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "| งาน | เวลา | สมมติฐาน |\n|---|---|---|\n|linked enqueue/dequeue/peek|O(1)|มี head/tail และ size;allocation คงที่ตาม model|\n|circular enqueue/dequeue/peek|O(1)|capacity คงที่ ไม่มี resize|\n|สร้าง circularbuffer|O(capacity)|เติม None เริ่มต้น"
+      }
+    },
+    {
+      "id": "oop-python-queue-exam-19",
+      "type": "numeric",
+      "prompt": "cap8,front6 หลัง dequeue3 ครั้งจาก size อย่างน้อย 3 front อยู่ที่ใด?",
+      "reference": "circular",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "(6+3)%8=1 ต้องให้มีข้อมูลก่อน dequeue แต่ละครั้ง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "pp.20–24,43–45:reuse ช่องว่างใน array ด้วย modulo ไม่ขยาย capacity และไม่เลื่อนสมาชิกทุก dequeue ในโค้ดนี้ rear หมายถึง **ช่องที่จะใส่ครั้งถัดไป** ไม่ใช่ตำแหน่งสมาชิกสุดท้าย front คือค่าที่จะออกถัดไป\n\n`rear=(rear+1)%capacity`, `front=(front",
+        "oracle": "(6+3)%8"
+      }
+    },
+    {
+      "id": "oop-python-queue-exam-20",
+      "type": "choice",
+      "prompt": "Capacity0 ควรให้ modulo ทำงานต่อหรือไม่ตาม policy บท?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "ควรเพราะ buffer ว่างปลอดภัยเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ ปฏิเสธตั้งแต่ constructor",
+          "id": "b"
+        },
+        {
+          "text": "ควรเปลี่ยนเป็น−1 เอง",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "capacity ต้อง positiveinteger ไม่รอให้เกิด division/moduloerror",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "อิง source Node/Queue/CircularQueue/PriorityQueue เพิ่ม strict positive capacity และ integer priority เป็น policy ที่ระบุชัด ไม่ overwrite เมื่อ full ต่างจาก boundeddeque(maxlen) ที่อาจทิ้งค่าคนละนโยบาย"
+      }
+    },
+    {
+      "id": "oop-python-queue-exam-21",
+      "type": "self",
+      "prompt": "ไล่ CircularQueue ด้วย buffer,front,rear,size และ FIFOsequence พร้อมกัน",
+      "reference": "trace",
+      "rubric": [
+        "rear หมายถึงช่องถัดไปตามบท",
+        "อ่าน logicalitems จาก front เพียง size ครั้ง",
+        "ทดสอบ wrap/full/empty โดยไม่ใช้ None ตัดสินสมาชิก"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: rear หมายถึงช่องถัดไปตามบท อ่าน logicalitems จาก front เพียง size ครั้ง ทดสอบ wrap/full/empty โดยไม่ใช้ None ตัดสินสมาชิก",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Week12 pp.20–22 เริ่ม cap5 A,B,C,D,E เต็ม;dequeue สามครั้งนำ A,B,C ออก จากนั้น enqueueF,G\n\n| ขั้น | buffer กายภาพ | front | rear(ช่องถัดไป) | size | ลำดับ FIFO |\n|---|---|---:|---:|---:|---|\n|เต็ม|A B C D E|0|0|5|A B C D E|\n|ลบ3|_ _ _ D E|3"
+      }
+    },
+    {
+      "id": "oop-python-queue-exam-22",
+      "type": "self",
+      "prompt": "ออกแบบ testsprioritytie ที่ payload เป็น dict สองตัว",
+      "reference": "priority",
+      "rubric": [
+        "ใช้ counter ที่ไม่ซ้ำเพื่อแยกก่อน payload",
+        "ตรวจ priority ต่ำก่อนและ FIFO ภายใน tie",
+        "แยก policy จำลองจาก triage จริง"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ใช้ counter ที่ไม่ซ้ำเพื่อแยกก่อน payload ตรวจ priority ต่ำก่อนและ FIFO ภายใน tie แยก policy จำลองจาก triage จริง",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "pp.32–37,47–49:heapq เป็น min-heap จึง priority เลขน้อยออกก่อน Tuple(priority,arrival_order,item) ทำให้เมื่อ priority เท่ากันออกก่อนตาม arrivalorder และไม่ต้องเปรียบเทียบ item ที่อาจเป็น dict/object ไม่มี ordering\n\nA(priority2,counter0),B(1"
+      }
+    },
+    {
+      "id": "oop-python-queue-exam-23",
+      "type": "self",
+      "prompt": "เลือก bounded deque หรือ fixed CircularQueue สำหรับประวัติที่ห้ามทิ้งเงียบๆ",
+      "reference": "deque",
+      "rubric": [
+        "ระบุ reject หรือ discard เมื่อเต็ม",
+        "ตรวจผลปลายที่ถูกนำออก",
+        "ไม่ใช้ชนิด container แทนการประกาศ businesspolicy"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ระบุ reject หรือ discard เมื่อเต็ม ตรวจผลปลายที่ถูกนำออก ไม่ใช้ชนิด container แทนการประกาศ businesspolicy",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "pp.26–30:double-endedqueue เพิ่ม/ลบได้สองปลาย:append/appendleft,pop/popleft;peek ใช้[0]/[-1]เมื่อไม่ว่าง เหมาะคิวทั่วไป/ประวัติ/งานสองปลาย ตรงข้ามกับ APIStack หรือ Queue ที่ตั้งใจจำกัดการใช้\n\nความเป็น deque ไม่ได้ทำให้ค้น/ลบค่ากลาง O(1) ข้อ"
+      }
+    },
+    {
+      "id": "oop-python-queue-exam-24",
+      "type": "self",
+      "prompt": "เปรียบเทียบ FIFO Queue, Deque และ Priority Queue กับงาน scheduler พร้อมเหตุผลในการเลือก",
+      "reference": "concepts",
+      "rubric": [
+        "ประกาศลำดับบริการที่งานต้องการ",
+        "รวมต้นทุนและข้อมูลช่วยเช่น tail/counter",
+        "ทดสอบ exception โดย completion/history ของเว็บไซต์ไม่ถูกแตะ"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ประกาศลำดับบริการที่งานต้องการ รวมต้นทุนและข้อมูลช่วยเช่น tail/counter ทดสอบ exception โดย completion/history ของเว็บไซต์ไม่ถูกแตะ",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Week12 pp.3–18:เข้าก่อนออกก่อน (First In, First Out) enqueue เพิ่ม rear, dequeue คืนและนำ front ออก,peek อ่าน front มี head/tail ทำให้ linkedqueue เพิ่มท้าย/ลบต้น O(1) โดยไม่เดินหาแต่ละตำแหน่ง ต่างจาก stack ที่ push/pop ที่ head เดียวกัน\n\nP"
+      }
+    }
+  ]
+}

@@ -5,18 +5,18 @@
 > FINAL: Week14 physical pp.3–35 อธิบาย Divide and Conquer,Merge/Quick และ Python Timsort โดยคำนวณ trace ใหม่จาก source arrays ไม่คัดลอก caption/benchmark ผิดบริบท โค้ดและแบบฝึกผู้เขียนตรวจอิสระ
 
 ## เป้าหมายการเรียนรู้ {#objectives}
-- อ่าน recursiontree/recurrence พร้อม basecase และต้นทุนต่อระดับ
+- อ่าน recursiontree/recurrence พร้อม base case และต้นทุนต่อระดับ
 - ทำ stablemerge และ Lomutopartition โดยรักษา invariant
-- แยก average/balanced/worstcase และ memory ของ arraycopy/recursion/trace
+- แยก average/balanced/worst case และ memory ของ arraycopy/recursion/trace
 - ใช้ Python stableadaptive sorting โดยไม่อ้าง toyimplementation เป็น Timsort จริง
 
 ## Divide and Conquer และ Recursion Tree {#concepts}
-Week14 pp.3–11:divide แบ่งปัญหา,conquer แก้ย่อย,combine รวม สำหรับมาตรฐาน mergesort แบ่งครึ่งโดย index ไม่ขึ้นกับค่าข้อมูล T(n)=2T(n/2)+Θ(n)เมื่อ n เป็นกำลังสอง มี log2n ระดับที่งานรวมระดับละΘ(n)จึงΘ(nlogn) ถ้า n ไม่เป็นกำลังสองใช้ floor/ceil และ height ใกล้ ceil(log2n) ไม่ถือว่า recursion ทุกแบบต้องสมดุลหรือมีงานต่อระดับเท่ากันโดยไม่พิสูจน์
+Week14 pp.3–11:divide แบ่งปัญหา,conquer แก้ย่อย,combine รวม สำหรับมาตรฐาน mergesort แบ่งครึ่งโดย index ไม่ขึ้นกับค่าข้อมูล T(n)=2T(n/2)+Θ(n) เมื่อ n เป็นกำลังสอง มี log2n ระดับที่งานรวมระดับละΘ(n) จึงΘ(nlogn) ถ้า n ไม่เป็นกำลังสองใช้ floor/ceil และ height ใกล้ ceil(log2n) ไม่ถือว่า recursion ทุกแบบต้องสมดุลหรือมีงานต่อระดับเท่ากันโดยไม่พิสูจน์
 
-Basecase0/1ต้องคืนได้ทันที ไม่เรียกแบ่ง array ว่างไปเรื่อยๆ การเลือก pivot ใน quick ต่างจากแบ่งครึ่งตาม index จึงอาจไม่ให้สองปัญหาขนาดใกล้กัน
+Basecase0/1 ต้องคืนได้ทันที ไม่เรียกแบ่ง array ว่างไปเรื่อยๆ การเลือก pivot ใน quick ต่างจากแบ่งครึ่งตาม index จึงอาจไม่ให้สองปัญหาขนาดใกล้กัน
 
 ## Python สำหรับตรวจ Trace {#python}
-Merge ใช้≤ให้ฝั่งซ้ายก่อนเมื่อ key เท่ากัน;Quick แบบ Lomuto ใช้ pivot ท้ายและ≤ตาม source มี optionmedian-of-three คัด3ตำแหน่งเท่านั้น ไม่ใช้ builtin เรียง array ทั้งชุดแทน algorithm ทุก functioncopyinput จึงไม่อ้าง O(1)space ของ function ทั้งหมด
+Merge ใช้≤ให้ฝั่งซ้ายก่อนเมื่อ key เท่ากัน;Quick แบบ Lomuto ใช้ pivot ท้ายและ≤ตาม source มี optionmedian-of-three คัด 3 ตำแหน่งเท่านั้น ไม่ใช้ builtin เรียง array ทั้งชุดแทน algorithm ทุก functioncopyinput จึงไม่อ้าง O(1)space ของ function ทั้งหมด
 
 ```python
 def merge(left,right,key=lambda x:x):
@@ -87,7 +87,7 @@ Week14 pp.13–18,31 ใช้ input[8,3,5,1,9,2,7,4]:แบ่งซ้าย[8
 | [2, 9] | [4, 7] | [2, 4, 7, 9] |
 | [1, 3, 5, 8] | [2, 4, 7, 9] | [1, 2, 3, 4, 5, 7, 8, 9] |
 
-สำหรับ finalmerge left[1,3,5,8],right[2,4,7,9] เลือก1,2,3,4,5,7,8จาก comparisons ตามลำดับ แล้ว left หมดจึง append9ที่ right ยังเหลือ รวม[1,2,3,4,5,7,8,9] **คำบรรยาย sourcep.14–15ที่ว่า right หมดก่อน/เทียบ8กับ7แล้วหมดไม่ตรงกับ right ที่ยังมี9** บทนี้ใช้ state จริง ไม่เปลี่ยนข้อมูลเพื่อให้ตรง caption
+สำหรับ finalmerge left[1,3,5,8],right[2,4,7,9] เลือก 1,2,3,4,5,7,8 จาก comparisons ตามลำดับ แล้ว left หมดจึง append9 ที่ right ยังเหลือ รวม[1,2,3,4,5,7,8,9] **คำบรรยาย sourcep.14–15 ที่ว่า right หมดก่อน/เทียบ 8 กับ 7 แล้วหมดไม่ตรงกับ right ที่ยังมี 9** บทนี้ใช้ state จริง ไม่เปลี่ยนข้อมูลเพื่อให้ตรง caption
 
 Invariant:ผลลัพธ์ที่สร้างเรียงแล้วและยังไม่ทำ element หาย;ส่วน left/right ที่เหลือเรียงภายใน เมื่อหมดฝั่งหนึ่งจึง append อีกฝั่งได้โดยไม่เปรียบเทียบซ้ำ การเทียบ≤ทำให้ซ้ายก่อนขวาเมื่อ tie จึง stable ถ้าสองส่วนย่อย stable ด้วย
 
@@ -110,12 +110,12 @@ Week14 pp.20–22:array[3,6,8,10,1,2,1],lo0,hi6,pivot1,i เริ่ม−1
 | 2..3 | 2 | 2 | [1, 1, 2, 3, 6, 10, 8] |
 | 5..6 | 5 | 8 | [1, 1, 2, 3, 6, 8, 10] |
 
-Partition เดียวไม่ใช่ full sort;การ swap ไกลทำให้ Quick ไม่ stable โดยทั่วไป เช่น[(2,A),(2,B),(1,C)]ได้ C,B,A หลัง pivot1และ tie ไม่กลับเป็น A,B อย่างรับประกัน
+Partition เดียวไม่ใช่ full sort;การ swap ไกลทำให้ Quick ไม่ stable โดยทั่วไป เช่น[(2,A),(2,B),(1,C)]ได้ C,B,A หลัง pivot1 และ tie ไม่กลับเป็น A,B อย่างรับประกัน
 
 ## Pivot, Stability และ Space {#tradeoffs}
-pp.23–27:last pivot บน sorted/reverse/ค่าเท่ากันมากอาจแบ่ง n−1กับ0ซ้ำ ทำ comparisonsn(n−1)/2และ call stackO(n)
+pp.23–27:last pivot บน sorted/reverse/ค่าเท่ากันมากอาจแบ่ง n−1 กับ 0 ซ้ำ ทำ comparisonsn(n−1)/2 และ call stackO(n)
 
-Median-of-three หรือ randompivot ช่วยหลายกรณี แต่ไม่รับรองทุก input เป็น O(nlogn)หรือป้องกัน worstcase ของ Lomutoduplicates ได้ Randompivotexpectedbound ต้องบอกสมมติฐาน randomness ไม่ใช้ benchmark หนึ่งชุดเป็นข้อพิสูจน์
+Median-of-three หรือ randompivot ช่วยหลายกรณี แต่ไม่รับรองทุก input เป็น O(nlogn) หรือป้องกัน worst case ของ Lomutoduplicates ได้ Randompivotexpectedbound ต้องบอกสมมติฐาน randomness ไม่ใช้ benchmark หนึ่งชุดเป็นข้อพิสูจน์
 
 | Algorithm/version | เวลา | พื้นที่ auxiliary/stack | Stability |
 |---|---|---|---|
@@ -123,15 +123,15 @@ Median-of-three หรือ randompivot ช่วยหลายกรณี �
 |Quickbalanced/expected ที่มี assumptions|O(nlogn)|corearrayinplace+stackO(logn);wrappercopyO(n)|ไม่ stable|
 |Quickworst|O(n²)|stackO(n)และ wrappercopyO(n)|ไม่ stable|
 
-trace=True เก็บ copies ของ subproblems หรือ array หลายครั้งจึงใช้พื้นที่มากกว่าตาราง core เช่น Quickworst อาจเก็บ O(n²) ไม่มีการแอบเพิ่ม tracingcost แล้วอ้าง samebenchmark Sourcebenchmarkn800ที่รายงาน37.4x เป็นผลรายงานของ run นั้น ไม่ใช่ผลวัดเครื่องผู้เรียนหรือคำรับรองในบทนี้ และ recursionlimit อาจทำให้ input ใหญ่ล้ม
+trace=True เก็บ copies ของ subproblems หรือ array หลายครั้งจึงใช้พื้นที่มากกว่าตาราง core เช่น Quickworst อาจเก็บ O(n²) ไม่มีการแอบเพิ่ม tracingcost แล้วอ้าง samebenchmark Sourcebenchmarkn800 ที่รายงาน 37.4x เป็นผลรายงานของ run นั้น ไม่ใช่ผลวัดเครื่องผู้เรียนหรือคำรับรองในบทนี้ และ recursionlimit อาจทำให้ input ใหญ่ล้ม
 
 ## Timsort และ Python Sorting {#timsort}
-Week14p.29อธิบาย stableadaptivehybrid ที่ใช้ runs/insertion และ merge เหมาะข้อมูลที่มีช่วงเรียงอยู่แล้ว แต่ไม่ใช่แบ่งทุก array เป็น run32/64คงที่อย่างเดียว:แนวคิด naturalruns และการปรับ run/mergepolicy เป็น implementationdetails ที่เปลี่ยนตาม version ไม่เขียน toyhybrid แล้วอ้างเป็น Timsort ของ Python จริง
+Week14p.29 อธิบาย stable adaptive hybrid ที่ใช้ runs/insertion และ merge เหมาะข้อมูลที่มีช่วงเรียงอยู่แล้ว แต่ไม่ใช่แบ่งทุก array เป็น run32/64 คงที่อย่างเดียว:แนวคิด naturalruns และการปรับ run/mergepolicy เป็น implementationdetails ที่เปลี่ยนตาม version ไม่เขียน toyhybrid แล้วอ้างเป็น Timsort ของ Python จริง
 
-สิ่งที่ใช้เป็น interface ได้จากเอกสาร Python:sorted คืน list ใหม่,list.sort แก้ list เดิมและคืน None;ทั้งคู่ stable และใช้ key ได้ ข้อมูล recordsA2,B1,C2ได้ B1,A2,C2รักษา A ก่อน C แม้ใช้ reverse ก็ยังรักษา relativeorder ของ ties ไม่จำเป็นต้องเขียน Quick ใหม่ใน production เพียงเพราะ coreinplace
+สิ่งที่ใช้เป็น interface ได้จากเอกสาร Python:sorted คืน list ใหม่,list.sort แก้ list เดิมและคืน None;ทั้งคู่ stable และใช้ key ได้ ข้อมูล recordsA2,B1,C2 ได้ B1,A2,C2 รักษา A ก่อน C แม้ใช้ reverse ก็ยังรักษา relativeorder ของ ties ไม่จำเป็นต้องเขียน Quick ใหม่ใน production เพียงเพราะ coreinplace
 
 ## ข้อผิดพลาดที่พบบ่อย {#mistakes}
-ไม่มี basecase;เลือกฝั่งขวาก่อนเมื่อ tie แล้วอ้าง stable;รวม pivot ซ้ำจน recursion ไม่เล็กลง;เข้าใจ partition ว่าเรียงหมด;อ้าง QuickspaceO(logn)ทุกกรณี;ลืม slice/copy;พิมพ์ data.sort แล้วคิดว่า None คือ array หาย;จำ timing จากสไลด์เป็นค่าคงที่
+ไม่มี base case;เลือกฝั่งขวาก่อนเมื่อ tie แล้วอ้าง stable;รวม pivot ซ้ำจน recursion ไม่เล็กลง;เข้าใจ partition ว่าเรียงหมด;อ้าง QuickspaceO(logn) ทุกกรณี;ลืม slice/copy;พิมพ์ data.sort แล้วคิดว่า None คือ array หาย;จำ timing จากสไลด์เป็นค่าคงที่
 
 ## แบบฝึกพร้อมเฉลย (ผู้เขียนจัดทำและตรวจอิสระ) {#practice}
 

@@ -1,0 +1,506 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "artificial-intelligence-final-cnn",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "artificial-intelligence-final-cnn-exam-01",
+      "type": "choice",
+      "prompt": "RGB หนึ่ง pixel มี channels หลักกี่ช่อง?",
+      "reference": "images",
+      "choices": [
+        {
+          "text": "3",
+          "id": "a"
+        },
+        {
+          "text": "1 เสมอ",
+          "id": "b"
+        },
+        {
+          "text": "เท่าจำนวน classes",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "R,G,B คือ input channels ไม่ใช่ output maps ของทุก filter",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S11 pp.12–14 ยก CNN สำหรับข้อมูลเชิงพื้นที่ (spatialdata) เช่นภาพ/วิดีโอ ใช้ filters ดึง features แล้วส่งต่อ classifier\n\nภาพกากบาท 5×5 เป็นตัวแทนเชิงตัวเลข:ช่องกากบาทกำหนด 5 และที่เหลือ 1 เป็น **encoding สมมติ** ไม่ใช่มาตรฐานว่าสีฟ้าทุกภาพม"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-cnn-exam-02",
+      "type": "choice",
+      "prompt": "Encoding กากบาทค่า 5 และพื้นหลัง 1 ใน source หมายความว่าอย่างไร?",
+      "reference": "images",
+      "choices": [
+        {
+          "text": "สีฟ้าทุกภาพมีค่า 5",
+          "id": "a"
+        },
+        {
+          "text": "เป็นตัวแทนตัวเลขของตัวอย่าง ไม่ใช่มาตรฐานสีทุกภาพ",
+          "id": "b"
+        },
+        {
+          "text": "ทุก image ต้อง binary0/1",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "อย่าแปล encoding สมมติเป็นกฎของ pixel จริงทุกแหล่ง",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S11 pp.12–14 ยก CNN สำหรับข้อมูลเชิงพื้นที่ (spatialdata) เช่นภาพ/วิดีโอ ใช้ filters ดึง features แล้วส่งต่อ classifier\n\nภาพกากบาท 5×5 เป็นตัวแทนเชิงตัวเลข:ช่องกากบาทกำหนด 5 และที่เหลือ 1 เป็น **encoding สมมติ** ไม่ใช่มาตรฐานว่าสีฟ้าทุกภาพม"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-cnn-exam-03",
+      "type": "choice",
+      "prompt": "Cross-correlation ต่างจาก mathematicalconvolution ที่จุดใด?",
+      "reference": "kernel",
+      "choices": [
+        {
+          "text": "ไม่คูณ input เลย",
+          "id": "a"
+        },
+        {
+          "text": "เปลี่ยนทุกค่าเป็น max",
+          "id": "b"
+        },
+        {
+          "text": "ไม่กลับ kernel ก่อนเลื่อนคูณ",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "บทใช้ชื่อ convolution ตาม CNN แต่คำนวณแบบไม่กลับ kernel",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S11 pp.15–18,21–22 ใช้ kernel/filter เลื่อนไปคูณตำแหน่งตรงกันแล้วรวม (dotproduct) เรียก convolution ตามการใช้ชื่อใน CNN แต่การคำนวณแบบ **ไม่กลับ kernel** นี้คือ cross-correlation บทนี้ใช้ bias0,dilation1 และสูตร\n\n\n\nนอกขอบเป็น 0 เมื่อ paddin"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-cnn-exam-04",
+      "type": "numeric",
+      "prompt": "Patch[[1,2],[3,4]],kernel[[1,0],[0,1]],bias0 แบบไม่กลับ kernel ได้ dotproduct เท่าใด?",
+      "reference": "kernel",
+      "answer": 5,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "1×1+2×0+3×0+4×1=5",
+      "difficulty": "easy",
+      "verification": {
+        "method": "python",
+        "evidence": "S11 pp.15–18,21–22 ใช้ kernel/filter เลื่อนไปคูณตำแหน่งตรงกันแล้วรวม (dotproduct) เรียก convolution ตามการใช้ชื่อใน CNN แต่การคำนวณแบบ **ไม่กลับ kernel** นี้คือ cross-correlation บทนี้ใช้ bias0,dilation1 และสูตร\n\n\n\nนอกขอบเป็น 0 เมื่อ paddin",
+        "oracle": "sum(x*k for x,k in zip([1,2,3,4],[1,0,0,1]))"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-cnn-exam-05",
+      "type": "numeric",
+      "prompt": "Patch[[1,2],[3,4]],kernel[[1,0],[0,0]],bias2 แบบ cross-correlation ได้ผลเท่าใด?",
+      "reference": "kernel",
+      "answer": 3,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "เลือกช่องซ้ายบน 1 แล้วบวก bias2 รวม 3",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "S11 pp.15–18,21–22 ใช้ kernel/filter เลื่อนไปคูณตำแหน่งตรงกันแล้วรวม (dotproduct) เรียก convolution ตามการใช้ชื่อใน CNN แต่การคำนวณแบบ **ไม่กลับ kernel** นี้คือ cross-correlation บทนี้ใช้ bias0,dilation1 และสูตร\n\n\n\nนอกขอบเป็น 0 เมื่อ paddin",
+        "oracle": "sum(x*k for x,k in zip([1,2,3,4],[1,0,0,0]))+2"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-cnn-exam-06",
+      "type": "choice",
+      "prompt": "Localfilter ใช้ weights เดิมที่หลายตำแหน่งเรียกว่าอะไร?",
+      "reference": "kernel",
+      "choices": [
+        {
+          "text": "เพิ่ม weights อิสระทุก pixel เสมอ",
+          "id": "a"
+        },
+        {
+          "text": "flatten",
+          "id": "b"
+        },
+        {
+          "text": "weight sharing",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "จำนวน parameters จึงไม่ได้คูณจำนวนตำแหน่ง output ทั้งหมด",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S11 pp.15–18,21–22 ใช้ kernel/filter เลื่อนไปคูณตำแหน่งตรงกันแล้วรวม (dotproduct) เรียก convolution ตามการใช้ชื่อใน CNN แต่การคำนวณแบบ **ไม่กลับ kernel** นี้คือ cross-correlation บทนี้ใช้ bias0,dilation1 และสูตร\n\n\n\nนอกขอบเป็น 0 เมื่อ paddin"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-cnn-exam-07",
+      "type": "numeric",
+      "prompt": "ต้องการ output กว้าง 5 จาก input5,kernel3,stride1,dilation1 โดยใช้ zero padding เท่ากันด้านละ p จงหา p",
+      "reference": "shape",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "5=(5+2p−3)+1 จึง 2p=2 และ p=1 ต้องคำนวณจากเงื่อนไข ไม่ถือว่า padding1 รักษาขนาดทุก kernel/stride",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "S11 p.23 เติมศูนย์หนึ่งชั้นรอบ input ขนาด 5×5 ให้เป็น 7×7 แล้วใช้ kernel ขนาด 3×3 และ stride 1 จึงได้ output ขนาด 5×5\n\nการใช้ padding ไม่ได้รับรองว่า shape จะเท่าเดิมสำหรับทุก kernel หรือ stride ต้องคำนวณจากเงื่อนไขก่อน สูตรเสริมต่อไปนี้ใช้",
+        "oracle": "Fraction(5-5+3-1,2)"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-cnn-exam-08",
+      "type": "numeric",
+      "prompt": "ช่องกลางของภาพกากบาทใช้ patch [[1,5,1],[5,5,5],[1,5,1]] กับ F1=[[-1,1,-1],[1,1,1],[-1,1,-1]] stride1,bias0 แบบไม่กลับ kernel จงหาผลรวม",
+      "reference": "source-matrices",
+      "answer": 21,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "คูณตำแหน่งตรงกันแล้วรวม −1+5−1+5+5+5−1+5−1=21 เป็นค่ากลางของ output F1 หน้า 21–22 ไม่ใช่ RGB kernels หน้า 31",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "S11 pp.14–15,21–22: X ต่อไปนี้และ F1,F2,F3 ตามลำดับ **ไม่ใช่** filtersRGB หน้า 31\n\nF1:\n\nF2:\n\nF3:\n\n\nF1 ช่องซ้ายบน: −1×1+1×1−1×5+1×1+1×1+1×5−1×5+1×5−1×5=−3; ช่องกลางใช้ patch[1,5,1;5,5,5;1,5,1] ได้−1+5−1+5+5+5−1+5−1=21\n\n### Valid convolution/",
+        "oracle": "sum(x*k for x,k in zip([1,5,1,5,5,5,1,5,1],[-1,1,-1,1,1,1,-1,1,-1]))"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-cnn-exam-09",
+      "type": "choice",
+      "prompt": "Padding1 รับรอง output เท่า input ทุก kernel/stride หรือไม่?",
+      "reference": "shape",
+      "choices": [
+        {
+          "text": "รับรองทุกกรณี",
+          "id": "a"
+        },
+        {
+          "text": "รับรองเมื่อ RGB เท่านั้น",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ ต้องคำนวณสูตร shape",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "shape ขึ้นกับ kernel,stride,padding และ dilation ไม่ใช้คำว่า same โดยเดา",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S11 p.23 เติมศูนย์หนึ่งชั้นรอบ input ขนาด 5×5 ให้เป็น 7×7 แล้วใช้ kernel ขนาด 3×3 และ stride 1 จึงได้ output ขนาด 5×5\n\nการใช้ padding ไม่ได้รับรองว่า shape จะเท่าเดิมสำหรับทุก kernel หรือ stride ต้องคำนวณจากเงื่อนไขก่อน สูตรเสริมต่อไปนี้ใช้"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-cnn-exam-10",
+      "type": "choice",
+      "prompt": "Maxpooling มาตรฐานในบทเรียน weights จากข้อมูลหรือไม่?",
+      "reference": "pooling",
+      "choices": [
+        {
+          "text": "ไม่ เลือกค่าสูงสุดตาม window ที่กำหนด",
+          "id": "a"
+        },
+        {
+          "text": "เรียน kernel ทุกค่าเหมือน conv",
+          "id": "b"
+        },
+        {
+          "text": "มี bias ใหม่ทุก class",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "size/stride เป็น configuration แต่ไม่มี trainable weights ใน pooling มาตรฐาน",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S11 pp.24–26 ใช้หน้าต่างเลือกค่าสูงสุดเพื่อลด spatialsize ไม่เรียน weights ใน pooling มาตรฐาน ต้องระบุ size/stride และ padding แยกจาก convolution\n\np.25 ให้ input4×4,size2,stride2:\n\n\nMax output:\n\n\nAverage output (เก็บค่าจริง):\n\n\nTop-leftavg="
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-cnn-exam-11",
+      "type": "numeric",
+      "prompt": "Window[[−3,2],[1,0]] maxpool ได้เท่าใด?",
+      "reference": "pooling",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "เลือกค่าสูงสุดจากทั้งสี่ค่า",
+      "difficulty": "easy",
+      "verification": {
+        "method": "python",
+        "evidence": "S11 pp.24–26 ใช้หน้าต่างเลือกค่าสูงสุดเพื่อลด spatialsize ไม่เรียน weights ใน pooling มาตรฐาน ต้องระบุ size/stride และ padding แยกจาก convolution\n\np.25 ให้ input4×4,size2,stride2:\n\n\nMax output:\n\n\nAverage output (เก็บค่าจริง):\n\n\nTop-leftavg=",
+        "oracle": "max([-3,2,1,0])"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-cnn-exam-12",
+      "type": "numeric",
+      "prompt": "Window[[2,4],[6,8]] averagepool แบบไม่ปัดได้เท่าใด?",
+      "reference": "pooling",
+      "answer": 5,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "รวม 20 หารจำนวนช่อง 4 ได้ 5",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "S11 pp.24–26 ใช้หน้าต่างเลือกค่าสูงสุดเพื่อลด spatialsize ไม่เรียน weights ใน pooling มาตรฐาน ต้องระบุ size/stride และ padding แยกจาก convolution\n\np.25 ให้ input4×4,size2,stride2:\n\n\nMax output:\n\n\nAverage output (เก็บค่าจริง):\n\n\nTop-leftavg=",
+        "oracle": "sum([2,4,6,8])/4"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-cnn-exam-13",
+      "type": "choice",
+      "prompt": "Outputpooling ต้องระบุอะไรเพิ่มจากชื่อ max/average?",
+      "reference": "pooling",
+      "choices": [
+        {
+          "text": "window,stride และ padding",
+          "id": "a"
+        },
+        {
+          "text": "เฉลย class จริงเสมอ",
+          "id": "b"
+        },
+        {
+          "text": "จำนวน epochs ของ classifier เท่านั้น",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "การเลือกตำแหน่งและ overlap เปลี่ยน shape และค่าที่รวม",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S11 pp.24–26 ใช้หน้าต่างเลือกค่าสูงสุดเพื่อลด spatialsize ไม่เรียน weights ใน pooling มาตรฐาน ต้องระบุ size/stride และ padding แยกจาก convolution\n\np.25 ให้ input4×4,size2,stride2:\n\n\nMax output:\n\n\nAverage output (เก็บค่าจริง):\n\n\nTop-leftavg="
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-cnn-exam-14",
+      "type": "numeric",
+      "prompt": "ReLU ของค่าผู้เขียน−7 เท่าใด?",
+      "reference": "relu-fc",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "ReLU=max(0,x) จึงเป็น 0 ไม่เปลี่ยน shape",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "S11 pp.27–30: ReLU(x)=max(0,x) ทำทีละค่า ไม่เปลี่ยน shape ตัวอย่าง p.27:\n\np.28 pooledmaps ข้างบนทุกค่าเป็นบวกจึงไม่เปลี่ยน แต่ถ้า ReLU ก่อน pooling/average อาจต่างได้ ต้องตาม order ที่ประกาศ\n\np.29 Flatten เรียง features เป็น vector ไม่มี we",
+        "oracle": "max(0,-7)"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-cnn-exam-15",
+      "type": "numeric",
+      "prompt": "Featuremaps ขนาด 2×3 มี 4maps Flatten ได้เวกเตอร์ยาวเท่าใด?",
+      "reference": "relu-fc",
+      "answer": 24,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "จำนวน features2×3×4=24 ต้องเก็บทุกค่า",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "S11 pp.27–30: ReLU(x)=max(0,x) ทำทีละค่า ไม่เปลี่ยน shape ตัวอย่าง p.27:\n\np.28 pooledmaps ข้างบนทุกค่าเป็นบวกจึงไม่เปลี่ยน แต่ถ้า ReLU ก่อน pooling/average อาจต่างได้ ต้องตาม order ที่ประกาศ\n\np.29 Flatten เรียง features เป็น vector ไม่มี we",
+        "oracle": "2*3*4"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-cnn-exam-16",
+      "type": "numeric",
+      "prompt": "FC รับเวกเตอร์ยาว 6 และมี output3units พร้อม bias ต่อ unit จำนวน parameters เท่าใด?",
+      "reference": "relu-fc",
+      "answer": 21,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "weights6×3 และ bias3 รวม 21",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "S11 pp.27–30: ReLU(x)=max(0,x) ทำทีละค่า ไม่เปลี่ยน shape ตัวอย่าง p.27:\n\np.28 pooledmaps ข้างบนทุกค่าเป็นบวกจึงไม่เปลี่ยน แต่ถ้า ReLU ก่อน pooling/average อาจต่างได้ ต้องตาม order ที่ประกาศ\n\np.29 Flatten เรียง features เป็น vector ไม่มี we",
+        "oracle": "6*3+3"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-cnn-exam-17",
+      "type": "choice",
+      "prompt": "หนึ่ง output filter บน RGB ควรรวม input channels อย่างไร?",
+      "reference": "rgb",
+      "choices": [
+        {
+          "text": "คืนสาม output maps อัตโนมัติ",
+          "id": "a"
+        },
+        {
+          "text": "คำนวณแต่ละ channel แล้วบวกพร้อม bias หนึ่งค่า",
+          "id": "b"
+        },
+        {
+          "text": "เฉลี่ย labels ของ RGB",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "จำนวน input channels กับ output maps เป็นคนละมิติ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S11 pp.31–33: RGB หนึ่ง pixel มี R/G/B สาม channels สำหรับหนึ่ง output map มี kernel ต่อ input channel คำนวณแล้ว **บวกตาม channels** และ bias หนึ่งค่า ไม่ใช่ได้สาม output maps อัตโนมัติ หน้า 31 ใช้ภาพกากบาทที่ R มีค่า 5, G มีค่า 10 และ B มี"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-cnn-exam-18",
+      "type": "numeric",
+      "prompt": "Kernel2×2,input3channels,output2maps พร้อม bias ต่อ map มี parameters เท่าใด?",
+      "reference": "rgb",
+      "answer": 26,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "weights2×2×3×2=24 บวก bias2",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "S11 pp.31–33: RGB หนึ่ง pixel มี R/G/B สาม channels สำหรับหนึ่ง output map มี kernel ต่อ input channel คำนวณแล้ว **บวกตาม channels** และ bias หนึ่งค่า ไม่ใช่ได้สาม output maps อัตโนมัติ หน้า 31 ใช้ภาพกากบาทที่ R มีค่า 5, G มีค่า 10 และ B มี",
+        "oracle": "2*2*3*2+2"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-cnn-exam-19",
+      "type": "choice",
+      "prompt": "นำ kernels ของ RGB หน้า 31 ที่ channel 2/3 เป็นสอง/สามเท่าของ channel 1 ไปแทน filters F2/F3 ของหน้า 22 ได้หรือไม่?",
+      "reference": "rgb",
+      "choices": [
+        {
+          "text": "ไม่ได้ เป็น filters คนละตัวอย่าง",
+          "id": "a"
+        },
+        {
+          "text": "ได้เพราะชื่อ F เหมือนกัน",
+          "id": "b"
+        },
+        {
+          "text": "ได้เมื่อ input5×5",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ไม่ได้ เป็น filters คนละชุด ตัวอย่าง RGB มี scaled kernels ขณะที่ F2/F3 หน้า 22 มีรูปแบบต่างกัน ต้องตรวจ matrices ของแต่ละตัวอย่าง",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "S11 pp.31–33: RGB หนึ่ง pixel มี R/G/B สาม channels สำหรับหนึ่ง output map มี kernel ต่อ input channel คำนวณแล้ว **บวกตาม channels** และ bias หนึ่งค่า ไม่ใช่ได้สาม output maps อัตโนมัติ หน้า 31 ใช้ภาพกากบาทที่ R มีค่า 5, G มีค่า 10 และ B มี"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-cnn-exam-20",
+      "type": "choice",
+      "prompt": "ตรวจ caption ไม่ตรง sum ใน source ควรรายงานอย่างไร?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "แก้ input ให้ caption ถูกโดยไม่บอก",
+          "id": "a"
+        },
+        {
+          "text": "แสดง matrix และผลคูณรวมที่ตรวจได้ พร้อมระบุความต่าง",
+          "id": "b"
+        },
+        {
+          "text": "เชื่อ caption แทนการคำนวณเสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "บทชี้ sum228 ที่ต่าง caption312 ไม่เปลี่ยน source ต้นฉบับ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตัวอย่างผู้เขียนไม่ใช้ framework และไม่ train โมเดล โค้ดตรวจด้วย SciPycorrelation อิสระใน offlineauthorcheck ไม่มี dependency ใหม่บนเว็บ"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-cnn-exam-21",
+      "type": "self",
+      "prompt": "เปรียบ cross-correlation กับ convolution ด้วย kernel ที่ไม่สมมาตร",
+      "reference": "kernel",
+      "rubric": [
+        "ประกาศว่าจะกลับ kernel หรือไม่",
+        "คูณ patch ทีละช่องและรวม bias",
+        "ใช้ kernel ไม่สมมาตรเพื่อให้ตรวจความต่างได้"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ประกาศว่าจะกลับ kernel หรือไม่ คูณ patch ทีละช่องและรวม bias ใช้ kernel ไม่สมมาตรเพื่อให้ตรวจความต่างได้",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "S11 pp.15–18,21–22 ใช้ kernel/filter เลื่อนไปคูณตำแหน่งตรงกันแล้วรวม (dotproduct) เรียก convolution ตามการใช้ชื่อใน CNN แต่การคำนวณแบบ **ไม่กลับ kernel** นี้คือ cross-correlation บทนี้ใช้ bias0,dilation1 และสูตร\n\n\n\nนอกขอบเป็น 0 เมื่อ paddin"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-cnn-exam-22",
+      "type": "self",
+      "prompt": "แสดงว่า ReLU กับ averagepool สลับลำดับแล้วอาจให้ผลต่าง",
+      "reference": "relu-fc",
+      "rubric": [
+        "ใช้ตัวอย่างมีค่าลบและบวกเช่น−2,2",
+        "คำนวณทั้งสอง orders โดยไม่ปัด",
+        "แยกจาก maxpool และไม่อ้างว่าทุก operation สลับกันได้"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ใช้ตัวอย่างมีค่าลบและบวกเช่น−2,2 คำนวณทั้งสอง orders โดยไม่ปัด แยกจาก maxpool และไม่อ้างว่าทุก operation สลับกันได้",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "S11 pp.27–30: ReLU(x)=max(0,x) ทำทีละค่า ไม่เปลี่ยน shape ตัวอย่าง p.27:\n\np.28 pooledmaps ข้างบนทุกค่าเป็นบวกจึงไม่เปลี่ยน แต่ถ้า ReLU ก่อน pooling/average อาจต่างได้ ต้องตาม order ที่ประกาศ\n\np.29 Flatten เรียง features เป็น vector ไม่มี we"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-cnn-exam-23",
+      "type": "self",
+      "prompt": "ไล่ shape ของ CNN หลายชั้นและตรวจ parametercount",
+      "reference": "rgb",
+      "rubric": [
+        "แยก H,W,Cin,Cout ทุกชั้น",
+        "รวมช่อง input ต่อ filter และ bias ต่อ outputmap",
+        "Flatten ไม่ทำข้อมูลหายและ FC ต้องมี weights ก่อนทำนาย class"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: แยก H,W,Cin,Cout ทุกชั้น รวมช่อง input ต่อ filter และ bias ต่อ outputmap Flatten ไม่ทำข้อมูลหายและ FC ต้องมี weights ก่อนทำนาย class",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "S11 pp.31–33: RGB หนึ่ง pixel มี R/G/B สาม channels สำหรับหนึ่ง output map มี kernel ต่อ input channel คำนวณแล้ว **บวกตาม channels** และ bias หนึ่งค่า ไม่ใช่ได้สาม output maps อัตโนมัติ หน้า 31 ใช้ภาพกากบาทที่ R มีค่า 5, G มีค่า 10 และ B มี"
+      }
+    },
+    {
+      "id": "artificial-intelligence-final-cnn-exam-24",
+      "type": "self",
+      "prompt": "ออกแบบ tests ของ conv/pool สำหรับขอบที่ไม่ลงตัวและ padding",
+      "reference": "shape",
+      "rubric": [
+        "ใช้ floor ตามสูตรและกำหนด dilation",
+        "ตรวจ window ขอบกับ stride",
+        "เทียบ referenceimplementation โดยไม่เปลี่ยน sourcematrices"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ใช้ floor ตามสูตรและกำหนด dilation ตรวจ window ขอบกับ stride เทียบ referenceimplementation โดยไม่เปลี่ยน sourcematrices",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "S11 p.23 เติมศูนย์หนึ่งชั้นรอบ input ขนาด 5×5 ให้เป็น 7×7 แล้วใช้ kernel ขนาด 3×3 และ stride 1 จึงได้ output ขนาด 5×5\n\nการใช้ padding ไม่ได้รับรองว่า shape จะเท่าเดิมสำหรับทุก kernel หรือ stride ต้องคำนวณจากเงื่อนไขก่อน สูตรเสริมต่อไปนี้ใช้"
+      }
+    }
+  ]
+}

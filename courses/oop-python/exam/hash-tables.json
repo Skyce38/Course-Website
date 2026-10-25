@@ -1,0 +1,574 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "oop-python-hash-tables",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "oop-python-hash-tables-exam-01",
+      "type": "choice",
+      "prompt": "Hash ให้ bucket เริ่มต้นโดยสูตรใดของบท?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "hash(key)%capacity",
+          "id": "a"
+        },
+        {
+          "text": "key×size เสมอ",
+          "id": "b"
+        },
+        {
+          "text": "index ของค่าใน sortedlist",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ต้องมี capacity เหมาะสมและ equality ตรวจ key จริง",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week15 pp.2–11: index=hash(key)%capacity ช่วยระบุตำแหน่งตั้งต้น ไม่ต้อง scan ทุก key เมื่อ hash กระจายดี\n\nhash เดียวกันไม่ได้แปลว่า key เท่ากันเพราะพื้นที่ hash/buckets จำกัด (pigeonholeprinciple) ต้องใช้ equality ตรวจ key จริงด้วย\n\nHash ที"
+      }
+    },
+    {
+      "id": "oop-python-hash-tables-exam-02",
+      "type": "numeric",
+      "prompt": "hash สมมติ=29,capacity8 จะได้ bucketindex ใด?",
+      "reference": "concepts",
+      "answer": 5,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "29%8=5 ไม่ต้องใช้ processhash จริง",
+      "difficulty": "easy",
+      "verification": {
+        "method": "python",
+        "evidence": "Week15 pp.2–11: index=hash(key)%capacity ช่วยระบุตำแหน่งตั้งต้น ไม่ต้อง scan ทุก key เมื่อ hash กระจายดี\n\nhash เดียวกันไม่ได้แปลว่า key เท่ากันเพราะพื้นที่ hash/buckets จำกัด (pigeonholeprinciple) ต้องใช้ equality ตรวจ key จริงด้วย\n\nHash ที",
+        "oracle": "29%8"
+      }
+    },
+    {
+      "id": "oop-python-hash-tables-exam-03",
+      "type": "choice",
+      "prompt": "Key ที่เท่ากันต้องมี hash อย่างไรเพื่อใช้ mapping ได้ถูกต้อง?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "ต้องมี hash ต่างกัน",
+          "id": "a"
+        },
+        {
+          "text": "hash เปลี่ยนทุก lookup ได้",
+          "id": "b"
+        },
+        {
+          "text": "ต้องมี hash เท่ากัน",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "กลับกัน hash เท่ากันยังไม่รับรอง key เท่ากัน",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week15 pp.2–11: index=hash(key)%capacity ช่วยระบุตำแหน่งตั้งต้น ไม่ต้อง scan ทุก key เมื่อ hash กระจายดี\n\nhash เดียวกันไม่ได้แปลว่า key เท่ากันเพราะพื้นที่ hash/buckets จำกัด (pigeonholeprinciple) ต้องใช้ equality ตรวจ key จริงด้วย\n\nHash ที"
+      }
+    },
+    {
+      "id": "oop-python-hash-tables-exam-04",
+      "type": "choice",
+      "prompt": "Hash ของ key เปลี่ยนขณะอยู่ใน table เสี่ยงอะไร?",
+      "reference": "concepts",
+      "choices": [
+        {
+          "text": "lookup ตาม bucket ใหม่อาจหา entry เดิมไม่พบ",
+          "id": "a"
+        },
+        {
+          "text": "เพิ่มความปลอดภัยโดยอัตโนมัติ",
+          "id": "b"
+        },
+        {
+          "text": "ไม่มีผลเพราะ table ค้นทุก key เสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "hash/equalitycontract ต้องคงที่ตามความหมายของ key ที่ใช้อยู่",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week15 pp.2–11: index=hash(key)%capacity ช่วยระบุตำแหน่งตั้งต้น ไม่ต้อง scan ทุก key เมื่อ hash กระจายดี\n\nhash เดียวกันไม่ได้แปลว่า key เท่ากันเพราะพื้นที่ hash/buckets จำกัด (pigeonholeprinciple) ต้องใช้ equality ตรวจ key จริงด้วย\n\nHash ที"
+      }
+    },
+    {
+      "id": "oop-python-hash-tables-exam-05",
+      "type": "choice",
+      "prompt": "Chaining จัดการ collision อย่างไร?",
+      "reference": "resolution",
+      "choices": [
+        {
+          "text": "ทิ้ง entry เก่าเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "เก็บหลาย entries ใน bucket เดียวแล้วตรวจ key",
+          "id": "b"
+        },
+        {
+          "text": "ห้าม hash ชนกัน",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "collision คนละ key ต้องรักษาทั้งสองข้อมูล",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.12–16:chaining เก็บหลาย(key,value) ใน bucket เดียว แยกแต่ละ list ด้วย comprehension ไม่ใช้ `[[]]*capacity`ซึ่งแชร์ list เดียวทั่วตาราง เมื่อ key มีอยู่ insert คือ update ไม่เพิ่ม size;key ต่างที่ hash ชนกันต้องอยู่ร่วมกันได้\n\nLinear prob"
+      }
+    },
+    {
+      "id": "oop-python-hash-tables-exam-06",
+      "type": "choice",
+      "prompt": "สร้าง buckets ด้วย[[]]*capacity มีปัญหาใด?",
+      "reference": "resolution",
+      "choices": [
+        {
+          "text": "แต่ละbucketอิสระเสมอ",
+          "id": "a"
+        },
+        {
+          "text": "hashกลายเป็น0",
+          "id": "b"
+        },
+        {
+          "text": "ทุกช่องอ้างlistเดียวกัน",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ต้องสร้างแต่ละ list ใหม่ เช่น comprehension",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "pp.12–16:chaining เก็บหลาย(key,value) ใน bucket เดียว แยกแต่ละ list ด้วย comprehension ไม่ใช้ `[[]]*capacity`ซึ่งแชร์ list เดียวทั่วตาราง เมื่อ key มีอยู่ insert คือ update ไม่เพิ่ม size;key ต่างที่ hash ชนกันต้องอยู่ร่วมกันได้\n\nLinear prob",
+        "oracle": "run(\"b=[[]]*3\\nb[0].append(1)\\nprint(\\\"ทุกช่องอ้างlistเดียวกัน\\\" if b[1]==[1] else \\\"wrong\\\")\")"
+      }
+    },
+    {
+      "id": "oop-python-hash-tables-exam-07",
+      "type": "choice",
+      "prompt": "Linearprobing ไปช่องถัดไปอย่างไร?",
+      "reference": "resolution",
+      "choices": [
+        {
+          "text": "(start+step)%capacity",
+          "id": "a"
+        },
+        {
+          "text": "start+capacity ทุกครั้ง",
+          "id": "b"
+        },
+        {
+          "text": "เลือก bucket0 เสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "modulo ทำให้วนกลับต้นโดยยังจำกัดจำนวน probes",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.12–16:chaining เก็บหลาย(key,value) ใน bucket เดียว แยกแต่ละ list ด้วย comprehension ไม่ใช้ `[[]]*capacity`ซึ่งแชร์ list เดียวทั่วตาราง เมื่อ key มีอยู่ insert คือ update ไม่เพิ่ม size;key ต่างที่ hash ชนกันต้องอยู่ร่วมกันได้\n\nLinear prob"
+      }
+    },
+    {
+      "id": "oop-python-hash-tables-exam-08",
+      "type": "choice",
+      "prompt": "Tombstone ต่างจาก empty-never-used ในการ search อย่างไร?",
+      "reference": "trace",
+      "choices": [
+        {
+          "text": "หยุดทั้งสองแบบทันที",
+          "id": "a"
+        },
+        {
+          "text": "ต้องค้นต่อผ่าน tombstone แต่หยุดที่ empty ได้",
+          "id": "b"
+        },
+        {
+          "text": "tombstone เป็น key ที่ค้นได้เสมอ",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "อาจมี key ที่ชนกันถูกวางถัดจากช่องที่ลบ",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "cap5,A/B/C ต่าง key แต่ hash2 ทั้งหมด:\n\n| ขั้น | slot2 | slot3 | slot4 | size |\n|---|---|---|---|---:|\n|insertA1|A1|ว่าง|ว่าง|1|\n|insertB2|A1|B2|ว่าง|2|\n|insertC3|A1|B2|C3|3|\n|deleteA|TOMBSTONE|B2|C3|2|\n|updateB42|TOMBSTONE|B42|C3|2|\n\ngetB "
+      }
+    },
+    {
+      "id": "oop-python-hash-tables-exam-09",
+      "type": "choice",
+      "prompt": "Insert พบ tombstone ก่อน existingkey เดียวกัน ควรทำอะไร?",
+      "reference": "trace",
+      "choices": [
+        {
+          "text": "เขียนทันทีทำ duplicatekey ได้",
+          "id": "a"
+        },
+        {
+          "text": "ลบทุกรายการหลัง tombstone",
+          "id": "b"
+        },
+        {
+          "text": "ค้นต่อหา key เดิมก่อนตัดสิน reuse",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "จำช่องลบแรกได้แต่ต้องยืนยันว่าเป็น insert ใหม่ไม่ใช่ update",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "cap5,A/B/C ต่าง key แต่ hash2 ทั้งหมด:\n\n| ขั้น | slot2 | slot3 | slot4 | size |\n|---|---|---|---|---:|\n|insertA1|A1|ว่าง|ว่าง|1|\n|insertB2|A1|B2|ว่าง|2|\n|insertC3|A1|B2|C3|3|\n|deleteA|TOMBSTONE|B2|C3|2|\n|updateB42|TOMBSTONE|B42|C3|2|\n\ngetB "
+      }
+    },
+    {
+      "id": "oop-python-hash-tables-exam-10",
+      "type": "numeric",
+      "prompt": "Chaining มี 6keys,capacity4 จงหาα",
+      "reference": "load",
+      "answer": 1.5,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "α=n/capacity=6/4=1.5 chaining อาจเกิน 1 ได้",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "pp.18–20:α=size/capacity เช่น 3/4=.75 เป็น threshold ที่ source เลือก ไม่ใช่ค่ากฎตายตัวทุก library Chaining อาจมีα>1 ได้เพราะหนึ่ง bucket เก็บหลาย entry แต่ประสิทธิภาพเปลี่ยนตาม chain ส่วน open addressing ต้องมีช่องหรือ policyfull ที่ชัด\n\nต",
+        "oracle": "Fraction(6,4)"
+      }
+    },
+    {
+      "id": "oop-python-hash-tables-exam-11",
+      "type": "choice",
+      "prompt": "Openaddressing เต็มแต่ยังค้น key ที่ไม่มี ต้องจำกัด probes อย่างไร?",
+      "reference": "load",
+      "choices": [
+        {
+          "text": "วนจนเจอ None แม้ไม่มีเลย",
+          "id": "a"
+        },
+        {
+          "text": "ไม่เกิน capacity ตาม policy บท",
+          "id": "b"
+        },
+        {
+          "text": "ตรวจช่องเริ่มซ้ำไม่สิ้นสุด",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "full/tombstone-only ต้องจบและรายงานไม่พบหรือ full",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.18–20:α=size/capacity เช่น 3/4=.75 เป็น threshold ที่ source เลือก ไม่ใช่ค่ากฎตายตัวทุก library Chaining อาจมีα>1 ได้เพราะหนึ่ง bucket เก็บหลาย entry แต่ประสิทธิภาพเปลี่ยนตาม chain ส่วน open addressing ต้องมีช่องหรือ policyfull ที่ชัด\n\nต"
+      }
+    },
+    {
+      "id": "oop-python-hash-tables-exam-12",
+      "type": "choice",
+      "prompt": "Resize แล้วควร copyentries ไว้ index เดิมอย่างเดียวหรือไม่?",
+      "reference": "load",
+      "choices": [
+        {
+          "text": "ควรเพราะ hash ไม่เปลี่ยนจึง index คงเดิม",
+          "id": "a"
+        },
+        {
+          "text": "ควรเมื่อเป็น string เท่านั้น",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ ต้อง rehash ตาม capacity ใหม่",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "แม้ hash เดิม mod ใหม่อาจเปลี่ยน bucket",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pp.18–20:α=size/capacity เช่น 3/4=.75 เป็น threshold ที่ source เลือก ไม่ใช่ค่ากฎตายตัวทุก library Chaining อาจมีα>1 ได้เพราะหนึ่ง bucket เก็บหลาย entry แต่ประสิทธิภาพเปลี่ยนตาม chain ส่วน open addressing ต้องมีช่องหรือ policyfull ที่ชัด\n\nต"
+      }
+    },
+    {
+      "id": "oop-python-hash-tables-exam-13",
+      "type": "numeric",
+      "prompt": "hash สมมติ 17 หลังขยาย capacity จาก 5 เป็น 10 จะได้ bucket ใหม่เท่าใด?",
+      "reference": "load",
+      "answer": 7,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "explanation": "17%10=7 ต่างจาก 17%5=2 ต้อง rehash ด้วย capacity ใหม่ ไม่คัด entry ไว้ index เดิม",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "pp.18–20:α=size/capacity เช่น 3/4=.75 เป็น threshold ที่ source เลือก ไม่ใช่ค่ากฎตายตัวทุก library Chaining อาจมีα>1 ได้เพราะหนึ่ง bucket เก็บหลาย entry แต่ประสิทธิภาพเปลี่ยนตาม chain ส่วน open addressing ต้องมีช่องหรือ policyfull ที่ชัด\n\nต",
+        "oracle": "17%10"
+      }
+    },
+    {
+      "id": "oop-python-hash-tables-exam-14",
+      "type": "numeric",
+      "prompt": "มี 8keys ขยาย capacity จาก 8 เป็น 16 หลัง rehashαใหม่เท่าใด?",
+      "reference": "load",
+      "answer": 0.5,
+      "absoluteTolerance": 0.000001,
+      "relativeTolerance": 0,
+      "explanation": "จำนวน key ยัง 8 แต่ capacity16 จึง.5",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "pp.18–20:α=size/capacity เช่น 3/4=.75 เป็น threshold ที่ source เลือก ไม่ใช่ค่ากฎตายตัวทุก library Chaining อาจมีα>1 ได้เพราะหนึ่ง bucket เก็บหลาย entry แต่ประสิทธิภาพเปลี่ยนตาม chain ส่วน open addressing ต้องมีช่องหรือ policyfull ที่ชัด\n\nต",
+        "oracle": "Fraction(8,16)"
+      }
+    },
+    {
+      "id": "oop-python-hash-tables-exam-15",
+      "type": "choice",
+      "prompt": "Updatevalue ของ key เดิมควรเพิ่ม size หรือไม่?",
+      "reference": "python",
+      "choices": [
+        {
+          "text": "เพิ่มทุก assign",
+          "id": "a"
+        },
+        {
+          "text": "ลด size หนึ่งเสมอ",
+          "id": "b"
+        },
+        {
+          "text": "ไม่ เพราะจำนวน key ไม่เปลี่ยน",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ต้องแยก insert ใหม่จาก update ก่อนใช้ resizepolicy",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตัวอย่าง Linear Probing (LP) ใช้ capacity คงที่ เมื่อเต็มจะเกิด OverflowError โดยไม่ขยายเอง ส่วน Chaining ขยายขนาดอัตโนมัติตาม policy ที่อธิบายไว้ข้างต้น\n\nในโค้ดนี้ delete คืนค่าที่ลบตาม policy ผู้เขียน และ None เป็น value หรือ key ภายใน en"
+      }
+    },
+    {
+      "id": "oop-python-hash-tables-exam-16",
+      "type": "choice",
+      "prompt": "dictupdatekey เดิมเปลี่ยน insertionorder หรือไม่?",
+      "reference": "dict",
+      "choices": [
+        {
+          "text": "ไม่ย้ายตำแหน่งเดิม",
+          "id": "a"
+        },
+        {
+          "text": "ย้ายท้ายเสมอ",
+          "id": "b"
+        },
+        {
+          "text": "เรียงkeyใหม่ตามhash",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "แต่ลบแล้ว insert ใหม่ไปท้ายได้",
+      "difficulty": "medium",
+      "verification": {
+        "method": "python",
+        "evidence": "Week15 pp.22–24:dict รักษา insertionorder แต่ไม่ใช่ sort ตาม hash/ชื่อ key update ค่าเดิมไม่ย้ายตำแหน่ง;ลบแล้ว insert ใหม่ไปท้าย ต่างจาก bucketiteration ของ teachingHashTable ซึ่งไม่ได้รับรอง insertionorder\n\nคำสรุป source ว่า mutable ทุกชนิ",
+        "oracle": "run(\"d={\\\"A\\\":1,\\\"B\\\":2}\\nd[\\\"A\\\"]=3\\nprint(\\\"ไม่ย้ายตำแหน่งเดิม\\\" if list(d)==[\\\"A\\\",\\\"B\\\"] else \\\"wrong\\\")\")"
+      }
+    },
+    {
+      "id": "oop-python-hash-tables-exam-17",
+      "type": "choice",
+      "prompt": "Tuple ที่มี list อยู่ข้างในใช้เป็น dictkey ได้หรือไม่?",
+      "reference": "dict",
+      "choices": [
+        {
+          "text": "ได้เพราะ tuple ทุกตัว hashable",
+          "id": "a"
+        },
+        {
+          "text": "ไม่ได้ เพราะสมาชิก list ไม่ hashable",
+          "id": "b"
+        },
+        {
+          "text": "ได้เฉพาะ list ว่าง",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ต้องตรวจ hashability ของสมาชิกด้วย ไม่ดู container ชั้นนอกอย่างเดียว",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Week15 pp.22–24:dict รักษา insertionorder แต่ไม่ใช่ sort ตาม hash/ชื่อ key update ค่าเดิมไม่ย้ายตำแหน่ง;ลบแล้ว insert ใหม่ไปท้าย ต่างจาก bucketiteration ของ teachingHashTable ซึ่งไม่ได้รับรอง insertionorder\n\nคำสรุป source ว่า mutable ทุกชนิ"
+      }
+    },
+    {
+      "id": "oop-python-hash-tables-exam-18",
+      "type": "choice",
+      "prompt": "OrderedDict มีจุดเด่นด้านใดที่บทแยกจาก dict ทั่วไป?",
+      "reference": "comparison",
+      "choices": [
+        {
+          "text": "รับรอง lookupworstO(1)",
+          "id": "a"
+        },
+        {
+          "text": "เรียงค่าตัวเลขให้อัตโนมัติ",
+          "id": "b"
+        },
+        {
+          "text": "การจัดการลำดับเช่น move_to_end ตาม interface",
+          "id": "c"
+        }
+      ],
+      "answer": "c",
+      "explanation": "เลือกตาม operation ที่ต้องการ ไม่เรียกทุก mapping ว่าเหมือนกัน",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "| ตัวเลือก | Function/order | เวลาและข้อสมมติ | Memory |\n|---|---|---|---|\n|dict|mapping/insertionorder|lookup/updateexpectedO(1),worstO(n)ตาม key/hash|index/entries และ sparecapacity|\n|OrderedDict|mapping พร้อม move_to_end/popitem เลือกปลา"
+      }
+    },
+    {
+      "id": "oop-python-hash-tables-exam-19",
+      "type": "choice",
+      "prompt": "ExpectedlookupO(1) ของ hash table ต้องระบุสมมติฐานใด?",
+      "reference": "complexity",
+      "choices": [
+        {
+          "text": "hash กระจายเหมาะและ keyoperations มีต้นทุนคงที่",
+          "id": "a"
+        },
+        {
+          "text": "ไม่มี collision ทุก key",
+          "id": "b"
+        },
+        {
+          "text": "ทุก stringhash ใช้เวลา 0",
+          "id": "c"
+        }
+      ],
+      "answer": "a",
+      "explanation": "หาก hash ชนทุก key หรือ key ยาว ต้นทุนย่อไม่ครอบคลุม",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Chainingexpectedlookup/insert/delete O(1+α) เมื่อ hash กระจาย uniform และ key operations คงที่;resizeinsert เป็น amortized;worst ทุก key ชนกัน O(n) LPprobe ยาวได้ถึง capacity และ tombstones จำนวนมากทำให้ probe แพงแม้ liveαต่ำ การ rehash เพื"
+      }
+    },
+    {
+      "id": "oop-python-hash-tables-exam-20",
+      "type": "choice",
+      "prompt": "Liveαต่ำแต่มี tombstones มาก ยัง lookup ช้าได้หรือไม่?",
+      "reference": "complexity",
+      "choices": [
+        {
+          "text": "ไม่ได้αต่ำรับรองทุก probe สั้น",
+          "id": "a"
+        },
+        {
+          "text": "ได้ เพราะต้อง probe ผ่านช่องที่ลบ",
+          "id": "b"
+        },
+        {
+          "text": "ได้เฉพาะ chaining",
+          "id": "c"
+        }
+      ],
+      "answer": "b",
+      "explanation": "load ของ liveentries ไม่สะท้อน probechain ทั้งหมด",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Chainingexpectedlookup/insert/delete O(1+α) เมื่อ hash กระจาย uniform และ key operations คงที่;resizeinsert เป็น amortized;worst ทุก key ชนกัน O(n) LPprobe ยาวได้ถึง capacity และ tombstones จำนวนมากทำให้ probe แพงแม้ liveαต่ำ การ rehash เพื"
+      }
+    },
+    {
+      "id": "oop-python-hash-tables-exam-21",
+      "type": "self",
+      "prompt": "ไล่ insert/delete/update เมื่อหลาย keyhash ชนกันและมี tombstone",
+      "reference": "trace",
+      "rubric": [
+        "รักษา searchchain หลัง delete",
+        "ค้น existingkey ก่อน reuse ช่องลบ",
+        "ตรวจ size และจำกัด probes ไม่วนไม่จบ"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: รักษา searchchain หลัง delete ค้น existingkey ก่อน reuse ช่องลบ ตรวจ size และจำกัด probes ไม่วนไม่จบ",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "cap5,A/B/C ต่าง key แต่ hash2 ทั้งหมด:\n\n| ขั้น | slot2 | slot3 | slot4 | size |\n|---|---|---|---|---:|\n|insertA1|A1|ว่าง|ว่าง|1|\n|insertB2|A1|B2|ว่าง|2|\n|insertC3|A1|B2|C3|3|\n|deleteA|TOMBSTONE|B2|C3|2|\n|updateB42|TOMBSTONE|B42|C3|2|\n\ngetB "
+      }
+    },
+    {
+      "id": "oop-python-hash-tables-exam-22",
+      "type": "self",
+      "prompt": "ออกแบบ resizepolicy ที่ไม่ trigger เพียง updatekey เดิม",
+      "reference": "load",
+      "rubric": [
+        "ตรวจ insert ใหม่ก่อนคำนวณ projectedload",
+        "rehash ด้วย capacity ใหม่ทุก entry",
+        "แยก one-resizecost จาก amortizedsequence"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ตรวจ insert ใหม่ก่อนคำนวณ projectedload rehash ด้วย capacity ใหม่ทุก entry แยก one-resizecost จาก amortizedsequence",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "pp.18–20:α=size/capacity เช่น 3/4=.75 เป็น threshold ที่ source เลือก ไม่ใช่ค่ากฎตายตัวทุก library Chaining อาจมีα>1 ได้เพราะหนึ่ง bucket เก็บหลาย entry แต่ประสิทธิภาพเปลี่ยนตาม chain ส่วน open addressing ต้องมีช่องหรือ policyfull ที่ชัด\n\nต"
+      }
+    },
+    {
+      "id": "oop-python-hash-tables-exam-23",
+      "type": "self",
+      "prompt": "อธิบาย hashability ของ customclass เมื่อเพิ่ม __eq__",
+      "reference": "dict",
+      "rubric": [
+        "ตรวจสัญญา equalkeys มี equalhash",
+        "ระวัง mutablefields ที่ใช้เป็น key",
+        "ใช้ tests ไม่อ้างว่าทุก objecthashable โดยอัตโนมัติ"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ตรวจสัญญา equalkeys มี equalhash ระวัง mutablefields ที่ใช้เป็น key ใช้ tests ไม่อ้างว่าทุก objecthashable โดยอัตโนมัติ",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Week15 pp.22–24:dict รักษา insertionorder แต่ไม่ใช่ sort ตาม hash/ชื่อ key update ค่าเดิมไม่ย้ายตำแหน่ง;ลบแล้ว insert ใหม่ไปท้าย ต่างจาก bucketiteration ของ teachingHashTable ซึ่งไม่ได้รับรอง insertionorder\n\nคำสรุป source ว่า mutable ทุกชนิ"
+      }
+    },
+    {
+      "id": "oop-python-hash-tables-exam-24",
+      "type": "self",
+      "prompt": "เปรียบ dict,chaining,linearprobing กับ linkedlist โดยไม่แต่ง requirements",
+      "reference": "complexity",
+      "rubric": [
+        "ระบุ lookup/order/delete ที่งานต้องการ",
+        "แยก expected/amortized/worst และ payloadcost",
+        "อธิบาย capacity/tombstoneoverhead และไม่ถือ benchmark เป็นข้อพิสูจน์"
+      ],
+      "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ระบุ lookup/order/delete ที่งานต้องการ แยก expected/amortized/worst และ payloadcost อธิบาย capacity/tombstoneoverhead และไม่ถือ benchmark เป็นข้อพิสูจน์",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Chainingexpectedlookup/insert/delete O(1+α) เมื่อ hash กระจาย uniform และ key operations คงที่;resizeinsert เป็น amortized;worst ทุก key ชนกัน O(n) LPprobe ยาวได้ถึง capacity และ tombstones จำนวนมากทำให้ probe แพงแม้ liveαต่ำ การ rehash เพื"
+      }
+    }
+  ]
+}

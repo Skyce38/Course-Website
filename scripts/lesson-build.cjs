@@ -2,7 +2,7 @@
 const fs = require('node:fs'), path = require('node:path');
 const {validate} = require('../assets/lesson-contract.js');
 const rich = require('./lesson-rich.cjs');
-const VERSION = 'phase6-practice-1';
+const VERSION = 'phase8-exam-1';
 const esc = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const json = value => JSON.stringify(value).replace(/</g,'\\u003c').replace(/\u2028/g,'\\u2028').replace(/\u2029/g,'\\u2029');
 function metadata(source) {
@@ -83,7 +83,7 @@ function markdown(body, context) {
       addID(id); headings.push({id,title:match[2],level:match[1].length}); result+='<h'+match[1].length+' id="'+esc(id)+'">'+inline(match[2],context)+'</h'+match[1].length+'>'; i++;
     } else if (line.startsWith('|') && /^\|[\s:|\-]+\|$/.test(lines[i+1] || '')) {
       const cells = value => value.slice(1,-1).split('|').map(cell=>inline(cell.trim(),context));
-      result+='<div class="table-scroll" tabindex="0" role="region" aria-label="ตาราง / Table"><table><thead><tr>'+cells(line).map(cell=>'<th scope="col">'+cell+'</th>').join('')+'</tr></thead><tbody>'; i+=2;
+      result+='<div class="table-scroll" tabindex="0" role="region" data-i18n-aria-label="lessonTable" aria-label="ตาราง"><table><thead><tr>'+cells(line).map(cell=>'<th scope="col">'+cell+'</th>').join('')+'</tr></thead><tbody>'; i+=2;
       while(i<lines.length && lines[i].startsWith('|')) { result+='<tr>'+cells(lines[i++]).map(cell=>'<td>'+cell+'</td>').join('')+'</tr>'; } result+='</tbody></table></div>';
     } else if (/^- /.test(line)) {
       result+='<ul>'; while(i<lines.length && /^- /.test(lines[i])) result+='<li>'+inline(lines[i++].slice(2),context)+'</li>'; result+='</ul>';
@@ -124,19 +124,22 @@ function buildLessons(catalog, root = process.cwd()) {
     const rendered=markdown(body,{source,output,root,catalog});
     if (!rendered.headings.length) throw Error('Lesson requires headings');
     const practiceFile=path.join(root,'courses',meta.course,'practice',meta.slug+'.json');
-    let practice='';
+    let practice='',exam='';
     if(fs.existsSync(practiceFile)){
       const data=JSON.parse(fs.readFileSync(practiceFile,'utf8'));
       if(data.lesson!==meta.id)throw Error('Practice lesson identity mismatch');
       practice='\n'+require('./practice-build.cjs').render(data,rendered.headings);
+      const examFile=path.join(root,'courses',meta.course,'exam',meta.slug+'.json');
+      if(fs.existsSync(examFile))exam='\n'+require('./exam-build.cjs').render(data,JSON.parse(fs.readFileSync(examFile,'utf8')),rendered.headings);
     }
     const values={MARKER:marker,TITLE:esc(meta.title),LANG:meta.language,COURSE:esc(course.name),COURSE_ID:esc(course.id),CATEGORY:esc(category.name),CATEGORY_ID:esc(category.id),VERSION,BODY:rendered.html,TOC:tocHTML(rendered.headings),COMPONENTS:rendered.interactive?'<script src="../../assets/lesson-contract.js?v='+VERSION+'" defer></script><script src="../../assets/lesson-components.js?v='+VERSION+'" defer></script>':''};
     if (rendered.interactive) values.COMPONENTS='<link rel="stylesheet" href="../../assets/lesson-components.css?v='+VERSION+'">'+values.COMPONENTS;
     values.RICH_CONTENT=rendered.features.length?'<link rel="stylesheet" href="../../assets/lesson-rich.css?v=rich-lesson-1">':'';
     if(rendered.features.includes('math')) values.RICH_CONTENT='<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css?v=0.19.1">'+values.RICH_CONTENT;
-    values.PRACTICE=practice;
+    values.PRACTICE=practice+exam;
     values.PRACTICE_ASSETS=practice?'<link rel="stylesheet" href="../../assets/practice.css?v='+VERSION+'"><script src="../../assets/practice-contract.js?v='+VERSION+'" defer></script><script src="../../assets/practice.js?v='+VERSION+'" defer></script>':'';
     if(practice)values.TOC+='<a href="#practice-mode" data-i18n="practiceTitle">โหมดฝึกทำโจทย์</a>';
+    if(exam){values.PRACTICE_ASSETS+='<link rel="stylesheet" href="../../assets/exam.css?v='+VERSION+'"><script src="../../assets/exam-contract.js?v='+VERSION+'" defer></script><script src="../../assets/exam.js?v='+VERSION+'" defer></script>';values.TOC+='<a href="#exam-mode" data-i18n="examTitle">คลังข้อสอบฝึกเพิ่มเติม</a>'}
     const template=fs.readFileSync(path.join(root,'templates/lesson.html'),'utf8').replace(/\r\n/g,'\n');
     const html=template.replace(/\{\{([A-Z_]+)\}\}/g,(_,key)=>{ if (!(key in values)) throw Error('Unknown template token'); return values[key]; });
     plans.push({target,html,resource,old});
