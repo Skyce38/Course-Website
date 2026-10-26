@@ -47,4 +47,3 @@ async function snap(p,name){if(artifacts){fs.mkdirSync(artifacts,{recursive:true
  const nojs=await browser.newContext({javaScriptEnabled:false}),staticPage=await nojs.newPage();for(const l of lessons){await staticPage.goto(base+l.reader);assert.equal(await staticPage.locator('.practice-fallback>ol>li').count(),6);assert.equal(await staticPage.locator('.exam-fallback>ol>li').count(),30);}await nojs.close();
  assert.deepEqual(errors,[]);await c.close();await browser.close();console.log('PASS:12 Unix readers,72 Practice answers and300 Exam answers/review/retry/scores,refresh; Classic/Modern/TH-EN/Light-Dark/6palettes/1440-1024-390-320; code copy, real TOC/math/course/search,completion/focus and Unix Insights readonly filters; all12 no-JS fallbacks; no app/asset errors');
 })().catch(e=>{console.error(e.stack);process.exit(1)});
-
