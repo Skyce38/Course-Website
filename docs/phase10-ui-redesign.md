@@ -29,4 +29,8 @@ Navigation reuses existing course/category routes. Courses/Recent sidebar links 
 
 Executed: build/check suite; original Practice browser suite (15 sessions), reader containment/TOC suite (24+6 cases), all three historical revision migrations, 50 controlled GitHub-sync focus cases and new Modern navigation/position regression. The latter covers all 25 practice destinations, seven palettes × two modes × four widths and 22px/narrow reading. Fresh Classic Home/Stack/Settings comparisons are pixel-identical at 1440/390px.
 
-Confirmed presentation fixes during review: settings text/icon crowding and legacy sidebar glyphs showing beside SVGs. Final screenshot comparison, remaining core regressions, integrity review and release preparation are pending; no overall visual PASS is claimed yet.
+Confirmed presentation fixes during review: settings text/icon crowding, legacy sidebar glyphs showing beside SVGs, and doubled native-anchor offsets before Practice/Exam sections. Section jumps now account for the actual header height. A held GitHub response reproduced lost focus on the newly introduced section targets; the existing synchronous-render helper now preserves those three targets without storing a snapshot across await or stealing search focus. All three new cases and the existing 50 resource-action cases pass.
+
+The complete Extended Exam browser suite passes (all 25 banks plus selection/scoring/retry/archive-compatible state, refresh, cross-tab focus and no-JS). Its initial parallel run hit a local `ERR_NO_BUFFER_SPACE` asset-loading failure; a serial run using the temporary HTTP/1.1 keepalive test server passed without code changes for that infrastructure error. No deployment behavior is inferred from this local-server limit.
+
+Final screenshot comparison, remaining core regressions, integrity review and release preparation are pending; no overall visual PASS is claimed yet.

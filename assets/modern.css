@@ -152,7 +152,7 @@ html:root[data-layout=modern] .html-reader .lesson-math-block{border-radius:8px;
 html:root[data-layout=modern] .html-reader .chapter{border-radius:8px;border-color:var(--ui-divider);box-shadow:none}
 
 /* One question surface; no grading, answer metadata or persistence changes. */
-html:root[data-layout=modern] .lesson-reader :is(.practice-mode,.exam-mode){border:0;border-top:1px solid var(--ui-divider);border-radius:0;padding:26px 0;margin:36px 0 0;background:none;box-shadow:none;font-size:var(--text-size);scroll-margin-top:var(--reader-header-offset,150px)}
+html:root[data-layout=modern] .lesson-reader :is(.practice-mode,.exam-mode){border:0;border-top:1px solid var(--ui-divider);border-radius:0;padding:26px 0;margin:36px 0 0;background:none;box-shadow:none;font-size:var(--text-size);scroll-margin-top:0}
 html:root[data-layout=modern] .practice-mode h2{font-size:28px;line-height:1.5;margin-bottom:12px}
 html:root[data-layout=modern] .practice-navigation{margin:18px 0 10px;gap:12px}
 html:root[data-layout=modern] .practice-position{font-size:15px;font-weight:600}

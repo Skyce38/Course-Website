@@ -19,6 +19,7 @@ const lessons=catalog.resources.filter(r=>r.generatedLesson===1&&r.reader);
  for(const r of lessons){const html=fs.readFileSync(require('path').resolve(__dirname,'..',r.reader),'utf8');for(const id of ['practice-mode','exam-mode'])assert.ok(html.includes('id="'+id+'"'),r.id)}
  await page.goto(base+'#course/artificial-intelligence');await page.locator('[data-course-practice]').click();await page.locator('.practice-destination a[href$="#practice-mode"]').first().click();await page.locator('[data-practice-ready=true]').waitFor();
  assert.ok(page.url().endsWith('#practice-mode'));assert.ok(await page.locator('#practice-mode').isVisible());
+ const initialOffset=await page.evaluate(()=>({top:document.querySelector('#practice-mode h2').getBoundingClientRect().top,header:document.querySelector('.topbar').getBoundingClientRect().bottom}));assert.ok(initialOffset.top>=initialOffset.header&&initialOffset.top<=initialOffset.header+70,JSON.stringify(initialOffset));
  const originalTrack=page.locator('#practice-mode .practice-position-track');assert.equal(await originalTrack.getAttribute('max'),'6');assert.equal(await originalTrack.getAttribute('value'),'1');
  await page.locator('#practice-mode .practice-navigation select').selectOption({index:1});assert.equal(await originalTrack.getAttribute('value'),'2');
  const submit=page.locator('#practice-mode button[type=submit]'),identity=await submit.elementHandle(),track=await originalTrack.elementHandle();await submit.focus();
@@ -37,5 +38,14 @@ const lessons=catalog.resources.filter(r=>r.generatedLesson===1&&r.reader);
   });assert.ok(ratios.every(r=>r>=4.5-.01),JSON.stringify({preset,theme,width,ratios}));
  }
  for(const width of [1440,1024,390,320]){await page.setViewportSize({width,height:1000});await page.evaluate(()=>LearningPreferences.update({font:22,width:'narrow'}));assert.equal(await page.locator('.prose').evaluate(n=>getComputedStyle(n).fontSize),'22px');assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false)}
- assert.deepEqual(errors,[]);await context.close();await browser.close();console.log('PASS: six real courses/25 practice destinations, keyboard section navigation, original/exam position indicators and stable focus/DOM across modes; Classic hidden-state compatibility; 7 palettes × 2 modes × 4 widths, selected-palette contrast and 22px narrow readers; no overflow/runtime/asset errors');
+ // Reproduce section focus while the GitHub promise is pending, then complete it.
+ for(const target of ['course-collection','recent-reading','practice-entry-heading']){
+  const isolated=await browser.newContext(),p=await isolated.newPage();let release;const pending=new Promise(resolve=>release=resolve);
+  await isolated.route('https://api.github.com/**',async route=>{await pending;await route.fulfill({json:{tree:[],truncated:false}})});
+  await isolated.addInitScript(()=>localStorage.setItem('skyce-learning-preferences',JSON.stringify({layout:'modern',language:'en'})));
+  await p.goto(base+(target==='practice-entry-heading'?'#course/artificial-intelligence':''));await p.waitForFunction(()=>syncing);
+  const link=p.locator(target==='practice-entry-heading'?'[data-course-practice]':'[data-home-section="'+target+'"]');await link.focus();await p.keyboard.press('Enter');assert.equal(await p.evaluate(()=>document.activeElement.id),target);
+  const scroll=await p.evaluate(()=>scrollY);release();await p.waitForFunction(()=>!syncing);assert.equal(await p.evaluate(()=>document.activeElement.id),target);assert.equal(await p.evaluate(()=>scrollY),scroll,'Sync restores section focus without scrolling');await isolated.close();
+ }
+ assert.deepEqual(errors,[]);await context.close();await browser.close();console.log('PASS: six real courses/25 practice destinations, keyboard section navigation and 3 held-sync section-focus cases, original/exam position indicators and stable focus/DOM across modes; Classic hidden-state compatibility; 7 palettes × 2 modes × 4 widths, selected-palette contrast and 22px narrow readers; no overflow/runtime/asset errors');
 })().catch(e=>{console.error(e.stack);process.exit(1)});
