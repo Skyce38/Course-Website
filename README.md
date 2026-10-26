@@ -130,3 +130,7 @@ All 25 registered lessons now also provide Topic Practice and 10/20/30/full mock
 ### Phase 10 — Modern learning workspace
 
 Modern now uses compact course tiles, divider-based document lists, flatter readers and Practice/Exam presentation, with direct links to the existing lesson activities. Classic remains the default and visually unchanged. `assets/modern.css` isolates the redesign; shared preferences, study records, grading, revision archives and lesson content keep their existing contracts. See [design boundaries, validation and browser limitations](docs/phase10-ui-redesign.md). Run the usual build/check commands; the optional `scripts/check-modern-ui-browser.cjs` uses `PLAYWRIGHT_MODULE` and `STUDY_BASE_URL` with an isolated Chrome profile.
+
+### Phase 11 — Study Insights
+
+Open `insights.html` from Modern navigation to inspect actual local Practice/Exam results, review priorities, course accuracy and ungraded Revisit ratings. Completed results are validated/recomputed; repeated observations, unique questions, excluded records and archived revisions remain distinct. The dashboard never writes browser storage, and its theme/language controls are temporary. All statistics are descriptive, with explicit sample limitations. See [formulas, privacy and validation](docs/study-insights.md). The standard build derives the dashboard-only public bank manifest; existing lessons/questions and saved-data formats remain authoritative.

@@ -26,6 +26,7 @@ for(const course of catalog.courses){
   }
 }
 const lessons=require('./lesson-build.cjs').buildLessons(catalog);
+require('./insights-build.cjs').build(catalog);
 if(JSON.stringify(catalog)!==originalCatalog)fs.writeFileSync('catalog.json',JSON.stringify(catalog,null,2)+'\n');
 const file='index.html';
 let html=fs.readFileSync(file,'utf8');

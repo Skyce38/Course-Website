@@ -112,3 +112,9 @@ Ready for PR preparation; no commit, push, merge or deployment performed. Browse
 - [x] Compact Modern dashboard, six-course catalog, readers, Practice/Exam, Settings and PDF chrome using shared data and scoped styles; preserve Classic and all palettes/preferences.
 - [x] Real practice entry points, accessible question-position progress and sync-safe section focus; no replacement Learning Paths or saved-data migration.
 - [x] Four-width screenshot review, focused functional/storage/accessibility regressions, deterministic builds and protected-content integrity checks. See [QA and remaining browser limits](docs/phase10-ui-redesign.md). PR review remains required before merge/deployment.
+
+## Phase 11 — Study Insights
+
+- [x] Read-only Practice/Exam observations with current-key validation, explicit historical exclusions, repeated/unique counts and separate self-assessment review.
+- [x] Theme-aware, bilingual dashboard, course/sort filters, real topic/practice links, empty/limited-data states and accessible native comparison bars.
+- [x] Deterministic derived banks, isolated storage/focus/browser regressions and screenshot review; no storage migration, analytics or mastery prediction. See [measurement rules and limits](docs/study-insights.md). Merge/deployment remain separate actions.
