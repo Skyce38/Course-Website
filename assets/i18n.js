@@ -2,6 +2,12 @@
 (() => {
   'use strict';
   const strings = {
+    homeNavigation:['หน้าหลัก','Home'],
+    coursesNavigation:['รายวิชา','Courses'],
+    practiceAndExams:['แบบฝึกและข้อสอบ','Practice & Exams'],
+    practiceEntryNote:['เลือกฝึกในบทเรียนที่เผยแพร่แล้ว ใช้โจทย์และประวัติชุดเดิม','Practice inside published lessons, using the existing questions and saved attempts.'],
+    lessonPracticeLinks:['เลือกบทเรียนเพื่อฝึก','Choose a lesson to practice'],
+    lessonPractice:['ฝึกในบทเรียน','Lesson practice'],
     lessonTable:['ตาราง','Table'],
     examAuthored:['โจทย์ที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง การประเมินตนเองไม่รวมคะแนน','Author-created revision, not official exams. Self-assessment is unscored.'],
     "examTitle":["คลังข้อสอบฝึกเพิ่มเติม","Extended Exam Bank"],

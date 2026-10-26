@@ -23,4 +23,10 @@ Tokens: selected-palette paper/canvas/soft/accent/ink; subdued decorative divide
 
 ## Validation status
 
-Stage A complete: relevant architecture inspected; baselines captured; design rules defined. Implementation and final QA pending. No overall PASS claimed.
+Stages A–F implemented: a single Modern stylesheet, compact shell/course/resource presentation, real practice deep links and a native question-position indicator. The indicator labels position, not mastery or graded completion; it uses existing sequence state and is never saved. Shared grading/storage contracts and educational sources are unchanged.
+
+Navigation reuses existing course/category routes. Courses/Recent sidebar links reveal real homepage sections with keyboard focus; course Lesson practice opens a real list of published-reader destinations. No new curriculum route or path is introduced. Empty category links are visually omitted only in Modern; Classic retains every original category.
+
+Executed: build/check suite; original Practice browser suite (15 sessions), reader containment/TOC suite (24+6 cases), all three historical revision migrations, 50 controlled GitHub-sync focus cases and new Modern navigation/position regression. The latter covers all 25 practice destinations, seven palettes × two modes × four widths and 22px/narrow reading. Fresh Classic Home/Stack/Settings comparisons are pixel-identical at 1440/390px.
+
+Confirmed presentation fixes during review: settings text/icon crowding and legacy sidebar glyphs showing beside SVGs. Final screenshot comparison, remaining core regressions, integrity review and release preparation are pending; no overall visual PASS is claimed yet.
