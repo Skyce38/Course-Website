@@ -17,7 +17,7 @@ Severity: Critical = incorrect answer / foundational misconception; High = wrong
 - Separate branch/worktree `codex/phase9-academic-correctness`; no reset, stash, rebase or edits in the other 18 worktrees. Their HEADs, indexes, diffs and nonignored dirty files were snapshotted outside Git before edits.
 - The local-only `FinalSource/` originals are available in the primary checkout. All original files and the 15 tracked PDFs were SHA-256 snapshotted outside Git (267 file entries including local derivatives). Do not publish those private files, personal filenames, source extractions or screenshots.
 - Existing [AI inventory](ai-source-coverage.md) supplies source aliases and locators, not independent correctness. S01 is the tracked introduction PDF; S02–S11 and assignment/workbook sources are local-only. Figures absent from L01/L02 remain unavailable unless actually found.
-- Runtime: CPython 3.12.14 (64-bit Windows). Scientific reference packages are reused from an existing external cache, not added as website dependencies. Versions and exact execution results are recorded with the relevant checks.
+- Runtime: CPython 3.12.14 (64-bit Windows), NumPy 2.3.5, SciPy 1.16.3, scikit-learn 1.7.2; Node 24.20.0; Chrome 155.0.8059.85 via Playwright. Scientific reference packages are reused from an existing external cache, not added as website dependencies.
 - Original lesson IDs, URLs, explicit anchors and study-storage formats must remain stable. Semantic question changes require historical-context protection; no silent regrading, clearing storage or discarding old attempts.
 
 ## Review progress
@@ -53,6 +53,8 @@ Fresh semantic review has read all ten Final lesson sources and all 300 associat
 | CNN | all matrices, exact pooling, 80 SciPy correlations + 48 pooling references; RGB channels/shape/parameters | S11 pp.16,23,25,31 images; source caption inconsistency already correctly handled |
 
 Independent references consulted (2026-10-26): [scikit-learn 1.7 OLS §1.1.1](https://scikit-learn.org/1.7/modules/linear_model.html#ordinary-least-squares), [neighbors §1.6](https://scikit-learn.org/1.7/modules/neighbors.html), [NB §1.9](https://scikit-learn.org/1.7/modules/naive_bayes.html), [trees mathematical formulation](https://scikit-learn.org/1.7/modules/tree.html#mathematical-formulation), [SciPy 1.16 linkage](https://docs.scipy.org/doc/scipy-1.16.0/reference/generated/scipy.cluster.hierarchy.linkage.html), [Stanford CS231n chain rule](https://cs231n.github.io/optimization-2/), [CNN layers](https://cs231n.github.io/convolutional-networks/), [Goodfellow et al., GAN (2014)](https://papers.nips.cc/paper/2014/hash/f033ed80deb0234979a61f95710dbe25-Abstract.html). Numerical execution uses sklearn 1.7.2 / SciPy 1.16.3; online stable/latest defaults are not substituted for that environment.
+
+C02's original `mlr.py` was inspected and fingerprinted, **not described as executed**: its complete-data fit/prediction was independently reproduced using NumPy and exact rational OLS. The executed lesson examples are teaching adaptations. No held-out model-performance claim is inferred from that full-data fit.
 
 ## Stages C–D review record
 
