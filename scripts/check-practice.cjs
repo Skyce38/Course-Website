@@ -2,7 +2,7 @@
 const fs=require('node:fs'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict');
 const C=require('../assets/practice-contract.js'),{render}=require('./practice-build.cjs'),{metadata,markdown,buildLessons}=require('./lesson-build.cjs');
 const catalog=JSON.parse(fs.readFileSync('catalog.json','utf8')),files=[];
-for(const course of ['oop-python','artificial-intelligence'])for(const file of fs.readdirSync('courses/'+course+'/practice'))if(file.endsWith('.json'))files.push(`courses/${course}/practice/${file}`);
+for(const course of [...new Set(catalog.resources.filter(r=>r.generatedLesson===1).map(r=>r.course))])for(const file of fs.readdirSync('courses/'+course+'/practice'))if(file.endsWith('.json'))files.push(`courses/${course}/practice/${file}`);
 const registered=JSON.parse(fs.readFileSync('scripts/lessons.json','utf8')).map(source=>metadata(fs.readFileSync(source,'utf8')).meta.id);
 assert.equal(files.length,Number(process.env.PRACTICE_EXPECTED_COUNT||registered.length),'Every registered lesson needs one practice sidecar (stage checks may explicitly set the interim count)');
 const seen=new Set();

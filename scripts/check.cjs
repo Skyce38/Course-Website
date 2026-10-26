@@ -37,7 +37,7 @@ for (const file of htmlFiles) {
   assert.equal(modernStyles.length, 1, file + ': load the Modern presentation once');
   assert.equal(new URL(modernStyles[0][1], 'https://example.test/').searchParams.get('v'), 'phase11-insights-1', file + ': version Modern styles with shared assets');
   for (const [,asset] of html.matchAll(/(?:src|href)="([^" ]*assets\/(?:preferences\.(?:js|css)|layouts\.css|readers\.(?:js|css)|(?:practice(?:-contract)?|lesson(?:-(?:components|contract))?)\.(?:js|css)|i18n\.js|study\.js|settings\.js|pdf(?:-source)?\.js)[^" ]*)"/g)) {
-    assert.equal(new URL(asset,'https://example.test/').searchParams.get('v'),'phase11-insights-1',file+': version shared UI assets together to prevent stale bundles');
+    const url=new URL(asset,'https://example.test/'),unixDictionary=url.pathname.endsWith('/assets/i18n.js')&&(file==='insights.html'||catalog.resources.some(r=>r.generatedLesson===1&&r.course==='unix-tools'&&r.reader===file));assert.equal(url.searchParams.get('v'),unixDictionary?'phase12-unix-1':'phase11-insights-1',file+': version unchanged shared assets and the extended Unix dictionary explicitly');
   }
   for (const match of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) new vm.Script(match[1], {filename: file});
   const markup = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, script => script.startsWith('<script src=') ? script : '');
@@ -122,3 +122,5 @@ require('./check-reading.cjs');
 require('./check-exam.cjs');
 require('./check-phase9.cjs');
 require('./check-insights.cjs');
+
+require('./check-unix.cjs');

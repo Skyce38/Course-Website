@@ -23,5 +23,17 @@
   "courses/oop-python/summaries/queue.md",
   "courses/oop-python/summaries/complexity-basic-sorting.md",
   "courses/oop-python/summaries/advanced-sorting.md",
-  "courses/oop-python/summaries/hash-tables.md"
+  "courses/oop-python/summaries/hash-tables.md",
+  "courses/unix-tools/summaries/final-shell-foundations.md",
+  "courses/unix-tools/summaries/final-variables-expansion.md",
+  "courses/unix-tools/summaries/final-arguments.md",
+  "courses/unix-tools/summaries/final-arithmetic-status.md",
+  "courses/unix-tools/summaries/final-tests-conditions.md",
+  "courses/unix-tools/summaries/final-redirection.md",
+  "courses/unix-tools/summaries/final-loops-reading.md",
+  "courses/unix-tools/summaries/final-case-heredoc.md",
+  "courses/unix-tools/summaries/final-functions-algorithms.md",
+  "courses/unix-tools/summaries/final-arrays-statistics.md",
+  "courses/unix-tools/summaries/final-regex-grep-sed.md",
+  "courses/unix-tools/summaries/final-awk-text.md"
 ]

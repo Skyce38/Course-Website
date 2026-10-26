@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "unix-tools-final-case-heredoc",
+  "title": "FINAL 08 — case และ Here Documents",
+  "questions": [
+    {
+      "id": "ux08-q01",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: แขนแรกตรง\nx=note.txt; case $x in *.txt) printf text;; *) printf other;; esac",
+      "reference": "case-patterns",
+      "explanation": "glob*.txtตรงนามสกุล — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux08-q01",
+      "choices": [
+        {
+          "id": "a",
+          "text": "other"
+        },
+        {
+          "id": "b",
+          "text": "txt"
+        },
+        {
+          "id": "c",
+          "text": "text"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "id": "ux08-q02",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: questionmarkหนึ่งตัว\nx=ab; case $x in ?) printf one;; ??) printf two;; esac",
+      "reference": "case-patterns",
+      "explanation": "??ตรงสองอักขระ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux08-q02",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่มี stdout"
+        },
+        {
+          "id": "b",
+          "text": "two"
+        },
+        {
+          "id": "c",
+          "text": "one"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "id": "ux08-q03",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: alternativepattern\nx=run; case $x in start|run) printf go;; *) printf no;; esac",
+      "reference": "case-patterns",
+      "explanation": "|แยกpatternทางเลือก — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux08-q03",
+      "choices": [
+        {
+          "id": "a",
+          "text": "go"
+        },
+        {
+          "id": "b",
+          "text": "no"
+        },
+        {
+          "id": "c",
+          "text": "start"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "id": "ux08-q04",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: แขนทับซ้อน\ncase abc in a*) printf first;; ab*) printf second;; esac",
+      "reference": "case-patterns",
+      "explanation": "เลือกแขนแรกแล้ว;;จบ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux08-q04",
+      "choices": [
+        {
+          "id": "a",
+          "text": "second"
+        },
+        {
+          "id": "b",
+          "text": "firstsecond"
+        },
+        {
+          "id": "c",
+          "text": "first"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "id": "ux08-q05",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: characterclass\ncase B in [ABC]) printf match;; *) printf no;; esac",
+      "reference": "case-patterns",
+      "explanation": "classรับหนึ่งในABC — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux08-q05",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ABC"
+        },
+        {
+          "id": "b",
+          "text": "match"
+        },
+        {
+          "id": "c",
+          "text": "no"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "id": "ux08-self1",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): อธิบายmatchingของcaseกับregexโดยมีตัวอย่าง",
+      "reference": "case-patterns",
+      "explanation": "ระบุ*และ?ในglobและไม่อ้างว่าcaseเป็นERE",
+      "rubric": [
+        "ระบุ*และ?ในglobและไม่อ้างว่าcaseเป็นERE",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,436 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "unix-tools-final-functions-algorithms",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "ux09-q06",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: returnmodulo256\nf(){ return 300; }; f; printf '%s' \"$?\"",
+      "reference": "return-output",
+      "explanation": "statusใช้แปดบิต300mod256=44 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux09-q06",
+      "answer": 44,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "returnจบฟังก์ชันพร้อมstatus0..255ในBash ไม่ใช่ข้อมูลเลขทั่วไป ส่งข้อมูลทางprintfแล้วรับด้วย$(...) แต่ต้องแยกlocalassignmentจากcommandsubstitutionเพื่อไม่ให้localบังstatus ป้องกันdivisionbyzeroและส่งerrorทางstderr"
+      }
+    },
+    {
+      "id": "ux09-q07",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: printdata\nf(){ printf 300; return 0; }; v=$(f); s=$?; printf '%s:%s' \"$v\" \"$s\"",
+      "reference": "return-output",
+      "explanation": "ข้อมูล300กับstatus0แยกกัน — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux09-q07",
+      "choices": [
+        {
+          "id": "a",
+          "text": "44:0"
+        },
+        {
+          "id": "b",
+          "text": "300:300"
+        },
+        {
+          "id": "c",
+          "text": "300:0"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "returnจบฟังก์ชันพร้อมstatus0..255ในBash ไม่ใช่ข้อมูลเลขทั่วไป ส่งข้อมูลทางprintfแล้วรับด้วย$(...) แต่ต้องแยกlocalassignmentจากcommandsubstitutionเพื่อไม่ให้localบังstatus ป้องกันdivisionbyzeroและส่งerrorทางstderr"
+      }
+    },
+    {
+      "id": "ux09-q08",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: implicitreturn\nf(){ false; }; f; printf '%s' \"$?\"",
+      "reference": "return-output",
+      "explanation": "ไม่returnชัดเจนใช้statusคำสั่งท้าย — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux09-q08",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "returnจบฟังก์ชันพร้อมstatus0..255ในBash ไม่ใช่ข้อมูลเลขทั่วไป ส่งข้อมูลทางprintfแล้วรับด้วย$(...) แต่ต้องแยกlocalassignmentจากcommandsubstitutionเพื่อไม่ให้localบังstatus ป้องกันdivisionbyzeroและส่งerrorทางstderr"
+      }
+    },
+    {
+      "id": "ux09-q09",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: localบังstatus\nf(){ local x=$(false); printf '%s' \"$?\"; }; f",
+      "reference": "return-output",
+      "explanation": "statusของlocalสำเร็จบังfalse — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux09-q09",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "returnจบฟังก์ชันพร้อมstatus0..255ในBash ไม่ใช่ข้อมูลเลขทั่วไป ส่งข้อมูลทางprintfแล้วรับด้วย$(...) แต่ต้องแยกlocalassignmentจากcommandsubstitutionเพื่อไม่ให้localบังstatus ป้องกันdivisionbyzeroและส่งerrorทางstderr"
+      }
+    },
+    {
+      "id": "ux09-q10",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: แยกdeclaration\nf(){ local x; x=$(false); printf '%s' \"$?\"; }; f",
+      "reference": "return-output",
+      "explanation": "assignmentรับstatuscommandsubstitution — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux09-q10",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "returnจบฟังก์ชันพร้อมstatus0..255ในBash ไม่ใช่ข้อมูลเลขทั่วไป ส่งข้อมูลทางprintfแล้วรับด้วย$(...) แต่ต้องแยกlocalassignmentจากcommandsubstitutionเพื่อไม่ให้localบังstatus ป้องกันdivisionbyzeroและส่งerrorทางstderr"
+      }
+    },
+    {
+      "id": "ux09-self2",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): ออกแบบfunctionส่งเลข300และรายงานความสำเร็จ",
+      "reference": "return-output",
+      "explanation": "printf300 stdoutแล้วreturn0;capturestatusทันทีและอย่าให้localซ่อนfailure",
+      "rubric": [
+        "printf300 stdoutแล้วreturn0;capturestatusทันทีและอย่าให้localซ่อนfailure",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "returnจบฟังก์ชันพร้อมstatus0..255ในBash ไม่ใช่ข้อมูลเลขทั่วไป ส่งข้อมูลทางprintfแล้วรับด้วย$(...) แต่ต้องแยกlocalassignmentจากcommandsubstitutionเพื่อไม่ให้localบังstatus ป้องกันdivisionbyzeroและส่งerrorทางstderr"
+      }
+    },
+    {
+      "id": "ux09-q11",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: fac5ตามHF\nfac(){ local n=$1 r=1 i; for ((i=2;i<=n;i++)); do ((r*=i)); done; printf '%s' \"$r\"; }; fac 5",
+      "reference": "factorial",
+      "explanation": "2*3*4*5=120 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux09-q11",
+      "answer": 120,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HF p.1 ขอfac()รับหลายargumentsและerrorเมื่อไม่มีข้อมูล ตัวอย่างเขียนเสริมตรวจเลข0..20ก่อนใช้signed64-bit เริ่มresult1วน2..n จึง0!=1 ขอบi<nทำให้ขาดตัวคูณสุดท้าย"
+      }
+    },
+    {
+      "id": "ux09-q12",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: fac0basecase\nn=0; r=1; for ((i=2;i<=n;i++)); do ((r*=i)); done; printf '%s' \"$r\"",
+      "reference": "factorial",
+      "explanation": "ไม่เข้าลูปresultยัง1 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux09-q12",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HF p.1 ขอfac()รับหลายargumentsและerrorเมื่อไม่มีข้อมูล ตัวอย่างเขียนเสริมตรวจเลข0..20ก่อนใช้signed64-bit เริ่มresult1วน2..n จึง0!=1 ขอบi<nทำให้ขาดตัวคูณสุดท้าย"
+      }
+    },
+    {
+      "id": "ux09-q13",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: offbyonefactorial\nn=5; r=1; for ((i=2;i<n;i++)); do ((r*=i)); done; printf '%s' \"$r\"",
+      "reference": "factorial",
+      "explanation": "ขาดคูณ5 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux09-q13",
+      "answer": 24,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HF p.1 ขอfac()รับหลายargumentsและerrorเมื่อไม่มีข้อมูล ตัวอย่างเขียนเสริมตรวจเลข0..20ก่อนใช้signed64-bit เริ่มresult1วน2..n จึง0!=1 ขอบi<nทำให้ขาดตัวคูณสุดท้าย"
+      }
+    },
+    {
+      "id": "ux09-q14",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: guardช่วงfactorial\nn=21; [[ $n =~ ^([0-9]|1[0-9]|20)$ ]]; printf '%s' \"$?\"",
+      "reference": "factorial",
+      "explanation": "ไม่รับ21เพราะเกินช่วงที่ตั้ง — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux09-q14",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HF p.1 ขอfac()รับหลายargumentsและerrorเมื่อไม่มีข้อมูล ตัวอย่างเขียนเสริมตรวจเลข0..20ก่อนใช้signed64-bit เริ่มresult1วน2..n จึง0!=1 ขอบi<nทำให้ขาดตัวคูณสุดท้าย"
+      }
+    },
+    {
+      "id": "ux09-q15",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: หลายarguments\nfac(){ local n=$1 r=1 i; for ((i=2;i<=n;i++)); do ((r*=i)); done; printf '%s ' \"$r\"; }; for n in 4 3; do fac \"$n\"; done",
+      "reference": "factorial",
+      "explanation": "facแต่ละinputแยกresult — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux09-q15",
+      "choices": [
+        {
+          "id": "a",
+          "text": "24 6 "
+        },
+        {
+          "id": "b",
+          "text": "24 144 "
+        },
+        {
+          "id": "c",
+          "text": "6 24 "
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HF p.1 ขอfac()รับหลายargumentsและerrorเมื่อไม่มีข้อมูล ตัวอย่างเขียนเสริมตรวจเลข0..20ก่อนใช้signed64-bit เริ่มresult1วน2..n จึง0!=1 ขอบi<nทำให้ขาดตัวคูณสุดท้าย"
+      }
+    },
+    {
+      "id": "ux09-self3",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): ออกแบบfacที่มีinputvalidationและอธิบาย0!",
+      "reference": "factorial",
+      "explanation": "อธิบายbasecase,loopinvariant,overflowและทดสอบ0,1,5,invalid",
+      "rubric": [
+        "อธิบายbasecase,loopinvariant,overflowและทดสอบ0,1,5,invalid",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "HF p.1 ขอfac()รับหลายargumentsและerrorเมื่อไม่มีข้อมูล ตัวอย่างเขียนเสริมตรวจเลข0..20ก่อนใช้signed64-bit เริ่มresult1วน2..n จึง0!=1 ขอบi<nทำให้ขาดตัวคูณสุดท้าย"
+      }
+    },
+    {
+      "id": "ux09-q16",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: oneไม่prime\nn=1; if ((n<2)); then printf no; else printf yes; fi",
+      "reference": "prime",
+      "explanation": "นิยามprimeต้อง>=2 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux09-q16",
+      "choices": [
+        {
+          "id": "a",
+          "text": "yes"
+        },
+        {
+          "id": "b",
+          "text": "1"
+        },
+        {
+          "id": "c",
+          "text": "no"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HF p.1แนะนำSieve of Eratosthenes แต่ตัวอย่างสั้นในบทนี้ใช้trialdivisionและระบุว่าเป็นวิธีเสริม คนละalgorithm จำนวนเฉพาะต้องn>=2 ตรวจตัวหารถึงรากรวมขอบ ใช้d<=n/dหลีกเลี่ยงd*doverflowเมื่อช่วงใหญ่;ภายใต้จำนวนเต็มบวก"
+      }
+    },
+    {
+      "id": "ux09-q17",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: รวมขอบsqrt\nn=25; p=yes; for ((d=2;d<=n/d;d++)); do if ((n%d==0)); then p=no; break; fi; done; printf '%s' \"$p\"",
+      "reference": "prime",
+      "explanation": "พบd5หาร25ลงตัว — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux09-q17",
+      "choices": [
+        {
+          "id": "a",
+          "text": "25"
+        },
+        {
+          "id": "b",
+          "text": "no"
+        },
+        {
+          "id": "c",
+          "text": "yes"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HF p.1แนะนำSieve of Eratosthenes แต่ตัวอย่างสั้นในบทนี้ใช้trialdivisionและระบุว่าเป็นวิธีเสริม คนละalgorithm จำนวนเฉพาะต้องn>=2 ตรวจตัวหารถึงรากรวมขอบ ใช้d<=n/dหลีกเลี่ยงd*doverflowเมื่อช่วงใหญ่;ภายใต้จำนวนเต็มบวก"
+      }
+    },
+    {
+      "id": "ux09-q18",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: prime13\nn=13; p=yes; for ((d=2;d<=n/d;d++)); do if ((n%d==0)); then p=no; break; fi; done; printf '%s' \"$p\"",
+      "reference": "prime",
+      "explanation": "ไม่มีตัวหาร2หรือ3 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux09-q18",
+      "choices": [
+        {
+          "id": "a",
+          "text": "yes"
+        },
+        {
+          "id": "b",
+          "text": "no"
+        },
+        {
+          "id": "c",
+          "text": "13"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HF p.1แนะนำSieve of Eratosthenes แต่ตัวอย่างสั้นในบทนี้ใช้trialdivisionและระบุว่าเป็นวิธีเสริม คนละalgorithm จำนวนเฉพาะต้องn>=2 ตรวจตัวหารถึงรากรวมขอบ ใช้d<=n/dหลีกเลี่ยงd*doverflowเมื่อช่วงใหญ่;ภายใต้จำนวนเต็มบวก"
+      }
+    },
+    {
+      "id": "ux09-q19",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: Sieveเริ่มsquare\np=3; printf '%s' \"$((p*p))\"",
+      "reference": "prime",
+      "explanation": "เริ่มทำเครื่องหมาย9ซึ่งเป็นcomposite — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux09-q19",
+      "answer": 9,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HF p.1แนะนำSieve of Eratosthenes แต่ตัวอย่างสั้นในบทนี้ใช้trialdivisionและระบุว่าเป็นวิธีเสริม คนละalgorithm จำนวนเฉพาะต้องn>=2 ตรวจตัวหารถึงรากรวมขอบ ใช้d<=n/dหลีกเลี่ยงd*doverflowเมื่อช่วงใหญ่;ภายใต้จำนวนเต็มบวก"
+      }
+    },
+    {
+      "id": "ux09-q20",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: trialจำนวนทดสอบ\nn=49; c=0; for ((d=2;d<=n/d;d++)); do ((c+=1)); if ((n%d==0)); then break; fi; done; printf '%s' \"$c\"",
+      "reference": "prime",
+      "explanation": "ตรวจ2..7รวม6ตัวและพบ7 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux09-q20",
+      "answer": 6,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HF p.1แนะนำSieve of Eratosthenes แต่ตัวอย่างสั้นในบทนี้ใช้trialdivisionและระบุว่าเป็นวิธีเสริม คนละalgorithm จำนวนเฉพาะต้องn>=2 ตรวจตัวหารถึงรากรวมขอบ ใช้d<=n/dหลีกเลี่ยงd*doverflowเมื่อช่วงใหญ่;ภายใต้จำนวนเต็มบวก"
+      }
+    },
+    {
+      "id": "ux09-self4",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): เปรียบเทียบtrialdivisionกับSieveสำหรับหลายqueries",
+      "reference": "prime",
+      "explanation": "trialตรวจแต่ละn ส่วนSieveเตรียมตารางถึงN ทำเครื่องหมายเริ่มp*pและไม่เรียกว่าprime",
+      "rubric": [
+        "trialตรวจแต่ละn ส่วนSieveเตรียมตารางถึงN ทำเครื่องหมายเริ่มp*pและไม่เรียกว่าprime",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "HF p.1แนะนำSieve of Eratosthenes แต่ตัวอย่างสั้นในบทนี้ใช้trialdivisionและระบุว่าเป็นวิธีเสริม คนละalgorithm จำนวนเฉพาะต้องn>=2 ตรวจตัวหารถึงรากรวมขอบ ใช้d<=n/dหลีกเลี่ยงd*doverflowเมื่อช่วงใหญ่;ภายใต้จำนวนเต็มบวก"
+      }
+    },
+    {
+      "id": "ux09-q21",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: sourcef40\nmode=-f; n=40; if [[ $mode == -f ]]; then awk -v x=\"$n\" 'BEGIN{printf \"%.2f\",9*x/5+32}'; fi",
+      "reference": "temperature",
+      "explanation": "-fตามHFหมายถึงผลF — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux09-q21",
+      "answer": 104,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HF pp.1–2กำหนด-fแปลงCไปF และ-cแปลงFไปC ซึ่งเป็นconventionของงานนี้ไม่ใช่มาตรฐานทุกprogram H7ใช้opตามด้วย2operands ใช้awkเพื่อทศนิยม ตรวจmode,จำนวนและรูปแบบก่อนประเมิน ไม่ใช้eval"
+      }
+    },
+    {
+      "id": "ux09-q22",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: sourcec102\nawk 'BEGIN{printf \"%.2f\",(102.2-32)*5/9}'",
+      "reference": "temperature",
+      "explanation": "102.2Fเป็น39.00C — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux09-q22",
+      "answer": 39,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HF pp.1–2กำหนด-fแปลงCไปF และ-cแปลงFไปC ซึ่งเป็นconventionของงานนี้ไม่ใช่มาตรฐานทุกprogram H7ใช้opตามด้วย2operands ใช้awkเพื่อทศนิยม ตรวจmode,จำนวนและรูปแบบก่อนประเมิน ไม่ใช้eval"
+      }
+    },
+    {
+      "id": "ux09-q23",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: freezingpoint\nawk 'BEGIN{printf \"%.2f\",(32-32)*5/9}'",
+      "reference": "temperature",
+      "explanation": "32Fตรง0C — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux09-q23",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HF pp.1–2กำหนด-fแปลงCไปF และ-cแปลงFไปC ซึ่งเป็นconventionของงานนี้ไม่ใช่มาตรฐานทุกprogram H7ใช้opตามด้วย2operands ใช้awkเพื่อทศนิยม ตรวจmode,จำนวนและรูปแบบก่อนประเมิน ไม่ใช้eval"
+      }
+    },
+    {
+      "id": "ux09-q24",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: calculatorzero\ndiv(){ if [[ $2 == 0 ]]; then return 2; fi; awk -v a=\"$1\" -v b=\"$2\" 'BEGIN{print a/b}'; }; div 3 0; printf '%s' \"$?\"",
+      "reference": "temperature",
+      "explanation": "guardตัวหาร0คืนstatus2ไม่มีผลหาร — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux09-q24",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HF pp.1–2กำหนด-fแปลงCไปF และ-cแปลงFไปC ซึ่งเป็นconventionของงานนี้ไม่ใช่มาตรฐานทุกprogram H7ใช้opตามด้วย2operands ใช้awkเพื่อทศนิยม ตรวจmode,จำนวนและรูปแบบก่อนประเมิน ไม่ใช้eval"
+      }
+    },
+    {
+      "id": "ux09-q25",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: CกับFจุดเดียวกัน\nawk 'BEGIN{print 9*(-40)/5+32}'",
+      "reference": "temperature",
+      "explanation": "-40Cเท่ากับ-40F — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux09-q25",
+      "answer": -40,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HF pp.1–2กำหนด-fแปลงCไปF และ-cแปลงFไปC ซึ่งเป็นconventionของงานนี้ไม่ใช่มาตรฐานทุกprogram H7ใช้opตามด้วย2operands ใช้awkเพื่อทศนิยม ตรวจmode,จำนวนและรูปแบบก่อนประเมิน ไม่ใช้eval"
+      }
+    },
+    {
+      "id": "ux09-self5",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): ออกแบบCLIรับหลายอุณหภูมิตามHFและerrorที่เหมาะสม",
+      "reference": "temperature",
+      "explanation": "เก็บmodeก่อนshift วนค่าตรวจformatใช้realarithmeticพิมพ์สองตำแหน่ง",
+      "rubric": [
+        "เก็บmodeก่อนshift วนค่าตรวจformatใช้realarithmeticพิมพ์สองตำแหน่ง",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "HF pp.1–2กำหนด-fแปลงCไปF และ-cแปลงFไปC ซึ่งเป็นconventionของงานนี้ไม่ใช่มาตรฐานทุกprogram H7ใช้opตามด้วย2operands ใช้awkเพื่อทศนิยม ตรวจmode,จำนวนและรูปแบบก่อนประเมิน ไม่ใช้eval"
+      }
+    }
+  ]
+}

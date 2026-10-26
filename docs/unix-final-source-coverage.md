@@ -26,11 +26,11 @@ Originals are local-only, read-only files under the available `Final Unix Tools/
 ## Evidence rules and confirmed distinctions
 
 - VERIFIED source coverage means the original was inspected; it does not make its answer authoritative. Independently authored solutions are labelled throughout the lessons and banks.
-- HW_Array p.1: the displayed grades for 1..10 conflict with its own formula. Teach the formula-derived F,F,F,C,C,C,C,C,B,B; the N=20 instruction and N=10 sample are distinct.
+- HW_Array p.1: the displayed grades for 1..10 conflict with its own formula. Teach the formula-derived F,F,C,C,C,C,C,C,B,B; the N=20 instruction and N=10 sample are distinct.
 - Lect15 p.7 gives contradictory prose for `:=`; p.8 says `:?` only displays an error. Teach the Bash manual semantics: `:=` assigns only when unset/null; `:?` exits a noninteractive shell when the required value is absent. Interactive behavior differs.
 - Array p.15's single-element statement applies to an initially empty array, not to setting index100 on the previously populated array. Existing entries survive indexed assignment.
 - SedAwk p.25 mixes BRE/ERE spellings in its table. Use GNU grep/sed documentation and executed examples, not that table as an answer key.
-- H6's unquoted example produces nine arguments, not five fields. Quote name and date to represent five fields; use anonymous instructional values, never personal source records.
+- H6's unquoted example produces eight arguments, not five fields. Quote name and date to represent five fields; use anonymous instructional values, never personal source records.
 - Lect15 p.5 `2>&1` in a Usage example duplicates stderr onto stdout; it does not send the Usage message to stderr. Use `>&2`.
 - No separate Lecture14 original was found in the inspected source collection. Do not invent a lecture or page reference. Twelve lesson boundaries split verified topics for revision; they are not twelve claimed original lectures.
 

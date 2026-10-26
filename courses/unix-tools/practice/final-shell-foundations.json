@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "unix-tools-final-shell-foundations",
+  "title": "FINAL 01 — พื้นฐาน Shell Script (Shell Foundations)",
+  "questions": [
+    {
+      "id": "ux01-q01",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: สั่ง Bash โดยตรง\nbash -c 'printf Bash'",
+      "reference": "execution",
+      "explanation": "bash -c เลือก Bash โดยตรง — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q01",
+      "choices": [
+        {
+          "id": "a",
+          "text": "sh เสมอ"
+        },
+        {
+          "id": "b",
+          "text": "ไม่มี stdout"
+        },
+        {
+          "id": "c",
+          "text": "Bash"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "id": "ux01-q02",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: สิทธิไฟล์กับการอ่าน\nprintf 'printf ok' > demo.sh; chmod 600 demo.sh; bash demo.sh",
+      "reference": "execution",
+      "explanation": "Bash อ่าน script ได้แม้ไม่มี execute bit — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q02",
+      "choices": [
+        {
+          "id": "a",
+          "text": "600"
+        },
+        {
+          "id": "b",
+          "text": "ok"
+        },
+        {
+          "id": "c",
+          "text": "Permission denied"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "id": "ux01-q03",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: Shebang ไม่ใช่คำสั่งพิมพ์\nprintf '#!/bin/bash\nprintf hello' > demo.sh; bash demo.sh",
+      "reference": "execution",
+      "explanation": "บรรทัด #! เป็น comment เมื่อ Bash อ่านไฟล์ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q03",
+      "choices": [
+        {
+          "id": "a",
+          "text": "hello"
+        },
+        {
+          "id": "b",
+          "text": "#!/bin/bash"
+        },
+        {
+          "id": "c",
+          "text": "ไม่มี stdout"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "id": "ux01-q04",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ตำแหน่ง script ใน PATH\nmkdir bin; printf '#!/bin/bash\nprintf found' > bin/study; chmod +x bin/study; PATH=\"$PWD/bin:$PATH\" study",
+      "reference": "execution",
+      "explanation": "PATH เพิ่ม directory ที่มีคำสั่ง executable — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q04",
+      "choices": [
+        {
+          "id": "a",
+          "text": "study"
+        },
+        {
+          "id": "b",
+          "text": "ไม่มี stdout"
+        },
+        {
+          "id": "c",
+          "text": "found"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "id": "ux01-q05",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: คืนสถานะ shell ลูก\nbash -c 'exit 7'; printf '%s' \"$?\"",
+      "reference": "execution",
+      "explanation": "status shell ลูกถูกส่งกลับ ไม่ใช่ stdout — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q05",
+      "answer": 7,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "ux01-self1",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): อธิบาย bash script.sh กับ ./script.sh และ sh script.sh ต่างกันอย่างไร",
+      "reference": "execution",
+      "explanation": "ระบุ interpreter, สิทธิอ่าน/execute, shebang และ PATH โดยไม่อ้างว่า sh คือ Bash เสมอ",
+      "rubric": [
+        "ระบุ interpreter, สิทธิอ่าน/execute, shebang และ PATH โดยไม่อ้างว่า sh คือ Bash เสมอ",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ]
+    }
+  ]
+}

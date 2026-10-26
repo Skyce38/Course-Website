@@ -1,6 +1,6 @@
 const fs=require('fs'),assert=require('assert/strict'),vm=require('vm'),C=require('../assets/practice-contract.js'),E=require('../assets/exam-contract.js'),I=require('../assets/insights-contract.js');
 const manifest=I.validate(require('../assets/insights-banks.json')),catalog=require('../catalog.json');
-assert.equal(manifest.lessons.length,25);assert.equal(manifest.lessons.reduce((n,l)=>n+l.bank.data.questions.length,0),750);
+assert.equal(manifest.lessons.length,require('./lessons.json').length);const legacy=manifest.lessons.filter(l=>l.course!=='unix-tools');assert.equal(legacy.length,25);assert.equal(legacy.reduce((n,l)=>n+l.bank.data.questions.length,0),750);
 for(const l of manifest.lessons){const r=catalog.resources.find(r=>r.id===l.id);assert.equal(l.reader,r.reader);assert.equal(l.title,r.title);const html=fs.readFileSync(l.reader,'utf8');assert.deepEqual(l.bank,JSON.parse(html.match(/class="exam-data">([\s\S]*?)<\/script>/)[1]));for(const t of l.bank.topics)assert.ok(html.includes('id="'+t.id+'"'));}
 const stack=manifest.lessons.find(l=>l.id==='oop-python-stack'),knn=manifest.lessons.find(l=>l.id==='artificial-intelligence-final-knn'),base=l=>({...l.bank.data,revision:l.practiceRevision,questions:l.bank.data.questions.filter(q=>l.practiceIds.includes(q.id))});
 function answers(data,wrong=[]){return Object.fromEntries(data.questions.map((q,index)=>[q.id,{draft:q.type==='choice'?(wrong.includes(index)?q.choices.find(c=>c.id!==q.answer).id:q.answer):q.type==='numeric'?String(q.answer+(wrong.includes(index)?1000000:0)):'คำอธิบายที่ประเมินเอง',submitted:true,rating:q.type==='self'?'revisit':null}]))}
@@ -80,7 +80,7 @@ for(const l of manifest.lessons.filter(l=>l.bank.history?.length)){
  const token='current-revision-two',old=l.bank.history[0],oldToken='retained-old-revision',config={version:1,revision:data.revision,sessions:[{token,mode:'mock',topic:'all',count:'full',ids:data.questions.map(q=>q.id)},{token:oldToken,revision:old.data.revision,mode:'mock',topic:'all',count:'full',ids:old.data.questions.map(q=>q.id)}]};
  x=inspect({[I.prefix.config+l.id]:JSON.stringify(config),[I.prefix.run+l.id+':'+token]:JSON.stringify(state(data,edited,[{at:100,responses:correct}]))});assert.equal(x.stats.total,data.questions.filter(q=>q.type!=='self').length);assert.equal(x.stats.accuracy,1);assert.equal(x.stats.revisit,data.questions.filter(q=>q.type==='self').length-1);assert.equal(x.result.excluded.archived,1);assert.ok(!x.calls.includes(I.prefix.run+l.id+':'+oldToken));
 }
-assert.match(fs.readFileSync('insights.html','utf8'),/insights-contract\.js\?v=phase11-1-counting-1/,'Invalidate the changed dashboard contract, not unrelated shared assets');
+assert.match(fs.readFileSync('insights.html','utf8'),/insights-contract\.js\?v=phase12-unix-1/,'Invalidate the changed dashboard contract, not unrelated shared assets');
 // Unsupported, duplicate-ID or missing-ID configurations never supply observations.
 for(const s of [{...session,ids:[session.ids[0],session.ids[0]]},{...session,ids:session.ids.slice(1)},{...session,revision:999}]){x=inspect({[configKey]:JSON.stringify({version:1,revision:stack.bank.data.revision,sessions:[s]}),[examKey]:JSON.stringify(state(subset,ea))});assert.equal(x.stats.total,0)}
 // Opt-in read-only preference application suppresses legacy migration and explicit UI writes.

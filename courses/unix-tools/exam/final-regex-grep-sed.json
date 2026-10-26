@@ -1,0 +1,508 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "unix-tools-final-regex-grep-sed",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "ux11-q06",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: นับบรรทัดไม่ใช่matches\nprintf 'aa a\na\n' | grep -c a",
+      "reference": "grep",
+      "explanation": "สองบรรทัดmatchแม้มีหลายa — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q06",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "grepเลือกบรรทัดที่matchที่ใดก็ได้เว้นแต่ใส่anchors -xบังคับทั้งบรรทัด -Fใช้fixedstrings -cนับmatchinglinesไม่ใช่จำนวนmatches -oพิมพ์matchesทีละตัว status0พบ1ไม่พบและ2เป็นerrorในGNUgrep ปกติ; -qอาจคืน0เมื่อพบแม้อีกไฟล์error"
+      }
+    },
+    {
+      "id": "ux11-q07",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: fixedstring\nprintf 'a.b\naxb\n' | grep -Fc 'a.b'",
+      "reference": "grep",
+      "explanation": "-Fทำจุดเป็นliteral — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q07",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "grepเลือกบรรทัดที่matchที่ใดก็ได้เว้นแต่ใส่anchors -xบังคับทั้งบรรทัด -Fใช้fixedstrings -cนับmatchinglinesไม่ใช่จำนวนmatches -oพิมพ์matchesทีละตัว status0พบ1ไม่พบและ2เป็นerrorในGNUgrep ปกติ; -qอาจคืน0เมื่อพบแม้อีกไฟล์error"
+      }
+    },
+    {
+      "id": "ux11-q08",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: grepไม่พบstatus\nprintf 'red\n' | grep blue; printf '%s' \"$?\"",
+      "reference": "grep",
+      "explanation": "ไม่พบให้1 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q08",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "grepเลือกบรรทัดที่matchที่ใดก็ได้เว้นแต่ใส่anchors -xบังคับทั้งบรรทัด -Fใช้fixedstrings -cนับmatchinglinesไม่ใช่จำนวนmatches -oพิมพ์matchesทีละตัว status0พบ1ไม่พบและ2เป็นerrorในGNUgrep ปกติ; -qอาจคืน0เมื่อพบแม้อีกไฟล์error"
+      }
+    },
+    {
+      "id": "ux11-q09",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: grepไฟล์หายstatus\ngrep x missing 2>/dev/null; printf '%s' \"$?\"",
+      "reference": "grep",
+      "explanation": "GNUgreperrorให้2 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q09",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "grepเลือกบรรทัดที่matchที่ใดก็ได้เว้นแต่ใส่anchors -xบังคับทั้งบรรทัด -Fใช้fixedstrings -cนับmatchinglinesไม่ใช่จำนวนmatches -oพิมพ์matchesทีละตัว status0พบ1ไม่พบและ2เป็นerrorในGNUgrep ปกติ; -qอาจคืน0เมื่อพบแม้อีกไฟล์error"
+      }
+    },
+    {
+      "id": "ux11-q10",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: wholeline\nprintf 'a\nba\nab\n' | grep -xc a",
+      "reference": "grep",
+      "explanation": "-xรับเฉพาะบรรทัดa — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q10",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "grepเลือกบรรทัดที่matchที่ใดก็ได้เว้นแต่ใส่anchors -xบังคับทั้งบรรทัด -Fใช้fixedstrings -cนับmatchinglinesไม่ใช่จำนวนmatches -oพิมพ์matchesทีละตัว status0พบ1ไม่พบและ2เป็นerrorในGNUgrep ปกติ; -qอาจคืน0เมื่อพบแม้อีกไฟล์error"
+      }
+    },
+    {
+      "id": "ux11-self2",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): ออกแบบแยกfound/notfound/errorและliteralpattern",
+      "reference": "grep",
+      "explanation": "ตรวจสามstatusและใช้-Fเมื่อผู้ใช้ให้ข้อความไม่ใช่regex",
+      "rubric": [
+        "ตรวจสามstatusและใช้-Fเมื่อผู้ใช้ให้ข้อความไม่ใช่regex",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "grepเลือกบรรทัดที่matchที่ใดก็ได้เว้นแต่ใส่anchors -xบังคับทั้งบรรทัด -Fใช้fixedstrings -cนับmatchinglinesไม่ใช่จำนวนmatches -oพิมพ์matchesทีละตัว status0พบ1ไม่พบและ2เป็นerrorในGNUgrep ปกติ; -qอาจคืน0เมื่อพบแม้อีกไฟล์error"
+      }
+    },
+    {
+      "id": "ux11-q11",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: แทนmatchแรก\nprintf 'foo foo\n' | sed 's/foo/bar/'",
+      "reference": "sed-substitute",
+      "explanation": "ไม่gจึงครั้งแรก — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q11",
+      "choices": [
+        {
+          "id": "a",
+          "text": "foo bar"
+        },
+        {
+          "id": "b",
+          "text": "bar foo"
+        },
+        {
+          "id": "c",
+          "text": "bar bar"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "sed s/pattern/replacement/แทนmatchแรกของแต่ละบรรทัด gแทนทุกmatch &ในreplacementคือmatchทั้งหมด \\1คือcapture ใช้-Eเมื่อใช้ERE คำสั่งอ่านstdinและพิมพ์stdoutไม่ได้แก้ไฟล์ต้นฉบับโดยปริยาย"
+      }
+    },
+    {
+      "id": "ux11-q12",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: แทนทุกmatch\nprintf 'foo foo\n' | sed 's/foo/bar/g'",
+      "reference": "sed-substitute",
+      "explanation": "gแทนสองmatch — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q12",
+      "choices": [
+        {
+          "id": "a",
+          "text": "bar bar"
+        },
+        {
+          "id": "b",
+          "text": "bar foo"
+        },
+        {
+          "id": "c",
+          "text": "foo bar"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "sed s/pattern/replacement/แทนmatchแรกของแต่ละบรรทัด gแทนทุกmatch &ในreplacementคือmatchทั้งหมด \\1คือcapture ใช้-Eเมื่อใช้ERE คำสั่งอ่านstdinและพิมพ์stdoutไม่ได้แก้ไฟล์ต้นฉบับโดยปริยาย"
+      }
+    },
+    {
+      "id": "ux11-q13",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: replacementampersand\nprintf 'abc\n' | sed 's/b/[&]/'",
+      "reference": "sed-substitute",
+      "explanation": "&คืนmatchb — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q13",
+      "choices": [
+        {
+          "id": "a",
+          "text": "a[&]c"
+        },
+        {
+          "id": "b",
+          "text": "abc"
+        },
+        {
+          "id": "c",
+          "text": "a[b]c"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "sed s/pattern/replacement/แทนmatchแรกของแต่ละบรรทัด gแทนทุกmatch &ในreplacementคือmatchทั้งหมด \\1คือcapture ใช้-Eเมื่อใช้ERE คำสั่งอ่านstdinและพิมพ์stdoutไม่ได้แก้ไฟล์ต้นฉบับโดยปริยาย"
+      }
+    },
+    {
+      "id": "ux11-q14",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: capturegroups\nprintf 'red-blue\\n' | sed -E 's/([a-z]+)-([a-z]+)/\\2:\\1/'",
+      "reference": "sed-substitute",
+      "explanation": "\\2คือblueและ\\1คือred — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q14",
+      "choices": [
+        {
+          "id": "a",
+          "text": "2:1"
+        },
+        {
+          "id": "b",
+          "text": "blue:red"
+        },
+        {
+          "id": "c",
+          "text": "red:blue"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "sed s/pattern/replacement/แทนmatchแรกของแต่ละบรรทัด gแทนทุกmatch &ในreplacementคือmatchทั้งหมด \\1คือcapture ใช้-Eเมื่อใช้ERE คำสั่งอ่านstdinและพิมพ์stdoutไม่ได้แก้ไฟล์ต้นฉบับโดยปริยาย"
+      }
+    },
+    {
+      "id": "ux11-q15",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: delimiterอื่น\nprintf '/a/b\n' | sed 's#/a#/x#'",
+      "reference": "sed-substitute",
+      "explanation": "#เป็นdelimiterแทน/ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q15",
+      "choices": [
+        {
+          "id": "a",
+          "text": "/x/b"
+        },
+        {
+          "id": "b",
+          "text": "/a/x"
+        },
+        {
+          "id": "c",
+          "text": "x/b"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "sed s/pattern/replacement/แทนmatchแรกของแต่ละบรรทัด gแทนทุกmatch &ในreplacementคือmatchทั้งหมด \\1คือcapture ใช้-Eเมื่อใช้ERE คำสั่งอ่านstdinและพิมพ์stdoutไม่ได้แก้ไฟล์ต้นฉบับโดยปริยาย"
+      }
+    },
+    {
+      "id": "ux11-self3",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): อธิบายreplacement&กับcaptureและเลือกdelimiter",
+      "reference": "sed-substitute",
+      "explanation": "แยกpattern/replacement/shellquotingและทดสอบก่อนแก้ไฟล์",
+      "rubric": [
+        "แยกpattern/replacement/shellquotingและทดสอบก่อนแก้ไฟล์",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "sed s/pattern/replacement/แทนmatchแรกของแต่ละบรรทัด gแทนทุกmatch &ในreplacementคือmatchทั้งหมด \\1คือcapture ใช้-Eเมื่อใช้ERE คำสั่งอ่านstdinและพิมพ์stdoutไม่ได้แก้ไฟล์ต้นฉบับโดยปริยาย"
+      }
+    },
+    {
+      "id": "ux11-q16",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: พิมพ์ช่วง\nprintf 'A\nB\nC\n' | sed -n '1,2p'",
+      "reference": "sed-address",
+      "explanation": "-nปิดprintเดิมแล้วเลือก1ถึง2 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q16",
+      "choices": [
+        {
+          "id": "a",
+          "text": "A\nB\nC"
+        },
+        {
+          "id": "b",
+          "text": "B"
+        },
+        {
+          "id": "c",
+          "text": "A\nB"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "sedปกติพิมพ์patternspaceท้ายรอบ; -nปิดautomaticprint pพิมพ์เอง dลบบรรทัดและเริ่มรอบถัดไป ใช้1,2pเลือกช่วงและ$แทนบรรทัดท้าย ลบเนื้อหาด้วยs/^.*$//ยังเหลือnewline ต่างจากd"
+      }
+    },
+    {
+      "id": "ux11-q17",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ลบหัว\nprintf 'head\ndata\n' | sed '1d'",
+      "reference": "sed-address",
+      "explanation": "1dลบบรรทัด1 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q17",
+      "choices": [
+        {
+          "id": "a",
+          "text": "head\ndata"
+        },
+        {
+          "id": "b",
+          "text": "data"
+        },
+        {
+          "id": "c",
+          "text": "head"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "sedปกติพิมพ์patternspaceท้ายรอบ; -nปิดautomaticprint pพิมพ์เอง dลบบรรทัดและเริ่มรอบถัดไป ใช้1,2pเลือกช่วงและ$แทนบรรทัดท้าย ลบเนื้อหาด้วยs/^.*$//ยังเหลือnewline ต่างจากd"
+      }
+    },
+    {
+      "id": "ux11-q18",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: printซ้ำ\nprintf 'A\n' | sed 'p'",
+      "reference": "sed-address",
+      "explanation": "pหนึ่งและautomaticprintอีกหนึ่ง — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q18",
+      "choices": [
+        {
+          "id": "a",
+          "text": "A\nA"
+        },
+        {
+          "id": "b",
+          "text": "A"
+        },
+        {
+          "id": "c",
+          "text": "ไม่มี stdout"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "sedปกติพิมพ์patternspaceท้ายรอบ; -nปิดautomaticprint pพิมพ์เอง dลบบรรทัดและเริ่มรอบถัดไป ใช้1,2pเลือกช่วงและ$แทนบรรทัดท้าย ลบเนื้อหาด้วยs/^.*$//ยังเหลือnewline ต่างจากd"
+      }
+    },
+    {
+      "id": "ux11-q19",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: lastline\nprintf 'A\nB\nC\n' | sed -n '$p'",
+      "reference": "sed-address",
+      "explanation": "$เลือกบรรทัดท้าย — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q19",
+      "choices": [
+        {
+          "id": "a",
+          "text": "A"
+        },
+        {
+          "id": "b",
+          "text": "B"
+        },
+        {
+          "id": "c",
+          "text": "C"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "sedปกติพิมพ์patternspaceท้ายรอบ; -nปิดautomaticprint pพิมพ์เอง dลบบรรทัดและเริ่มรอบถัดไป ใช้1,2pเลือกช่วงและ$แทนบรรทัดท้าย ลบเนื้อหาด้วยs/^.*$//ยังเหลือnewline ต่างจากd"
+      }
+    },
+    {
+      "id": "ux11-q20",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ลบเนื้อหายังมีบรรทัด\nprintf 'A\nB\n' | sed 's/.*//' | wc -l",
+      "reference": "sed-address",
+      "explanation": "สองemptylinesยังมีnewline — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q20",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "sedปกติพิมพ์patternspaceท้ายรอบ; -nปิดautomaticprint pพิมพ์เอง dลบบรรทัดและเริ่มรอบถัดไป ใช้1,2pเลือกช่วงและ$แทนบรรทัดท้าย ลบเนื้อหาด้วยs/^.*$//ยังเหลือnewline ต่างจากd"
+      }
+    },
+    {
+      "id": "ux11-self4",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): อธิบายs/.*//กับdและการพิมพ์ซ้ำ",
+      "reference": "sed-address",
+      "explanation": "แยกemptylineกับremovedlineและtraceautomaticprint",
+      "rubric": [
+        "แยกemptylineกับremovedlineและtraceautomaticprint",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "sedปกติพิมพ์patternspaceท้ายรอบ; -nปิดautomaticprint pพิมพ์เอง dลบบรรทัดและเริ่มรอบถัดไป ใช้1,2pเลือกช่วงและ$แทนบรรทัดท้าย ลบเนื้อหาด้วยs/^.*$//ยังเหลือnewline ต่างจากd"
+      }
+    },
+    {
+      "id": "ux11-q21",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ไม่แก้ต้นฉบับโดยdefault\nprintf foo >f; sed 's/foo/bar/' f >/dev/null; cat f",
+      "reference": "editing-safety",
+      "explanation": "sedstdoutไม่แก้file — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q21",
+      "choices": [
+        {
+          "id": "a",
+          "text": "foo"
+        },
+        {
+          "id": "b",
+          "text": "bar"
+        },
+        {
+          "id": "c",
+          "text": "ว่าง"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "GNU sed-iแก้ไฟล์ผ่านไฟล์ชั่วคราวและrename ไม่เหมือนredirect>file BSDsedรูปแบบbackupต่างกัน -iกับ-nที่ไม่มีpอาจทำไฟล์ว่าง ทดสอบstdoutก่อนและสำรองข้อมูล ห้ามรันคำสั่งแก้ไฟล์จริงจากโจทย์โดยไม่ตรวจ"
+      }
+    },
+    {
+      "id": "ux11-q22",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: GNUbackup\nprintf foo >f; sed -i.bak 's/foo/bar/' f; cat f.bak",
+      "reference": "editing-safety",
+      "explanation": "backupเก็บเดิม — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q22",
+      "choices": [
+        {
+          "id": "a",
+          "text": "bar"
+        },
+        {
+          "id": "b",
+          "text": "ไม่มี stdout"
+        },
+        {
+          "id": "c",
+          "text": "foo"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "GNU sed-iแก้ไฟล์ผ่านไฟล์ชั่วคราวและrename ไม่เหมือนredirect>file BSDsedรูปแบบbackupต่างกัน -iกับ-nที่ไม่มีpอาจทำไฟล์ว่าง ทดสอบstdoutก่อนและสำรองข้อมูล ห้ามรันคำสั่งแก้ไฟล์จริงจากโจทย์โดยไม่ตรวจ"
+      }
+    },
+    {
+      "id": "ux11-q23",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: อันตราย-n-i\nprintf 'foo\n' >f; sed -ni 's/foo/bar/' f; wc -c <f",
+      "reference": "editing-safety",
+      "explanation": "-nไม่pและ-iเขียนผลว่าง — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q23",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "GNU sed-iแก้ไฟล์ผ่านไฟล์ชั่วคราวและrename ไม่เหมือนredirect>file BSDsedรูปแบบbackupต่างกัน -iกับ-nที่ไม่มีpอาจทำไฟล์ว่าง ทดสอบstdoutก่อนและสำรองข้อมูล ห้ามรันคำสั่งแก้ไฟล์จริงจากโจทย์โดยไม่ตรวจ"
+      }
+    },
+    {
+      "id": "ux11-q24",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: deleteต่างempty\nprintf 'A\nB\n' | sed '/./d' | wc -l",
+      "reference": "editing-safety",
+      "explanation": "dลบบรรทัดทั้งหมด — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q24",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "GNU sed-iแก้ไฟล์ผ่านไฟล์ชั่วคราวและrename ไม่เหมือนredirect>file BSDsedรูปแบบbackupต่างกัน -iกับ-nที่ไม่มีpอาจทำไฟล์ว่าง ทดสอบstdoutก่อนและสำรองข้อมูล ห้ามรันคำสั่งแก้ไฟล์จริงจากโจทย์โดยไม่ตรวจ"
+      }
+    },
+    {
+      "id": "ux11-q25",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: rangecharASCII\nprintf 'A\nz\n7\n' | grep -Ec '^[[:digit:]]$'",
+      "reference": "editing-safety",
+      "explanation": "LC_ALL=Cมี7ที่เป็นdigit — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q25",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "GNU sed-iแก้ไฟล์ผ่านไฟล์ชั่วคราวและrename ไม่เหมือนredirect>file BSDsedรูปแบบbackupต่างกัน -iกับ-nที่ไม่มีpอาจทำไฟล์ว่าง ทดสอบstdoutก่อนและสำรองข้อมูล ห้ามรันคำสั่งแก้ไฟล์จริงจากโจทย์โดยไม่ตรวจ"
+      }
+    },
+    {
+      "id": "ux11-self5",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): ออกแบบworkflowแก้ไฟล์ด้วยsedอย่างปลอดภัยข้ามระบบ",
+      "reference": "editing-safety",
+      "explanation": "dryrun,backup,ระบุimplementationและตรวจผลก่อนreplaceโดยไม่ใช้catf>f",
+      "rubric": [
+        "dryrun,backup,ระบุimplementationและตรวจผลก่อนreplaceโดยไม่ใช้catf>f",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "GNU sed-iแก้ไฟล์ผ่านไฟล์ชั่วคราวและrename ไม่เหมือนredirect>file BSDsedรูปแบบbackupต่างกัน -iกับ-nที่ไม่มีpอาจทำไฟล์ว่าง ทดสอบstdoutก่อนและสำรองข้อมูล ห้ามรันคำสั่งแก้ไฟล์จริงจากโจทย์โดยไม่ตรวจ"
+      }
+    }
+  ]
+}

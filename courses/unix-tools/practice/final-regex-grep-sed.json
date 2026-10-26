@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "unix-tools-final-regex-grep-sed",
+  "title": "FINAL 11 — Regex, grep และ sed",
+  "questions": [
+    {
+      "id": "ux11-q01",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: EREplus\nprintf 'a\naa\nb\n' | grep -Ec '^a+$'",
+      "reference": "regex-glob",
+      "explanation": "a+ต้องมีaอย่างน้อยหนึ่ง — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q01",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "ux11-q02",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: BREliteralplus\nprintf 'a+\na\n' | grep -c '^a+$'",
+      "reference": "regex-glob",
+      "explanation": "BRE+ไม่มีescapeเป็นliteralในGNUgrep — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q02",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "ux11-q03",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: anchorชื่อไฟล์\nprintf 'x.txt\nxatxt\n' | grep -Ec '^.*\\.txt$'",
+      "reference": "regex-glob",
+      "explanation": "\\.จับจุดจริง — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q03",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "ux11-q04",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: regexstarzero\nprintf 'ac\nabc\nabbc\n' | grep -Ec '^ab*c$'",
+      "reference": "regex-glob",
+      "explanation": "b*รับศูนย์ขึ้นไป — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q04",
+      "answer": 3,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "ux11-q05",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: shellglobต่างregex\ncase file.txt in *.txt) printf glob;; esac",
+      "reference": "regex-glob",
+      "explanation": "*ในcaseแทนสายอักขระได้ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q05",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่มี stdout"
+        },
+        {
+          "id": "b",
+          "text": "glob"
+        },
+        {
+          "id": "c",
+          "text": "regex"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "id": "ux11-self1",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): เปรียบเทียบ*.txtกับregexที่จับนามสกุลtxtทั้งสาย",
+      "reference": "regex-glob",
+      "explanation": "ระบุglobกับregex^.*\\.txt$และquoteเพื่อไม่ให้shellขยายก่อน",
+      "rubric": [
+        "ระบุglobกับregex^.*\\.txt$และquoteเพื่อไม่ให้shellขยายก่อน",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ]
+    }
+  ]
+}

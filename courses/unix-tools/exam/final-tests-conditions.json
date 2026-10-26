@@ -1,0 +1,424 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "unix-tools-final-tests-conditions",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "ux05-q06",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: numeric equality\n[ 01 -eq 1 ]; printf '%s' \"$?\"",
+      "reference": "numbers-strings",
+      "explanation": "integer test มองสองค่าตรงกัน — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux05-q06",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ -eq/-ne/-lt/-le/-gt/-ge กับจำนวนเต็ม; =/!= เทียบข้อความ; -z/-n ตรวจความยาว กรณี [[ ]] การ >/< เทียบ string ตาม locale ไม่ใช่ numerical order ใช้ LC_ALL=C เมื่อผลต้องแน่นอน"
+      }
+    },
+    {
+      "id": "ux05-q07",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: string equality\n[ 01 = 1 ]; printf '%s' \"$?\"",
+      "reference": "numbers-strings",
+      "explanation": "ข้อความต่างรูปกัน — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux05-q07",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ -eq/-ne/-lt/-le/-gt/-ge กับจำนวนเต็ม; =/!= เทียบข้อความ; -z/-n ตรวจความยาว กรณี [[ ]] การ >/< เทียบ string ตาม locale ไม่ใช่ numerical order ใช้ LC_ALL=C เมื่อผลต้องแน่นอน"
+      }
+    },
+    {
+      "id": "ux05-q08",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ว่างกับช่องว่าง\nx=' '; [ -z \"$x\" ]; printf '%s' \"$?\"",
+      "reference": "numbers-strings",
+      "explanation": "ช่องว่างหนึ่งตัวไม่ใช่ zero length — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux05-q08",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ -eq/-ne/-lt/-le/-gt/-ge กับจำนวนเต็ม; =/!= เทียบข้อความ; -z/-n ตรวจความยาว กรณี [[ ]] การ >/< เทียบ string ตาม locale ไม่ใช่ numerical order ใช้ LC_ALL=C เมื่อผลต้องแน่นอน"
+      }
+    },
+    {
+      "id": "ux05-q09",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: lexicographic comparison\n[[ 9 > 10 ]]; printf '%s' \"$?\"",
+      "reference": "numbers-strings",
+      "explanation": "LC_ALL=C เรียง string9หลัง1 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux05-q09",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ -eq/-ne/-lt/-le/-gt/-ge กับจำนวนเต็ม; =/!= เทียบข้อความ; -z/-n ตรวจความยาว กรณี [[ ]] การ >/< เทียบ string ตาม locale ไม่ใช่ numerical order ใช้ LC_ALL=C เมื่อผลต้องแน่นอน"
+      }
+    },
+    {
+      "id": "ux05-q10",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: numeric less equal\n[ 10 -le 10 ]; printf '%s' \"$?\"",
+      "reference": "numbers-strings",
+      "explanation": "-le รวมเท่ากัน — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux05-q10",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ -eq/-ne/-lt/-le/-gt/-ge กับจำนวนเต็ม; =/!= เทียบข้อความ; -z/-n ตรวจความยาว กรณี [[ ]] การ >/< เทียบ string ตาม locale ไม่ใช่ numerical order ใช้ LC_ALL=C เมื่อผลต้องแน่นอน"
+      }
+    },
+    {
+      "id": "ux05-self2",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): อธิบายความต่าง string equality กับ integer equality",
+      "reference": "numbers-strings",
+      "explanation": "ยกตัวอย่าง 01 กับ1 และระบุว่าตรวจรูปแบบ input ก่อน test",
+      "rubric": [
+        "ยกตัวอย่าง 01 กับ1 และระบุว่าตรวจรูปแบบ input ก่อน test",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ใช้ -eq/-ne/-lt/-le/-gt/-ge กับจำนวนเต็ม; =/!= เทียบข้อความ; -z/-n ตรวจความยาว กรณี [[ ]] การ >/< เทียบ string ตาม locale ไม่ใช่ numerical order ใช้ LC_ALL=C เมื่อผลต้องแน่นอน"
+      }
+    },
+    {
+      "id": "ux05-q11",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: รอยต่อ80\ns=80; if ((s>=80)); then printf A; elif ((s>=70)); then printf B; else printf C; fi",
+      "reference": "branching",
+      "explanation": "แขนแรกตรงที่80 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux05-q11",
+      "choices": [
+        {
+          "id": "a",
+          "text": "C"
+        },
+        {
+          "id": "b",
+          "text": "A"
+        },
+        {
+          "id": "c",
+          "text": "B"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "if ตรวจ status คำสั่ง เลือกแขนแรกที่สำเร็จ จากนั้นไม่ทดสอบ elif ถัดไป Grade thresholds ควรเรียงจากสูงลงต่ำและตรวจช่วง0..100ก่อน ต้องตกลงเครื่องหมายเท่ากับชัดเจน"
+      }
+    },
+    {
+      "id": "ux05-q12",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: เลือกแขนแรก\nn=9; if ((n>0)); then printf positive; elif ((n>5)); then printf large; fi",
+      "reference": "branching",
+      "explanation": "elifไม่ถูกประเมินเมื่อแขนแรกผ่าน — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux05-q12",
+      "choices": [
+        {
+          "id": "a",
+          "text": "positive"
+        },
+        {
+          "id": "b",
+          "text": "large"
+        },
+        {
+          "id": "c",
+          "text": "positivelarge"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "if ตรวจ status คำสั่ง เลือกแขนแรกที่สำเร็จ จากนั้นไม่ทดสอบ elif ถัดไป Grade thresholds ควรเรียงจากสูงลงต่ำและตรวจช่วง0..100ก่อน ต้องตกลงเครื่องหมายเท่ากับชัดเจน"
+      }
+    },
+    {
+      "id": "ux05-q13",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: if ไม่มีแขนตรง\nif false; then printf wrong; fi; printf '%s' \"$?\"",
+      "reference": "branching",
+      "explanation": "if ไม่มี conditiontrue และไม่มีelseคืน0 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux05-q13",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "if ตรวจ status คำสั่ง เลือกแขนแรกที่สำเร็จ จากนั้นไม่ทดสอบ elif ถัดไป Grade thresholds ควรเรียงจากสูงลงต่ำและตรวจช่วง0..100ก่อน ต้องตกลงเครื่องหมายเท่ากับชัดเจน"
+      }
+    },
+    {
+      "id": "ux05-q14",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: nested condition\nn=4; if ((n>0)); then if ((n%2==0)); then printf even; fi; fi",
+      "reference": "branching",
+      "explanation": "บวกและคู่จึงพิมพ์ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux05-q14",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่มี stdout"
+        },
+        {
+          "id": "b",
+          "text": "even"
+        },
+        {
+          "id": "c",
+          "text": "odd"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "if ตรวจ status คำสั่ง เลือกแขนแรกที่สำเร็จ จากนั้นไม่ทดสอบ elif ถัดไป Grade thresholds ควรเรียงจากสูงลงต่ำและตรวจช่วง0..100ก่อน ต้องตกลงเครื่องหมายเท่ากับชัดเจน"
+      }
+    },
+    {
+      "id": "ux05-q15",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: validation ก่อนเกรด\ns=101; if ((s<0 || s>100)); then printf invalid; elif ((s>=80)); then printf A; fi",
+      "reference": "branching",
+      "explanation": "ปฏิเสธค่าผิดช่วงก่อนคิดเกรด — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux05-q15",
+      "choices": [
+        {
+          "id": "a",
+          "text": "invalid"
+        },
+        {
+          "id": "b",
+          "text": "A"
+        },
+        {
+          "id": "c",
+          "text": "101"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "if ตรวจ status คำสั่ง เลือกแขนแรกที่สำเร็จ จากนั้นไม่ทดสอบ elif ถัดไป Grade thresholds ควรเรียงจากสูงลงต่ำและตรวจช่วง0..100ก่อน ต้องตกลงเครื่องหมายเท่ากับชัดเจน"
+      }
+    },
+    {
+      "id": "ux05-self3",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): ออกแบบทดสอบค่า79,80,100และค่าผิดช่วง",
+      "reference": "branching",
+      "explanation": "ระบุ input validation และคาดหมายแต่ละขอบโดยไม่อ้างว่าเป็นเกรดมหาวิทยาลัยจริง",
+      "rubric": [
+        "ระบุ input validation และคาดหมายแต่ละขอบโดยไม่อ้างว่าเป็นเกรดมหาวิทยาลัยจริง",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "if ตรวจ status คำสั่ง เลือกแขนแรกที่สำเร็จ จากนั้นไม่ทดสอบ elif ถัดไป Grade thresholds ควรเรียงจากสูงลงต่ำและตรวจช่วง0..100ก่อน ต้องตกลงเครื่องหมายเท่ากับชัดเจน"
+      }
+    },
+    {
+      "id": "ux05-q16",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ไฟล์ว่าง\ntouch empty; [ -s empty ]; printf '%s' \"$?\"",
+      "reference": "files",
+      "explanation": "มีไฟล์แต่ขนาด0 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux05-q16",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "-e มีอยู่ -f ไฟล์ธรรมดา -d directory -s ขนาดมากกว่า0; -r/-w/-x ตรวจตามสิทธิที่ process เห็น ไม่ใช่ตัดสิน owner bits อย่างเดียว root/ACL อาจต่างกัน -ef ตรวจว่าอ้างไฟล์เดียวกัน ตรวจไฟล์ล่วงหน้าไม่ป้องกัน race ระหว่างตรวจและเปิด"
+      }
+    },
+    {
+      "id": "ux05-q17",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: directory ไม่ใช่ regular file\nmkdir d; [ -f d ]; printf '%s' \"$?\"",
+      "reference": "files",
+      "explanation": "-f ไม่รับ directory — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux05-q17",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "-e มีอยู่ -f ไฟล์ธรรมดา -d directory -s ขนาดมากกว่า0; -r/-w/-x ตรวจตามสิทธิที่ process เห็น ไม่ใช่ตัดสิน owner bits อย่างเดียว root/ACL อาจต่างกัน -ef ตรวจว่าอ้างไฟล์เดียวกัน ตรวจไฟล์ล่วงหน้าไม่ป้องกัน race ระหว่างตรวจและเปิด"
+      }
+    },
+    {
+      "id": "ux05-q18",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: hard link identity\nprintf x > a; ln a b; [ a -ef b ]; printf '%s' \"$?\"",
+      "reference": "files",
+      "explanation": "สองชื่ออ้าง inode เดียวกัน — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux05-q18",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "-e มีอยู่ -f ไฟล์ธรรมดา -d directory -s ขนาดมากกว่า0; -r/-w/-x ตรวจตามสิทธิที่ process เห็น ไม่ใช่ตัดสิน owner bits อย่างเดียว root/ACL อาจต่างกัน -ef ตรวจว่าอ้างไฟล์เดียวกัน ตรวจไฟล์ล่วงหน้าไม่ป้องกัน race ระหว่างตรวจและเปิด"
+      }
+    },
+    {
+      "id": "ux05-q19",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: symbolic link เสีย\nln -s missing link; [ -e link ]; printf '%s' \"$?\"",
+      "reference": "files",
+      "explanation": "-e ตาม link แล้วไม่พบเป้าหมาย — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux05-q19",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "-e มีอยู่ -f ไฟล์ธรรมดา -d directory -s ขนาดมากกว่า0; -r/-w/-x ตรวจตามสิทธิที่ process เห็น ไม่ใช่ตัดสิน owner bits อย่างเดียว root/ACL อาจต่างกัน -ef ตรวจว่าอ้างไฟล์เดียวกัน ตรวจไฟล์ล่วงหน้าไม่ป้องกัน race ระหว่างตรวจและเปิด"
+      }
+    },
+    {
+      "id": "ux05-q20",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ตรวจชนิด symlink\nln -s missing link; [ -L link ]; printf '%s' \"$?\"",
+      "reference": "files",
+      "explanation": "-L ตรวจ link เองจึงยังจริง — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux05-q20",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "-e มีอยู่ -f ไฟล์ธรรมดา -d directory -s ขนาดมากกว่า0; -r/-w/-x ตรวจตามสิทธิที่ process เห็น ไม่ใช่ตัดสิน owner bits อย่างเดียว root/ACL อาจต่างกัน -ef ตรวจว่าอ้างไฟล์เดียวกัน ตรวจไฟล์ล่วงหน้าไม่ป้องกัน race ระหว่างตรวจและเปิด"
+      }
+    },
+    {
+      "id": "ux05-self4",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): อธิบาย -e,-f,-d,-s และข้อจำกัด time-of-check",
+      "reference": "files",
+      "explanation": "แยกชนิด/ขนาด/สิทธิและยังต้องจัดการ error ตอนเปิดจริง",
+      "rubric": [
+        "แยกชนิด/ขนาด/สิทธิและยังต้องจัดการ error ตอนเปิดจริง",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "-e มีอยู่ -f ไฟล์ธรรมดา -d directory -s ขนาดมากกว่า0; -r/-w/-x ตรวจตามสิทธิที่ process เห็น ไม่ใช่ตัดสิน owner bits อย่างเดียว root/ACL อาจต่างกัน -ef ตรวจว่าอ้างไฟล์เดียวกัน ตรวจไฟล์ล่วงหน้าไม่ป้องกัน race ระหว่างตรวจและเปิด"
+      }
+    },
+    {
+      "id": "ux05-q21",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: pattern RHS ไม่quote\nx=Alpha; [[ $x == A* ]]; printf '%s' \"$?\"",
+      "reference": "bash-conditions",
+      "explanation": "A* ตรงกับ Alpha — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux05-q21",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "[[ ]] เป็น Bash construct ไม่ทำ word splitting/pathname expansion ปกติใน operands `[[ $x == A* ]]` ใช้ pattern แต่ RHS ที่ quoteเป็น literal `[[ $x =~ regex ]]` ใช้ ERE; ถ้า quoteทั้ง regex จะเปลี่ยนความหมาย ห้ามสับสนกับ glob"
+      }
+    },
+    {
+      "id": "ux05-q22",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: literal RHS quote\nx=Alpha; [[ $x == 'A*' ]]; printf '%s' \"$?\"",
+      "reference": "bash-conditions",
+      "explanation": "quote ทำให้ * เป็น literal — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux05-q22",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "[[ ]] เป็น Bash construct ไม่ทำ word splitting/pathname expansion ปกติใน operands `[[ $x == A* ]]` ใช้ pattern แต่ RHS ที่ quoteเป็น literal `[[ $x =~ regex ]]` ใช้ ERE; ถ้า quoteทั้ง regex จะเปลี่ยนความหมาย ห้ามสับสนกับ glob"
+      }
+    },
+    {
+      "id": "ux05-q23",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ERE ทั้งสาย\nx=123x; [[ $x =~ ^[0-9]+$ ]]; printf '%s' \"$?\"",
+      "reference": "bash-conditions",
+      "explanation": "anchorไม่อนุญาต x — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux05-q23",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "[[ ]] เป็น Bash construct ไม่ทำ word splitting/pathname expansion ปกติใน operands `[[ $x == A* ]]` ใช้ pattern แต่ RHS ที่ quoteเป็น literal `[[ $x =~ regex ]]` ใช้ ERE; ถ้า quoteทั้ง regex จะเปลี่ยนความหมาย ห้ามสับสนกับ glob"
+      }
+    },
+    {
+      "id": "ux05-q24",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: regex ตัวแปรไม่quote\nr='^a+$'; x=aaa; [[ $x =~ $r ]]; printf '%s' \"$?\"",
+      "reference": "bash-conditions",
+      "explanation": "ERE a+ ตรงกับ aaa — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux05-q24",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "[[ ]] เป็น Bash construct ไม่ทำ word splitting/pathname expansion ปกติใน operands `[[ $x == A* ]]` ใช้ pattern แต่ RHS ที่ quoteเป็น literal `[[ $x =~ regex ]]` ใช้ ERE; ถ้า quoteทั้ง regex จะเปลี่ยนความหมาย ห้ามสับสนกับ glob"
+      }
+    },
+    {
+      "id": "ux05-q25",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: redirect ใน [ ]\na=z; b=target; [ \"$a\" > \"$b\" ]; [ -f target ]; printf '%s' \"$?\"",
+      "reference": "bash-conditions",
+      "explanation": "> สร้างtarget ไม่ใช่ string compare แบบ [[ ]] — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux05-q25",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "[[ ]] เป็น Bash construct ไม่ทำ word splitting/pathname expansion ปกติใน operands `[[ $x == A* ]]` ใช้ pattern แต่ RHS ที่ quoteเป็น literal `[[ $x =~ regex ]]` ใช้ ERE; ถ้า quoteทั้ง regex จะเปลี่ยนความหมาย ห้ามสับสนกับ glob"
+      }
+    },
+    {
+      "id": "ux05-self5",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): เปรียบเทียบ glob ใน == กับ regex ใน =~",
+      "reference": "bash-conditions",
+      "explanation": "ระบุ anchoring และผล quote RHS พร้อมแยก string/numeric",
+      "rubric": [
+        "ระบุ anchoring และผล quote RHS พร้อมแยก string/numeric",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "[[ ]] เป็น Bash construct ไม่ทำ word splitting/pathname expansion ปกติใน operands `[[ $x == A* ]]` ใช้ pattern แต่ RHS ที่ quoteเป็น literal `[[ $x =~ regex ]]` ใช้ ERE; ถ้า quoteทั้ง regex จะเปลี่ยนความหมาย ห้ามสับสนกับ glob"
+      }
+    }
+  ]
+}

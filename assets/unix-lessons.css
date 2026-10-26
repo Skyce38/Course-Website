@@ -1,0 +1,2 @@
+/* Shell whitespace is teaching content, including inside quoted strings. Unix only. */
+.shell-lesson .practice-mode legend,.shell-lesson .practice-option span{white-space:pre-wrap;tab-size:4;overflow-wrap:anywhere}

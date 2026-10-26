@@ -1,0 +1,472 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "unix-tools-final-arrays-statistics",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "ux10-q06",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: quotedarrayargs\na=('red blue' green); set -- \"${a[@]}\"; printf '%s' \"$#\"",
+      "reference": "iteration",
+      "explanation": "แต่ละสมาชิกเป็นหนึ่งargument — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux10-q06",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`\"${a[@]}\"`รักษาแต่ละสมาชิกและemptyสมาชิก `\"${a[*]}\"`รวมด้วยIFSตัวแรก `${!a[@]}`ให้indices `${#a[0]}`ให้ความยาวstringของสมาชิก0ไม่ใช่จำนวนสมาชิก `unset 'a[1]'`ต้องquoteเพื่อไม่ให้shellglobก่อน"
+      }
+    },
+    {
+      "id": "ux10-q07",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: arraystar\na=(red blue); IFS=:; printf '%s' \"${a[*]}\"",
+      "reference": "iteration",
+      "explanation": "รวมสมาชิกด้วยcolon — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux10-q07",
+      "choices": [
+        {
+          "id": "a",
+          "text": "red blue"
+        },
+        {
+          "id": "b",
+          "text": "redblue"
+        },
+        {
+          "id": "c",
+          "text": "red:blue"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`\"${a[@]}\"`รักษาแต่ละสมาชิกและemptyสมาชิก `\"${a[*]}\"`รวมด้วยIFSตัวแรก `${!a[@]}`ให้indices `${#a[0]}`ให้ความยาวstringของสมาชิก0ไม่ใช่จำนวนสมาชิก `unset 'a[1]'`ต้องquoteเพื่อไม่ให้shellglobก่อน"
+      }
+    },
+    {
+      "id": "ux10-q08",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: lengthสมาชิก\na=(hello x); printf '%s' \"${#a[0]}\"",
+      "reference": "iteration",
+      "explanation": "helloยาว5ไม่ใช่count2 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux10-q08",
+      "answer": 5,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`\"${a[@]}\"`รักษาแต่ละสมาชิกและemptyสมาชิก `\"${a[*]}\"`รวมด้วยIFSตัวแรก `${!a[@]}`ให้indices `${#a[0]}`ให้ความยาวstringของสมาชิก0ไม่ใช่จำนวนสมาชิก `unset 'a[1]'`ต้องquoteเพื่อไม่ให้shellglobก่อน"
+      }
+    },
+    {
+      "id": "ux10-q09",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: emptymember\na=('' x); printf '%s' \"${#a[@]}\"",
+      "reference": "iteration",
+      "explanation": "emptystringยังเป็นmember — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux10-q09",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`\"${a[@]}\"`รักษาแต่ละสมาชิกและemptyสมาชิก `\"${a[*]}\"`รวมด้วยIFSตัวแรก `${!a[@]}`ให้indices `${#a[0]}`ให้ความยาวstringของสมาชิก0ไม่ใช่จำนวนสมาชิก `unset 'a[1]'`ต้องquoteเพื่อไม่ให้shellglobก่อน"
+      }
+    },
+    {
+      "id": "ux10-q10",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: iterateholes\na=([0]=10 [3]=20); s=0; for i in \"${!a[@]}\"; do ((s+=a[i])); done; printf '%s' \"$s\"",
+      "reference": "iteration",
+      "explanation": "วนเฉพาะindex0และ3 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux10-q10",
+      "answer": 30,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`\"${a[@]}\"`รักษาแต่ละสมาชิกและemptyสมาชิก `\"${a[*]}\"`รวมด้วยIFSตัวแรก `${!a[@]}`ให้indices `${#a[0]}`ให้ความยาวstringของสมาชิก0ไม่ใช่จำนวนสมาชิก `unset 'a[1]'`ต้องquoteเพื่อไม่ให้shellglobก่อน"
+      }
+    },
+    {
+      "id": "ux10-self2",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): เขียนloopที่อ่านsparsearrayพร้อมชื่อและindex",
+      "reference": "iteration",
+      "explanation": "วนindicesที่มีอยู่จริงและquoteexpansionทุกจุด",
+      "rubric": [
+        "วนindicesที่มีอยู่จริงและquoteexpansionทุกจุด",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "`\"${a[@]}\"`รักษาแต่ละสมาชิกและemptyสมาชิก `\"${a[*]}\"`รวมด้วยIFSตัวแรก `${!a[@]}`ให้indices `${#a[0]}`ให้ความยาวstringของสมาชิก0ไม่ใช่จำนวนสมาชิก `unset 'a[1]'`ต้องquoteเพื่อไม่ให้shellglobก่อน"
+      }
+    },
+    {
+      "id": "ux10-q11",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: meanจากHA\nawk 'BEGIN{s=0;for(i=1;i<=10;i++)s+=i;print s/10}'",
+      "reference": "statistics",
+      "explanation": "sum55/N10 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux10-q11",
+      "answer": 5.5,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HA p.1กำหนดmean=sum/Nและpopulationvariance=sum((x-mean)^2)/Nไม่ใช่samplevarianceที่หารN-1 ใช้awkrealarithmeticและตรวจN>0ก่อนหาร คำนวณก่อนปัด ค่า1..10มีsum55 mean5.5 variance8.25 SDsqrt8.25≈2.872281323"
+      }
+    },
+    {
+      "id": "ux10-q12",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: populationvariance\nawk 'BEGIN{m=4;print ((2-m)^2+(4-m)^2+(6-m)^2)/3}'",
+      "reference": "statistics",
+      "explanation": "squareddeviations8หาร3;stdoutmawkพิมพ์6significantdigits — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux10-q12",
+      "answer": 2.66667,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HA p.1กำหนดmean=sum/Nและpopulationvariance=sum((x-mean)^2)/Nไม่ใช่samplevarianceที่หารN-1 ใช้awkrealarithmeticและตรวจN>0ก่อนหาร คำนวณก่อนปัด ค่า1..10มีsum55 mean5.5 variance8.25 SDsqrt8.25≈2.872281323"
+      }
+    },
+    {
+      "id": "ux10-q13",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: populationSD\nawk 'BEGIN{printf \"%.6f\",sqrt(8.25)}'",
+      "reference": "statistics",
+      "explanation": "sqrt8.25ปัดหกตำแหน่ง — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux10-q13",
+      "answer": 2.872281,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HA p.1กำหนดmean=sum/Nและpopulationvariance=sum((x-mean)^2)/Nไม่ใช่samplevarianceที่หารN-1 ใช้awkrealarithmeticและตรวจN>0ก่อนหาร คำนวณก่อนปัด ค่า1..10มีsum55 mean5.5 variance8.25 SDsqrt8.25≈2.872281323"
+      }
+    },
+    {
+      "id": "ux10-q14",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: uniformvariance\nawk 'BEGIN{print ((5-5)^2+(5-5)^2)/2}'",
+      "reference": "statistics",
+      "explanation": "ทุกค่าเบี่ยงเบน0 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux10-q14",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HA p.1กำหนดmean=sum/Nและpopulationvariance=sum((x-mean)^2)/Nไม่ใช่samplevarianceที่หารN-1 ใช้awkrealarithmeticและตรวจN>0ก่อนหาร คำนวณก่อนปัด ค่า1..10มีsum55 mean5.5 variance8.25 SDsqrt8.25≈2.872281323"
+      }
+    },
+    {
+      "id": "ux10-q15",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ห้ามหารN0\na=(); if ((${#a[@]}==0)); then printf undefined; fi",
+      "reference": "statistics",
+      "explanation": "emptydataไม่มีmean — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux10-q15",
+      "choices": [
+        {
+          "id": "a",
+          "text": "undefined"
+        },
+        {
+          "id": "b",
+          "text": "0"
+        },
+        {
+          "id": "c",
+          "text": "NaN"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HA p.1กำหนดmean=sum/Nและpopulationvariance=sum((x-mean)^2)/Nไม่ใช่samplevarianceที่หารN-1 ใช้awkrealarithmeticและตรวจN>0ก่อนหาร คำนวณก่อนปัด ค่า1..10มีsum55 mean5.5 variance8.25 SDsqrt8.25≈2.872281323"
+      }
+    },
+    {
+      "id": "ux10-self3",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): คำนวณmean/variance/SDของ2,4,6และอธิบายตัวหาร",
+      "reference": "statistics",
+      "explanation": "mean4 populationvariance8/3 SDsqrt(8/3)และN=0ไม่มีmean",
+      "rubric": [
+        "mean4 populationvariance8/3 SDsqrt(8/3)และN=0ไม่มีmean",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "HA p.1กำหนดmean=sum/Nและpopulationvariance=sum((x-mean)^2)/Nไม่ใช่samplevarianceที่หารN-1 ใช้awkrealarithmeticและตรวจN>0ก่อนหาร คำนวณก่อนปัด ค่า1..10มีsum55 mean5.5 variance8.25 SDsqrt8.25≈2.872281323"
+      }
+    },
+    {
+      "id": "ux10-q16",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ขอบบนC\nawk 'BEGIN{s=60;m=50;d=10;if(s>m+2*d)print \"A\";else if(s>m+d)print \"B\";else if(s>m-d)print \"C\";else print \"F\"}'",
+      "reference": "grading",
+      "explanation": "60เท่าขอบบนC — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux10-q16",
+      "choices": [
+        {
+          "id": "a",
+          "text": "B"
+        },
+        {
+          "id": "b",
+          "text": "A"
+        },
+        {
+          "id": "c",
+          "text": "C"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HAกำหนด Cเมื่อavg-sd<score<=avg+sd; Bเมื่อavg+sd<score<=avg+2sd; Aเมื่อscore>avg+2sd;ที่เหลือF ไม่มีDในสูตรนี้ ต้องตีความตามโจทย์ไม่ใช่เกณฑ์ทั่วมหาวิทยาลัย เมื่อsd0และscoreavgจะเข้าFตามstrictlowerbound"
+      }
+    },
+    {
+      "id": "ux10-q17",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ขอบบนB\nawk 'BEGIN{s=70;m=50;d=10;if(s>m+2*d)print \"A\";else if(s>m+d)print \"B\";else if(s>m-d)print \"C\";else print \"F\"}'",
+      "reference": "grading",
+      "explanation": "70รวมBแต่ไม่A — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux10-q17",
+      "choices": [
+        {
+          "id": "a",
+          "text": "C"
+        },
+        {
+          "id": "b",
+          "text": "B"
+        },
+        {
+          "id": "c",
+          "text": "A"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HAกำหนด Cเมื่อavg-sd<score<=avg+sd; Bเมื่อavg+sd<score<=avg+2sd; Aเมื่อscore>avg+2sd;ที่เหลือF ไม่มีDในสูตรนี้ ต้องตีความตามโจทย์ไม่ใช่เกณฑ์ทั่วมหาวิทยาลัย เมื่อsd0และscoreavgจะเข้าFตามstrictlowerbound"
+      }
+    },
+    {
+      "id": "ux10-q18",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ขอบล่างC\nawk 'BEGIN{s=40;m=50;d=10;if(s>m+2*d)print \"A\";else if(s>m+d)print \"B\";else if(s>m-d)print \"C\";else print \"F\"}'",
+      "reference": "grading",
+      "explanation": "40ไม่ผ่านstrictlowerbound — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux10-q18",
+      "choices": [
+        {
+          "id": "a",
+          "text": "F"
+        },
+        {
+          "id": "b",
+          "text": "C"
+        },
+        {
+          "id": "c",
+          "text": "B"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HAกำหนด Cเมื่อavg-sd<score<=avg+sd; Bเมื่อavg+sd<score<=avg+2sd; Aเมื่อscore>avg+2sd;ที่เหลือF ไม่มีDในสูตรนี้ ต้องตีความตามโจทย์ไม่ใช่เกณฑ์ทั่วมหาวิทยาลัย เมื่อsd0และscoreavgจะเข้าFตามstrictlowerbound"
+      }
+    },
+    {
+      "id": "ux10-q19",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: sd0ตามสูตร\nawk 'BEGIN{s=50;m=50;d=0;if(s>m+2*d)print \"A\";else if(s>m+d)print \"B\";else if(s>m-d)print \"C\";else print \"F\"}'",
+      "reference": "grading",
+      "explanation": "score=avgไม่ผ่านstrictinequality — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux10-q19",
+      "choices": [
+        {
+          "id": "a",
+          "text": "C"
+        },
+        {
+          "id": "b",
+          "text": "A"
+        },
+        {
+          "id": "c",
+          "text": "F"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HAกำหนด Cเมื่อavg-sd<score<=avg+sd; Bเมื่อavg+sd<score<=avg+2sd; Aเมื่อscore>avg+2sd;ที่เหลือF ไม่มีDในสูตรนี้ ต้องตีความตามโจทย์ไม่ใช่เกณฑ์ทั่วมหาวิทยาลัย เมื่อsd0และscoreavgจะเข้าFตามstrictlowerbound"
+      }
+    },
+    {
+      "id": "ux10-q20",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: สูตรHAกับscore9\nawk 'BEGIN{m=5.5;d=sqrt(8.25);s=9;if(s>m+2*d)print \"A\";else if(s>m+d)print \"B\";else if(s>m-d)print \"C\";else print \"F\"}'",
+      "reference": "grading",
+      "explanation": "9อยู่ระหว่าง8.372...กับ11.244...จึงBไม่ใช่Aตามsample — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux10-q20",
+      "choices": [
+        {
+          "id": "a",
+          "text": "C"
+        },
+        {
+          "id": "b",
+          "text": "B"
+        },
+        {
+          "id": "c",
+          "text": "A"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HAกำหนด Cเมื่อavg-sd<score<=avg+sd; Bเมื่อavg+sd<score<=avg+2sd; Aเมื่อscore>avg+2sd;ที่เหลือF ไม่มีDในสูตรนี้ ต้องตีความตามโจทย์ไม่ใช่เกณฑ์ทั่วมหาวิทยาลัย เมื่อsd0และscoreavgจะเข้าFตามstrictlowerbound"
+      }
+    },
+    {
+      "id": "ux10-self4",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): อธิบายscoreที่เท่ากับแต่ละขอบรวมกรณีsd0",
+      "reference": "grading",
+      "explanation": "ขอบล่างCไม่รวม ขอบบนCและBรวม ส่วนAstrictและsd0ได้F",
+      "rubric": [
+        "ขอบล่างCไม่รวม ขอบบนCและBรวม ส่วนAstrictและsd0ได้F",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "HAกำหนด Cเมื่อavg-sd<score<=avg+sd; Bเมื่อavg+sd<score<=avg+2sd; Aเมื่อscore>avg+2sd;ที่เหลือF ไม่มีDในสูตรนี้ ต้องตีความตามโจทย์ไม่ใช่เกณฑ์ทั่วมหาวิทยาลัย เมื่อsd0และscoreavgจะเข้าFตามstrictlowerbound"
+      }
+    },
+    {
+      "id": "ux10-q21",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: Nหลังลบ\na=(10 20 30); unset 'a[1]'; printf '%s' \"${#a[@]}\"",
+      "reference": "applied-array",
+      "explanation": "countต้องคำนวณใหม่ไม่ยึดขนาดเดิม — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux10-q21",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "สร้างข้อมูลสมมติscores=(...)ตรวจว่าเป็นตัวเลข0..100และไม่ว่างก่อนรวม ใช้สองpassหาค่าเฉลี่ยแล้วsquareddeviationsเพื่อลดความผิดพลาดจากrounding ไม่เอาrandomชุดใหม่มาเปรียบผลเดิมโดยไม่บันทึกinput HW_Arrayพิมพ์N20แต่ตัวอย่าง1..10เป็น10ค่าจึงประกาศNจริง"
+      }
+    },
+    {
+      "id": "ux10-q22",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: รวมoccurrences\na=(2 2 4); s=0; for x in \"${a[@]}\"; do ((s+=x)); done; printf '%s' \"$s\"",
+      "reference": "applied-array",
+      "explanation": "ค่าซ้ำยังอยู่ในpopulation — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux10-q22",
+      "answer": 8,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "สร้างข้อมูลสมมติscores=(...)ตรวจว่าเป็นตัวเลข0..100และไม่ว่างก่อนรวม ใช้สองpassหาค่าเฉลี่ยแล้วsquareddeviationsเพื่อลดความผิดพลาดจากrounding ไม่เอาrandomชุดใหม่มาเปรียบผลเดิมโดยไม่บันทึกinput HW_Arrayพิมพ์N20แต่ตัวอย่าง1..10เป็น10ค่าจึงประกาศNจริง"
+      }
+    },
+    {
+      "id": "ux10-q23",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: validateคะแนน\nscore=101; [[ $score =~ ^[0-9]+$ ]] && ((10#$score<=100)); printf '%s' \"$?\"",
+      "reference": "applied-array",
+      "explanation": "101เกินช่วงที่กำหนด — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux10-q23",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "สร้างข้อมูลสมมติscores=(...)ตรวจว่าเป็นตัวเลข0..100และไม่ว่างก่อนรวม ใช้สองpassหาค่าเฉลี่ยแล้วsquareddeviationsเพื่อลดความผิดพลาดจากrounding ไม่เอาrandomชุดใหม่มาเปรียบผลเดิมโดยไม่บันทึกinput HW_Arrayพิมพ์N20แต่ตัวอย่าง1..10เป็น10ค่าจึงประกาศNจริง"
+      }
+    },
+    {
+      "id": "ux10-q24",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: sumHA\ns=0; for ((i=1;i<=10;i++)); do ((s+=i)); done; printf '%s' \"$s\"",
+      "reference": "applied-array",
+      "explanation": "sum1ถึง10เท่ากับ10*11/2 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux10-q24",
+      "answer": 55,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "สร้างข้อมูลสมมติscores=(...)ตรวจว่าเป็นตัวเลข0..100และไม่ว่างก่อนรวม ใช้สองpassหาค่าเฉลี่ยแล้วsquareddeviationsเพื่อลดความผิดพลาดจากrounding ไม่เอาrandomชุดใหม่มาเปรียบผลเดิมโดยไม่บันทึกinput HW_Arrayพิมพ์N20แต่ตัวอย่าง1..10เป็น10ค่าจึงประกาศNจริง"
+      }
+    },
+    {
+      "id": "ux10-q25",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: numericdataไม่ใช่textjoin\na=(10 20); printf '%s' \"${a[*]}\"",
+      "reference": "applied-array",
+      "explanation": "arraystarรวมข้อความไม่ได้รวมเลข — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux10-q25",
+      "choices": [
+        {
+          "id": "a",
+          "text": "30"
+        },
+        {
+          "id": "b",
+          "text": "1020"
+        },
+        {
+          "id": "c",
+          "text": "10 20"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "สร้างข้อมูลสมมติscores=(...)ตรวจว่าเป็นตัวเลข0..100และไม่ว่างก่อนรวม ใช้สองpassหาค่าเฉลี่ยแล้วsquareddeviationsเพื่อลดความผิดพลาดจากrounding ไม่เอาrandomชุดใหม่มาเปรียบผลเดิมโดยไม่บันทึกinput HW_Arrayพิมพ์N20แต่ตัวอย่าง1..10เป็น10ค่าจึงประกาศNจริง"
+      }
+    },
+    {
+      "id": "ux10-self5",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): วางแผนtestgradingรวมempty,sparse,identicalและboundaries",
+      "reference": "applied-array",
+      "explanation": "ระบุoracleแยกจากโค้ดหลักและไม่เชื่อsamplegradesที่ขัดสูตร",
+      "rubric": [
+        "ระบุoracleแยกจากโค้ดหลักและไม่เชื่อsamplegradesที่ขัดสูตร",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "สร้างข้อมูลสมมติscores=(...)ตรวจว่าเป็นตัวเลข0..100และไม่ว่างก่อนรวม ใช้สองpassหาค่าเฉลี่ยแล้วsquareddeviationsเพื่อลดความผิดพลาดจากrounding ไม่เอาrandomชุดใหม่มาเปรียบผลเดิมโดยไม่บันทึกinput HW_Arrayพิมพ์N20แต่ตัวอย่าง1..10เป็น10ค่าจึงประกาศNจริง"
+      }
+    }
+  ]
+}

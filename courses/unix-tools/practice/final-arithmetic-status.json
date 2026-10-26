@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "unix-tools-final-arithmetic-status",
+  "title": "FINAL 04 — Arithmetic และ Exit Status",
+  "questions": [
+    {
+      "id": "ux04-q01",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: หารจำนวนเต็ม\nprintf '%s' \"$((7/2))\"",
+      "reference": "integers",
+      "explanation": "7/2 ตัดเศษใน integer arithmetic — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux04-q01",
+      "answer": 3,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "ux04-q02",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: หารจำนวนลบ\nprintf '%s' \"$((-7/2))\"",
+      "reference": "integers",
+      "explanation": "ตัดเข้าศูนย์ไม่ใช่ floor — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux04-q02",
+      "choices": [
+        {
+          "id": "a",
+          "text": "-3.5"
+        },
+        {
+          "id": "b",
+          "text": "-3"
+        },
+        {
+          "id": "c",
+          "text": "-4"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "id": "ux04-q03",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: modulo\nprintf '%s' \"$((7%2))\"",
+      "reference": "integers",
+      "explanation": "7=3*2+1 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux04-q03",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "ux04-q04",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ฐานแปด\nprintf '%s' \"$((010))\"",
+      "reference": "integers",
+      "explanation": "เลขนำ0เป็นฐานแปด — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux04-q04",
+      "answer": 8,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "ux04-q05",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: arithmetic expression ในตัวแปร\nn=7+2; printf '%s' \"$((n))\"",
+      "reference": "integers",
+      "explanation": "arithmetic context ประเมินข้อความเป็นนิพจน์ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux04-q05",
+      "answer": 9,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "ux04-self1",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): อธิบาย integer division กับ decimal division และ base10",
+      "reference": "integers",
+      "explanation": "ยกตัวอย่าง 7/2 กับ awk 7/2 และอธิบาย 08 โดยไม่สับสน string กับเลข",
+      "rubric": [
+        "ยกตัวอย่าง 7/2 กับ awk 7/2 และอธิบาย 08 โดยไม่สับสน string กับเลข",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ]
+    }
+  ]
+}

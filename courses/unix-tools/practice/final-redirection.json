@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "unix-tools-final-redirection",
+  "title": "FINAL 06 — Redirection และ File Descriptors",
+  "questions": [
+    {
+      "id": "ux06-q01",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: แยกstdoutstderr\n{ printf O; printf E >&2; } >out 2>err; printf '%s:%s' \"$(cat out)\" \"$(cat err)\"",
+      "reference": "streams",
+      "explanation": "fd1เขียนout fd2เขียนerr — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q01",
+      "choices": [
+        {
+          "id": "a",
+          "text": "OE:"
+        },
+        {
+          "id": "b",
+          "text": "E:O"
+        },
+        {
+          "id": "c",
+          "text": "O:E"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "id": "ux06-q02",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: stdin redirect\nprintf abc >in; wc -c <in",
+      "reference": "streams",
+      "explanation": "wcอ่าน3bytesจากstdin — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q02",
+      "answer": 3,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "ux06-q03",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: diagnostic ตามstderr\nprintf Usage >&2; printf data",
+      "reference": "streams",
+      "explanation": "Usageอยู่stderrไม่ใช่stdout — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q03",
+      "choices": [
+        {
+          "id": "a",
+          "text": "data"
+        },
+        {
+          "id": "b",
+          "text": "Usagedata"
+        },
+        {
+          "id": "c",
+          "text": "Usage"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "id": "ux06-q04",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: เฉพาะstderrเข้าไฟล์\n{ printf O; printf E >&2; } 2>err; cat err",
+      "reference": "streams",
+      "explanation": "Oออกstdoutทันทีแล้วcatแสดงE — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q04",
+      "choices": [
+        {
+          "id": "a",
+          "text": "E"
+        },
+        {
+          "id": "b",
+          "text": "EO"
+        },
+        {
+          "id": "c",
+          "text": "OE"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "id": "ux06-q05",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: stdin fd0\nprintf word >in; read -r x 0<in; printf '%s' \"$x\"",
+      "reference": "streams",
+      "explanation": "readได้wordแม้ไม่มีnewlineแต่ตัวแปรยังมีข้อมูล — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q05",
+      "choices": [
+        {
+          "id": "a",
+          "text": "in"
+        },
+        {
+          "id": "b",
+          "text": "word"
+        },
+        {
+          "id": "c",
+          "text": "ว่าง"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "id": "ux06-self1",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): วาด mapping fd0/1/2ก่อนและหลัง redirect",
+      "reference": "streams",
+      "explanation": "แยก descriptor จากไฟล์ปลายทางและอธิบายว่าstdoutกับstderrอาจอยู่จอเดียวกัน",
+      "rubric": [
+        "แยก descriptor จากไฟล์ปลายทางและอธิบายว่าstdoutกับstderrอาจอยู่จอเดียวกัน",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ]
+    }
+  ]
+}
