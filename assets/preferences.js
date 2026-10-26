@@ -2,6 +2,7 @@
 (() => {
   'use strict';
   const key = 'skyce-learning-preferences';
+  const readOnly = document.currentScript?.hasAttribute?.('data-read-only') === true;
   const app = new URL('../', document.currentScript.src);
   const presets = {
     forest: {label:'forestGreen', light:['#285f4b','#f5f5ee','#fffefa'], dark:['#acd2b5','#14251e','#20352b']},
@@ -95,7 +96,7 @@
   try {
     const saved = JSON.parse(raw);
     value = validate(saved);
-    if (['system', 'auto'].includes(saved.theme)) {
+    if (!readOnly && ['system', 'auto'].includes(saved.theme)) {
       try { localStorage.setItem(key, JSON.stringify(value)); } catch { canPersist = false; }
     }
   } catch { value = validate({}); }
@@ -143,7 +144,7 @@
     if ('accent' in patch && !('preset' in patch)) incoming.preset = legacyPresets[patch.accent];
     const next = validate(incoming);
     Object.assign(value, next);
-    try { localStorage.setItem(key, JSON.stringify(value)); canPersist = true; } catch { canPersist = false; }
+    if (!readOnly) try { localStorage.setItem(key, JSON.stringify(value)); canPersist = true; } catch { canPersist = false; }
     apply();
   }
   function cycleTheme() { update({theme: value.theme === 'dark' ? 'light' : 'dark'}); }
