@@ -31,8 +31,58 @@ x=inspect({[configKey]:JSON.stringify({version:1,revision:stack.bank.data.revisi
 for(const t of x.stats.topics.filter(t=>t.lesson===stack.id))assert.equal(t.practice,stack.practiceIds.some(id=>stack.bank.data.questions.find(q=>q.id===id).reference===t.id));
 // Every archived revision stays excluded; its answer payload must never even be read.
 for(const l of manifest.lessons.filter(l=>l.bank.history?.length)){const old=l.bank.history[0],token='archived-session-1',s={token,mode:'mock',topic:'all',count:'full',ids:E.choose(old,'mock','all','full',()=>0)},key=I.prefix.config+l.id,backup=I.prefix.history+l.id+':r'+old.data.revision,config={version:1,revision:old.data.revision,current:token,sessions:[s]};x=inspect({[key]:JSON.stringify(config),[backup]:JSON.stringify(config)});assert.equal(x.result.excluded.archived,1);assert.equal(x.stats.total,0);assert.ok(!x.calls.includes(I.prefix.run+l.id+':'+token));}
+// P11-PROD-001: self-only edits must not add a second graded snapshot of saved B.
+const regression=require('./insights-counting-fixture.cjs').fixture(),gradeView=s=>({correct:s.correct,incorrect:s.incorrect,total:s.total,accuracy:s.accuracy,unique:s.unique,repeated:s.repeated,topics:s.topics.filter(t=>t.total).map(t=>[t.lesson,t.id,t.correct,t.incorrect,t.total,t.accuracy,t.unique,t.limited])});
+let reproduction=inspect(regression.values);const initial=gradeView(reproduction.stats);
+assert.deepEqual({correct:initial.correct,incorrect:initial.incorrect,total:initial.total,unique:initial.unique,repeated:initial.repeated},{correct:10,incorrect:5,total:15,unique:10,repeated:5});
+regression.stackState.responses['s-explain'].rating='understood';
+reproduction=inspect({...regression.values,[regression.stackKey]:JSON.stringify(regression.stackState)});
+assert.deepEqual(gradeView(reproduction.stats),initial,'Changing only Revisit to Understood must preserve all graded observations');
+assert.equal(reproduction.stats.revisit,2,'Historical A and KNN retain Revisit; active B now reflects Understood');
+const repeat=()=>inspect({...regression.values,[regression.stackKey]:JSON.stringify(regression.stackState)}),latestB=s=>s.records.find(r=>r.lesson===regression.stackId&&r.at===1700000001000);
+assert.equal(latestB(reproduction.stats).answers['s-explain'].rating,'understood');
+const historyBefore=JSON.stringify(regression.stackState.attempts);
+for(const rating of ['revisit','understood','revisit','understood']){
+ regression.stackState.responses['s-explain'].rating=rating;const next=repeat();assert.deepEqual(gradeView(next.stats),initial);assert.equal(next.stats.revisit,rating==='revisit'?3:2);assert.equal(next.stats.self,3);assert.equal(next.stats.records.length,3);assert.equal(latestB(next.stats).answers['s-explain'].rating,rating);
+ const oop=next.engine.summarize(next.result,'oop-python');assert.deepEqual([oop.correct,oop.incorrect,oop.total,oop.accuracy,oop.unique,oop.repeated],[7,3,10,.7,5,5]);
+}
+// Draft-only edits, including the real Practice input handler's unsubmitted state.
+for(const submitted of [true,false]){regression.stackState.responses['s-explain']={draft:'แก้เฉพาะข้อความใหม่',submitted,rating:submitted?'understood':null};const next=repeat();assert.deepEqual(gradeView(next.stats),initial);assert.equal(next.stats.revisit,2);assert.equal(latestB(next.stats).answers['s-explain'].draft,'แก้เฉพาะข้อความใหม่');assert.equal(latestB(next.stats).answers['s-explain'].submitted,submitted)}
+assert.equal(JSON.stringify(regression.stackState.attempts),historyBefore,'Derived self reconciliation never mutates saved attempts');
+delete regression.stackState.responses['s-explain'];reproduction=repeat();assert.deepEqual(gradeView(reproduction.stats),initial);assert.equal(reproduction.stats.revisit,2);assert.equal(latestB(reproduction.stats).answers['s-explain'],undefined,'Retry removes only the latest logical self rating');
+// Reverse both question and response-field property order; identity remains stable.
+regression.stackState.responses=Object.fromEntries(Object.entries(regression.stackState.responses).reverse().map(([id,r])=>[id,Object.fromEntries(Object.entries(r).reverse())]));assert.deepEqual(gradeView(repeat().stats),initial);
+// Same auto answers at different timestamps are genuinely separate saved attempts.
+const selfEdited=structuredClone(bad);selfEdited['s-explain'].rating='understood';
+x=inspect({[pk]:JSON.stringify(state(sk,selfEdited,[{at:100,responses:bad},{at:101,responses:bad}]))});assert.equal(x.stats.total,10);assert.equal(x.stats.revisit,1);assert.equal(x.stats.self,2);assert.equal(x.stats.records.length,2);
+// A duplicate timestamp + auto signature is one attempt; its last valid self copy wins.
+x=inspect({[pk]:JSON.stringify(state(sk,{},[{at:100,responses:bad},{at:100,responses:selfEdited}]))});assert.equal(x.stats.total,5);assert.equal(x.stats.self,1);assert.equal(x.stats.revisit,0);
+x=inspect({[pk]:JSON.stringify(state(sk,{},[{at:100,responses:selfEdited},{at:100,responses:bad}]))});assert.equal(x.stats.total,5);assert.equal(x.stats.revisit,1);
+// An older duplicate must not change which distinct attempt is the latest.
+x=inspect({[pk]:JSON.stringify(state(sk,selfEdited,[{at:100,responses:good},{at:101,responses:bad},{at:100,responses:good}]))});assert.equal(x.stats.total,10);assert.equal(x.stats.correct,9);assert.equal(x.stats.revisit,1);
+// Equal timestamps with different automatic answers must not collapse either.
+x=inspect({[pk]:JSON.stringify(state(sk,{},[{at:100,responses:good},{at:100,responses:bad}]))});assert.equal(x.stats.total,10);
+// Unlike self edits, a different completed automatic snapshot is another observation.
+const automatic=require('./insights-counting-fixture.cjs').fixture();automatic.stackState.responses['s-lifo'].draft='b';x=inspect({...automatic.values,[automatic.stackKey]:JSON.stringify(automatic.stackState)});assert.equal(x.stats.total,20);assert.equal(x.stats.correct,14);assert.equal(x.stats.incorrect,6);assert.equal(x.stats.repeated,10);
+const malformed=require('./insights-counting-fixture.cjs').fixture();malformed.stackState.responses['s-explain'].rating='unsupported';x=inspect({...malformed.values,[malformed.stackKey]:JSON.stringify(malformed.stackState)});assert.deepEqual(gradeView(x.stats),initial);assert.equal(x.stats.revisit,3);assert.equal(x.result.excluded.invalid,1,'An invalid active self copy must not overwrite valid history');
+// Self-only topic runs: replace the latest logical self state without inventing grades.
+const selfLesson=manifest.lessons.find(l=>l.bank.topics.some(t=>t.ids.every(id=>l.bank.data.questions.find(q=>q.id===id).type==='self'))),selfTopic=selfLesson.bank.topics.find(t=>t.ids.every(id=>selfLesson.bank.data.questions.find(q=>q.id===id).type==='self')),selfData=E.subset(selfLesson.bank,selfTopic.ids),selfToken='self-only-regression',selfConfig=JSON.stringify({version:1,revision:selfLesson.bank.data.revision,current:selfToken,sessions:[{token:selfToken,mode:'topic',topic:selfTopic.id,count:'full',ids:selfTopic.ids}]}),selfKey=I.prefix.run+selfLesson.id+':'+selfToken,selfAnswers=answers(selfData),selfCurrent=structuredClone(selfAnswers);
+for(const r of Object.values(selfCurrent))r.rating='understood';
+const selfState=state(selfData,selfCurrent,[{at:100,responses:selfAnswers},{at:101,responses:selfAnswers}]),selfEntries=()=>({[I.prefix.config+selfLesson.id]:selfConfig,[selfKey]:JSON.stringify(selfState)});
+x=inspect(selfEntries());assert.equal(x.stats.total,0);assert.equal(x.stats.unique,0);assert.equal(x.stats.practiced,1);assert.equal(x.stats.records.length,2);assert.equal(x.stats.self,selfData.questions.length*2);assert.equal(x.stats.revisit,selfData.questions.length);
+for(const r of Object.values(selfState.responses)){r.draft='แก้ร่างแต่ยังไม่ส่ง';r.submitted=false;r.rating=null}x=inspect(selfEntries());assert.equal(x.stats.total,0);assert.equal(x.stats.records.length,2);assert.equal(x.stats.self,selfData.questions.length);assert.equal(x.stats.revisit,selfData.questions.length);
+selfState.attempts=[];x=inspect(selfEntries());assert.equal(x.stats.records.length,0,'An unsubmitted self-only draft alone is not completed evidence');
+// Separate tokens are separate self-only sessions, even without automatic questions.
+const otherSelfToken='self-only-another-run',otherSelfKey=I.prefix.run+selfLesson.id+':'+otherSelfToken;
+x=inspect({[I.prefix.config+selfLesson.id]:JSON.stringify({version:1,revision:selfLesson.bank.data.revision,sessions:[{token:selfToken,mode:'topic',topic:selfTopic.id,count:'full',ids:selfTopic.ids},{token:otherSelfToken,mode:'topic',topic:selfTopic.id,count:'full',ids:selfTopic.ids}]}),[selfKey]:JSON.stringify(state(selfData,selfAnswers)),[otherSelfKey]:JSON.stringify(state(selfData,selfAnswers))});assert.equal(x.stats.total,0);assert.equal(x.stats.self,selfData.questions.length*2);assert.equal(x.stats.records.length,2);
+for(const l of manifest.lessons.filter(l=>l.bank.history?.length)){
+ const data=l.bank.data,correct=answers(data),edited=structuredClone(correct),self=data.questions.find(q=>q.type==='self');edited[self.id].rating='understood';
+ const token='current-revision-two',old=l.bank.history[0],oldToken='retained-old-revision',config={version:1,revision:data.revision,sessions:[{token,mode:'mock',topic:'all',count:'full',ids:data.questions.map(q=>q.id)},{token:oldToken,revision:old.data.revision,mode:'mock',topic:'all',count:'full',ids:old.data.questions.map(q=>q.id)}]};
+ x=inspect({[I.prefix.config+l.id]:JSON.stringify(config),[I.prefix.run+l.id+':'+token]:JSON.stringify(state(data,edited,[{at:100,responses:correct}]))});assert.equal(x.stats.total,data.questions.filter(q=>q.type!=='self').length);assert.equal(x.stats.accuracy,1);assert.equal(x.stats.revisit,data.questions.filter(q=>q.type==='self').length-1);assert.equal(x.result.excluded.archived,1);assert.ok(!x.calls.includes(I.prefix.run+l.id+':'+oldToken));
+}
+assert.match(fs.readFileSync('insights.html','utf8'),/insights-contract\.js\?v=phase11-1-counting-1/,'Invalidate the changed dashboard contract, not unrelated shared assets');
 // Unsupported, duplicate-ID or missing-ID configurations never supply observations.
 for(const s of [{...session,ids:[session.ids[0],session.ids[0]]},{...session,ids:session.ids.slice(1)},{...session,revision:999}]){x=inspect({[configKey]:JSON.stringify({version:1,revision:stack.bank.data.revision,sessions:[s]}),[examKey]:JSON.stringify(state(subset,ea))});assert.equal(x.stats.total,0)}
 // Opt-in read-only preference application suppresses legacy migration and explicit UI writes.
 let writes=0;const context={URL,CustomEvent:class{constructor(type,options){this.type=type;this.detail=options?.detail}},localStorage:{getItem:()=>'{"theme":"system","language":"th"}',setItem(){writes++}},document:{currentScript:{src:'https://example.test/Course-Website/assets/preferences.js',hasAttribute:n=>n==='data-read-only'},documentElement:{dataset:{},style:{setProperty(){}}},querySelectorAll:()=>[],dispatchEvent(){},addEventListener(){}},window:{addEventListener(){}}};vm.runInNewContext(fs.readFileSync('assets/preferences.js','utf8'),context);context.window.LearningPreferences.update({theme:'dark',language:'en'});assert.equal(writes,0);assert.equal(context.document.documentElement.dataset.theme,'dark');
-console.log('PASS: Insights 25/750 derived-bank identity/anchors, independent count fixtures, deduplicated active/saved results, repeats/unique IDs, filters/self exclusion, partial/corrupt/future/denied storage, current sessions, all archived contexts untouched and zero-write preferences');
+console.log('PASS: Insights 25/750 identity/anchors; P11-PROD-001 10/15 invariance across self rating/draft/retry/property-order edits; latest self state and historical repeats/duplicate timestamps/self-only sessions; current revision2 and archived isolation; malformed/incomplete/denied reads and zero-write preferences');

@@ -32,27 +32,36 @@
      if(!object(r)||typeof r.draft!=='string'||r.draft.length>(q.type==='self'?3000:q.type==='choice'?160:80)||typeof r.submitted!=='boolean'||(r.rating!==null&&r.rating!==undefined&&!(q.type==='self'&&r.submitted&&['understood','revisit'].includes(r.rating)))||q.type!=='self'&&r.submitted&&C.grade(q,r.draft)===null)return null;
     }return C.responses(data,value);
    }
-   function completed(data,input){
+   function completed(data,input,allowSelfDraft=false){
     const answers=responses(data,input);if(!answers){exclude('invalid');return null}
     if(C.summary(data,answers).unanswered){if(Object.keys(answers).length)exclude('incomplete');return null}
-    if(!data.questions.some(q=>answers[q.id]?.submitted))return null;
+    if(!data.questions.some(q=>answers[q.id]?.submitted)&&!(allowSelfDraft&&data.questions.every(q=>q.type==='self')&&Object.keys(answers).length))return null;
     return answers;
    }
-   const signature=(data,answers)=>JSON.stringify(data.questions.filter(q=>answers[q.id]?.submitted).map(q=>[q.id,answers[q.id].draft,answers[q.id].rating]));
+   // Self edits cannot create another graded observation of the same logical attempt.
+   const signature=(data,answers)=>JSON.stringify(data.questions.filter(q=>q.type!=='self'&&answers[q.id]?.submitted).map(q=>[q.id,answers[q.id].draft]));
+   function latestSelf(record,answers){
+    // Only derived response objects are updated, never the stored historical payload.
+    for(const q of record.data.questions.filter(q=>q.type==='self')){
+     if(answers[q.id])record.answers[q.id]=answers[q.id];else delete record.answers[q.id];
+    }
+   }
    function run(lesson,data,key,mode){
     const value=get(key);if(value===null)return;
     if(!object(value)||value.version!==1||value.revision!==data.revision){exclude('incompatible');return}
-    const saved=[],seen=new Set();
+    const saved=[],seen=new Map();
     if(value.attempts!==undefined&&!Array.isArray(value.attempts)){exclude('invalid');return}
     if(value.attempts?.length>10){exclude('invalid');return}
     for(const attempt of value.attempts||[]){
      if(!object(attempt)||!Number.isSafeInteger(attempt.at)||attempt.at<0||attempt.at>8640000000000000){exclude('invalid');continue}
      const answers=completed(data,attempt.responses);if(!answers)continue;const sig=signature(data,answers),identity=attempt.at+':'+sig;
-     if(seen.has(identity)){exclude('duplicate');continue}seen.add(identity);saved.push(sig);result.records.push({source:key,lesson:lesson.id,course:lesson.course,mode,at:attempt.at,answers,data});
+     if(seen.has(identity)){latestSelf(seen.get(identity),answers);exclude('duplicate');continue}
+     const record={source:key,lesson:lesson.id,course:lesson.course,mode,at:attempt.at,answers,data};seen.set(identity,record);saved.push({sig,record});result.records.push(record);
     }
     if(value.current!==undefined&&!data.questions.some(q=>q.id===value.current)){exclude('invalid');return}
-    const answers=completed(data,value.responses??{});if(!answers)return;const sig=signature(data,answers);
-    if(saved.at(-1)===sig){exclude('duplicate');return}
+    const answers=completed(data,value.responses??{},true);if(!answers)return;const sig=signature(data,answers),latest=saved.at(-1);
+    if(latest?.sig===sig){latestSelf(latest.record,answers);exclude('duplicate');return}
+    if(!data.questions.some(q=>answers[q.id]?.submitted))return;
     result.records.push({source:key,lesson:lesson.id,course:lesson.course,mode,at:null,answers,data});
    }
    for(const l of manifest.lessons){
