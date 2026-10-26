@@ -5,6 +5,8 @@ import argparse
 import math
 import re
 import io
+import json
+from itertools import product
 from contextlib import redirect_stdout
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -59,6 +61,57 @@ assert 'O(n²+capacity)' in hash_source and 'คาดหมาย O(n+capacity)
 array = (ROOT/'courses/oop-python/summaries/arrays-dynamic-array.md').read_text(encoding='utf8')
 assert '|O(n−i+1)' in array
 print('PASS: four collision-heavy rebuild operation counts and end-insertion complexity qualification')
+
+# Three equally weighted records cannot give empirical entropy exactly one bit,
+# even when all three possible labels are allowed. Enumerate every labelling.
+entropy = lambda counts: -sum((n/sum(counts))*math.log2(n/sum(counts)) for n in counts if n)
+for labels in product(range(3), repeat=3):
+    assert not math.isclose(entropy([labels.count(c) for c in range(3)]), 1, abs_tol=1e-12)
+assert (2*entropy([2, 0])+6*entropy([3, 3]))/8 == .75
+bank = lambda course, slug: json.loads((ROOT/f'courses/{course}/exam/{slug}.json').read_text(encoding='utf8'))
+sorting = next(q for q in bank('oop-python','complexity-basic-sorting')['questions'] if q['id'].endswith('04-r2'))
+assert 'แคบที่สุด' in sorting['prompt'] and sorting['answer'] == 'a'
+for n in range(1, 1001): assert n <= n*n  # Both were upper bounds; the prompt must disambiguate.
+tree = next(q for q in bank('artificial-intelligence','final-decision-tree')['questions'] if q['id'].endswith('19-r2'))
+assert '2 และ 6 records' in tree['prompt'] and tree['answer'] == .75
+intro = next(q for q in bank('artificial-intelligence','ai-foundations-agents')['questions'] if q['id'].endswith('08-r2'))
+assert 'ChatGPT' in intro['prompt'] and 'กฎหมาย' not in intro['prompt'] and intro['answer'] == 'b'
+print('PASS: exhaustive 3-record entropy counterexample and realizable replacement, tightest-bound and source-premise correction guards')
+
+class Example:
+    shared = []
+    def method(self): return 7
+assert isinstance(Example, type) and isinstance(Example, object)
+assert callable(getattr(Example(), 'method'))
+a,b = Example(),Example()
+a.shared.append(3)
+assert b.shared == [3] and a.shared is b.shared
+prose = (ROOT/'courses/oop-python/summaries/classes-objects.md').read_text(encoding='utf8')
+assert 'ตัว class เองก็เป็น object' in prose
+
+# Execute the original two Linked List blocks in their documented shared scope.
+# Check reachable values/identity against plain-list expectations, and compare
+# the declarative traversal's output to the executed print stream.
+linked = (ROOT/'courses/oop-python/summaries/linked-list.md').read_text(encoding='utf8')
+blocks = re.findall(r'^```python\n(.*?)^```', linked, re.M|re.S)
+assert len(blocks) == 2
+scope, output = {}, io.StringIO()
+with redirect_stdout(output): exec(compile(blocks[0], 'linked-traversal', 'exec'), scope)
+assert output.getvalue().splitlines() == ['10', '20', '30']
+assert scope['current'] is None and scope['head'].data == 10 and scope['tail'].data == 30
+original_tail = scope['tail']
+exec(compile(blocks[1], 'linked-insertion', 'exec'), scope)
+node, seen, values = scope['head'], set(), []
+while node is not None:
+    assert id(node) not in seen
+    seen.add(id(node)); values.append(node.data); node = node.next
+assert values == [10, 20, 25, 30] and scope['tail'] is original_tail
+stepper = json.loads(re.search(r'^```study-stepper\n(.*?)^```', linked, re.M|re.S)[1])
+assert len(stepper['steps']) == 11
+assert stepper['steps'][-1]['output'].splitlines() == output.getvalue().splitlines()
+intro_text = (ROOT/'courses/artificial-intelligence/summaries/ai-foundations-agents.md').read_text(encoding='utf8')
+assert 'ไม่เกิน 70%' in intro_text and '**1966**' in intro_text and 'Simple Reflex' in intro_text
+print('PASS: class/object counterexample; both original Linked List blocks and 11-state final output; primary-reference qualification guards')
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--source-root', type=Path)

@@ -28,7 +28,7 @@
       "difficulty": "easy",
       "verification": {
         "method": "source-review",
-        "evidence": "Week1 pp.3–13 ยกปัญหาบัญชีจำนวนมาก: owner/balance แยกจากฟังก์ชันจนจับคู่ผิดได้\n\nClass คือแบบแปลนที่รวมข้อมูลและพฤติกรรม; instance คือ object ที่สร้างจากแบบแปลนนั้น เช่น BankAccount หนึ่งคลาสสร้างบัญชีหลายตัว แต่ละตัวมีสถานะของตนเอง Attribut"
+        "evidence": "Week1 pp.3–13 ยกปัญหาบัญชีจำนวนมาก: owner/balance แยกจากฟังก์ชันจนจับคู่ผิดได้\n\nClass คือแบบแปลนที่รวมข้อมูลและพฤติกรรม; instance คือ object ที่สร้างจากแบบแปลนนั้น เช่น BankAccount หนึ่งคลาสสร้างบัญชีหลายตัว แต่ละตัวมีสถานะของตนเอง Data attributes เช่น owner/b"
       }
     },
     {
@@ -55,7 +55,7 @@
       "difficulty": "easy",
       "verification": {
         "method": "source-review",
-        "evidence": "Week1 pp.3–13 ยกปัญหาบัญชีจำนวนมาก: owner/balance แยกจากฟังก์ชันจนจับคู่ผิดได้\n\nClass คือแบบแปลนที่รวมข้อมูลและพฤติกรรม; instance คือ object ที่สร้างจากแบบแปลนนั้น เช่น BankAccount หนึ่งคลาสสร้างบัญชีหลายตัว แต่ละตัวมีสถานะของตนเอง Attribut"
+        "evidence": "Week1 pp.3–13 ยกปัญหาบัญชีจำนวนมาก: owner/balance แยกจากฟังก์ชันจนจับคู่ผิดได้\n\nClass คือแบบแปลนที่รวมข้อมูลและพฤติกรรม; instance คือ object ที่สร้างจากแบบแปลนนั้น เช่น BankAccount หนึ่งคลาสสร้างบัญชีหลายตัว แต่ละตัวมีสถานะของตนเอง Data attributes เช่น owner/b"
       }
     },
     {
@@ -82,7 +82,7 @@
       "difficulty": "easy",
       "verification": {
         "method": "source-review",
-        "evidence": "Week1 pp.3–13 ยกปัญหาบัญชีจำนวนมาก: owner/balance แยกจากฟังก์ชันจนจับคู่ผิดได้\n\nClass คือแบบแปลนที่รวมข้อมูลและพฤติกรรม; instance คือ object ที่สร้างจากแบบแปลนนั้น เช่น BankAccount หนึ่งคลาสสร้างบัญชีหลายตัว แต่ละตัวมีสถานะของตนเอง Attribut"
+        "evidence": "Week1 pp.3–13 ยกปัญหาบัญชีจำนวนมาก: owner/balance แยกจากฟังก์ชันจนจับคู่ผิดได้\n\nClass คือแบบแปลนที่รวมข้อมูลและพฤติกรรม; instance คือ object ที่สร้างจากแบบแปลนนั้น เช่น BankAccount หนึ่งคลาสสร้างบัญชีหลายตัว แต่ละตัวมีสถานะของตนเอง Data attributes เช่น owner/b"
       }
     },
     {
@@ -457,7 +457,7 @@
       "difficulty": "medium",
       "verification": {
         "method": "source-review",
-        "evidence": "Week1 pp.3–13 ยกปัญหาบัญชีจำนวนมาก: owner/balance แยกจากฟังก์ชันจนจับคู่ผิดได้\n\nClass คือแบบแปลนที่รวมข้อมูลและพฤติกรรม; instance คือ object ที่สร้างจากแบบแปลนนั้น เช่น BankAccount หนึ่งคลาสสร้างบัญชีหลายตัว แต่ละตัวมีสถานะของตนเอง Attribut"
+        "evidence": "Week1 pp.3–13 ยกปัญหาบัญชีจำนวนมาก: owner/balance แยกจากฟังก์ชันจนจับคู่ผิดได้\n\nClass คือแบบแปลนที่รวมข้อมูลและพฤติกรรม; instance คือ object ที่สร้างจากแบบแปลนนั้น เช่น BankAccount หนึ่งคลาสสร้างบัญชีหลายตัว แต่ละตัวมีสถานะของตนเอง Data attributes เช่น owner/b"
       }
     },
     {
@@ -551,7 +551,7 @@
       "difficulty": "hard",
       "verification": {
         "method": "rubric-review",
-        "evidence": "Week1 pp.3–13 ยกปัญหาบัญชีจำนวนมาก: owner/balance แยกจากฟังก์ชันจนจับคู่ผิดได้\n\nClass คือแบบแปลนที่รวมข้อมูลและพฤติกรรม; instance คือ object ที่สร้างจากแบบแปลนนั้น เช่น BankAccount หนึ่งคลาสสร้างบัญชีหลายตัว แต่ละตัวมีสถานะของตนเอง Attribut"
+        "evidence": "Week1 pp.3–13 ยกปัญหาบัญชีจำนวนมาก: owner/balance แยกจากฟังก์ชันจนจับคู่ผิดได้\n\nClass คือแบบแปลนที่รวมข้อมูลและพฤติกรรม; instance คือ object ที่สร้างจากแบบแปลนนั้น เช่น BankAccount หนึ่งคลาสสร้างบัญชีหลายตัว แต่ละตัวมีสถานะของตนเอง Data attributes เช่น owner/b"
       }
     },
     {
