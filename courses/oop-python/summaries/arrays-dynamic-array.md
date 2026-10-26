@@ -155,7 +155,7 @@ Week8 pp.26–35 ใช้ DynamicArray เป็น part ของ Stack เพ
 |---|---|---|
 |get/set/len|O(1)|index ต้องอยู่ใน logicalsize|
 |append|amortizedO(1),worstO(n)|resizecopy|
-|insert/remove ตำแหน่ง i|O(n−i)และอาจ resizeO(n)|เลื่อนข้อมูล|
+|insert/remove ตำแหน่ง i|O(n−i+1)และอาจ resizeO(n)|รวมงานคงที่แม้ไม่ต้องเลื่อน|
 |pop ท้าย|O(1)|ไม่ shrink|
 |find|O(n)worst|เทียบค่า O(1)ตามสมมติฐาน|
 |str|O(n)บวกต้นทุน format|ไม่ใช่ O(1)เหมือน len|

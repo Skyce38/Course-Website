@@ -421,7 +421,7 @@
       "difficulty": "medium",
       "verification": {
         "method": "source-review",
-        "evidence": "| Operation | เวลาในโมเดลนี้ | หมายเหตุ |\n|---|---|---|\n|get/set/len|O(1)|index ต้องอยู่ใน logicalsize|\n|append|amortizedO(1),worstO(n)|resizecopy|\n|insert/remove ตำแหน่ง i|O(n−i)และอาจ resizeO(n)|เลื่อนข้อมูล|\n|pop ท้าย|O(1)|ไม่ shrink|\n|f"
+        "evidence": "| Operation | เวลาในโมเดลนี้ | หมายเหตุ |\n|---|---|---|\n|get/set/len|O(1)|index ต้องอยู่ใน logicalsize|\n|append|amortizedO(1),worstO(n)|resizecopy|\n|insert/remove ตำแหน่ง i|O(n−i+1)และอาจ resizeO(n)|รวมงานคงที่แม้ไม่ต้องเลื่อน|\n|pop ท้าย|O(1)|ไม่ shrink|\n|f"
       }
     },
     {
@@ -475,7 +475,7 @@
       "difficulty": "medium",
       "verification": {
         "method": "source-review",
-        "evidence": "| Operation | เวลาในโมเดลนี้ | หมายเหตุ |\n|---|---|---|\n|get/set/len|O(1)|index ต้องอยู่ใน logicalsize|\n|append|amortizedO(1),worstO(n)|resizecopy|\n|insert/remove ตำแหน่ง i|O(n−i)และอาจ resizeO(n)|เลื่อนข้อมูล|\n|pop ท้าย|O(1)|ไม่ shrink|\n|f"
+        "evidence": "| Operation | เวลาในโมเดลนี้ | หมายเหตุ |\n|---|---|---|\n|get/set/len|O(1)|index ต้องอยู่ใน logicalsize|\n|append|amortizedO(1),worstO(n)|resizecopy|\n|insert/remove ตำแหน่ง i|O(n−i+1)และอาจ resizeO(n)|รวมงานคงที่แม้ไม่ต้องเลื่อน|\n|pop ท้าย|O(1)|ไม่ shrink|\n|f"
       }
     },
     {

@@ -49,3 +49,27 @@ Each confirmed finding will record: ID; course/lesson; original source and physi
 ## Compatibility risk requiring investigation
 
 **P9-DATA-001 — NOT VERIFIED (implementation risk, not an academic claim).** `assets/practice-contract.js` computes historical scores using the supplied current bank, and returns a fresh state on revision mismatch. Before any semantic question correction, verify a strategy that preserves the original persisted data and distinguishes old answer context. Do not treat this initial observation as evidence that existing unchanged banks have already lost data.
+
+## P9-OOP-001 — Collision-heavy rebuild complexity
+
+- Lesson/anchor: [Hash tables, load](../read/oop-python/hash-tables.html#load). Week15 physical pp.13,18–20 discuss distribution/load; the particular reinsertion implementation is the website's teaching adaptation.
+- Original claim: one rehash is O(n+capacity), without qualifying that bound for this implementation. Classification: **correct only under additional distribution assumptions**. Each reinsertion scans an existing bucket for duplicate keys, so a single colliding bucket gives a triangular number of comparisons and quadratic rebuild cost.
+- Evidence: inspect `ChainingHashTable.insert`; instrument only equality calls on forced-collision keys at capacities 8,16,32,64. The insertion triggering a rebuild makes m(m+1)/2 comparisons for m=3capacity/4 existing keys. [Open Data Structures, Hash Tables](https://opendatastructures.org/ods-python/5_Hash_Tables.html) distinguishes randomized assumptions; executed counterexample is `scripts/check-phase9.py`.
+- Severity: Medium. Action: state expected linear rebuild under appropriate hashing and O(n²+capacity) for this collision-heavy implementation, and qualify expected amortized insertion. Result: **CORRECTED**, exact operation-count checks passed, mapping results preserved. No code or keys changed.
+
+## P9-OOP-002 — End insertion has a constant cost
+
+- Lesson/anchor: [Arrays, complexity](../read/oop-python/arrays-dynamic-array.html#complexity); Week8 physical pp.18–24, website summary table.
+- Original claim: O(n−i) for insert/remove positions. At legal insertion position i=n with spare capacity there are zero shifts but still validation, a write and size update. Classification: **missing boundary qualification**.
+- Conclusion: O(n−i+1), plus O(n) when resizing, is a uniform bound including that boundary. Directly inspect the existing loop and fixed work; existing 3200 list-oracle operations cover valid end insertions and values. Severity: Low. Action: correct table and its two literal evidence excerpts; answer keys, identities and revision remain unchanged. Result: **CORRECTED**; reading baseline table hash updated only for the corrected row, guarded by the new regression.
+
+## P9-SOURCE-003 — Merge trace caption (existing correction retained)
+
+- Week14 physical pp.14–15; [Advanced sorting, merge](../read/oop-python/advanced-sorting.html#merge). Listed arrays are left=[1,3,5,8], right=[2,4,7,9], but the caption says right is exhausted after taking 7.
+- Classification: **confirmed incorrect trace caption**, High source severity. Seven head comparisons actually exhaust left first, leaving 9 on the right. Direct images inspected; output/order and comparison counts reproduced by the existing independent sorting checks. Website already teaches the correct trace. Result: **VERIFIED**, no new change; originals preserved.
+
+## P9-SOURCE-004 — Mutable keys (existing correction retained)
+
+- Week15 physical p.23; [Hash tables, dict](../read/oop-python/hash-tables.html#dict). Source wording disallows mutable objects as keys universally.
+- Classification: **confirmed overgeneralization**, Medium. Default identity-hashed user objects can have mutable attributes and remain hashable; built-in lists/dicts/sets are unhashable. Equality/hash consistency and stability are the actual contract.
+- Evidence: original image; [Python 3.12 glossary, hashable](https://docs.python.org/3.12/glossary.html#term-hashable), executable custom-class/dict counterexamples in existing OOP tests. Website already states the distinction. Result: **VERIFIED**, no new change required.
