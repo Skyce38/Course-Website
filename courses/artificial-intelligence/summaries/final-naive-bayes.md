@@ -65,7 +65,7 @@ Query คือ `Blonde, Average, Heavy, No` ตารางต้นฉบั�
 ```text
 Name   Hair    Height   Weight   Lotion Result
 Sarah  Blonde  Average  Light    No     +
-Dana   Blonde  Tall     Average  Yes    -
+Paola  Blonde  Tall     Average  Yes    -
 Alex   Brown   Short    Average  Yes    -
 Annie  Blonde  Short    Average  No     +
 Emily  Red     Average  Heavy    No     +

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "revision": 1,
+  "revision": 2,
   "lesson": "oop-python-complexity-basic-sorting",
   "baseRevision": 1,
   "questions": [
@@ -75,9 +75,9 @@
       }
     },
     {
-      "id": "oop-python-complexity-basic-sorting-exam-04",
+      "id": "oop-python-complexity-basic-sorting-exam-04-r2",
       "type": "choice",
-      "prompt": "ลูป n ครั้งแต่ละรอบทำงานคงที่ ใช้ timegrowth ใด?",
+      "prompt": "ลูปทำงาน n ครั้ง แต่ละรอบมีต้นทุนคงที่บวก ขอบเขตบน Big-O ที่แคบที่สุดในตัวเลือกต่อไปนี้คือข้อใด?",
       "reference": "complexity",
       "choices": [
         {
@@ -94,7 +94,7 @@
         }
       ],
       "answer": "a",
-      "explanation": "นับจำนวนครั้งรวม ไม่ดูเพียงงานภายในหนึ่งรอบ",
+      "explanation": "ต้นทุนเป็น Θ(n) จึงเลือก O(n) ซึ่งแคบที่สุดในตัวเลือก O(n²) ก็เป็น upper bound ที่ถูกแต่หลวมกว่า ไม่ใช่ว่า Big-O หมายถึง tight bound โดยอัตโนมัติ",
       "difficulty": "easy",
       "verification": {
         "method": "source-review",
@@ -555,6 +555,644 @@
       "verification": {
         "method": "rubric-review",
         "evidence": "Week13 pp.3–13:O(1),O(log n),O(n),O(n log n),O(n²) บอกอัตราการโตไม่ใช่วินาที\n\nBig-O เป็น upperbound ไม่ได้มีความหมายว่า worst case โดยตัวมันเอง ต้องระบุว่าเรากำลัง boundbest/average/worst หรือ amortized แม้ 3n+2 เป็น O(n²) ได้แต่ใช้ tightbo"
+      }
+    }
+  ],
+  "history": [
+    {
+      "data": {
+        "version": 1,
+        "revision": 1,
+        "lesson": "oop-python-complexity-basic-sorting",
+        "title": "Basic Sorting และตัวนับ",
+        "questions": [
+          {
+            "id": "b-pass",
+            "type": "choice",
+            "prompt": "Bubble Sort เรียงน้อยไปมากจาก [5,3,8,1,2] โดยวนซ้ายไปขวา หนึ่ง pass แรกครบแล้วได้ลิสต์ใด?",
+            "reference": "bubble",
+            "choices": [
+              {
+                "id": "a",
+                "text": "[3,5,1,2,8]"
+              },
+              {
+                "id": "b",
+                "text": "[1,2,3,5,8]"
+              },
+              {
+                "id": "c",
+                "text": "[3,5,8,1,2]"
+              }
+            ],
+            "answer": "a",
+            "explanation": "เปรียบคู่ติดกัน: 5/3 สลับ, 5/8 ไม่สลับ, 8/1 สลับ, 8/2 สลับ จึงได้ [3,5,1,2,8] ค่าสูงสุด 8 อยู่ท้ายแล้ว แต่ทั้งลิสต์ยังไม่จำเป็นต้องเรียง"
+          },
+          {
+            "id": "b-stability",
+            "type": "choice",
+            "prompt": "Selection Sort แบบสลับ minimum กับตำแหน่งต้นในบทเรียน เรียง [(2,A),(2,B),(1,C)] ตาม key ตัวเลขแล้วได้อะไร?",
+            "reference": "selection",
+            "choices": [
+              {
+                "id": "a",
+                "text": "[(1,C),(2,A),(2,B)] เสมอ"
+              },
+              {
+                "id": "b",
+                "text": "[(1,C),(2,B),(2,A)] จึงไม่ stable"
+              },
+              {
+                "id": "c",
+                "text": "ทำไม่ได้เพราะมี key เท่ากัน"
+              }
+            ],
+            "answer": "b",
+            "explanation": "รอบแรกสลับ C กับ A ได้ C,B,A ทำให้ B มาก่อน A ทั้งที่ key=2 เท่ากัน แสดง counterexample ว่า implementation นี้ไม่ stable"
+          },
+          {
+            "id": "b-space",
+            "type": "choice",
+            "prompt": "ถ้า core ของ Basic Sort ใช้ auxiliary space O(1) แต่ฟังก์ชันตัวอย่าง copy input n รายการก่อนเรียง พื้นที่เพิ่มเติมของฟังก์ชันทั้งตัวคืออะไร?",
+            "reference": "complexity",
+            "choices": [
+              {
+                "id": "a",
+                "text": "O(1) เพราะ core ไม่สร้าง array ใหม่"
+              },
+              {
+                "id": "b",
+                "text": "O(log n) เสมอ"
+              },
+              {
+                "id": "c",
+                "text": "O(n) เมื่อรวมสำเนา input"
+              }
+            ],
+            "answer": "c",
+            "explanation": "ต้องนับสำเนา input ขนาด n ด้วย จึงเป็น O(n) สำหรับฟังก์ชันทั้งตัว แม้ core แบบทำใน array เดิมจะใช้ O(1); หากเก็บทุก pass ยังอาจมี overhead มากขึ้น"
+          },
+          {
+            "id": "b-comparisons",
+            "type": "numeric",
+            "prompt": "Selection Sort ตามบทเรียน สำหรับ n=100 เปรียบเทียบ key ทั้งหมดกี่ครั้ง? ไม่นับการตรวจเงื่อนไข loop",
+            "reference": "selection",
+            "answer": 4950,
+            "absoluteTolerance": 0,
+            "relativeTolerance": 0,
+            "explanation": "จำนวนครั้งคือ 99+98+...+1 = 100×99/2 = 4950 เป็น key comparisons ไม่ใช่จำนวน swaps ซึ่งมีได้ไม่เกิน 99 ครั้ง"
+          },
+          {
+            "id": "b-swaps",
+            "type": "numeric",
+            "prompt": "Bubble Sort สำหรับ [5,3,8,1,2] ตามบทเรียน สลับค่าจริงทั้งหมดกี่ครั้ง?",
+            "reference": "bubble",
+            "answer": 7,
+            "absoluteTolerance": 0,
+            "relativeTolerance": 0,
+            "explanation": "มี inversions 7 คู่: (5,3),(5,1),(5,2),(3,1),(3,2),(8,1),(8,2) การสลับคู่ติดกันแต่ละครั้งแก้หนึ่ง inversion จึงมี 7 swaps ไม่ใช่ 10 comparisons"
+          },
+          {
+            "id": "b-trace",
+            "type": "self",
+            "prompt": "ไล่ Insertion Sort ของ [5,3,8,1,2] ทีละ pass พร้อมแยก key comparisons ออกจาก shifts แล้วอธิบาย best case",
+            "reference": "insertion",
+            "explanation": "หลังแต่ละ pass: [3,5,8,1,2], [3,5,8,1,2], [1,3,5,8,2], [1,2,3,5,8] ตามนิยามตัวนับในบทได้ 9 key comparisons และ 7 shifts ข้อมูลที่เรียงแล้วมี n−1 comparisons และไม่มี shift; ต้องระบุว่ากำลังนับ operation ใด",
+            "rubric": [
+              "แสดง sorted prefix หลังแต่ละ pass ถูกต้อง",
+              "นับ key comparisons 9 และ shifts 7 ตามเงื่อนไขโค้ด",
+              "อธิบาย best case โดยไม่สับสนกับเวลาหน่วยวินาที"
+            ]
+          },
+          {
+            "id": "oop-python-complexity-basic-sorting-exam-01",
+            "type": "choice",
+            "prompt": "Big-O โดยตัวมันเองแปลว่า worstcase เสมอหรือไม่?",
+            "reference": "complexity",
+            "choices": [
+              {
+                "text": "ไม่ เป็น upperbound ต้องระบุ case ที่กำลังวิเคราะห์",
+                "id": "a"
+              },
+              {
+                "text": "ใช่ทุกครั้ง",
+                "id": "b"
+              },
+              {
+                "text": "แปลเป็นวินาทีโดยตรง",
+                "id": "c"
+              }
+            ],
+            "answer": "a",
+            "explanation": "best/average/worst และ amortized เป็นคำถามเพิ่มจาก notation"
+          },
+          {
+            "id": "oop-python-complexity-basic-sorting-exam-02",
+            "type": "choice",
+            "prompt": "3n+2 เขียน O(n²) ได้แต่เหตุใด O(n) มีประโยชน์กว่า?",
+            "reference": "complexity",
+            "choices": [
+              {
+                "text": "O(n²) ผิดทางคณิตศาสตร์เสมอ",
+                "id": "a"
+              },
+              {
+                "text": "เป็น bound ที่แคบกว่าในกรณีนี้",
+                "id": "b"
+              },
+              {
+                "text": "ค่าคงที่ 3 ทำให้เป็น exponential",
+                "id": "c"
+              }
+            ],
+            "answer": "b",
+            "explanation": "ไม่สับสน upperbound ที่ถูกกับ bound ที่แสดง growth ได้ชัด"
+          },
+          {
+            "id": "oop-python-complexity-basic-sorting-exam-03",
+            "type": "numeric",
+            "prompt": "ฟังก์ชันจำนวน operations T(n)=3n+2 เมื่อ n=10 มีกี่ operations ตามโมเดลนี้?",
+            "reference": "complexity",
+            "answer": 32,
+            "absoluteTolerance": 0,
+            "relativeTolerance": 0,
+            "explanation": "แทน n ได้ 3×10+2=32 ไม่ใช่เวลาวินาที"
+          },
+          {
+            "id": "oop-python-complexity-basic-sorting-exam-04",
+            "type": "choice",
+            "prompt": "ลูป n ครั้งแต่ละรอบทำงานคงที่ ใช้ timegrowth ใด?",
+            "reference": "complexity",
+            "choices": [
+              {
+                "text": "O(n)",
+                "id": "a"
+              },
+              {
+                "text": "O(1)",
+                "id": "b"
+              },
+              {
+                "text": "O(n²) เสมอ",
+                "id": "c"
+              }
+            ],
+            "answer": "a",
+            "explanation": "นับจำนวนครั้งรวม ไม่ดูเพียงงานภายในหนึ่งรอบ"
+          },
+          {
+            "id": "oop-python-complexity-basic-sorting-exam-05",
+            "type": "choice",
+            "prompt": "Counter comparisons ในโค้ดบทนับอะไร?",
+            "reference": "python",
+            "choices": [
+              {
+                "text": "ทุก assignment รวมเป็น comparison",
+                "id": "a"
+              },
+              {
+                "text": "การเปรียบเทียบ keys ไม่รวม loop guards",
+                "id": "b"
+              },
+              {
+                "text": "เฉพาะการเทียบที่ทำให้ swap",
+                "id": "c"
+              }
+            ],
+            "answer": "b",
+            "explanation": "ต้องใช้กติกาเดียวกันก่อนเทียบ trace"
+          },
+          {
+            "id": "oop-python-complexity-basic-sorting-exam-06",
+            "type": "choice",
+            "prompt": "หนึ่ง pass ของ bubble ซ้ายไปขวาทำให้ส่วนใดถูกตำแหน่งเพิ่ม?",
+            "reference": "bubble",
+            "choices": [
+              {
+                "text": "minimum อยู่ตรงกลางเสมอ",
+                "id": "a"
+              },
+              {
+                "text": "ทุกค่าเรียงครบเสมอ",
+                "id": "b"
+              },
+              {
+                "text": "maximum ของส่วนยังไม่เรียงไปอยู่ท้าย",
+                "id": "c"
+              }
+            ],
+            "answer": "c",
+            "explanation": "suffix ที่จบแล้วโตขึ้นทีละ pass"
+          },
+          {
+            "id": "oop-python-complexity-basic-sorting-exam-07",
+            "type": "choice",
+            "prompt": "เมื่อใด early exit ของ bubble ปลอดภัยตาม implementation นี้?",
+            "reference": "bubble",
+            "choices": [
+              {
+                "text": "ครบ pass แล้วไม่มี swap เลย",
+                "id": "a"
+              },
+              {
+                "text": "เห็นคู่แรกเรียงแล้ว",
+                "id": "b"
+              },
+              {
+                "text": "เจอ maximum ครั้งแรก",
+                "id": "c"
+              }
+            ],
+            "answer": "a",
+            "explanation": "ต้องตรวจทั้งส่วนที่กำลังทำ ไม่หยุดก่อนครบ pass"
+          },
+          {
+            "id": "oop-python-complexity-basic-sorting-exam-08",
+            "type": "numeric",
+            "prompt": "Bubble บน[3,2,1]ซ้ายไปขวาตามบทมี swaps รวมกี่ครั้ง?",
+            "reference": "bubble",
+            "answer": 3,
+            "absoluteTolerance": 0,
+            "relativeTolerance": 0,
+            "explanation": "inversions มี(3,2),(3,1),(2,1) รวม 3 และ adjacentswap แก้ทีละคู่"
+          },
+          {
+            "id": "oop-python-complexity-basic-sorting-exam-09",
+            "type": "numeric",
+            "prompt": "Bubble มี early exit บน[1,2,3,4,5] เปรียบ key ทั้งหมดกี่ครั้ง?",
+            "reference": "bubble",
+            "answer": 4,
+            "absoluteTolerance": 0,
+            "relativeTolerance": 0,
+            "explanation": "pass แรกตรวจ 4 คู่แล้วไม่มี swap จึงหยุด"
+          },
+          {
+            "id": "oop-python-complexity-basic-sorting-exam-10",
+            "type": "choice",
+            "prompt": "Selection เลือก minimum จากช่วงใดในแต่ละ pass?",
+            "reference": "selection",
+            "choices": [
+              {
+                "text": "ส่วนที่ยังไม่เรียงด้านขวา",
+                "id": "a"
+              },
+              {
+                "text": "เฉพาะคู่ติดกันแรก",
+                "id": "b"
+              },
+              {
+                "text": "prefix ที่เรียงแล้วเท่านั้น",
+                "id": "c"
+              }
+            ],
+            "answer": "a",
+            "explanation": "นำ minimum มาวางหน้าส่วนยังไม่เรียง รักษา sorted prefix"
+          },
+          {
+            "id": "oop-python-complexity-basic-sorting-exam-11",
+            "type": "numeric",
+            "prompt": "Selection แบบ scanminimum เต็มส่วนสำหรับ n=6 มี key comparisons กี่ครั้ง?",
+            "reference": "selection",
+            "answer": 15,
+            "absoluteTolerance": 0,
+            "relativeTolerance": 0,
+            "explanation": "5+4+3+2+1=15 ไม่ขึ้นกับลำดับ input"
+          },
+          {
+            "id": "oop-python-complexity-basic-sorting-exam-12",
+            "type": "choice",
+            "prompt": "Selfswap เมื่อ minimum อยู่ตำแหน่งเดิมนับเป็น swap ในบทหรือไม่?",
+            "reference": "selection",
+            "choices": [
+              {
+                "text": "นับทุก assignment เป็น swap",
+                "id": "a"
+              },
+              {
+                "text": "นับเฉพาะ input เรียงแล้ว",
+                "id": "b"
+              },
+              {
+                "text": "ไม่ นับเฉพาะสลับคนละ index",
+                "id": "c"
+              }
+            ],
+            "answer": "c",
+            "explanation": "ต้องระบุ definition ของ counter ไม่เทียบตัวเลขข้าม convention"
+          },
+          {
+            "id": "oop-python-complexity-basic-sorting-exam-13",
+            "type": "choice",
+            "prompt": "เหตุใด selection แบบ swapminimum ข้ามตำแหน่งจึงอาจไม่ stable?",
+            "reference": "selection",
+            "choices": [
+              {
+                "text": "อาจข้ามสลับ recordskey เท่ากันจนลำดับเดิมเปลี่ยน",
+                "id": "a"
+              },
+              {
+                "text": "เพราะ comparison ใช้<เสมอจึง stable แน่นอน",
+                "id": "b"
+              },
+              {
+                "text": "เพราะทุก algorithm ที่ O(n²) ไม่ stable",
+                "id": "c"
+              }
+            ],
+            "answer": "a",
+            "explanation": "stability ขึ้นกับการย้าย records ไม่ใช่เพียง operator ของ comparison"
+          },
+          {
+            "id": "oop-python-complexity-basic-sorting-exam-14",
+            "type": "choice",
+            "prompt": "Insertion เก็บ key ไว้ก่อนเลื่อนสมาชิกเพราะอะไร?",
+            "reference": "insertion",
+            "choices": [
+              {
+                "text": "เพื่อเพิ่มข้อมูลใหม่อีกหนึ่งค่า",
+                "id": "a"
+              },
+              {
+                "text": "ป้องกันค่าที่จะแทรกถูกเขียนทับ",
+                "id": "b"
+              },
+              {
+                "text": "เพื่อลบ duplicates",
+                "id": "c"
+              }
+            ],
+            "answer": "b",
+            "explanation": "เลื่อนค่าที่มากกว่าทางขวาแล้วค่อยวาง key ในช่องว่าง"
+          },
+          {
+            "id": "oop-python-complexity-basic-sorting-exam-15",
+            "type": "numeric",
+            "prompt": "Insertion บน[4,3,2,1]แบบเลื่อนค่าที่มากกว่า มี shifts รวมกี่ครั้ง?",
+            "reference": "insertion",
+            "answer": 6,
+            "absoluteTolerance": 0,
+            "relativeTolerance": 0,
+            "explanation": "จำนวน inversions คือ 3+2+1=6 แต่ไม่เรียก shifts ทั้งหมดว่า swaps"
+          },
+          {
+            "id": "oop-python-complexity-basic-sorting-exam-16",
+            "type": "choice",
+            "prompt": "Insertion ที่เลื่อนเฉพาะค่ามากกว่า key รักษา tie อย่างไร?",
+            "reference": "insertion",
+            "choices": [
+              {
+                "text": "recordskey เท่ากันไม่ข้ามกัน",
+                "id": "a"
+              },
+              {
+                "text": "สลับเท่ากันทุกครั้ง",
+                "id": "b"
+              },
+              {
+                "text": "ลบ record หลังที่ key ซ้ำ",
+                "id": "c"
+              }
+            ],
+            "answer": "a",
+            "explanation": "strict>ในการเลื่อนช่วยให้ stable"
+          },
+          {
+            "id": "oop-python-complexity-basic-sorting-exam-17",
+            "type": "choice",
+            "prompt": "เรียงนักเรียนตามส่วนสูงที่เท่ากันแต่ต้องคงลำดับเดิม ต้องการคุณสมบัติใด?",
+            "reference": "applications",
+            "choices": [
+              {
+                "text": "Hashability",
+                "id": "a"
+              },
+              {
+                "text": "Stability",
+                "id": "b"
+              },
+              {
+                "text": "FIFO ของ heap เสมอ",
+                "id": "c"
+              }
+            ],
+            "answer": "b",
+            "explanation": "ตัวอย่าง lab ผูก key กับ records ที่มี identity ไม่ใช่เฉพาะตัวเลข"
+          },
+          {
+            "id": "oop-python-complexity-basic-sorting-exam-18",
+            "type": "choice",
+            "prompt": "days_left เมื่อ daily_usage=0 ในตัวอย่างใช้ policy ใด?",
+            "reference": "applications",
+            "choices": [
+              {
+                "text": "หาร 0 แล้วถือ 0 วัน",
+                "id": "a"
+              },
+              {
+                "text": "แก้ stock เป็น 0 เอง",
+                "id": "b"
+              },
+              {
+                "text": "คืน infinity เพื่อสื่อไม่หมดจากการใช้แบบนี้",
+                "id": "c"
+              }
+            ],
+            "answer": "c",
+            "explanation": "เป็น policy ที่ต้องประกาศ ไม่ใช้ตัวหารศูนย์เงียบๆ"
+          },
+          {
+            "id": "oop-python-complexity-basic-sorting-exam-19",
+            "type": "choice",
+            "prompt": "Benchmarkinput เล็กครั้งเดียวพิสูจน์ Big-O หรือไม่?",
+            "reference": "complexity",
+            "choices": [
+              {
+                "text": "ไม่ ต้องวิเคราะห์ growth และสมมติฐาน",
+                "id": "a"
+              },
+              {
+                "text": "พิสูจน์ทุก case",
+                "id": "b"
+              },
+              {
+                "text": "พิสูจน์ถ้าใช้เครื่องเร็ว",
+                "id": "c"
+              }
+            ],
+            "answer": "a",
+            "explanation": "เวลาแปรตาม environment และ constants ไม่ใช่ข้อพิสูจน์ asymptotic"
+          },
+          {
+            "id": "oop-python-complexity-basic-sorting-exam-20",
+            "type": "choice",
+            "prompt": "เก็บ snapshotarrayn ค่าทุก pass เพิ่ม space ได้อย่างไร?",
+            "reference": "python",
+            "choices": [
+              {
+                "text": "ไม่มีผลเพราะเป็น debug",
+                "id": "a"
+              },
+              {
+                "text": "อาจ O(n²) ใน trace แม้ core ใช้ O(1)extra",
+                "id": "b"
+              },
+              {
+                "text": "ลด space เสมอ",
+                "id": "c"
+              }
+            ],
+            "answer": "b",
+            "explanation": "ต้องแยก core,copyinput และ eventhistory"
+          },
+          {
+            "id": "oop-python-complexity-basic-sorting-exam-21",
+            "type": "self",
+            "prompt": "ตรวจ comparisons,swaps,shifts ของ sorters บน input เดียว",
+            "reference": "python",
+            "rubric": [
+              "นิยาม counter รวม failedkeycomparison หรือไม่",
+              "เก็บทุก pass และตรวจ invariant",
+              "ไม่เอา assignment ทุกตัวเรียกว่า swap"
+            ],
+            "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: นิยาม counter รวม failedkeycomparison หรือไม่ เก็บทุก pass และตรวจ invariant ไม่เอา assignment ทุกตัวเรียกว่า swap"
+          },
+          {
+            "id": "oop-python-complexity-basic-sorting-exam-22",
+            "type": "self",
+            "prompt": "อธิบายเหตุใด insertion เหมาะกับ near-sorted บางกรณี",
+            "reference": "insertion",
+            "rubric": [
+              "จำนวน shift เกี่ยวกับ inversions",
+              "bestcase ยังอ่าน key เปรียบเทียบตามโค้ด",
+              "ไม่อ้างเร็วที่สุดทุก n หรือทุก payload"
+            ],
+            "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: จำนวน shift เกี่ยวกับ inversions bestcase ยังอ่าน key เปรียบเทียบตามโค้ด ไม่อ้างเร็วที่สุดทุก n หรือทุก payload"
+          },
+          {
+            "id": "oop-python-complexity-basic-sorting-exam-23",
+            "type": "self",
+            "prompt": "ออกแบบ tests เรียง records ที่ key เท่ากันและทดสอบ input ไม่ถูกแก้",
+            "reference": "applications",
+            "rubric": [
+              "ติด identity แยกจาก key",
+              "ตรวจลำดับ tie หลังเรียง",
+              "แยก copywrapper จาก corein-place และต้นทุน memory"
+            ],
+            "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ติด identity แยกจาก key ตรวจลำดับ tie หลังเรียง แยก copywrapper จาก corein-place และต้นทุน memory"
+          },
+          {
+            "id": "oop-python-complexity-basic-sorting-exam-24",
+            "type": "self",
+            "prompt": "เปรียบ threebasicsorts ใน time/space/case โดยไม่จำเพียงตาราง",
+            "reference": "complexity",
+            "rubric": [
+              "bubble มี early exit ตามโค้ด",
+              "selectioncomparisons คงตาม n แม้เรียงแล้ว",
+              "insertionshift ตามข้อมูลและ trace มีต้นทุนเพิ่ม"
+            ],
+            "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: bubble มี early exit ตามโค้ด selectioncomparisons คงตาม n แม้เรียงแล้ว insertionshift ตามข้อมูลและ trace มีต้นทุนเพิ่ม"
+          }
+        ]
+      },
+      "topics": [
+        {
+          "id": "bubble",
+          "title": "Bubble Sort: Invariant และทุก Pass",
+          "ids": [
+            "b-pass",
+            "b-swaps",
+            "oop-python-complexity-basic-sorting-exam-06",
+            "oop-python-complexity-basic-sorting-exam-07",
+            "oop-python-complexity-basic-sorting-exam-08",
+            "oop-python-complexity-basic-sorting-exam-09"
+          ]
+        },
+        {
+          "id": "selection",
+          "title": "Selection Sort: เลือก Minimum",
+          "ids": [
+            "b-stability",
+            "b-comparisons",
+            "oop-python-complexity-basic-sorting-exam-10",
+            "oop-python-complexity-basic-sorting-exam-11",
+            "oop-python-complexity-basic-sorting-exam-12",
+            "oop-python-complexity-basic-sorting-exam-13"
+          ]
+        },
+        {
+          "id": "complexity",
+          "title": "Time, Space และ Cases",
+          "ids": [
+            "b-space",
+            "oop-python-complexity-basic-sorting-exam-01",
+            "oop-python-complexity-basic-sorting-exam-02",
+            "oop-python-complexity-basic-sorting-exam-03",
+            "oop-python-complexity-basic-sorting-exam-04",
+            "oop-python-complexity-basic-sorting-exam-19",
+            "oop-python-complexity-basic-sorting-exam-24"
+          ]
+        },
+        {
+          "id": "insertion",
+          "title": "Insertion Sort: รักษา Sorted Prefix",
+          "ids": [
+            "b-trace",
+            "oop-python-complexity-basic-sorting-exam-14",
+            "oop-python-complexity-basic-sorting-exam-15",
+            "oop-python-complexity-basic-sorting-exam-16",
+            "oop-python-complexity-basic-sorting-exam-22"
+          ]
+        },
+        {
+          "id": "python",
+          "title": "Python และกติกาตัวนับ",
+          "ids": [
+            "oop-python-complexity-basic-sorting-exam-05",
+            "oop-python-complexity-basic-sorting-exam-20",
+            "oop-python-complexity-basic-sorting-exam-21"
+          ]
+        },
+        {
+          "id": "applications",
+          "title": "Case Studies จาก Lab ที่มีจริง",
+          "ids": [
+            "oop-python-complexity-basic-sorting-exam-17",
+            "oop-python-complexity-basic-sorting-exam-18",
+            "oop-python-complexity-basic-sorting-exam-23"
+          ]
+        }
+      ],
+      "difficulty": {
+        "b-pass": "original",
+        "b-stability": "original",
+        "b-space": "original",
+        "b-comparisons": "original",
+        "b-swaps": "original",
+        "b-trace": "original",
+        "oop-python-complexity-basic-sorting-exam-01": "easy",
+        "oop-python-complexity-basic-sorting-exam-02": "easy",
+        "oop-python-complexity-basic-sorting-exam-03": "easy",
+        "oop-python-complexity-basic-sorting-exam-04": "easy",
+        "oop-python-complexity-basic-sorting-exam-05": "medium",
+        "oop-python-complexity-basic-sorting-exam-06": "easy",
+        "oop-python-complexity-basic-sorting-exam-07": "medium",
+        "oop-python-complexity-basic-sorting-exam-08": "medium",
+        "oop-python-complexity-basic-sorting-exam-09": "medium",
+        "oop-python-complexity-basic-sorting-exam-10": "easy",
+        "oop-python-complexity-basic-sorting-exam-11": "medium",
+        "oop-python-complexity-basic-sorting-exam-12": "medium",
+        "oop-python-complexity-basic-sorting-exam-13": "medium",
+        "oop-python-complexity-basic-sorting-exam-14": "medium",
+        "oop-python-complexity-basic-sorting-exam-15": "medium",
+        "oop-python-complexity-basic-sorting-exam-16": "medium",
+        "oop-python-complexity-basic-sorting-exam-17": "medium",
+        "oop-python-complexity-basic-sorting-exam-18": "medium",
+        "oop-python-complexity-basic-sorting-exam-19": "medium",
+        "oop-python-complexity-basic-sorting-exam-20": "medium",
+        "oop-python-complexity-basic-sorting-exam-21": "hard",
+        "oop-python-complexity-basic-sorting-exam-22": "hard",
+        "oop-python-complexity-basic-sorting-exam-23": "hard",
+        "oop-python-complexity-basic-sorting-exam-24": "hard"
       }
     }
   ]

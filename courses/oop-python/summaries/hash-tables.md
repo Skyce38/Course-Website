@@ -27,7 +27,7 @@ Linear probing สำรวจ(index+step)%capacity ใน array เดียว
 ## Load Factor และ Resizing {#load}
 pp.18–20:α=size/capacity เช่น 3/4=.75 เป็น threshold ที่ source เลือก ไม่ใช่ค่ากฎตายตัวทุก library Chaining อาจมีα>1 ได้เพราะหนึ่ง bucket เก็บหลาย entry แต่ประสิทธิภาพเปลี่ยนตาม chain ส่วน open addressing ต้องมีช่องหรือ policyfull ที่ชัด
 
-ตัวอย่าง chaining ขยาย 2 เท่าก่อนเพิ่ม key ใหม่ที่จะทำให้α>.75 และไม่ resize เพียง updatekey เดิม (policy ผู้เขียนชัดเจน ต่างจาก source ที่ตรวจ load ปัจจุบันก่อนทุก insert) ต้อง rehash ด้วย capacity ใหม่ ไม่ copyentries ไว้ index เดิมเฉยๆ Rehash หนึ่งครั้ง O(n+capacity) แต่ลำดับการโตเรขาคณิตให้ amortizedO(1)insert เมื่อ hash/equals คงที่และกระจายเหมาะสม ไม่รับรอง worst case ของแต่ละ call
+ตัวอย่าง chaining ขยาย 2 เท่าก่อนเพิ่ม key ใหม่ที่จะทำให้α>.75 และไม่ resize เพียง updatekey เดิม (policy ผู้เขียนชัดเจน ต่างจาก source ที่ตรวจ load ปัจจุบันก่อนทุก insert) ต้อง rehash ด้วย capacity ใหม่ ไม่ copyentries ไว้ index เดิมเฉยๆ Rehash หนึ่งครั้งมีต้นทุนคาดหมาย O(n+capacity) เมื่อ hash กระจายเหมาะสม สำหรับโค้ดด้านล่างที่นำ entry กลับผ่าน insert ซึ่งตรวจ equality ใน bucket หากทุก key ชนกัน การ rebuild อาจใช้ O(n²+capacity) ไม่ใช่ linear worst case ส่วนลำดับการโตเรขาคณิตให้ expected amortizedO(1)insert เมื่อ hash/equals คงที่และกระจายเหมาะสม ไม่รับรอง worst case ของแต่ละ call
 
 ## Python: สอง Models ที่ตรวจ Edge Cases {#python}
 ตัวอย่าง Linear Probing (LP) ใช้ capacity คงที่ เมื่อเต็มจะเกิด OverflowError โดยไม่ขยายเอง ส่วน Chaining ขยายขนาดอัตโนมัติตาม policy ที่อธิบายไว้ข้างต้น

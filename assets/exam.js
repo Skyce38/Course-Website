@@ -9,36 +9,38 @@
   let config=E.clean(bank,null),persistent=true,locked=false,stale=false,notice='',mounted,lastRaw=null;
   function newer(v){return v&&(v.version>1||v.version===1&&v.revision>bank.data.revision)}
   let raw;try{raw=localStorage.getItem(key);lastRaw=raw}catch{persistent=false;notice='unavailable'}
-  if(raw)try{const parsed=JSON.parse(raw);locked=newer(parsed);config=E.clean(bank,parsed);if(locked)notice='newer';else if(!parsed||parsed.version!==1||parsed.revision!==bank.data.revision||config.sessions.length!==parsed.sessions?.length||!config.current)notice='recovered'}catch{notice='recovered'}
-  const ui=node('div','exam-controls'),help=node('p','practice-note'),modeLabel=node('label'),mode=node('select'),topicLabel=node('label'),topic=node('select'),countLabel=node('label'),count=node('select'),start=node('button','icon-button'),pastLabel=node('label'),past=node('select'),status=node('p','exam-status'),active=node('p','practice-note'),host=node('div','exam-host');
+  if(raw)try{const parsed=JSON.parse(raw);locked=newer(parsed);config=E.clean(bank,parsed);if(locked)notice='newer';else if(!parsed||parsed.version!==1||!E.forRevision(bank,parsed.revision)||config.sessions.length!==parsed.sessions?.length||!config.current)notice='recovered';else if(parsed.revision<bank.data.revision)notice='updated'}catch{notice='recovered'}
+  const ui=node('div','exam-controls'),help=node('p','practice-note'),modeLabel=node('label'),mode=node('select'),topicLabel=node('label'),topic=node('select'),countLabel=node('label'),count=node('select'),start=node('button','icon-button'),pastLabel=node('label'),past=node('select'),status=node('p','exam-status'),active=node('p','practice-note'),archiveNote=node('p','practice-note'),host=node('div','exam-host');
   status.setAttribute('role','status');status.setAttribute('aria-live','polite');start.type='button';
   for(const [label,input,name]of [[modeLabel,mode,'mode'],[topicLabel,topic,'topic'],[countLabel,count,'count'],[pastLabel,past,'sessions']]){input.id='exam-select-'+name;label.htmlFor=input.id;const wrap=node('div','exam-field');wrap.append(label,input);ui.append(wrap)}
   const add=(select,value)=>{const o=node('option');o.value=String(value);select.append(o);return o};
   const modes=[add(mode,'topic'),add(mode,'mock')];for(const topicData of bank.topics){const o=add(topic,topicData.id);o.textContent=topicData.title;o.lang='th'}
   topic.value=(bank.topics.find(t=>!['practice','sources','summary'].includes(t.id))||bank.topics[0]).id;
   for(const size of [10,20,30])if(size<=bank.data.questions.length)add(count,size).textContent=String(size);add(count,'full');
-  root.append(help,ui,start,status,active,host);root.querySelector('.exam-fallback').hidden=true;
+  root.append(help,ui,start,status,active,archiveNote,host);root.querySelector('.exam-fallback').hidden=true;
   function writeConfig(){
-   if(locked||stale)return;try{const live=localStorage.getItem(key);let old;try{old=JSON.parse(live||'null')}catch{}if(newer(old)){locked=true;notice='newer';return}if(live!==lastRaw){stale=true;notice='other';return}const value=JSON.stringify(config);localStorage.setItem(key,value);lastRaw=value}catch{persistent=false;notice='unavailable'}
+   if(locked||stale)return;try{const live=localStorage.getItem(key);let old;try{old=JSON.parse(live||'null')}catch{}if(newer(old)){locked=true;notice='newer';return}if(live!==lastRaw){stale=true;notice='other';return}
+    if(old?.version===1&&old.revision<bank.data.revision){const backup='skyce-learning-exam-config-history-v1:'+bank.data.lesson+':r'+old.revision;if(localStorage.getItem(backup)===null)localStorage.setItem(backup,live)}
+    const value=JSON.stringify(config);localStorage.setItem(key,value);lastRaw=value}catch{persistent=false;notice='unavailable'}
   }
-  function options(){const selected=past.value;past.replaceChildren();for(const [i,s]of config.sessions.entries()){const o=add(past,s.token);o.textContent=(i+1)+' · '+tx(s.mode==='topic'?'topicMode':'mockMode')+' · '+s.ids.length+(s.mode==='topic'?' · '+bank.topics.find(t=>t.id===s.topic).title:'')}past.value=config.current||selected;past.disabled=!config.sessions.length;past.setAttribute('aria-disabled',String(locked||stale))}
+  function options(){const selected=past.value;past.replaceChildren();for(const [i,s]of config.sessions.entries()){const context=E.sessionBank(bank,s),o=add(past,s.token);o.textContent=(i+1)+' · '+tx(s.mode==='topic'?'topicMode':'mockMode')+' · '+s.ids.length+(s.mode==='topic'?' · '+context.topics.find(t=>t.id===s.topic).title:'')+(s.revision?' · '+tx('archived')+' '+s.revision:'')}past.value=config.current||selected;past.disabled=!config.sessions.length;past.setAttribute('aria-disabled',String(locked||stale))}
   function render(){
    root.querySelector('[data-i18n=examTitle]').textContent=tx('title');help.textContent=tx('help');modeLabel.textContent=tx('mode');topicLabel.textContent=tx('topic');countLabel.textContent=tx('count');pastLabel.textContent=tx('sessions');start.textContent=tx('start');start.setAttribute('aria-disabled',String(locked||stale));
    modes[0].textContent=tx('topicMode');modes[1].textContent=tx('mockMode');count.querySelector('[value=full]').textContent=tx('full');topic.disabled=mode.value!=='topic';count.disabled=mode.value==='topic';topicLabel.parentElement.hidden=topic.disabled;countLabel.parentElement.hidden=count.disabled;pastLabel.parentElement.hidden=config.sessions.length<2;
    status.textContent=notice?tx(notice):!persistent?tx('unavailable'):!config.current?tx('empty'):'';status.hidden=!status.textContent;
-   const s=config.sessions.find(s=>s.token===config.current);active.textContent=s?tx('active')+': '+tx(s.mode==='topic'?'topicMode':'mockMode')+' · '+s.ids.length:'';active.hidden=!s;options();
+   const s=config.sessions.find(s=>s.token===config.current);active.textContent=s?tx('active')+': '+tx(s.mode==='topic'?'topicMode':'mockMode')+' · '+s.ids.length:'';active.hidden=!s;archiveNote.textContent=s?.revision?tx('archiveNotice'):'';archiveNote.hidden=!archiveNote.textContent;options();
   }
   function open(){
    mounted?.destroy();host.replaceChildren();const s=config.sessions.find(s=>s.token===config.current);if(!s)return;
    mode.value=s.mode;if(s.mode==='topic')topic.value=s.topic;else count.value=String(s.count);
-   const run=node('div','practice-mode exam-run');host.append(run);mounted=StudyPractice.mount(run,E.subset(bank,s.ids),{storageKey:runPrefix+s.token,idPrefix:'exam-',questionLabel:q=>bank.difficulty[q.id]==='original'?tx('original'):tx('difficulty')+': '+tx(bank.difficulty[q.id])});
+   const context=E.sessionBank(bank,s),run=node('div','practice-mode exam-run');host.append(run);mounted=StudyPractice.mount(run,E.subset(context,s.ids),{storageKey:runPrefix+s.token,idPrefix:'exam-',questionLabel:q=>context.difficulty[q.id]==='original'?tx('original'):tx('difficulty')+': '+tx(context.difficulty[q.id])});
   }
   start.onclick=()=>{
    if(locked||stale)return;
    const selectionMode=mode.value,selectedTopic=selectionMode==='topic'?topic.value:'all',selectedCount=selectionMode==='topic'?'full':count.value==='full'?'full':Number(count.value);
    const bytes=new Uint32Array(4);crypto.getRandomValues(bytes);const token=Array.from(bytes,n=>n.toString(36)).join('-');
    const s={token,mode:selectionMode,topic:selectedTopic,count:selectedCount,ids:E.choose(bank,selectionMode,selectedTopic,selectedCount)};
-   const before=config,removed=config.sessions.length===10?config.sessions[0]:null;config={...config,sessions:[...config.sessions,s].slice(-10),current:token};notice='';writeConfig();
+   const before=config,currentSessions=config.sessions.filter(s=>!s.revision),removed=currentSessions.length===10?currentSessions[0]:null;config=E.clean(bank,{...config,sessions:[...config.sessions,s],current:token});notice='';writeConfig();
    if(locked||stale){config=before;render();return}
    if(removed&&persistent&&!locked)try{localStorage.removeItem(runPrefix+removed.token)}catch{persistent=false}
    open();render();

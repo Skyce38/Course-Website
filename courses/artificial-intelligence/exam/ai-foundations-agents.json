@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "revision": 1,
+  "revision": 2,
   "lesson": "artificial-intelligence-ai-foundations-agents",
   "baseRevision": 1,
   "questions": [
@@ -194,26 +194,26 @@
       }
     },
     {
-      "id": "artificial-intelligence-ai-foundations-agents-exam-08",
+      "id": "artificial-intelligence-ai-foundations-agents-exam-08-r2",
       "type": "choice",
-      "prompt": "คำกล่าวเกี่ยวกับกฎหมายในหน้า 7 ควรใช้เป็นข้อสอบข้อเท็จจริงปัจจุบันหรือไม่?",
+      "prompt": "ความเห็นใน S01 หน้า 7 ว่า ChatGPT ปี 2023 น่าจะทำได้ตามคำทำนาย Turing เป็นหลักฐานผลทดลองปัจจุบันหรือไม่?",
       "reference": "turing-limitations",
       "choices": [
         {
-          "text": "ควรถือเป็นกฎหมายทุกประเทศ",
-          "id": "a"
+          "id": "a",
+          "text": "เป็นหลักฐานรับรองทุกเวอร์ชันและทุกวิธีทดสอบ"
         },
         {
-          "text": "ไม่ควร หลักฐานในสไลด์ยังไม่ยืนยันข้อกล่าวนั้น",
-          "id": "b"
+          "id": "b",
+          "text": "ไม่ใช่ หน้านั้นไม่ได้ให้วิธีทดลอง กลุ่มตัวอย่าง หรือผลคะแนนที่ตรวจสอบได้"
         },
         {
-          "text": "ควรถือว่าใช้ตลอดไป",
-          "id": "c"
+          "id": "c",
+          "text": "เป็นหลักฐานยืนยันจิตสำนึกเพราะสนทนาห้านาที"
         }
       ],
       "answer": "b",
-      "explanation": "บทระบุความไม่แน่นอน ต้องตรวจแหล่งกฎหมายแยก ไม่ขยายข้อความสไลด์เป็นข้อเท็จจริงสากล",
+      "explanation": "หน้า 7 เป็นความเห็นเรื่อง Turing Test/ChatGPT ไม่ใช่ข้อกล่าวกฎหมาย และไม่มี protocol หรือผลทดลองพอรับรองความสามารถปัจจุบัน ต้องแยกคำทำนาย ความเห็น และข้อมูลทดสอบ",
       "difficulty": "medium",
       "verification": {
         "method": "source-review",
@@ -577,6 +577,734 @@
       "verification": {
         "method": "rubric-review",
         "evidence": "**จากหน้า 8:** สไลด์ชี้ว่าพฤติกรรมมนุษย์บางอย่างไม่ฉลาด พฤติกรรมที่ฉลาดบางอย่างไม่เหมือนมนุษย์ ผู้สังเกตอาจถูกหลอกได้ง่าย และความคาดหวังมีผลต่อการตัดสิน อีกกับดักคือการมองระบบเป็นมนุษย์ (Anthropomorphic Fallacy)\n\nสไลด์ยก ELIZA ปี 1964 เป็นต"
+      }
+    }
+  ],
+  "history": [
+    {
+      "data": {
+        "version": 1,
+        "revision": 1,
+        "lesson": "artificial-intelligence-ai-foundations-agents",
+        "title": "AI Foundations และ Agents: เกณฑ์และหลักฐาน",
+        "questions": [
+          {
+            "id": "aa-scope",
+            "type": "choice",
+            "prompt": "โปรแกรมหมากรุกที่เก่งมากเป็นหลักฐานเพียงพอว่าเป็น AGI ตามนิยามในบทหรือไม่?",
+            "reference": "scope",
+            "choices": [
+              {
+                "id": "a",
+                "text": "เพียงพอ เพราะชนะเกมหนึ่งเกมแปลว่าทำงานทางปัญญาทุกชนิดได้"
+              },
+              {
+                "id": "b",
+                "text": "ยังไม่พอ ผลเฉพาะงานรองรับ Narrow AI แต่ยังไม่ยืนยันความสามารถทั่วไปของ AGI"
+              },
+              {
+                "id": "c",
+                "text": "AGI หมายถึงหุ่นยนต์ที่มีรูปร่างเหมือนคนเท่านั้น"
+              }
+            ],
+            "answer": "b",
+            "explanation": "ต้องแยกขอบเขตความสามารถเฉพาะงานกับทั่วไป ความเก่งหมากรุกอย่างเดียวไม่รับรองทุกงาน และรูปร่างหุ่นยนต์ไม่ใช่นิยาม AGI"
+          },
+          {
+            "id": "aa-approaches",
+            "type": "choice",
+            "prompt": "ถ้าจะตรวจว่าระบบคิดเหมือนมนุษย์จริง ไม่ใช่แค่ตอบเหมือนกัน ควรเลือกแนวทางใดจากสี่แนวทาง?",
+            "reference": "four-approaches",
+            "choices": [
+              {
+                "id": "a",
+                "text": "Acting humanly โดยดูผลลัพธ์สนทนาเพียงอย่างเดียว"
+              },
+              {
+                "id": "b",
+                "text": "Acting rationally โดยนิยาม utility เท่านั้น"
+              },
+              {
+                "id": "c",
+                "text": "Thinking humanly โดยตั้งสมมติฐานกระบวนการรู้คิดและเทียบข้อมูลมนุษย์"
+              }
+            ],
+            "answer": "c",
+            "explanation": "Thinking humanly สนใจ process และหลักฐานเกี่ยวกับมนุษย์ ต่างจาก Acting humanly ที่ดูพฤติกรรมภายนอก Thinking rationally ใช้ตรรกะ ส่วน Acting rationally มุ่งการกระทำตามเป้าหมาย/utility ไม่สลับเกณฑ์เหล่านี้จากคำตอบเหมือนกันอย่างเดียว"
+          },
+          {
+            "id": "aa-turing",
+            "type": "choice",
+            "prompt": "การสนทนาดูเหมือนมนุษย์และข้อโต้แย้ง Chinese Room ช่วยสรุปเรื่องความเข้าใจภายในอย่างไร?",
+            "reference": "turing-test",
+            "choices": [
+              {
+                "id": "a",
+                "text": "พฤติกรรมเลียนแบบอย่างเดียวไม่ยืนยันความเข้าใจ;Chinese Room ชวนแยกการจัดการสัญลักษณ์จากความหมาย ไม่ใช่บทพิสูจน์ว่าทุก AI ไม่มีความเข้าใจ"
+              },
+              {
+                "id": "b",
+                "text": "ผ่าน Turing Test แล้วพิสูจน์ความเข้าใจภายในทุกแบบได้"
+              },
+              {
+                "id": "c",
+                "text": "Chinese Room เป็นผลทดลองที่วัดทุกระบบ AI ครบแล้ว"
+              }
+            ],
+            "answer": "a",
+            "explanation": "ต้องระบุว่าเกณฑ์ประเมินอะไร การเลียนแบบพฤติกรรมไม่เพียงพอจะยืนยันกระบวนการ/ความหมายภายใน และข้อโต้แย้งทางปรัชญาไม่ใช่ผลทดลองครอบคลุมทุก AI ไม่ยกความเห็นที่ขาดหลักฐานในหน้า 7 เป็นข้อเท็จจริงพิสูจน์แล้ว"
+          },
+          {
+            "id": "aa-utility",
+            "type": "numeric",
+            "prompt": "ใช้ตัวอย่างหุ่นยนต์ที่ผู้เขียนสร้างในบท: ทาง B มี utility70 เมื่อทางเปิด(P=.7) และ 50 เมื่อกีดขวาง(P=.3) เหตุการณ์ครอบคลุมทั้งหมด จงหา Expected Utility ของ B",
+            "reference": "utility-example",
+            "answer": 64,
+            "absoluteTolerance": 0,
+            "relativeTolerance": 0,
+            "explanation": "EU(B)=.7×70+.3×50=49+15=64 ส่วน A ที่ให้ 100/−100 ตามตัวอย่างได้ 40 จึงเลือก B ภายใต้สมมติฐานนี้ ตัวเลขตารางเป็นตัวอย่างผู้เขียน ไม่ใช่ผลทดลองหรือข้อมูลจากสไลด์"
+          },
+          {
+            "id": "aa-ml",
+            "type": "choice",
+            "prompt": "ข้อใดอธิบาย AI,ML,DL ตามบทโดยไม่เหมารวมเทคนิคทั้งหมด?",
+            "reference": "ai-ml",
+            "choices": [
+              {
+                "id": "a",
+                "text": "ทุก AI ต้องเรียนรู้จากข้อมูลและเป็น DL"
+              },
+              {
+                "id": "b",
+                "text": "ML เป็นส่วนหนึ่งของ AI และ DL เป็นส่วนหนึ่งของ ML;ระบบ AI บางแบบไม่ใช่ ML"
+              },
+              {
+                "id": "c",
+                "text": "DL อยู่นอก AI เพราะใช้ neuralnetworks"
+              }
+            ],
+            "answer": "b",
+            "explanation": "แยกขอบเขต AI ที่รวมแนวทางแก้ปัญหาหลายแบบจาก ML ที่เรียนจากข้อมูล และ DL เป็นส่วนย่อยหนึ่งของ ML ไม่ใช้คำ AI/ML/DL แทนกันทุกกรณี"
+          },
+          {
+            "id": "aa-agent",
+            "type": "self",
+            "prompt": "วิเคราะห์รถที่รับรู้คนข้ามถนนแล้วหยุด: แยก percept, action, objective และอธิบาย bounded rationality กับสิ่งที่ต้นฉบับยังไม่ตอบ",
+            "reference": "agents",
+            "explanation": "คนข้ามที่รับรู้เป็น percept การหยุดเป็น action เป้าหมายอาจกำหนดว่าไปถึงปลายทางอย่างปลอดภัย ต้องประเมินด้วยข้อมูล/ทรัพยากรและเกณฑ์ที่ประกาศ ไม่ใช่รู้อนาคตทุกกรณี อย่าตอบ objective เฉพาะของ ChatGPT เป็น official key จากหน้า 16 เพราะ source ไม่ได้เฉลย และความเห็นหน้า 7 ไม่มีหลักฐานทดลองครบ",
+            "rubric": [
+              "แยก percept/action/objective อย่างสอดคล้อง scenario",
+              "อธิบาย boundedrationality และ uncertainty โดยไม่รับรองผลลัพธ์สมบูรณ์",
+              "แยกตัวอย่าง/คำอธิบายผู้เขียนกับคำถามที่ source ยังไม่เฉลย"
+            ]
+          },
+          {
+            "id": "artificial-intelligence-ai-foundations-agents-exam-01",
+            "type": "choice",
+            "prompt": "ภาพ ASIMO เพียงอย่างเดียวยืนยันสิ่งใดได้?",
+            "reference": "intelligence",
+            "choices": [
+              {
+                "text": "เป็นตัวอย่างหุ่นยนต์ ไม่พิสูจน์ความฉลาดทุกด้าน",
+                "id": "a"
+              },
+              {
+                "text": "ระบบเข้าใจทุกภาษา",
+                "id": "b"
+              },
+              {
+                "text": "AI ทุกระบบต้องมีร่างกาย",
+                "id": "c"
+              }
+            ],
+            "answer": "a",
+            "explanation": "ต้องระบุงานและวิธีประเมิน ไม่ตัดสินความสามารถจากรูปร่าง"
+          },
+          {
+            "id": "artificial-intelligence-ai-foundations-agents-exam-02",
+            "type": "choice",
+            "prompt": "AGI กับ Artificial Superintelligence ต่างกันที่เกณฑ์ใด?",
+            "reference": "scope",
+            "choices": [
+              {
+                "text": "ขนาดตัวเครื่องเท่านั้น",
+                "id": "a"
+              },
+              {
+                "text": "ความสามารถทั่วไปเทียบมนุษย์ กับความสามารถเหนือมนุษย์",
+                "id": "b"
+              },
+              {
+                "text": "มีหรือไม่มีอินเทอร์เน็ต",
+                "id": "c"
+              }
+            ],
+            "answer": "b",
+            "explanation": "สองคำเป็นขอบเขตความสามารถเชิงสมมติ ไม่ใช่ระดับผลิตภัณฑ์ที่สไลด์พิสูจน์แล้ว"
+          },
+          {
+            "id": "artificial-intelligence-ai-foundations-agents-exam-03",
+            "type": "choice",
+            "prompt": "ระบบให้ข้อสรุปตามกฎตรรกะถูกต้อง ควรวัดด้วยแนวทางใด?",
+            "reference": "four-approaches",
+            "choices": [
+              {
+                "text": "Acting humanly",
+                "id": "a"
+              },
+              {
+                "text": "Thinking humanly",
+                "id": "b"
+              },
+              {
+                "text": "Thinking rationally",
+                "id": "c"
+              }
+            ],
+            "answer": "c",
+            "explanation": "เน้นความถูกต้องของการอนุมาน ไม่ใช่ความคล้ายพฤติกรรมมนุษย์"
+          },
+          {
+            "id": "artificial-intelligence-ai-foundations-agents-exam-04",
+            "type": "choice",
+            "prompt": "เกณฑ์ Acting rationally ต้องพิจารณาสิ่งใดเป็นหลัก?",
+            "reference": "four-approaches",
+            "choices": [
+              {
+                "text": "การกระทำที่เหมาะกับเป้าหมายและข้อมูลที่มี",
+                "id": "a"
+              },
+              {
+                "text": "การเลียนแบบคำพูดมนุษย์เสมอ",
+                "id": "b"
+              },
+              {
+                "text": "การใช้ตรรกะโดยไม่ดูผลลัพธ์",
+                "id": "c"
+              }
+            ],
+            "answer": "a",
+            "explanation": "ความมีเหตุผลผูกกับเป้าหมายและหลักฐาน ไม่รับรองผลดีที่สุดเมื่อข้อมูลไม่ครบ"
+          },
+          {
+            "id": "artificial-intelligence-ai-foundations-agents-exam-05",
+            "type": "choice",
+            "prompt": "ได้คำตอบเดียวกับมนุษย์ทุกข้อ พิสูจน์กระบวนการคิดเหมือนมนุษย์หรือไม่?",
+            "reference": "cognition",
+            "choices": [
+              {
+                "text": "พอ เพราะผลเท่ากัน",
+                "id": "a"
+              },
+              {
+                "text": "ยังไม่พอ ต้องมีหลักฐานกระบวนการภายใน",
+                "id": "b"
+              },
+              {
+                "text": "พอเมื่อใช้ข้อมูลจำนวนมาก",
+                "id": "c"
+              }
+            ],
+            "answer": "b",
+            "explanation": "ผลลัพธ์เดียวกันเกิดจากกระบวนการต่างกันได้ ต้องแยกการประเมินผลกับแบบจำลองการรู้คิด"
+          },
+          {
+            "id": "artificial-intelligence-ai-foundations-agents-exam-06",
+            "type": "choice",
+            "prompt": "ผู้ตัดสิน Turing Test ในภาพใช้หลักฐานแบบใด?",
+            "reference": "turing-test",
+            "choices": [
+              {
+                "text": "ตรวจน้ำหนักเครือข่ายโดยตรง",
+                "id": "a"
+              },
+              {
+                "text": "ตรวจรูปทรงร่างกาย",
+                "id": "b"
+              },
+              {
+                "text": "การโต้ตอบผ่านข้อความกับคู่สนทนา",
+                "id": "c"
+              }
+            ],
+            "answer": "c",
+            "explanation": "เป็นเกณฑ์พฤติกรรมในการสื่อสาร ไม่ใช่การตรวจกลไกภายใน"
+          },
+          {
+            "id": "artificial-intelligence-ai-foundations-agents-exam-07",
+            "type": "choice",
+            "prompt": "ด้านใดอยู่ในความสามารถสี่กลุ่มที่สไลด์เชื่อมกับ Turing Test?",
+            "reference": "turing-test",
+            "choices": [
+              {
+                "text": "Natural Language Processing",
+                "id": "a"
+              },
+              {
+                "text": "การมีแขนกลเสมอ",
+                "id": "b"
+              },
+              {
+                "text": "การเคลื่อนที่ด้วยล้อเสมอ",
+                "id": "c"
+              }
+            ],
+            "answer": "a",
+            "explanation": "สี่กลุ่มคือ NLP, Knowledge Representation, Automated Reasoning และ Machine Learning"
+          },
+          {
+            "id": "artificial-intelligence-ai-foundations-agents-exam-08",
+            "type": "choice",
+            "prompt": "คำกล่าวเกี่ยวกับกฎหมายในหน้า 7 ควรใช้เป็นข้อสอบข้อเท็จจริงปัจจุบันหรือไม่?",
+            "reference": "turing-limitations",
+            "choices": [
+              {
+                "text": "ควรถือเป็นกฎหมายทุกประเทศ",
+                "id": "a"
+              },
+              {
+                "text": "ไม่ควร หลักฐานในสไลด์ยังไม่ยืนยันข้อกล่าวนั้น",
+                "id": "b"
+              },
+              {
+                "text": "ควรถือว่าใช้ตลอดไป",
+                "id": "c"
+              }
+            ],
+            "answer": "b",
+            "explanation": "บทระบุความไม่แน่นอน ต้องตรวจแหล่งกฎหมายแยก ไม่ขยายข้อความสไลด์เป็นข้อเท็จจริงสากล"
+          },
+          {
+            "id": "artificial-intelligence-ai-foundations-agents-exam-09",
+            "type": "choice",
+            "prompt": "อนุมานถูกต้องตามกฎ แต่ premise ผิด รับรองข้อสรุปจริงได้หรือไม่?",
+            "reference": "logic",
+            "choices": [
+              {
+                "text": "ได้เสมอ",
+                "id": "a"
+              },
+              {
+                "text": "ได้ถ้ารันเร็วพอ",
+                "id": "b"
+              },
+              {
+                "text": "ไม่ได้ ความสมเหตุผลของรูปแบบไม่รับรอง premise",
+                "id": "c"
+              }
+            ],
+            "answer": "c",
+            "explanation": "ต้องตรวจทั้งข้ออ้างตั้งต้นและกฎ ไม่สับสนรูปแบบที่ถูกกับข้อมูลที่จริง"
+          },
+          {
+            "id": "artificial-intelligence-ai-foundations-agents-exam-10",
+            "type": "choice",
+            "prompt": "ตัวกระทำมีเหตุผลเลือกทางที่คาดว่าดีที่สุดแล้วเกิดเหตุร้าย แปลว่าไม่มีเหตุผลเสมอหรือไม่?",
+            "reference": "rational-action",
+            "choices": [
+              {
+                "text": "ไม่เสมอ ต้องประเมินข้อมูลที่รู้ขณะตัดสินใจ",
+                "id": "a"
+              },
+              {
+                "text": "ใช่ เพราะต้องชนะทุกครั้ง",
+                "id": "b"
+              },
+              {
+                "text": "ใช่ เพราะต้องทำนายอนาคตได้",
+                "id": "c"
+              }
+            ],
+            "answer": "a",
+            "explanation": "เหตุผลภายใต้ความไม่แน่นอนต่างจากการรู้ผลลัพธ์ล่วงหน้า"
+          },
+          {
+            "id": "artificial-intelligence-ai-foundations-agents-exam-11",
+            "type": "numeric",
+            "prompt": "ตัวอย่างผู้เขียน: A ได้ utility 100 ด้วยโอกาส .4 และ 20 ด้วยโอกาส .6 จงหา Expected Utility",
+            "reference": "utility-example",
+            "answer": 52,
+            "absoluteTolerance": 0,
+            "relativeTolerance": 0,
+            "explanation": "คำนวณ .4×100+.6×20=52 ไม่ใช่ค่าเฉลี่ยไม่ถ่วงน้ำหนัก"
+          },
+          {
+            "id": "artificial-intelligence-ai-foundations-agents-exam-12",
+            "type": "numeric",
+            "prompt": "ตัวอย่างผู้เขียน: ทางปลอดภัยมี utility 60 แน่นอน อีกทางได้ 100 ด้วยโอกาส .5 และ 0 ด้วยโอกาส .5 ค่าคาดหมายทางปลอดภัยมากกว่ากี่หน่วย?",
+            "reference": "utility-example",
+            "answer": 10,
+            "absoluteTolerance": 0,
+            "relativeTolerance": 0,
+            "explanation": "อีกทางมีค่าเฉลี่ยถ่วงน้ำหนัก 50 ส่วนทางปลอดภัย 60 จึงต่าง 10"
+          },
+          {
+            "id": "artificial-intelligence-ai-foundations-agents-exam-13",
+            "type": "choice",
+            "prompt": "เซนเซอร์รายงานคนเดินถนน คำสั่งเบรก และการลดอุบัติเหตุ ตรงกับอะไรตามลำดับ?",
+            "reference": "agents",
+            "choices": [
+              {
+                "text": "Percept, Action, Objective",
+                "id": "a"
+              },
+              {
+                "text": "Action, Objective, Percept",
+                "id": "b"
+              },
+              {
+                "text": "Objective, Percept, Action",
+                "id": "c"
+              }
+            ],
+            "answer": "a",
+            "explanation": "ข้อมูลที่รับ การทำที่เลือก และเกณฑ์ความสำเร็จเป็นคนละบทบาท"
+          },
+          {
+            "id": "artificial-intelligence-ai-foundations-agents-exam-14",
+            "type": "choice",
+            "prompt": "เหตุใด percept จึงไม่เท่ากับสถานะจริงทั้งหมดของ environment?",
+            "reference": "agents",
+            "choices": [
+              {
+                "text": "percept เป็นเป้าหมายเสมอ",
+                "id": "a"
+              },
+              {
+                "text": "การรับรู้อาจไม่ครบหรือคลาดเคลื่อน",
+                "id": "b"
+              },
+              {
+                "text": "environment ต้องอยู่ภายในโปรแกรม",
+                "id": "c"
+              }
+            ],
+            "answer": "b",
+            "explanation": "ตัวกระทำใช้ข้อมูลสังเกต ไม่จำเป็นต้องเห็นโลกทุกส่วน"
+          },
+          {
+            "id": "artificial-intelligence-ai-foundations-agents-exam-15",
+            "type": "choice",
+            "prompt": "ระบบตรรกะที่ใช้กฎกำหนดไว้และไม่มีการเรียนจากข้อมูล อาจเป็น AI ได้หรือไม่?",
+            "reference": "ai-ml",
+            "choices": [
+              {
+                "text": "ไม่ได้ AI เท่ากับ ML เท่านั้น",
+                "id": "a"
+              },
+              {
+                "text": "ได้เฉพาะเมื่อใช้ CNN",
+                "id": "b"
+              },
+              {
+                "text": "ได้ AI ไม่ได้จำกัดว่าทุกระบบต้องเป็น ML",
+                "id": "c"
+              }
+            ],
+            "answer": "c",
+            "explanation": "บทใช้ความสัมพันธ์ DL เป็นส่วนหนึ่งของ ML และ ML เป็นส่วนหนึ่งของ AI ไม่ใช่ทุก AI ใช้การเรียนรู้"
+          },
+          {
+            "id": "artificial-intelligence-ai-foundations-agents-exam-16",
+            "type": "choice",
+            "prompt": "KNN ที่เรียนจากตัวอย่างแต่ไม่มีเครือข่ายหลายชั้น ควรจัดอย่างไร?",
+            "reference": "ai-ml",
+            "choices": [
+              {
+                "text": "เป็น ML แต่ไม่จำเป็นต้องเป็น Deep Learning",
+                "id": "a"
+              },
+              {
+                "text": "เป็น DL โดยนิยาม",
+                "id": "b"
+              },
+              {
+                "text": "อยู่นอก AI ทั้งหมด",
+                "id": "c"
+              }
+            ],
+            "answer": "a",
+            "explanation": "ML มีหลายตระกูล ไม่ใช้จำนวนข้อมูลเป็นเกณฑ์นิยาม Deep Learning"
+          },
+          {
+            "id": "artificial-intelligence-ai-foundations-agents-exam-17",
+            "type": "choice",
+            "prompt": "กำหนดเป้าหมายรถให้ถึงปลายทางเร็วที่สุดอย่างเดียว ข้อใดเป็นความเสี่ยง?",
+            "reference": "car-example",
+            "choices": [
+              {
+                "text": "ความเร็วรับรองความปลอดภัยเอง",
+                "id": "a"
+              },
+              {
+                "text": "เกณฑ์อาจไม่สะท้อนข้อจำกัดความปลอดภัย",
+                "id": "b"
+              },
+              {
+                "text": "ระบบไม่ต้องรับ percept อีก",
+                "id": "c"
+              }
+            ],
+            "answer": "b",
+            "explanation": "การเลือก objective ผิดอาจให้พฤติกรรมไม่พึงประสงค์ แม้ optimizer ทำตามเกณฑ์"
+          },
+          {
+            "id": "artificial-intelligence-ai-foundations-agents-exam-18",
+            "type": "choice",
+            "prompt": "คำตอบคล่องของ LLM เป็นหลักฐานเพียงพอของความจริงทุกข้อความหรือไม่?",
+            "reference": "llm-example",
+            "choices": [
+              {
+                "text": "ใช่ เพราะภาษาเป็นธรรมชาติ",
+                "id": "a"
+              },
+              {
+                "text": "ใช่ ถ้าคำตอบยาว",
+                "id": "b"
+              },
+              {
+                "text": "ไม่ ต้องตรวจหลักฐานและขอบเขตงาน",
+                "id": "c"
+              }
+            ],
+            "answer": "c",
+            "explanation": "ความคล้ายภาษามนุษย์ไม่รับรองความถูกต้องหรือความเข้าใจทุกบริบท"
+          },
+          {
+            "id": "artificial-intelligence-ai-foundations-agents-exam-19",
+            "type": "numeric",
+            "prompt": "ตัวอย่างผู้เขียน: utility สำเร็จ 90 ล้มเหลว 10 โดย P(สำเร็จ)=.75 จงหาค่าคาดหมาย",
+            "reference": "utility-example",
+            "answer": 70,
+            "absoluteTolerance": 0,
+            "relativeTolerance": 0,
+            "explanation": "ใช้สองเหตุการณ์ที่ครอบคลุมกัน .75×90+.25×10=70"
+          },
+          {
+            "id": "artificial-intelligence-ai-foundations-agents-exam-20",
+            "type": "choice",
+            "prompt": "คำถามเปิดท้ายสไลด์หน้า 16 ควรนำเสนอเฉลยที่ผู้เขียนเสนออย่างไร?",
+            "reference": "source-examples",
+            "choices": [
+              {
+                "text": "ระบุว่าเป็นเฉลยอาจารย์",
+                "id": "a"
+              },
+              {
+                "text": "ติดป้ายเป็นการวิเคราะห์เสริม ไม่ใช่คำตอบทางการ",
+                "id": "b"
+              },
+              {
+                "text": "อ้างคะแนนสอบที่แน่นอน",
+                "id": "c"
+              }
+            ],
+            "answer": "b",
+            "explanation": "แหล่งให้คำถาม ไม่ได้ให้ official answer key จึงต้องแยกที่มาของคำตอบ"
+          },
+          {
+            "id": "artificial-intelligence-ai-foundations-agents-exam-21",
+            "type": "self",
+            "prompt": "ออกแบบการประเมินระบบตอบคำถามให้แยก Thinking humanly กับ Acting humanly โดยไม่ใช้คะแนนผลลัพธ์แทนกระบวนการ",
+            "reference": "four-approaches",
+            "rubric": [
+              "ระบุงานและพฤติกรรมที่สังเกตได้",
+              "เสนอหลักฐานกระบวนการรู้คิดเพิ่มเติม",
+              "อธิบายข้อจำกัดของการอนุมานจากคำตอบเดียวกัน"
+            ],
+            "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: ระบุงานและพฤติกรรมที่สังเกตได้ เสนอหลักฐานกระบวนการรู้คิดเพิ่มเติม อธิบายข้อจำกัดของการอนุมานจากคำตอบเดียวกัน"
+          },
+          {
+            "id": "artificial-intelligence-ai-foundations-agents-exam-22",
+            "type": "self",
+            "prompt": "เสนอทางเลือกสามทางในสถานการณ์ที่มีความไม่แน่นอน พร้อมวิธีตรวจ expected utility โดยไม่อ้างว่าเป็นผลในสไลด์",
+            "reference": "utility-example",
+            "rubric": [
+              "กำหนดเหตุการณ์และความน่าจะเป็นรวมเป็น 1",
+              "คูณ utility แต่ละเหตุการณ์แล้วรวม",
+              "แยกสมมติฐานผู้เขียนจากข้อมูลต้นฉบับ"
+            ],
+            "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: กำหนดเหตุการณ์และความน่าจะเป็นรวมเป็น 1 คูณ utility แต่ละเหตุการณ์แล้วรวม แยกสมมติฐานผู้เขียนจากข้อมูลต้นฉบับ"
+          },
+          {
+            "id": "artificial-intelligence-ai-foundations-agents-exam-23",
+            "type": "self",
+            "prompt": "ตรวจข้ออ้างตั้งต้นและขั้นอนุมานของระบบกฎ แล้วอธิบายว่าความถูกของตรรกะต่างจากประสิทธิภาพอย่างไร",
+            "reference": "logic-example",
+            "rubric": [
+              "แสดง premises และกฎที่ใช้",
+              "แยก validity กับความจริงของข้อมูล",
+              "ระบุข้อจำกัดด้านเวลาและการแทนความรู้"
+            ],
+            "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: แสดง premises และกฎที่ใช้ แยก validity กับความจริงของข้อมูล ระบุข้อจำกัดด้านเวลาและการแทนความรู้"
+          },
+          {
+            "id": "artificial-intelligence-ai-foundations-agents-exam-24",
+            "type": "self",
+            "prompt": "วิจารณ์การใช้ Turing Test และ Chinese Room เพื่อกล่าวว่าระบบหนึ่งมีหรือไม่มีความเข้าใจแน่นอน",
+            "reference": "turing-limitations",
+            "rubric": [
+              "แยกการทดสอบพฤติกรรมกับข้อโต้แย้งเชิงปรัชญา",
+              "ไม่ใช้ผลสนทนาเป็นหลักฐานกลไกภายในทั้งหมด",
+              "รักษาข้อจำกัดของคำกล่าวหน้า 7 และคำถามเปิดหน้า 16"
+            ],
+            "explanation": "แนวประเมินที่ผู้เขียนจัดทำ: แยกการทดสอบพฤติกรรมกับข้อโต้แย้งเชิงปรัชญา ไม่ใช้ผลสนทนาเป็นหลักฐานกลไกภายในทั้งหมด รักษาข้อจำกัดของคำกล่าวหน้า 7 และคำถามเปิดหน้า 16"
+          }
+        ]
+      },
+      "topics": [
+        {
+          "id": "scope",
+          "title": "ขอบเขตความสามารถสามแบบ",
+          "ids": [
+            "aa-scope",
+            "artificial-intelligence-ai-foundations-agents-exam-02"
+          ]
+        },
+        {
+          "id": "four-approaches",
+          "title": "สี่แนวทางในการนิยาม AI",
+          "ids": [
+            "aa-approaches",
+            "artificial-intelligence-ai-foundations-agents-exam-03",
+            "artificial-intelligence-ai-foundations-agents-exam-04",
+            "artificial-intelligence-ai-foundations-agents-exam-21"
+          ]
+        },
+        {
+          "id": "turing-test",
+          "title": "Turing Test และสิ่งที่การทดสอบบอกไม่ได้",
+          "ids": [
+            "aa-turing",
+            "artificial-intelligence-ai-foundations-agents-exam-06",
+            "artificial-intelligence-ai-foundations-agents-exam-07"
+          ]
+        },
+        {
+          "id": "utility-example",
+          "title": "ตัวอย่างคำนวณที่เขียนเพิ่ม ไม่ใช่ข้อมูลจากสไลด์",
+          "ids": [
+            "aa-utility",
+            "artificial-intelligence-ai-foundations-agents-exam-11",
+            "artificial-intelligence-ai-foundations-agents-exam-12",
+            "artificial-intelligence-ai-foundations-agents-exam-19",
+            "artificial-intelligence-ai-foundations-agents-exam-22"
+          ]
+        },
+        {
+          "id": "ai-ml",
+          "title": "AI, Machine Learning และ Deep Learning",
+          "ids": [
+            "aa-ml",
+            "artificial-intelligence-ai-foundations-agents-exam-15",
+            "artificial-intelligence-ai-foundations-agents-exam-16"
+          ]
+        },
+        {
+          "id": "agents",
+          "title": "ตัวกระทำอัจฉริยะและวงจรสิ่งแวดล้อม",
+          "ids": [
+            "aa-agent",
+            "artificial-intelligence-ai-foundations-agents-exam-13",
+            "artificial-intelligence-ai-foundations-agents-exam-14"
+          ]
+        },
+        {
+          "id": "intelligence",
+          "title": "เริ่มจากความฉลาด ไม่ใช่รูปร่างของหุ่นยนต์",
+          "ids": [
+            "artificial-intelligence-ai-foundations-agents-exam-01"
+          ]
+        },
+        {
+          "id": "cognition",
+          "title": "การรู้คิดและคำถามเรื่องจิตสำนึก",
+          "ids": [
+            "artificial-intelligence-ai-foundations-agents-exam-05"
+          ]
+        },
+        {
+          "id": "turing-limitations",
+          "title": "ข้อวิจารณ์และห้องจีน",
+          "ids": [
+            "artificial-intelligence-ai-foundations-agents-exam-08",
+            "artificial-intelligence-ai-foundations-agents-exam-24"
+          ]
+        },
+        {
+          "id": "logic",
+          "title": "การคิดด้วยตรรกะและข้อจำกัด",
+          "ids": [
+            "artificial-intelligence-ai-foundations-agents-exam-09"
+          ]
+        },
+        {
+          "id": "rational-action",
+          "title": "การกระทำอย่างมีเหตุผลและอรรถประโยชน์",
+          "ids": [
+            "artificial-intelligence-ai-foundations-agents-exam-10"
+          ]
+        },
+        {
+          "id": "car-example",
+          "title": "รถยนต์ขับเคลื่อนอัตโนมัติ",
+          "ids": [
+            "artificial-intelligence-ai-foundations-agents-exam-17"
+          ]
+        },
+        {
+          "id": "llm-example",
+          "title": "การบ้านและแบบจำลองภาษา (LLM)",
+          "ids": [
+            "artificial-intelligence-ai-foundations-agents-exam-18"
+          ]
+        },
+        {
+          "id": "source-examples",
+          "title": "ตัวอย่างจากสไลด์: รถยนต์และ LLM",
+          "ids": [
+            "artificial-intelligence-ai-foundations-agents-exam-20"
+          ]
+        },
+        {
+          "id": "logic-example",
+          "title": "ตัวอย่างเรียนหนักแล้วได้ A จริงหรือไม่",
+          "ids": [
+            "artificial-intelligence-ai-foundations-agents-exam-23"
+          ]
+        }
+      ],
+      "difficulty": {
+        "aa-scope": "original",
+        "aa-approaches": "original",
+        "aa-turing": "original",
+        "aa-utility": "original",
+        "aa-ml": "original",
+        "aa-agent": "original",
+        "artificial-intelligence-ai-foundations-agents-exam-01": "easy",
+        "artificial-intelligence-ai-foundations-agents-exam-02": "easy",
+        "artificial-intelligence-ai-foundations-agents-exam-03": "easy",
+        "artificial-intelligence-ai-foundations-agents-exam-04": "easy",
+        "artificial-intelligence-ai-foundations-agents-exam-05": "medium",
+        "artificial-intelligence-ai-foundations-agents-exam-06": "easy",
+        "artificial-intelligence-ai-foundations-agents-exam-07": "easy",
+        "artificial-intelligence-ai-foundations-agents-exam-08": "medium",
+        "artificial-intelligence-ai-foundations-agents-exam-09": "medium",
+        "artificial-intelligence-ai-foundations-agents-exam-10": "medium",
+        "artificial-intelligence-ai-foundations-agents-exam-11": "medium",
+        "artificial-intelligence-ai-foundations-agents-exam-12": "medium",
+        "artificial-intelligence-ai-foundations-agents-exam-13": "medium",
+        "artificial-intelligence-ai-foundations-agents-exam-14": "medium",
+        "artificial-intelligence-ai-foundations-agents-exam-15": "medium",
+        "artificial-intelligence-ai-foundations-agents-exam-16": "medium",
+        "artificial-intelligence-ai-foundations-agents-exam-17": "medium",
+        "artificial-intelligence-ai-foundations-agents-exam-18": "medium",
+        "artificial-intelligence-ai-foundations-agents-exam-19": "medium",
+        "artificial-intelligence-ai-foundations-agents-exam-20": "medium",
+        "artificial-intelligence-ai-foundations-agents-exam-21": "hard",
+        "artificial-intelligence-ai-foundations-agents-exam-22": "hard",
+        "artificial-intelligence-ai-foundations-agents-exam-23": "hard",
+        "artificial-intelligence-ai-foundations-agents-exam-24": "hard"
       }
     }
   ]
