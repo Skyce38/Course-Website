@@ -1,0 +1,259 @@
+/* Phase 10: presentation only. Classic and print keep their existing styles. */
+.modern-section-link,.modern-practice-entry,.practice-position-track,.modern-home-label,.library-app .modern-practice-entry-tab{display:none}
+@media screen {
+html:root[data-layout=modern] body{
+  --ui-canvas:color-mix(in srgb,var(--paper) 88%,var(--bg));
+  --ui-panel:var(--paper);--ui-selected:var(--soft);
+  --ui-divider:color-mix(in srgb,var(--ink) 14%,var(--paper));
+  --ui-radius:8px;--dashboard-line:var(--ui-divider);--reader-line:var(--ui-divider);
+  background:var(--ui-canvas);font-family:"Segoe UI",Tahoma,"Leelawadee UI",sans-serif;
+  color:var(--ink);line-height:1.8;
+}
+html:root[data-layout=modern] :is(button,input,select,textarea){font-family:inherit}
+html:root[data-layout=modern] :is(a,button,input,select,textarea,summary):focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+html:root[data-layout=modern] :is(.sidebar,.topbar,.foundation-header){background:var(--ui-panel);border-color:var(--ui-divider)}
+html:root[data-layout=modern] :is(.library-app,.html-reader) .sidebar{width:248px;padding:20px 14px;box-shadow:none}
+html:root[data-layout=modern] :is(.library-app,.html-reader) .workspace{margin-left:248px}
+html:root[data-layout=modern] :is(.library-app,.html-reader) .brand{padding:0 6px 20px;border-color:var(--ui-divider);gap:10px}
+html:root[data-layout=modern] .brand strong{font-family:inherit;font-size:18px;letter-spacing:-.4px;line-height:1.35}
+html:root[data-layout=modern] .brand small{font-family:inherit;letter-spacing:0;font-size:12px;line-height:1.7}
+html:root[data-layout=modern] .brand-symbol{width:36px;height:36px;min-width:36px;border-radius:9px}
+html:root[data-layout=modern] .brand-symbol svg{width:36px;height:36px}
+html:root[data-layout=modern] :is(.icon-button,.read-link,.tool){border-radius:var(--ui-radius);min-height:44px;font-size:15px;line-height:1.55;box-shadow:none}
+html:root[data-layout=modern] :is(.icon-button,.tool):hover:not(:disabled){background:var(--ui-selected);color:var(--accent)}
+
+/* Library navigation and header. One shared route/search implementation. */
+html:root[data-layout=modern] .library-app .side-link{padding:9px 10px;min-height:44px;margin:3px 0;border:0;border-radius:7px;font-size:15px;gap:10px}
+html:root[data-layout=modern] .library-app .side-link.active{background:var(--ui-selected);color:var(--accent);box-shadow:none;font-weight:650}
+html:root[data-layout=modern] .library-app .side-icon{width:28px;min-width:28px;height:28px;border-radius:6px;font-size:12px;background:var(--ui-selected);color:var(--accent)}
+html:root[data-layout=modern] .library-app .side-icon:has(svg){background:none;font-size:0}
+html:root[data-layout=modern] .library-app .nav-label{font-family:inherit;font-size:13px;letter-spacing:0;font-weight:600;margin:22px 10px 10px;color:var(--muted)}
+html:root[data-layout=modern] .library-app .sidebar>.nav-label:first-of-type{display:none}
+html:root[data-layout=modern] .library-app .modern-nav-count{font-size:12px;background:none;padding:0;color:var(--muted)}
+html:root[data-layout=modern] .modern-section-link{display:flex}
+html:root[data-layout=modern] .modern-home-label{display:inline}
+html:root[data-layout=modern] .classic-home-label{display:none}
+html:root[data-layout=modern] .library-app .modern-practice-entry-tab{display:inline-flex}
+html:root[data-layout=modern] :is(#recent-reading,#course-collection,.modern-practice-entry){scroll-margin-top:160px}
+html:root[data-layout=modern] .library-app .side-bottom{border-color:var(--ui-divider);padding:16px 6px;font-size:12px}
+html:root[data-layout=modern] .library-app .topbar{grid-template-columns:minmax(90px,.55fr) minmax(220px,1fr) auto;gap:16px;padding:12px 28px;min-height:72px;border-color:var(--ui-divider)}
+html:root[data-layout=modern] .library-app .breadcrumbs{font-size:14px}
+html:root[data-layout=modern] .library-app #search{height:44px;border-radius:8px;background:var(--ui-canvas);font-size:15px}
+html:root[data-layout=modern] .library-app #clear-search{height:44px;min-width:44px;border-radius:8px}
+html:root[data-layout=modern] .library-app .top-actions .icon-button{min-height:44px;font-size:14px;padding:8px 10px}
+html:root[data-layout=modern] .library-app .top-actions [data-settings-link]{font-size:0;padding:0;width:44px;min-width:44px}
+html:root[data-layout=modern] .library-app .content{max-width:1392px;padding:26px 32px 48px}
+html:root[data-layout=modern] .library-app .hero{padding:0;margin:0 0 28px;border:0;background:none;border-radius:0;box-shadow:none}
+html:root[data-layout=modern] .library-app .modern-welcome h1{font-size:32px;line-height:1.4;letter-spacing:-.7px;margin:0 0 6px}
+html:root[data-layout=modern] .library-app .modern-welcome p{font-size:16px;line-height:1.85;max-width:850px}
+html:root[data-layout=modern] .library-app .dashboard-panels{grid-template-columns:minmax(0,1.7fr) minmax(230px,1fr);gap:24px;margin:0 0 30px}
+html:root[data-layout=modern] .library-app .recent-reading{padding:0;border:0;border-radius:0;background:none}
+html:root[data-layout=modern] .library-app .recent-reading .section-heading{margin:0 0 14px}
+html:root[data-layout=modern] .library-app .recent-reading .resource-list{max-height:none;overflow:visible;padding:0;border:1px solid var(--ui-divider);border-radius:8px}
+html:root[data-layout=modern] .library-app .recent-reading .resource-row{grid-template-columns:32px minmax(0,1fr) auto;padding:14px;gap:10px;background:var(--ui-panel)}
+html:root[data-layout=modern] .library-app .recent-reading .resource-buttons{grid-column:auto;justify-content:flex-start;flex-wrap:wrap}
+html:root[data-layout=modern] .library-app .recent-reading .resource-meta>span:not(:first-child){display:none}
+html:root[data-layout=modern] .library-app .modern-overview{padding:18px 20px;border-color:var(--ui-divider);border-radius:8px;box-shadow:none}
+html:root[data-layout=modern] .library-app :is(.recent-reading,.modern-overview) h2{font-size:21px;line-height:1.5;letter-spacing:-.2px}
+html:root[data-layout=modern] .library-app .modern-overview dl{gap:12px;margin:18px 0}
+html:root[data-layout=modern] .library-app .modern-stat{padding:0;background:none;border-radius:0;gap:4px}
+html:root[data-layout=modern] .library-app .modern-stat dd{font-size:25px;color:var(--ink)}
+html:root[data-layout=modern] .library-app .modern-stat dt{font-size:13px;line-height:1.6}
+html:root[data-layout=modern] .library-app .modern-progress{font-size:14px}
+html:root[data-layout=modern] .library-app .modern-progress progress{height:5px;margin-top:8px}
+html:root[data-layout=modern] .library-app .section-heading{margin:28px 0 16px;align-items:baseline}
+html:root[data-layout=modern] .library-app .section-heading h2{font-size:25px;line-height:1.5;letter-spacing:-.35px}
+html:root[data-layout=modern] .library-app .section-heading p{font-size:14px;line-height:1.7}
+
+/* Compact real-course tiles. Decorative course colors never override the palette. */
+html:root[data-layout=modern] .library-app .course-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+html:root[data-layout=modern] .library-app .course-card{position:relative;display:grid;grid-template-columns:40px minmax(0,1fr);column-gap:14px;row-gap:4px;min-height:0;padding:18px 30px 18px 18px;border-radius:8px;border-color:var(--ui-divider);background:var(--ui-panel);box-shadow:none;transition:none}
+html:root[data-layout=modern] .library-app .course-card::after{content:'›';position:absolute;inset:16px 12px auto auto;color:var(--accent);font-size:23px;line-height:1}
+html:root[data-layout=modern] .library-app .course-card:hover{border-color:var(--accent);background:var(--ui-panel);box-shadow:none;transform:none}
+html:root[data-layout=modern] .library-app .card-top{grid-column:1;grid-row:1/4;margin:0;align-items:start}
+html:root[data-layout=modern] .library-app .course-symbol{width:40px;height:40px;border:0;border-radius:7px;background:var(--ui-selected);color:var(--accent);font-size:14px}
+html:root[data-layout=modern] .library-app .modern-course-code{display:none}
+html:root[data-layout=modern] .library-app .course-card h3{grid-column:2;font-size:18px;line-height:1.55;margin:0}
+html:root[data-layout=modern] .library-app .course-thai{grid-column:2;font-size:14px;line-height:1.8;margin:0;color:var(--muted)}
+html:root[data-layout=modern] .library-app .card-tags{display:none}
+html:root[data-layout=modern] .library-app .modern-course-progress{grid-column:2;margin:10px 0 0}
+html:root[data-layout=modern] .library-app .card-footer{display:none}
+html:root[data-layout=modern] .library-app .card-footer>span:first-child{display:none}
+
+/* Document rows share action identity with the original library. */
+html:root[data-layout=modern] .library-app .resource-list{display:block;border:1px solid var(--ui-divider);border-radius:8px;overflow:hidden;background:var(--ui-panel)}
+html:root[data-layout=modern] .library-app .resource-row{grid-template-columns:32px minmax(0,1fr) auto;gap:14px;padding:16px 18px;border:0;border-bottom:1px solid var(--ui-divider);border-radius:0;background:var(--ui-panel)}
+html:root[data-layout=modern] .library-app .resource-row:last-child{border-bottom:0}
+html:root[data-layout=modern] .library-app .file-icon{width:32px;height:36px;border:0;border-radius:6px;background:var(--ui-selected);color:var(--accent);font-size:11px}
+html:root[data-layout=modern] .library-app .resource-main>a{font-size:16px;line-height:1.65;font-weight:600;overflow-wrap:break-word}
+html:root[data-layout=modern] .library-app .resource-meta{font-size:13px;line-height:1.8;gap:4px 12px;margin-top:4px}
+html:root[data-layout=modern] .library-app .resource-buttons{grid-column:auto;gap:6px}
+html:root[data-layout=modern] .library-app .resource-buttons :is(.study-complete,.bookmark){display:grid;place-items:center;padding:0;width:44px;height:44px;min-width:44px;border-radius:8px;background:transparent;border-color:transparent;color:var(--muted)}
+html:root[data-layout=modern] .library-app .resource-buttons :is(.study-complete,.bookmark):hover{background:var(--ui-selected);color:var(--accent);border-color:var(--accent)}
+html:root[data-layout=modern] .library-app .resource-buttons :is(.study-complete,.bookmark)[aria-pressed=true]{background:var(--ui-selected);color:var(--accent);border-color:transparent}
+html:root[data-layout=modern] .library-app .resource-buttons :is(.study-complete,.bookmark) svg{display:block;width:20px;height:20px}
+html:root[data-layout=modern] .library-app .resource-buttons .read-link{padding:8px 10px;border:0;background:transparent;color:var(--accent);font-size:14px;min-height:44px;white-space:normal}
+html:root[data-layout=modern] .library-app .resource-buttons .read-link:hover{background:var(--ui-selected)}
+html:root[data-layout=modern] .library-app .course-header{background:none;border:0;padding:0;margin:16px 0;gap:16px;border-radius:0}
+html:root[data-layout=modern] .library-app .course-header .eyebrow{display:none}
+html:root[data-layout=modern] .library-app .course-header .course-symbol{width:48px;height:48px;flex:none}
+html:root[data-layout=modern] .library-app .course-header h1{font-size:32px;line-height:1.45;margin:0 0 4px}
+html:root[data-layout=modern] .library-app .course-header p{font-size:16px;line-height:1.8}
+html:root[data-layout=modern] .library-app .course-progress{border:1px solid var(--ui-divider);border-radius:8px;padding:16px 20px;gap:20px;background:var(--ui-panel);margin:22px 0}
+html:root[data-layout=modern] .library-app .course-progress h2{font-size:18px;line-height:1.6}
+html:root[data-layout=modern] .library-app .course-progress .progress-summary{margin:3px 0;font-size:14px}
+html:root[data-layout=modern] .library-app .course-progress progress{height:5px}
+html:root[data-layout=modern] .library-app .course-toolbar{font-size:13px;margin:14px 0 0}
+html:root[data-layout=modern] .library-app .category-tabs{gap:4px;border-bottom:1px solid var(--ui-divider);margin:8px 0 20px;padding:0 0 4px;flex-wrap:wrap}
+html:root[data-layout=modern] .library-app .category-tab{padding:10px 12px;border:0;border-bottom:2px solid transparent;border-radius:0;font-size:14px;min-height:44px;background:none;color:var(--muted)}
+html:root[data-layout=modern] .library-app .category-tab.active{background:none;color:var(--accent);border-color:var(--accent);font-weight:650}
+html:root[data-layout=modern] .library-app .category-tab span{font-size:12px}
+html:root[data-layout=modern] .library-app .category-tab[data-count="0"]{display:none}
+html:root[data-layout=modern] .library-app .category-tabs #refresh{border:0;background:transparent;min-height:44px;width:44px}
+html:root[data-layout=modern] .library-app .quick-banner{display:none}
+html:root[data-layout=modern] .modern-practice-entry{display:block;margin:28px 0}
+html:root[data-layout=modern] .modern-practice-entry h2{font-size:24px;line-height:1.5;margin:0 0 6px}
+html:root[data-layout=modern] .modern-practice-entry p{font-size:14px;color:var(--muted);margin:0 0 14px}
+html:root[data-layout=modern] .practice-destinations{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+html:root[data-layout=modern] .practice-destination{padding:16px;border:1px solid var(--ui-divider);border-radius:8px;background:var(--ui-panel);min-width:0}
+html:root[data-layout=modern] .practice-destination strong{display:block;font-size:16px;line-height:1.7;margin-bottom:8px}
+html:root[data-layout=modern] .practice-destination nav{display:flex;flex-wrap:wrap;gap:6px 18px}
+html:root[data-layout=modern] .practice-destination a{font-size:14px;display:inline-flex;align-items:center;min-height:44px}
+html:root[data-layout=modern] .library-app .empty{border:1px dashed var(--ui-divider);border-radius:8px}
+
+/* Readers retain their source HTML, anchors, one TOC scroll region and exact resume. */
+html:root[data-layout=modern] .html-reader .topbar{padding:12px 28px;min-height:72px;gap:12px;background:var(--ui-panel)}
+html:root[data-layout=modern] .html-reader .sidebar{display:flex;flex-direction:column;height:100dvh;overflow:hidden}
+html:root[data-layout=modern] .html-reader .reader-toc{flex:1;min-height:0;max-height:none;overflow-y:auto;overflow-x:hidden;padding:4px;scrollbar-width:thin;overscroll-behavior:contain}
+html:root[data-layout=modern] .html-reader .reader-toc a{padding:9px 10px;min-height:44px;margin:1px 0;border-radius:6px;font-size:14px;line-height:1.75;white-space:normal;overflow-wrap:break-word;color:var(--muted)}
+html:root[data-layout=modern] .html-reader .reader-toc a.sub{font-size:13px;padding-inline-start:22px}
+html:root[data-layout=modern] .html-reader .reader-toc a.is-current{background:var(--ui-selected);color:var(--accent);box-shadow:none;font-weight:650}
+html:root[data-layout=modern] .html-reader .reader-contents-label{font-family:inherit;font-size:13px;letter-spacing:0;margin:20px 10px 10px}
+html:root[data-layout=modern] .html-reader .lesson-course-back a{font-size:14px;line-height:1.75}
+html:root[data-layout=modern] .html-reader .content{padding:24px 32px 60px}
+html:root[data-layout=modern] .html-reader .reader-content{max-width:calc(var(--reader-width) + 100px)}
+html:root[data-layout=modern] .html-reader .reader-top{margin-bottom:18px;gap:12px}
+html:root[data-layout=modern] .html-reader .reader-font{gap:6px}
+html:root[data-layout=modern] .html-reader .study-reader-actions{padding:0 0 16px;margin:0 0 18px;border:0;border-bottom:1px solid var(--ui-divider);border-radius:0;background:none;gap:8px;flex-wrap:wrap}
+html:root[data-layout=modern] .html-reader .reading-page{padding:0;border:0;border-radius:0;background:none;max-width:var(--reader-width);box-shadow:none}
+html:root[data-layout=modern] .lesson-reader.html-reader .prose{font-size:var(--text-size);line-height:1.95;overflow-wrap:break-word;word-break:normal}
+html:root[data-layout=modern] .lesson-reader.html-reader .prose h1{font-size:clamp(28px,2.5vw,36px);line-height:1.55;letter-spacing:-.45px;margin:0 0 22px}
+html:root[data-layout=modern] .lesson-reader.html-reader .prose h2{font-size:clamp(25px,2.2vw,28px);line-height:1.6;margin:1.65em 0 .7em;padding-top:.85em;border-color:var(--ui-divider)}
+html:root[data-layout=modern] .lesson-reader.html-reader .prose h3{font-size:23px;line-height:1.65;margin:1.4em 0 .65em}
+html:root[data-layout=modern] .lesson-reader.html-reader .prose p{margin:.9em 0}
+html:root[data-layout=modern] .html-reader .prose blockquote{background:var(--ui-panel);border-inline-start:3px solid var(--accent);padding:6px 18px;border-radius:0;margin:22px 0;color:var(--muted)}
+html:root[data-layout=modern] .html-reader .code-viewer{border-color:var(--ui-divider);border-radius:8px;box-shadow:none}
+html:root[data-layout=modern] .html-reader .prose pre{border-color:var(--ui-divider);border-radius:8px;padding:18px;line-height:1.75}
+html:root[data-layout=modern] .html-reader .code-viewer pre{padding:0;border-radius:0}
+html:root[data-layout=modern] .html-reader .code-toolbar{background:var(--ui-panel);border-color:var(--ui-divider)}
+html:root[data-layout=modern] .html-reader .table-scroll{border-radius:8px;border-color:var(--ui-divider)}
+html:root[data-layout=modern] .html-reader .prose :is(td,th){border-color:var(--ui-divider);padding:.7em .85em;line-height:1.8}
+html:root[data-layout=modern] .html-reader .lesson-math-block{border-radius:8px;background:var(--ui-panel);border-color:var(--ui-divider);padding:18px}
+html:root[data-layout=modern] .html-reader .chapter{border-radius:8px;border-color:var(--ui-divider);box-shadow:none}
+
+/* One question surface; no grading, answer metadata or persistence changes. */
+html:root[data-layout=modern] .lesson-reader :is(.practice-mode,.exam-mode){border:0;border-top:1px solid var(--ui-divider);border-radius:0;padding:26px 0;margin:36px 0 0;background:none;box-shadow:none;font-size:var(--text-size);scroll-margin-top:0}
+html:root[data-layout=modern] .practice-mode h2{font-size:28px;line-height:1.5;margin-bottom:12px}
+html:root[data-layout=modern] .practice-navigation{margin:18px 0 10px;gap:12px}
+html:root[data-layout=modern] .practice-position{font-size:15px;font-weight:600}
+html:root[data-layout=modern] .practice-position-track{display:block;appearance:none;width:100%;height:5px;border:0;border-radius:4px;overflow:hidden;background:var(--ui-selected);accent-color:var(--accent);margin:8px 0 20px}
+html:root[data-layout=modern] .practice-position-track::-webkit-progress-bar{background:var(--ui-selected)}
+html:root[data-layout=modern] .practice-position-track::-webkit-progress-value{background:var(--accent);border-radius:4px}
+html:root[data-layout=modern] .practice-position-track::-moz-progress-bar{background:var(--accent)}
+html:root[data-layout=modern] .practice-score{font-size:17px;font-variant-numeric:tabular-nums;margin:12px 0 4px}
+html:root[data-layout=modern] .practice-mode .practice-note{font-size:max(14px,.85em);line-height:1.85}
+html:root[data-layout=modern] .practice-mode fieldset{border:0;border-bottom:1px solid var(--ui-divider);border-radius:0;background:none;margin:22px 0 12px;padding:0 0 18px;min-width:0}
+html:root[data-layout=modern] .practice-mode legend{float:left;width:100%;padding:0;margin:0 0 18px;font-size:1.08em;line-height:1.9;font-weight:650;white-space:pre-wrap;overflow-wrap:break-word}
+html:root[data-layout=modern] .practice-mode legend+*{clear:both}
+html:root[data-layout=modern] .practice-mode fieldset>label:not(.practice-option){display:block}
+html:root[data-layout=modern] .practice-option{padding:12px 14px;margin:10px 0;border-color:var(--line);border-radius:8px;line-height:1.85;background:var(--ui-panel)}
+html:root[data-layout=modern] .practice-option:has(input:checked){background:var(--ui-selected);border-color:var(--accent)}
+html:root[data-layout=modern] .practice-option input{margin-top:.4em;min-width:18px}
+html:root[data-layout=modern] .practice-mode :is(input[type=text],textarea,select){background:var(--ui-panel);border-radius:8px;font-size:inherit}
+html:root[data-layout=modern] .practice-session form>.practice-actions button[type=submit]{background:var(--accent);color:var(--on-accent);border-color:var(--accent);padding-inline:20px}
+html:root[data-layout=modern] .practice-session>.practice-actions{border-top:1px solid var(--ui-divider);padding-top:18px;margin-top:20px;gap:8px}
+html:root[data-layout=modern] .practice-feedback{padding:16px 18px;border-radius:8px;border-inline-start-width:3px;background:var(--ui-selected);line-height:1.9}
+html:root[data-layout=modern] .practice-feedback[data-result=incorrect]{border-color:var(--danger)}
+html:root[data-layout=modern] .practice-feedback[data-result=incorrect]>strong{color:var(--danger)}
+html:root[data-layout=modern] .practice-history{border:1px solid var(--ui-divider);border-radius:8px;padding:4px 14px;margin-top:22px;background:var(--ui-panel)}
+html:root[data-layout=modern] .practice-history summary{padding:8px 0;line-height:1.7}
+html:root[data-layout=modern] .lesson-reader .exam-controls{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0}
+html:root[data-layout=modern] .lesson-reader .exam-run{padding:0;border:0;margin:22px 0 0}
+html:root[data-layout=modern] .exam-mode .exam-status{background:var(--ui-selected);border:0;border-radius:8px;padding:12px}
+
+/* Settings and PDF use the same chrome; PDF page pixels are untouched. */
+html:root[data-layout=modern] .foundation-header{padding:14px 28px;min-height:72px;gap:10px}
+html:root[data-layout=modern] .foundation-content{padding:28px 32px 60px}
+html:root[data-layout=modern] .settings-content{max-width:1040px}
+html:root[data-layout=modern] .settings-content>.eyebrow{display:none}
+html:root[data-layout=modern] .foundation-content h1{font-family:inherit;font-size:32px;line-height:1.5;margin:14px 0 8px}
+html:root[data-layout=modern] .settings-card{border:0;border-top:1px solid var(--ui-divider);border-radius:0;padding:24px 0;background:none;box-shadow:none;margin-top:24px}
+html:root[data-layout=modern] .settings-card h2{font-family:inherit;font-size:24px;line-height:1.6;margin:0 0 12px}
+html:root[data-layout=modern] .setting-row{border-color:var(--ui-divider);padding:14px 0;font-size:16px}
+html:root[data-layout=modern] .theme-choice{background:var(--ui-panel);border:1px solid var(--ui-divider);border-radius:8px;box-shadow:none}
+html:root[data-layout=modern] .theme-choice[aria-pressed=true]{border-color:var(--accent);background:var(--ui-selected)}
+html:root[data-layout=modern] .theme-choice[aria-pressed=true]:not(:focus-visible){outline:0}
+html:root[data-layout=modern] .theme-choice strong{font-family:inherit}
+html:root[data-layout=modern] .layout-preview{border-color:var(--ui-divider);border-radius:6px;height:110px}
+html:root[data-layout=modern] .preview-modern .preview-banner{background:var(--ui-panel);box-shadow:none;border:0}
+html:root[data-layout=modern] .preview-modern .preview-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+html:root[data-layout=modern] .settings-preview{border:1px solid var(--ui-divider);border-radius:8px;background:var(--ui-panel)}
+html:root[data-layout=modern] .pdf-reader .foundation-header{padding:14px 28px;min-height:72px}
+html:root[data-layout=modern] .pdf-reader .pdf-content{max-width:1440px;padding:24px 32px}
+html:root[data-layout=modern] .pdf-reader h1{font-size:28px;line-height:1.55;margin:0 0 18px}
+html:root[data-layout=modern] .pdf-reader :is(#pdf-controls,#pdf-fallback){padding:12px 16px;border:1px solid var(--ui-divider);border-radius:8px;background:var(--ui-panel);gap:8px}
+html:root[data-layout=modern] .pdf-reader #pdf-pages{height:72vh;border:1px solid var(--ui-divider);border-radius:8px;background:var(--bg);padding:12px}
+html:root[data-layout=modern] .pdf-reader #pdf-frame{border-radius:8px;border-color:var(--ui-divider)}
+html:root[data-layout=modern] .pdf-reader .study-reader-actions{padding:0;border:0;background:none;margin-bottom:14px;gap:8px}
+
+@media(max-width:1200px){
+  html:root[data-layout=modern] .library-app .topbar{grid-template-columns:minmax(0,1fr) auto}
+  html:root[data-layout=modern] .library-app .topbar .search-row{grid-column:1/-1;grid-row:2}
+  html:root[data-layout=modern] .library-app .dashboard-panels{grid-template-columns:minmax(0,1fr)}
+  html:root[data-layout=modern] .library-app .resource-row{grid-template-columns:32px minmax(0,1fr)}
+  html:root[data-layout=modern] .library-app .resource-buttons{grid-column:2;justify-content:flex-start;flex-wrap:wrap}
+  html:root[data-layout=modern] .library-app .recent-reading .resource-row{grid-template-columns:32px minmax(0,1fr)}
+  html:root[data-layout=modern] .library-app .recent-reading .resource-buttons{grid-column:2}
+}
+@media(max-width:800px){
+  html:root[data-layout=modern] :is(.library-app,.html-reader) .sidebar{width:min(290px,calc(100vw - 24px))}
+  html:root[data-layout=modern] :is(.library-app,.html-reader) .workspace{margin-left:0}
+  html:root[data-layout=modern] :is(.library-app,.html-reader) .content{padding:22px 20px 40px}
+  html:root[data-layout=modern] .library-app .topbar{padding:10px 20px}
+  html:root[data-layout=modern] .html-reader .topbar{padding:10px 16px;gap:8px}
+}
+@media(max-width:600px){
+  html:root[data-layout=modern] :is(.library-app,.html-reader) .content{padding:20px 16px 40px}
+  html:root[data-layout=modern] .library-app .topbar{padding:10px 16px;gap:8px}
+  html:root[data-layout=modern] .library-app .modern-welcome h1{font-size:28px}
+  html:root[data-layout=modern] .library-app .hero{margin-bottom:24px}
+  html:root[data-layout=modern] .library-app .course-grid{grid-template-columns:minmax(0,1fr)}
+  html:root[data-layout=modern] .library-app .course-card{padding:16px;gap:5px 12px}
+  html:root[data-layout=modern] .library-app .resource-row{padding:14px 12px;gap:10px}
+  html:root[data-layout=modern] .library-app .resource-buttons{grid-column:1/-1}
+  html:root[data-layout=modern] .library-app .resource-buttons .read-link{flex:1;font-size:14px}
+  html:root[data-layout=modern] .library-app .recent-reading .resource-buttons{grid-column:1/-1}
+  html:root[data-layout=modern] .library-app .modern-overview{padding:16px}
+  html:root[data-layout=modern] .library-app .course-header h1{font-size:27px}
+  html:root[data-layout=modern] .library-app .course-progress{padding:14px 16px}
+  html:root[data-layout=modern] .library-app .category-tab{font-size:14px;padding:9px 10px}
+  html:root[data-layout=modern] .practice-destinations{grid-template-columns:minmax(0,1fr)}
+  html:root[data-layout=modern] .lesson-reader.html-reader .reading-page.prose{padding:0}
+  html:root[data-layout=modern] .html-reader .study-reader-actions .icon-button{font-size:14px;flex:1 1 120px}
+  html:root[data-layout=modern] .lesson-reader .exam-controls{grid-template-columns:minmax(0,1fr)}
+  html:root[data-layout=modern] .practice-mode h2{font-size:25px}
+  html:root[data-layout=modern] .practice-mode legend{font-size:1em;line-height:1.95}
+  html:root[data-layout=modern] .practice-mode fieldset{padding:0 0 16px}
+  html:root[data-layout=modern] .practice-option{padding:12px}
+  html:root[data-layout=modern] .practice-session>.practice-actions .icon-button{font-size:14px;flex:1 1 120px}
+  html:root[data-layout=modern] .foundation-header{padding:12px 16px;flex-wrap:wrap}
+  html:root[data-layout=modern] .foundation-content{padding:22px 16px 40px}
+  html:root[data-layout=modern] .foundation-content h1{font-size:28px}
+  html:root[data-layout=modern] .settings-card{padding:22px 0}
+  html:root[data-layout=modern] .pdf-reader .foundation-header{padding:12px 16px}
+  html:root[data-layout=modern] .pdf-reader .pdf-content{padding:20px 16px}
+  html:root[data-layout=modern] .pdf-reader h1{font-size:25px}
+  html:root[data-layout=modern] .pdf-reader :is(#pdf-controls,#pdf-fallback){padding:12px}
+}
+@media(prefers-reduced-motion:reduce){html:root[data-layout=modern]{scroll-behavior:auto}}
+}

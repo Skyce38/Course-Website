@@ -126,3 +126,7 @@ Learning Paths and their ordered recommendations have been removed. Open every l
 ### Phase 8 — Extended Exam Bank and Reading Polish
 
 All 25 registered lessons now also provide Topic Practice and 10/20/30/full mock sessions: **750 unique questions** (460 choice, 165 numeric, 125 ungraded self-assessments). The original 150 questions, revisions and saved attempts remain unchanged. Exam sessions use separate local keys and the shared grader. Generated readers have reviewed prose spacing, compact typography and keyboard-scrollable tables; original programs, equations, tables, solved exercises and stable anchors remain protected. See [coverage](docs/phase8-exam-coverage.md), [verification](docs/phase8-exam-verification.md), [storage/build contract](docs/extended-exam-bank.md) and [reading review](docs/phase8-reading-review.md).
+
+### Phase 10 — Modern learning workspace
+
+Modern now uses compact course tiles, divider-based document lists, flatter readers and Practice/Exam presentation, with direct links to the existing lesson activities. Classic remains the default and visually unchanged. `assets/modern.css` isolates the redesign; shared preferences, study records, grading, revision archives and lesson content keep their existing contracts. See [design boundaries, validation and browser limitations](docs/phase10-ui-redesign.md). Run the usual build/check commands; the optional `scripts/check-modern-ui-browser.cjs` uses `PLAYWRIGHT_MODULE` and `STUDY_BASE_URL` with an isolated Chrome profile.

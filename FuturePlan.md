@@ -106,3 +106,9 @@ Ready for PR preparation; no commit, push, merge or deployment performed. Browse
 - [x] Separate exam sessions/storage, deterministic validation/coverage ledger, original attempt compatibility, explicit ungraded rubrics and source-limited lab caveats.
 - [x] Generated-reader typography and reviewed Thai/English prose spacing; preserve programs, math, tables, solutions and anchors through baseline hashes. See [coverage](docs/phase8-exam-coverage.md) and [compatibility](docs/extended-exam-bank.md).
 - [x] Final visual/regression review and focused PR preparation; user review remains required before merge/deployment. See [QA](docs/phase8-qa.md).
+
+## Phase 10 — Modern UI refinement
+
+- [x] Compact Modern dashboard, six-course catalog, readers, Practice/Exam, Settings and PDF chrome using shared data and scoped styles; preserve Classic and all palettes/preferences.
+- [x] Real practice entry points, accessible question-position progress and sync-safe section focus; no replacement Learning Paths or saved-data migration.
+- [x] Four-width screenshot review, focused functional/storage/accessibility regressions, deterministic builds and protected-content integrity checks. See [QA and remaining browser limits](docs/phase10-ui-redesign.md). PR review remains required before merge/deployment.

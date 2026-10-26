@@ -25,7 +25,8 @@
     const ui=el('div','practice-session'),position=el('p','practice-position'),select=el('select'),score=el('p','practice-score'),selfCount=el('p','practice-note'),warning=el('p','practice-warning'),message=el('p','practice-message');
     position.setAttribute('role','status');position.setAttribute('aria-live','polite');
     warning.setAttribute('role','status');message.setAttribute('role','status');message.setAttribute('aria-live','polite');
-    const controls=el('div','practice-navigation');controls.append(position,select);
+    const controls=el('div','practice-navigation'),positionTrack=el('progress','practice-position-track');controls.append(position,select);
+    position.id=(options.idPrefix||'quiz-')+data.lesson+'-position';positionTrack.setAttribute('aria-labelledby',position.id);
     const form=el('form');form.noValidate=true;
     const views=new Map();
     for(const [index,q]of data.questions.entries()){
@@ -57,11 +58,12 @@
     const navigation=el('div','practice-actions'),previous=el('button','icon-button'),next=el('button','icon-button'),review=el('button','icon-button'),finish=el('button','icon-button'),restart=el('button','icon-button');
     for(const button of [previous,next,review,finish,restart]){button.type='button';navigation.append(button)}
     const history=el('details','practice-history'),historyTitle=el('summary'),historyList=el('ol');history.append(historyTitle,historyList);
-    ui.append(controls,score,selfCount,warning,message,form,navigation,history);root.append(ui);
+    ui.append(controls,positionTrack,score,selfCount,warning,message,form,navigation,history);root.append(ui);
     const current=()=>data.questions.find(q=>q.id===state.current),sequence=()=>state.review.length?state.review:data.questions.map(q=>q.id);
     function render(){
       const q=current(),available=sequence(),index=available.indexOf(q.id),totals=C.summary(data,state.responses);
       text(position,t('practicePosition',{current:index+1,total:available.length}));select.value=q.id;select.setAttribute('aria-label',t('practiceSelect'));
+      positionTrack.max=available.length;positionTrack.value=index+1;positionTrack.setAttribute('aria-valuetext',position.textContent);
       text(score,t('practiceScore',totals));text(selfCount,t('practiceSelfCount',{count:totals.self}));text(warning,persistent?'':t('practiceStorageUnavailable'));warning.hidden=persistent;
       text(message,notice?t(notice):'');message.hidden=!notice;
       for(const item of data.questions){
