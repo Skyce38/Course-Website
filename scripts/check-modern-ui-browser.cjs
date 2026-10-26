@@ -9,7 +9,7 @@ const lessons=catalog.resources.filter(r=>r.generatedLesson===1&&r.reader);
  await context.route('https://api.github.com/**',r=>r.fulfill({json:{tree:[],truncated:false}}));
  await context.addInitScript(({origin})=>{if(location.origin===origin&&!localStorage.getItem('modern-test-seeded')){localStorage.setItem('skyce-learning-preferences',JSON.stringify({layout:'modern',theme:'light',preset:'ocean',language:'en'}));localStorage.setItem('modern-test-seeded','1')}},{origin:new URL(base).origin});
  await page.goto(base);await page.locator('.course-card').first().waitFor();assert.equal(await page.locator('.course-card').count(),6);
- assert.equal(await page.locator('.modern-practice-entry .practice-destination').count(),2);
+ assert.equal(await page.locator('.modern-practice-entry .practice-destination').count(),new Set(lessons.map(r=>r.course)).size);
  for(const course of catalog.courses){await page.goto(base+'#course/'+course.id);await page.locator('.course-header').waitFor();const count=lessons.filter(r=>r.course===course.id).length;
   assert.equal(await page.locator('.practice-destination').count(),count);if(count){await page.locator('[data-course-practice]').focus();await page.keyboard.press('Enter');assert.equal(await page.locator('#practice-entry details').getAttribute('open'),'');assert.equal(await page.evaluate(()=>document.activeElement.id),'practice-entry-heading');assert.equal(await page.locator('.practice-destination a').count(),count*2)}
  }
@@ -47,5 +47,5 @@ const lessons=catalog.resources.filter(r=>r.generatedLesson===1&&r.reader);
   const link=p.locator(target==='practice-entry-heading'?'[data-course-practice]':'[data-home-section="'+target+'"]');await link.focus();await p.keyboard.press('Enter');assert.equal(await p.evaluate(()=>document.activeElement.id),target);
   const scroll=await p.evaluate(()=>scrollY);release();await p.waitForFunction(()=>!syncing);assert.equal(await p.evaluate(()=>document.activeElement.id),target);assert.equal(await p.evaluate(()=>scrollY),scroll,'Sync restores section focus without scrolling');await isolated.close();
  }
- assert.deepEqual(errors,[]);await context.close();await browser.close();console.log('PASS: six real courses/25 practice destinations, keyboard section navigation and 3 held-sync section-focus cases, original/exam position indicators and stable focus/DOM across modes; Classic hidden-state compatibility; 7 palettes × 2 modes × 4 widths, selected-palette contrast and 22px narrow readers; no overflow/runtime/asset errors');
+ assert.deepEqual(errors,[]);await context.close();await browser.close();console.log('PASS: six real courses/'+lessons.length+' practice destinations, keyboard section navigation and 3 held-sync section-focus cases, original/exam position indicators and stable focus/DOM across modes; Classic hidden-state compatibility; 7 palettes × 2 modes × 4 widths, selected-palette contrast and 22px narrow readers; no overflow/runtime/asset errors');
 })().catch(e=>{console.error(e.stack);process.exit(1)});

@@ -275,7 +275,7 @@
     {
       "id": "ux06-q16",
       "type": "choice",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: fd3อ่าน\nprintf 'alpha\nbeta\n' >f; exec 3<f; read -r -u3 x; exec 3<&-; printf '%s' \"$x\"",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: fd3อ่าน\nprintf 'alpha\\nbeta\\n' >f; exec 3<f; read -r -u3 x; exec 3<&-; printf '%s' \"$x\"",
       "reference": "descriptors",
       "explanation": "readหนึ่งบรรทัดจากfd3 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q16",
       "choices": [
@@ -511,7 +511,7 @@
     {
       "id": "ux06-q25",
       "type": "choice",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: H5missingfileยังอ่านไฟล์ถัดไป\nprintf 'known\n' >yes; cat missing yes >out 2>err; s=$?; printf '%s:%s' \"$s\" \"$(cat out)\"",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: H5missingfileยังอ่านไฟล์ถัดไป\nprintf 'known\\n' >yes; cat missing yes >out 2>err; s=$?; printf '%s:%s' \"$s\" \"$(cat out)\"",
       "reference": "noclobber-pipes",
       "explanation": "GNUcatรายงานmissingแต่ยังอ่านyesและคืน1 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q25",
       "choices": [

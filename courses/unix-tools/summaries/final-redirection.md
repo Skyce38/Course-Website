@@ -130,9 +130,7 @@ AB
 ตัวอย่างจัดทำเสริม (รันใน directory ว่าง ไม่ใช่โปรแกรมพร้อมรับ input ที่ไม่เชื่อถือ):
 
 ```bash
-printf 'alpha
-beta
-' >f; exec 3<f; read -r -u3 x; exec 3<&-; printf '%s' "$x"
+printf 'alpha\nbeta\n' >f; exec 3<f; read -r -u3 x; exec 3<&-; printf '%s' "$x"
 ```
 
 ผล stdout (ตัด newline ท้ายตามเกณฑ์ชุดทดสอบ):

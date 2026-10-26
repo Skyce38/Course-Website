@@ -25,8 +25,7 @@ awkอ่านrecordsปกติทีละบรรทัดและแบ�
 ตัวอย่างจัดทำเสริม (รันใน directory ว่าง ไม่ใช่โปรแกรมพร้อมรับ input ที่ไม่เชื่อถือ):
 
 ```bash
-printf 'red:10:yes
-' | awk -F: '{print $2}'
+printf 'red:10:yes\n' | awk -F: '{print $2}'
 ```
 
 ผล stdout (ตัด newline ท้ายตามเกณฑ์ชุดทดสอบ):
@@ -61,9 +60,7 @@ NRนับrecordsสะสมทุกไฟล์ FNRเริ่มใหม�
 ตัวอย่างจัดทำเสริม (รันใน directory ว่าง ไม่ใช่โปรแกรมพร้อมรับ input ที่ไม่เชื่อถือ):
 
 ```bash
-printf 'A
-B
-' | awk 'END{print NR}'
+printf 'A\nB\n' | awk 'END{print NR}'
 ```
 
 ผล stdout (ตัด newline ท้ายตามเกณฑ์ชุดทดสอบ):
@@ -98,9 +95,7 @@ BEGINทำก่อนอ่าน ENDหลังอ่าน ใช้sum+=$2
 ตัวอย่างจัดทำเสริม (รันใน directory ว่าง ไม่ใช่โปรแกรมพร้อมรับ input ที่ไม่เชื่อถือ):
 
 ```bash
-printf 'A:10
-B:20
-' | awk -F: '{s+=$2}END{print s}'
+printf 'A:10\nB:20\n' | awk -F: '{s+=$2}END{print s}'
 ```
 
 ผล stdout (ตัด newline ท้ายตามเกณฑ์ชุดทดสอบ):
@@ -135,10 +130,7 @@ sortปกติเรียงlexicographicตามlocale -nเปรียบ
 ตัวอย่างจัดทำเสริม (รันใน directory ว่าง ไม่ใช่โปรแกรมพร้อมรับ input ที่ไม่เชื่อถือ):
 
 ```bash
-printf '10
-2
-1
-' | sort -n
+printf '10\n2\n1\n' | sort -n
 ```
 
 ผล stdout (ตัด newline ท้ายตามเกณฑ์ชุดทดสอบ):
@@ -175,10 +167,7 @@ printf '10
 ตัวอย่างจัดทำเสริม (รันใน directory ว่าง ไม่ใช่โปรแกรมพร้อมรับ input ที่ไม่เชื่อถือ):
 
 ```bash
-printf 'A:10
-bad
-B:20
-' | awk -F: 'NF==2 && $2~/^[0-9]+$/{n++}END{print n}'
+printf 'A:10\nbad\nB:20\n' | awk -F: 'NF==2 && $2~/^[0-9]+$/{n++}END{print n}'
 ```
 
 ผล stdout (ตัด newline ท้ายตามเกณฑ์ชุดทดสอบ):

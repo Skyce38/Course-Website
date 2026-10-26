@@ -239,7 +239,7 @@
     {
       "id": "ux07-q16",
       "type": "choice",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: รักษาช่องว่าง\nprintf '  A  \n' >in; IFS= read -r x <in; printf '<%s>' \"$x\"",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: รักษาช่องว่าง\nprintf '  A  \\n' >in; IFS= read -r x <in; printf '<%s>' \"$x\"",
       "reference": "read-lines",
       "explanation": "IFS=รักษาช่องว่างหัวท้าย — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux07-q16",
       "choices": [
@@ -335,7 +335,7 @@
     {
       "id": "ux07-q20",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: รักษาบรรทัดว่าง\nprintf 'A\n\nB\n' >in; n=0; while IFS= read -r x; do ((n+=1)); done <in; printf '%s' \"$n\"",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: รักษาบรรทัดว่าง\nprintf 'A\\n\\nB\\n' >in; n=0; while IFS= read -r x; do ((n+=1)); done <in; printf '%s' \"$n\"",
       "reference": "read-lines",
       "explanation": "บรรทัดว่างยังมีnewlineและนับได้ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux07-q20",
       "answer": 3,
@@ -367,7 +367,7 @@
     {
       "id": "ux07-q21",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: counterในpipe\nshopt -u lastpipe; n=0; printf 'x\n' | while read -r x; do ((n+=1)); done; printf '%s' \"$n\"",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: counterในpipe\nshopt -u lastpipe; n=0; printf 'x\\n' | while read -r x; do ((n+=1)); done; printf '%s' \"$n\"",
       "reference": "pipeline-scope",
       "explanation": "counterในsubshellไม่กลับแม่ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux07-q21",
       "answer": 0,
@@ -382,7 +382,7 @@
     {
       "id": "ux07-q22",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: counterredirect\nprintf 'x\ny\n' >in; n=0; while read -r x; do ((n+=1)); done <in; printf '%s' \"$n\"",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: counterredirect\nprintf 'x\\ny\\n' >in; n=0; while read -r x; do ((n+=1)); done <in; printf '%s' \"$n\"",
       "reference": "pipeline-scope",
       "explanation": "loopอยู่shellเดิม — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux07-q22",
       "answer": 2,
@@ -397,7 +397,7 @@
     {
       "id": "ux07-q23",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: lastpipeเปิด\nset +m; shopt -s lastpipe; n=0; printf 'x\n' | while read -r x; do ((n+=1)); done; printf '%s' \"$n\"",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: lastpipeเปิด\nset +m; shopt -s lastpipe; n=0; printf 'x\\n' | while read -r x; do ((n+=1)); done; printf '%s' \"$n\"",
       "reference": "pipeline-scope",
       "explanation": "ท้ายpipelineในshellเดิมเมื่อlastpipeและไม่มีjobcontrol — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux07-q23",
       "answer": 1,
@@ -412,7 +412,7 @@
     {
       "id": "ux07-q24",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: processsubstitution\nn=0; while read -r x; do ((n+=1)); done < <(printf 'a\nb\n'); printf '%s' \"$n\"",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: processsubstitution\nn=0; while read -r x; do ((n+=1)); done < <(printf 'a\\nb\\n'); printf '%s' \"$n\"",
       "reference": "pipeline-scope",
       "explanation": "loopไม่ใช่ส่วนของpipe — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux07-q24",
       "answer": 2,
@@ -427,7 +427,7 @@
     {
       "id": "ux07-q25",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: forcatแตกคำ\nprintf 'red blue\ngreen\n' >in; n=0; for x in $(cat in); do ((n+=1)); done; printf '%s' \"$n\"",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: forcatแตกคำ\nprintf 'red blue\\ngreen\\n' >in; n=0; for x in $(cat in); do ((n+=1)); done; printf '%s' \"$n\"",
       "reference": "pipeline-scope",
       "explanation": "defaultIFSแตกเป็นสามwordsไม่ใช่สองบรรทัด — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux07-q25",
       "answer": 3,

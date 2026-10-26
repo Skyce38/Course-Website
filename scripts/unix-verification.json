@@ -42,7 +42,7 @@
     {
       "reference": "execution",
       "label": "Shebang ไม่ใช่คำสั่งพิมพ์",
-      "code": "printf '#!/bin/bash\nprintf hello' > demo.sh; bash demo.sh",
+      "code": "printf '#!/bin/bash\\nprintf hello' > demo.sh; bash demo.sh",
       "output": "hello",
       "why": "บรรทัด #! เป็น comment เมื่อ Bash อ่านไฟล์",
       "wrong": [
@@ -58,7 +58,7 @@
     {
       "reference": "execution",
       "label": "ตำแหน่ง script ใน PATH",
-      "code": "mkdir bin; printf '#!/bin/bash\nprintf found' > bin/study; chmod +x bin/study; PATH=\"$PWD/bin:$PATH\" study",
+      "code": "mkdir bin; printf '#!/bin/bash\\nprintf found' > bin/study; chmod +x bin/study; PATH=\"$PWD/bin:$PATH\" study",
       "output": "found",
       "why": "PATH เพิ่ม directory ที่มีคำสั่ง executable",
       "wrong": [
@@ -235,7 +235,7 @@
     {
       "reference": "substitution",
       "label": "ตัด newline ท้าย",
-      "code": "x=$(printf 'A\n\n'); printf '%s' \"${#x}\"",
+      "code": "x=$(printf 'A\\n\\n'); printf '%s' \"${#x}\"",
       "output": "1",
       "why": "newline ท้ายสองตัวถูกตัด เหลือ A",
       "wrong": [],
@@ -248,7 +248,7 @@
     {
       "reference": "substitution",
       "label": "เก็บ newline ภายใน",
-      "code": "x=$(printf 'A\nB\n'); printf '%s' \"${#x}\"",
+      "code": "x=$(printf 'A\\nB\\n'); printf '%s' \"${#x}\"",
       "output": "3",
       "why": "A newline B รวมสามอักขระ ASCII",
       "wrong": [],
@@ -325,7 +325,7 @@
     {
       "reference": "utilities",
       "label": "นับบรรทัดไม่ใช่คำ",
-      "code": "printf 'red blue\ngreen\n' | wc -l",
+      "code": "printf 'red blue\\ngreen\\n' | wc -l",
       "output": "2",
       "why": "มี newline สองตัว",
       "wrong": [],
@@ -2047,7 +2047,7 @@
     {
       "reference": "descriptors",
       "label": "fd3อ่าน",
-      "code": "printf 'alpha\nbeta\n' >f; exec 3<f; read -r -u3 x; exec 3<&-; printf '%s' \"$x\"",
+      "code": "printf 'alpha\\nbeta\\n' >f; exec 3<f; read -r -u3 x; exec 3<&-; printf '%s' \"$x\"",
       "output": "alpha",
       "why": "readหนึ่งบรรทัดจากfd3",
       "wrong": [
@@ -2185,7 +2185,7 @@
     {
       "reference": "noclobber-pipes",
       "label": "H5missingfileยังอ่านไฟล์ถัดไป",
-      "code": "printf 'known\n' >yes; cat missing yes >out 2>err; s=$?; printf '%s:%s' \"$s\" \"$(cat out)\"",
+      "code": "printf 'known\\n' >yes; cat missing yes >out 2>err; s=$?; printf '%s:%s' \"$s\" \"$(cat out)\"",
       "output": "1:known",
       "why": "GNUcatรายงานmissingแต่ยังอ่านyesและคืน1",
       "wrong": [
@@ -2411,7 +2411,7 @@
     {
       "reference": "read-lines",
       "label": "รักษาช่องว่าง",
-      "code": "printf '  A  \n' >in; IFS= read -r x <in; printf '<%s>' \"$x\"",
+      "code": "printf '  A  \\n' >in; IFS= read -r x <in; printf '<%s>' \"$x\"",
       "output": "<  A  >",
       "why": "IFS=รักษาช่องว่างหัวท้าย",
       "wrong": [
@@ -2472,7 +2472,7 @@
     {
       "reference": "read-lines",
       "label": "รักษาบรรทัดว่าง",
-      "code": "printf 'A\n\nB\n' >in; n=0; while IFS= read -r x; do ((n+=1)); done <in; printf '%s' \"$n\"",
+      "code": "printf 'A\\n\\nB\\n' >in; n=0; while IFS= read -r x; do ((n+=1)); done <in; printf '%s' \"$n\"",
       "output": "3",
       "why": "บรรทัดว่างยังมีnewlineและนับได้",
       "wrong": [],
@@ -2485,7 +2485,7 @@
     {
       "reference": "pipeline-scope",
       "label": "counterในpipe",
-      "code": "shopt -u lastpipe; n=0; printf 'x\n' | while read -r x; do ((n+=1)); done; printf '%s' \"$n\"",
+      "code": "shopt -u lastpipe; n=0; printf 'x\\n' | while read -r x; do ((n+=1)); done; printf '%s' \"$n\"",
       "output": "0",
       "why": "counterในsubshellไม่กลับแม่",
       "wrong": [],
@@ -2498,7 +2498,7 @@
     {
       "reference": "pipeline-scope",
       "label": "counterredirect",
-      "code": "printf 'x\ny\n' >in; n=0; while read -r x; do ((n+=1)); done <in; printf '%s' \"$n\"",
+      "code": "printf 'x\\ny\\n' >in; n=0; while read -r x; do ((n+=1)); done <in; printf '%s' \"$n\"",
       "output": "2",
       "why": "loopอยู่shellเดิม",
       "wrong": [],
@@ -2511,7 +2511,7 @@
     {
       "reference": "pipeline-scope",
       "label": "lastpipeเปิด",
-      "code": "set +m; shopt -s lastpipe; n=0; printf 'x\n' | while read -r x; do ((n+=1)); done; printf '%s' \"$n\"",
+      "code": "set +m; shopt -s lastpipe; n=0; printf 'x\\n' | while read -r x; do ((n+=1)); done; printf '%s' \"$n\"",
       "output": "1",
       "why": "ท้ายpipelineในshellเดิมเมื่อlastpipeและไม่มีjobcontrol",
       "wrong": [],
@@ -2524,7 +2524,7 @@
     {
       "reference": "pipeline-scope",
       "label": "processsubstitution",
-      "code": "n=0; while read -r x; do ((n+=1)); done < <(printf 'a\nb\n'); printf '%s' \"$n\"",
+      "code": "n=0; while read -r x; do ((n+=1)); done < <(printf 'a\\nb\\n'); printf '%s' \"$n\"",
       "output": "2",
       "why": "loopไม่ใช่ส่วนของpipe",
       "wrong": [],
@@ -2537,7 +2537,7 @@
     {
       "reference": "pipeline-scope",
       "label": "forcatแตกคำ",
-      "code": "printf 'red blue\ngreen\n' >in; n=0; for x in $(cat in); do ((n+=1)); done; printf '%s' \"$n\"",
+      "code": "printf 'red blue\\ngreen\\n' >in; n=0; for x in $(cat in); do ((n+=1)); done; printf '%s' \"$n\"",
       "output": "3",
       "why": "defaultIFSแตกเป็นสามwordsไม่ใช่สองบรรทัด",
       "wrong": [],
@@ -3651,7 +3651,7 @@
     {
       "reference": "regex-glob",
       "label": "EREplus",
-      "code": "printf 'a\naa\nb\n' | grep -Ec '^a+$'",
+      "code": "printf 'a\\naa\\nb\\n' | grep -Ec '^a+$'",
       "output": "2",
       "why": "a+ต้องมีaอย่างน้อยหนึ่ง",
       "wrong": [],
@@ -3664,7 +3664,7 @@
     {
       "reference": "regex-glob",
       "label": "BREliteralplus",
-      "code": "printf 'a+\na\n' | grep -c '^a+$'",
+      "code": "printf 'a+\\na\\n' | grep -c '^a+$'",
       "output": "1",
       "why": "BRE+ไม่มีescapeเป็นliteralในGNUgrep",
       "wrong": [],
@@ -3677,7 +3677,7 @@
     {
       "reference": "regex-glob",
       "label": "anchorชื่อไฟล์",
-      "code": "printf 'x.txt\nxatxt\n' | grep -Ec '^.*\\.txt$'",
+      "code": "printf 'x.txt\\nxatxt\\n' | grep -Ec '^.*\\.txt$'",
       "output": "1",
       "why": "\\.จับจุดจริง",
       "wrong": [],
@@ -3690,7 +3690,7 @@
     {
       "reference": "regex-glob",
       "label": "regexstarzero",
-      "code": "printf 'ac\nabc\nabbc\n' | grep -Ec '^ab*c$'",
+      "code": "printf 'ac\\nabc\\nabbc\\n' | grep -Ec '^ab*c$'",
       "output": "3",
       "why": "b*รับศูนย์ขึ้นไป",
       "wrong": [],
@@ -3719,7 +3719,7 @@
     {
       "reference": "grep",
       "label": "นับบรรทัดไม่ใช่matches",
-      "code": "printf 'aa a\na\n' | grep -c a",
+      "code": "printf 'aa a\\na\\n' | grep -c a",
       "output": "2",
       "why": "สองบรรทัดmatchแม้มีหลายa",
       "wrong": [],
@@ -3732,7 +3732,7 @@
     {
       "reference": "grep",
       "label": "fixedstring",
-      "code": "printf 'a.b\naxb\n' | grep -Fc 'a.b'",
+      "code": "printf 'a.b\\naxb\\n' | grep -Fc 'a.b'",
       "output": "1",
       "why": "-Fทำจุดเป็นliteral",
       "wrong": [],
@@ -3745,7 +3745,7 @@
     {
       "reference": "grep",
       "label": "grepไม่พบstatus",
-      "code": "printf 'red\n' | grep blue; printf '%s' \"$?\"",
+      "code": "printf 'red\\n' | grep blue; printf '%s' \"$?\"",
       "output": "1",
       "why": "ไม่พบให้1",
       "wrong": [],
@@ -3771,7 +3771,7 @@
     {
       "reference": "grep",
       "label": "wholeline",
-      "code": "printf 'a\nba\nab\n' | grep -xc a",
+      "code": "printf 'a\\nba\\nab\\n' | grep -xc a",
       "output": "1",
       "why": "-xรับเฉพาะบรรทัดa",
       "wrong": [],
@@ -3784,7 +3784,7 @@
     {
       "reference": "sed-substitute",
       "label": "แทนmatchแรก",
-      "code": "printf 'foo foo\n' | sed 's/foo/bar/'",
+      "code": "printf 'foo foo\\n' | sed 's/foo/bar/'",
       "output": "bar foo",
       "why": "ไม่gจึงครั้งแรก",
       "wrong": [
@@ -3800,7 +3800,7 @@
     {
       "reference": "sed-substitute",
       "label": "แทนทุกmatch",
-      "code": "printf 'foo foo\n' | sed 's/foo/bar/g'",
+      "code": "printf 'foo foo\\n' | sed 's/foo/bar/g'",
       "output": "bar bar",
       "why": "gแทนสองmatch",
       "wrong": [
@@ -3816,7 +3816,7 @@
     {
       "reference": "sed-substitute",
       "label": "replacementampersand",
-      "code": "printf 'abc\n' | sed 's/b/[&]/'",
+      "code": "printf 'abc\\n' | sed 's/b/[&]/'",
       "output": "a[b]c",
       "why": "&คืนmatchb",
       "wrong": [
@@ -3848,7 +3848,7 @@
     {
       "reference": "sed-substitute",
       "label": "delimiterอื่น",
-      "code": "printf '/a/b\n' | sed 's#/a#/x#'",
+      "code": "printf '/a/b\\n' | sed 's#/a#/x#'",
       "output": "/x/b",
       "why": "#เป็นdelimiterแทน/",
       "wrong": [
@@ -3864,7 +3864,7 @@
     {
       "reference": "sed-address",
       "label": "พิมพ์ช่วง",
-      "code": "printf 'A\nB\nC\n' | sed -n '1,2p'",
+      "code": "printf 'A\\nB\\nC\\n' | sed -n '1,2p'",
       "output": "A\nB",
       "why": "-nปิดprintเดิมแล้วเลือก1ถึง2",
       "wrong": [
@@ -3880,7 +3880,7 @@
     {
       "reference": "sed-address",
       "label": "ลบหัว",
-      "code": "printf 'head\ndata\n' | sed '1d'",
+      "code": "printf 'head\\ndata\\n' | sed '1d'",
       "output": "data",
       "why": "1dลบบรรทัด1",
       "wrong": [
@@ -3896,7 +3896,7 @@
     {
       "reference": "sed-address",
       "label": "printซ้ำ",
-      "code": "printf 'A\n' | sed 'p'",
+      "code": "printf 'A\\n' | sed 'p'",
       "output": "A\nA",
       "why": "pหนึ่งและautomaticprintอีกหนึ่ง",
       "wrong": [
@@ -3912,7 +3912,7 @@
     {
       "reference": "sed-address",
       "label": "lastline",
-      "code": "printf 'A\nB\nC\n' | sed -n '$p'",
+      "code": "printf 'A\\nB\\nC\\n' | sed -n '$p'",
       "output": "C",
       "why": "$เลือกบรรทัดท้าย",
       "wrong": [
@@ -3928,7 +3928,7 @@
     {
       "reference": "sed-address",
       "label": "ลบเนื้อหายังมีบรรทัด",
-      "code": "printf 'A\nB\n' | sed 's/.*//' | wc -l",
+      "code": "printf 'A\\nB\\n' | sed 's/.*//' | wc -l",
       "output": "2",
       "why": "สองemptylinesยังมีnewline",
       "wrong": [],
@@ -3973,7 +3973,7 @@
     {
       "reference": "editing-safety",
       "label": "อันตราย-n-i",
-      "code": "printf 'foo\n' >f; sed -ni 's/foo/bar/' f; wc -c <f",
+      "code": "printf 'foo\\n' >f; sed -ni 's/foo/bar/' f; wc -c <f",
       "output": "0",
       "why": "-nไม่pและ-iเขียนผลว่าง",
       "wrong": [],
@@ -3986,7 +3986,7 @@
     {
       "reference": "editing-safety",
       "label": "deleteต่างempty",
-      "code": "printf 'A\nB\n' | sed '/./d' | wc -l",
+      "code": "printf 'A\\nB\\n' | sed '/./d' | wc -l",
       "output": "0",
       "why": "dลบบรรทัดทั้งหมด",
       "wrong": [],
@@ -3999,7 +3999,7 @@
     {
       "reference": "editing-safety",
       "label": "rangecharASCII",
-      "code": "printf 'A\nz\n7\n' | grep -Ec '^[[:digit:]]$'",
+      "code": "printf 'A\\nz\\n7\\n' | grep -Ec '^[[:digit:]]$'",
       "output": "1",
       "why": "LC_ALL=Cมี7ที่เป็นdigit",
       "wrong": [],
@@ -4012,7 +4012,7 @@
     {
       "reference": "fields",
       "label": "field2colon",
-      "code": "printf 'red:10:yes\n' | awk -F: '{print $2}'",
+      "code": "printf 'red:10:yes\\n' | awk -F: '{print $2}'",
       "output": "10",
       "why": "colonfield2คือ10",
       "wrong": [],
@@ -4025,7 +4025,7 @@
     {
       "reference": "fields",
       "label": "OFS",
-      "code": "printf 'A B\n' | awk 'BEGIN{OFS=\":\"}{print $1,$2}'",
+      "code": "printf 'A B\\n' | awk 'BEGIN{OFS=\":\"}{print $1,$2}'",
       "output": "A:B",
       "why": "printหลายexpressionใช้OFS",
       "wrong": [
@@ -4041,7 +4041,7 @@
     {
       "reference": "fields",
       "label": "OFSไม่rebuildเอง",
-      "code": "printf 'A B\n' | awk 'BEGIN{OFS=\":\"}{print $0}'",
+      "code": "printf 'A B\\n' | awk 'BEGIN{OFS=\":\"}{print $0}'",
       "output": "A B",
       "why": "$0เดิมยังspace",
       "wrong": [
@@ -4057,7 +4057,7 @@
     {
       "reference": "fields",
       "label": "แก้fieldrebuild",
-      "code": "printf 'A B\n' | awk 'BEGIN{OFS=\":\"}{$2=\"C\";print $0}'",
+      "code": "printf 'A B\\n' | awk 'BEGIN{OFS=\":\"}{$2=\"C\";print $0}'",
       "output": "A:C",
       "why": "assignmentfieldrebuildด้วยOFS",
       "wrong": [
@@ -4073,7 +4073,7 @@
     {
       "reference": "fields",
       "label": "defaultwhitespace",
-      "code": "printf ' A   B \n' | awk '{print NF}'",
+      "code": "printf ' A   B \\n' | awk '{print NF}'",
       "output": "2",
       "why": "defaultFSแยกwhitespaceและไม่สร้างemptyfieldsหัวท้าย",
       "wrong": [],
@@ -4086,7 +4086,7 @@
     {
       "reference": "records",
       "label": "NRรวมrecords",
-      "code": "printf 'A\nB\n' | awk 'END{print NR}'",
+      "code": "printf 'A\\nB\\n' | awk 'END{print NR}'",
       "output": "2",
       "why": "มีสองrecords",
       "wrong": [],
@@ -4099,7 +4099,7 @@
     {
       "reference": "records",
       "label": "NFต่อrecord",
-      "code": "printf 'A B C\n' | awk '{print NF}'",
+      "code": "printf 'A B C\\n' | awk '{print NF}'",
       "output": "3",
       "why": "สามfields",
       "wrong": [],
@@ -4112,7 +4112,7 @@
     {
       "reference": "records",
       "label": "filterคะแนน",
-      "code": "printf 'A:50\nB:70\nC:90\n' | awk -F: '$2>=60{print $1}'",
+      "code": "printf 'A:50\\nB:70\\nC:90\\n' | awk -F: '$2>=60{print $1}'",
       "output": "B\nC",
       "why": "70และ90ผ่าน",
       "wrong": [
@@ -4128,7 +4128,7 @@
     {
       "reference": "records",
       "label": "FNRต่อไฟล์",
-      "code": "printf 'A\n' >a; printf 'B\n' >b; awk '{printf \"%s:%s;\",NR,FNR}' a b",
+      "code": "printf 'A\\n' >a; printf 'B\\n' >b; awk '{printf \"%s:%s;\",NR,FNR}' a b",
       "output": "1:1;2:1;",
       "why": "NRต่อเนื่องFNRเริ่มใหม่",
       "wrong": [
@@ -4144,7 +4144,7 @@
     {
       "reference": "records",
       "label": "blankrecordNF0",
-      "code": "printf '\n' | awk '{print NF}'",
+      "code": "printf '\\n' | awk '{print NF}'",
       "output": "0",
       "why": "มีrecordแต่ไม่มีfield",
       "wrong": [],
@@ -4157,7 +4157,7 @@
     {
       "reference": "aggregation",
       "label": "sumfield",
-      "code": "printf 'A:10\nB:20\n' | awk -F: '{s+=$2}END{print s}'",
+      "code": "printf 'A:10\\nB:20\\n' | awk -F: '{s+=$2}END{print s}'",
       "output": "30",
       "why": "รวม10กับ20",
       "wrong": [],
@@ -4170,7 +4170,7 @@
     {
       "reference": "aggregation",
       "label": "filteredmean",
-      "code": "printf 'A:50\nB:70\nC:90\n' | awk -F: '$2>=60{s+=$2;n++}END{print s/n}'",
+      "code": "printf 'A:50\\nB:70\\nC:90\\n' | awk -F: '$2>=60{s+=$2;n++}END{print s/n}'",
       "output": "80",
       "why": "หารด้วย2recordsที่ผ่านไม่ใช่3",
       "wrong": [],
@@ -4225,7 +4225,7 @@
     {
       "reference": "pipelines",
       "label": "sortnumeric",
-      "code": "printf '10\n2\n1\n' | sort -n",
+      "code": "printf '10\\n2\\n1\\n' | sort -n",
       "output": "1\n2\n10",
       "why": "-nเรียงค่าตัวเลข",
       "wrong": [
@@ -4241,7 +4241,7 @@
     {
       "reference": "pipelines",
       "label": "sortlexical",
-      "code": "printf '10\n2\n1\n' | sort",
+      "code": "printf '10\\n2\\n1\\n' | sort",
       "output": "1\n10\n2",
       "why": "LC_ALL=Cเรียงข้อความ",
       "wrong": [
@@ -4257,7 +4257,7 @@
     {
       "reference": "pipelines",
       "label": "uniqไม่รวมไม่ติด",
-      "code": "printf 'b\na\nb\n' | uniq | wc -l",
+      "code": "printf 'b\\na\\nb\\n' | uniq | wc -l",
       "output": "3",
       "why": "ไม่มีสองบรรทัดติดซ้ำ",
       "wrong": [],
@@ -4270,7 +4270,7 @@
     {
       "reference": "pipelines",
       "label": "sortก่อนuniq",
-      "code": "printf 'b\na\nb\n' | sort | uniq | wc -l",
+      "code": "printf 'b\\na\\nb\\n' | sort | uniq | wc -l",
       "output": "2",
       "why": "sortทำbติดกันแล้วuniqเหลือa,b",
       "wrong": [],
@@ -4296,7 +4296,7 @@
     {
       "reference": "applied-text",
       "label": "validatefields",
-      "code": "printf 'A:10\nbad\nB:20\n' | awk -F: 'NF==2 && $2~/^[0-9]+$/{n++}END{print n}'",
+      "code": "printf 'A:10\\nbad\\nB:20\\n' | awk -F: 'NF==2 && $2~/^[0-9]+$/{n++}END{print n}'",
       "output": "2",
       "why": "badมีNF1จึงไม่รับ",
       "wrong": [],
@@ -4309,7 +4309,7 @@
     {
       "reference": "applied-text",
       "label": "maxscore",
-      "code": "printf 'A:10\nB:30\nC:20\n' | awk -F: 'NR==1||$2>m{m=$2}END{print m}'",
+      "code": "printf 'A:10\\nB:30\\nC:20\\n' | awk -F: 'NR==1||$2>m{m=$2}END{print m}'",
       "output": "30",
       "why": "maximumสามข้อมูลคือ30",
       "wrong": [],
@@ -4322,7 +4322,7 @@
     {
       "reference": "applied-text",
       "label": "cutASCIIfields",
-      "code": "printf 'studentXYZ\n' | cut -c1-7",
+      "code": "printf 'studentXYZ\\n' | cut -c1-7",
       "output": "student",
       "why": "เลือกASCIIตำแหน่ง1ถึง7",
       "wrong": [
@@ -4338,7 +4338,7 @@
     {
       "reference": "applied-text",
       "label": "sortkeynumeric",
-      "code": "printf 'A 2\nB 10\nC 3\n' | sort -k2,2nr | head -1",
+      "code": "printf 'A 2\\nB 10\\nC 3\\n' | sort -k2,2nr | head -1",
       "output": "B 10",
       "why": "field2numericreverseเอามากสุด",
       "wrong": [
@@ -4354,7 +4354,7 @@
     {
       "reference": "applied-text",
       "label": "countvalidzero",
-      "code": "printf 'A:0\nB:x\n' | awk -F: 'NF==2&&$2~/^[0-9]+$/{n++}END{print n+0}'",
+      "code": "printf 'A:0\\nB:x\\n' | awk -F: 'NF==2&&$2~/^[0-9]+$/{n++}END{print n+0}'",
       "output": "1",
       "why": "0เป็นเลขvalid ไม่ใช่missing",
       "wrong": [],

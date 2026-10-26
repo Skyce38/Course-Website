@@ -130,8 +130,7 @@ A
 ตัวอย่างจัดทำเสริม (รันใน directory ว่าง ไม่ใช่โปรแกรมพร้อมรับ input ที่ไม่เชื่อถือ):
 
 ```bash
-printf '  A  
-' >in; IFS= read -r x <in; printf '<%s>' "$x"
+printf '  A  \n' >in; IFS= read -r x <in; printf '<%s>' "$x"
 ```
 
 ผล stdout (ตัด newline ท้ายตามเกณฑ์ชุดทดสอบ):
@@ -166,8 +165,7 @@ Bashปกติรันแต่ละส่วนของpipelineในsubsh
 ตัวอย่างจัดทำเสริม (รันใน directory ว่าง ไม่ใช่โปรแกรมพร้อมรับ input ที่ไม่เชื่อถือ):
 
 ```bash
-shopt -u lastpipe; n=0; printf 'x
-' | while read -r x; do ((n+=1)); done; printf '%s' "$n"
+shopt -u lastpipe; n=0; printf 'x\n' | while read -r x; do ((n+=1)); done; printf '%s' "$n"
 ```
 
 ผล stdout (ตัด newline ท้ายตามเกณฑ์ชุดทดสอบ):

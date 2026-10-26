@@ -2,6 +2,12 @@
 
 `insights.html` is a read-only, client-side view of existing Practice Mode and Extended Exam results. Modern homepage navigation links to it; the same page also supports Classic. No Learning Paths, account, tracking service, upload or mastery model is introduced.
 
+## Phase 12 registered courses
+
+The derived manifest now lists controlled `{id,label}` course metadata from the existing catalog, restricted to courses with registered lessons. AI, OOP and Unix are selectable/comparable; the old two-course manifest shape remains accepted for compatibility. Course IDs/labels are validated and rendered as text, never used as arbitrary URLs or HTML. This is derived public configuration, **not a saved-data schema change**.
+
+Current inventory:37 lessons /1110 unique questions, including12 Unix Final lessons /360 questions. Each Unix bank uses existing Practice/Exam namespaces, graders and revision rules. All Phase11.1 graded/self reconciliation rules below remain unchanged. No storage migration, write API, polling, predicted mastery or inferred curriculum order is added. The new dictionary/Insights modules/manifest use targeted `phase12-unix-1` URLs; unchanged reader assets retain their original cache versions.
+
 ## Exact measurement rules
 
 - **Included result:** a supported version/revision with valid responses and every automatically graded question in its selected run submitted. A partially answered automatic run is excluded, not extrapolated. Unsubmitted drafts never count. Self-only topic runs need at least one submitted self-assessment and contribute no automatic observations.

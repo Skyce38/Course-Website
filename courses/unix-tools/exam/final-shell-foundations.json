@@ -263,7 +263,7 @@
     {
       "id": "ux01-q16",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ตัด newline ท้าย\nx=$(printf 'A\n\n'); printf '%s' \"${#x}\"",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ตัด newline ท้าย\nx=$(printf 'A\\n\\n'); printf '%s' \"${#x}\"",
       "reference": "substitution",
       "explanation": "newline ท้ายสองตัวถูกตัด เหลือ A — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q16",
       "answer": 1,
@@ -278,7 +278,7 @@
     {
       "id": "ux01-q17",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: เก็บ newline ภายใน\nx=$(printf 'A\nB\n'); printf '%s' \"${#x}\"",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: เก็บ newline ภายใน\nx=$(printf 'A\\nB\\n'); printf '%s' \"${#x}\"",
       "reference": "substitution",
       "explanation": "A newline B รวมสามอักขระ ASCII — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q17",
       "answer": 3,
@@ -418,7 +418,7 @@
     {
       "id": "ux01-q22",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: นับบรรทัดไม่ใช่คำ\nprintf 'red blue\ngreen\n' | wc -l",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: นับบรรทัดไม่ใช่คำ\nprintf 'red blue\\ngreen\\n' | wc -l",
       "reference": "utilities",
       "explanation": "มี newline สองตัว — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q22",
       "answer": 2,

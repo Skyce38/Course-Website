@@ -25,10 +25,7 @@ Shellglobใช้เลือกชื่อไฟล์และcase; regexใ
 ตัวอย่างจัดทำเสริม (รันใน directory ว่าง ไม่ใช่โปรแกรมพร้อมรับ input ที่ไม่เชื่อถือ):
 
 ```bash
-printf 'a
-aa
-b
-' | grep -Ec '^a+$'
+printf 'a\naa\nb\n' | grep -Ec '^a+$'
 ```
 
 ผล stdout (ตัด newline ท้ายตามเกณฑ์ชุดทดสอบ):
@@ -63,9 +60,7 @@ grepเลือกบรรทัดที่matchที่ใดก็ได�
 ตัวอย่างจัดทำเสริม (รันใน directory ว่าง ไม่ใช่โปรแกรมพร้อมรับ input ที่ไม่เชื่อถือ):
 
 ```bash
-printf 'aa a
-a
-' | grep -c a
+printf 'aa a\na\n' | grep -c a
 ```
 
 ผล stdout (ตัด newline ท้ายตามเกณฑ์ชุดทดสอบ):
@@ -100,8 +95,7 @@ sed s/pattern/replacement/แทนmatchแรกของแต่ละบร�
 ตัวอย่างจัดทำเสริม (รันใน directory ว่าง ไม่ใช่โปรแกรมพร้อมรับ input ที่ไม่เชื่อถือ):
 
 ```bash
-printf 'foo foo
-' | sed 's/foo/bar/'
+printf 'foo foo\n' | sed 's/foo/bar/'
 ```
 
 ผล stdout (ตัด newline ท้ายตามเกณฑ์ชุดทดสอบ):
@@ -136,10 +130,7 @@ sedปกติพิมพ์patternspaceท้ายรอบ; -nปิดauto
 ตัวอย่างจัดทำเสริม (รันใน directory ว่าง ไม่ใช่โปรแกรมพร้อมรับ input ที่ไม่เชื่อถือ):
 
 ```bash
-printf 'A
-B
-C
-' | sed -n '1,2p'
+printf 'A\nB\nC\n' | sed -n '1,2p'
 ```
 
 ผล stdout (ตัด newline ท้ายตามเกณฑ์ชุดทดสอบ):

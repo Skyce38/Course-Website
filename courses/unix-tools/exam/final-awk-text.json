@@ -7,7 +7,7 @@
     {
       "id": "ux12-q06",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: NRรวมrecords\nprintf 'A\nB\n' | awk 'END{print NR}'",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: NRรวมrecords\nprintf 'A\\nB\\n' | awk 'END{print NR}'",
       "reference": "records",
       "explanation": "มีสองrecords — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux12-q06",
       "answer": 2,
@@ -22,7 +22,7 @@
     {
       "id": "ux12-q07",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: NFต่อrecord\nprintf 'A B C\n' | awk '{print NF}'",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: NFต่อrecord\nprintf 'A B C\\n' | awk '{print NF}'",
       "reference": "records",
       "explanation": "สามfields — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux12-q07",
       "answer": 3,
@@ -37,7 +37,7 @@
     {
       "id": "ux12-q08",
       "type": "choice",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: filterคะแนน\nprintf 'A:50\nB:70\nC:90\n' | awk -F: '$2>=60{print $1}'",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: filterคะแนน\nprintf 'A:50\\nB:70\\nC:90\\n' | awk -F: '$2>=60{print $1}'",
       "reference": "records",
       "explanation": "70และ90ผ่าน — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux12-q08",
       "choices": [
@@ -64,7 +64,7 @@
     {
       "id": "ux12-q09",
       "type": "choice",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: FNRต่อไฟล์\nprintf 'A\n' >a; printf 'B\n' >b; awk '{printf \"%s:%s;\",NR,FNR}' a b",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: FNRต่อไฟล์\nprintf 'A\\n' >a; printf 'B\\n' >b; awk '{printf \"%s:%s;\",NR,FNR}' a b",
       "reference": "records",
       "explanation": "NRต่อเนื่องFNRเริ่มใหม่ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux12-q09",
       "choices": [
@@ -91,7 +91,7 @@
     {
       "id": "ux12-q10",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: blankrecordNF0\nprintf '\n' | awk '{print NF}'",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: blankrecordNF0\nprintf '\\n' | awk '{print NF}'",
       "reference": "records",
       "explanation": "มีrecordแต่ไม่มีfield — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux12-q10",
       "answer": 0,
@@ -123,7 +123,7 @@
     {
       "id": "ux12-q11",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: sumfield\nprintf 'A:10\nB:20\n' | awk -F: '{s+=$2}END{print s}'",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: sumfield\nprintf 'A:10\\nB:20\\n' | awk -F: '{s+=$2}END{print s}'",
       "reference": "aggregation",
       "explanation": "รวม10กับ20 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux12-q11",
       "answer": 30,
@@ -138,7 +138,7 @@
     {
       "id": "ux12-q12",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: filteredmean\nprintf 'A:50\nB:70\nC:90\n' | awk -F: '$2>=60{s+=$2;n++}END{print s/n}'",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: filteredmean\nprintf 'A:50\\nB:70\\nC:90\\n' | awk -F: '$2>=60{s+=$2;n++}END{print s/n}'",
       "reference": "aggregation",
       "explanation": "หารด้วย2recordsที่ผ่านไม่ใช่3 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux12-q12",
       "answer": 80,
@@ -227,7 +227,7 @@
     {
       "id": "ux12-q16",
       "type": "choice",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: sortnumeric\nprintf '10\n2\n1\n' | sort -n",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: sortnumeric\nprintf '10\\n2\\n1\\n' | sort -n",
       "reference": "pipelines",
       "explanation": "-nเรียงค่าตัวเลข — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux12-q16",
       "choices": [
@@ -254,7 +254,7 @@
     {
       "id": "ux12-q17",
       "type": "choice",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: sortlexical\nprintf '10\n2\n1\n' | sort",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: sortlexical\nprintf '10\\n2\\n1\\n' | sort",
       "reference": "pipelines",
       "explanation": "LC_ALL=Cเรียงข้อความ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux12-q17",
       "choices": [
@@ -281,7 +281,7 @@
     {
       "id": "ux12-q18",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: uniqไม่รวมไม่ติด\nprintf 'b\na\nb\n' | uniq | wc -l",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: uniqไม่รวมไม่ติด\nprintf 'b\\na\\nb\\n' | uniq | wc -l",
       "reference": "pipelines",
       "explanation": "ไม่มีสองบรรทัดติดซ้ำ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux12-q18",
       "answer": 3,
@@ -296,7 +296,7 @@
     {
       "id": "ux12-q19",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: sortก่อนuniq\nprintf 'b\na\nb\n' | sort | uniq | wc -l",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: sortก่อนuniq\nprintf 'b\\na\\nb\\n' | sort | uniq | wc -l",
       "reference": "pipelines",
       "explanation": "sortทำbติดกันแล้วuniqเหลือa,b — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux12-q19",
       "answer": 2,
@@ -343,7 +343,7 @@
     {
       "id": "ux12-q21",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: validatefields\nprintf 'A:10\nbad\nB:20\n' | awk -F: 'NF==2 && $2~/^[0-9]+$/{n++}END{print n}'",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: validatefields\nprintf 'A:10\\nbad\\nB:20\\n' | awk -F: 'NF==2 && $2~/^[0-9]+$/{n++}END{print n}'",
       "reference": "applied-text",
       "explanation": "badมีNF1จึงไม่รับ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux12-q21",
       "answer": 2,
@@ -358,7 +358,7 @@
     {
       "id": "ux12-q22",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: maxscore\nprintf 'A:10\nB:30\nC:20\n' | awk -F: 'NR==1||$2>m{m=$2}END{print m}'",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: maxscore\nprintf 'A:10\\nB:30\\nC:20\\n' | awk -F: 'NR==1||$2>m{m=$2}END{print m}'",
       "reference": "applied-text",
       "explanation": "maximumสามข้อมูลคือ30 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux12-q22",
       "answer": 30,
@@ -373,7 +373,7 @@
     {
       "id": "ux12-q23",
       "type": "choice",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: cutASCIIfields\nprintf 'studentXYZ\n' | cut -c1-7",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: cutASCIIfields\nprintf 'studentXYZ\\n' | cut -c1-7",
       "reference": "applied-text",
       "explanation": "เลือกASCIIตำแหน่ง1ถึง7 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux12-q23",
       "choices": [
@@ -400,7 +400,7 @@
     {
       "id": "ux12-q24",
       "type": "choice",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: sortkeynumeric\nprintf 'A 2\nB 10\nC 3\n' | sort -k2,2nr | head -1",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: sortkeynumeric\nprintf 'A 2\\nB 10\\nC 3\\n' | sort -k2,2nr | head -1",
       "reference": "applied-text",
       "explanation": "field2numericreverseเอามากสุด — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux12-q24",
       "choices": [
@@ -427,7 +427,7 @@
     {
       "id": "ux12-q25",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: countvalidzero\nprintf 'A:0\nB:x\n' | awk -F: 'NF==2&&$2~/^[0-9]+$/{n++}END{print n+0}'",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: countvalidzero\nprintf 'A:0\\nB:x\\n' | awk -F: 'NF==2&&$2~/^[0-9]+$/{n++}END{print n+0}'",
       "reference": "applied-text",
       "explanation": "0เป็นเลขvalid ไม่ใช่missing — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux12-q25",
       "answer": 1,

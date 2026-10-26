@@ -222,5 +222,19 @@
       "ux12-q04"
     ],
     "reason": "OFSไม่rebuildเอง เทียบกับ แก้fieldrebuild: $0เดิมยังspace; ส่วนอีกข้อ assignmentfieldrebuildด้วยOFS. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux12-q05",
+      "ux12-q07"
+    ],
+    "reason": "ux12-q05 ทดสอบ default FS ยุบ whitespace และไม่สร้าง empty fields ที่ขอบ; ux12-q07 ทดสอบ NF บน record สาม field ปกติ เป็น contrast เรื่อง tokenization กับการนับ field ไม่ใช่การเปลี่ยนตัวเลขในสูตร และมี Linux execution แยกแต่ละกรณี"
+  },
+  {
+    "ids": [
+      "ux12-q11",
+      "ux12-q12"
+    ],
+    "reason": "ux12-q11 ตรวจ sum ของทุก record; ux12-q12 ตรวจ filtered mean และใช้จำนวน record ที่ผ่านเป็นตัวหาร ไม่ใช่ NR ทั้งหมด เป็นคนละ aggregation และ failure mode ไม่ใช่เปลี่ยนเฉพาะเลขในสูตร มี independent outputs30และ80"
   }
 ]

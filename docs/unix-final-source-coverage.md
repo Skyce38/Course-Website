@@ -4,6 +4,8 @@ Audit date: 2026-10-27. Course identity remains `unix-tools` / **88624159**. The
 
 Originals are local-only, read-only files under the available `Final Unix Tools/sources/` and `Final Unix Tools/homework final/` collections. These labels describe the collections, not public repository paths. No originals, private submissions or extracted copies are published. Page numbers below are **physical PDF pages**. `Lect12.txt`, hw5–7 have no PDF page numbers.
 
+Inventory:16 available physical files /15 unique originals (HL duplicates U11). Matrix status: **VERIFIED from original source for the cited topic coverage**, not automatic endorsement of every statement. All360 new questions are **SUPPLEMENTARY**. Automatic answers have independent execution evidence; self rubrics are qualified reviews. A separate Lecture14 is **SOURCE UNAVAILABLE** in this collection.
+
 | Evidence | Inspected source | Relevant coverage | Lessons |
 |---|---|---|---|
 | U09 | Lect09.pdf, 19 pages | pp.1–7 builtins/jobs/subshells; 8–14 scripts, tar, local; 15–19 arguments | 01–03 |

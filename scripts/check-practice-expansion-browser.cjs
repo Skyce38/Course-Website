@@ -8,7 +8,7 @@ const base=process.env.STUDY_BASE_URL||'http://127.0.0.1:8780/Course-Website/';
 const registry=JSON.parse(fs.readFileSync(path.join(__dirname,'lessons.json'),'utf8'));
 const sets=registry.map(file=>{const {meta}=require('./lesson-build.cjs').metadata(fs.readFileSync(path.join(__dirname,'..',file),'utf8'));return JSON.parse(fs.readFileSync(path.join(__dirname,'../courses',meta.course,'practice',meta.slug+'.json'),'utf8'))});
 const pilots=['oop-python-stack','oop-python-complexity-basic-sorting','artificial-intelligence-final-knn','artificial-intelligence-final-decision-tree'];
-const additions=sets.filter(q=>!pilots.includes(q.lesson));assert.equal(additions.length,21);
+const additions=sets.filter(q=>!pilots.includes(q.lesson)&&!q.lesson.startsWith('unix-tools-'));assert.equal(additions.length,21);
 const key=q=>'skyce-learning-practice-v1:'+q.lesson;
 const address=q=>base+'read/'+(q.lesson.startsWith('oop-python-')?'oop-python/'+q.lesson.slice(11):'artificial-intelligence/'+q.lesson.slice(24))+'.html';
 const field=p=>p.locator('.practice-session fieldset:visible'),nav=(p,n)=>p.locator('.practice-session > .practice-actions button').nth(n);

@@ -15,6 +15,7 @@ let auto=0,self=0;for(const l of unix){
  }
  assert.equal(l.bank.data.questions.filter(q=>q.type==='self').length,5);assert.equal(l.practiceIds.length,6);assert.match(html,/shellCode/);assert.match(html,/<span>Bash<\/span>/);assert.ok(!html.includes('{{'));assert.match(html,/i18n\.js\?v=phase12-unix-1/);
  const shell=B.markdown('## Safe {#safe}\n```bash\nprintf "<script>"\n```',{root:process.cwd(),source:'courses/unix-tools/summaries/final-shell-foundations.md',output:l.reader,catalog});assert.match(shell.html,/&lt;script&gt;/);assert.ok(!shell.html.includes('<script>'));assert.equal(shell.interactive,true);
+ const literals=B.codeViewer('printf "pythonCode โค้ด Python <script>"','fixture','bash');assert.ok(literals.includes('printf &quot;pythonCode โค้ด Python &lt;script&gt;&quot;'),'Language labels must never replace lesson source literals');
 }
 assert.equal(auto,300);assert.equal(self,60);assert.equal(ids.size,360);
 assert.equal(I.courses(manifest).length,3);assert.ok(I.courses(manifest).some(c=>c.id==='unix-tools'));

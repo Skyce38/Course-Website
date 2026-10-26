@@ -7,7 +7,7 @@
     {
       "id": "ux11-q06",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: นับบรรทัดไม่ใช่matches\nprintf 'aa a\na\n' | grep -c a",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: นับบรรทัดไม่ใช่matches\nprintf 'aa a\\na\\n' | grep -c a",
       "reference": "grep",
       "explanation": "สองบรรทัดmatchแม้มีหลายa — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q06",
       "answer": 2,
@@ -22,7 +22,7 @@
     {
       "id": "ux11-q07",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: fixedstring\nprintf 'a.b\naxb\n' | grep -Fc 'a.b'",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: fixedstring\nprintf 'a.b\\naxb\\n' | grep -Fc 'a.b'",
       "reference": "grep",
       "explanation": "-Fทำจุดเป็นliteral — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q07",
       "answer": 1,
@@ -37,7 +37,7 @@
     {
       "id": "ux11-q08",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: grepไม่พบstatus\nprintf 'red\n' | grep blue; printf '%s' \"$?\"",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: grepไม่พบstatus\nprintf 'red\\n' | grep blue; printf '%s' \"$?\"",
       "reference": "grep",
       "explanation": "ไม่พบให้1 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q08",
       "answer": 1,
@@ -67,7 +67,7 @@
     {
       "id": "ux11-q10",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: wholeline\nprintf 'a\nba\nab\n' | grep -xc a",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: wholeline\nprintf 'a\\nba\\nab\\n' | grep -xc a",
       "reference": "grep",
       "explanation": "-xรับเฉพาะบรรทัดa — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q10",
       "answer": 1,
@@ -99,7 +99,7 @@
     {
       "id": "ux11-q11",
       "type": "choice",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: แทนmatchแรก\nprintf 'foo foo\n' | sed 's/foo/bar/'",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: แทนmatchแรก\nprintf 'foo foo\\n' | sed 's/foo/bar/'",
       "reference": "sed-substitute",
       "explanation": "ไม่gจึงครั้งแรก — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q11",
       "choices": [
@@ -126,7 +126,7 @@
     {
       "id": "ux11-q12",
       "type": "choice",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: แทนทุกmatch\nprintf 'foo foo\n' | sed 's/foo/bar/g'",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: แทนทุกmatch\nprintf 'foo foo\\n' | sed 's/foo/bar/g'",
       "reference": "sed-substitute",
       "explanation": "gแทนสองmatch — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q12",
       "choices": [
@@ -153,7 +153,7 @@
     {
       "id": "ux11-q13",
       "type": "choice",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: replacementampersand\nprintf 'abc\n' | sed 's/b/[&]/'",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: replacementampersand\nprintf 'abc\\n' | sed 's/b/[&]/'",
       "reference": "sed-substitute",
       "explanation": "&คืนmatchb — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q13",
       "choices": [
@@ -207,7 +207,7 @@
     {
       "id": "ux11-q15",
       "type": "choice",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: delimiterอื่น\nprintf '/a/b\n' | sed 's#/a#/x#'",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: delimiterอื่น\nprintf '/a/b\\n' | sed 's#/a#/x#'",
       "reference": "sed-substitute",
       "explanation": "#เป็นdelimiterแทน/ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q15",
       "choices": [
@@ -251,7 +251,7 @@
     {
       "id": "ux11-q16",
       "type": "choice",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: พิมพ์ช่วง\nprintf 'A\nB\nC\n' | sed -n '1,2p'",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: พิมพ์ช่วง\nprintf 'A\\nB\\nC\\n' | sed -n '1,2p'",
       "reference": "sed-address",
       "explanation": "-nปิดprintเดิมแล้วเลือก1ถึง2 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q16",
       "choices": [
@@ -278,7 +278,7 @@
     {
       "id": "ux11-q17",
       "type": "choice",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ลบหัว\nprintf 'head\ndata\n' | sed '1d'",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ลบหัว\nprintf 'head\\ndata\\n' | sed '1d'",
       "reference": "sed-address",
       "explanation": "1dลบบรรทัด1 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q17",
       "choices": [
@@ -305,7 +305,7 @@
     {
       "id": "ux11-q18",
       "type": "choice",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: printซ้ำ\nprintf 'A\n' | sed 'p'",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: printซ้ำ\nprintf 'A\\n' | sed 'p'",
       "reference": "sed-address",
       "explanation": "pหนึ่งและautomaticprintอีกหนึ่ง — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q18",
       "choices": [
@@ -332,7 +332,7 @@
     {
       "id": "ux11-q19",
       "type": "choice",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: lastline\nprintf 'A\nB\nC\n' | sed -n '$p'",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: lastline\nprintf 'A\\nB\\nC\\n' | sed -n '$p'",
       "reference": "sed-address",
       "explanation": "$เลือกบรรทัดท้าย — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q19",
       "choices": [
@@ -359,7 +359,7 @@
     {
       "id": "ux11-q20",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ลบเนื้อหายังมีบรรทัด\nprintf 'A\nB\n' | sed 's/.*//' | wc -l",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ลบเนื้อหายังมีบรรทัด\nprintf 'A\\nB\\n' | sed 's/.*//' | wc -l",
       "reference": "sed-address",
       "explanation": "สองemptylinesยังมีnewline — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q20",
       "answer": 2,
@@ -445,7 +445,7 @@
     {
       "id": "ux11-q23",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: อันตราย-n-i\nprintf 'foo\n' >f; sed -ni 's/foo/bar/' f; wc -c <f",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: อันตราย-n-i\nprintf 'foo\\n' >f; sed -ni 's/foo/bar/' f; wc -c <f",
       "reference": "editing-safety",
       "explanation": "-nไม่pและ-iเขียนผลว่าง — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q23",
       "answer": 0,
@@ -460,7 +460,7 @@
     {
       "id": "ux11-q24",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: deleteต่างempty\nprintf 'A\nB\n' | sed '/./d' | wc -l",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: deleteต่างempty\nprintf 'A\\nB\\n' | sed '/./d' | wc -l",
       "reference": "editing-safety",
       "explanation": "dลบบรรทัดทั้งหมด — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q24",
       "answer": 0,
@@ -475,7 +475,7 @@
     {
       "id": "ux11-q25",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: rangecharASCII\nprintf 'A\nz\n7\n' | grep -Ec '^[[:digit:]]$'",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: rangecharASCII\nprintf 'A\\nz\\n7\\n' | grep -Ec '^[[:digit:]]$'",
       "reference": "editing-safety",
       "explanation": "LC_ALL=Cมี7ที่เป็นdigit — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux11-q25",
       "answer": 1,

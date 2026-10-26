@@ -7,7 +7,7 @@
     {
       "id": "ux12-q01",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: field2colon\nprintf 'red:10:yes\n' | awk -F: '{print $2}'",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: field2colon\nprintf 'red:10:yes\\n' | awk -F: '{print $2}'",
       "reference": "fields",
       "explanation": "colonfield2คือ10 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux12-q01",
       "answer": 10,
@@ -17,7 +17,7 @@
     {
       "id": "ux12-q02",
       "type": "choice",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: OFS\nprintf 'A B\n' | awk 'BEGIN{OFS=\":\"}{print $1,$2}'",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: OFS\nprintf 'A B\\n' | awk 'BEGIN{OFS=\":\"}{print $1,$2}'",
       "reference": "fields",
       "explanation": "printหลายexpressionใช้OFS — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux12-q02",
       "choices": [
@@ -39,7 +39,7 @@
     {
       "id": "ux12-q03",
       "type": "choice",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: OFSไม่rebuildเอง\nprintf 'A B\n' | awk 'BEGIN{OFS=\":\"}{print $0}'",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: OFSไม่rebuildเอง\nprintf 'A B\\n' | awk 'BEGIN{OFS=\":\"}{print $0}'",
       "reference": "fields",
       "explanation": "$0เดิมยังspace — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux12-q03",
       "choices": [
@@ -61,7 +61,7 @@
     {
       "id": "ux12-q04",
       "type": "choice",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: แก้fieldrebuild\nprintf 'A B\n' | awk 'BEGIN{OFS=\":\"}{$2=\"C\";print $0}'",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: แก้fieldrebuild\nprintf 'A B\\n' | awk 'BEGIN{OFS=\":\"}{$2=\"C\";print $0}'",
       "reference": "fields",
       "explanation": "assignmentfieldrebuildด้วยOFS — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux12-q04",
       "choices": [
@@ -83,7 +83,7 @@
     {
       "id": "ux12-q05",
       "type": "numeric",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: defaultwhitespace\nprintf ' A   B \n' | awk '{print NF}'",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: defaultwhitespace\nprintf ' A   B \\n' | awk '{print NF}'",
       "reference": "fields",
       "explanation": "defaultFSแยกwhitespaceและไม่สร้างemptyfieldsหัวท้าย — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux12-q05",
       "answer": 2,

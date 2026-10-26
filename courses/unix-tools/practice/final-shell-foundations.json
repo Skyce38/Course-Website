@@ -51,7 +51,7 @@
     {
       "id": "ux01-q03",
       "type": "choice",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: Shebang ไม่ใช่คำสั่งพิมพ์\nprintf '#!/bin/bash\nprintf hello' > demo.sh; bash demo.sh",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: Shebang ไม่ใช่คำสั่งพิมพ์\nprintf '#!/bin/bash\\nprintf hello' > demo.sh; bash demo.sh",
       "reference": "execution",
       "explanation": "บรรทัด #! เป็น comment เมื่อ Bash อ่านไฟล์ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q03",
       "choices": [
@@ -73,7 +73,7 @@
     {
       "id": "ux01-q04",
       "type": "choice",
-      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ตำแหน่ง script ใน PATH\nmkdir bin; printf '#!/bin/bash\nprintf found' > bin/study; chmod +x bin/study; PATH=\"$PWD/bin:$PATH\" study",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ตำแหน่ง script ใน PATH\nmkdir bin; printf '#!/bin/bash\\nprintf found' > bin/study; chmod +x bin/study; PATH=\"$PWD/bin:$PATH\" study",
       "reference": "execution",
       "explanation": "PATH เพิ่ม directory ที่มีคำสั่ง executable — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q04",
       "choices": [

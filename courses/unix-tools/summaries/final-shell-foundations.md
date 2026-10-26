@@ -130,9 +130,7 @@ old
 ตัวอย่างจัดทำเสริม (รันใน directory ว่าง ไม่ใช่โปรแกรมพร้อมรับ input ที่ไม่เชื่อถือ):
 
 ```bash
-x=$(printf 'A
-
-'); printf '%s' "${#x}"
+x=$(printf 'A\n\n'); printf '%s' "${#x}"
 ```
 
 ผล stdout (ตัด newline ท้ายตามเกณฑ์ชุดทดสอบ):
