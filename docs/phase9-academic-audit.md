@@ -34,3 +34,22 @@ Severity: Critical = incorrect answer / foundational misconception; High = wrong
 | H | Final integrity review and PR | Not ready |
 
 Finding details: [corrections](phase9-corrections.md), [unverified claims](phase9-unverified-claims.md). Counts will be updated from actual review records, never inferred from test success.
+
+## Stage B review record (in progress)
+
+Fresh semantic review has read all ten Final lesson sources and all 300 associated original/extended prompts, alternatives, answer keys, explanations and self-assessment rubrics. Numeric/code checks are recorded separately below; this does not certify missing lab observations or every original slide figure.
+
+| Lesson | Independently checked conclusions / method | Original evidence freshly checked |
+|---|---|---|
+| Regression | exact OLS fractions; centered correlation; units and rounding; MAE/MSE/RMSE; rank and 300-row/8-row distinction; 80 independent OLS cases | S06 pp.6–8,13 images; A03/X07/C02/D03 fingerprints, workbook cells/formulas and 300 rows |
+| KNN | ten exact Drug distances/ranking, Buy Hamming-distance oracle, 24 categorical comparisons, ties, encoding and Iris split | S07 pp.3–5 images; X01/X02 duplicate, X03/X04 cells, C01 KNN segment; R8 discrepancy now disclosed |
+| Naive Bayes | exact priors/scores/posteriors, smoothing denominators, 78 categorical comparisons and independent Gaussian density checks | S07 p.7 image; X01/X03 counts/formulas, incomplete L3/L6 excluded, C01 NB segment |
+| Decision Tree | all source counts/gains, subtree predictions, 80 mutual-information comparisons; no generalization guarantee | S08 pp.6,13–14,16 images; original D01 rows |
+| Hierarchical | all source matrix merges and 75 SciPy linkage comparisons; correlation/metric caveats and cut convention | S09 pp.10,14,22,25 images |
+| K-Means | exact iteration tables, 40 independent cases, monotone SSE under stated tie/empty policy, qualified elbow | A02 all 15 points; X05 96 distances, 32 assignments and centroid rounds, read-only |
+| Perceptron | all 24 sequential rows, 30 array-update comparisons, XOR inequality proof, strict zero threshold, degenerate classifier counterexample | S10 pp.11,14,18 images; X06 all 24 source rows; L01 observations remain limited |
+| Backpropagation | 909 central finite-difference gradients / 101 independent losses; sign, old weights, biases and simultaneous updates | S10 p.23 loss image; XOR/remaining source figures still being reconciled |
+| Deep Learning overview | affine composition, RNN mapping/shared state, GAN role separation, no invented performance | S11 pp.5,8,10–11 images; original GAN paper and Stanford references |
+| CNN | all matrices, exact pooling, 80 SciPy correlations + 48 pooling references; RGB channels/shape/parameters | S11 pp.16,23,25,31 images; source caption inconsistency already correctly handled |
+
+Independent references consulted (2026-10-26): [scikit-learn 1.7 OLS §1.1.1](https://scikit-learn.org/1.7/modules/linear_model.html#ordinary-least-squares), [neighbors §1.6](https://scikit-learn.org/1.7/modules/neighbors.html), [NB §1.9](https://scikit-learn.org/1.7/modules/naive_bayes.html), [trees mathematical formulation](https://scikit-learn.org/1.7/modules/tree.html#mathematical-formulation), [SciPy 1.16 linkage](https://docs.scipy.org/doc/scipy-1.16.0/reference/generated/scipy.cluster.hierarchy.linkage.html), [Stanford CS231n chain rule](https://cs231n.github.io/optimization-2/), [CNN layers](https://cs231n.github.io/convolutional-networks/), [Goodfellow et al., GAN (2014)](https://papers.nips.cc/paper/2014/hash/f033ed80deb0234979a61f95710dbe25-Abstract.html). Numerical execution uses sklearn 1.7.2 / SciPy 1.16.3; online stable/latest defaults are not substituted for that environment.
