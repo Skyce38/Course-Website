@@ -12,10 +12,12 @@
    cache.set(key,{raw,result});if(cache.size>512)cache.delete(cache.keys().next().value);return result;
   };
  }
+ function courses(manifest){return manifest.courses??[{id:'artificial-intelligence',label:'AI'},{id:'oop-python',label:'OOP'}]}
  function validate(manifest){
   if(!object(manifest)||manifest.version!==1||!Array.isArray(manifest.lessons))throw Error('Insights manifest');
+  const registered=courses(manifest);if(!Array.isArray(registered)||!registered.length||registered.length>50||new Set(registered.map(c=>c?.id)).size!==registered.length||!registered.every(c=>object(c)&&typeof c.id==='string'&&/^[a-z][a-z0-9-]{0,79}$/.test(c.id)&&typeof c.label==='string'&&c.label.trim().length&&c.label.length<=200))throw Error('Insights courses');
   const ids=new Set();for(const l of manifest.lessons){
-   E.validate(l.bank);if(!['artificial-intelligence','oop-python'].includes(l.course)||l.id!==l.bank.data.lesson||ids.has(l.id)||typeof l.title!=='string'||!l.title.length||l.title.length>300||!new RegExp('^read/'+l.course+'/[a-z0-9-]+\\.html$').test(l.reader)||l.id!==l.course+'-'+l.reader.split('/').at(-1).replace(/\.html$/,''))throw Error('Insights lesson');ids.add(l.id);
+   E.validate(l.bank);if(!registered.some(c=>c.id===l.course)||l.id!==l.bank.data.lesson||ids.has(l.id)||typeof l.title!=='string'||!l.title.length||l.title.length>300||!new RegExp('^read/'+l.course+'/[a-z0-9-]+\\.html$').test(l.reader)||l.id!==l.course+'-'+l.reader.split('/').at(-1).replace(/\.html$/,''))throw Error('Insights lesson');ids.add(l.id);
    if(!Array.isArray(l.practiceIds)||new Set(l.practiceIds).size!==l.practiceIds.length||!l.practiceIds.length||!l.practiceIds.every(id=>l.bank.data.questions.some(q=>q.id===id)))throw Error('Insights practice IDs');
    C.validate({...l.bank.data,revision:l.practiceRevision,questions:l.bank.data.questions.filter(q=>l.practiceIds.includes(q.id))});
   }return manifest;
@@ -95,5 +97,5 @@
   }
   return {refresh,summarize};
  }
- return {reader,validate,create,prefix};
+ return {reader,validate,create,prefix,courses};
 });

@@ -1,0 +1,4398 @@
+{
+  "version": 1,
+  "environment": {
+    "image": "debian:bookworm-slim",
+    "digest": "sha256:7ff6ba31527b9e336162fa061746c366c4b2032f4d2cff2078bea43f78efe3f8",
+    "bash": "5.2.15",
+    "locale": "C"
+  },
+  "cases": [
+    {
+      "reference": "execution",
+      "label": "สั่ง Bash โดยตรง",
+      "code": "bash -c 'printf Bash'",
+      "output": "Bash",
+      "why": "bash -c เลือก Bash โดยตรง",
+      "wrong": [
+        "sh เสมอ",
+        "ไม่มี stdout"
+      ],
+      "question": "ux01-q01",
+      "lesson": "unix-tools-final-shell-foundations",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "execution",
+      "label": "สิทธิไฟล์กับการอ่าน",
+      "code": "printf 'printf ok' > demo.sh; chmod 600 demo.sh; bash demo.sh",
+      "output": "ok",
+      "why": "Bash อ่าน script ได้แม้ไม่มี execute bit",
+      "wrong": [
+        "Permission denied",
+        "600"
+      ],
+      "question": "ux01-q02",
+      "lesson": "unix-tools-final-shell-foundations",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "execution",
+      "label": "Shebang ไม่ใช่คำสั่งพิมพ์",
+      "code": "printf '#!/bin/bash\\nprintf hello' > demo.sh; bash demo.sh",
+      "output": "hello",
+      "why": "บรรทัด #! เป็น comment เมื่อ Bash อ่านไฟล์",
+      "wrong": [
+        "#!/bin/bash",
+        "ไม่มี stdout"
+      ],
+      "question": "ux01-q03",
+      "lesson": "unix-tools-final-shell-foundations",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "execution",
+      "label": "ตำแหน่ง script ใน PATH",
+      "code": "mkdir bin; printf '#!/bin/bash\\nprintf found' > bin/study; chmod +x bin/study; PATH=\"$PWD/bin:$PATH\" study",
+      "output": "found",
+      "why": "PATH เพิ่ม directory ที่มีคำสั่ง executable",
+      "wrong": [
+        "study",
+        "ไม่มี stdout"
+      ],
+      "question": "ux01-q04",
+      "lesson": "unix-tools-final-shell-foundations",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "execution",
+      "label": "คืนสถานะ shell ลูก",
+      "code": "bash -c 'exit 7'; printf '%s' \"$?\"",
+      "output": "7",
+      "why": "status shell ลูกถูกส่งกลับ ไม่ใช่ stdout",
+      "wrong": [],
+      "question": "ux01-q05",
+      "lesson": "unix-tools-final-shell-foundations",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "builtins",
+      "label": "ชนิดของ cd",
+      "code": "type -t cd",
+      "output": "builtin",
+      "why": "cd เป็น Bash builtin",
+      "wrong": [
+        "file",
+        "function"
+      ],
+      "question": "ux01-q06",
+      "lesson": "unix-tools-final-shell-foundations",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "builtins",
+      "label": "ตรวจ syntax ไม่รัน",
+      "code": "printf 'printf should-not-run' > demo.sh; bash -n demo.sh; printf checked",
+      "output": "checked",
+      "why": "-n ไม่รัน printf ในไฟล์",
+      "wrong": [
+        "should-not-runchecked",
+        "ไม่มี stdout"
+      ],
+      "question": "ux01-q07",
+      "lesson": "unix-tools-final-shell-foundations",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "builtins",
+      "label": "syntax ผ่านแต่คำสั่งไม่จำเป็นต้องมี",
+      "code": "printf 'missing_unix_command' > demo.sh; bash -n demo.sh; printf '%s' \"$?\"",
+      "output": "0",
+      "why": "-n ไม่ตรวจ command lookup",
+      "wrong": [],
+      "question": "ux01-q08",
+      "lesson": "unix-tools-final-shell-foundations",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "builtins",
+      "label": "ตรวจ syntax เสียโดยจับ stderr",
+      "code": "printf 'if true; then' > bad.sh; bash -n bad.sh 2>/dev/null; printf '%s' \"$?\"",
+      "output": "2",
+      "why": "Bash ตรวจพบ if ที่ไม่มี fi คืน 2",
+      "wrong": [],
+      "question": "ux01-q09",
+      "lesson": "unix-tools-final-shell-foundations",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "builtins",
+      "label": "trace คนละ stream",
+      "code": "bash -x -c 'printf data' 2>trace; printf ':'; grep -c printf trace",
+      "output": "data:1",
+      "why": "stdout เป็น data; trace ที่ stderr มี printf หนึ่งบรรทัด",
+      "wrong": [
+        "+ printf data",
+        "data:0"
+      ],
+      "question": "ux01-q10",
+      "lesson": "unix-tools-final-shell-foundations",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "processes",
+      "label": "ตัวแปรใน shell ลูก",
+      "code": "x=old; bash -c 'x=new'; printf '%s' \"$x\"",
+      "output": "old",
+      "why": "ลูกไม่มีทางแก้ตัวแปรแม่ด้วย assignment นี้",
+      "wrong": [
+        "new",
+        "ว่าง"
+      ],
+      "question": "ux01-q11",
+      "lesson": "unix-tools-final-shell-foundations",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "processes",
+      "label": "source ตั้งค่าแม่",
+      "code": "printf 'x=new' > part.sh; x=old; source ./part.sh; printf '%s' \"$x\"",
+      "output": "new",
+      "why": "source ทำใน shell ปัจจุบัน",
+      "wrong": [
+        "old",
+        "ว่าง"
+      ],
+      "question": "ux01-q12",
+      "lesson": "unix-tools-final-shell-foundations",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "processes",
+      "label": "วงเล็บ subshell",
+      "code": "x=1; ( x=2 ); printf '%s' \"$x\"",
+      "output": "1",
+      "why": "assignment ใน subshell ไม่ย้อนกลับ",
+      "wrong": [],
+      "question": "ux01-q13",
+      "lesson": "unix-tools-final-shell-foundations",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "processes",
+      "label": "brace group",
+      "code": "x=1; { x=2; }; printf '%s' \"$x\"",
+      "output": "2",
+      "why": "brace group ใช้ shell ปัจจุบัน",
+      "wrong": [],
+      "question": "ux01-q14",
+      "lesson": "unix-tools-final-shell-foundations",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "processes",
+      "label": "export เป็นสำเนาเริ่มต้น",
+      "code": "export x=parent; bash -c 'x=child'; printf '%s' \"$x\"",
+      "output": "parent",
+      "why": "export ไม่ใช่ shared mutable state",
+      "wrong": [
+        "child",
+        "ว่าง"
+      ],
+      "question": "ux01-q15",
+      "lesson": "unix-tools-final-shell-foundations",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "substitution",
+      "label": "ตัด newline ท้าย",
+      "code": "x=$(printf 'A\\n\\n'); printf '%s' \"${#x}\"",
+      "output": "1",
+      "why": "newline ท้ายสองตัวถูกตัด เหลือ A",
+      "wrong": [],
+      "question": "ux01-q16",
+      "lesson": "unix-tools-final-shell-foundations",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "substitution",
+      "label": "เก็บ newline ภายใน",
+      "code": "x=$(printf 'A\\nB\\n'); printf '%s' \"${#x}\"",
+      "output": "3",
+      "why": "A newline B รวมสามอักขระ ASCII",
+      "wrong": [],
+      "question": "ux01-q17",
+      "lesson": "unix-tools-final-shell-foundations",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "substitution",
+      "label": "ไม่เก็บ stderr",
+      "code": "x=$(printf out; printf err >&2); printf '%s' \"$x\"",
+      "output": "out",
+      "why": "stderr แยกต่างหาก มี err แต่ stdout ของ script นี้คือ out",
+      "wrong": [
+        "outerr",
+        "err"
+      ],
+      "question": "ux01-q18",
+      "lesson": "unix-tools-final-shell-foundations",
+      "stderr": "err",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "substitution",
+      "label": "group redirect",
+      "code": "{ printf A; printf B; } > log; cat log",
+      "output": "AB",
+      "why": "ทั้งกลุ่มเขียน stdout ไป log",
+      "wrong": [
+        "A",
+        "B"
+      ],
+      "question": "ux01-q19",
+      "lesson": "unix-tools-final-shell-foundations",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "substitution",
+      "label": "semicolon ไม่ short circuit",
+      "code": "false; printf later",
+      "output": "later",
+      "why": "; ทำคำสั่งต่อแม้ก่อนหน้าคืน nonzero",
+      "wrong": [
+        "ไม่มี stdout",
+        "false"
+      ],
+      "question": "ux01-q20",
+      "lesson": "unix-tools-final-shell-foundations",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "utilities",
+      "label": "format คงที่",
+      "code": "printf '%s:%02d' item 7",
+      "output": "item:07",
+      "why": "%02d เติมศูนย์ซ้ายครบสองหลัก",
+      "wrong": [
+        "item:7",
+        "item:002"
+      ],
+      "question": "ux01-q21",
+      "lesson": "unix-tools-final-shell-foundations",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "utilities",
+      "label": "นับบรรทัดไม่ใช่คำ",
+      "code": "printf 'red blue\\ngreen\\n' | wc -l",
+      "output": "2",
+      "why": "มี newline สองตัว",
+      "wrong": [],
+      "question": "ux01-q22",
+      "lesson": "unix-tools-final-shell-foundations",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "utilities",
+      "label": "ดู archive",
+      "code": "printf data > a; tar -cf demo.tar a; tar -tf demo.tar",
+      "output": "a",
+      "why": "tar -tf แสดงชื่อสมาชิก ไม่พิมพ์ข้อมูลใน a",
+      "wrong": [
+        "data",
+        "demo.tar"
+      ],
+      "question": "ux01-q23",
+      "lesson": "unix-tools-final-shell-foundations",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "utilities",
+      "label": "builtin true",
+      "code": "true; printf '%s' \"$?\"",
+      "output": "0",
+      "why": "true สำเร็จโดยไม่พิมพ์ข้อมูล",
+      "wrong": [],
+      "question": "ux01-q24",
+      "lesson": "unix-tools-final-shell-foundations",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "utilities",
+      "label": "cd ใน subshell",
+      "code": "mkdir child; (cd child); test -d child; printf '%s' \"$?\"",
+      "output": "0",
+      "why": "shell แม่ยังอยู่ parent จึงพบ child",
+      "wrong": [],
+      "question": "ux01-q25",
+      "lesson": "unix-tools-final-shell-foundations",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "assignment",
+      "label": "assignment เก็บข้อความ",
+      "code": "v=2+3; printf '%s' \"$v\"",
+      "output": "2+3",
+      "why": "ไม่เกิด arithmetic expansion",
+      "wrong": [
+        "5",
+        "ว่าง"
+      ],
+      "question": "ux02-q01",
+      "lesson": "unix-tools-final-variables-expansion",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "assignment",
+      "label": "export สู่ลูก",
+      "code": "export color=green; bash -c 'printf %s \"$color\"'",
+      "output": "green",
+      "why": "export ให้ shell ลูกเห็นค่า",
+      "wrong": [
+        "ว่าง",
+        "color"
+      ],
+      "question": "ux02-q02",
+      "lesson": "unix-tools-final-variables-expansion",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "assignment",
+      "label": "ไม่ export",
+      "code": "unset color; color=green; bash -c 'printf \"<%s>\" \"${color-unset}\"'",
+      "output": "<unset>",
+      "why": "ตัวแปรธรรมดาไม่ได้ส่งให้ bash ลูก",
+      "wrong": [
+        "<green>",
+        "<>"
+      ],
+      "question": "ux02-q03",
+      "lesson": "unix-tools-final-variables-expansion",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "assignment",
+      "label": "local คืนค่าเดิม",
+      "code": "x=outer; f(){ local x=inner; }; f; printf '%s' \"$x\"",
+      "output": "outer",
+      "why": "local ไม่ทับ binding ภายนอก",
+      "wrong": [
+        "inner",
+        "ว่าง"
+      ],
+      "question": "ux02-q04",
+      "lesson": "unix-tools-final-variables-expansion",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "assignment",
+      "label": "readonly ใน shell ลูก",
+      "code": "bash -c 'readonly x=1; x=2' 2>/dev/null; printf '%s' \"$?\"",
+      "output": "1",
+      "why": "assignment readonly เป็น error ของ Bash noninteractive",
+      "wrong": [],
+      "question": "ux02-q05",
+      "lesson": "unix-tools-final-variables-expansion",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "quoting",
+      "label": "single quote",
+      "code": "v=green; printf '%s' '$v'",
+      "output": "$v",
+      "why": "single quote ไม่ขยายตัวแปร",
+      "wrong": [
+        "green",
+        "v"
+      ],
+      "question": "ux02-q06",
+      "lesson": "unix-tools-final-variables-expansion",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "quoting",
+      "label": "double quote",
+      "code": "v='red blue'; printf '<%s>' \"$v\"",
+      "output": "<red blue>",
+      "why": "double quote รักษาเป็นหนึ่ง argument",
+      "wrong": [
+        "<red><blue>",
+        "<$v>"
+      ],
+      "question": "ux02-q07",
+      "lesson": "unix-tools-final-variables-expansion",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "quoting",
+      "label": "backslash ป้องกัน dollar",
+      "code": "v=green; printf '%s' \\$v",
+      "output": "$v",
+      "why": "backslash ทำ $ เป็น literal",
+      "wrong": [
+        "green",
+        "\\green"
+      ],
+      "question": "ux02-q08",
+      "lesson": "unix-tools-final-variables-expansion",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "quoting",
+      "label": "quote ส่วนติดกัน",
+      "code": "v=red; printf '%s' \"${v}\"'blue'",
+      "output": "redblue",
+      "why": "ส่วน quote ติดกันเป็น word เดียว",
+      "wrong": [
+        "red blue",
+        "${v}blue"
+      ],
+      "question": "ux02-q09",
+      "lesson": "unix-tools-final-variables-expansion",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "quoting",
+      "label": "format ไม่ใช่ข้อมูล",
+      "code": "v='%s'; printf '%s' \"$v\"",
+      "output": "%s",
+      "why": "format คงที่ป้องกันข้อมูลเป็น format directive",
+      "wrong": [
+        "ว่าง",
+        "s"
+      ],
+      "question": "ux02-q10",
+      "lesson": "unix-tools-final-variables-expansion",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "splitting",
+      "label": "splitting ค่าไม่ quote",
+      "code": "v='red blue'; set -- $v; printf '%s' \"$#\"",
+      "output": "2",
+      "why": "default IFS แยกช่องว่างเป็นสอง args",
+      "wrong": [],
+      "question": "ux02-q11",
+      "lesson": "unix-tools-final-variables-expansion",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "splitting",
+      "label": "globbing หลัง expansion",
+      "code": "touch a.txt b.txt; v='*.txt'; set -- $v; printf '%s' \"$#\"",
+      "output": "2",
+      "why": "glob พบไฟล์ txt สองไฟล์ใน temp",
+      "wrong": [],
+      "question": "ux02-q12",
+      "lesson": "unix-tools-final-variables-expansion",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "splitting",
+      "label": "ปิด glob",
+      "code": "touch a.txt b.txt; set -f; v='*.txt'; printf '%s' $v",
+      "output": "*.txt",
+      "why": "-f ปิด filename expansion",
+      "wrong": [
+        "a.txt b.txt",
+        "ว่าง"
+      ],
+      "question": "ux02-q13",
+      "lesson": "unix-tools-final-variables-expansion",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "splitting",
+      "label": "IFS กำหนดตัวคั่น",
+      "code": "IFS=:; v='a:b:c'; set -- $v; printf '%s' \"$#\"",
+      "output": "3",
+      "why": "colon เป็นตัวคั่นสาม fields",
+      "wrong": [],
+      "question": "ux02-q14",
+      "lesson": "unix-tools-final-variables-expansion",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "splitting",
+      "label": "assignment ไม่แตกคำ",
+      "code": "v='a b'; x=$v; printf '%s' \"${#x}\"",
+      "output": "3",
+      "why": "assignment รักษาช่องว่างหนึ่งตัวใน a b",
+      "wrong": [],
+      "question": "ux02-q15",
+      "lesson": "unix-tools-final-variables-expansion",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "defaults",
+      "label": "default ไม่ assign",
+      "code": "unset v; x=${v:-d}; printf '%s:%s' \"$x\" \"${v-unset}\"",
+      "output": "d:unset",
+      "why": ":- ไม่ตั้งค่าให้ v",
+      "wrong": [
+        "d:d",
+        "unset:d"
+      ],
+      "question": "ux02-q16",
+      "lesson": "unix-tools-final-variables-expansion",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "defaults",
+      "label": "empty กับไม่มี colon",
+      "code": "v=; printf '<%s>:<%s>' \"${v-d}\" \"${v:-d}\"",
+      "output": "<>:<d>",
+      "why": "แบบ - ตรวจเฉพาะ unset; :- ตรวจ empty ด้วย",
+      "wrong": [
+        "<d>:<d>",
+        "<>:<>"
+      ],
+      "question": "ux02-q17",
+      "lesson": "unix-tools-final-variables-expansion",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "defaults",
+      "label": "assign default",
+      "code": "unset v; : \"${v:=d}\"; printf '%s' \"$v\"",
+      "output": "d",
+      "why": ":= assign เมื่อ unset",
+      "wrong": [
+        "ว่าง",
+        "unset"
+      ],
+      "question": "ux02-q18",
+      "lesson": "unix-tools-final-variables-expansion",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "defaults",
+      "label": "ไม่ overwrite ค่าที่มี",
+      "code": "v=old; : \"${v:=new}\"; printf '%s' \"$v\"",
+      "output": "old",
+      "why": ":= ไม่แทนค่าที่ไม่ว่าง",
+      "wrong": [
+        "new",
+        "oldnew"
+      ],
+      "question": "ux02-q19",
+      "lesson": "unix-tools-final-variables-expansion",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "defaults",
+      "label": "required ขัดจังหวะ shell",
+      "code": "bash -c 'unset v; : \"${v:?required}\"; printf wrong' 2>/dev/null; printf done",
+      "output": "done",
+      "why": "noninteractive shell ลูกหยุดก่อน printf wrong",
+      "wrong": [
+        "wrongdone",
+        "requireddone"
+      ],
+      "question": "ux02-q20",
+      "lesson": "unix-tools-final-variables-expansion",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "transform",
+      "label": "แยกชื่อตัวแปร",
+      "code": "name=lab; printf '%s' \"${name}_report\"",
+      "output": "lab_report",
+      "why": "braces ระบุชื่อ name ชัดเจน",
+      "wrong": [
+        "report",
+        "_report"
+      ],
+      "question": "ux02-q21",
+      "lesson": "unix-tools-final-variables-expansion",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "transform",
+      "label": "prefix สั้นสุด",
+      "code": "v=a/b/c; printf '%s' \"${v#*/}\"",
+      "output": "b/c",
+      "why": "# ตัดถึง slash แรก",
+      "wrong": [
+        "c",
+        "a/b"
+      ],
+      "question": "ux02-q22",
+      "lesson": "unix-tools-final-variables-expansion",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "transform",
+      "label": "prefix ยาวสุด",
+      "code": "v=a/b/c; printf '%s' \"${v##*/}\"",
+      "output": "c",
+      "why": "## ตัด prefix ที่ตรงยาวสุด",
+      "wrong": [
+        "b/c",
+        "a"
+      ],
+      "question": "ux02-q23",
+      "lesson": "unix-tools-final-variables-expansion",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "transform",
+      "label": "suffix สั้นสุด",
+      "code": "v=report.tar.gz; printf '%s' \"${v%.*}\"",
+      "output": "report.tar",
+      "why": "% ตัด .gz",
+      "wrong": [
+        "report",
+        "gz"
+      ],
+      "question": "ux02-q24",
+      "lesson": "unix-tools-final-variables-expansion",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "transform",
+      "label": "แทนทุก match",
+      "code": "v=banana; printf '%s' \"${v//a/o}\"",
+      "output": "bonono",
+      "why": "// แทน a ทุกตำแหน่ง",
+      "wrong": [
+        "bonana",
+        "banana"
+      ],
+      "question": "ux02-q25",
+      "lesson": "unix-tools-final-variables-expansion",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "positions",
+      "label": "จำนวน arguments ไม่รวม $0",
+      "code": "set -- one two; printf '%s' \"$#\"",
+      "output": "2",
+      "why": "set -- ตั้งสอง arguments",
+      "wrong": [],
+      "question": "ux03-q01",
+      "lesson": "unix-tools-final-arguments",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "positions",
+      "label": "argument ที่สิบ",
+      "code": "set -- a b c d e f g h i j; printf '%s' \"${10}\"",
+      "output": "j",
+      "why": "braces เลือกสิบ",
+      "wrong": [
+        "a0",
+        "i"
+      ],
+      "question": "ux03-q02",
+      "lesson": "unix-tools-final-arguments",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "positions",
+      "label": "$10 ไม่ใช่สิบ",
+      "code": "set -- a b c d e f g h i j; printf '%s' \"$10\"",
+      "output": "a0",
+      "why": "$1 ต่อ literal 0",
+      "wrong": [
+        "j",
+        "10"
+      ],
+      "question": "ux03-q03",
+      "lesson": "unix-tools-final-arguments",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "positions",
+      "label": "ตั้ง $0 ใน bash -c",
+      "code": "bash -c 'printf %s \"$0\"' demo first",
+      "output": "demo",
+      "why": "argument หลัง command string เป็น $0",
+      "wrong": [
+        "first",
+        "bash"
+      ],
+      "question": "ux03-q04",
+      "lesson": "unix-tools-final-arguments",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "positions",
+      "label": "empty positional มีอยู่",
+      "code": "set -- ''; printf '%s' \"$#\"",
+      "output": "1",
+      "why": "empty argument ยังนับหนึ่ง",
+      "wrong": [],
+      "question": "ux03-q05",
+      "lesson": "unix-tools-final-arguments",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "all-arguments",
+      "label": "วนรักษาช่องว่าง",
+      "code": "set -- 'red blue' green; for x in \"$@\"; do printf '<%s>' \"$x\"; done",
+      "output": "<red blue><green>",
+      "why": "quoted @ รักษาแต่ละ argument",
+      "wrong": [
+        "<red><blue><green>",
+        "<red blue green>"
+      ],
+      "question": "ux03-q06",
+      "lesson": "unix-tools-final-arguments",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "all-arguments",
+      "label": "รวมด้วย IFS ตัวแรก",
+      "code": "set -- A B; IFS=:; printf '%s' \"$*\"",
+      "output": "A:B",
+      "why": "quoted * ใช้ colon",
+      "wrong": [
+        "AB",
+        "A B"
+      ],
+      "question": "ux03-q07",
+      "lesson": "unix-tools-final-arguments",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "all-arguments",
+      "label": "quoted @ ว่าง",
+      "code": "set --; n=0; for x in \"$@\"; do ((n+=1)); done; printf '%s' \"$n\"",
+      "output": "0",
+      "why": "ไม่มี arguments จึงไม่มีรอบ",
+      "wrong": [],
+      "question": "ux03-q08",
+      "lesson": "unix-tools-final-arguments",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "all-arguments",
+      "label": "quoted * ว่าง",
+      "code": "set --; n=0; for x in \"$*\"; do ((n+=1)); done; printf '%s' \"$n\"",
+      "output": "1",
+      "why": "มีหนึ่ง empty word",
+      "wrong": [],
+      "question": "ux03-q09",
+      "lesson": "unix-tools-final-arguments",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "all-arguments",
+      "label": "for แบบย่อ",
+      "code": "set -- A '' B; n=0; for x; do ((n+=1)); done; printf '%s' \"$n\"",
+      "output": "3",
+      "why": "for x วน positional args รวม empty",
+      "wrong": [],
+      "question": "ux03-q10",
+      "lesson": "unix-tools-final-arguments",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "shift",
+      "label": "shift สอง",
+      "code": "set -- A B C; shift 2; printf '%s:%s' \"$#\" \"$1\"",
+      "output": "1:C",
+      "why": "เหลือ C ตัวเดียว",
+      "wrong": [
+        "2:B",
+        "3:A"
+      ],
+      "question": "ux03-q11",
+      "lesson": "unix-tools-final-arguments",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "shift",
+      "label": "shift เกินจำนวน",
+      "code": "set -- A; shift 2; s=$?; printf '%s:%s' \"$s\" \"$#\"",
+      "output": "1:1",
+      "why": "ล้มเหลวและไม่เลื่อน",
+      "wrong": [
+        "0:0",
+        "1:0"
+      ],
+      "question": "ux03-q12",
+      "lesson": "unix-tools-final-arguments",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "shift",
+      "label": "เก็บ mode ก่อน shift",
+      "code": "set -- -c 102.2 204.4; mode=$1; shift; printf '%s:%s' \"$mode\" \"$#\"",
+      "output": "-c:2",
+      "why": "mode เก็บ -c เหลือสอง operands",
+      "wrong": [
+        "102.2:2",
+        "-c:3"
+      ],
+      "question": "ux03-q13",
+      "lesson": "unix-tools-final-arguments",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "shift",
+      "label": "shift ศูนย์",
+      "code": "set -- A B; shift 0; printf '%s' \"$#\"",
+      "output": "2",
+      "why": "shift0 ไม่เปลี่ยน args",
+      "wrong": [],
+      "question": "ux03-q14",
+      "lesson": "unix-tools-final-arguments",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "shift",
+      "label": "วนกิน arguments",
+      "code": "set -- A B C; n=0; while (( $# )); do shift; ((n+=1)); done; printf '%s' \"$n\"",
+      "output": "3",
+      "why": "เลื่อนหนึ่งต่อรอบจนว่าง",
+      "wrong": [],
+      "question": "ux03-q15",
+      "lesson": "unix-tools-final-arguments",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "validation",
+      "label": "arity สำหรับ calculator",
+      "code": "set -- sub 10; printf '%s' \"$((3-$#))\"",
+      "output": "1",
+      "why": "ต้องการสาม args มีสองจึงขาดหนึ่ง",
+      "wrong": [],
+      "question": "ux03-q16",
+      "lesson": "unix-tools-final-arguments",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "validation",
+      "label": "regex ตัวเลขไม่รับอักษร",
+      "code": "v=12x; [[ $v =~ ^[0-9]+$ ]]; printf '%s' \"$?\"",
+      "output": "1",
+      "why": "มี x จึงไม่ใช่ digit ทั้งสาย",
+      "wrong": [],
+      "question": "ux03-q17",
+      "lesson": "unix-tools-final-arguments",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "validation",
+      "label": "ฐานสิบศูนย์นำหน้า",
+      "code": "v=08; printf '%s' \"$((10#$v))\"",
+      "output": "8",
+      "why": "10# ระบุฐานสิบหลังตรวจ input",
+      "wrong": [],
+      "question": "ux03-q18",
+      "lesson": "unix-tools-final-arguments",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "validation",
+      "label": "missing และ default",
+      "code": "set --; printf '%s' \"${1-missing}\"",
+      "output": "missing",
+      "why": "ไม่มี $1 ใช้ default",
+      "wrong": [
+        "1",
+        "ว่าง"
+      ],
+      "question": "ux03-q19",
+      "lesson": "unix-tools-final-arguments",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "validation",
+      "label": "ไม่ตีความ option เป็นเลข",
+      "code": "set -- -f 40; [[ $1 == -f && $# -ge 2 ]]; printf '%s' \"$?\"",
+      "output": "0",
+      "why": "option และจำนวนครบตามเงื่อนไข",
+      "wrong": [],
+      "question": "ux03-q20",
+      "lesson": "unix-tools-final-arguments",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "student-record",
+      "label": "H6 แบบ unquoted",
+      "code": "set -- 99999999 Ada Example a@example.invalid 00-0000-0000 1 Jan 2000; printf '%s' \"$#\"",
+      "output": "8",
+      "why": "ชื่อแตกสองและวันเกิดแตกสาม รวมแปด",
+      "wrong": [],
+      "question": "ux03-q21",
+      "lesson": "unix-tools-final-arguments",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "student-record",
+      "label": "H6 แบบ quote",
+      "code": "set -- 99999999 'Ada Example' a@example.invalid 00-0000-0000 '1 Jan 2000'; printf '%s' \"$#\"",
+      "output": "5",
+      "why": "ชื่อและวันเกิดคนละหนึ่ง argument",
+      "wrong": [],
+      "question": "ux03-q22",
+      "lesson": "unix-tools-final-arguments",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "student-record",
+      "label": "field ชื่อหลัง quote",
+      "code": "set -- 99999999 'Ada Example' a@example.invalid 00-0000-0000 '1 Jan 2000'; printf '%s' \"$2\"",
+      "output": "Ada Example",
+      "why": "ชื่อเป็น $2 ทั้งข้อความ",
+      "wrong": [
+        "Ada",
+        "Example"
+      ],
+      "question": "ux03-q23",
+      "lesson": "unix-tools-final-arguments",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "student-record",
+      "label": "timestamp แบบแน่นอน",
+      "code": "TZ=UTC date -d '2000-01-02 03:04:00 UTC' +%Y%m%d%H%M",
+      "output": "200001020304",
+      "why": "GNU date รูปแบบ YYYYMMDDHHMM ใช้เวลาที่ระบุไม่ใช่ปัจจุบัน",
+      "wrong": [
+        "20000102030400",
+        "200001020403"
+      ],
+      "question": "ux03-q24",
+      "lesson": "unix-tools-final-arguments",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "student-record",
+      "label": "colon record",
+      "code": "set -- id 'Ada Example' mail phone '1 Jan'; printf '%s:%s:%s:%s:%s' \"$@\"",
+      "output": "id:Ada Example:mail:phone:1 Jan",
+      "why": "printf format ห้าช่องรับห้า arguments",
+      "wrong": [
+        "id:Ada:Example:mail:phone",
+        "id Ada Example mail phone 1 Jan"
+      ],
+      "question": "ux03-q25",
+      "lesson": "unix-tools-final-arguments",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "integers",
+      "label": "หารจำนวนเต็ม",
+      "code": "printf '%s' \"$((7/2))\"",
+      "output": "3",
+      "why": "7/2 ตัดเศษใน integer arithmetic",
+      "wrong": [],
+      "question": "ux04-q01",
+      "lesson": "unix-tools-final-arithmetic-status",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "integers",
+      "label": "หารจำนวนลบ",
+      "code": "printf '%s' \"$((-7/2))\"",
+      "output": "-3",
+      "why": "ตัดเข้าศูนย์ไม่ใช่ floor",
+      "wrong": [
+        "-4",
+        "-3.5"
+      ],
+      "question": "ux04-q02",
+      "lesson": "unix-tools-final-arithmetic-status",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "integers",
+      "label": "modulo",
+      "code": "printf '%s' \"$((7%2))\"",
+      "output": "1",
+      "why": "7=3*2+1",
+      "wrong": [],
+      "question": "ux04-q03",
+      "lesson": "unix-tools-final-arithmetic-status",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "integers",
+      "label": "ฐานแปด",
+      "code": "printf '%s' \"$((010))\"",
+      "output": "8",
+      "why": "เลขนำ0เป็นฐานแปด",
+      "wrong": [],
+      "question": "ux04-q04",
+      "lesson": "unix-tools-final-arithmetic-status",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "integers",
+      "label": "arithmetic expression ในตัวแปร",
+      "code": "n=7+2; printf '%s' \"$((n))\"",
+      "output": "9",
+      "why": "arithmetic context ประเมินข้อความเป็นนิพจน์",
+      "wrong": [],
+      "question": "ux04-q05",
+      "lesson": "unix-tools-final-arithmetic-status",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "operators",
+      "label": "ลำดับคำนวณ",
+      "code": "printf '%s' \"$((2+3*4))\"",
+      "output": "14",
+      "why": "คูณก่อนบวก",
+      "wrong": [],
+      "question": "ux04-q06",
+      "lesson": "unix-tools-final-arithmetic-status",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "operators",
+      "label": "ยกกำลังกับ XOR",
+      "code": "printf '%s:%s' \"$((2**3))\" \"$((2^3))\"",
+      "output": "8:1",
+      "why": "** ยกกำลัง ^ bitwise XOR",
+      "wrong": [
+        "8:8",
+        "6:1"
+      ],
+      "question": "ux04-q07",
+      "lesson": "unix-tools-final-arithmetic-status",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "operators",
+      "label": "post increment",
+      "code": "n=0; x=$((n++)); printf '%s:%s' \"$x\" \"$n\"",
+      "output": "0:1",
+      "why": "ค่าของ expression คือค่าเก่า",
+      "wrong": [
+        "1:1",
+        "0:0"
+      ],
+      "question": "ux04-q08",
+      "lesson": "unix-tools-final-arithmetic-status",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "operators",
+      "label": "pre increment",
+      "code": "n=0; x=$((++n)); printf '%s:%s' \"$x\" \"$n\"",
+      "output": "1:1",
+      "why": "ค่า expression คือค่าที่เพิ่มแล้ว",
+      "wrong": [
+        "0:1",
+        "1:0"
+      ],
+      "question": "ux04-q09",
+      "lesson": "unix-tools-final-arithmetic-status",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "operators",
+      "label": "compound assignment",
+      "code": "n=5; ((n*=3)); printf '%s' \"$n\"",
+      "output": "15",
+      "why": "คูณแล้วกำหนดกลับ",
+      "wrong": [],
+      "question": "ux04-q10",
+      "lesson": "unix-tools-final-arithmetic-status",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "status",
+      "label": "arithmetic zero status",
+      "code": "((0)); printf '%s' \"$?\"",
+      "output": "1",
+      "why": "ค่าศูนย์ใน arithmetic command หมายถึง false",
+      "wrong": [],
+      "question": "ux04-q11",
+      "lesson": "unix-tools-final-arithmetic-status",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "status",
+      "label": "arithmetic nonzero status",
+      "code": "((-2)); printf '%s' \"$?\"",
+      "output": "0",
+      "why": "ค่าที่ไม่เป็นศูนย์คือ true",
+      "wrong": [],
+      "question": "ux04-q12",
+      "lesson": "unix-tools-final-arithmetic-status",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "status",
+      "label": "คำสั่งใหม่ทับ status",
+      "code": "false; true; printf '%s' \"$?\"",
+      "output": "0",
+      "why": "เก็บ status ของ true ล่าสุด",
+      "wrong": [],
+      "question": "ux04-q13",
+      "lesson": "unix-tools-final-arithmetic-status",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "status",
+      "label": "เก็บ status ก่อนพิมพ์",
+      "code": "false; s=$?; printf '%s' \"$s\"",
+      "output": "1",
+      "why": "assignment เก็บค่า false ก่อนหาย",
+      "wrong": [],
+      "question": "ux04-q14",
+      "lesson": "unix-tools-final-arithmetic-status",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "status",
+      "label": "if ไม่อ่านคำว่า false",
+      "code": "if printf false >/dev/null; then printf yes; else printf no; fi",
+      "output": "yes",
+      "why": "printf สำเร็จแม้พิมพ์คำว่า false",
+      "wrong": [
+        "no",
+        "false"
+      ],
+      "question": "ux04-q15",
+      "lesson": "unix-tools-final-arithmetic-status",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "short-circuit",
+      "label": "AND ไม่เรียกคำสั่งขวา",
+      "code": "false && printf wrong; printf done",
+      "output": "done",
+      "why": "false ทำให้ข้าม &&",
+      "wrong": [
+        "wrongdone",
+        "ไม่มี stdout"
+      ],
+      "question": "ux04-q16",
+      "lesson": "unix-tools-final-arithmetic-status",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "short-circuit",
+      "label": "OR เลือก fallback",
+      "code": "false || printf fallback",
+      "output": "fallback",
+      "why": "คำสั่งแรก nonzero จึงรัน fallback",
+      "wrong": [
+        "false",
+        "ไม่มี stdout"
+      ],
+      "question": "ux04-q17",
+      "lesson": "unix-tools-final-arithmetic-status",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "short-circuit",
+      "label": "AND OR ไม่ใช่ ternary",
+      "code": "true && false || printf fallback",
+      "output": "fallback",
+      "why": "คำสั่งกลางล้มเหลวจึงรัน ||",
+      "wrong": [
+        "ไม่มี stdout",
+        "true"
+      ],
+      "question": "ux04-q18",
+      "lesson": "unix-tools-final-arithmetic-status",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "short-circuit",
+      "label": "pipeline ค่าเริ่มต้น",
+      "code": "false | true; printf '%s' \"$?\"",
+      "output": "0",
+      "why": "status คำสั่งท้ายคือ true",
+      "wrong": [],
+      "question": "ux04-q19",
+      "lesson": "unix-tools-final-arithmetic-status",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "short-circuit",
+      "label": "pipeline เปิด pipefail",
+      "code": "set -o pipefail; false | true; printf '%s' \"$?\"",
+      "output": "1",
+      "why": "ขวาสุดที่ล้มเหลวคือ false",
+      "wrong": [],
+      "question": "ux04-q20",
+      "lesson": "unix-tools-final-arithmetic-status",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "decimals",
+      "label": "calc div แบบ decimal",
+      "code": "awk 'BEGIN {print 10/20}'",
+      "output": "0.5",
+      "why": "awk ใช้เลขทศนิยม",
+      "wrong": [],
+      "question": "ux04-q21",
+      "lesson": "unix-tools-final-arithmetic-status",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "decimals",
+      "label": "กับดักสูตร integer",
+      "code": "printf '%s' \"$((9/5*40+32))\"",
+      "output": "72",
+      "why": "9/5 ได้1 จึง1*40+32",
+      "wrong": [],
+      "question": "ux04-q22",
+      "lesson": "unix-tools-final-arithmetic-status",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "decimals",
+      "label": "Celsius ไป Fahrenheit",
+      "code": "awk 'BEGIN {printf \"%.2f\",9/5*40+32}'",
+      "output": "104",
+      "why": "คำนวณแบบ real ได้104.00",
+      "wrong": [],
+      "question": "ux04-q23",
+      "lesson": "unix-tools-final-arithmetic-status",
+      "stderr": "",
+      "status": 0,
+      "numeric": true,
+      "stdout": "104.00"
+    },
+    {
+      "reference": "decimals",
+      "label": "Fahrenheit ไป Celsius",
+      "code": "awk 'BEGIN {printf \"%.2f\",(204.4-32)*5/9}'",
+      "output": "95.78",
+      "why": "ปัดผลสุดท้ายสองตำแหน่ง",
+      "wrong": [],
+      "question": "ux04-q24",
+      "lesson": "unix-tools-final-arithmetic-status",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "decimals",
+      "label": "calculator subtraction",
+      "code": "awk 'BEGIN {print 10-20}'",
+      "output": "-10",
+      "why": "รักษาลำดับ operands ไม่สลับ",
+      "wrong": [],
+      "question": "ux04-q25",
+      "lesson": "unix-tools-final-arithmetic-status",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "test-syntax",
+      "label": "test ส่งสถานะ",
+      "code": "[ yes = yes ]; printf '%s' \"$?\"",
+      "output": "0",
+      "why": "string ตรงกันจึงสำเร็จ",
+      "wrong": [],
+      "question": "ux05-q01",
+      "lesson": "unix-tools-final-tests-conditions",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "test-syntax",
+      "label": "empty quote",
+      "code": "x=; [ \"$x\" = '' ]; printf '%s' \"$?\"",
+      "output": "0",
+      "why": "empty เป็น argument ชัดเจน",
+      "wrong": [],
+      "question": "ux05-q02",
+      "lesson": "unix-tools-final-tests-conditions",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "test-syntax",
+      "label": "ปิดวงเล็บผิด",
+      "code": "[ yes = yes 2>/dev/null; printf '%s' \"$?\"",
+      "output": "2",
+      "why": "ไม่มี ] เป็น syntax ของ test ที่ผิด",
+      "wrong": [],
+      "question": "ux05-q03",
+      "lesson": "unix-tools-final-tests-conditions",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "test-syntax",
+      "label": "test ไม่พิมพ์ค่า",
+      "code": "test 3 -gt 2; printf done",
+      "output": "done",
+      "why": "test คืน status ไม่มี stdout",
+      "wrong": [
+        "truedone",
+        "1done"
+      ],
+      "question": "ux05-q04",
+      "lesson": "unix-tools-final-tests-conditions",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "test-syntax",
+      "label": "NOT",
+      "code": "! [ 2 -gt 3 ]; printf '%s' \"$?\"",
+      "output": "0",
+      "why": "กลับ false เป็น true",
+      "wrong": [
+        "1",
+        "2"
+      ],
+      "question": "ux05-q05",
+      "lesson": "unix-tools-final-tests-conditions",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "numbers-strings",
+      "label": "numeric equality",
+      "code": "[ 01 -eq 1 ]; printf '%s' \"$?\"",
+      "output": "0",
+      "why": "integer test มองสองค่าตรงกัน",
+      "wrong": [],
+      "question": "ux05-q06",
+      "lesson": "unix-tools-final-tests-conditions",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "numbers-strings",
+      "label": "string equality",
+      "code": "[ 01 = 1 ]; printf '%s' \"$?\"",
+      "output": "1",
+      "why": "ข้อความต่างรูปกัน",
+      "wrong": [],
+      "question": "ux05-q07",
+      "lesson": "unix-tools-final-tests-conditions",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "numbers-strings",
+      "label": "ว่างกับช่องว่าง",
+      "code": "x=' '; [ -z \"$x\" ]; printf '%s' \"$?\"",
+      "output": "1",
+      "why": "ช่องว่างหนึ่งตัวไม่ใช่ zero length",
+      "wrong": [],
+      "question": "ux05-q08",
+      "lesson": "unix-tools-final-tests-conditions",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "numbers-strings",
+      "label": "lexicographic comparison",
+      "code": "[[ 9 > 10 ]]; printf '%s' \"$?\"",
+      "output": "0",
+      "why": "LC_ALL=C เรียง string9หลัง1",
+      "wrong": [],
+      "question": "ux05-q09",
+      "lesson": "unix-tools-final-tests-conditions",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "numbers-strings",
+      "label": "numeric less equal",
+      "code": "[ 10 -le 10 ]; printf '%s' \"$?\"",
+      "output": "0",
+      "why": "-le รวมเท่ากัน",
+      "wrong": [],
+      "question": "ux05-q10",
+      "lesson": "unix-tools-final-tests-conditions",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "branching",
+      "label": "รอยต่อ80",
+      "code": "s=80; if ((s>=80)); then printf A; elif ((s>=70)); then printf B; else printf C; fi",
+      "output": "A",
+      "why": "แขนแรกตรงที่80",
+      "wrong": [
+        "B",
+        "C"
+      ],
+      "question": "ux05-q11",
+      "lesson": "unix-tools-final-tests-conditions",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "branching",
+      "label": "เลือกแขนแรก",
+      "code": "n=9; if ((n>0)); then printf positive; elif ((n>5)); then printf large; fi",
+      "output": "positive",
+      "why": "elifไม่ถูกประเมินเมื่อแขนแรกผ่าน",
+      "wrong": [
+        "large",
+        "positivelarge"
+      ],
+      "question": "ux05-q12",
+      "lesson": "unix-tools-final-tests-conditions",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "branching",
+      "label": "if ไม่มีแขนตรง",
+      "code": "if false; then printf wrong; fi; printf '%s' \"$?\"",
+      "output": "0",
+      "why": "if ไม่มี conditiontrue และไม่มีelseคืน0",
+      "wrong": [],
+      "question": "ux05-q13",
+      "lesson": "unix-tools-final-tests-conditions",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "branching",
+      "label": "nested condition",
+      "code": "n=4; if ((n>0)); then if ((n%2==0)); then printf even; fi; fi",
+      "output": "even",
+      "why": "บวกและคู่จึงพิมพ์",
+      "wrong": [
+        "odd",
+        "ไม่มี stdout"
+      ],
+      "question": "ux05-q14",
+      "lesson": "unix-tools-final-tests-conditions",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "branching",
+      "label": "validation ก่อนเกรด",
+      "code": "s=101; if ((s<0 || s>100)); then printf invalid; elif ((s>=80)); then printf A; fi",
+      "output": "invalid",
+      "why": "ปฏิเสธค่าผิดช่วงก่อนคิดเกรด",
+      "wrong": [
+        "A",
+        "101"
+      ],
+      "question": "ux05-q15",
+      "lesson": "unix-tools-final-tests-conditions",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "files",
+      "label": "ไฟล์ว่าง",
+      "code": "touch empty; [ -s empty ]; printf '%s' \"$?\"",
+      "output": "1",
+      "why": "มีไฟล์แต่ขนาด0",
+      "wrong": [],
+      "question": "ux05-q16",
+      "lesson": "unix-tools-final-tests-conditions",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "files",
+      "label": "directory ไม่ใช่ regular file",
+      "code": "mkdir d; [ -f d ]; printf '%s' \"$?\"",
+      "output": "1",
+      "why": "-f ไม่รับ directory",
+      "wrong": [],
+      "question": "ux05-q17",
+      "lesson": "unix-tools-final-tests-conditions",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "files",
+      "label": "hard link identity",
+      "code": "printf x > a; ln a b; [ a -ef b ]; printf '%s' \"$?\"",
+      "output": "0",
+      "why": "สองชื่ออ้าง inode เดียวกัน",
+      "wrong": [],
+      "question": "ux05-q18",
+      "lesson": "unix-tools-final-tests-conditions",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "files",
+      "label": "symbolic link เสีย",
+      "code": "ln -s missing link; [ -e link ]; printf '%s' \"$?\"",
+      "output": "1",
+      "why": "-e ตาม link แล้วไม่พบเป้าหมาย",
+      "wrong": [],
+      "question": "ux05-q19",
+      "lesson": "unix-tools-final-tests-conditions",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "files",
+      "label": "ตรวจชนิด symlink",
+      "code": "ln -s missing link; [ -L link ]; printf '%s' \"$?\"",
+      "output": "0",
+      "why": "-L ตรวจ link เองจึงยังจริง",
+      "wrong": [],
+      "question": "ux05-q20",
+      "lesson": "unix-tools-final-tests-conditions",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "bash-conditions",
+      "label": "pattern RHS ไม่quote",
+      "code": "x=Alpha; [[ $x == A* ]]; printf '%s' \"$?\"",
+      "output": "0",
+      "why": "A* ตรงกับ Alpha",
+      "wrong": [],
+      "question": "ux05-q21",
+      "lesson": "unix-tools-final-tests-conditions",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "bash-conditions",
+      "label": "literal RHS quote",
+      "code": "x=Alpha; [[ $x == 'A*' ]]; printf '%s' \"$?\"",
+      "output": "1",
+      "why": "quote ทำให้ * เป็น literal",
+      "wrong": [],
+      "question": "ux05-q22",
+      "lesson": "unix-tools-final-tests-conditions",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "bash-conditions",
+      "label": "ERE ทั้งสาย",
+      "code": "x=123x; [[ $x =~ ^[0-9]+$ ]]; printf '%s' \"$?\"",
+      "output": "1",
+      "why": "anchorไม่อนุญาต x",
+      "wrong": [],
+      "question": "ux05-q23",
+      "lesson": "unix-tools-final-tests-conditions",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "bash-conditions",
+      "label": "regex ตัวแปรไม่quote",
+      "code": "r='^a+$'; x=aaa; [[ $x =~ $r ]]; printf '%s' \"$?\"",
+      "output": "0",
+      "why": "ERE a+ ตรงกับ aaa",
+      "wrong": [],
+      "question": "ux05-q24",
+      "lesson": "unix-tools-final-tests-conditions",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "bash-conditions",
+      "label": "redirect ใน [ ]",
+      "code": "a=z; b=target; [ \"$a\" > \"$b\" ]; [ -f target ]; printf '%s' \"$?\"",
+      "output": "0",
+      "why": "> สร้างtarget ไม่ใช่ string compare แบบ [[ ]]",
+      "wrong": [],
+      "question": "ux05-q25",
+      "lesson": "unix-tools-final-tests-conditions",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "streams",
+      "label": "แยกstdoutstderr",
+      "code": "{ printf O; printf E >&2; } >out 2>err; printf '%s:%s' \"$(cat out)\" \"$(cat err)\"",
+      "output": "O:E",
+      "why": "fd1เขียนout fd2เขียนerr",
+      "wrong": [
+        "OE:",
+        "E:O"
+      ],
+      "question": "ux06-q01",
+      "lesson": "unix-tools-final-redirection",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "streams",
+      "label": "stdin redirect",
+      "code": "printf abc >in; wc -c <in",
+      "output": "3",
+      "why": "wcอ่าน3bytesจากstdin",
+      "wrong": [],
+      "question": "ux06-q02",
+      "lesson": "unix-tools-final-redirection",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "streams",
+      "label": "diagnostic ตามstderr",
+      "code": "printf Usage >&2; printf data",
+      "output": "data",
+      "why": "Usageอยู่stderrไม่ใช่stdout",
+      "wrong": [
+        "Usagedata",
+        "Usage"
+      ],
+      "question": "ux06-q03",
+      "lesson": "unix-tools-final-redirection",
+      "stderr": "Usage",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "streams",
+      "label": "เฉพาะstderrเข้าไฟล์",
+      "code": "{ printf O; printf E >&2; } 2>err; cat err",
+      "output": "OE",
+      "why": "Oออกstdoutทันทีแล้วcatแสดงE",
+      "wrong": [
+        "E",
+        "EO"
+      ],
+      "question": "ux06-q04",
+      "lesson": "unix-tools-final-redirection",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "streams",
+      "label": "stdin fd0",
+      "code": "printf word >in; read -r x 0<in; printf '%s' \"$x\"",
+      "output": "word",
+      "why": "readได้wordแม้ไม่มีnewlineแต่ตัวแปรยังมีข้อมูล",
+      "wrong": [
+        "ว่าง",
+        "in"
+      ],
+      "question": "ux06-q05",
+      "lesson": "unix-tools-final-redirection",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "redirect-order",
+      "label": "stdoutก่อนduplicate",
+      "code": "{ printf O; printf E >&2; } >log 2>&1; cat log",
+      "output": "OE",
+      "why": "ทั้งสองfdไปlogเดียวกัน",
+      "wrong": [
+        "O",
+        "E"
+      ],
+      "question": "ux06-q06",
+      "lesson": "unix-tools-final-redirection",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "redirect-order",
+      "label": "duplicateก่อนstdout",
+      "code": "{ printf O; printf E >&2; } 2>&1 >log; printf ':'; cat log",
+      "output": "E:O",
+      "why": "Eไปstdoutเดิม Oไปlog",
+      "wrong": [
+        "OE:",
+        "O:E"
+      ],
+      "question": "ux06-q07",
+      "lesson": "unix-tools-final-redirection",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "redirect-order",
+      "label": "หลายredirectท้ายสุด",
+      "code": "printf x >a >b; printf '%s:%s' \"$(wc -c <a)\" \"$(cat b)\"",
+      "output": "0:x",
+      "why": "aถูกเปิดแล้วbเป็นstdoutสุดท้าย",
+      "wrong": [
+        "x:0",
+        "x:x"
+      ],
+      "question": "ux06-q08",
+      "lesson": "unix-tools-final-redirection",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "redirect-order",
+      "label": "ทิศทางdup stdoutไปstderr",
+      "code": "{ printf message 1>&2; } >out 2>err; wc -c <out",
+      "output": "0",
+      "why": "1>&2ส่งข้อความไปerr",
+      "wrong": [],
+      "question": "ux06-q09",
+      "lesson": "unix-tools-final-redirection",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "redirect-order",
+      "label": "ปิดstderrชั่วคราว",
+      "code": "{ printf O; } 2>&-",
+      "output": "O",
+      "why": "ปิดfd2ไม่ปิดstdout",
+      "wrong": [
+        "ไม่มี stdout",
+        "error"
+      ],
+      "question": "ux06-q10",
+      "lesson": "unix-tools-final-redirection",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "files-links",
+      "label": "appendไม่truncate",
+      "code": "printf A >f; printf B >>f; cat f",
+      "output": "AB",
+      "why": ">>ต่อท้าย",
+      "wrong": [
+        "B",
+        "BA"
+      ],
+      "question": "ux06-q11",
+      "lesson": "unix-tools-final-redirection",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "files-links",
+      "label": "catไฟล์ตัวเอง",
+      "code": "printf original >f; cat f >f; wc -c <f",
+      "output": "0",
+      "why": "truncateก่อนcatอ่าน",
+      "wrong": [],
+      "question": "ux06-q12",
+      "lesson": "unix-tools-final-redirection",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "files-links",
+      "label": "hardlinkเห็นการเขียน",
+      "code": "printf A >a; ln a b; printf B >b; cat a",
+      "output": "B",
+      "why": "ทั้งสองชื่ออ้างข้อมูลเดียวกัน",
+      "wrong": [
+        "A",
+        "AB"
+      ],
+      "question": "ux06-q13",
+      "lesson": "unix-tools-final-redirection",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "files-links",
+      "label": "ลบชื่อหนึ่ง",
+      "code": "printf x >a; ln a b; unlink a; cat b",
+      "output": "x",
+      "why": "อีกhardlinkยังอยู่",
+      "wrong": [
+        "ไม่มี stdout",
+        "error"
+      ],
+      "question": "ux06-q14",
+      "lesson": "unix-tools-final-redirection",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "files-links",
+      "label": "truncateแม้commandล้มเหลว",
+      "code": "printf old >f; false >f; wc -c <f",
+      "output": "0",
+      "why": "redirectเกิดก่อนfalse",
+      "wrong": [],
+      "question": "ux06-q15",
+      "lesson": "unix-tools-final-redirection",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "descriptors",
+      "label": "fd3อ่าน",
+      "code": "printf 'alpha\\nbeta\\n' >f; exec 3<f; read -r -u3 x; exec 3<&-; printf '%s' \"$x\"",
+      "output": "alpha",
+      "why": "readหนึ่งบรรทัดจากfd3",
+      "wrong": [
+        "beta",
+        "f"
+      ],
+      "question": "ux06-q16",
+      "lesson": "unix-tools-final-redirection",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "descriptors",
+      "label": "fd4เขียน",
+      "code": "exec 4>out; printf data >&4; exec 4>&-; cat out",
+      "output": "data",
+      "why": "stdoutของprintfduplicateไปfd4",
+      "wrong": [
+        "out",
+        "ไม่มี stdout"
+      ],
+      "question": "ux06-q17",
+      "lesson": "unix-tools-final-redirection",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "descriptors",
+      "label": "fdที่ปิด",
+      "code": "exec 3<&-; read -r -u3 x 2>/dev/null; printf '%s' \"$?\"",
+      "output": "1",
+      "why": "readจากfdปิดล้มเหลว",
+      "wrong": [],
+      "question": "ux06-q18",
+      "lesson": "unix-tools-final-redirection",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "descriptors",
+      "label": "save stdoutแล้วrestore",
+      "code": "exec 3>&1; exec >log; printf hidden; exec 1>&3; exec 3>&-; printf visible",
+      "output": "visible",
+      "why": "หลังrestorestdoutกลับปลายทางเดิม",
+      "wrong": [
+        "hiddenvisible",
+        "hidden"
+      ],
+      "question": "ux06-q19",
+      "lesson": "unix-tools-final-redirection",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "descriptors",
+      "label": "copy ด้วยfd",
+      "code": "printf input >in; exec 3<in 4>out; cat <&3 >&4; exec 3<&- 4>&-; cat out",
+      "output": "input",
+      "why": "catเชื่อมfd3เข้ากับfd4",
+      "wrong": [
+        "in",
+        "out"
+      ],
+      "question": "ux06-q20",
+      "lesson": "unix-tools-final-redirection",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "noclobber-pipes",
+      "label": "noclobberป้องกันเดิม",
+      "code": "printf old >f; set -C; { printf new >f; } 2>/dev/null; cat f",
+      "output": "old",
+      "why": "-Cป้องกันtruncateไฟล์เดิม",
+      "wrong": [
+        "new",
+        "oldnew"
+      ],
+      "question": "ux06-q21",
+      "lesson": "unix-tools-final-redirection",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "noclobber-pipes",
+      "label": "บังคับoverwrite",
+      "code": "printf old >f; set -C; printf new >|f; cat f",
+      "output": "new",
+      "why": ">|ข้ามnoclobber",
+      "wrong": [
+        "old",
+        "oldnew"
+      ],
+      "question": "ux06-q22",
+      "lesson": "unix-tools-final-redirection",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "noclobber-pipes",
+      "label": "appendแม้noclobber",
+      "code": "printf old >f; set -C; printf new >>f; cat f",
+      "output": "oldnew",
+      "why": ">>ยังต่อท้าย",
+      "wrong": [
+        "old",
+        "new"
+      ],
+      "question": "ux06-q23",
+      "lesson": "unix-tools-final-redirection",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "noclobber-pipes",
+      "label": "pipeรับเฉพาะstdout",
+      "code": "{ printf O; printf E >&2; } 2>err | wc -c",
+      "output": "1",
+      "why": "pipeมีOหนึ่งbyte Eอยู่err",
+      "wrong": [],
+      "question": "ux06-q24",
+      "lesson": "unix-tools-final-redirection",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "noclobber-pipes",
+      "label": "H5missingfileยังอ่านไฟล์ถัดไป",
+      "code": "printf 'known\\n' >yes; cat missing yes >out 2>err; s=$?; printf '%s:%s' \"$s\" \"$(cat out)\"",
+      "output": "1:known",
+      "why": "GNUcatรายงานmissingแต่ยังอ่านyesและคืน1",
+      "wrong": [
+        "0:known",
+        "1:"
+      ],
+      "question": "ux06-q25",
+      "lesson": "unix-tools-final-redirection",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "for-loop",
+      "label": "list iteration",
+      "code": "s=0; for x in 2 4 6; do ((s+=x)); done; printf '%s' \"$s\"",
+      "output": "12",
+      "why": "รวมรายการ2+4+6",
+      "wrong": [],
+      "question": "ux07-q01",
+      "lesson": "unix-tools-final-loops-reading",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "for-loop",
+      "label": "Cstyleรวมขอบ",
+      "code": "n=0; for ((i=1;i<=3;i++)); do ((n+=1)); done; printf '%s' \"$n\"",
+      "output": "3",
+      "why": "รวมi=3",
+      "wrong": [],
+      "question": "ux07-q02",
+      "lesson": "unix-tools-final-loops-reading",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "for-loop",
+      "label": "braceกับตัวแปร",
+      "code": "n=3; for i in {1..$n}; do printf '<%s>' \"$i\"; done",
+      "output": "<{1..3}>",
+      "why": "braceก่อนparameterไม่ขยายrangeซ้ำ",
+      "wrong": [
+        "<1><2><3>",
+        "<1..3>"
+      ],
+      "question": "ux07-q03",
+      "lesson": "unix-tools-final-loops-reading",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "for-loop",
+      "label": "globในfor",
+      "code": "touch a.txt b.txt; n=0; for f in *.txt; do ((n+=1)); done; printf '%s' \"$n\"",
+      "output": "2",
+      "why": "สองไฟล์ตรงglob",
+      "wrong": [],
+      "question": "ux07-q04",
+      "lesson": "unix-tools-final-loops-reading",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "for-loop",
+      "label": "รายการว่าง",
+      "code": "n=0; for x in; do ((n+=1)); done; printf '%s' \"$n\"",
+      "output": "0",
+      "why": "ไม่มีรายการจึงศูนย์รอบ",
+      "wrong": [],
+      "question": "ux07-q05",
+      "lesson": "unix-tools-final-loops-reading",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "while-until",
+      "label": "whileนับก่อนupdate",
+      "code": "i=1; while ((i<=3)); do printf '%s' \"$i\"; ((i+=1)); done",
+      "output": "123",
+      "why": "พิมพ์1,2,3ติดกัน",
+      "wrong": [
+        "012",
+        "1234"
+      ],
+      "question": "ux07-q06",
+      "lesson": "unix-tools-final-loops-reading",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "while-until",
+      "label": "untilหยุดเมื่อสำเร็จ",
+      "code": "i=0; until ((i>=3)); do printf '%s' \"$i\"; ((i+=1)); done",
+      "output": "012",
+      "why": "ทำต่อเมื่อi<3",
+      "wrong": [
+        "123",
+        "0123"
+      ],
+      "question": "ux07-q07",
+      "lesson": "unix-tools-final-loops-reading",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "while-until",
+      "label": "zeroiterations",
+      "code": "n=0; while false; do ((n+=1)); done; printf '%s' \"$n\"",
+      "output": "0",
+      "why": "ตรวจก่อนจึงไม่ทำbody",
+      "wrong": [],
+      "question": "ux07-q08",
+      "lesson": "unix-tools-final-loops-reading",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "while-until",
+      "label": "untiltrueไม่ทำ",
+      "code": "n=0; until true; do ((n+=1)); done; printf '%s' \"$n\"",
+      "output": "0",
+      "why": "conditionสำเร็จตั้งแต่แรก",
+      "wrong": [],
+      "question": "ux07-q09",
+      "lesson": "unix-tools-final-loops-reading",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "while-until",
+      "label": "updateขอบสะสม",
+      "code": "i=2; s=0; while ((i>0)); do ((s+=i)); ((i-=1)); done; printf '%s' \"$s\"",
+      "output": "3",
+      "why": "2+1ก่อนหยุดที่0",
+      "wrong": [],
+      "question": "ux07-q10",
+      "lesson": "unix-tools-final-loops-reading",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "control",
+      "label": "breakก่อนพิมพ์",
+      "code": "for x in A B C; do [[ $x == B ]] && break; printf '%s' \"$x\"; done",
+      "output": "A",
+      "why": "หยุดที่Bก่อนprintf",
+      "wrong": [
+        "AB",
+        "AC"
+      ],
+      "question": "ux07-q11",
+      "lesson": "unix-tools-final-loops-reading",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "control",
+      "label": "continueข้ามB",
+      "code": "for x in A B C; do [[ $x == B ]] && continue; printf '%s' \"$x\"; done",
+      "output": "AC",
+      "why": "ข้ามBแต่ยังทำC",
+      "wrong": [
+        "A",
+        "ABC"
+      ],
+      "question": "ux07-q12",
+      "lesson": "unix-tools-final-loops-reading",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "control",
+      "label": "breakสองระดับ",
+      "code": "n=0; for a in 1 2; do for b in 1 2; do ((n+=1)); break 2; done; done; printf '%s' \"$n\"",
+      "output": "1",
+      "why": "ออกสองloopหลังรอบแรก",
+      "wrong": [],
+      "question": "ux07-q13",
+      "lesson": "unix-tools-final-loops-reading",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "control",
+      "label": "findEvenนับoccurrences",
+      "code": "n=0; for x in -4 0 8 3 8; do ((x%2==0)) && ((n+=1)); done; printf '%s' \"$n\"",
+      "output": "4",
+      "why": "-4,0,8,8รวมสี่occurrences",
+      "wrong": [],
+      "question": "ux07-q14",
+      "lesson": "unix-tools-final-loops-reading",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "control",
+      "label": "updateก่อนcontinue",
+      "code": "i=0; s=0; while ((i<4)); do ((i+=1)); ((i==2)) && continue; ((s+=i)); done; printf '%s' \"$s\"",
+      "output": "8",
+      "why": "นับ1+3+4และloopจบ",
+      "wrong": [],
+      "question": "ux07-q15",
+      "lesson": "unix-tools-final-loops-reading",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "read-lines",
+      "label": "รักษาช่องว่าง",
+      "code": "printf '  A  \\n' >in; IFS= read -r x <in; printf '<%s>' \"$x\"",
+      "output": "<  A  >",
+      "why": "IFS=รักษาช่องว่างหัวท้าย",
+      "wrong": [
+        "<A>",
+        "< A >"
+      ],
+      "question": "ux07-q16",
+      "lesson": "unix-tools-final-loops-reading",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "read-lines",
+      "label": "รักษาbackslash",
+      "code": "printf '%s\\n' 'a\\b' >in; IFS= read -r x <in; printf '%s' \"$x\"",
+      "output": "a\\b",
+      "why": "-rไม่ตีความbackslash",
+      "wrong": [
+        "ab",
+        "a b"
+      ],
+      "question": "ux07-q17",
+      "lesson": "unix-tools-final-loops-reading",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "read-lines",
+      "label": "EOFไม่มีnewline",
+      "code": "printf tail >in; n=0; while IFS= read -r x || [[ -n $x ]]; do ((n+=1)); done <in; printf '%s' \"$n\"",
+      "output": "1",
+      "why": "เงื่อนไขขวาช่วยรับท้ายไฟล์",
+      "wrong": [],
+      "question": "ux07-q18",
+      "lesson": "unix-tools-final-loops-reading",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "read-lines",
+      "label": "readธรรมดาท้ายไฟล์",
+      "code": "printf tail >in; read -r x <in; s=$?; printf '%s:%s' \"$s\" \"$x\"",
+      "output": "1:tail",
+      "why": "readคืน1แต่ยังตั้งxเป็นtail",
+      "wrong": [
+        "0:tail",
+        "1:"
+      ],
+      "question": "ux07-q19",
+      "lesson": "unix-tools-final-loops-reading",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "read-lines",
+      "label": "รักษาบรรทัดว่าง",
+      "code": "printf 'A\\n\\nB\\n' >in; n=0; while IFS= read -r x; do ((n+=1)); done <in; printf '%s' \"$n\"",
+      "output": "3",
+      "why": "บรรทัดว่างยังมีnewlineและนับได้",
+      "wrong": [],
+      "question": "ux07-q20",
+      "lesson": "unix-tools-final-loops-reading",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "pipeline-scope",
+      "label": "counterในpipe",
+      "code": "shopt -u lastpipe; n=0; printf 'x\\n' | while read -r x; do ((n+=1)); done; printf '%s' \"$n\"",
+      "output": "0",
+      "why": "counterในsubshellไม่กลับแม่",
+      "wrong": [],
+      "question": "ux07-q21",
+      "lesson": "unix-tools-final-loops-reading",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "pipeline-scope",
+      "label": "counterredirect",
+      "code": "printf 'x\\ny\\n' >in; n=0; while read -r x; do ((n+=1)); done <in; printf '%s' \"$n\"",
+      "output": "2",
+      "why": "loopอยู่shellเดิม",
+      "wrong": [],
+      "question": "ux07-q22",
+      "lesson": "unix-tools-final-loops-reading",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "pipeline-scope",
+      "label": "lastpipeเปิด",
+      "code": "set +m; shopt -s lastpipe; n=0; printf 'x\\n' | while read -r x; do ((n+=1)); done; printf '%s' \"$n\"",
+      "output": "1",
+      "why": "ท้ายpipelineในshellเดิมเมื่อlastpipeและไม่มีjobcontrol",
+      "wrong": [],
+      "question": "ux07-q23",
+      "lesson": "unix-tools-final-loops-reading",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "pipeline-scope",
+      "label": "processsubstitution",
+      "code": "n=0; while read -r x; do ((n+=1)); done < <(printf 'a\\nb\\n'); printf '%s' \"$n\"",
+      "output": "2",
+      "why": "loopไม่ใช่ส่วนของpipe",
+      "wrong": [],
+      "question": "ux07-q24",
+      "lesson": "unix-tools-final-loops-reading",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "pipeline-scope",
+      "label": "forcatแตกคำ",
+      "code": "printf 'red blue\\ngreen\\n' >in; n=0; for x in $(cat in); do ((n+=1)); done; printf '%s' \"$n\"",
+      "output": "3",
+      "why": "defaultIFSแตกเป็นสามwordsไม่ใช่สองบรรทัด",
+      "wrong": [],
+      "question": "ux07-q25",
+      "lesson": "unix-tools-final-loops-reading",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "case-patterns",
+      "label": "แขนแรกตรง",
+      "code": "x=note.txt; case $x in *.txt) printf text;; *) printf other;; esac",
+      "output": "text",
+      "why": "glob*.txtตรงนามสกุล",
+      "wrong": [
+        "other",
+        "txt"
+      ],
+      "question": "ux08-q01",
+      "lesson": "unix-tools-final-case-heredoc",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "case-patterns",
+      "label": "questionmarkหนึ่งตัว",
+      "code": "x=ab; case $x in ?) printf one;; ??) printf two;; esac",
+      "output": "two",
+      "why": "??ตรงสองอักขระ",
+      "wrong": [
+        "one",
+        "ไม่มี stdout"
+      ],
+      "question": "ux08-q02",
+      "lesson": "unix-tools-final-case-heredoc",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "case-patterns",
+      "label": "alternativepattern",
+      "code": "x=run; case $x in start|run) printf go;; *) printf no;; esac",
+      "output": "go",
+      "why": "|แยกpatternทางเลือก",
+      "wrong": [
+        "no",
+        "start"
+      ],
+      "question": "ux08-q03",
+      "lesson": "unix-tools-final-case-heredoc",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "case-patterns",
+      "label": "แขนทับซ้อน",
+      "code": "case abc in a*) printf first;; ab*) printf second;; esac",
+      "output": "first",
+      "why": "เลือกแขนแรกแล้ว;;จบ",
+      "wrong": [
+        "second",
+        "firstsecond"
+      ],
+      "question": "ux08-q04",
+      "lesson": "unix-tools-final-case-heredoc",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "case-patterns",
+      "label": "characterclass",
+      "code": "case B in [ABC]) printf match;; *) printf no;; esac",
+      "output": "match",
+      "why": "classรับหนึ่งในABC",
+      "wrong": [
+        "no",
+        "ABC"
+      ],
+      "question": "ux08-q05",
+      "lesson": "unix-tools-final-case-heredoc",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "menus",
+      "label": "defaultไม่รู้จัก",
+      "code": "x=unknown; case $x in q) printf quit;; *) printf invalid;; esac",
+      "output": "invalid",
+      "why": "*เป็นfallback",
+      "wrong": [
+        "quit",
+        "unknown"
+      ],
+      "question": "ux08-q06",
+      "lesson": "unix-tools-final-case-heredoc",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "menus",
+      "label": "breakออกmenu",
+      "code": "for x in a q b; do case $x in q) break;; *) printf '%s' \"$x\";; esac; done; printf end",
+      "output": "aend",
+      "why": "breakจบloopแต่คำสั่งหลังloopยังทำ",
+      "wrong": [
+        "aqbend",
+        "a"
+      ],
+      "question": "ux08-q07",
+      "lesson": "unix-tools-final-case-heredoc",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "menus",
+      "label": "exitจบscriptลูก",
+      "code": "bash -c 'case q in q) exit 0;; esac; printf wrong'; printf end",
+      "output": "end",
+      "why": "exitหยุดshellลูก",
+      "wrong": [
+        "wrongend",
+        "qend"
+      ],
+      "question": "ux08-q08",
+      "lesson": "unix-tools-final-case-heredoc",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "menus",
+      "label": "EOFหยุดรับ",
+      "code": "n=0; while IFS= read -r x; do ((n+=1)); done </dev/null; printf '%s' \"$n\"",
+      "output": "0",
+      "why": "EOFตั้งแต่แรกไม่วน",
+      "wrong": [],
+      "question": "ux08-q09",
+      "lesson": "unix-tools-final-case-heredoc",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "menus",
+      "label": "caseinsensitiveระบุเอง",
+      "code": "case YES in [Yy][Ee][Ss]) printf accepted;; *) printf no;; esac",
+      "output": "accepted",
+      "why": "classแต่ละตำแหน่งรับตัวใหญ่เล็ก",
+      "wrong": [
+        "no",
+        "YES"
+      ],
+      "question": "ux08-q10",
+      "lesson": "unix-tools-final-case-heredoc",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "heredoc",
+      "label": "unquoteddelimiter",
+      "code": "name=Dao; cat <<EOF\nHello $name\nEOF",
+      "output": "Hello Dao",
+      "why": "ขยาย$nameในbody",
+      "wrong": [
+        "Hello $name",
+        "Dao"
+      ],
+      "question": "ux08-q11",
+      "lesson": "unix-tools-final-case-heredoc",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "heredoc",
+      "label": "commandในbody",
+      "code": "cat <<EOF\n$(printf computed)\nEOF",
+      "output": "computed",
+      "why": "unquotedheredocทำcommandsubstitution",
+      "wrong": [
+        "$(printf computed)",
+        "ไม่มี stdout"
+      ],
+      "question": "ux08-q12",
+      "lesson": "unix-tools-final-case-heredoc",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "heredoc",
+      "label": "arithmeticในbody",
+      "code": "cat <<EOF\n$((2+3))\nEOF",
+      "output": "5",
+      "why": "arithmeticexpansionในbody",
+      "wrong": [
+        "2+3",
+        "$((2+3))"
+      ],
+      "question": "ux08-q13",
+      "lesson": "unix-tools-final-case-heredoc",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "heredoc",
+      "label": "redirectstdoutเพิ่มเติม",
+      "code": "cat >out <<EOF\ndata\nEOF\nwc -l <out",
+      "output": "1",
+      "why": "bodyหนึ่งบรรทัดถูกcatเขียนout",
+      "wrong": [],
+      "question": "ux08-q14",
+      "lesson": "unix-tools-final-case-heredoc",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "heredoc",
+      "label": "quoteในbodyเป็นdata",
+      "code": "x=yes; cat <<EOF\n'$x'\nEOF",
+      "output": "'yes'",
+      "why": "singlequotesในheredocbodyเป็นliteralไม่ปิดexpansion",
+      "wrong": [
+        "'$x'",
+        "yes"
+      ],
+      "question": "ux08-q15",
+      "lesson": "unix-tools-final-case-heredoc",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "quoted-delimiter",
+      "label": "quoteหยุดparameter",
+      "code": "name=Dao; cat <<'EOF'\nHello $name\nEOF",
+      "output": "Hello $name",
+      "why": "delimiterquoteปิดexpansion",
+      "wrong": [
+        "Hello Dao",
+        "Dao"
+      ],
+      "question": "ux08-q16",
+      "lesson": "unix-tools-final-case-heredoc",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "quoted-delimiter",
+      "label": "quoteหยุดcommand",
+      "code": "cat <<'EOF'\n$(printf computed)\nEOF",
+      "output": "$(printf computed)",
+      "why": "ไม่มีcommandsubstitution",
+      "wrong": [
+        "computed",
+        "printf computed"
+      ],
+      "question": "ux08-q17",
+      "lesson": "unix-tools-final-case-heredoc",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "quoted-delimiter",
+      "label": "tabstrip",
+      "code": "cat <<-EOF\n\tdata\n\tEOF",
+      "output": "data",
+      "why": "<<-ตัดtabนำหน้า",
+      "wrong": [
+        "\tdata",
+        "ไม่มี stdout"
+      ],
+      "question": "ux08-q18",
+      "lesson": "unix-tools-final-case-heredoc",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "quoted-delimiter",
+      "label": "spacesไม่strip",
+      "code": "cat <<-EOF\n  data\nEOF",
+      "output": "  data",
+      "why": "<<-ไม่ตัดspace",
+      "wrong": [
+        "data",
+        " data"
+      ],
+      "question": "ux08-q19",
+      "lesson": "unix-tools-final-case-heredoc",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "quoted-delimiter",
+      "label": "doublequoteddelimiterก็literal",
+      "code": "x=yes; cat <<\"EOF\"\n$x\nEOF",
+      "output": "$x",
+      "why": "quoteทุกแบบที่delimiterปิดbodyexpansion",
+      "wrong": [
+        "yes",
+        "EOF"
+      ],
+      "question": "ux08-q20",
+      "lesson": "unix-tools-final-case-heredoc",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "combined",
+      "label": "literalhelpผ่านcase",
+      "code": "case help in help) cat <<'EOF'\nUse $1 safely\nEOF\n;; esac",
+      "output": "Use $1 safely",
+      "why": "quotedheredocคง$1",
+      "wrong": [
+        "Use  safely",
+        "help"
+      ],
+      "question": "ux08-q21",
+      "lesson": "unix-tools-final-case-heredoc",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "combined",
+      "label": "caseไม่ตรงไม่มีoutput",
+      "code": "case x in y) printf y;; esac; printf done",
+      "output": "done",
+      "why": "ไม่มีarmตรงและไม่default",
+      "wrong": [
+        "ydone",
+        "x"
+      ],
+      "question": "ux08-q22",
+      "lesson": "unix-tools-final-case-heredoc",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "combined",
+      "label": "stringว่างตรงdefault",
+      "code": "x=; case $x in ?) printf one;; *) printf empty;; esac",
+      "output": "empty",
+      "why": "?ต้องหนึ่งcharacter",
+      "wrong": [
+        "one",
+        "ไม่มี stdout"
+      ],
+      "question": "ux08-q23",
+      "lesson": "unix-tools-final-case-heredoc",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "combined",
+      "label": "noautoexecution",
+      "code": "cat <<'EOF'\nprintf not-executed\nEOF",
+      "output": "printf not-executed",
+      "why": "bodyเป็นdataไม่ใช่shellscript",
+      "wrong": [
+        "not-executed",
+        "ไม่มี stdout"
+      ],
+      "question": "ux08-q24",
+      "lesson": "unix-tools-final-case-heredoc",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "combined",
+      "label": "readสองfields",
+      "code": "read -r mode rest <<EOF\nrun red blue\nEOF\nprintf '%s:%s' \"$mode\" \"$rest\"",
+      "output": "run:red blue",
+      "why": "readตัวแปรท้ายรับส่วนที่เหลือ",
+      "wrong": [
+        "run:red",
+        "run:blue"
+      ],
+      "question": "ux08-q25",
+      "lesson": "unix-tools-final-case-heredoc",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "function-scope",
+      "label": "functionparameters",
+      "code": "set -- outer; f(){ printf '%s' \"$1\"; }; f inner; printf ':%s' \"$1\"",
+      "output": "inner:outer",
+      "why": "argumentsฟังก์ชันrestoreหลังreturn",
+      "wrong": [
+        "inner:inner",
+        "outer:outer"
+      ],
+      "question": "ux09-q01",
+      "lesson": "unix-tools-final-functions-algorithms",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "function-scope",
+      "label": "globalassignment",
+      "code": "x=old; f(){ x=new; }; f; printf '%s' \"$x\"",
+      "output": "new",
+      "why": "ไม่มีlocalจึงแก้global",
+      "wrong": [
+        "old",
+        "ว่าง"
+      ],
+      "question": "ux09-q02",
+      "lesson": "unix-tools-final-functions-algorithms",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "function-scope",
+      "label": "dynamicscope",
+      "code": "x=global; g(){ printf '%s' \"$x\"; }; f(){ local x=local; g; }; f",
+      "output": "local",
+      "why": "gเห็นlocalของcallerในBash",
+      "wrong": [
+        "global",
+        "ว่าง"
+      ],
+      "question": "ux09-q03",
+      "lesson": "unix-tools-final-functions-algorithms",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "function-scope",
+      "label": "commandsubstitutionแยกscope",
+      "code": "x=old; f(){ x=new; printf value; }; y=$(f); printf '%s:%s' \"$x\" \"$y\"",
+      "output": "old:value",
+      "why": "functionทำในsubshellของsubstitution",
+      "wrong": [
+        "new:value",
+        "old:old"
+      ],
+      "question": "ux09-q04",
+      "lesson": "unix-tools-final-functions-algorithms",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "function-scope",
+      "label": "functionarity",
+      "code": "f(){ printf '%s' \"$#\"; }; f 'a b' c",
+      "output": "2",
+      "why": "quotedชื่อหลายคำหนึ่งargument",
+      "wrong": [],
+      "question": "ux09-q05",
+      "lesson": "unix-tools-final-functions-algorithms",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "return-output",
+      "label": "returnmodulo256",
+      "code": "f(){ return 300; }; f; printf '%s' \"$?\"",
+      "output": "44",
+      "why": "statusใช้แปดบิต300mod256=44",
+      "wrong": [],
+      "question": "ux09-q06",
+      "lesson": "unix-tools-final-functions-algorithms",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "return-output",
+      "label": "printdata",
+      "code": "f(){ printf 300; return 0; }; v=$(f); s=$?; printf '%s:%s' \"$v\" \"$s\"",
+      "output": "300:0",
+      "why": "ข้อมูล300กับstatus0แยกกัน",
+      "wrong": [
+        "44:0",
+        "300:300"
+      ],
+      "question": "ux09-q07",
+      "lesson": "unix-tools-final-functions-algorithms",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "return-output",
+      "label": "implicitreturn",
+      "code": "f(){ false; }; f; printf '%s' \"$?\"",
+      "output": "1",
+      "why": "ไม่returnชัดเจนใช้statusคำสั่งท้าย",
+      "wrong": [],
+      "question": "ux09-q08",
+      "lesson": "unix-tools-final-functions-algorithms",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "return-output",
+      "label": "localบังstatus",
+      "code": "f(){ local x=$(false); printf '%s' \"$?\"; }; f",
+      "output": "0",
+      "why": "statusของlocalสำเร็จบังfalse",
+      "wrong": [],
+      "question": "ux09-q09",
+      "lesson": "unix-tools-final-functions-algorithms",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "return-output",
+      "label": "แยกdeclaration",
+      "code": "f(){ local x; x=$(false); printf '%s' \"$?\"; }; f",
+      "output": "1",
+      "why": "assignmentรับstatuscommandsubstitution",
+      "wrong": [],
+      "question": "ux09-q10",
+      "lesson": "unix-tools-final-functions-algorithms",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "factorial",
+      "label": "fac5ตามHF",
+      "code": "fac(){ local n=$1 r=1 i; for ((i=2;i<=n;i++)); do ((r*=i)); done; printf '%s' \"$r\"; }; fac 5",
+      "output": "120",
+      "why": "2*3*4*5=120",
+      "wrong": [],
+      "question": "ux09-q11",
+      "lesson": "unix-tools-final-functions-algorithms",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "factorial",
+      "label": "fac0basecase",
+      "code": "n=0; r=1; for ((i=2;i<=n;i++)); do ((r*=i)); done; printf '%s' \"$r\"",
+      "output": "1",
+      "why": "ไม่เข้าลูปresultยัง1",
+      "wrong": [],
+      "question": "ux09-q12",
+      "lesson": "unix-tools-final-functions-algorithms",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "factorial",
+      "label": "offbyonefactorial",
+      "code": "n=5; r=1; for ((i=2;i<n;i++)); do ((r*=i)); done; printf '%s' \"$r\"",
+      "output": "24",
+      "why": "ขาดคูณ5",
+      "wrong": [],
+      "question": "ux09-q13",
+      "lesson": "unix-tools-final-functions-algorithms",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "factorial",
+      "label": "guardช่วงfactorial",
+      "code": "n=21; [[ $n =~ ^([0-9]|1[0-9]|20)$ ]]; printf '%s' \"$?\"",
+      "output": "1",
+      "why": "ไม่รับ21เพราะเกินช่วงที่ตั้ง",
+      "wrong": [],
+      "question": "ux09-q14",
+      "lesson": "unix-tools-final-functions-algorithms",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "factorial",
+      "label": "หลายarguments",
+      "code": "fac(){ local n=$1 r=1 i; for ((i=2;i<=n;i++)); do ((r*=i)); done; printf '%s ' \"$r\"; }; for n in 4 3; do fac \"$n\"; done",
+      "output": "24 6 ",
+      "why": "facแต่ละinputแยกresult",
+      "wrong": [
+        "24 144 ",
+        "6 24 "
+      ],
+      "question": "ux09-q15",
+      "lesson": "unix-tools-final-functions-algorithms",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "prime",
+      "label": "oneไม่prime",
+      "code": "n=1; if ((n<2)); then printf no; else printf yes; fi",
+      "output": "no",
+      "why": "นิยามprimeต้อง>=2",
+      "wrong": [
+        "yes",
+        "1"
+      ],
+      "question": "ux09-q16",
+      "lesson": "unix-tools-final-functions-algorithms",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "prime",
+      "label": "รวมขอบsqrt",
+      "code": "n=25; p=yes; for ((d=2;d<=n/d;d++)); do if ((n%d==0)); then p=no; break; fi; done; printf '%s' \"$p\"",
+      "output": "no",
+      "why": "พบd5หาร25ลงตัว",
+      "wrong": [
+        "yes",
+        "25"
+      ],
+      "question": "ux09-q17",
+      "lesson": "unix-tools-final-functions-algorithms",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "prime",
+      "label": "prime13",
+      "code": "n=13; p=yes; for ((d=2;d<=n/d;d++)); do if ((n%d==0)); then p=no; break; fi; done; printf '%s' \"$p\"",
+      "output": "yes",
+      "why": "ไม่มีตัวหาร2หรือ3",
+      "wrong": [
+        "no",
+        "13"
+      ],
+      "question": "ux09-q18",
+      "lesson": "unix-tools-final-functions-algorithms",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "prime",
+      "label": "Sieveเริ่มsquare",
+      "code": "p=3; printf '%s' \"$((p*p))\"",
+      "output": "9",
+      "why": "เริ่มทำเครื่องหมาย9ซึ่งเป็นcomposite",
+      "wrong": [],
+      "question": "ux09-q19",
+      "lesson": "unix-tools-final-functions-algorithms",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "prime",
+      "label": "trialจำนวนทดสอบ",
+      "code": "n=49; c=0; for ((d=2;d<=n/d;d++)); do ((c+=1)); if ((n%d==0)); then break; fi; done; printf '%s' \"$c\"",
+      "output": "6",
+      "why": "ตรวจ2..7รวม6ตัวและพบ7",
+      "wrong": [],
+      "question": "ux09-q20",
+      "lesson": "unix-tools-final-functions-algorithms",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "temperature",
+      "label": "sourcef40",
+      "code": "mode=-f; n=40; if [[ $mode == -f ]]; then awk -v x=\"$n\" 'BEGIN{printf \"%.2f\",9*x/5+32}'; fi",
+      "output": "104",
+      "why": "-fตามHFหมายถึงผลF",
+      "wrong": [],
+      "question": "ux09-q21",
+      "lesson": "unix-tools-final-functions-algorithms",
+      "stderr": "",
+      "status": 0,
+      "numeric": true,
+      "stdout": "104.00"
+    },
+    {
+      "reference": "temperature",
+      "label": "sourcec102",
+      "code": "awk 'BEGIN{printf \"%.2f\",(102.2-32)*5/9}'",
+      "output": "39",
+      "why": "102.2Fเป็น39.00C",
+      "wrong": [],
+      "question": "ux09-q22",
+      "lesson": "unix-tools-final-functions-algorithms",
+      "stderr": "",
+      "status": 0,
+      "numeric": true,
+      "stdout": "39.00"
+    },
+    {
+      "reference": "temperature",
+      "label": "freezingpoint",
+      "code": "awk 'BEGIN{printf \"%.2f\",(32-32)*5/9}'",
+      "output": "0",
+      "why": "32Fตรง0C",
+      "wrong": [],
+      "question": "ux09-q23",
+      "lesson": "unix-tools-final-functions-algorithms",
+      "stderr": "",
+      "status": 0,
+      "numeric": true,
+      "stdout": "0.00"
+    },
+    {
+      "reference": "temperature",
+      "label": "calculatorzero",
+      "code": "div(){ if [[ $2 == 0 ]]; then return 2; fi; awk -v a=\"$1\" -v b=\"$2\" 'BEGIN{print a/b}'; }; div 3 0; printf '%s' \"$?\"",
+      "output": "2",
+      "why": "guardตัวหาร0คืนstatus2ไม่มีผลหาร",
+      "wrong": [],
+      "question": "ux09-q24",
+      "lesson": "unix-tools-final-functions-algorithms",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "temperature",
+      "label": "CกับFจุดเดียวกัน",
+      "code": "awk 'BEGIN{print 9*(-40)/5+32}'",
+      "output": "-40",
+      "why": "-40Cเท่ากับ-40F",
+      "wrong": [],
+      "question": "ux09-q25",
+      "lesson": "unix-tools-final-functions-algorithms",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "indexed",
+      "label": "index0",
+      "code": "a=(10 20 30); printf '%s' \"${a[0]}\"",
+      "output": "10",
+      "why": "สมาชิกแรกindex0",
+      "wrong": [],
+      "question": "ux10-q01",
+      "lesson": "unix-tools-final-arrays-statistics",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "indexed",
+      "label": "sparseสมาชิกเดียว",
+      "code": "a=(); a[100]=x; printf '%s' \"${#a[@]}\"",
+      "output": "1",
+      "why": "index100ไม่แปลว่า101สมาชิก",
+      "wrong": [],
+      "question": "ux10-q02",
+      "lesson": "unix-tools-final-arrays-statistics",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "indexed",
+      "label": "assignmentไม่ลบสมาชิกเดิม",
+      "code": "a=(x y z); a[100]=q; printf '%s' \"${#a[@]}\"",
+      "output": "4",
+      "why": "สมาชิกเดิมสามและใหม่หนึ่ง",
+      "wrong": [],
+      "question": "ux10-q03",
+      "lesson": "unix-tools-final-arrays-statistics",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "indexed",
+      "label": "unsetไม่เลื่อน",
+      "code": "a=(10 20 30); unset 'a[1]'; printf '%s' \"${a[2]}\"",
+      "output": "30",
+      "why": "index2ยัง30",
+      "wrong": [],
+      "question": "ux10-q04",
+      "lesson": "unix-tools-final-arrays-statistics",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "indexed",
+      "label": "sparseindices",
+      "code": "a=([2]=x [7]=y); printf '%s ' \"${!a[@]}\"",
+      "output": "2 7 ",
+      "why": "indicesที่มีค่าจริง",
+      "wrong": [
+        "0 1 ",
+        "2 3 4 5 6 7 "
+      ],
+      "question": "ux10-q05",
+      "lesson": "unix-tools-final-arrays-statistics",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "iteration",
+      "label": "quotedarrayargs",
+      "code": "a=('red blue' green); set -- \"${a[@]}\"; printf '%s' \"$#\"",
+      "output": "2",
+      "why": "แต่ละสมาชิกเป็นหนึ่งargument",
+      "wrong": [],
+      "question": "ux10-q06",
+      "lesson": "unix-tools-final-arrays-statistics",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "iteration",
+      "label": "arraystar",
+      "code": "a=(red blue); IFS=:; printf '%s' \"${a[*]}\"",
+      "output": "red:blue",
+      "why": "รวมสมาชิกด้วยcolon",
+      "wrong": [
+        "red blue",
+        "redblue"
+      ],
+      "question": "ux10-q07",
+      "lesson": "unix-tools-final-arrays-statistics",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "iteration",
+      "label": "lengthสมาชิก",
+      "code": "a=(hello x); printf '%s' \"${#a[0]}\"",
+      "output": "5",
+      "why": "helloยาว5ไม่ใช่count2",
+      "wrong": [],
+      "question": "ux10-q08",
+      "lesson": "unix-tools-final-arrays-statistics",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "iteration",
+      "label": "emptymember",
+      "code": "a=('' x); printf '%s' \"${#a[@]}\"",
+      "output": "2",
+      "why": "emptystringยังเป็นmember",
+      "wrong": [],
+      "question": "ux10-q09",
+      "lesson": "unix-tools-final-arrays-statistics",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "iteration",
+      "label": "iterateholes",
+      "code": "a=([0]=10 [3]=20); s=0; for i in \"${!a[@]}\"; do ((s+=a[i])); done; printf '%s' \"$s\"",
+      "output": "30",
+      "why": "วนเฉพาะindex0และ3",
+      "wrong": [],
+      "question": "ux10-q10",
+      "lesson": "unix-tools-final-arrays-statistics",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "statistics",
+      "label": "meanจากHA",
+      "code": "awk 'BEGIN{s=0;for(i=1;i<=10;i++)s+=i;print s/10}'",
+      "output": "5.5",
+      "why": "sum55/N10",
+      "wrong": [],
+      "question": "ux10-q11",
+      "lesson": "unix-tools-final-arrays-statistics",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "statistics",
+      "label": "populationvariance",
+      "code": "awk 'BEGIN{m=4;print ((2-m)^2+(4-m)^2+(6-m)^2)/3}'",
+      "output": "2.66667",
+      "why": "squareddeviations8หาร3;stdoutmawkพิมพ์6significantdigits",
+      "wrong": [],
+      "question": "ux10-q12",
+      "lesson": "unix-tools-final-arrays-statistics",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "statistics",
+      "label": "populationSD",
+      "code": "awk 'BEGIN{printf \"%.6f\",sqrt(8.25)}'",
+      "output": "2.872281",
+      "why": "sqrt8.25ปัดหกตำแหน่ง",
+      "wrong": [],
+      "question": "ux10-q13",
+      "lesson": "unix-tools-final-arrays-statistics",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "statistics",
+      "label": "uniformvariance",
+      "code": "awk 'BEGIN{print ((5-5)^2+(5-5)^2)/2}'",
+      "output": "0",
+      "why": "ทุกค่าเบี่ยงเบน0",
+      "wrong": [],
+      "question": "ux10-q14",
+      "lesson": "unix-tools-final-arrays-statistics",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "statistics",
+      "label": "ห้ามหารN0",
+      "code": "a=(); if ((${#a[@]}==0)); then printf undefined; fi",
+      "output": "undefined",
+      "why": "emptydataไม่มีmean",
+      "wrong": [
+        "0",
+        "NaN"
+      ],
+      "question": "ux10-q15",
+      "lesson": "unix-tools-final-arrays-statistics",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "grading",
+      "label": "ขอบบนC",
+      "code": "awk 'BEGIN{s=60;m=50;d=10;if(s>m+2*d)print \"A\";else if(s>m+d)print \"B\";else if(s>m-d)print \"C\";else print \"F\"}'",
+      "output": "C",
+      "why": "60เท่าขอบบนC",
+      "wrong": [
+        "B",
+        "A"
+      ],
+      "question": "ux10-q16",
+      "lesson": "unix-tools-final-arrays-statistics",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "grading",
+      "label": "ขอบบนB",
+      "code": "awk 'BEGIN{s=70;m=50;d=10;if(s>m+2*d)print \"A\";else if(s>m+d)print \"B\";else if(s>m-d)print \"C\";else print \"F\"}'",
+      "output": "B",
+      "why": "70รวมBแต่ไม่A",
+      "wrong": [
+        "A",
+        "C"
+      ],
+      "question": "ux10-q17",
+      "lesson": "unix-tools-final-arrays-statistics",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "grading",
+      "label": "ขอบล่างC",
+      "code": "awk 'BEGIN{s=40;m=50;d=10;if(s>m+2*d)print \"A\";else if(s>m+d)print \"B\";else if(s>m-d)print \"C\";else print \"F\"}'",
+      "output": "F",
+      "why": "40ไม่ผ่านstrictlowerbound",
+      "wrong": [
+        "C",
+        "B"
+      ],
+      "question": "ux10-q18",
+      "lesson": "unix-tools-final-arrays-statistics",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "grading",
+      "label": "sd0ตามสูตร",
+      "code": "awk 'BEGIN{s=50;m=50;d=0;if(s>m+2*d)print \"A\";else if(s>m+d)print \"B\";else if(s>m-d)print \"C\";else print \"F\"}'",
+      "output": "F",
+      "why": "score=avgไม่ผ่านstrictinequality",
+      "wrong": [
+        "C",
+        "A"
+      ],
+      "question": "ux10-q19",
+      "lesson": "unix-tools-final-arrays-statistics",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "grading",
+      "label": "สูตรHAกับscore9",
+      "code": "awk 'BEGIN{m=5.5;d=sqrt(8.25);s=9;if(s>m+2*d)print \"A\";else if(s>m+d)print \"B\";else if(s>m-d)print \"C\";else print \"F\"}'",
+      "output": "B",
+      "why": "9อยู่ระหว่าง8.372...กับ11.244...จึงBไม่ใช่Aตามsample",
+      "wrong": [
+        "A",
+        "C"
+      ],
+      "question": "ux10-q20",
+      "lesson": "unix-tools-final-arrays-statistics",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "applied-array",
+      "label": "Nหลังลบ",
+      "code": "a=(10 20 30); unset 'a[1]'; printf '%s' \"${#a[@]}\"",
+      "output": "2",
+      "why": "countต้องคำนวณใหม่ไม่ยึดขนาดเดิม",
+      "wrong": [],
+      "question": "ux10-q21",
+      "lesson": "unix-tools-final-arrays-statistics",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "applied-array",
+      "label": "รวมoccurrences",
+      "code": "a=(2 2 4); s=0; for x in \"${a[@]}\"; do ((s+=x)); done; printf '%s' \"$s\"",
+      "output": "8",
+      "why": "ค่าซ้ำยังอยู่ในpopulation",
+      "wrong": [],
+      "question": "ux10-q22",
+      "lesson": "unix-tools-final-arrays-statistics",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "applied-array",
+      "label": "validateคะแนน",
+      "code": "score=101; [[ $score =~ ^[0-9]+$ ]] && ((10#$score<=100)); printf '%s' \"$?\"",
+      "output": "1",
+      "why": "101เกินช่วงที่กำหนด",
+      "wrong": [],
+      "question": "ux10-q23",
+      "lesson": "unix-tools-final-arrays-statistics",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "applied-array",
+      "label": "sumHA",
+      "code": "s=0; for ((i=1;i<=10;i++)); do ((s+=i)); done; printf '%s' \"$s\"",
+      "output": "55",
+      "why": "sum1ถึง10เท่ากับ10*11/2",
+      "wrong": [],
+      "question": "ux10-q24",
+      "lesson": "unix-tools-final-arrays-statistics",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "applied-array",
+      "label": "numericdataไม่ใช่textjoin",
+      "code": "a=(10 20); printf '%s' \"${a[*]}\"",
+      "output": "10 20",
+      "why": "arraystarรวมข้อความไม่ได้รวมเลข",
+      "wrong": [
+        "30",
+        "1020"
+      ],
+      "question": "ux10-q25",
+      "lesson": "unix-tools-final-arrays-statistics",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "regex-glob",
+      "label": "EREplus",
+      "code": "printf 'a\\naa\\nb\\n' | grep -Ec '^a+$'",
+      "output": "2",
+      "why": "a+ต้องมีaอย่างน้อยหนึ่ง",
+      "wrong": [],
+      "question": "ux11-q01",
+      "lesson": "unix-tools-final-regex-grep-sed",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "regex-glob",
+      "label": "BREliteralplus",
+      "code": "printf 'a+\\na\\n' | grep -c '^a+$'",
+      "output": "1",
+      "why": "BRE+ไม่มีescapeเป็นliteralในGNUgrep",
+      "wrong": [],
+      "question": "ux11-q02",
+      "lesson": "unix-tools-final-regex-grep-sed",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "regex-glob",
+      "label": "anchorชื่อไฟล์",
+      "code": "printf 'x.txt\\nxatxt\\n' | grep -Ec '^.*\\.txt$'",
+      "output": "1",
+      "why": "\\.จับจุดจริง",
+      "wrong": [],
+      "question": "ux11-q03",
+      "lesson": "unix-tools-final-regex-grep-sed",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "regex-glob",
+      "label": "regexstarzero",
+      "code": "printf 'ac\\nabc\\nabbc\\n' | grep -Ec '^ab*c$'",
+      "output": "3",
+      "why": "b*รับศูนย์ขึ้นไป",
+      "wrong": [],
+      "question": "ux11-q04",
+      "lesson": "unix-tools-final-regex-grep-sed",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "regex-glob",
+      "label": "shellglobต่างregex",
+      "code": "case file.txt in *.txt) printf glob;; esac",
+      "output": "glob",
+      "why": "*ในcaseแทนสายอักขระได้",
+      "wrong": [
+        "regex",
+        "ไม่มี stdout"
+      ],
+      "question": "ux11-q05",
+      "lesson": "unix-tools-final-regex-grep-sed",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "grep",
+      "label": "นับบรรทัดไม่ใช่matches",
+      "code": "printf 'aa a\\na\\n' | grep -c a",
+      "output": "2",
+      "why": "สองบรรทัดmatchแม้มีหลายa",
+      "wrong": [],
+      "question": "ux11-q06",
+      "lesson": "unix-tools-final-regex-grep-sed",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "grep",
+      "label": "fixedstring",
+      "code": "printf 'a.b\\naxb\\n' | grep -Fc 'a.b'",
+      "output": "1",
+      "why": "-Fทำจุดเป็นliteral",
+      "wrong": [],
+      "question": "ux11-q07",
+      "lesson": "unix-tools-final-regex-grep-sed",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "grep",
+      "label": "grepไม่พบstatus",
+      "code": "printf 'red\\n' | grep blue; printf '%s' \"$?\"",
+      "output": "1",
+      "why": "ไม่พบให้1",
+      "wrong": [],
+      "question": "ux11-q08",
+      "lesson": "unix-tools-final-regex-grep-sed",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "grep",
+      "label": "grepไฟล์หายstatus",
+      "code": "grep x missing 2>/dev/null; printf '%s' \"$?\"",
+      "output": "2",
+      "why": "GNUgreperrorให้2",
+      "wrong": [],
+      "question": "ux11-q09",
+      "lesson": "unix-tools-final-regex-grep-sed",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "grep",
+      "label": "wholeline",
+      "code": "printf 'a\\nba\\nab\\n' | grep -xc a",
+      "output": "1",
+      "why": "-xรับเฉพาะบรรทัดa",
+      "wrong": [],
+      "question": "ux11-q10",
+      "lesson": "unix-tools-final-regex-grep-sed",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "sed-substitute",
+      "label": "แทนmatchแรก",
+      "code": "printf 'foo foo\\n' | sed 's/foo/bar/'",
+      "output": "bar foo",
+      "why": "ไม่gจึงครั้งแรก",
+      "wrong": [
+        "bar bar",
+        "foo bar"
+      ],
+      "question": "ux11-q11",
+      "lesson": "unix-tools-final-regex-grep-sed",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "sed-substitute",
+      "label": "แทนทุกmatch",
+      "code": "printf 'foo foo\\n' | sed 's/foo/bar/g'",
+      "output": "bar bar",
+      "why": "gแทนสองmatch",
+      "wrong": [
+        "bar foo",
+        "foo bar"
+      ],
+      "question": "ux11-q12",
+      "lesson": "unix-tools-final-regex-grep-sed",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "sed-substitute",
+      "label": "replacementampersand",
+      "code": "printf 'abc\\n' | sed 's/b/[&]/'",
+      "output": "a[b]c",
+      "why": "&คืนmatchb",
+      "wrong": [
+        "a[&]c",
+        "abc"
+      ],
+      "question": "ux11-q13",
+      "lesson": "unix-tools-final-regex-grep-sed",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "sed-substitute",
+      "label": "capturegroups",
+      "code": "printf 'red-blue\\n' | sed -E 's/([a-z]+)-([a-z]+)/\\2:\\1/'",
+      "output": "blue:red",
+      "why": "\\2คือblueและ\\1คือred",
+      "wrong": [
+        "red:blue",
+        "2:1"
+      ],
+      "question": "ux11-q14",
+      "lesson": "unix-tools-final-regex-grep-sed",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "sed-substitute",
+      "label": "delimiterอื่น",
+      "code": "printf '/a/b\\n' | sed 's#/a#/x#'",
+      "output": "/x/b",
+      "why": "#เป็นdelimiterแทน/",
+      "wrong": [
+        "/a/x",
+        "x/b"
+      ],
+      "question": "ux11-q15",
+      "lesson": "unix-tools-final-regex-grep-sed",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "sed-address",
+      "label": "พิมพ์ช่วง",
+      "code": "printf 'A\\nB\\nC\\n' | sed -n '1,2p'",
+      "output": "A\nB",
+      "why": "-nปิดprintเดิมแล้วเลือก1ถึง2",
+      "wrong": [
+        "A\nB\nC",
+        "B"
+      ],
+      "question": "ux11-q16",
+      "lesson": "unix-tools-final-regex-grep-sed",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "sed-address",
+      "label": "ลบหัว",
+      "code": "printf 'head\\ndata\\n' | sed '1d'",
+      "output": "data",
+      "why": "1dลบบรรทัด1",
+      "wrong": [
+        "head",
+        "head\ndata"
+      ],
+      "question": "ux11-q17",
+      "lesson": "unix-tools-final-regex-grep-sed",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "sed-address",
+      "label": "printซ้ำ",
+      "code": "printf 'A\\n' | sed 'p'",
+      "output": "A\nA",
+      "why": "pหนึ่งและautomaticprintอีกหนึ่ง",
+      "wrong": [
+        "A",
+        "ไม่มี stdout"
+      ],
+      "question": "ux11-q18",
+      "lesson": "unix-tools-final-regex-grep-sed",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "sed-address",
+      "label": "lastline",
+      "code": "printf 'A\\nB\\nC\\n' | sed -n '$p'",
+      "output": "C",
+      "why": "$เลือกบรรทัดท้าย",
+      "wrong": [
+        "A",
+        "B"
+      ],
+      "question": "ux11-q19",
+      "lesson": "unix-tools-final-regex-grep-sed",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "sed-address",
+      "label": "ลบเนื้อหายังมีบรรทัด",
+      "code": "printf 'A\\nB\\n' | sed 's/.*//' | wc -l",
+      "output": "2",
+      "why": "สองemptylinesยังมีnewline",
+      "wrong": [],
+      "question": "ux11-q20",
+      "lesson": "unix-tools-final-regex-grep-sed",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "editing-safety",
+      "label": "ไม่แก้ต้นฉบับโดยdefault",
+      "code": "printf foo >f; sed 's/foo/bar/' f >/dev/null; cat f",
+      "output": "foo",
+      "why": "sedstdoutไม่แก้file",
+      "wrong": [
+        "bar",
+        "ว่าง"
+      ],
+      "question": "ux11-q21",
+      "lesson": "unix-tools-final-regex-grep-sed",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "editing-safety",
+      "label": "GNUbackup",
+      "code": "printf foo >f; sed -i.bak 's/foo/bar/' f; cat f.bak",
+      "output": "foo",
+      "why": "backupเก็บเดิม",
+      "wrong": [
+        "bar",
+        "ไม่มี stdout"
+      ],
+      "question": "ux11-q22",
+      "lesson": "unix-tools-final-regex-grep-sed",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "editing-safety",
+      "label": "อันตราย-n-i",
+      "code": "printf 'foo\\n' >f; sed -ni 's/foo/bar/' f; wc -c <f",
+      "output": "0",
+      "why": "-nไม่pและ-iเขียนผลว่าง",
+      "wrong": [],
+      "question": "ux11-q23",
+      "lesson": "unix-tools-final-regex-grep-sed",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "editing-safety",
+      "label": "deleteต่างempty",
+      "code": "printf 'A\\nB\\n' | sed '/./d' | wc -l",
+      "output": "0",
+      "why": "dลบบรรทัดทั้งหมด",
+      "wrong": [],
+      "question": "ux11-q24",
+      "lesson": "unix-tools-final-regex-grep-sed",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "editing-safety",
+      "label": "rangecharASCII",
+      "code": "printf 'A\\nz\\n7\\n' | grep -Ec '^[[:digit:]]$'",
+      "output": "1",
+      "why": "LC_ALL=Cมี7ที่เป็นdigit",
+      "wrong": [],
+      "question": "ux11-q25",
+      "lesson": "unix-tools-final-regex-grep-sed",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "fields",
+      "label": "field2colon",
+      "code": "printf 'red:10:yes\\n' | awk -F: '{print $2}'",
+      "output": "10",
+      "why": "colonfield2คือ10",
+      "wrong": [],
+      "question": "ux12-q01",
+      "lesson": "unix-tools-final-awk-text",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "fields",
+      "label": "OFS",
+      "code": "printf 'A B\\n' | awk 'BEGIN{OFS=\":\"}{print $1,$2}'",
+      "output": "A:B",
+      "why": "printหลายexpressionใช้OFS",
+      "wrong": [
+        "A B",
+        "AB"
+      ],
+      "question": "ux12-q02",
+      "lesson": "unix-tools-final-awk-text",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "fields",
+      "label": "OFSไม่rebuildเอง",
+      "code": "printf 'A B\\n' | awk 'BEGIN{OFS=\":\"}{print $0}'",
+      "output": "A B",
+      "why": "$0เดิมยังspace",
+      "wrong": [
+        "A:B",
+        "AB"
+      ],
+      "question": "ux12-q03",
+      "lesson": "unix-tools-final-awk-text",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "fields",
+      "label": "แก้fieldrebuild",
+      "code": "printf 'A B\\n' | awk 'BEGIN{OFS=\":\"}{$2=\"C\";print $0}'",
+      "output": "A:C",
+      "why": "assignmentfieldrebuildด้วยOFS",
+      "wrong": [
+        "A C",
+        "A:B"
+      ],
+      "question": "ux12-q04",
+      "lesson": "unix-tools-final-awk-text",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "fields",
+      "label": "defaultwhitespace",
+      "code": "printf ' A   B \\n' | awk '{print NF}'",
+      "output": "2",
+      "why": "defaultFSแยกwhitespaceและไม่สร้างemptyfieldsหัวท้าย",
+      "wrong": [],
+      "question": "ux12-q05",
+      "lesson": "unix-tools-final-awk-text",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "records",
+      "label": "NRรวมrecords",
+      "code": "printf 'A\\nB\\n' | awk 'END{print NR}'",
+      "output": "2",
+      "why": "มีสองrecords",
+      "wrong": [],
+      "question": "ux12-q06",
+      "lesson": "unix-tools-final-awk-text",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "records",
+      "label": "NFต่อrecord",
+      "code": "printf 'A B C\\n' | awk '{print NF}'",
+      "output": "3",
+      "why": "สามfields",
+      "wrong": [],
+      "question": "ux12-q07",
+      "lesson": "unix-tools-final-awk-text",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "records",
+      "label": "filterคะแนน",
+      "code": "printf 'A:50\\nB:70\\nC:90\\n' | awk -F: '$2>=60{print $1}'",
+      "output": "B\nC",
+      "why": "70และ90ผ่าน",
+      "wrong": [
+        "A\nB\nC",
+        "C"
+      ],
+      "question": "ux12-q08",
+      "lesson": "unix-tools-final-awk-text",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "records",
+      "label": "FNRต่อไฟล์",
+      "code": "printf 'A\\n' >a; printf 'B\\n' >b; awk '{printf \"%s:%s;\",NR,FNR}' a b",
+      "output": "1:1;2:1;",
+      "why": "NRต่อเนื่องFNRเริ่มใหม่",
+      "wrong": [
+        "1:1;2:2;",
+        "1:1;1:1;"
+      ],
+      "question": "ux12-q09",
+      "lesson": "unix-tools-final-awk-text",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "records",
+      "label": "blankrecordNF0",
+      "code": "printf '\\n' | awk '{print NF}'",
+      "output": "0",
+      "why": "มีrecordแต่ไม่มีfield",
+      "wrong": [],
+      "question": "ux12-q10",
+      "lesson": "unix-tools-final-awk-text",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "aggregation",
+      "label": "sumfield",
+      "code": "printf 'A:10\\nB:20\\n' | awk -F: '{s+=$2}END{print s}'",
+      "output": "30",
+      "why": "รวม10กับ20",
+      "wrong": [],
+      "question": "ux12-q11",
+      "lesson": "unix-tools-final-awk-text",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "aggregation",
+      "label": "filteredmean",
+      "code": "printf 'A:50\\nB:70\\nC:90\\n' | awk -F: '$2>=60{s+=$2;n++}END{print s/n}'",
+      "output": "80",
+      "why": "หารด้วย2recordsที่ผ่านไม่ใช่3",
+      "wrong": [],
+      "question": "ux12-q12",
+      "lesson": "unix-tools-final-awk-text",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "aggregation",
+      "label": "BEGINแม้ไม่มีinput",
+      "code": "awk 'BEGIN{print 2+3}' </dev/null",
+      "output": "5",
+      "why": "BEGINทำครั้งเดียวโดยไม่ต้องrecord",
+      "wrong": [],
+      "question": "ux12-q13",
+      "lesson": "unix-tools-final-awk-text",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "aggregation",
+      "label": "emptyaggregationguard",
+      "code": "awk 'END{if(NR)print s/NR;else print \"no-data\"}' </dev/null",
+      "output": "no-data",
+      "why": "guardก่อนหารzero",
+      "wrong": [
+        "0",
+        "NaN"
+      ],
+      "question": "ux12-q14",
+      "lesson": "unix-tools-final-awk-text",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "aggregation",
+      "label": "printfprecision",
+      "code": "awk 'BEGIN{printf \"%.2f\",10/3}'",
+      "output": "3.33",
+      "why": "roundแสดงผลสองตำแหน่ง",
+      "wrong": [],
+      "question": "ux12-q15",
+      "lesson": "unix-tools-final-awk-text",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "pipelines",
+      "label": "sortnumeric",
+      "code": "printf '10\\n2\\n1\\n' | sort -n",
+      "output": "1\n2\n10",
+      "why": "-nเรียงค่าตัวเลข",
+      "wrong": [
+        "1\n10\n2",
+        "10\n2\n1"
+      ],
+      "question": "ux12-q16",
+      "lesson": "unix-tools-final-awk-text",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "pipelines",
+      "label": "sortlexical",
+      "code": "printf '10\\n2\\n1\\n' | sort",
+      "output": "1\n10\n2",
+      "why": "LC_ALL=Cเรียงข้อความ",
+      "wrong": [
+        "1\n2\n10",
+        "10\n2\n1"
+      ],
+      "question": "ux12-q17",
+      "lesson": "unix-tools-final-awk-text",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "pipelines",
+      "label": "uniqไม่รวมไม่ติด",
+      "code": "printf 'b\\na\\nb\\n' | uniq | wc -l",
+      "output": "3",
+      "why": "ไม่มีสองบรรทัดติดซ้ำ",
+      "wrong": [],
+      "question": "ux12-q18",
+      "lesson": "unix-tools-final-awk-text",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "pipelines",
+      "label": "sortก่อนuniq",
+      "code": "printf 'b\\na\\nb\\n' | sort | uniq | wc -l",
+      "output": "2",
+      "why": "sortทำbติดกันแล้วuniqเหลือa,b",
+      "wrong": [],
+      "question": "ux12-q19",
+      "lesson": "unix-tools-final-awk-text",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "pipelines",
+      "label": "wcไม่มีnewline",
+      "code": "printf tail | wc -l",
+      "output": "0",
+      "why": "wc-lนับnewlineไม่ใช่recordสุดท้าย",
+      "wrong": [],
+      "question": "ux12-q20",
+      "lesson": "unix-tools-final-awk-text",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "applied-text",
+      "label": "validatefields",
+      "code": "printf 'A:10\\nbad\\nB:20\\n' | awk -F: 'NF==2 && $2~/^[0-9]+$/{n++}END{print n}'",
+      "output": "2",
+      "why": "badมีNF1จึงไม่รับ",
+      "wrong": [],
+      "question": "ux12-q21",
+      "lesson": "unix-tools-final-awk-text",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "applied-text",
+      "label": "maxscore",
+      "code": "printf 'A:10\\nB:30\\nC:20\\n' | awk -F: 'NR==1||$2>m{m=$2}END{print m}'",
+      "output": "30",
+      "why": "maximumสามข้อมูลคือ30",
+      "wrong": [],
+      "question": "ux12-q22",
+      "lesson": "unix-tools-final-awk-text",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    },
+    {
+      "reference": "applied-text",
+      "label": "cutASCIIfields",
+      "code": "printf 'studentXYZ\\n' | cut -c1-7",
+      "output": "student",
+      "why": "เลือกASCIIตำแหน่ง1ถึง7",
+      "wrong": [
+        "studentX",
+        "XYZ"
+      ],
+      "question": "ux12-q23",
+      "lesson": "unix-tools-final-awk-text",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "applied-text",
+      "label": "sortkeynumeric",
+      "code": "printf 'A 2\\nB 10\\nC 3\\n' | sort -k2,2nr | head -1",
+      "output": "B 10",
+      "why": "field2numericreverseเอามากสุด",
+      "wrong": [
+        "C 3",
+        "A 2"
+      ],
+      "question": "ux12-q24",
+      "lesson": "unix-tools-final-awk-text",
+      "stderr": "",
+      "status": 0,
+      "numeric": false
+    },
+    {
+      "reference": "applied-text",
+      "label": "countvalidzero",
+      "code": "printf 'A:0\\nB:x\\n' | awk -F: 'NF==2&&$2~/^[0-9]+$/{n++}END{print n+0}'",
+      "output": "1",
+      "why": "0เป็นเลขvalid ไม่ใช่missing",
+      "wrong": [],
+      "question": "ux12-q25",
+      "lesson": "unix-tools-final-awk-text",
+      "stderr": "",
+      "status": 0,
+      "numeric": true
+    }
+  ],
+  "examples": [
+    {
+      "id": "validated-factorial",
+      "code": "fac() {\n    local n=${1-} result=1 i\n    [[ $n =~ ^([0-9]|1[0-9]|20)$ ]] || return 2\n    for ((i=2; i<=n; i++)); do\n        ((result *= i))\n    done\n    printf '%s\\n' \"$result\"\n}\nfor n in 5 4 0; do fac \"$n\"; done",
+      "output": "120\n24\n1",
+      "stderr": "",
+      "status": 0
+    },
+    {
+      "id": "validated-prime",
+      "code": "isPrime() {\n    local n=${1-} d\n    [[ $n =~ ^(0|[1-9][0-9]{0,5})$ ]] || return 2\n    ((n >= 2)) || return 1\n    for ((d=2; d<=n/d; d++)); do\n        ((n%d == 0)) && return 1\n    done\n    return 0\n}\nfor n in 1 2 13 25; do\n    if isPrime \"$n\"; then printf 'yes\\n'; else printf 'no\\n'; fi\ndone",
+      "output": "no\nyes\nyes\nno",
+      "stderr": "",
+      "status": 0
+    },
+    {
+      "id": "temperature-batch",
+      "code": "convert() {\n    local mode=${1-} x\n    [[ $# -ge 2 && ($mode == -c || $mode == -f) ]] || return 2\n    shift\n    for x in \"$@\"; do\n        [[ $x =~ ^-?[0-9]+([.][0-9]+)?$ ]] || return 2\n        awk -v x=\"$x\" -v m=\"$mode\" 'BEGIN {\n            if (m==\"-f\") printf \"%.2f\\n\", 9*x/5+32\n            else printf \"%.2f\\n\", (x-32)*5/9\n        }'\n    done\n}\nconvert -c 102.2 204.4\nconvert -f 40",
+      "output": "39.00\n95.78\n104.00",
+      "stderr": "",
+      "status": 0
+    },
+    {
+      "id": "grading-program",
+      "code": "scores=(1 2 3 4 5 6 7 8 9 10)\nif ((${#scores[@]} == 0)); then printf \"no-data\\n\" >&2; exit 2; fi\nprintf '%s\\n' \"${scores[@]}\" | awk '\n{ x[NR]=$1; sum+=$1 }\nEND {\n    if (!NR) { print \"no-data\"; exit 2 }\n    avg=sum/NR\n    for(i=1;i<=NR;i++) variance+=(x[i]-avg)^2\n    variance/=NR; sd=sqrt(variance)\n    printf \"N=%d sum=%g avg=%.1f var=%.2f sd=%.6f\\n\", NR,sum,avg,variance,sd\n    for(i=1;i<=NR;i++) {\n        s=x[i]\n        if(s>avg+2*sd) grade=\"A\"\n        else if(s>avg+sd) grade=\"B\"\n        else if(s>avg-sd) grade=\"C\"\n        else grade=\"F\"\n        printf \"%g %s\\n\",s,grade\n    }\n}'",
+      "output": "N=10 sum=55 avg=5.5 var=8.25 sd=2.872281\n1 F\n2 F\n3 C\n4 C\n5 C\n6 C\n7 C\n8 C\n9 B\n10 B",
+      "stderr": "",
+      "status": 0
+    }
+  ]
+}

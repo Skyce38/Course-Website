@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "unix-tools-final-functions-algorithms",
+  "title": "FINAL 09 — Functions และ Applied Algorithms",
+  "questions": [
+    {
+      "id": "ux09-q01",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: functionparameters\nset -- outer; f(){ printf '%s' \"$1\"; }; f inner; printf ':%s' \"$1\"",
+      "reference": "function-scope",
+      "explanation": "argumentsฟังก์ชันrestoreหลังreturn — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux09-q01",
+      "choices": [
+        {
+          "id": "a",
+          "text": "inner:inner"
+        },
+        {
+          "id": "b",
+          "text": "outer:outer"
+        },
+        {
+          "id": "c",
+          "text": "inner:outer"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "id": "ux09-q02",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: globalassignment\nx=old; f(){ x=new; }; f; printf '%s' \"$x\"",
+      "reference": "function-scope",
+      "explanation": "ไม่มีlocalจึงแก้global — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux09-q02",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ว่าง"
+        },
+        {
+          "id": "b",
+          "text": "new"
+        },
+        {
+          "id": "c",
+          "text": "old"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "id": "ux09-q03",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: dynamicscope\nx=global; g(){ printf '%s' \"$x\"; }; f(){ local x=local; g; }; f",
+      "reference": "function-scope",
+      "explanation": "gเห็นlocalของcallerในBash — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux09-q03",
+      "choices": [
+        {
+          "id": "a",
+          "text": "local"
+        },
+        {
+          "id": "b",
+          "text": "global"
+        },
+        {
+          "id": "c",
+          "text": "ว่าง"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "id": "ux09-q04",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: commandsubstitutionแยกscope\nx=old; f(){ x=new; printf value; }; y=$(f); printf '%s:%s' \"$x\" \"$y\"",
+      "reference": "function-scope",
+      "explanation": "functionทำในsubshellของsubstitution — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux09-q04",
+      "choices": [
+        {
+          "id": "a",
+          "text": "new:value"
+        },
+        {
+          "id": "b",
+          "text": "old:old"
+        },
+        {
+          "id": "c",
+          "text": "old:value"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "id": "ux09-q05",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: functionarity\nf(){ printf '%s' \"$#\"; }; f 'a b' c",
+      "reference": "function-scope",
+      "explanation": "quotedชื่อหลายคำหนึ่งargument — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux09-q05",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "ux09-self1",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): อธิบายlocalกับglobalและargumentsขณะเรียกฟังก์ชัน",
+      "reference": "function-scope",
+      "explanation": "แสดงค่าก่อน/หลังรวมผลเมื่อเรียกโดยcommandsubstitution",
+      "rubric": [
+        "แสดงค่าก่อน/หลังรวมผลเมื่อเรียกโดยcommandsubstitution",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,484 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "unix-tools-final-arguments",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "ux03-q06",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: วนรักษาช่องว่าง\nset -- 'red blue' green; for x in \"$@\"; do printf '<%s>' \"$x\"; done",
+      "reference": "all-arguments",
+      "explanation": "quoted @ รักษาแต่ละ argument — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux03-q06",
+      "choices": [
+        {
+          "id": "a",
+          "text": "<red blue><green>"
+        },
+        {
+          "id": "b",
+          "text": "<red><blue><green>"
+        },
+        {
+          "id": "c",
+          "text": "<red blue green>"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`\"$@\"` ให้หนึ่ง word ต่อหนึ่ง argument รวม empty argument; `\"$*\"` รวมเป็น word เดียวคั่นด้วยอักขระแรกของ IFS เมื่อไม่มี arguments \"$@\" ให้ศูนย์ words แต่ \"$*\" ให้หนึ่ง empty word `for arg; do` เทียบเท่า for ที่วน \"$@\""
+      }
+    },
+    {
+      "id": "ux03-q07",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: รวมด้วย IFS ตัวแรก\nset -- A B; IFS=:; printf '%s' \"$*\"",
+      "reference": "all-arguments",
+      "explanation": "quoted * ใช้ colon — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux03-q07",
+      "choices": [
+        {
+          "id": "a",
+          "text": "AB"
+        },
+        {
+          "id": "b",
+          "text": "A B"
+        },
+        {
+          "id": "c",
+          "text": "A:B"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`\"$@\"` ให้หนึ่ง word ต่อหนึ่ง argument รวม empty argument; `\"$*\"` รวมเป็น word เดียวคั่นด้วยอักขระแรกของ IFS เมื่อไม่มี arguments \"$@\" ให้ศูนย์ words แต่ \"$*\" ให้หนึ่ง empty word `for arg; do` เทียบเท่า for ที่วน \"$@\""
+      }
+    },
+    {
+      "id": "ux03-q08",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: quoted @ ว่าง\nset --; n=0; for x in \"$@\"; do ((n+=1)); done; printf '%s' \"$n\"",
+      "reference": "all-arguments",
+      "explanation": "ไม่มี arguments จึงไม่มีรอบ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux03-q08",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`\"$@\"` ให้หนึ่ง word ต่อหนึ่ง argument รวม empty argument; `\"$*\"` รวมเป็น word เดียวคั่นด้วยอักขระแรกของ IFS เมื่อไม่มี arguments \"$@\" ให้ศูนย์ words แต่ \"$*\" ให้หนึ่ง empty word `for arg; do` เทียบเท่า for ที่วน \"$@\""
+      }
+    },
+    {
+      "id": "ux03-q09",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: quoted * ว่าง\nset --; n=0; for x in \"$*\"; do ((n+=1)); done; printf '%s' \"$n\"",
+      "reference": "all-arguments",
+      "explanation": "มีหนึ่ง empty word — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux03-q09",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`\"$@\"` ให้หนึ่ง word ต่อหนึ่ง argument รวม empty argument; `\"$*\"` รวมเป็น word เดียวคั่นด้วยอักขระแรกของ IFS เมื่อไม่มี arguments \"$@\" ให้ศูนย์ words แต่ \"$*\" ให้หนึ่ง empty word `for arg; do` เทียบเท่า for ที่วน \"$@\""
+      }
+    },
+    {
+      "id": "ux03-q10",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: for แบบย่อ\nset -- A '' B; n=0; for x; do ((n+=1)); done; printf '%s' \"$n\"",
+      "reference": "all-arguments",
+      "explanation": "for x วน positional args รวม empty — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux03-q10",
+      "answer": 3,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`\"$@\"` ให้หนึ่ง word ต่อหนึ่ง argument รวม empty argument; `\"$*\"` รวมเป็น word เดียวคั่นด้วยอักขระแรกของ IFS เมื่อไม่มี arguments \"$@\" ให้ศูนย์ words แต่ \"$*\" ให้หนึ่ง empty word `for arg; do` เทียบเท่า for ที่วน \"$@\""
+      }
+    },
+    {
+      "id": "ux03-self2",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): เปรียบเทียบ \"$@\" กับ \"$*\" รวมกรณีไม่มี arguments",
+      "reference": "all-arguments",
+      "explanation": "นับ words และ empty arguments ให้ถูก; ระบุผลของ IFS",
+      "rubric": [
+        "นับ words และ empty arguments ให้ถูก; ระบุผลของ IFS",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "`\"$@\"` ให้หนึ่ง word ต่อหนึ่ง argument รวม empty argument; `\"$*\"` รวมเป็น word เดียวคั่นด้วยอักขระแรกของ IFS เมื่อไม่มี arguments \"$@\" ให้ศูนย์ words แต่ \"$*\" ให้หนึ่ง empty word `for arg; do` เทียบเท่า for ที่วน \"$@\""
+      }
+    },
+    {
+      "id": "ux03-q11",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: shift สอง\nset -- A B C; shift 2; printf '%s:%s' \"$#\" \"$1\"",
+      "reference": "shift",
+      "explanation": "เหลือ C ตัวเดียว — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux03-q11",
+      "choices": [
+        {
+          "id": "a",
+          "text": "3:A"
+        },
+        {
+          "id": "b",
+          "text": "1:C"
+        },
+        {
+          "id": "c",
+          "text": "2:B"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`shift n` ลบ n arguments แรกและคืน nonzero หาก n มากกว่า $# โดยไม่เลื่อนบางส่วน เก็บ option ในตัวแปรก่อน shift; ใช้ while (($#)) เพื่อไล่ค่าที่เหลือ $0 ไม่เปลี่ยนจาก shift"
+      }
+    },
+    {
+      "id": "ux03-q12",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: shift เกินจำนวน\nset -- A; shift 2; s=$?; printf '%s:%s' \"$s\" \"$#\"",
+      "reference": "shift",
+      "explanation": "ล้มเหลวและไม่เลื่อน — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux03-q12",
+      "choices": [
+        {
+          "id": "a",
+          "text": "1:1"
+        },
+        {
+          "id": "b",
+          "text": "0:0"
+        },
+        {
+          "id": "c",
+          "text": "1:0"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`shift n` ลบ n arguments แรกและคืน nonzero หาก n มากกว่า $# โดยไม่เลื่อนบางส่วน เก็บ option ในตัวแปรก่อน shift; ใช้ while (($#)) เพื่อไล่ค่าที่เหลือ $0 ไม่เปลี่ยนจาก shift"
+      }
+    },
+    {
+      "id": "ux03-q13",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: เก็บ mode ก่อน shift\nset -- -c 102.2 204.4; mode=$1; shift; printf '%s:%s' \"$mode\" \"$#\"",
+      "reference": "shift",
+      "explanation": "mode เก็บ -c เหลือสอง operands — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux03-q13",
+      "choices": [
+        {
+          "id": "a",
+          "text": "102.2:2"
+        },
+        {
+          "id": "b",
+          "text": "-c:3"
+        },
+        {
+          "id": "c",
+          "text": "-c:2"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`shift n` ลบ n arguments แรกและคืน nonzero หาก n มากกว่า $# โดยไม่เลื่อนบางส่วน เก็บ option ในตัวแปรก่อน shift; ใช้ while (($#)) เพื่อไล่ค่าที่เหลือ $0 ไม่เปลี่ยนจาก shift"
+      }
+    },
+    {
+      "id": "ux03-q14",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: shift ศูนย์\nset -- A B; shift 0; printf '%s' \"$#\"",
+      "reference": "shift",
+      "explanation": "shift0 ไม่เปลี่ยน args — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux03-q14",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`shift n` ลบ n arguments แรกและคืน nonzero หาก n มากกว่า $# โดยไม่เลื่อนบางส่วน เก็บ option ในตัวแปรก่อน shift; ใช้ while (($#)) เพื่อไล่ค่าที่เหลือ $0 ไม่เปลี่ยนจาก shift"
+      }
+    },
+    {
+      "id": "ux03-q15",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: วนกิน arguments\nset -- A B C; n=0; while (( $# )); do shift; ((n+=1)); done; printf '%s' \"$n\"",
+      "reference": "shift",
+      "explanation": "เลื่อนหนึ่งต่อรอบจนว่าง — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux03-q15",
+      "answer": 3,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`shift n` ลบ n arguments แรกและคืน nonzero หาก n มากกว่า $# โดยไม่เลื่อนบางส่วน เก็บ option ในตัวแปรก่อน shift; ใช้ while (($#)) เพื่อไล่ค่าที่เหลือ $0 ไม่เปลี่ยนจาก shift"
+      }
+    },
+    {
+      "id": "ux03-self3",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): ออกแบบรับ -c ตามด้วยอุณหภูมิหลายค่า",
+      "reference": "shift",
+      "explanation": "ตรวจจำนวนก่อน shift เก็บ mode แล้ววน \"$@\" โดยรักษาค่าติดลบและ quote",
+      "rubric": [
+        "ตรวจจำนวนก่อน shift เก็บ mode แล้ววน \"$@\" โดยรักษาค่าติดลบและ quote",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "`shift n` ลบ n arguments แรกและคืน nonzero หาก n มากกว่า $# โดยไม่เลื่อนบางส่วน เก็บ option ในตัวแปรก่อน shift; ใช้ while (($#)) เพื่อไล่ค่าที่เหลือ $0 ไม่เปลี่ยนจาก shift"
+      }
+    },
+    {
+      "id": "ux03-q16",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: arity สำหรับ calculator\nset -- sub 10; printf '%s' \"$((3-$#))\"",
+      "reference": "validation",
+      "explanation": "ต้องการสาม args มีสองจึงขาดหนึ่ง — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux03-q16",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตรวจจำนวนด้วย $# และรูปแบบด้วย [[ ... =~ ... ]] อย่าประเมินข้อมูลไม่เชื่อถือเป็น arithmetic expression โดยตรง ใช้ regex จำกัดจำนวนเต็มไม่ติดเครื่องหมายตามตัวอย่างแล้วแปลงฐาน10; สคริปต์จริงต้องกำหนดช่วงป้องกัน overflow"
+      }
+    },
+    {
+      "id": "ux03-q17",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: regex ตัวเลขไม่รับอักษร\nv=12x; [[ $v =~ ^[0-9]+$ ]]; printf '%s' \"$?\"",
+      "reference": "validation",
+      "explanation": "มี x จึงไม่ใช่ digit ทั้งสาย — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux03-q17",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตรวจจำนวนด้วย $# และรูปแบบด้วย [[ ... =~ ... ]] อย่าประเมินข้อมูลไม่เชื่อถือเป็น arithmetic expression โดยตรง ใช้ regex จำกัดจำนวนเต็มไม่ติดเครื่องหมายตามตัวอย่างแล้วแปลงฐาน10; สคริปต์จริงต้องกำหนดช่วงป้องกัน overflow"
+      }
+    },
+    {
+      "id": "ux03-q18",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ฐานสิบศูนย์นำหน้า\nv=08; printf '%s' \"$((10#$v))\"",
+      "reference": "validation",
+      "explanation": "10# ระบุฐานสิบหลังตรวจ input — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux03-q18",
+      "answer": 8,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตรวจจำนวนด้วย $# และรูปแบบด้วย [[ ... =~ ... ]] อย่าประเมินข้อมูลไม่เชื่อถือเป็น arithmetic expression โดยตรง ใช้ regex จำกัดจำนวนเต็มไม่ติดเครื่องหมายตามตัวอย่างแล้วแปลงฐาน10; สคริปต์จริงต้องกำหนดช่วงป้องกัน overflow"
+      }
+    },
+    {
+      "id": "ux03-q19",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: missing และ default\nset --; printf '%s' \"${1-missing}\"",
+      "reference": "validation",
+      "explanation": "ไม่มี $1 ใช้ default — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux03-q19",
+      "choices": [
+        {
+          "id": "a",
+          "text": "1"
+        },
+        {
+          "id": "b",
+          "text": "ว่าง"
+        },
+        {
+          "id": "c",
+          "text": "missing"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตรวจจำนวนด้วย $# และรูปแบบด้วย [[ ... =~ ... ]] อย่าประเมินข้อมูลไม่เชื่อถือเป็น arithmetic expression โดยตรง ใช้ regex จำกัดจำนวนเต็มไม่ติดเครื่องหมายตามตัวอย่างแล้วแปลงฐาน10; สคริปต์จริงต้องกำหนดช่วงป้องกัน overflow"
+      }
+    },
+    {
+      "id": "ux03-q20",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ไม่ตีความ option เป็นเลข\nset -- -f 40; [[ $1 == -f && $# -ge 2 ]]; printf '%s' \"$?\"",
+      "reference": "validation",
+      "explanation": "option และจำนวนครบตามเงื่อนไข — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux03-q20",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตรวจจำนวนด้วย $# และรูปแบบด้วย [[ ... =~ ... ]] อย่าประเมินข้อมูลไม่เชื่อถือเป็น arithmetic expression โดยตรง ใช้ regex จำกัดจำนวนเต็มไม่ติดเครื่องหมายตามตัวอย่างแล้วแปลงฐาน10; สคริปต์จริงต้องกำหนดช่วงป้องกัน overflow"
+      }
+    },
+    {
+      "id": "ux03-self4",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): ออกแบบ error เมื่อ argument หายหรือไม่ใช่ตัวเลข",
+      "reference": "validation",
+      "explanation": "ตรวจ arity, regex, ช่วงค่า และส่ง diagnostic stderr พร้อมสถานะ nonzero",
+      "rubric": [
+        "ตรวจ arity, regex, ช่วงค่า และส่ง diagnostic stderr พร้อมสถานะ nonzero",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ตรวจจำนวนด้วย $# และรูปแบบด้วย [[ ... =~ ... ]] อย่าประเมินข้อมูลไม่เชื่อถือเป็น arithmetic expression โดยตรง ใช้ regex จำกัดจำนวนเต็มไม่ติดเครื่องหมายตามตัวอย่างแล้วแปลงฐาน10; สคริปต์จริงต้องกำหนดช่วงป้องกัน overflow"
+      }
+    },
+    {
+      "id": "ux03-q21",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: H6 แบบ unquoted\nset -- 99999999 Ada Example a@example.invalid 00-0000-0000 1 Jan 2000; printf '%s' \"$#\"",
+      "reference": "student-record",
+      "explanation": "ชื่อแตกสองและวันเกิดแตกสาม รวมแปด — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux03-q21",
+      "answer": 8,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "H6 ขอเก็บรหัส ชื่อ อีเมล โทรศัพท์ วันเกิด และสร้างชื่อไฟล์มีเวลารูปแบบ %Y%m%d%H%M แต่ตัวอย่าง unquoted มีแปด arguments วิธีที่ปรับปรุงคือ quote ชื่อและวันเกิดให้เหลือห้า arguments; ใช้ข้อมูลสมมติและตรวจฟิลด์ก่อนเขียน ห้ามนำข้อมูลส่วนบุคคลจากต้นฉบับมาทำชุดข้อสอบ"
+      }
+    },
+    {
+      "id": "ux03-q22",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: H6 แบบ quote\nset -- 99999999 'Ada Example' a@example.invalid 00-0000-0000 '1 Jan 2000'; printf '%s' \"$#\"",
+      "reference": "student-record",
+      "explanation": "ชื่อและวันเกิดคนละหนึ่ง argument — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux03-q22",
+      "answer": 5,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "H6 ขอเก็บรหัส ชื่อ อีเมล โทรศัพท์ วันเกิด และสร้างชื่อไฟล์มีเวลารูปแบบ %Y%m%d%H%M แต่ตัวอย่าง unquoted มีแปด arguments วิธีที่ปรับปรุงคือ quote ชื่อและวันเกิดให้เหลือห้า arguments; ใช้ข้อมูลสมมติและตรวจฟิลด์ก่อนเขียน ห้ามนำข้อมูลส่วนบุคคลจากต้นฉบับมาทำชุดข้อสอบ"
+      }
+    },
+    {
+      "id": "ux03-q23",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: field ชื่อหลัง quote\nset -- 99999999 'Ada Example' a@example.invalid 00-0000-0000 '1 Jan 2000'; printf '%s' \"$2\"",
+      "reference": "student-record",
+      "explanation": "ชื่อเป็น $2 ทั้งข้อความ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux03-q23",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Example"
+        },
+        {
+          "id": "b",
+          "text": "Ada Example"
+        },
+        {
+          "id": "c",
+          "text": "Ada"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "H6 ขอเก็บรหัส ชื่อ อีเมล โทรศัพท์ วันเกิด และสร้างชื่อไฟล์มีเวลารูปแบบ %Y%m%d%H%M แต่ตัวอย่าง unquoted มีแปด arguments วิธีที่ปรับปรุงคือ quote ชื่อและวันเกิดให้เหลือห้า arguments; ใช้ข้อมูลสมมติและตรวจฟิลด์ก่อนเขียน ห้ามนำข้อมูลส่วนบุคคลจากต้นฉบับมาทำชุดข้อสอบ"
+      }
+    },
+    {
+      "id": "ux03-q24",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: timestamp แบบแน่นอน\nTZ=UTC date -d '2000-01-02 03:04:00 UTC' +%Y%m%d%H%M",
+      "reference": "student-record",
+      "explanation": "GNU date รูปแบบ YYYYMMDDHHMM ใช้เวลาที่ระบุไม่ใช่ปัจจุบัน — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux03-q24",
+      "choices": [
+        {
+          "id": "a",
+          "text": "200001020304"
+        },
+        {
+          "id": "b",
+          "text": "20000102030400"
+        },
+        {
+          "id": "c",
+          "text": "200001020403"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "H6 ขอเก็บรหัส ชื่อ อีเมล โทรศัพท์ วันเกิด และสร้างชื่อไฟล์มีเวลารูปแบบ %Y%m%d%H%M แต่ตัวอย่าง unquoted มีแปด arguments วิธีที่ปรับปรุงคือ quote ชื่อและวันเกิดให้เหลือห้า arguments; ใช้ข้อมูลสมมติและตรวจฟิลด์ก่อนเขียน ห้ามนำข้อมูลส่วนบุคคลจากต้นฉบับมาทำชุดข้อสอบ"
+      }
+    },
+    {
+      "id": "ux03-q25",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: colon record\nset -- id 'Ada Example' mail phone '1 Jan'; printf '%s:%s:%s:%s:%s' \"$@\"",
+      "reference": "student-record",
+      "explanation": "printf format ห้าช่องรับห้า arguments — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux03-q25",
+      "choices": [
+        {
+          "id": "a",
+          "text": "id:Ada:Example:mail:phone"
+        },
+        {
+          "id": "b",
+          "text": "id Ada Example mail phone 1 Jan"
+        },
+        {
+          "id": "c",
+          "text": "id:Ada Example:mail:phone:1 Jan"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "H6 ขอเก็บรหัส ชื่อ อีเมล โทรศัพท์ วันเกิด และสร้างชื่อไฟล์มีเวลารูปแบบ %Y%m%d%H%M แต่ตัวอย่าง unquoted มีแปด arguments วิธีที่ปรับปรุงคือ quote ชื่อและวันเกิดให้เหลือห้า arguments; ใช้ข้อมูลสมมติและตรวจฟิลด์ก่อนเขียน ห้ามนำข้อมูลส่วนบุคคลจากต้นฉบับมาทำชุดข้อสอบ"
+      }
+    },
+    {
+      "id": "ux03-self5",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): ออกแบบ record ที่มีชื่อและวันเกิดหลายคำโดยไม่สูญ field",
+      "reference": "student-record",
+      "explanation": "กำหนดห้า args, quote, printf format คงที่, ตรวจ colon/newline และป้องกันชื่อไฟล์ชนกัน",
+      "rubric": [
+        "กำหนดห้า args, quote, printf format คงที่, ตรวจ colon/newline และป้องกันชื่อไฟล์ชนกัน",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "H6 ขอเก็บรหัส ชื่อ อีเมล โทรศัพท์ วันเกิด และสร้างชื่อไฟล์มีเวลารูปแบบ %Y%m%d%H%M แต่ตัวอย่าง unquoted มีแปด arguments วิธีที่ปรับปรุงคือ quote ชื่อและวันเกิดให้เหลือห้า arguments; ใช้ข้อมูลสมมติและตรวจฟิลด์ก่อนเขียน ห้ามนำข้อมูลส่วนบุคคลจากต้นฉบับมาทำชุดข้อสอบ"
+      }
+    }
+  ]
+}

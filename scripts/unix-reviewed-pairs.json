@@ -1,0 +1,240 @@
+[
+  {
+    "ids": [
+      "ux02-q16",
+      "ux02-q18"
+    ],
+    "reason": "default ไม่ assign เทียบกับ assign default: :- ไม่ตั้งค่าให้ v; ส่วนอีกข้อ := assign เมื่อ unset. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux02-q22",
+      "ux02-q23"
+    ],
+    "reason": "prefix สั้นสุด เทียบกับ prefix ยาวสุด: # ตัดถึง slash แรก; ส่วนอีกข้อ ## ตัด prefix ที่ตรงยาวสุด. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux03-q02",
+      "ux03-q03"
+    ],
+    "reason": "argument ที่สิบ เทียบกับ $10 ไม่ใช่สิบ: braces เลือกสิบ; ส่วนอีกข้อ $1 ต่อ literal 0. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux03-q08",
+      "ux03-q09"
+    ],
+    "reason": "quoted @ ว่าง เทียบกับ quoted * ว่าง: ไม่มี arguments จึงไม่มีรอบ; ส่วนอีกข้อ มีหนึ่ง empty word. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux03-q21",
+      "ux03-q22"
+    ],
+    "reason": "H6 แบบ unquoted เทียบกับ H6 แบบ quote: ชื่อแตกสองและวันเกิดแตกสาม รวมแปด; ส่วนอีกข้อ ชื่อและวันเกิดคนละหนึ่ง argument. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux04-q08",
+      "ux04-q09"
+    ],
+    "reason": "post increment เทียบกับ pre increment: ค่าของ expression คือค่าเก่า; ส่วนอีกข้อ ค่า expression คือค่าที่เพิ่มแล้ว. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux04-q23",
+      "ux04-q24"
+    ],
+    "reason": "Celsius ไป Fahrenheit เทียบกับ Fahrenheit ไป Celsius: คำนวณแบบ real ได้104.00; ส่วนอีกข้อ ปัดผลสุดท้ายสองตำแหน่ง. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux06-q06",
+      "ux06-q07"
+    ],
+    "reason": "stdoutก่อนduplicate เทียบกับ duplicateก่อนstdout: ทั้งสองfdไปlogเดียวกัน; ส่วนอีกข้อ Eไปstdoutเดิม Oไปlog. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux06-q22",
+      "ux06-q23"
+    ],
+    "reason": "บังคับoverwrite เทียบกับ appendแม้noclobber: >|ข้ามnoclobber; ส่วนอีกข้อ >>ยังต่อท้าย. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux07-q05",
+      "ux07-q14"
+    ],
+    "reason": "รายการว่าง เทียบกับ findEvenนับoccurrences: ไม่มีรายการจึงศูนย์รอบ; ส่วนอีกข้อ -4,0,8,8รวมสี่occurrences. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux07-q21",
+      "ux07-q23"
+    ],
+    "reason": "counterในpipe เทียบกับ lastpipeเปิด: counterในsubshellไม่กลับแม่; ส่วนอีกข้อ ท้ายpipelineในshellเดิมเมื่อlastpipeและไม่มีjobcontrol. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux08-q11",
+      "ux08-q16"
+    ],
+    "reason": "unquoteddelimiter เทียบกับ quoteหยุดparameter: ขยาย$nameในbody; ส่วนอีกข้อ delimiterquoteปิดexpansion. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux09-q09",
+      "ux09-q10"
+    ],
+    "reason": "localบังstatus เทียบกับ แยกdeclaration: statusของlocalสำเร็จบังfalse; ส่วนอีกข้อ assignmentรับstatuscommandsubstitution. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux09-q11",
+      "ux09-q12"
+    ],
+    "reason": "fac5ตามHF เทียบกับ fac0basecase: 2*3*4*5=120; ส่วนอีกข้อ ไม่เข้าลูปresultยัง1. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux09-q11",
+      "ux09-q15"
+    ],
+    "reason": "fac5ตามHF เทียบกับ หลายarguments: 2*3*4*5=120; ส่วนอีกข้อ facแต่ละinputแยกresult. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux09-q12",
+      "ux09-q13"
+    ],
+    "reason": "fac0basecase เทียบกับ offbyonefactorial: ไม่เข้าลูปresultยัง1; ส่วนอีกข้อ ขาดคูณ5. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux09-q12",
+      "ux09-q15"
+    ],
+    "reason": "fac0basecase เทียบกับ หลายarguments: ไม่เข้าลูปresultยัง1; ส่วนอีกข้อ facแต่ละinputแยกresult. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux09-q17",
+      "ux09-q18"
+    ],
+    "reason": "รวมขอบsqrt เทียบกับ prime13: พบd5หาร25ลงตัว; ส่วนอีกข้อ ไม่มีตัวหาร2หรือ3. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux10-q16",
+      "ux10-q17"
+    ],
+    "reason": "ขอบบนC เทียบกับ ขอบบนB: 60เท่าขอบบนC; ส่วนอีกข้อ 70รวมBแต่ไม่A. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux10-q16",
+      "ux10-q18"
+    ],
+    "reason": "ขอบบนC เทียบกับ ขอบล่างC: 60เท่าขอบบนC; ส่วนอีกข้อ 40ไม่ผ่านstrictlowerbound. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux10-q16",
+      "ux10-q19"
+    ],
+    "reason": "ขอบบนC เทียบกับ sd0ตามสูตร: 60เท่าขอบบนC; ส่วนอีกข้อ score=avgไม่ผ่านstrictinequality. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux10-q16",
+      "ux10-q20"
+    ],
+    "reason": "ขอบบนC เทียบกับ สูตรHAกับscore9: 60เท่าขอบบนC; ส่วนอีกข้อ 9อยู่ระหว่าง8.372...กับ11.244...จึงBไม่ใช่Aตามsample. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux10-q17",
+      "ux10-q18"
+    ],
+    "reason": "ขอบบนB เทียบกับ ขอบล่างC: 70รวมBแต่ไม่A; ส่วนอีกข้อ 40ไม่ผ่านstrictlowerbound. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux10-q17",
+      "ux10-q19"
+    ],
+    "reason": "ขอบบนB เทียบกับ sd0ตามสูตร: 70รวมBแต่ไม่A; ส่วนอีกข้อ score=avgไม่ผ่านstrictinequality. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux10-q17",
+      "ux10-q20"
+    ],
+    "reason": "ขอบบนB เทียบกับ สูตรHAกับscore9: 70รวมBแต่ไม่A; ส่วนอีกข้อ 9อยู่ระหว่าง8.372...กับ11.244...จึงBไม่ใช่Aตามsample. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux10-q18",
+      "ux10-q19"
+    ],
+    "reason": "ขอบล่างC เทียบกับ sd0ตามสูตร: 40ไม่ผ่านstrictlowerbound; ส่วนอีกข้อ score=avgไม่ผ่านstrictinequality. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux10-q18",
+      "ux10-q20"
+    ],
+    "reason": "ขอบล่างC เทียบกับ สูตรHAกับscore9: 40ไม่ผ่านstrictlowerbound; ส่วนอีกข้อ 9อยู่ระหว่าง8.372...กับ11.244...จึงBไม่ใช่Aตามsample. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux10-q19",
+      "ux10-q20"
+    ],
+    "reason": "sd0ตามสูตร เทียบกับ สูตรHAกับscore9: score=avgไม่ผ่านstrictinequality; ส่วนอีกข้อ 9อยู่ระหว่าง8.372...กับ11.244...จึงBไม่ใช่Aตามsample. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux11-q16",
+      "ux11-q19"
+    ],
+    "reason": "พิมพ์ช่วง เทียบกับ lastline: -nปิดprintเดิมแล้วเลือก1ถึง2; ส่วนอีกข้อ $เลือกบรรทัดท้าย. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux12-q02",
+      "ux12-q03"
+    ],
+    "reason": "OFS เทียบกับ OFSไม่rebuildเอง: printหลายexpressionใช้OFS; ส่วนอีกข้อ $0เดิมยังspace. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux12-q02",
+      "ux12-q04"
+    ],
+    "reason": "OFS เทียบกับ แก้fieldrebuild: printหลายexpressionใช้OFS; ส่วนอีกข้อ assignmentfieldrebuildด้วยOFS. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux12-q03",
+      "ux12-q04"
+    ],
+    "reason": "OFSไม่rebuildเอง เทียบกับ แก้fieldrebuild: $0เดิมยังspace; ส่วนอีกข้อ assignmentfieldrebuildด้วยOFS. แยก failure mode/expansion/boundary ตามหัวข้อ ไม่ได้เปลี่ยนเฉพาะจำนวนเพื่อเพิ่มข้อ; code และเฉลยมี independent execution แยกกัน"
+  },
+  {
+    "ids": [
+      "ux12-q05",
+      "ux12-q07"
+    ],
+    "reason": "ux12-q05 ทดสอบ default FS ยุบ whitespace และไม่สร้าง empty fields ที่ขอบ; ux12-q07 ทดสอบ NF บน record สาม field ปกติ เป็น contrast เรื่อง tokenization กับการนับ field ไม่ใช่การเปลี่ยนตัวเลขในสูตร และมี Linux execution แยกแต่ละกรณี"
+  },
+  {
+    "ids": [
+      "ux12-q11",
+      "ux12-q12"
+    ],
+    "reason": "ux12-q11 ตรวจ sum ของทุก record; ux12-q12 ตรวจ filtered mean และใช้จำนวน record ที่ผ่านเป็นตัวหาร ไม่ใช่ NR ทั้งหมด เป็นคนละ aggregation และ failure mode ไม่ใช่เปลี่ยนเฉพาะเลขในสูตร มี independent outputs30และ80"
+  }
+]

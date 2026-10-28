@@ -1,0 +1,568 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "unix-tools-final-variables-expansion",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "ux02-q06",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: single quote\nv=green; printf '%s' '$v'",
+      "reference": "quoting",
+      "explanation": "single quote ไม่ขยายตัวแปร — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux02-q06",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$v"
+        },
+        {
+          "id": "b",
+          "text": "green"
+        },
+        {
+          "id": "c",
+          "text": "v"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Single quotes รักษาอักขระทุกตัวด้านใน Double quotes ยังขยาย $var และ $(...) แต่ป้องกัน word splitting/globbing ของผลลัพธ์ ใช้ backslash quote อักขระเฉพาะตัวและ `printf` format คงที่ อย่าใช้ข้อมูลผู้ใช้เป็น format"
+      }
+    },
+    {
+      "id": "ux02-q07",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: double quote\nv='red blue'; printf '<%s>' \"$v\"",
+      "reference": "quoting",
+      "explanation": "double quote รักษาเป็นหนึ่ง argument — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux02-q07",
+      "choices": [
+        {
+          "id": "a",
+          "text": "<red><blue>"
+        },
+        {
+          "id": "b",
+          "text": "<$v>"
+        },
+        {
+          "id": "c",
+          "text": "<red blue>"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Single quotes รักษาอักขระทุกตัวด้านใน Double quotes ยังขยาย $var และ $(...) แต่ป้องกัน word splitting/globbing ของผลลัพธ์ ใช้ backslash quote อักขระเฉพาะตัวและ `printf` format คงที่ อย่าใช้ข้อมูลผู้ใช้เป็น format"
+      }
+    },
+    {
+      "id": "ux02-q08",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: backslash ป้องกัน dollar\nv=green; printf '%s' \\$v",
+      "reference": "quoting",
+      "explanation": "backslash ทำ $ เป็น literal — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux02-q08",
+      "choices": [
+        {
+          "id": "a",
+          "text": "\\green"
+        },
+        {
+          "id": "b",
+          "text": "$v"
+        },
+        {
+          "id": "c",
+          "text": "green"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Single quotes รักษาอักขระทุกตัวด้านใน Double quotes ยังขยาย $var และ $(...) แต่ป้องกัน word splitting/globbing ของผลลัพธ์ ใช้ backslash quote อักขระเฉพาะตัวและ `printf` format คงที่ อย่าใช้ข้อมูลผู้ใช้เป็น format"
+      }
+    },
+    {
+      "id": "ux02-q09",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: quote ส่วนติดกัน\nv=red; printf '%s' \"${v}\"'blue'",
+      "reference": "quoting",
+      "explanation": "ส่วน quote ติดกันเป็น word เดียว — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux02-q09",
+      "choices": [
+        {
+          "id": "a",
+          "text": "redblue"
+        },
+        {
+          "id": "b",
+          "text": "red blue"
+        },
+        {
+          "id": "c",
+          "text": "${v}blue"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Single quotes รักษาอักขระทุกตัวด้านใน Double quotes ยังขยาย $var และ $(...) แต่ป้องกัน word splitting/globbing ของผลลัพธ์ ใช้ backslash quote อักขระเฉพาะตัวและ `printf` format คงที่ อย่าใช้ข้อมูลผู้ใช้เป็น format"
+      }
+    },
+    {
+      "id": "ux02-q10",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: format ไม่ใช่ข้อมูล\nv='%s'; printf '%s' \"$v\"",
+      "reference": "quoting",
+      "explanation": "format คงที่ป้องกันข้อมูลเป็น format directive — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux02-q10",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ว่าง"
+        },
+        {
+          "id": "b",
+          "text": "s"
+        },
+        {
+          "id": "c",
+          "text": "%s"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Single quotes รักษาอักขระทุกตัวด้านใน Double quotes ยังขยาย $var และ $(...) แต่ป้องกัน word splitting/globbing ของผลลัพธ์ ใช้ backslash quote อักขระเฉพาะตัวและ `printf` format คงที่ อย่าใช้ข้อมูลผู้ใช้เป็น format"
+      }
+    },
+    {
+      "id": "ux02-self2",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): อธิบาย printf กับ single/double quotes เมื่อค่ามีช่องว่าง",
+      "reference": "quoting",
+      "explanation": "แยก expansion ออกจาก splitting และ quote format/arguments",
+      "rubric": [
+        "แยก expansion ออกจาก splitting และ quote format/arguments",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Single quotes รักษาอักขระทุกตัวด้านใน Double quotes ยังขยาย $var และ $(...) แต่ป้องกัน word splitting/globbing ของผลลัพธ์ ใช้ backslash quote อักขระเฉพาะตัวและ `printf` format คงที่ อย่าใช้ข้อมูลผู้ใช้เป็น format"
+      }
+    },
+    {
+      "id": "ux02-q11",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: splitting ค่าไม่ quote\nv='red blue'; set -- $v; printf '%s' \"$#\"",
+      "reference": "splitting",
+      "explanation": "default IFS แยกช่องว่างเป็นสอง args — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux02-q11",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ผล expansion ที่ไม่ quote ในบริบท argument ผ่าน word splitting ตาม IFS แล้ว filename expansion ตาม glob; literal คำใน source ไม่ถูก split ซ้ำทุกบริบท Assignment ไม่ทำสองขั้นนี้โดยทั่วไป `set -f` ปิด glob ไม่ปิด splitting"
+      }
+    },
+    {
+      "id": "ux02-q12",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: globbing หลัง expansion\ntouch a.txt b.txt; v='*.txt'; set -- $v; printf '%s' \"$#\"",
+      "reference": "splitting",
+      "explanation": "glob พบไฟล์ txt สองไฟล์ใน temp — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux02-q12",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ผล expansion ที่ไม่ quote ในบริบท argument ผ่าน word splitting ตาม IFS แล้ว filename expansion ตาม glob; literal คำใน source ไม่ถูก split ซ้ำทุกบริบท Assignment ไม่ทำสองขั้นนี้โดยทั่วไป `set -f` ปิด glob ไม่ปิด splitting"
+      }
+    },
+    {
+      "id": "ux02-q13",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ปิด glob\ntouch a.txt b.txt; set -f; v='*.txt'; printf '%s' $v",
+      "reference": "splitting",
+      "explanation": "-f ปิด filename expansion — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux02-q13",
+      "choices": [
+        {
+          "id": "a",
+          "text": "a.txt b.txt"
+        },
+        {
+          "id": "b",
+          "text": "ว่าง"
+        },
+        {
+          "id": "c",
+          "text": "*.txt"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ผล expansion ที่ไม่ quote ในบริบท argument ผ่าน word splitting ตาม IFS แล้ว filename expansion ตาม glob; literal คำใน source ไม่ถูก split ซ้ำทุกบริบท Assignment ไม่ทำสองขั้นนี้โดยทั่วไป `set -f` ปิด glob ไม่ปิด splitting"
+      }
+    },
+    {
+      "id": "ux02-q14",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: IFS กำหนดตัวคั่น\nIFS=:; v='a:b:c'; set -- $v; printf '%s' \"$#\"",
+      "reference": "splitting",
+      "explanation": "colon เป็นตัวคั่นสาม fields — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux02-q14",
+      "answer": 3,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ผล expansion ที่ไม่ quote ในบริบท argument ผ่าน word splitting ตาม IFS แล้ว filename expansion ตาม glob; literal คำใน source ไม่ถูก split ซ้ำทุกบริบท Assignment ไม่ทำสองขั้นนี้โดยทั่วไป `set -f` ปิด glob ไม่ปิด splitting"
+      }
+    },
+    {
+      "id": "ux02-q15",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: assignment ไม่แตกคำ\nv='a b'; x=$v; printf '%s' \"${#x}\"",
+      "reference": "splitting",
+      "explanation": "assignment รักษาช่องว่างหนึ่งตัวใน a b — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux02-q15",
+      "answer": 3,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ผล expansion ที่ไม่ quote ในบริบท argument ผ่าน word splitting ตาม IFS แล้ว filename expansion ตาม glob; literal คำใน source ไม่ถูก split ซ้ำทุกบริบท Assignment ไม่ทำสองขั้นนี้โดยทั่วไป `set -f` ปิด glob ไม่ปิด splitting"
+      }
+    },
+    {
+      "id": "ux02-self3",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): ติดตาม expansion ของ v ที่มีช่องว่างและ glob ใน directory ที่กำหนด",
+      "reference": "splitting",
+      "explanation": "ระบุค่าหลังแต่ละขั้นและเปรียบเทียบกับ \"$v\" โดยไม่เดาจาก directory จริง",
+      "rubric": [
+        "ระบุค่าหลังแต่ละขั้นและเปรียบเทียบกับ \"$v\" โดยไม่เดาจาก directory จริง",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ผล expansion ที่ไม่ quote ในบริบท argument ผ่าน word splitting ตาม IFS แล้ว filename expansion ตาม glob; literal คำใน source ไม่ถูก split ซ้ำทุกบริบท Assignment ไม่ทำสองขั้นนี้โดยทั่วไป `set -f` ปิด glob ไม่ปิด splitting"
+      }
+    },
+    {
+      "id": "ux02-q16",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: default ไม่ assign\nunset v; x=${v:-d}; printf '%s:%s' \"$x\" \"${v-unset}\"",
+      "reference": "defaults",
+      "explanation": ":- ไม่ตั้งค่าให้ v — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux02-q16",
+      "choices": [
+        {
+          "id": "a",
+          "text": "d:d"
+        },
+        {
+          "id": "b",
+          "text": "unset:d"
+        },
+        {
+          "id": "c",
+          "text": "d:unset"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`${v:-d}` ใช้ default เมื่อ unset หรือ empty แต่ไม่ assign; `${v-d}` ตรวจเฉพาะ unset; `${v:=d}` assign เมื่อ unset/empty เท่านั้น `${v:?msg}` แสดง error และทำให้ noninteractive shell ยุติเมื่อค่าว่าง/ไม่ตั้ง ไม่ใช่เพียงพิมพ์แล้วทำต่อ"
+      }
+    },
+    {
+      "id": "ux02-q17",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: empty กับไม่มี colon\nv=; printf '<%s>:<%s>' \"${v-d}\" \"${v:-d}\"",
+      "reference": "defaults",
+      "explanation": "แบบ - ตรวจเฉพาะ unset; :- ตรวจ empty ด้วย — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux02-q17",
+      "choices": [
+        {
+          "id": "a",
+          "text": "<>:<>"
+        },
+        {
+          "id": "b",
+          "text": "<>:<d>"
+        },
+        {
+          "id": "c",
+          "text": "<d>:<d>"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`${v:-d}` ใช้ default เมื่อ unset หรือ empty แต่ไม่ assign; `${v-d}` ตรวจเฉพาะ unset; `${v:=d}` assign เมื่อ unset/empty เท่านั้น `${v:?msg}` แสดง error และทำให้ noninteractive shell ยุติเมื่อค่าว่าง/ไม่ตั้ง ไม่ใช่เพียงพิมพ์แล้วทำต่อ"
+      }
+    },
+    {
+      "id": "ux02-q18",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: assign default\nunset v; : \"${v:=d}\"; printf '%s' \"$v\"",
+      "reference": "defaults",
+      "explanation": ":= assign เมื่อ unset — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux02-q18",
+      "choices": [
+        {
+          "id": "a",
+          "text": "d"
+        },
+        {
+          "id": "b",
+          "text": "ว่าง"
+        },
+        {
+          "id": "c",
+          "text": "unset"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`${v:-d}` ใช้ default เมื่อ unset หรือ empty แต่ไม่ assign; `${v-d}` ตรวจเฉพาะ unset; `${v:=d}` assign เมื่อ unset/empty เท่านั้น `${v:?msg}` แสดง error และทำให้ noninteractive shell ยุติเมื่อค่าว่าง/ไม่ตั้ง ไม่ใช่เพียงพิมพ์แล้วทำต่อ"
+      }
+    },
+    {
+      "id": "ux02-q19",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ไม่ overwrite ค่าที่มี\nv=old; : \"${v:=new}\"; printf '%s' \"$v\"",
+      "reference": "defaults",
+      "explanation": ":= ไม่แทนค่าที่ไม่ว่าง — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux02-q19",
+      "choices": [
+        {
+          "id": "a",
+          "text": "new"
+        },
+        {
+          "id": "b",
+          "text": "oldnew"
+        },
+        {
+          "id": "c",
+          "text": "old"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`${v:-d}` ใช้ default เมื่อ unset หรือ empty แต่ไม่ assign; `${v-d}` ตรวจเฉพาะ unset; `${v:=d}` assign เมื่อ unset/empty เท่านั้น `${v:?msg}` แสดง error และทำให้ noninteractive shell ยุติเมื่อค่าว่าง/ไม่ตั้ง ไม่ใช่เพียงพิมพ์แล้วทำต่อ"
+      }
+    },
+    {
+      "id": "ux02-q20",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: required ขัดจังหวะ shell\nbash -c 'unset v; : \"${v:?required}\"; printf wrong' 2>/dev/null; printf done",
+      "reference": "defaults",
+      "explanation": "noninteractive shell ลูกหยุดก่อน printf wrong — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux02-q20",
+      "choices": [
+        {
+          "id": "a",
+          "text": "requireddone"
+        },
+        {
+          "id": "b",
+          "text": "done"
+        },
+        {
+          "id": "c",
+          "text": "wrongdone"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`${v:-d}` ใช้ default เมื่อ unset หรือ empty แต่ไม่ assign; `${v-d}` ตรวจเฉพาะ unset; `${v:=d}` assign เมื่อ unset/empty เท่านั้น `${v:?msg}` แสดง error และทำให้ noninteractive shell ยุติเมื่อค่าว่าง/ไม่ตั้ง ไม่ใช่เพียงพิมพ์แล้วทำต่อ"
+      }
+    },
+    {
+      "id": "ux02-self4",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): เปรียบเทียบ :-, -, := และ :? ใน unset/empty/set",
+      "reference": "defaults",
+      "explanation": "ทำตารางครบสามสถานะและแยกผลการขยายกับการเปลี่ยนตัวแปร",
+      "rubric": [
+        "ทำตารางครบสามสถานะและแยกผลการขยายกับการเปลี่ยนตัวแปร",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "`${v:-d}` ใช้ default เมื่อ unset หรือ empty แต่ไม่ assign; `${v-d}` ตรวจเฉพาะ unset; `${v:=d}` assign เมื่อ unset/empty เท่านั้น `${v:?msg}` แสดง error และทำให้ noninteractive shell ยุติเมื่อค่าว่าง/ไม่ตั้ง ไม่ใช่เพียงพิมพ์แล้วทำต่อ"
+      }
+    },
+    {
+      "id": "ux02-q21",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: แยกชื่อตัวแปร\nname=lab; printf '%s' \"${name}_report\"",
+      "reference": "transform",
+      "explanation": "braces ระบุชื่อ name ชัดเจน — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux02-q21",
+      "choices": [
+        {
+          "id": "a",
+          "text": "lab_report"
+        },
+        {
+          "id": "b",
+          "text": "report"
+        },
+        {
+          "id": "c",
+          "text": "_report"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`${#v}` คืนความยาว `${v#pattern}`/`${v##pattern}` ตัด prefix สั้น/ยาวที่สุด `${v%pattern}`/`${v%%pattern}` ตัด suffix; pattern เป็น shell glob ไม่ใช่ regex `${v/old/new}` แทนครั้งแรก `${v//old/new}` แทนทุกครั้ง"
+      }
+    },
+    {
+      "id": "ux02-q22",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: prefix สั้นสุด\nv=a/b/c; printf '%s' \"${v#*/}\"",
+      "reference": "transform",
+      "explanation": "# ตัดถึง slash แรก — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux02-q22",
+      "choices": [
+        {
+          "id": "a",
+          "text": "c"
+        },
+        {
+          "id": "b",
+          "text": "a/b"
+        },
+        {
+          "id": "c",
+          "text": "b/c"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`${#v}` คืนความยาว `${v#pattern}`/`${v##pattern}` ตัด prefix สั้น/ยาวที่สุด `${v%pattern}`/`${v%%pattern}` ตัด suffix; pattern เป็น shell glob ไม่ใช่ regex `${v/old/new}` แทนครั้งแรก `${v//old/new}` แทนทุกครั้ง"
+      }
+    },
+    {
+      "id": "ux02-q23",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: prefix ยาวสุด\nv=a/b/c; printf '%s' \"${v##*/}\"",
+      "reference": "transform",
+      "explanation": "## ตัด prefix ที่ตรงยาวสุด — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux02-q23",
+      "choices": [
+        {
+          "id": "a",
+          "text": "a"
+        },
+        {
+          "id": "b",
+          "text": "c"
+        },
+        {
+          "id": "c",
+          "text": "b/c"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`${#v}` คืนความยาว `${v#pattern}`/`${v##pattern}` ตัด prefix สั้น/ยาวที่สุด `${v%pattern}`/`${v%%pattern}` ตัด suffix; pattern เป็น shell glob ไม่ใช่ regex `${v/old/new}` แทนครั้งแรก `${v//old/new}` แทนทุกครั้ง"
+      }
+    },
+    {
+      "id": "ux02-q24",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: suffix สั้นสุด\nv=report.tar.gz; printf '%s' \"${v%.*}\"",
+      "reference": "transform",
+      "explanation": "% ตัด .gz — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux02-q24",
+      "choices": [
+        {
+          "id": "a",
+          "text": "report.tar"
+        },
+        {
+          "id": "b",
+          "text": "report"
+        },
+        {
+          "id": "c",
+          "text": "gz"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`${#v}` คืนความยาว `${v#pattern}`/`${v##pattern}` ตัด prefix สั้น/ยาวที่สุด `${v%pattern}`/`${v%%pattern}` ตัด suffix; pattern เป็น shell glob ไม่ใช่ regex `${v/old/new}` แทนครั้งแรก `${v//old/new}` แทนทุกครั้ง"
+      }
+    },
+    {
+      "id": "ux02-q25",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: แทนทุก match\nv=banana; printf '%s' \"${v//a/o}\"",
+      "reference": "transform",
+      "explanation": "// แทน a ทุกตำแหน่ง — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux02-q25",
+      "choices": [
+        {
+          "id": "a",
+          "text": "bonana"
+        },
+        {
+          "id": "b",
+          "text": "banana"
+        },
+        {
+          "id": "c",
+          "text": "bonono"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`${#v}` คืนความยาว `${v#pattern}`/`${v##pattern}` ตัด prefix สั้น/ยาวที่สุด `${v%pattern}`/`${v%%pattern}` ตัด suffix; pattern เป็น shell glob ไม่ใช่ regex `${v/old/new}` แทนครั้งแรก `${v//old/new}` แทนทุกครั้ง"
+      }
+    },
+    {
+      "id": "ux02-self5",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): อธิบายการแยกชื่อไฟล์กับนามสกุลโดยไม่ใช้ regex",
+      "reference": "transform",
+      "explanation": "เลือก #/% และจำนวนเครื่องหมายให้สอดคล้องกับ prefix/suffix และระบุกรณีจุดหลายตัว",
+      "rubric": [
+        "เลือก #/% และจำนวนเครื่องหมายให้สอดคล้องกับ prefix/suffix และระบุกรณีจุดหลายตัว",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "`${#v}` คืนความยาว `${v#pattern}`/`${v##pattern}` ตัด prefix สั้น/ยาวที่สุด `${v%pattern}`/`${v%%pattern}` ตัด suffix; pattern เป็น shell glob ไม่ใช่ regex `${v/old/new}` แทนครั้งแรก `${v//old/new}` แทนทุกครั้ง"
+      }
+    }
+  ]
+}

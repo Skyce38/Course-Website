@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "unix-tools-final-variables-expansion",
+  "title": "FINAL 02 — ตัวแปร Quoting และ Expansion",
+  "questions": [
+    {
+      "id": "ux02-q01",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: assignment เก็บข้อความ\nv=2+3; printf '%s' \"$v\"",
+      "reference": "assignment",
+      "explanation": "ไม่เกิด arithmetic expansion — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux02-q01",
+      "choices": [
+        {
+          "id": "a",
+          "text": "5"
+        },
+        {
+          "id": "b",
+          "text": "ว่าง"
+        },
+        {
+          "id": "c",
+          "text": "2+3"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "id": "ux02-q02",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: export สู่ลูก\nexport color=green; bash -c 'printf %s \"$color\"'",
+      "reference": "assignment",
+      "explanation": "export ให้ shell ลูกเห็นค่า — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux02-q02",
+      "choices": [
+        {
+          "id": "a",
+          "text": "color"
+        },
+        {
+          "id": "b",
+          "text": "green"
+        },
+        {
+          "id": "c",
+          "text": "ว่าง"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "id": "ux02-q03",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ไม่ export\nunset color; color=green; bash -c 'printf \"<%s>\" \"${color-unset}\"'",
+      "reference": "assignment",
+      "explanation": "ตัวแปรธรรมดาไม่ได้ส่งให้ bash ลูก — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux02-q03",
+      "choices": [
+        {
+          "id": "a",
+          "text": "<unset>"
+        },
+        {
+          "id": "b",
+          "text": "<green>"
+        },
+        {
+          "id": "c",
+          "text": "<>"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "id": "ux02-q04",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: local คืนค่าเดิม\nx=outer; f(){ local x=inner; }; f; printf '%s' \"$x\"",
+      "reference": "assignment",
+      "explanation": "local ไม่ทับ binding ภายนอก — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux02-q04",
+      "choices": [
+        {
+          "id": "a",
+          "text": "inner"
+        },
+        {
+          "id": "b",
+          "text": "ว่าง"
+        },
+        {
+          "id": "c",
+          "text": "outer"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "id": "ux02-q05",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: readonly ใน shell ลูก\nbash -c 'readonly x=1; x=2' 2>/dev/null; printf '%s' \"$?\"",
+      "reference": "assignment",
+      "explanation": "assignment readonly เป็น error ของ Bash noninteractive — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux02-q05",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "ux02-self1",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): อธิบาย export กับ local พร้อมผลกระทบต่อลูกและแม่",
+      "reference": "assignment",
+      "explanation": "ส่งค่าเริ่มต้นไปลูก ส่วน local จำกัด lifetime ในฟังก์ชัน ไม่ทำให้ลูกแก้แม่",
+      "rubric": [
+        "ส่งค่าเริ่มต้นไปลูก ส่วน local จำกัด lifetime ในฟังก์ชัน ไม่ทำให้ลูกแก้แม่",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ]
+    }
+  ]
+}

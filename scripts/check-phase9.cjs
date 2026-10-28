@@ -37,5 +37,5 @@ for(const source of require('./lessons.json')){
  assert.equal(E.clean(bank,{...migrated,sessions:[{...session,revision:99}]}).sessions.length,0);
  for(const invalid of [{...bank,history:[old,old]},{...bank,history:[{...old,history:[]}]},{...bank,history:[{...old,data:{...old.data,lesson:'different-lesson'}}]}])assert.throws(()=>E.validate(invalid));
 }
-assert.equal(current,750);assert.equal(archived,90);
-console.log('PASS: 750 current questions, 3 semantic replacements; 90 immutable historical context questions; revision-1 drafts/attempts/scores/rubrics, idempotent migration, retained archived sessions and future/malformed rejection');
+assert.equal(current,require('./lessons.json').length*30);assert.equal(require('../assets/insights-banks.json').lessons.filter(l=>l.course!=='unix-tools').reduce((n,l)=>n+l.bank.data.questions.length,0),750);assert.equal(archived,90);
+console.log('PASS: '+current+' current questions (750 original preserved), 3 semantic replacements; 90 immutable historical context questions; revision-1 drafts/attempts/scores/rubrics, idempotent migration, retained archived sessions and future/malformed rejection');

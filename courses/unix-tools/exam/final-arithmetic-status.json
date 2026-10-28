@@ -1,0 +1,460 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "unix-tools-final-arithmetic-status",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "ux04-q06",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ลำดับคำนวณ\nprintf '%s' \"$((2+3*4))\"",
+      "reference": "operators",
+      "explanation": "คูณก่อนบวก — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux04-q06",
+      "answer": 14,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "คูณหารก่อนบวก ลำดับระดับเดียวกันคำนวณตาม associativity ใช้ ** สำหรับยกกำลัง และ ^ สำหรับ XOR Post-increment ให้นิพจน์ค่าเดิม Pre-increment ให้ค่าใหม่ จำนวนเต็มมีความกว้างจำกัดและไม่มีการรับประกันแจ้ง overflow จึงจำกัดช่วง factorial 0..20 ใน signed64-bit"
+      }
+    },
+    {
+      "id": "ux04-q07",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ยกกำลังกับ XOR\nprintf '%s:%s' \"$((2**3))\" \"$((2^3))\"",
+      "reference": "operators",
+      "explanation": "** ยกกำลัง ^ bitwise XOR — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux04-q07",
+      "choices": [
+        {
+          "id": "a",
+          "text": "8:8"
+        },
+        {
+          "id": "b",
+          "text": "6:1"
+        },
+        {
+          "id": "c",
+          "text": "8:1"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "คูณหารก่อนบวก ลำดับระดับเดียวกันคำนวณตาม associativity ใช้ ** สำหรับยกกำลัง และ ^ สำหรับ XOR Post-increment ให้นิพจน์ค่าเดิม Pre-increment ให้ค่าใหม่ จำนวนเต็มมีความกว้างจำกัดและไม่มีการรับประกันแจ้ง overflow จึงจำกัดช่วง factorial 0..20 ใน signed64-bit"
+      }
+    },
+    {
+      "id": "ux04-q08",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: post increment\nn=0; x=$((n++)); printf '%s:%s' \"$x\" \"$n\"",
+      "reference": "operators",
+      "explanation": "ค่าของ expression คือค่าเก่า — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux04-q08",
+      "choices": [
+        {
+          "id": "a",
+          "text": "0:0"
+        },
+        {
+          "id": "b",
+          "text": "0:1"
+        },
+        {
+          "id": "c",
+          "text": "1:1"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "คูณหารก่อนบวก ลำดับระดับเดียวกันคำนวณตาม associativity ใช้ ** สำหรับยกกำลัง และ ^ สำหรับ XOR Post-increment ให้นิพจน์ค่าเดิม Pre-increment ให้ค่าใหม่ จำนวนเต็มมีความกว้างจำกัดและไม่มีการรับประกันแจ้ง overflow จึงจำกัดช่วง factorial 0..20 ใน signed64-bit"
+      }
+    },
+    {
+      "id": "ux04-q09",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: pre increment\nn=0; x=$((++n)); printf '%s:%s' \"$x\" \"$n\"",
+      "reference": "operators",
+      "explanation": "ค่า expression คือค่าที่เพิ่มแล้ว — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux04-q09",
+      "choices": [
+        {
+          "id": "a",
+          "text": "1:1"
+        },
+        {
+          "id": "b",
+          "text": "0:1"
+        },
+        {
+          "id": "c",
+          "text": "1:0"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "คูณหารก่อนบวก ลำดับระดับเดียวกันคำนวณตาม associativity ใช้ ** สำหรับยกกำลัง และ ^ สำหรับ XOR Post-increment ให้นิพจน์ค่าเดิม Pre-increment ให้ค่าใหม่ จำนวนเต็มมีความกว้างจำกัดและไม่มีการรับประกันแจ้ง overflow จึงจำกัดช่วง factorial 0..20 ใน signed64-bit"
+      }
+    },
+    {
+      "id": "ux04-q10",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: compound assignment\nn=5; ((n*=3)); printf '%s' \"$n\"",
+      "reference": "operators",
+      "explanation": "คูณแล้วกำหนดกลับ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux04-q10",
+      "answer": 15,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "คูณหารก่อนบวก ลำดับระดับเดียวกันคำนวณตาม associativity ใช้ ** สำหรับยกกำลัง และ ^ สำหรับ XOR Post-increment ให้นิพจน์ค่าเดิม Pre-increment ให้ค่าใหม่ จำนวนเต็มมีความกว้างจำกัดและไม่มีการรับประกันแจ้ง overflow จึงจำกัดช่วง factorial 0..20 ใน signed64-bit"
+      }
+    },
+    {
+      "id": "ux04-self2",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): ติดตาม n++ และ ++n พร้อมค่า expression และ status",
+      "reference": "operators",
+      "explanation": "แยกค่าเก่า/ใหม่ และระบุ overflow เป็นข้อจำกัด implementation",
+      "rubric": [
+        "แยกค่าเก่า/ใหม่ และระบุ overflow เป็นข้อจำกัด implementation",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "คูณหารก่อนบวก ลำดับระดับเดียวกันคำนวณตาม associativity ใช้ ** สำหรับยกกำลัง และ ^ สำหรับ XOR Post-increment ให้นิพจน์ค่าเดิม Pre-increment ให้ค่าใหม่ จำนวนเต็มมีความกว้างจำกัดและไม่มีการรับประกันแจ้ง overflow จึงจำกัดช่วง factorial 0..20 ใน signed64-bit"
+      }
+    },
+    {
+      "id": "ux04-q11",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: arithmetic zero status\n((0)); printf '%s' \"$?\"",
+      "reference": "status",
+      "explanation": "ค่าศูนย์ใน arithmetic command หมายถึง false — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux04-q11",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "status0 คือสำเร็จ nonzero มีหลายความหมาย `$?` เปลี่ยนเมื่อรันคำสั่งใหม่ ต้องเก็บทันที `((expr))` สำเร็จเมื่อค่า expr ไม่เป็น0 if ตรวจ status ไม่ได้อ่านข้อความ stdout การบันทึก status ต้องเกิดก่อนคำสั่งแสดงผล"
+      }
+    },
+    {
+      "id": "ux04-q12",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: arithmetic nonzero status\n((-2)); printf '%s' \"$?\"",
+      "reference": "status",
+      "explanation": "ค่าที่ไม่เป็นศูนย์คือ true — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux04-q12",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "status0 คือสำเร็จ nonzero มีหลายความหมาย `$?` เปลี่ยนเมื่อรันคำสั่งใหม่ ต้องเก็บทันที `((expr))` สำเร็จเมื่อค่า expr ไม่เป็น0 if ตรวจ status ไม่ได้อ่านข้อความ stdout การบันทึก status ต้องเกิดก่อนคำสั่งแสดงผล"
+      }
+    },
+    {
+      "id": "ux04-q13",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: คำสั่งใหม่ทับ status\nfalse; true; printf '%s' \"$?\"",
+      "reference": "status",
+      "explanation": "เก็บ status ของ true ล่าสุด — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux04-q13",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "status0 คือสำเร็จ nonzero มีหลายความหมาย `$?` เปลี่ยนเมื่อรันคำสั่งใหม่ ต้องเก็บทันที `((expr))` สำเร็จเมื่อค่า expr ไม่เป็น0 if ตรวจ status ไม่ได้อ่านข้อความ stdout การบันทึก status ต้องเกิดก่อนคำสั่งแสดงผล"
+      }
+    },
+    {
+      "id": "ux04-q14",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: เก็บ status ก่อนพิมพ์\nfalse; s=$?; printf '%s' \"$s\"",
+      "reference": "status",
+      "explanation": "assignment เก็บค่า false ก่อนหาย — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux04-q14",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "status0 คือสำเร็จ nonzero มีหลายความหมาย `$?` เปลี่ยนเมื่อรันคำสั่งใหม่ ต้องเก็บทันที `((expr))` สำเร็จเมื่อค่า expr ไม่เป็น0 if ตรวจ status ไม่ได้อ่านข้อความ stdout การบันทึก status ต้องเกิดก่อนคำสั่งแสดงผล"
+      }
+    },
+    {
+      "id": "ux04-q15",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: if ไม่อ่านคำว่า false\nif printf false >/dev/null; then printf yes; else printf no; fi",
+      "reference": "status",
+      "explanation": "printf สำเร็จแม้พิมพ์คำว่า false — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux04-q15",
+      "choices": [
+        {
+          "id": "a",
+          "text": "yes"
+        },
+        {
+          "id": "b",
+          "text": "no"
+        },
+        {
+          "id": "c",
+          "text": "false"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "status0 คือสำเร็จ nonzero มีหลายความหมาย `$?` เปลี่ยนเมื่อรันคำสั่งใหม่ ต้องเก็บทันที `((expr))` สำเร็จเมื่อค่า expr ไม่เป็น0 if ตรวจ status ไม่ได้อ่านข้อความ stdout การบันทึก status ต้องเกิดก่อนคำสั่งแสดงผล"
+      }
+    },
+    {
+      "id": "ux04-self3",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): ออกแบบส่งผลคำนวณกับแจ้ง error คนละช่องทาง",
+      "reference": "status",
+      "explanation": "stdout สำหรับข้อมูล stderr สำหรับ error และ return/exit สำหรับสถานะ",
+      "rubric": [
+        "stdout สำหรับข้อมูล stderr สำหรับ error และ return/exit สำหรับสถานะ",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "status0 คือสำเร็จ nonzero มีหลายความหมาย `$?` เปลี่ยนเมื่อรันคำสั่งใหม่ ต้องเก็บทันที `((expr))` สำเร็จเมื่อค่า expr ไม่เป็น0 if ตรวจ status ไม่ได้อ่านข้อความ stdout การบันทึก status ต้องเกิดก่อนคำสั่งแสดงผล"
+      }
+    },
+    {
+      "id": "ux04-q16",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: AND ไม่เรียกคำสั่งขวา\nfalse && printf wrong; printf done",
+      "reference": "short-circuit",
+      "explanation": "false ทำให้ข้าม && — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux04-q16",
+      "choices": [
+        {
+          "id": "a",
+          "text": "wrongdone"
+        },
+        {
+          "id": "b",
+          "text": "ไม่มี stdout"
+        },
+        {
+          "id": "c",
+          "text": "done"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`a && b` รัน b เมื่อ a สำเร็จ; `a || b` รันเมื่อ a ล้มเหลว ทั้งสองมี precedence เท่ากันและเชื่อมซ้ายไปขวาใน Bash; อย่าใช้ a&&b||c แทน if/else เมื่อ b ล้มเหลวได้ Pipeline ปกติคืน status ของคำสั่งท้าย; pipefail เปลี่ยนเป็นขวาสุดที่ล้มเหลว"
+      }
+    },
+    {
+      "id": "ux04-q17",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: OR เลือก fallback\nfalse || printf fallback",
+      "reference": "short-circuit",
+      "explanation": "คำสั่งแรก nonzero จึงรัน fallback — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux04-q17",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่มี stdout"
+        },
+        {
+          "id": "b",
+          "text": "fallback"
+        },
+        {
+          "id": "c",
+          "text": "false"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`a && b` รัน b เมื่อ a สำเร็จ; `a || b` รันเมื่อ a ล้มเหลว ทั้งสองมี precedence เท่ากันและเชื่อมซ้ายไปขวาใน Bash; อย่าใช้ a&&b||c แทน if/else เมื่อ b ล้มเหลวได้ Pipeline ปกติคืน status ของคำสั่งท้าย; pipefail เปลี่ยนเป็นขวาสุดที่ล้มเหลว"
+      }
+    },
+    {
+      "id": "ux04-q18",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: AND OR ไม่ใช่ ternary\ntrue && false || printf fallback",
+      "reference": "short-circuit",
+      "explanation": "คำสั่งกลางล้มเหลวจึงรัน || — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux04-q18",
+      "choices": [
+        {
+          "id": "a",
+          "text": "fallback"
+        },
+        {
+          "id": "b",
+          "text": "ไม่มี stdout"
+        },
+        {
+          "id": "c",
+          "text": "true"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`a && b` รัน b เมื่อ a สำเร็จ; `a || b` รันเมื่อ a ล้มเหลว ทั้งสองมี precedence เท่ากันและเชื่อมซ้ายไปขวาใน Bash; อย่าใช้ a&&b||c แทน if/else เมื่อ b ล้มเหลวได้ Pipeline ปกติคืน status ของคำสั่งท้าย; pipefail เปลี่ยนเป็นขวาสุดที่ล้มเหลว"
+      }
+    },
+    {
+      "id": "ux04-q19",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: pipeline ค่าเริ่มต้น\nfalse | true; printf '%s' \"$?\"",
+      "reference": "short-circuit",
+      "explanation": "status คำสั่งท้ายคือ true — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux04-q19",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`a && b` รัน b เมื่อ a สำเร็จ; `a || b` รันเมื่อ a ล้มเหลว ทั้งสองมี precedence เท่ากันและเชื่อมซ้ายไปขวาใน Bash; อย่าใช้ a&&b||c แทน if/else เมื่อ b ล้มเหลวได้ Pipeline ปกติคืน status ของคำสั่งท้าย; pipefail เปลี่ยนเป็นขวาสุดที่ล้มเหลว"
+      }
+    },
+    {
+      "id": "ux04-q20",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: pipeline เปิด pipefail\nset -o pipefail; false | true; printf '%s' \"$?\"",
+      "reference": "short-circuit",
+      "explanation": "ขวาสุดที่ล้มเหลวคือ false — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux04-q20",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`a && b` รัน b เมื่อ a สำเร็จ; `a || b` รันเมื่อ a ล้มเหลว ทั้งสองมี precedence เท่ากันและเชื่อมซ้ายไปขวาใน Bash; อย่าใช้ a&&b||c แทน if/else เมื่อ b ล้มเหลวได้ Pipeline ปกติคืน status ของคำสั่งท้าย; pipefail เปลี่ยนเป็นขวาสุดที่ล้มเหลว"
+      }
+    },
+    {
+      "id": "ux04-self4",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): อธิบาย pipeline failure กับ pipefail โดยมีตัวอย่าง",
+      "reference": "short-circuit",
+      "explanation": "แยก stdout/status และไม่อ้างว่าทุก pipeline ล้มเหลวเมื่อคำสั่งแรกพลาด",
+      "rubric": [
+        "แยก stdout/status และไม่อ้างว่าทุก pipeline ล้มเหลวเมื่อคำสั่งแรกพลาด",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "`a && b` รัน b เมื่อ a สำเร็จ; `a || b` รันเมื่อ a ล้มเหลว ทั้งสองมี precedence เท่ากันและเชื่อมซ้ายไปขวาใน Bash; อย่าใช้ a&&b||c แทน if/else เมื่อ b ล้มเหลวได้ Pipeline ปกติคืน status ของคำสั่งท้าย; pipefail เปลี่ยนเป็นขวาสุดที่ล้มเหลว"
+      }
+    },
+    {
+      "id": "ux04-q21",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: calc div แบบ decimal\nawk 'BEGIN {print 10/20}'",
+      "reference": "decimals",
+      "explanation": "awk ใช้เลขทศนิยม — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux04-q21",
+      "answer": 0.5,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "H7 ขอ calc div10 20 ได้0.5 จึงต้องใช้ awk หรือ bc ที่ติดตั้ง HF ใช้ F=(9/5)C+32 และ C=(5/9)(F-32) ต้องคำนวณแบบทศนิยมและ formatสองตำแหน่ง การปัดทำตอนแสดงผล ไม่ปัด intermediate เร็วเกินไป"
+      }
+    },
+    {
+      "id": "ux04-q22",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: กับดักสูตร integer\nprintf '%s' \"$((9/5*40+32))\"",
+      "reference": "decimals",
+      "explanation": "9/5 ได้1 จึง1*40+32 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux04-q22",
+      "answer": 72,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "H7 ขอ calc div10 20 ได้0.5 จึงต้องใช้ awk หรือ bc ที่ติดตั้ง HF ใช้ F=(9/5)C+32 และ C=(5/9)(F-32) ต้องคำนวณแบบทศนิยมและ formatสองตำแหน่ง การปัดทำตอนแสดงผล ไม่ปัด intermediate เร็วเกินไป"
+      }
+    },
+    {
+      "id": "ux04-q23",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: Celsius ไป Fahrenheit\nawk 'BEGIN {printf \"%.2f\",9/5*40+32}'",
+      "reference": "decimals",
+      "explanation": "คำนวณแบบ real ได้104.00 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux04-q23",
+      "answer": 104,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "H7 ขอ calc div10 20 ได้0.5 จึงต้องใช้ awk หรือ bc ที่ติดตั้ง HF ใช้ F=(9/5)C+32 และ C=(5/9)(F-32) ต้องคำนวณแบบทศนิยมและ formatสองตำแหน่ง การปัดทำตอนแสดงผล ไม่ปัด intermediate เร็วเกินไป"
+      }
+    },
+    {
+      "id": "ux04-q24",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: Fahrenheit ไป Celsius\nawk 'BEGIN {printf \"%.2f\",(204.4-32)*5/9}'",
+      "reference": "decimals",
+      "explanation": "ปัดผลสุดท้ายสองตำแหน่ง — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux04-q24",
+      "answer": 95.78,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "H7 ขอ calc div10 20 ได้0.5 จึงต้องใช้ awk หรือ bc ที่ติดตั้ง HF ใช้ F=(9/5)C+32 และ C=(5/9)(F-32) ต้องคำนวณแบบทศนิยมและ formatสองตำแหน่ง การปัดทำตอนแสดงผล ไม่ปัด intermediate เร็วเกินไป"
+      }
+    },
+    {
+      "id": "ux04-q25",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: calculator subtraction\nawk 'BEGIN {print 10-20}'",
+      "reference": "decimals",
+      "explanation": "รักษาลำดับ operands ไม่สลับ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux04-q25",
+      "answer": -10,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "H7 ขอ calc div10 20 ได้0.5 จึงต้องใช้ awk หรือ bc ที่ติดตั้ง HF ใช้ F=(9/5)C+32 และ C=(5/9)(F-32) ต้องคำนวณแบบทศนิยมและ formatสองตำแหน่ง การปัดทำตอนแสดงผล ไม่ปัด intermediate เร็วเกินไป"
+      }
+    },
+    {
+      "id": "ux04-self5",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): อธิบายเหตุที่การแปลง40Cให้72เป็นคำตอบผิดและแก้ให้104",
+      "reference": "decimals",
+      "explanation": "ใช้ real arithmetic 1.8*40+32 และแยก precision จาก formatting",
+      "rubric": [
+        "ใช้ real arithmetic 1.8*40+32 และแยก precision จาก formatting",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "H7 ขอ calc div10 20 ได้0.5 จึงต้องใช้ awk หรือ bc ที่ติดตั้ง HF ใช้ F=(9/5)C+32 และ C=(5/9)(F-32) ต้องคำนวณแบบทศนิยมและ formatสองตำแหน่ง การปัดทำตอนแสดงผล ไม่ปัด intermediate เร็วเกินไป"
+      }
+    }
+  ]
+}

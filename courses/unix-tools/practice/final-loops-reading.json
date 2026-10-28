@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "unix-tools-final-loops-reading",
+  "title": "FINAL 07 — Loops และการอ่านไฟล์",
+  "questions": [
+    {
+      "id": "ux07-q01",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: list iteration\ns=0; for x in 2 4 6; do ((s+=x)); done; printf '%s' \"$s\"",
+      "reference": "for-loop",
+      "explanation": "รวมรายการ2+4+6 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux07-q01",
+      "answer": 12,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "ux07-q02",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: Cstyleรวมขอบ\nn=0; for ((i=1;i<=3;i++)); do ((n+=1)); done; printf '%s' \"$n\"",
+      "reference": "for-loop",
+      "explanation": "รวมi=3 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux07-q02",
+      "answer": 3,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "ux07-q03",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: braceกับตัวแปร\nn=3; for i in {1..$n}; do printf '<%s>' \"$i\"; done",
+      "reference": "for-loop",
+      "explanation": "braceก่อนparameterไม่ขยายrangeซ้ำ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux07-q03",
+      "choices": [
+        {
+          "id": "a",
+          "text": "<{1..3}>"
+        },
+        {
+          "id": "b",
+          "text": "<1><2><3>"
+        },
+        {
+          "id": "c",
+          "text": "<1..3>"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "id": "ux07-q04",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: globในfor\ntouch a.txt b.txt; n=0; for f in *.txt; do ((n+=1)); done; printf '%s' \"$n\"",
+      "reference": "for-loop",
+      "explanation": "สองไฟล์ตรงglob — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux07-q04",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "ux07-q05",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: รายการว่าง\nn=0; for x in; do ((n+=1)); done; printf '%s' \"$n\"",
+      "reference": "for-loop",
+      "explanation": "ไม่มีรายการจึงศูนย์รอบ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux07-q05",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "ux07-self1",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): อธิบายforสามรูปและเลือกใช้ตามข้อมูล",
+      "reference": "for-loop",
+      "explanation": "แยกlist/args/arithmeticและอธิบายexpansionล่วงหน้า",
+      "rubric": [
+        "แยกlist/args/arithmeticและอธิบายexpansionล่วงหน้า",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ]
+    }
+  ]
+}

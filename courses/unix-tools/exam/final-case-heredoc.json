@@ -1,0 +1,592 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "unix-tools-final-case-heredoc",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "ux08-q06",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: defaultไม่รู้จัก\nx=unknown; case $x in q) printf quit;; *) printf invalid;; esac",
+      "reference": "menus",
+      "explanation": "*เป็นfallback — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux08-q06",
+      "choices": [
+        {
+          "id": "a",
+          "text": "invalid"
+        },
+        {
+          "id": "b",
+          "text": "quit"
+        },
+        {
+          "id": "c",
+          "text": "unknown"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เมนูควรมีdefaultปฏิเสธinputที่ไม่รู้จัก ใช้read -rและcase; exitจบscriptส่วนbreakออกloopเท่านั้น ออกแบบEOFเพื่อไม่วนไม่จบเมื่อstdinหมด ตัวอย่างเป็นข้อมูลสมมติ ไม่เรียกคำสั่งดูข้อมูลผู้ใช้จริง"
+      }
+    },
+    {
+      "id": "ux08-q07",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: breakออกmenu\nfor x in a q b; do case $x in q) break;; *) printf '%s' \"$x\";; esac; done; printf end",
+      "reference": "menus",
+      "explanation": "breakจบloopแต่คำสั่งหลังloopยังทำ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux08-q07",
+      "choices": [
+        {
+          "id": "a",
+          "text": "aqbend"
+        },
+        {
+          "id": "b",
+          "text": "a"
+        },
+        {
+          "id": "c",
+          "text": "aend"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เมนูควรมีdefaultปฏิเสธinputที่ไม่รู้จัก ใช้read -rและcase; exitจบscriptส่วนbreakออกloopเท่านั้น ออกแบบEOFเพื่อไม่วนไม่จบเมื่อstdinหมด ตัวอย่างเป็นข้อมูลสมมติ ไม่เรียกคำสั่งดูข้อมูลผู้ใช้จริง"
+      }
+    },
+    {
+      "id": "ux08-q08",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: exitจบscriptลูก\nbash -c 'case q in q) exit 0;; esac; printf wrong'; printf end",
+      "reference": "menus",
+      "explanation": "exitหยุดshellลูก — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux08-q08",
+      "choices": [
+        {
+          "id": "a",
+          "text": "qend"
+        },
+        {
+          "id": "b",
+          "text": "end"
+        },
+        {
+          "id": "c",
+          "text": "wrongend"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เมนูควรมีdefaultปฏิเสธinputที่ไม่รู้จัก ใช้read -rและcase; exitจบscriptส่วนbreakออกloopเท่านั้น ออกแบบEOFเพื่อไม่วนไม่จบเมื่อstdinหมด ตัวอย่างเป็นข้อมูลสมมติ ไม่เรียกคำสั่งดูข้อมูลผู้ใช้จริง"
+      }
+    },
+    {
+      "id": "ux08-q09",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: EOFหยุดรับ\nn=0; while IFS= read -r x; do ((n+=1)); done </dev/null; printf '%s' \"$n\"",
+      "reference": "menus",
+      "explanation": "EOFตั้งแต่แรกไม่วน — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux08-q09",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เมนูควรมีdefaultปฏิเสธinputที่ไม่รู้จัก ใช้read -rและcase; exitจบscriptส่วนbreakออกloopเท่านั้น ออกแบบEOFเพื่อไม่วนไม่จบเมื่อstdinหมด ตัวอย่างเป็นข้อมูลสมมติ ไม่เรียกคำสั่งดูข้อมูลผู้ใช้จริง"
+      }
+    },
+    {
+      "id": "ux08-q10",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: caseinsensitiveระบุเอง\ncase YES in [Yy][Ee][Ss]) printf accepted;; *) printf no;; esac",
+      "reference": "menus",
+      "explanation": "classแต่ละตำแหน่งรับตัวใหญ่เล็ก — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux08-q10",
+      "choices": [
+        {
+          "id": "a",
+          "text": "no"
+        },
+        {
+          "id": "b",
+          "text": "YES"
+        },
+        {
+          "id": "c",
+          "text": "accepted"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เมนูควรมีdefaultปฏิเสธinputที่ไม่รู้จัก ใช้read -rและcase; exitจบscriptส่วนbreakออกloopเท่านั้น ออกแบบEOFเพื่อไม่วนไม่จบเมื่อstdinหมด ตัวอย่างเป็นข้อมูลสมมติ ไม่เรียกคำสั่งดูข้อมูลผู้ใช้จริง"
+      }
+    },
+    {
+      "id": "ux08-self2",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): ออกแบบเมนูที่รับqและEOFอย่างปลอดภัย",
+      "reference": "menus",
+      "explanation": "แยกcasedefault,สถานะEOF,breakกับexitและdiagnosticstderr",
+      "rubric": [
+        "แยกcasedefault,สถานะEOF,breakกับexitและdiagnosticstderr",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "เมนูควรมีdefaultปฏิเสธinputที่ไม่รู้จัก ใช้read -rและcase; exitจบscriptส่วนbreakออกloopเท่านั้น ออกแบบEOFเพื่อไม่วนไม่จบเมื่อstdinหมด ตัวอย่างเป็นข้อมูลสมมติ ไม่เรียกคำสั่งดูข้อมูลผู้ใช้จริง"
+      }
+    },
+    {
+      "id": "ux08-q11",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: unquoteddelimiter\nname=Dao; cat <<EOF\nHello $name\nEOF",
+      "reference": "heredoc",
+      "explanation": "ขยาย$nameในbody — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux08-q11",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Dao"
+        },
+        {
+          "id": "b",
+          "text": "Hello Dao"
+        },
+        {
+          "id": "c",
+          "text": "Hello $name"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`cat <<EOF` ส่งข้อความหลายบรรทัดเป็นstdinของcat; delimiterปิดต้องตรงและไม่มีspacesเกิน ถ้าdelimiterไม่quoteจะขยายparameter/command/arithmetic แต่ไม่ใช่การรันทุกบรรทัดเป็นshellcommands"
+      }
+    },
+    {
+      "id": "ux08-q12",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: commandในbody\ncat <<EOF\n$(printf computed)\nEOF",
+      "reference": "heredoc",
+      "explanation": "unquotedheredocทำcommandsubstitution — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux08-q12",
+      "choices": [
+        {
+          "id": "a",
+          "text": "computed"
+        },
+        {
+          "id": "b",
+          "text": "$(printf computed)"
+        },
+        {
+          "id": "c",
+          "text": "ไม่มี stdout"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`cat <<EOF` ส่งข้อความหลายบรรทัดเป็นstdinของcat; delimiterปิดต้องตรงและไม่มีspacesเกิน ถ้าdelimiterไม่quoteจะขยายparameter/command/arithmetic แต่ไม่ใช่การรันทุกบรรทัดเป็นshellcommands"
+      }
+    },
+    {
+      "id": "ux08-q13",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: arithmeticในbody\ncat <<EOF\n$((2+3))\nEOF",
+      "reference": "heredoc",
+      "explanation": "arithmeticexpansionในbody — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux08-q13",
+      "choices": [
+        {
+          "id": "a",
+          "text": "2+3"
+        },
+        {
+          "id": "b",
+          "text": "$((2+3))"
+        },
+        {
+          "id": "c",
+          "text": "5"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`cat <<EOF` ส่งข้อความหลายบรรทัดเป็นstdinของcat; delimiterปิดต้องตรงและไม่มีspacesเกิน ถ้าdelimiterไม่quoteจะขยายparameter/command/arithmetic แต่ไม่ใช่การรันทุกบรรทัดเป็นshellcommands"
+      }
+    },
+    {
+      "id": "ux08-q14",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: redirectstdoutเพิ่มเติม\ncat >out <<EOF\ndata\nEOF\nwc -l <out",
+      "reference": "heredoc",
+      "explanation": "bodyหนึ่งบรรทัดถูกcatเขียนout — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux08-q14",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`cat <<EOF` ส่งข้อความหลายบรรทัดเป็นstdinของcat; delimiterปิดต้องตรงและไม่มีspacesเกิน ถ้าdelimiterไม่quoteจะขยายparameter/command/arithmetic แต่ไม่ใช่การรันทุกบรรทัดเป็นshellcommands"
+      }
+    },
+    {
+      "id": "ux08-q15",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: quoteในbodyเป็นdata\nx=yes; cat <<EOF\n'$x'\nEOF",
+      "reference": "heredoc",
+      "explanation": "singlequotesในheredocbodyเป็นliteralไม่ปิดexpansion — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux08-q15",
+      "choices": [
+        {
+          "id": "a",
+          "text": "'yes'"
+        },
+        {
+          "id": "b",
+          "text": "'$x'"
+        },
+        {
+          "id": "c",
+          "text": "yes"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`cat <<EOF` ส่งข้อความหลายบรรทัดเป็นstdinของcat; delimiterปิดต้องตรงและไม่มีspacesเกิน ถ้าdelimiterไม่quoteจะขยายparameter/command/arithmetic แต่ไม่ใช่การรันทุกบรรทัดเป็นshellcommands"
+      }
+    },
+    {
+      "id": "ux08-self3",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): วาดเส้นทางข้อมูลในcat<<EOFและcat>file<<EOF",
+      "reference": "heredoc",
+      "explanation": "แยกstdinจากstdout;fileเกิดเพราะ>ไม่ใช่เพราะ<<",
+      "rubric": [
+        "แยกstdinจากstdout;fileเกิดเพราะ>ไม่ใช่เพราะ<<",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "`cat <<EOF` ส่งข้อความหลายบรรทัดเป็นstdinของcat; delimiterปิดต้องตรงและไม่มีspacesเกิน ถ้าdelimiterไม่quoteจะขยายparameter/command/arithmetic แต่ไม่ใช่การรันทุกบรรทัดเป็นshellcommands"
+      }
+    },
+    {
+      "id": "ux08-q16",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: quoteหยุดparameter\nname=Dao; cat <<'EOF'\nHello $name\nEOF",
+      "reference": "quoted-delimiter",
+      "explanation": "delimiterquoteปิดexpansion — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux08-q16",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Hello Dao"
+        },
+        {
+          "id": "b",
+          "text": "Dao"
+        },
+        {
+          "id": "c",
+          "text": "Hello $name"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`<<'EOF'` ปิดการขยายในbodyทั้งหมดเหมาะกับสร้างข้อความliteral `<<-EOF` ตัดเฉพาะtabนำหน้าจากbodyและdelimiter ไม่ตัดspaces Quoteใดๆในdelimiterทำให้bodyไม่expand"
+      }
+    },
+    {
+      "id": "ux08-q17",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: quoteหยุดcommand\ncat <<'EOF'\n$(printf computed)\nEOF",
+      "reference": "quoted-delimiter",
+      "explanation": "ไม่มีcommandsubstitution — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux08-q17",
+      "choices": [
+        {
+          "id": "a",
+          "text": "printf computed"
+        },
+        {
+          "id": "b",
+          "text": "$(printf computed)"
+        },
+        {
+          "id": "c",
+          "text": "computed"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`<<'EOF'` ปิดการขยายในbodyทั้งหมดเหมาะกับสร้างข้อความliteral `<<-EOF` ตัดเฉพาะtabนำหน้าจากbodyและdelimiter ไม่ตัดspaces Quoteใดๆในdelimiterทำให้bodyไม่expand"
+      }
+    },
+    {
+      "id": "ux08-q18",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: tabstrip\ncat <<-EOF\n\tdata\n\tEOF",
+      "reference": "quoted-delimiter",
+      "explanation": "<<-ตัดtabนำหน้า — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux08-q18",
+      "choices": [
+        {
+          "id": "a",
+          "text": "data"
+        },
+        {
+          "id": "b",
+          "text": "\tdata"
+        },
+        {
+          "id": "c",
+          "text": "ไม่มี stdout"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`<<'EOF'` ปิดการขยายในbodyทั้งหมดเหมาะกับสร้างข้อความliteral `<<-EOF` ตัดเฉพาะtabนำหน้าจากbodyและdelimiter ไม่ตัดspaces Quoteใดๆในdelimiterทำให้bodyไม่expand"
+      }
+    },
+    {
+      "id": "ux08-q19",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: spacesไม่strip\ncat <<-EOF\n  data\nEOF",
+      "reference": "quoted-delimiter",
+      "explanation": "<<-ไม่ตัดspace — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux08-q19",
+      "choices": [
+        {
+          "id": "a",
+          "text": "data"
+        },
+        {
+          "id": "b",
+          "text": " data"
+        },
+        {
+          "id": "c",
+          "text": "  data"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`<<'EOF'` ปิดการขยายในbodyทั้งหมดเหมาะกับสร้างข้อความliteral `<<-EOF` ตัดเฉพาะtabนำหน้าจากbodyและdelimiter ไม่ตัดspaces Quoteใดๆในdelimiterทำให้bodyไม่expand"
+      }
+    },
+    {
+      "id": "ux08-q20",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: doublequoteddelimiterก็literal\nx=yes; cat <<\"EOF\"\n$x\nEOF",
+      "reference": "quoted-delimiter",
+      "explanation": "quoteทุกแบบที่delimiterปิดbodyexpansion — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux08-q20",
+      "choices": [
+        {
+          "id": "a",
+          "text": "EOF"
+        },
+        {
+          "id": "b",
+          "text": "$x"
+        },
+        {
+          "id": "c",
+          "text": "yes"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`<<'EOF'` ปิดการขยายในbodyทั้งหมดเหมาะกับสร้างข้อความliteral `<<-EOF` ตัดเฉพาะtabนำหน้าจากbodyและdelimiter ไม่ตัดspaces Quoteใดๆในdelimiterทำให้bodyไม่expand"
+      }
+    },
+    {
+      "id": "ux08-self4",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): เปรียบเทียบdelimiterquoteกับไม่quoteเมื่อbodyมี$และ$(...)",
+      "reference": "quoted-delimiter",
+      "explanation": "ทำนายliteral/expandedให้ครบและอธิบายtabกับspace",
+      "rubric": [
+        "ทำนายliteral/expandedให้ครบและอธิบายtabกับspace",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "`<<'EOF'` ปิดการขยายในbodyทั้งหมดเหมาะกับสร้างข้อความliteral `<<-EOF` ตัดเฉพาะtabนำหน้าจากbodyและdelimiter ไม่ตัดspaces Quoteใดๆในdelimiterทำให้bodyไม่expand"
+      }
+    },
+    {
+      "id": "ux08-q21",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: literalhelpผ่านcase\ncase help in help) cat <<'EOF'\nUse $1 safely\nEOF\n;; esac",
+      "reference": "combined",
+      "explanation": "quotedheredocคง$1 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux08-q21",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Use $1 safely"
+        },
+        {
+          "id": "b",
+          "text": "Use  safely"
+        },
+        {
+          "id": "c",
+          "text": "help"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ผสมcaseกับheredocเพื่อแสดงคำแนะนำและrouteinputได้ กำหนดdelimiterไม่ชนบรรทัดข้อมูลเมื่อทำระบบจริง หลีกเลี่ยงevalหรือรันscriptที่สร้างจากข้อมูลผู้ใช้ ตัวอย่างbundleจากต้นฉบับใช้ประกอบแนวคิด ไม่ใช่ตัวอย่างsecurearchive"
+      }
+    },
+    {
+      "id": "ux08-q22",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: caseไม่ตรงไม่มีoutput\ncase x in y) printf y;; esac; printf done",
+      "reference": "combined",
+      "explanation": "ไม่มีarmตรงและไม่default — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux08-q22",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ydone"
+        },
+        {
+          "id": "b",
+          "text": "x"
+        },
+        {
+          "id": "c",
+          "text": "done"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ผสมcaseกับheredocเพื่อแสดงคำแนะนำและrouteinputได้ กำหนดdelimiterไม่ชนบรรทัดข้อมูลเมื่อทำระบบจริง หลีกเลี่ยงevalหรือรันscriptที่สร้างจากข้อมูลผู้ใช้ ตัวอย่างbundleจากต้นฉบับใช้ประกอบแนวคิด ไม่ใช่ตัวอย่างsecurearchive"
+      }
+    },
+    {
+      "id": "ux08-q23",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: stringว่างตรงdefault\nx=; case $x in ?) printf one;; *) printf empty;; esac",
+      "reference": "combined",
+      "explanation": "?ต้องหนึ่งcharacter — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux08-q23",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่มี stdout"
+        },
+        {
+          "id": "b",
+          "text": "empty"
+        },
+        {
+          "id": "c",
+          "text": "one"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ผสมcaseกับheredocเพื่อแสดงคำแนะนำและrouteinputได้ กำหนดdelimiterไม่ชนบรรทัดข้อมูลเมื่อทำระบบจริง หลีกเลี่ยงevalหรือรันscriptที่สร้างจากข้อมูลผู้ใช้ ตัวอย่างbundleจากต้นฉบับใช้ประกอบแนวคิด ไม่ใช่ตัวอย่างsecurearchive"
+      }
+    },
+    {
+      "id": "ux08-q24",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: noautoexecution\ncat <<'EOF'\nprintf not-executed\nEOF",
+      "reference": "combined",
+      "explanation": "bodyเป็นdataไม่ใช่shellscript — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux08-q24",
+      "choices": [
+        {
+          "id": "a",
+          "text": "printf not-executed"
+        },
+        {
+          "id": "b",
+          "text": "not-executed"
+        },
+        {
+          "id": "c",
+          "text": "ไม่มี stdout"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ผสมcaseกับheredocเพื่อแสดงคำแนะนำและrouteinputได้ กำหนดdelimiterไม่ชนบรรทัดข้อมูลเมื่อทำระบบจริง หลีกเลี่ยงevalหรือรันscriptที่สร้างจากข้อมูลผู้ใช้ ตัวอย่างbundleจากต้นฉบับใช้ประกอบแนวคิด ไม่ใช่ตัวอย่างsecurearchive"
+      }
+    },
+    {
+      "id": "ux08-q25",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: readสองfields\nread -r mode rest <<EOF\nrun red blue\nEOF\nprintf '%s:%s' \"$mode\" \"$rest\"",
+      "reference": "combined",
+      "explanation": "readตัวแปรท้ายรับส่วนที่เหลือ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux08-q25",
+      "choices": [
+        {
+          "id": "a",
+          "text": "run:red"
+        },
+        {
+          "id": "b",
+          "text": "run:blue"
+        },
+        {
+          "id": "c",
+          "text": "run:red blue"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ผสมcaseกับheredocเพื่อแสดงคำแนะนำและrouteinputได้ กำหนดdelimiterไม่ชนบรรทัดข้อมูลเมื่อทำระบบจริง หลีกเลี่ยงevalหรือรันscriptที่สร้างจากข้อมูลผู้ใช้ ตัวอย่างbundleจากต้นฉบับใช้ประกอบแนวคิด ไม่ใช่ตัวอย่างsecurearchive"
+      }
+    },
+    {
+      "id": "ux08-self5",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): อธิบายความเสี่ยงการสร้างscriptจากข้อมูลและเสนอทางเลือก",
+      "reference": "combined",
+      "explanation": "ใช้quotedheredocหรือprintfเป็นdata;ไม่evalและตรวจpathก่อนเขียน",
+      "rubric": [
+        "ใช้quotedheredocหรือprintfเป็นdata;ไม่evalและตรวจpathก่อนเขียน",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ผสมcaseกับheredocเพื่อแสดงคำแนะนำและrouteinputได้ กำหนดdelimiterไม่ชนบรรทัดข้อมูลเมื่อทำระบบจริง หลีกเลี่ยงevalหรือรันscriptที่สร้างจากข้อมูลผู้ใช้ ตัวอย่างbundleจากต้นฉบับใช้ประกอบแนวคิด ไม่ใช่ตัวอย่างsecurearchive"
+      }
+    }
+  ]
+}

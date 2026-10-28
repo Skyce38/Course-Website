@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "unix-tools-final-arrays-statistics",
+  "title": "FINAL 10 — Bash Arrays และสถิติ",
+  "questions": [
+    {
+      "id": "ux10-q01",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: index0\na=(10 20 30); printf '%s' \"${a[0]}\"",
+      "reference": "indexed",
+      "explanation": "สมาชิกแรกindex0 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux10-q01",
+      "answer": 10,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "ux10-q02",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: sparseสมาชิกเดียว\na=(); a[100]=x; printf '%s' \"${#a[@]}\"",
+      "reference": "indexed",
+      "explanation": "index100ไม่แปลว่า101สมาชิก — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux10-q02",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "ux10-q03",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: assignmentไม่ลบสมาชิกเดิม\na=(x y z); a[100]=q; printf '%s' \"${#a[@]}\"",
+      "reference": "indexed",
+      "explanation": "สมาชิกเดิมสามและใหม่หนึ่ง — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux10-q03",
+      "answer": 4,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "ux10-q04",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: unsetไม่เลื่อน\na=(10 20 30); unset 'a[1]'; printf '%s' \"${a[2]}\"",
+      "reference": "indexed",
+      "explanation": "index2ยัง30 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux10-q04",
+      "answer": 30,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "ux10-q05",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: sparseindices\na=([2]=x [7]=y); printf '%s ' \"${!a[@]}\"",
+      "reference": "indexed",
+      "explanation": "indicesที่มีค่าจริง — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux10-q05",
+      "choices": [
+        {
+          "id": "a",
+          "text": "2 3 4 5 6 7 "
+        },
+        {
+          "id": "b",
+          "text": "2 7 "
+        },
+        {
+          "id": "c",
+          "text": "0 1 "
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "id": "ux10-self1",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): อธิบายsparsearrayและแก้ความกำกวมในสไลด์p.15",
+      "reference": "indexed",
+      "explanation": "ทดสอบทั้งarrayว่าง/มีสมาชิกและแยกcountจากhighestindex",
+      "rubric": [
+        "ทดสอบทั้งarrayว่าง/มีสมาชิกและแยกcountจากhighestindex",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "unix-tools-final-tests-conditions",
+  "title": "FINAL 05 — test, if และ Conditions",
+  "questions": [
+    {
+      "id": "ux05-q01",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: test ส่งสถานะ\n[ yes = yes ]; printf '%s' \"$?\"",
+      "reference": "test-syntax",
+      "explanation": "string ตรงกันจึงสำเร็จ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux05-q01",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "ux05-q02",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: empty quote\nx=; [ \"$x\" = '' ]; printf '%s' \"$?\"",
+      "reference": "test-syntax",
+      "explanation": "empty เป็น argument ชัดเจน — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux05-q02",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "ux05-q03",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ปิดวงเล็บผิด\n[ yes = yes 2>/dev/null; printf '%s' \"$?\"",
+      "reference": "test-syntax",
+      "explanation": "ไม่มี ] เป็น syntax ของ test ที่ผิด — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux05-q03",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "ux05-q04",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: test ไม่พิมพ์ค่า\ntest 3 -gt 2; printf done",
+      "reference": "test-syntax",
+      "explanation": "test คืน status ไม่มี stdout — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux05-q04",
+      "choices": [
+        {
+          "id": "a",
+          "text": "truedone"
+        },
+        {
+          "id": "b",
+          "text": "1done"
+        },
+        {
+          "id": "c",
+          "text": "done"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "id": "ux05-q05",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: NOT\n! [ 2 -gt 3 ]; printf '%s' \"$?\"",
+      "reference": "test-syntax",
+      "explanation": "กลับ false เป็น true — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux05-q05",
+      "choices": [
+        {
+          "id": "a",
+          "text": "2"
+        },
+        {
+          "id": "b",
+          "text": "0"
+        },
+        {
+          "id": "c",
+          "text": "1"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "id": "ux05-self1",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): อธิบายเหตุที่ [ \"$x\" = yes ] ปลอดภัยกว่าไม่quote",
+      "reference": "test-syntax",
+      "explanation": "แสดง arguments ที่ test เห็นเมื่อ x ว่างหรือมีช่องว่าง",
+      "rubric": [
+        "แสดง arguments ที่ test เห็นเมื่อ x ว่างหรือมีช่องว่าง",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ]
+    }
+  ]
+}

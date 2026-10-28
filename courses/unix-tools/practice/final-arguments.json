@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "unix-tools-final-arguments",
+  "title": "FINAL 03 — Arguments และ Parameters",
+  "questions": [
+    {
+      "id": "ux03-q01",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: จำนวน arguments ไม่รวม $0\nset -- one two; printf '%s' \"$#\"",
+      "reference": "positions",
+      "explanation": "set -- ตั้งสอง arguments — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux03-q01",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "ux03-q02",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: argument ที่สิบ\nset -- a b c d e f g h i j; printf '%s' \"${10}\"",
+      "reference": "positions",
+      "explanation": "braces เลือกสิบ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux03-q02",
+      "choices": [
+        {
+          "id": "a",
+          "text": "i"
+        },
+        {
+          "id": "b",
+          "text": "j"
+        },
+        {
+          "id": "c",
+          "text": "a0"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "id": "ux03-q03",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: $10 ไม่ใช่สิบ\nset -- a b c d e f g h i j; printf '%s' \"$10\"",
+      "reference": "positions",
+      "explanation": "$1 ต่อ literal 0 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux03-q03",
+      "choices": [
+        {
+          "id": "a",
+          "text": "a0"
+        },
+        {
+          "id": "b",
+          "text": "j"
+        },
+        {
+          "id": "c",
+          "text": "10"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "id": "ux03-q04",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ตั้ง $0 ใน bash -c\nbash -c 'printf %s \"$0\"' demo first",
+      "reference": "positions",
+      "explanation": "argument หลัง command string เป็น $0 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux03-q04",
+      "choices": [
+        {
+          "id": "a",
+          "text": "first"
+        },
+        {
+          "id": "b",
+          "text": "bash"
+        },
+        {
+          "id": "c",
+          "text": "demo"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "id": "ux03-q05",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: empty positional มีอยู่\nset -- ''; printf '%s' \"$#\"",
+      "reference": "positions",
+      "explanation": "empty argument ยังนับหนึ่ง — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux03-q05",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "ux03-self1",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): อธิบายการส่งชื่อคนเป็น argument เดียวและตรวจ $#",
+      "reference": "positions",
+      "explanation": "quote ค่าและตรวจจำนวนก่อนอ่าน positional parameter",
+      "rubric": [
+        "quote ค่าและตรวจจำนวนก่อนอ่าน positional parameter",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ]
+    }
+  ]
+}

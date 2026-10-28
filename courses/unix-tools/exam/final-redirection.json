@@ -1,0 +1,556 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "unix-tools-final-redirection",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "ux06-q06",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: stdoutก่อนduplicate\n{ printf O; printf E >&2; } >log 2>&1; cat log",
+      "reference": "redirect-order",
+      "explanation": "ทั้งสองfdไปlogเดียวกัน — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q06",
+      "choices": [
+        {
+          "id": "a",
+          "text": "OE"
+        },
+        {
+          "id": "b",
+          "text": "O"
+        },
+        {
+          "id": "c",
+          "text": "E"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Shell จัด redirect ซ้ายไปขวา `>log 2>&1` ผูกstdoutกับlogก่อนแล้วstderrตาม ส่วน `2>&1 >log` ทำstderrตามปลายทางstdoutเดิมก่อน stdoutจึงเปลี่ยนทีหลัง การ duplicate fd ไม่ได้เป็นการเชื่อมที่ตามการเปลี่ยนอนาคต"
+      }
+    },
+    {
+      "id": "ux06-q07",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: duplicateก่อนstdout\n{ printf O; printf E >&2; } 2>&1 >log; printf ':'; cat log",
+      "reference": "redirect-order",
+      "explanation": "Eไปstdoutเดิม Oไปlog — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q07",
+      "choices": [
+        {
+          "id": "a",
+          "text": "OE:"
+        },
+        {
+          "id": "b",
+          "text": "O:E"
+        },
+        {
+          "id": "c",
+          "text": "E:O"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Shell จัด redirect ซ้ายไปขวา `>log 2>&1` ผูกstdoutกับlogก่อนแล้วstderrตาม ส่วน `2>&1 >log` ทำstderrตามปลายทางstdoutเดิมก่อน stdoutจึงเปลี่ยนทีหลัง การ duplicate fd ไม่ได้เป็นการเชื่อมที่ตามการเปลี่ยนอนาคต"
+      }
+    },
+    {
+      "id": "ux06-q08",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: หลายredirectท้ายสุด\nprintf x >a >b; printf '%s:%s' \"$(wc -c <a)\" \"$(cat b)\"",
+      "reference": "redirect-order",
+      "explanation": "aถูกเปิดแล้วbเป็นstdoutสุดท้าย — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q08",
+      "choices": [
+        {
+          "id": "a",
+          "text": "x:x"
+        },
+        {
+          "id": "b",
+          "text": "0:x"
+        },
+        {
+          "id": "c",
+          "text": "x:0"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Shell จัด redirect ซ้ายไปขวา `>log 2>&1` ผูกstdoutกับlogก่อนแล้วstderrตาม ส่วน `2>&1 >log` ทำstderrตามปลายทางstdoutเดิมก่อน stdoutจึงเปลี่ยนทีหลัง การ duplicate fd ไม่ได้เป็นการเชื่อมที่ตามการเปลี่ยนอนาคต"
+      }
+    },
+    {
+      "id": "ux06-q09",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ทิศทางdup stdoutไปstderr\n{ printf message 1>&2; } >out 2>err; wc -c <out",
+      "reference": "redirect-order",
+      "explanation": "1>&2ส่งข้อความไปerr — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q09",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Shell จัด redirect ซ้ายไปขวา `>log 2>&1` ผูกstdoutกับlogก่อนแล้วstderrตาม ส่วน `2>&1 >log` ทำstderrตามปลายทางstdoutเดิมก่อน stdoutจึงเปลี่ยนทีหลัง การ duplicate fd ไม่ได้เป็นการเชื่อมที่ตามการเปลี่ยนอนาคต"
+      }
+    },
+    {
+      "id": "ux06-q10",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ปิดstderrชั่วคราว\n{ printf O; } 2>&-",
+      "reference": "redirect-order",
+      "explanation": "ปิดfd2ไม่ปิดstdout — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q10",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่มี stdout"
+        },
+        {
+          "id": "b",
+          "text": "error"
+        },
+        {
+          "id": "c",
+          "text": "O"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Shell จัด redirect ซ้ายไปขวา `>log 2>&1` ผูกstdoutกับlogก่อนแล้วstderrตาม ส่วน `2>&1 >log` ทำstderrตามปลายทางstdoutเดิมก่อน stdoutจึงเปลี่ยนทีหลัง การ duplicate fd ไม่ได้เป็นการเชื่อมที่ตามการเปลี่ยนอนาคต"
+      }
+    },
+    {
+      "id": "ux06-self2",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): วาด mappingของสองคำสั่งที่สลับลำดับและทำนายไฟล์กับจอ",
+      "reference": "redirect-order",
+      "explanation": "ระบุปลายทางเดิมก่อนคัดลอกแต่ละขั้น ไม่ใช้คำว่าไปจอเสมอ",
+      "rubric": [
+        "ระบุปลายทางเดิมก่อนคัดลอกแต่ละขั้น ไม่ใช้คำว่าไปจอเสมอ",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Shell จัด redirect ซ้ายไปขวา `>log 2>&1` ผูกstdoutกับlogก่อนแล้วstderrตาม ส่วน `2>&1 >log` ทำstderrตามปลายทางstdoutเดิมก่อน stdoutจึงเปลี่ยนทีหลัง การ duplicate fd ไม่ได้เป็นการเชื่อมที่ตามการเปลี่ยนอนาคต"
+      }
+    },
+    {
+      "id": "ux06-q11",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: appendไม่truncate\nprintf A >f; printf B >>f; cat f",
+      "reference": "files-links",
+      "explanation": ">>ต่อท้าย — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q11",
+      "choices": [
+        {
+          "id": "a",
+          "text": "BA"
+        },
+        {
+          "id": "b",
+          "text": "AB"
+        },
+        {
+          "id": "c",
+          "text": "B"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`>` เปิด/ตัดไฟล์ก่อนเริ่มคำสั่ง `>>` ต่อท้าย `cat file >file` ทำให้ข้อมูลหายก่อนcatอ่าน ใช้tempแล้วเปลี่ยนชื่ออย่างปลอดภัย Hard links เป็นหลายชื่อของไฟล์เดียวในfilesystemเดียว ลบชื่อหนึ่งไม่จำเป็นต้องลบข้อมูล ต้นฉบับที่ parse ls ไม่ปลอดภัยกับชื่อซับซ้อน"
+      }
+    },
+    {
+      "id": "ux06-q12",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: catไฟล์ตัวเอง\nprintf original >f; cat f >f; wc -c <f",
+      "reference": "files-links",
+      "explanation": "truncateก่อนcatอ่าน — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q12",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`>` เปิด/ตัดไฟล์ก่อนเริ่มคำสั่ง `>>` ต่อท้าย `cat file >file` ทำให้ข้อมูลหายก่อนcatอ่าน ใช้tempแล้วเปลี่ยนชื่ออย่างปลอดภัย Hard links เป็นหลายชื่อของไฟล์เดียวในfilesystemเดียว ลบชื่อหนึ่งไม่จำเป็นต้องลบข้อมูล ต้นฉบับที่ parse ls ไม่ปลอดภัยกับชื่อซับซ้อน"
+      }
+    },
+    {
+      "id": "ux06-q13",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: hardlinkเห็นการเขียน\nprintf A >a; ln a b; printf B >b; cat a",
+      "reference": "files-links",
+      "explanation": "ทั้งสองชื่ออ้างข้อมูลเดียวกัน — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q13",
+      "choices": [
+        {
+          "id": "a",
+          "text": "A"
+        },
+        {
+          "id": "b",
+          "text": "AB"
+        },
+        {
+          "id": "c",
+          "text": "B"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`>` เปิด/ตัดไฟล์ก่อนเริ่มคำสั่ง `>>` ต่อท้าย `cat file >file` ทำให้ข้อมูลหายก่อนcatอ่าน ใช้tempแล้วเปลี่ยนชื่ออย่างปลอดภัย Hard links เป็นหลายชื่อของไฟล์เดียวในfilesystemเดียว ลบชื่อหนึ่งไม่จำเป็นต้องลบข้อมูล ต้นฉบับที่ parse ls ไม่ปลอดภัยกับชื่อซับซ้อน"
+      }
+    },
+    {
+      "id": "ux06-q14",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ลบชื่อหนึ่ง\nprintf x >a; ln a b; unlink a; cat b",
+      "reference": "files-links",
+      "explanation": "อีกhardlinkยังอยู่ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q14",
+      "choices": [
+        {
+          "id": "a",
+          "text": "error"
+        },
+        {
+          "id": "b",
+          "text": "x"
+        },
+        {
+          "id": "c",
+          "text": "ไม่มี stdout"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`>` เปิด/ตัดไฟล์ก่อนเริ่มคำสั่ง `>>` ต่อท้าย `cat file >file` ทำให้ข้อมูลหายก่อนcatอ่าน ใช้tempแล้วเปลี่ยนชื่ออย่างปลอดภัย Hard links เป็นหลายชื่อของไฟล์เดียวในfilesystemเดียว ลบชื่อหนึ่งไม่จำเป็นต้องลบข้อมูล ต้นฉบับที่ parse ls ไม่ปลอดภัยกับชื่อซับซ้อน"
+      }
+    },
+    {
+      "id": "ux06-q15",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: truncateแม้commandล้มเหลว\nprintf old >f; false >f; wc -c <f",
+      "reference": "files-links",
+      "explanation": "redirectเกิดก่อนfalse — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q15",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`>` เปิด/ตัดไฟล์ก่อนเริ่มคำสั่ง `>>` ต่อท้าย `cat file >file` ทำให้ข้อมูลหายก่อนcatอ่าน ใช้tempแล้วเปลี่ยนชื่ออย่างปลอดภัย Hard links เป็นหลายชื่อของไฟล์เดียวในfilesystemเดียว ลบชื่อหนึ่งไม่จำเป็นต้องลบข้อมูล ต้นฉบับที่ parse ls ไม่ปลอดภัยกับชื่อซับซ้อน"
+      }
+    },
+    {
+      "id": "ux06-self3",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): อธิบาย truncate ผ่าน hard link และลบชื่อหนึ่ง",
+      "reference": "files-links",
+      "explanation": "แยก directory entry, inode, open fd และข้อมูลที่ยังมีชื่อหรือผู้เปิดใช้งาน",
+      "rubric": [
+        "แยก directory entry, inode, open fd และข้อมูลที่ยังมีชื่อหรือผู้เปิดใช้งาน",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "`>` เปิด/ตัดไฟล์ก่อนเริ่มคำสั่ง `>>` ต่อท้าย `cat file >file` ทำให้ข้อมูลหายก่อนcatอ่าน ใช้tempแล้วเปลี่ยนชื่ออย่างปลอดภัย Hard links เป็นหลายชื่อของไฟล์เดียวในfilesystemเดียว ลบชื่อหนึ่งไม่จำเป็นต้องลบข้อมูล ต้นฉบับที่ parse ls ไม่ปลอดภัยกับชื่อซับซ้อน"
+      }
+    },
+    {
+      "id": "ux06-q16",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: fd3อ่าน\nprintf 'alpha\\nbeta\\n' >f; exec 3<f; read -r -u3 x; exec 3<&-; printf '%s' \"$x\"",
+      "reference": "descriptors",
+      "explanation": "readหนึ่งบรรทัดจากfd3 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q16",
+      "choices": [
+        {
+          "id": "a",
+          "text": "beta"
+        },
+        {
+          "id": "b",
+          "text": "f"
+        },
+        {
+          "id": "c",
+          "text": "alpha"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`exec 3<file` เปิดfd3อ่านในshellปัจจุบัน `read -u3` อ่านจากfd3 `exec 3<&-` ปิด ส่วน `exec 4>out` เปิดเขียน ปิดด้วย4>&- `>&2` ส่งstdoutไปstderr ตรงข้ามความเข้าใจผิดจาก `2>&1` ในUsageตัวอย่าง"
+      }
+    },
+    {
+      "id": "ux06-q17",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: fd4เขียน\nexec 4>out; printf data >&4; exec 4>&-; cat out",
+      "reference": "descriptors",
+      "explanation": "stdoutของprintfduplicateไปfd4 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q17",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่มี stdout"
+        },
+        {
+          "id": "b",
+          "text": "data"
+        },
+        {
+          "id": "c",
+          "text": "out"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`exec 3<file` เปิดfd3อ่านในshellปัจจุบัน `read -u3` อ่านจากfd3 `exec 3<&-` ปิด ส่วน `exec 4>out` เปิดเขียน ปิดด้วย4>&- `>&2` ส่งstdoutไปstderr ตรงข้ามความเข้าใจผิดจาก `2>&1` ในUsageตัวอย่าง"
+      }
+    },
+    {
+      "id": "ux06-q18",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: fdที่ปิด\nexec 3<&-; read -r -u3 x 2>/dev/null; printf '%s' \"$?\"",
+      "reference": "descriptors",
+      "explanation": "readจากfdปิดล้มเหลว — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q18",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`exec 3<file` เปิดfd3อ่านในshellปัจจุบัน `read -u3` อ่านจากfd3 `exec 3<&-` ปิด ส่วน `exec 4>out` เปิดเขียน ปิดด้วย4>&- `>&2` ส่งstdoutไปstderr ตรงข้ามความเข้าใจผิดจาก `2>&1` ในUsageตัวอย่าง"
+      }
+    },
+    {
+      "id": "ux06-q19",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: save stdoutแล้วrestore\nexec 3>&1; exec >log; printf hidden; exec 1>&3; exec 3>&-; printf visible",
+      "reference": "descriptors",
+      "explanation": "หลังrestorestdoutกลับปลายทางเดิม — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q19",
+      "choices": [
+        {
+          "id": "a",
+          "text": "hiddenvisible"
+        },
+        {
+          "id": "b",
+          "text": "hidden"
+        },
+        {
+          "id": "c",
+          "text": "visible"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`exec 3<file` เปิดfd3อ่านในshellปัจจุบัน `read -u3` อ่านจากfd3 `exec 3<&-` ปิด ส่วน `exec 4>out` เปิดเขียน ปิดด้วย4>&- `>&2` ส่งstdoutไปstderr ตรงข้ามความเข้าใจผิดจาก `2>&1` ในUsageตัวอย่าง"
+      }
+    },
+    {
+      "id": "ux06-q20",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: copy ด้วยfd\nprintf input >in; exec 3<in 4>out; cat <&3 >&4; exec 3<&- 4>&-; cat out",
+      "reference": "descriptors",
+      "explanation": "catเชื่อมfd3เข้ากับfd4 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q20",
+      "choices": [
+        {
+          "id": "a",
+          "text": "out"
+        },
+        {
+          "id": "b",
+          "text": "input"
+        },
+        {
+          "id": "c",
+          "text": "in"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`exec 3<file` เปิดfd3อ่านในshellปัจจุบัน `read -u3` อ่านจากfd3 `exec 3<&-` ปิด ส่วน `exec 4>out` เปิดเขียน ปิดด้วย4>&- `>&2` ส่งstdoutไปstderr ตรงข้ามความเข้าใจผิดจาก `2>&1` ในUsageตัวอย่าง"
+      }
+    },
+    {
+      "id": "ux06-self4",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): ออกแบบคัดลอกด้วยfd3/4พร้อมคืนstatusของcat",
+      "reference": "descriptors",
+      "explanation": "เปิด/ตรวจerror/อ่านเขียน/ปิดและเก็บstatusก่อนcleanupโดยไม่ทำให้สำเร็จปลอม",
+      "rubric": [
+        "เปิด/ตรวจerror/อ่านเขียน/ปิดและเก็บstatusก่อนcleanupโดยไม่ทำให้สำเร็จปลอม",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "`exec 3<file` เปิดfd3อ่านในshellปัจจุบัน `read -u3` อ่านจากfd3 `exec 3<&-` ปิด ส่วน `exec 4>out` เปิดเขียน ปิดด้วย4>&- `>&2` ส่งstdoutไปstderr ตรงข้ามความเข้าใจผิดจาก `2>&1` ในUsageตัวอย่าง"
+      }
+    },
+    {
+      "id": "ux06-q21",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: noclobberป้องกันเดิม\nprintf old >f; set -C; { printf new >f; } 2>/dev/null; cat f",
+      "reference": "noclobber-pipes",
+      "explanation": "-Cป้องกันtruncateไฟล์เดิม — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q21",
+      "choices": [
+        {
+          "id": "a",
+          "text": "old"
+        },
+        {
+          "id": "b",
+          "text": "new"
+        },
+        {
+          "id": "c",
+          "text": "oldnew"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`set -o noclobber` ป้องกัน > ทับregularfileที่มีอยู่ `>|` bypassโดยเจตนาและ>>ยังต่อท้าย Pipelineส่งstdoutของคำสั่งซ้ายไปstdinขวา ไม่ส่งstderrโดยปริยาย H5ให้ทดลองไฟล์ที่หายกับที่มีอยู่ ต้องจับstreamแยก ไม่เปรียบเทียบข้อความerrorที่อาจต่างเวอร์ชัน"
+      }
+    },
+    {
+      "id": "ux06-q22",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: บังคับoverwrite\nprintf old >f; set -C; printf new >|f; cat f",
+      "reference": "noclobber-pipes",
+      "explanation": ">|ข้ามnoclobber — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q22",
+      "choices": [
+        {
+          "id": "a",
+          "text": "old"
+        },
+        {
+          "id": "b",
+          "text": "oldnew"
+        },
+        {
+          "id": "c",
+          "text": "new"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`set -o noclobber` ป้องกัน > ทับregularfileที่มีอยู่ `>|` bypassโดยเจตนาและ>>ยังต่อท้าย Pipelineส่งstdoutของคำสั่งซ้ายไปstdinขวา ไม่ส่งstderrโดยปริยาย H5ให้ทดลองไฟล์ที่หายกับที่มีอยู่ ต้องจับstreamแยก ไม่เปรียบเทียบข้อความerrorที่อาจต่างเวอร์ชัน"
+      }
+    },
+    {
+      "id": "ux06-q23",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: appendแม้noclobber\nprintf old >f; set -C; printf new >>f; cat f",
+      "reference": "noclobber-pipes",
+      "explanation": ">>ยังต่อท้าย — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q23",
+      "choices": [
+        {
+          "id": "a",
+          "text": "new"
+        },
+        {
+          "id": "b",
+          "text": "oldnew"
+        },
+        {
+          "id": "c",
+          "text": "old"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`set -o noclobber` ป้องกัน > ทับregularfileที่มีอยู่ `>|` bypassโดยเจตนาและ>>ยังต่อท้าย Pipelineส่งstdoutของคำสั่งซ้ายไปstdinขวา ไม่ส่งstderrโดยปริยาย H5ให้ทดลองไฟล์ที่หายกับที่มีอยู่ ต้องจับstreamแยก ไม่เปรียบเทียบข้อความerrorที่อาจต่างเวอร์ชัน"
+      }
+    },
+    {
+      "id": "ux06-q24",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: pipeรับเฉพาะstdout\n{ printf O; printf E >&2; } 2>err | wc -c",
+      "reference": "noclobber-pipes",
+      "explanation": "pipeมีOหนึ่งbyte Eอยู่err — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q24",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`set -o noclobber` ป้องกัน > ทับregularfileที่มีอยู่ `>|` bypassโดยเจตนาและ>>ยังต่อท้าย Pipelineส่งstdoutของคำสั่งซ้ายไปstdinขวา ไม่ส่งstderrโดยปริยาย H5ให้ทดลองไฟล์ที่หายกับที่มีอยู่ ต้องจับstreamแยก ไม่เปรียบเทียบข้อความerrorที่อาจต่างเวอร์ชัน"
+      }
+    },
+    {
+      "id": "ux06-q25",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: H5missingfileยังอ่านไฟล์ถัดไป\nprintf 'known\\n' >yes; cat missing yes >out 2>err; s=$?; printf '%s:%s' \"$s\" \"$(cat out)\"",
+      "reference": "noclobber-pipes",
+      "explanation": "GNUcatรายงานmissingแต่ยังอ่านyesและคืน1 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux06-q25",
+      "choices": [
+        {
+          "id": "a",
+          "text": "0:known"
+        },
+        {
+          "id": "b",
+          "text": "1:"
+        },
+        {
+          "id": "c",
+          "text": "1:known"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`set -o noclobber` ป้องกัน > ทับregularfileที่มีอยู่ `>|` bypassโดยเจตนาและ>>ยังต่อท้าย Pipelineส่งstdoutของคำสั่งซ้ายไปstdinขวา ไม่ส่งstderrโดยปริยาย H5ให้ทดลองไฟล์ที่หายกับที่มีอยู่ ต้องจับstreamแยก ไม่เปรียบเทียบข้อความerrorที่อาจต่างเวอร์ชัน"
+      }
+    },
+    {
+      "id": "ux06-self5",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): วางแผนทดสอบhw5โดยไม่ยึดข้อความerrorเฉพาะเครื่อง",
+      "reference": "noclobber-pipes",
+      "explanation": "ตรวจเนื้อหาไฟล์ที่รู้แน่ stdout/stderrแยก และสถานะnonzeroเมื่อมีไฟล์หาย",
+      "rubric": [
+        "ตรวจเนื้อหาไฟล์ที่รู้แน่ stdout/stderrแยก และสถานะnonzeroเมื่อมีไฟล์หาย",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "`set -o noclobber` ป้องกัน > ทับregularfileที่มีอยู่ `>|` bypassโดยเจตนาและ>>ยังต่อท้าย Pipelineส่งstdoutของคำสั่งซ้ายไปstdinขวา ไม่ส่งstderrโดยปริยาย H5ให้ทดลองไฟล์ที่หายกับที่มีอยู่ ต้องจับstreamแยก ไม่เปรียบเทียบข้อความerrorที่อาจต่างเวอร์ชัน"
+      }
+    }
+  ]
+}

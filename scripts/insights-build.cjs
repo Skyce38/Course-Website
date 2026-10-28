@@ -6,6 +6,7 @@ function build(catalog,root=process.cwd()){
   const practice=C.validate(JSON.parse(fs.readFileSync(path.join(root,'courses',r.course,'practice',r.path.split('/').at(-1).replace(/\.md$/,'.json')),'utf8')));
   return {id:r.id,course:r.course,title:r.title,reader:r.reader,practiceRevision:practice.revision,practiceIds:practice.questions.map(q=>q.id),bank};
  });
- const manifest=require('../assets/insights-contract.js').validate({version:1,lessons});fs.writeFileSync(path.join(root,'assets/insights-banks.json'),JSON.stringify(manifest)+'\n');return manifest;
+ const courses=catalog.courses.filter(c=>lessons.some(l=>l.course===c.id)).map(c=>({id:c.id,label:c.id==='artificial-intelligence'?'AI':c.id==='oop-python'?'OOP':c.name}));
+ const manifest=require('../assets/insights-contract.js').validate({version:1,courses,lessons});fs.writeFileSync(path.join(root,'assets/insights-banks.json'),JSON.stringify(manifest)+'\n');return manifest;
 }
 module.exports={build};

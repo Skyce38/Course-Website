@@ -645,6 +645,138 @@
       "reader": "read/oop-python/hash-tables.html",
       "generatedLesson": 1,
       "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/summaries/hash-tables.md"
+    },
+    {
+      "id": "unix-tools-final-shell-foundations",
+      "course": "unix-tools",
+      "category": "summaries",
+      "title": "FINAL 01 — พื้นฐาน Shell Script (Shell Foundations)",
+      "path": "summaries/final-shell-foundations.md",
+      "format": "MD",
+      "reader": "read/unix-tools/final-shell-foundations.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/unix-tools/summaries/final-shell-foundations.md"
+    },
+    {
+      "id": "unix-tools-final-variables-expansion",
+      "course": "unix-tools",
+      "category": "summaries",
+      "title": "FINAL 02 — ตัวแปร Quoting และ Expansion",
+      "path": "summaries/final-variables-expansion.md",
+      "format": "MD",
+      "reader": "read/unix-tools/final-variables-expansion.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/unix-tools/summaries/final-variables-expansion.md"
+    },
+    {
+      "id": "unix-tools-final-arguments",
+      "course": "unix-tools",
+      "category": "summaries",
+      "title": "FINAL 03 — Arguments และ Parameters",
+      "path": "summaries/final-arguments.md",
+      "format": "MD",
+      "reader": "read/unix-tools/final-arguments.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/unix-tools/summaries/final-arguments.md"
+    },
+    {
+      "id": "unix-tools-final-arithmetic-status",
+      "course": "unix-tools",
+      "category": "summaries",
+      "title": "FINAL 04 — Arithmetic และ Exit Status",
+      "path": "summaries/final-arithmetic-status.md",
+      "format": "MD",
+      "reader": "read/unix-tools/final-arithmetic-status.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/unix-tools/summaries/final-arithmetic-status.md"
+    },
+    {
+      "id": "unix-tools-final-tests-conditions",
+      "course": "unix-tools",
+      "category": "summaries",
+      "title": "FINAL 05 — test, if และ Conditions",
+      "path": "summaries/final-tests-conditions.md",
+      "format": "MD",
+      "reader": "read/unix-tools/final-tests-conditions.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/unix-tools/summaries/final-tests-conditions.md"
+    },
+    {
+      "id": "unix-tools-final-redirection",
+      "course": "unix-tools",
+      "category": "summaries",
+      "title": "FINAL 06 — Redirection และ File Descriptors",
+      "path": "summaries/final-redirection.md",
+      "format": "MD",
+      "reader": "read/unix-tools/final-redirection.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/unix-tools/summaries/final-redirection.md"
+    },
+    {
+      "id": "unix-tools-final-loops-reading",
+      "course": "unix-tools",
+      "category": "summaries",
+      "title": "FINAL 07 — Loops และการอ่านไฟล์",
+      "path": "summaries/final-loops-reading.md",
+      "format": "MD",
+      "reader": "read/unix-tools/final-loops-reading.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/unix-tools/summaries/final-loops-reading.md"
+    },
+    {
+      "id": "unix-tools-final-case-heredoc",
+      "course": "unix-tools",
+      "category": "summaries",
+      "title": "FINAL 08 — case และ Here Documents",
+      "path": "summaries/final-case-heredoc.md",
+      "format": "MD",
+      "reader": "read/unix-tools/final-case-heredoc.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/unix-tools/summaries/final-case-heredoc.md"
+    },
+    {
+      "id": "unix-tools-final-functions-algorithms",
+      "course": "unix-tools",
+      "category": "summaries",
+      "title": "FINAL 09 — Functions และ Applied Algorithms",
+      "path": "summaries/final-functions-algorithms.md",
+      "format": "MD",
+      "reader": "read/unix-tools/final-functions-algorithms.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/unix-tools/summaries/final-functions-algorithms.md"
+    },
+    {
+      "id": "unix-tools-final-arrays-statistics",
+      "course": "unix-tools",
+      "category": "summaries",
+      "title": "FINAL 10 — Bash Arrays และสถิติ",
+      "path": "summaries/final-arrays-statistics.md",
+      "format": "MD",
+      "reader": "read/unix-tools/final-arrays-statistics.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/unix-tools/summaries/final-arrays-statistics.md"
+    },
+    {
+      "id": "unix-tools-final-regex-grep-sed",
+      "course": "unix-tools",
+      "category": "summaries",
+      "title": "FINAL 11 — Regex, grep และ sed",
+      "path": "summaries/final-regex-grep-sed.md",
+      "format": "MD",
+      "reader": "read/unix-tools/final-regex-grep-sed.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/unix-tools/summaries/final-regex-grep-sed.md"
+    },
+    {
+      "id": "unix-tools-final-awk-text",
+      "course": "unix-tools",
+      "category": "summaries",
+      "title": "FINAL 12 — awk และ Text Processing",
+      "path": "summaries/final-awk-text.md",
+      "format": "MD",
+      "reader": "read/unix-tools/final-awk-text.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/unix-tools/summaries/final-awk-text.md"
     }
   ]
 }

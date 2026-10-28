@@ -1,0 +1,508 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "unix-tools-final-shell-foundations",
+  "baseRevision": 1,
+  "questions": [
+    {
+      "id": "ux01-q06",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ชนิดของ cd\ntype -t cd",
+      "reference": "builtins",
+      "explanation": "cd เป็น Bash builtin — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q06",
+      "choices": [
+        {
+          "id": "a",
+          "text": "builtin"
+        },
+        {
+          "id": "b",
+          "text": "file"
+        },
+        {
+          "id": "c",
+          "text": "function"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`type` และ `command -v` ใช้ตรวจการค้นคำสั่ง `help` อธิบาย Bash builtins เช่น cd, printf, read การเปลี่ยน directory ต้องมีผลกับ shell ปัจจุบัน `bash -n` ตรวจไวยากรณ์แต่ไม่ตรวจว่าคำสั่งมีจริงหรือคำตอบถูก `bash -x` รันจริงและส่ง trace ไป stderr ห้ามใช้ trace กับความลับ"
+      }
+    },
+    {
+      "id": "ux01-q07",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ตรวจ syntax ไม่รัน\nprintf 'printf should-not-run' > demo.sh; bash -n demo.sh; printf checked",
+      "reference": "builtins",
+      "explanation": "-n ไม่รัน printf ในไฟล์ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q07",
+      "choices": [
+        {
+          "id": "a",
+          "text": "should-not-runchecked"
+        },
+        {
+          "id": "b",
+          "text": "ไม่มี stdout"
+        },
+        {
+          "id": "c",
+          "text": "checked"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`type` และ `command -v` ใช้ตรวจการค้นคำสั่ง `help` อธิบาย Bash builtins เช่น cd, printf, read การเปลี่ยน directory ต้องมีผลกับ shell ปัจจุบัน `bash -n` ตรวจไวยากรณ์แต่ไม่ตรวจว่าคำสั่งมีจริงหรือคำตอบถูก `bash -x` รันจริงและส่ง trace ไป stderr ห้ามใช้ trace กับความลับ"
+      }
+    },
+    {
+      "id": "ux01-q08",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: syntax ผ่านแต่คำสั่งไม่จำเป็นต้องมี\nprintf 'missing_unix_command' > demo.sh; bash -n demo.sh; printf '%s' \"$?\"",
+      "reference": "builtins",
+      "explanation": "-n ไม่ตรวจ command lookup — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q08",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`type` และ `command -v` ใช้ตรวจการค้นคำสั่ง `help` อธิบาย Bash builtins เช่น cd, printf, read การเปลี่ยน directory ต้องมีผลกับ shell ปัจจุบัน `bash -n` ตรวจไวยากรณ์แต่ไม่ตรวจว่าคำสั่งมีจริงหรือคำตอบถูก `bash -x` รันจริงและส่ง trace ไป stderr ห้ามใช้ trace กับความลับ"
+      }
+    },
+    {
+      "id": "ux01-q09",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ตรวจ syntax เสียโดยจับ stderr\nprintf 'if true; then' > bad.sh; bash -n bad.sh 2>/dev/null; printf '%s' \"$?\"",
+      "reference": "builtins",
+      "explanation": "Bash ตรวจพบ if ที่ไม่มี fi คืน 2 — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q09",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`type` และ `command -v` ใช้ตรวจการค้นคำสั่ง `help` อธิบาย Bash builtins เช่น cd, printf, read การเปลี่ยน directory ต้องมีผลกับ shell ปัจจุบัน `bash -n` ตรวจไวยากรณ์แต่ไม่ตรวจว่าคำสั่งมีจริงหรือคำตอบถูก `bash -x` รันจริงและส่ง trace ไป stderr ห้ามใช้ trace กับความลับ"
+      }
+    },
+    {
+      "id": "ux01-q10",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: trace คนละ stream\nbash -x -c 'printf data' 2>trace; printf ':'; grep -c printf trace",
+      "reference": "builtins",
+      "explanation": "stdout เป็น data; trace ที่ stderr มี printf หนึ่งบรรทัด — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q10",
+      "choices": [
+        {
+          "id": "a",
+          "text": "+ printf data"
+        },
+        {
+          "id": "b",
+          "text": "data:0"
+        },
+        {
+          "id": "c",
+          "text": "data:1"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`type` และ `command -v` ใช้ตรวจการค้นคำสั่ง `help` อธิบาย Bash builtins เช่น cd, printf, read การเปลี่ยน directory ต้องมีผลกับ shell ปัจจุบัน `bash -n` ตรวจไวยากรณ์แต่ไม่ตรวจว่าคำสั่งมีจริงหรือคำตอบถูก `bash -x` รันจริงและส่ง trace ไป stderr ห้ามใช้ trace กับความลับ"
+      }
+    },
+    {
+      "id": "ux01-self2",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): วางแผนตรวจ script โดยไม่เผยค่าลับผ่าน trace",
+      "reference": "builtins",
+      "explanation": "เริ่ม bash -n แล้วทดสอบ input ใน directory ชั่วคราว ใช้ -x เฉพาะข้อมูลสมมติและแยก stderr",
+      "rubric": [
+        "เริ่ม bash -n แล้วทดสอบ input ใน directory ชั่วคราว ใช้ -x เฉพาะข้อมูลสมมติและแยก stderr",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "`type` และ `command -v` ใช้ตรวจการค้นคำสั่ง `help` อธิบาย Bash builtins เช่น cd, printf, read การเปลี่ยน directory ต้องมีผลกับ shell ปัจจุบัน `bash -n` ตรวจไวยากรณ์แต่ไม่ตรวจว่าคำสั่งมีจริงหรือคำตอบถูก `bash -x` รันจริงและส่ง trace ไป stderr ห้ามใช้ trace กับความลับ"
+      }
+    },
+    {
+      "id": "ux01-q11",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ตัวแปรใน shell ลูก\nx=old; bash -c 'x=new'; printf '%s' \"$x\"",
+      "reference": "processes",
+      "explanation": "ลูกไม่มีทางแก้ตัวแปรแม่ด้วย assignment นี้ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q11",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ว่าง"
+        },
+        {
+          "id": "b",
+          "text": "old"
+        },
+        {
+          "id": "c",
+          "text": "new"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`bash script.sh` เริ่ม shell ลูก `source script.sh` รันใน shell ปัจจุบันจึงเปลี่ยนตัวแปรและ directory ได้ `( commands )` แยกสภาพแวดล้อมใน subshell ส่วน `{ commands; }` ใช้ shell เดิม `export` ส่งค่าเริ่มต้นไปลูก ไม่ได้แชร์การแก้ไขกลับแม่"
+      }
+    },
+    {
+      "id": "ux01-q12",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: source ตั้งค่าแม่\nprintf 'x=new' > part.sh; x=old; source ./part.sh; printf '%s' \"$x\"",
+      "reference": "processes",
+      "explanation": "source ทำใน shell ปัจจุบัน — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q12",
+      "choices": [
+        {
+          "id": "a",
+          "text": "new"
+        },
+        {
+          "id": "b",
+          "text": "old"
+        },
+        {
+          "id": "c",
+          "text": "ว่าง"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`bash script.sh` เริ่ม shell ลูก `source script.sh` รันใน shell ปัจจุบันจึงเปลี่ยนตัวแปรและ directory ได้ `( commands )` แยกสภาพแวดล้อมใน subshell ส่วน `{ commands; }` ใช้ shell เดิม `export` ส่งค่าเริ่มต้นไปลูก ไม่ได้แชร์การแก้ไขกลับแม่"
+      }
+    },
+    {
+      "id": "ux01-q13",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: วงเล็บ subshell\nx=1; ( x=2 ); printf '%s' \"$x\"",
+      "reference": "processes",
+      "explanation": "assignment ใน subshell ไม่ย้อนกลับ — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q13",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`bash script.sh` เริ่ม shell ลูก `source script.sh` รันใน shell ปัจจุบันจึงเปลี่ยนตัวแปรและ directory ได้ `( commands )` แยกสภาพแวดล้อมใน subshell ส่วน `{ commands; }` ใช้ shell เดิม `export` ส่งค่าเริ่มต้นไปลูก ไม่ได้แชร์การแก้ไขกลับแม่"
+      }
+    },
+    {
+      "id": "ux01-q14",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: brace group\nx=1; { x=2; }; printf '%s' \"$x\"",
+      "reference": "processes",
+      "explanation": "brace group ใช้ shell ปัจจุบัน — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q14",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`bash script.sh` เริ่ม shell ลูก `source script.sh` รันใน shell ปัจจุบันจึงเปลี่ยนตัวแปรและ directory ได้ `( commands )` แยกสภาพแวดล้อมใน subshell ส่วน `{ commands; }` ใช้ shell เดิม `export` ส่งค่าเริ่มต้นไปลูก ไม่ได้แชร์การแก้ไขกลับแม่"
+      }
+    },
+    {
+      "id": "ux01-q15",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: export เป็นสำเนาเริ่มต้น\nexport x=parent; bash -c 'x=child'; printf '%s' \"$x\"",
+      "reference": "processes",
+      "explanation": "export ไม่ใช่ shared mutable state — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q15",
+      "choices": [
+        {
+          "id": "a",
+          "text": "parent"
+        },
+        {
+          "id": "b",
+          "text": "child"
+        },
+        {
+          "id": "c",
+          "text": "ว่าง"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`bash script.sh` เริ่ม shell ลูก `source script.sh` รันใน shell ปัจจุบันจึงเปลี่ยนตัวแปรและ directory ได้ `( commands )` แยกสภาพแวดล้อมใน subshell ส่วน `{ commands; }` ใช้ shell เดิม `export` ส่งค่าเริ่มต้นไปลูก ไม่ได้แชร์การแก้ไขกลับแม่"
+      }
+    },
+    {
+      "id": "ux01-self3",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): เปรียบเทียบ source, subshell และ shell ลูกจากการเปลี่ยนค่า x",
+      "reference": "processes",
+      "explanation": "ติดตามค่า x ก่อน/ภายใน/หลังแต่ละกรณี และระบุว่าลูกไม่แก้แม่",
+      "rubric": [
+        "ติดตามค่า x ก่อน/ภายใน/หลังแต่ละกรณี และระบุว่าลูกไม่แก้แม่",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "`bash script.sh` เริ่ม shell ลูก `source script.sh` รันใน shell ปัจจุบันจึงเปลี่ยนตัวแปรและ directory ได้ `( commands )` แยกสภาพแวดล้อมใน subshell ส่วน `{ commands; }` ใช้ shell เดิม `export` ส่งค่าเริ่มต้นไปลูก ไม่ได้แชร์การแก้ไขกลับแม่"
+      }
+    },
+    {
+      "id": "ux01-q16",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ตัด newline ท้าย\nx=$(printf 'A\\n\\n'); printf '%s' \"${#x}\"",
+      "reference": "substitution",
+      "explanation": "newline ท้ายสองตัวถูกตัด เหลือ A — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q16",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`$(command)` เก็บ stdout และตัด newline ท้ายทั้งหมด ไม่เก็บ stderr โดยอัตโนมัติ Quote ผลลัพธ์เพื่อรักษาช่องว่าง/บรรทัดภายใน `{ a; b; }` รวมคำสั่งใน shell เดิมและเปลี่ยนทิศทางทั้งกลุ่มได้ `a; b` รันต่อโดยไม่ตรวจความสำเร็จของ a"
+      }
+    },
+    {
+      "id": "ux01-q17",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: เก็บ newline ภายใน\nx=$(printf 'A\\nB\\n'); printf '%s' \"${#x}\"",
+      "reference": "substitution",
+      "explanation": "A newline B รวมสามอักขระ ASCII — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q17",
+      "answer": 3,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`$(command)` เก็บ stdout และตัด newline ท้ายทั้งหมด ไม่เก็บ stderr โดยอัตโนมัติ Quote ผลลัพธ์เพื่อรักษาช่องว่าง/บรรทัดภายใน `{ a; b; }` รวมคำสั่งใน shell เดิมและเปลี่ยนทิศทางทั้งกลุ่มได้ `a; b` รันต่อโดยไม่ตรวจความสำเร็จของ a"
+      }
+    },
+    {
+      "id": "ux01-q18",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ไม่เก็บ stderr\nx=$(printf out; printf err >&2); printf '%s' \"$x\"",
+      "reference": "substitution",
+      "explanation": "stderr แยกต่างหาก มี err แต่ stdout ของ script นี้คือ out — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q18",
+      "choices": [
+        {
+          "id": "a",
+          "text": "out"
+        },
+        {
+          "id": "b",
+          "text": "outerr"
+        },
+        {
+          "id": "c",
+          "text": "err"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`$(command)` เก็บ stdout และตัด newline ท้ายทั้งหมด ไม่เก็บ stderr โดยอัตโนมัติ Quote ผลลัพธ์เพื่อรักษาช่องว่าง/บรรทัดภายใน `{ a; b; }` รวมคำสั่งใน shell เดิมและเปลี่ยนทิศทางทั้งกลุ่มได้ `a; b` รันต่อโดยไม่ตรวจความสำเร็จของ a"
+      }
+    },
+    {
+      "id": "ux01-q19",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: group redirect\n{ printf A; printf B; } > log; cat log",
+      "reference": "substitution",
+      "explanation": "ทั้งกลุ่มเขียน stdout ไป log — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q19",
+      "choices": [
+        {
+          "id": "a",
+          "text": "A"
+        },
+        {
+          "id": "b",
+          "text": "B"
+        },
+        {
+          "id": "c",
+          "text": "AB"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`$(command)` เก็บ stdout และตัด newline ท้ายทั้งหมด ไม่เก็บ stderr โดยอัตโนมัติ Quote ผลลัพธ์เพื่อรักษาช่องว่าง/บรรทัดภายใน `{ a; b; }` รวมคำสั่งใน shell เดิมและเปลี่ยนทิศทางทั้งกลุ่มได้ `a; b` รันต่อโดยไม่ตรวจความสำเร็จของ a"
+      }
+    },
+    {
+      "id": "ux01-q20",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: semicolon ไม่ short circuit\nfalse; printf later",
+      "reference": "substitution",
+      "explanation": "; ทำคำสั่งต่อแม้ก่อนหน้าคืน nonzero — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q20",
+      "choices": [
+        {
+          "id": "a",
+          "text": "false"
+        },
+        {
+          "id": "b",
+          "text": "later"
+        },
+        {
+          "id": "c",
+          "text": "ไม่มี stdout"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`$(command)` เก็บ stdout และตัด newline ท้ายทั้งหมด ไม่เก็บ stderr โดยอัตโนมัติ Quote ผลลัพธ์เพื่อรักษาช่องว่าง/บรรทัดภายใน `{ a; b; }` รวมคำสั่งใน shell เดิมและเปลี่ยนทิศทางทั้งกลุ่มได้ `a; b` รันต่อโดยไม่ตรวจความสำเร็จของ a"
+      }
+    },
+    {
+      "id": "ux01-self4",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): อธิบายสิ่งที่ command substitution เก็บและสิ่งที่สูญเสีย",
+      "reference": "substitution",
+      "explanation": "stdout เท่านั้นและตัด trailing newlines; quote รักษา whitespace ภายใน แต่ตัวแปร Bash เก็บ NUL ไม่ได้",
+      "rubric": [
+        "stdout เท่านั้นและตัด trailing newlines; quote รักษา whitespace ภายใน แต่ตัวแปร Bash เก็บ NUL ไม่ได้",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "`$(command)` เก็บ stdout และตัด newline ท้ายทั้งหมด ไม่เก็บ stderr โดยอัตโนมัติ Quote ผลลัพธ์เพื่อรักษาช่องว่าง/บรรทัดภายใน `{ a; b; }` รวมคำสั่งใน shell เดิมและเปลี่ยนทิศทางทั้งกลุ่มได้ `a; b` รันต่อโดยไม่ตรวจความสำเร็จของ a"
+      }
+    },
+    {
+      "id": "ux01-q21",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: format คงที่\nprintf '%s:%02d' item 7",
+      "reference": "utilities",
+      "explanation": "%02d เติมศูนย์ซ้ายครบสองหลัก — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q21",
+      "choices": [
+        {
+          "id": "a",
+          "text": "item:07"
+        },
+        {
+          "id": "b",
+          "text": "item:7"
+        },
+        {
+          "id": "c",
+          "text": "item:002"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ `printf` แทน echo เมื่อ format ต้องแน่นอน `pwd`, `wc`, `sort`, `tar -cf`, `tar -tf`, `tar -xf` ใช้ตรวจ directory/ข้อมูล/archive ได้ Job control เช่น jobs, fg, bg เกี่ยวกับ interactive shell; สคริปต์ noninteractive มักปิด job control ต้องแยกงานทบทวนออกจากคำสั่งที่ทำลาย process จริง"
+      }
+    },
+    {
+      "id": "ux01-q22",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: นับบรรทัดไม่ใช่คำ\nprintf 'red blue\\ngreen\\n' | wc -l",
+      "reference": "utilities",
+      "explanation": "มี newline สองตัว — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q22",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ `printf` แทน echo เมื่อ format ต้องแน่นอน `pwd`, `wc`, `sort`, `tar -cf`, `tar -tf`, `tar -xf` ใช้ตรวจ directory/ข้อมูล/archive ได้ Job control เช่น jobs, fg, bg เกี่ยวกับ interactive shell; สคริปต์ noninteractive มักปิด job control ต้องแยกงานทบทวนออกจากคำสั่งที่ทำลาย process จริง"
+      }
+    },
+    {
+      "id": "ux01-q23",
+      "type": "choice",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: ดู archive\nprintf data > a; tar -cf demo.tar a; tar -tf demo.tar",
+      "reference": "utilities",
+      "explanation": "tar -tf แสดงชื่อสมาชิก ไม่พิมพ์ข้อมูลใน a — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q23",
+      "choices": [
+        {
+          "id": "a",
+          "text": "demo.tar"
+        },
+        {
+          "id": "b",
+          "text": "a"
+        },
+        {
+          "id": "c",
+          "text": "data"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ `printf` แทน echo เมื่อ format ต้องแน่นอน `pwd`, `wc`, `sort`, `tar -cf`, `tar -tf`, `tar -xf` ใช้ตรวจ directory/ข้อมูล/archive ได้ Job control เช่น jobs, fg, bg เกี่ยวกับ interactive shell; สคริปต์ noninteractive มักปิด job control ต้องแยกงานทบทวนออกจากคำสั่งที่ทำลาย process จริง"
+      }
+    },
+    {
+      "id": "ux01-q24",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: builtin true\ntrue; printf '%s' \"$?\"",
+      "reference": "utilities",
+      "explanation": "true สำเร็จโดยไม่พิมพ์ข้อมูล — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q24",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ `printf` แทน echo เมื่อ format ต้องแน่นอน `pwd`, `wc`, `sort`, `tar -cf`, `tar -tf`, `tar -xf` ใช้ตรวจ directory/ข้อมูล/archive ได้ Job control เช่น jobs, fg, bg เกี่ยวกับ interactive shell; สคริปต์ noninteractive มักปิด job control ต้องแยกงานทบทวนออกจากคำสั่งที่ทำลาย process จริง"
+      }
+    },
+    {
+      "id": "ux01-q25",
+      "type": "numeric",
+      "prompt": "สมมติ Bash 5.2 บน Linux, LC_ALL=C, directory ชั่วคราวว่าง, IFS ปกติ, ปิด errexit/pipefail/lastpipe ยกเว้นโค้ดระบุ เปิดอ่าน stdout เท่านั้น ตัด newline ท้ายก่อนเทียบ (รักษา spaces); ตัวเลขตอบเป็นค่า: cd ใน subshell\nmkdir child; (cd child); test -d child; printf '%s' \"$?\"",
+      "reference": "utilities",
+      "explanation": "shell แม่ยังอยู่ parent จึงพบ child — ตัวอย่าง/คำตอบจัดทำเสริมและตรวจด้วย Linux Bash ไม่ใช่เฉลยทางการ; ดูหัวข้อที่เชื่อมและ ledger ux01-q25",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ `printf` แทน echo เมื่อ format ต้องแน่นอน `pwd`, `wc`, `sort`, `tar -cf`, `tar -tf`, `tar -xf` ใช้ตรวจ directory/ข้อมูล/archive ได้ Job control เช่น jobs, fg, bg เกี่ยวกับ interactive shell; สคริปต์ noninteractive มักปิด job control ต้องแยกงานทบทวนออกจากคำสั่งที่ทำลาย process จริง"
+      }
+    },
+    {
+      "id": "ux01-self5",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (โจทย์เสริม ไม่ตรวจคะแนนอัตโนมัติ): ออกแบบการทดสอบ archive ที่ไม่แตะไฟล์จริง",
+      "reference": "utilities",
+      "explanation": "สร้างข้อมูลสมมติใน temp ตรวจ tar -tf และแตกใน directory ว่าง ไม่เชื่อ path ใน archive ที่ไม่รู้ที่มา",
+      "rubric": [
+        "สร้างข้อมูลสมมติใน temp ตรวจ tar -tf และแตกใน directory ว่าง ไม่เชื่อ path ใน archive ที่ไม่รู้ที่มา",
+        "อธิบายเหตุผลและสมมติฐานของ Bash/utility ให้ชัด พร้อมตัวอย่างหรือ trace ที่ตรวจได้",
+        "ตรวจกรณีขอบและแยกข้อมูลออกทาง stdout จาก exit status; ไม่ใช้เฉลยต้นฉบับที่ยังไม่ยืนยัน"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ใช้ `printf` แทน echo เมื่อ format ต้องแน่นอน `pwd`, `wc`, `sort`, `tar -cf`, `tar -tf`, `tar -xf` ใช้ตรวจ directory/ข้อมูล/archive ได้ Job control เช่น jobs, fg, bg เกี่ยวกับ interactive shell; สคริปต์ noninteractive มักปิด job control ต้องแยกงานทบทวนออกจากคำสั่งที่ทำลาย process จริง"
+      }
+    }
+  ]
+}
