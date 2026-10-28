@@ -35,5 +35,14 @@
   "courses/unix-tools/summaries/final-functions-algorithms.md",
   "courses/unix-tools/summaries/final-arrays-statistics.md",
   "courses/unix-tools/summaries/final-regex-grep-sed.md",
-  "courses/unix-tools/summaries/final-awk-text.md"
+  "courses/unix-tools/summaries/final-awk-text.md",
+  "courses/internet-of-things/summaries/final-esp32-foundations.md",
+  "courses/internet-of-things/summaries/final-sensors-gpio-adc.md",
+  "courses/internet-of-things/summaries/final-ultrasonic.md",
+  "courses/internet-of-things/summaries/final-water-level.md",
+  "courses/internet-of-things/summaries/final-arduino-cpp.md",
+  "courses/internet-of-things/summaries/final-interfaces.md",
+  "courses/internet-of-things/summaries/final-pir-motion.md",
+  "courses/internet-of-things/summaries/final-relay-timers.md",
+  "courses/internet-of-things/summaries/final-oled-integration.md"
 ]

@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "internet-of-things-final-oled-integration",
+  "title": "FINAL 09 — OLED และระบบ IoT แบบรวม",
+  "questions": [
+    {
+      "id": "iot09-q01",
+      "reference": "oled-interface",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ตัวอย่างนี้กำหนด OLED แบบใดอย่างชัดเจน?",
+      "explanation": "เป็น targetassumption ที่ต้องตรวจ module จริง (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot09-q01)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "OLEDทุกตัวในโลกต้องเป็นแบบนี้"
+        },
+        {
+          "id": "b",
+          "text": "จอUARTที่ไม่ใช้library"
+        },
+        {
+          "id": "c",
+          "text": "จอใช้ADCอ่านpixelอย่างเดียว"
+        },
+        {
+          "id": "d",
+          "text": "I2C SSD1306 128x64 addressสมมติ0x3C"
+        }
+      ],
+      "answer": "d"
+    },
+    {
+      "id": "iot09-q02",
+      "reference": "oled-interface",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ต้องการใช้ AdafruitSSD1306I2C ต้องมี library ใดสำหรับ bus ตามตัวอย่าง?",
+      "explanation": "Wire คือ I2CAPI ไม่จำเป็นต้องติด DHT เมื่อไม่ใช้ sensor นั้น (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot09-q02)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "DHTเสมอแม้ไม่ใช้DHT"
+        },
+        {
+          "id": "b",
+          "text": "SoftwareSerialเท่านั้น"
+        },
+        {
+          "id": "c",
+          "text": "Wire"
+        },
+        {
+          "id": "d",
+          "text": "SPIเป็นข้อบังคับสำหรับทุกI2C"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "id": "iot09-q03",
+      "reference": "oled-interface",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: OLEDmodule มี pullups ไป 5V ควรทำอย่างไรกับ ESP32?",
+      "explanation": "logicvoltage ไม่ขึ้นกับ textsize (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot09-q03)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ลดbaudSerialแล้วแรงดันลด"
+        },
+        {
+          "id": "b",
+          "text": "ตรวจ/แก้levelinterfaceหรือเลือกcompatiblemoduleก่อนต่อ"
+        },
+        {
+          "id": "c",
+          "text": "ต่อโดยตรงเพราะชื่อI2C"
+        },
+        {
+          "id": "d",
+          "text": "เปลี่ยนsetTextSizeเป็น1เพื่อให้ปลอดภัย"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "id": "iot09-q04",
+      "reference": "oled-interface",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: จอ 128x64 มีจำนวน pixel เท่าใด?",
+      "explanation": "นับ pixel ไม่ใช่จำนวน bytebuffer (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot09-q04)",
+      "type": "numeric",
+      "answer": 8192,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "iot09-q05",
+      "reference": "oled-interface",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: 0x3C ในโค้ดควรตีความอย่างไร?",
+      "explanation": "ไม่ใช้ภาพ libraryexample ยืนยัน hardware (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot09-q05)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "หลักฐานว่าOLEDจริงทุกตัวใช้0x3C"
+        },
+        {
+          "id": "b",
+          "text": "แรงดันGPIOหน่วยโวลต์"
+        },
+        {
+          "id": "c",
+          "text": "baudrateของUART"
+        },
+        {
+          "id": "d",
+          "text": "addressที่เลือกเป็นสมมติฐานและต้องตรวจACK/module"
+        }
+      ],
+      "answer": "d"
+    },
+    {
+      "id": "iot09-self1",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): อธิบายสมมติฐาน OLED และวิธีตรวจ communication",
+      "reference": "oled-interface",
+      "explanation": "ตรวจรุ่น bus / address / power / pins / ACK และห้ามเหมาว่าทุก OLED เป็น I2C0x3C",
+      "rubric": [
+        "ตรวจรุ่น bus / address / power / pins / ACK และห้ามเหมาว่าทุก OLED เป็น I2C0x3C",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    }
+  ]
+}

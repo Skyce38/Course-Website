@@ -1,0 +1,632 @@
+{
+  "version": 1,
+  "revision": 1,
+  "baseRevision": 1,
+  "lesson": "internet-of-things-final-pir-motion",
+  "questions": [
+    {
+      "id": "iot07-q06",
+      "reference": "module-output",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: อ่าน PIRHIGH5 ครั้งติดกันใน holdpulse หนึ่งช่วง นับคนได้เท่าใดแน่นอน?",
+      "explanation": "จำนวน samples ไม่ใช่จำนวน physicalevents (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot07-q06)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "1คนแน่นอน"
+        },
+        {
+          "id": "b",
+          "text": "0คนแน่นอน"
+        },
+        {
+          "id": "c",
+          "text": "ยังนับจำนวนคนไม่ได้"
+        },
+        {
+          "id": "d",
+          "text": "5คนแน่นอน"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "PIRmodule นำ signal ไปประมวลผลแล้วให้ DO ตามวงจร output อาจ HIGH ค้างหรือ retrigger ตาม mode ต้องตรวจรุ่น / polarity / warmup / holdtime จริง S12 ภาพแพร่หลายไม่บอกรุ่นที่ผู้เรียนถืออยู่ครบ บทนี้สมมติ 3.3VcompatibleactiveHIGH เพื่อ trace เท่านั้น"
+      }
+    },
+    {
+      "id": "iot07-q07",
+      "reference": "module-output",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: traceDO={1,1,0,0} มี HIGHsamples กี่ตัว?",
+      "explanation": "นี่คือนับ samples ไม่ใช่คน (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot07-q07)",
+      "type": "numeric",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "PIRmodule นำ signal ไปประมวลผลแล้วให้ DO ตามวงจร output อาจ HIGH ค้างหรือ retrigger ตาม mode ต้องตรวจรุ่น / polarity / warmup / holdtime จริง S12 ภาพแพร่หลายไม่บอกรุ่นที่ผู้เรียนถืออยู่ครบ บทนี้สมมติ 3.3VcompatibleactiveHIGH เพื่อ trace เท่านั้น"
+      }
+    },
+    {
+      "id": "iot07-q08",
+      "reference": "module-output",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: เวลาที่ moduleDO ค้าง HIGH ขึ้นกับอะไร?",
+      "explanation": "ต้องตรวจ spec ของ module ตรงรุ่น (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot07-q08)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "รุ่น/mode/hold/retriggerและเงื่อนไขจริง"
+        },
+        {
+          "id": "b",
+          "text": "ชื่อthemeในเว็บ"
+        },
+        {
+          "id": "c",
+          "text": "ค่าanswerในJSON"
+        },
+        {
+          "id": "d",
+          "text": "จำนวนขาOLEDเพียงอย่างเดียว"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "PIRmodule นำ signal ไปประมวลผลแล้วให้ DO ตามวงจร output อาจ HIGH ค้างหรือ retrigger ตาม mode ต้องตรวจรุ่น / polarity / warmup / holdtime จริง S12 ภาพแพร่หลายไม่บอกรุ่นที่ผู้เรียนถืออยู่ครบ บทนี้สมมติ 3.3VcompatibleactiveHIGH เพื่อ trace เท่านั้น"
+      }
+    },
+    {
+      "id": "iot07-q09",
+      "reference": "module-output",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: สมมติ activeHIGH ในบทหมายความว่าอะไร?",
+      "explanation": "เป็น assumption เพื่อ trace ไม่ใช่ certificatehardware (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot07-q09)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทุกPIRในโลกเป็นHIGHactiveที่ระดับ5V"
+        },
+        {
+          "id": "b",
+          "text": "LOWยืนยันไม่มีคน"
+        },
+        {
+          "id": "c",
+          "text": "ไม่ต้องตรวจlogicvoltage"
+        },
+        {
+          "id": "d",
+          "text": "HIGHถูกตีความเป็นobservedmotionสำหรับexampleนี้"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "PIRmodule นำ signal ไปประมวลผลแล้วให้ DO ตามวงจร output อาจ HIGH ค้างหรือ retrigger ตาม mode ต้องตรวจรุ่น / polarity / warmup / holdtime จริง S12 ภาพแพร่หลายไม่บอกรุ่นที่ผู้เรียนถืออยู่ครบ บทนี้สมมติ 3.3VcompatibleactiveHIGH เพื่อ trace เท่านั้น"
+      }
+    },
+    {
+      "id": "iot07-q10",
+      "reference": "module-output",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ช่วง warmup ควรใช้ค่าเวลาจากไหน?",
+      "explanation": "ไม่ระบุเลข warmup เป็น universal โดยไม่มีหลักฐาน (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot07-q10)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "จำนวนคำถามในbank"
+        },
+        {
+          "id": "b",
+          "text": "baud115200โดยตรง"
+        },
+        {
+          "id": "c",
+          "text": "datasheet/การตรวจmoduleจริงพร้อมqualification"
+        },
+        {
+          "id": "d",
+          "text": "เดา30วินาทีให้ทุกตัว"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "PIRmodule นำ signal ไปประมวลผลแล้วให้ DO ตามวงจร output อาจ HIGH ค้างหรือ retrigger ตาม mode ต้องตรวจรุ่น / polarity / warmup / holdtime จริง S12 ภาพแพร่หลายไม่บอกรุ่นที่ผู้เรียนถืออยู่ครบ บทนี้สมมติ 3.3VcompatibleactiveHIGH เพื่อ trace เท่านั้น"
+      }
+    },
+    {
+      "id": "iot07-self2",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): อธิบาย HIGH หลาย samples จากการเคลื่อนครั้งเดียว",
+      "reference": "module-output",
+      "explanation": "พิจารณา moduleholdtime และ sampling อย่านับทุก HIGH เป็น event ใหม่",
+      "rubric": [
+        "พิจารณา moduleholdtime และ sampling อย่านับทุก HIGH เป็น event ใหม่",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "PIRmodule นำ signal ไปประมวลผลแล้วให้ DO ตามวงจร output อาจ HIGH ค้างหรือ retrigger ตาม mode ต้องตรวจรุ่น / polarity / warmup / holdtime จริง S12 ภาพแพร่หลายไม่บอกรุ่นที่ผู้เรียนถืออยู่ครบ บทนี้สมมติ 3.3VcompatibleactiveHIGH เพื่อ trace เท่านั้น"
+      }
+    },
+    {
+      "id": "iot07-q11",
+      "reference": "input-handling",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: code ที่แปลง inputactiveHIGH เป็น bool เหมาะสมคือใด?",
+      "explanation": "digitalRead ให้ state ไม่ใช่ distance (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot07-q11)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "bool motion=Serial.begin(9600);"
+        },
+        {
+          "id": "b",
+          "text": "bool motion=digitalRead(PIR_PIN)==HIGH;"
+        },
+        {
+          "id": "c",
+          "text": "bool motion=analogRead(PIR_PIN)/2;"
+        },
+        {
+          "id": "d",
+          "text": "pinMode(PIR_PIN,OUTPUT);เพื่ออ่าน"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ input ที่ตรง logic / GND และเปรียบเทียบ digitalRead(PIR_PIN)==HIGH ค่าที่ส่งเข้าสู่ controller คือ observedmotionbool ไม่ใช่ groundtruth คนอยู่ ห้องว่างหรือ warmup อาจให้สัญญาณเปลี่ยน ต้องใช้ state และ diagnostic สำหรับข้อจำกัดที่ตรวจพบ"
+      }
+    },
+    {
+      "id": "iot07-q12",
+      "reference": "input-handling",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: หากอ่าน LOW แทนด้วย 0; boolmotion=(0==1); intmotion เท่าใด?",
+      "explanation": "สมมติ HIGH1 LOW0 ในการ trace (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot07-q12)",
+      "type": "numeric",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ input ที่ตรง logic / GND และเปรียบเทียบ digitalRead(PIR_PIN)==HIGH ค่าที่ส่งเข้าสู่ controller คือ observedmotionbool ไม่ใช่ groundtruth คนอยู่ ห้องว่างหรือ warmup อาจให้สัญญาณเปลี่ยน ต้องใช้ state และ diagnostic สำหรับข้อจำกัดที่ตรวจพบ"
+      }
+    },
+    {
+      "id": "iot07-q13",
+      "reference": "input-handling",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: เลือก inputpin แล้วพบ moduleoutput5V ควรทำอย่างไร?",
+      "explanation": "ประเภทตัวแปรไม่เปลี่ยนแรงดันขา (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot07-q13)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เสียบตรงแล้วแก้ด้วยif"
+        },
+        {
+          "id": "b",
+          "text": "เปลี่ยนboolเป็นfloat"
+        },
+        {
+          "id": "c",
+          "text": "ตั้งbaudให้ต่ำลงเพื่อให้ปลอดภัย"
+        },
+        {
+          "id": "d",
+          "text": "ตรวจและแปลงระดับก่อนต่อinput3.3V"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ input ที่ตรง logic / GND และเปรียบเทียบ digitalRead(PIR_PIN)==HIGH ค่าที่ส่งเข้าสู่ controller คือ observedmotionbool ไม่ใช่ groundtruth คนอยู่ ห้องว่างหรือ warmup อาจให้สัญญาณเปลี่ยน ต้องใช้ state และ diagnostic สำหรับข้อจำกัดที่ตรวจพบ"
+      }
+    },
+    {
+      "id": "iot07-q14",
+      "reference": "input-handling",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: PIRVCC ถูกต้องแต่ DO ไม่ต่อ referenceGND ในวงจร nonisolated ควรตรวจอะไร?",
+      "explanation": "logic ต้องมี reference (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot07-q14)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ค่าความเร็วเสียง"
+        },
+        {
+          "id": "b",
+          "text": "ระยะ20cm"
+        },
+        {
+          "id": "c",
+          "text": "commonreferenceและสายก่อนตัดสินsoftwareผิด"
+        },
+        {
+          "id": "d",
+          "text": "ชื่อฟังก์ชันOLEDอย่างเดียว"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ input ที่ตรง logic / GND และเปรียบเทียบ digitalRead(PIR_PIN)==HIGH ค่าที่ส่งเข้าสู่ controller คือ observedmotionbool ไม่ใช่ groundtruth คนอยู่ ห้องว่างหรือ warmup อาจให้สัญญาณเปลี่ยน ต้องใช้ state และ diagnostic สำหรับข้อจำกัดที่ตรวจพบ"
+      }
+    },
+    {
+      "id": "iot07-q15",
+      "reference": "input-handling",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ผล sensor ที่ยังไม่ calibrate / ไม่รู้สเปกควร label อย่างไร?",
+      "explanation": "รักษาขอบเขตหลักฐาน (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot07-q15)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "physicalPASSจากcompile"
+        },
+        {
+          "id": "b",
+          "text": "observedDOstateภายใต้assumptionที่ระบุ"
+        },
+        {
+          "id": "c",
+          "text": "trueoccupancyที่แม่นยำ100%"
+        },
+        {
+          "id": "d",
+          "text": "จำนวนคนทางการ"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ input ที่ตรง logic / GND และเปรียบเทียบ digitalRead(PIR_PIN)==HIGH ค่าที่ส่งเข้าสู่ controller คือ observedmotionbool ไม่ใช่ groundtruth คนอยู่ ห้องว่างหรือ warmup อาจให้สัญญาณเปลี่ยน ต้องใช้ state และ diagnostic สำหรับข้อจำกัดที่ตรวจพบ"
+      }
+    },
+    {
+      "id": "iot07-self3",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): ออกแบบ inputhandling โดยไม่เปลี่ยน meaning เงียบๆ",
+      "reference": "input-handling",
+      "explanation": "ระบุ pin / mode / activelevel และแยก fault / unknown เมื่อระบบตรวจได้",
+      "rubric": [
+        "ระบุ pin / mode / activelevel และแยก fault / unknown เมื่อระบบตรวจได้",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ใช้ input ที่ตรง logic / GND และเปรียบเทียบ digitalRead(PIR_PIN)==HIGH ค่าที่ส่งเข้าสู่ controller คือ observedmotionbool ไม่ใช่ groundtruth คนอยู่ ห้องว่างหรือ warmup อาจให้สัญญาณเปลี่ยน ต้องใช้ state และ diagnostic สำหรับข้อจำกัดที่ตรวจพบ"
+      }
+    },
+    {
+      "id": "iot07-q16",
+      "reference": "false-triggers",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ต้องการ debugfalseindication อย่างมีหลักฐานควรทำอะไร?",
+      "explanation": "ทดสอบแยกชั้นและไม่แต่งข้อมูล (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot07-q16)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เก็บtraceและเงื่อนไขpower/environment/modulemodeจริง"
+        },
+        {
+          "id": "b",
+          "text": "ลบทุกHIGHที่ไม่ชอบจากlog"
+        },
+        {
+          "id": "c",
+          "text": "อ้างว่าผ่าน100%โดยไม่ทดลอง"
+        },
+        {
+          "id": "d",
+          "text": "นับคำว่าMotionในSerialเป็นคน"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "สภาพแวดล้อมที่เปลี่ยน infrared การติดตั้ง การจ่ายไฟหรือ modulewarmup อาจทำให้ falseindication ต้องทดสอบตาม spec จริง ห้ามเดาระยะ warmup หรือมุมตรวจจากรูปโมดูลอื่น ไม่ตัดสินคนเข้าออกจาก DO อย่างเดียว"
+      }
+    },
+    {
+      "id": "iot07-q17",
+      "reference": "false-triggers",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ข้อความใดหลีกเลี่ยง claim เกินหลักฐาน?",
+      "explanation": "simulation ไม่วัด environment จริง (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot07-q17)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "compileผ่านจึงไม่มีfalsepositiveจริง"
+        },
+        {
+          "id": "b",
+          "text": "PIRยืนยันidentityผู้ใช้"
+        },
+        {
+          "id": "c",
+          "text": "HIGHทุกครั้งแม่นยำทางการ"
+        },
+        {
+          "id": "d",
+          "text": "simulationผ่านtraceที่กำหนด แต่physicalfalsealarmยังไม่ทดสอบ"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "สภาพแวดล้อมที่เปลี่ยน infrared การติดตั้ง การจ่ายไฟหรือ modulewarmup อาจทำให้ falseindication ต้องทดสอบตาม spec จริง ห้ามเดาระยะ warmup หรือมุมตรวจจากรูปโมดูลอื่น ไม่ตัดสินคนเข้าออกจาก DO อย่างเดียว"
+      }
+    },
+    {
+      "id": "iot07-q18",
+      "reference": "false-triggers",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ควรติด PIR ตามภาพอุปกรณ์คนละรุ่นแล้วสรุปมุมตรวจเท่ากันหรือไม่?",
+      "explanation": "appearance ไม่ใช่ fullspec (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot07-q18)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ได้ถ้าESP32มีWi-Fi"
+        },
+        {
+          "id": "b",
+          "text": "ได้หากsetTextSize(1)"
+        },
+        {
+          "id": "c",
+          "text": "ไม่ ต้องใช้รุ่นและlensspecจริง"
+        },
+        {
+          "id": "d",
+          "text": "ได้เสมอถ้าสีฝาขาวเหมือนกัน"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "สภาพแวดล้อมที่เปลี่ยน infrared การติดตั้ง การจ่ายไฟหรือ modulewarmup อาจทำให้ falseindication ต้องทดสอบตาม spec จริง ห้ามเดาระยะ warmup หรือมุมตรวจจากรูปโมดูลอื่น ไม่ตัดสินคนเข้าออกจาก DO อย่างเดียว"
+      }
+    },
+    {
+      "id": "iot07-q19",
+      "reference": "false-triggers",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: เซนเซอร์ไม่เปลี่ยน state แม้ขยับ ควรตรวจชุดใด?",
+      "explanation": "แยก wiring / configuration จาก detectionlimits (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot07-q19)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "แก้เฉลยให้ยอมรับทุกคำตอบ"
+        },
+        {
+          "id": "b",
+          "text": "power/GND/pin/polarity/warmup/field-of-viewตามmodule"
+        },
+        {
+          "id": "c",
+          "text": "เปิดrelaymainsเพื่อทดลอง"
+        },
+        {
+          "id": "d",
+          "text": "คูณdistanceสองเท่า"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "สภาพแวดล้อมที่เปลี่ยน infrared การติดตั้ง การจ่ายไฟหรือ modulewarmup อาจทำให้ falseindication ต้องทดสอบตาม spec จริง ห้ามเดาระยะ warmup หรือมุมตรวจจากรูปโมดูลอื่น ไม่ตัดสินคนเข้าออกจาก DO อย่างเดียว"
+      }
+    },
+    {
+      "id": "iot07-q20",
+      "reference": "false-triggers",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: สังเกต input8samples มี invalid ถูกแยก 2samples เหลือ validobservations กี่ samples?",
+      "explanation": "นับ observations ตามข้อมูลสมมติ ไม่ใช่ accuracy ที่วัดจริง (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot07-q20)",
+      "type": "numeric",
+      "answer": 6,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "สภาพแวดล้อมที่เปลี่ยน infrared การติดตั้ง การจ่ายไฟหรือ modulewarmup อาจทำให้ falseindication ต้องทดสอบตาม spec จริง ห้ามเดาระยะ warmup หรือมุมตรวจจากรูปโมดูลอื่น ไม่ตัดสินคนเข้าออกจาก DO อย่างเดียว"
+      }
+    },
+    {
+      "id": "iot07-self4",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): วางแผน controlledtest เพื่อแยก PIRfault กับ software",
+      "reference": "false-triggers",
+      "explanation": "บันทึก inputtrace / แหล่งจ่าย / เงื่อนไข environment โดยไม่แต่งจำนวนทดลอง",
+      "rubric": [
+        "บันทึก inputtrace / แหล่งจ่าย / เงื่อนไข environment โดยไม่แต่งจำนวนทดลอง",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "สภาพแวดล้อมที่เปลี่ยน infrared การติดตั้ง การจ่ายไฟหรือ modulewarmup อาจทำให้ falseindication ต้องทดสอบตาม spec จริง ห้ามเดาระยะ warmup หรือมุมตรวจจากรูปโมดูลอื่น ไม่ตัดสินคนเข้าออกจาก DO อย่างเดียว"
+      }
+    },
+    {
+      "id": "iot07-q21",
+      "reference": "state-vs-event",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: PIRLOW หลังหยุดเคลื่อน 2s แต่ timer ค้างไฟ 10s ข้อความใดอาจถูกต้องพร้อมกัน?",
+      "explanation": "observedmotion ต่างจาก holdstate (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot07-q21)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "No Motionต้องคู่OFFทันทีเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "Motion Detected และ Lamp OFFตามpolicyปกติทุกครั้ง"
+        },
+        {
+          "id": "c",
+          "text": "LOWแปลว่าERRORเสมอ"
+        },
+        {
+          "id": "d",
+          "text": "No Motion และ Lamp ON"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "W12 ต้องแสดง Motion Detected เมื่อ observedHIGH และ No Motion เมื่อ LOW แยกจาก Lamp ON ที่อาจค้าง 10s เมื่อ motionLOW แล้ว การนับ risingedges กับนับ HIGHsamples เป็นคนละสถิติและไม่มีอันใดรับรองจำนวนคนถ้าไม่มีหลักฐานเพิ่ม"
+      }
+    },
+    {
+      "id": "iot07-q22",
+      "reference": "state-vs-event",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: trace เริ่ม LOW แล้ว HIGH,HIGH,LOW,HIGH มี risingedges กี่ครั้ง?",
+      "explanation": "เกิด 0→1 สองครั้ง ไม่ใช่ HIGHsamples สามครั้ง (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot07-q22)",
+      "type": "numeric",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "W12 ต้องแสดง Motion Detected เมื่อ observedHIGH และ No Motion เมื่อ LOW แยกจาก Lamp ON ที่อาจค้าง 10s เมื่อ motionLOW แล้ว การนับ risingedges กับนับ HIGHsamples เป็นคนละสถิติและไม่มีอันใดรับรองจำนวนคนถ้าไม่มีหลักฐานเพิ่ม"
+      }
+    },
+    {
+      "id": "iot07-q23",
+      "reference": "state-vs-event",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: W12 ต้องการ state ใดบน OLED นอกจาก motiontext?",
+      "explanation": "แยก Lampstate ออกจาก sensorstate (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot07-q23)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "จำนวนคนที่เดาจากPIR"
+        },
+        {
+          "id": "b",
+          "text": "สถานะหลอดไฟ"
+        },
+        {
+          "id": "c",
+          "text": "ชื่อผู้เรียนทุกคน"
+        },
+        {
+          "id": "d",
+          "text": "แรงดันmainsที่ไม่ได้วัด"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "W12 ต้องแสดง Motion Detected เมื่อ observedHIGH และ No Motion เมื่อ LOW แยกจาก Lamp ON ที่อาจค้าง 10s เมื่อ motionLOW แล้ว การนับ risingedges กับนับ HIGHsamples เป็นคนละสถิติและไม่มีอันใดรับรองจำนวนคนถ้าไม่มีหลักฐานเพิ่ม"
+      }
+    },
+    {
+      "id": "iot07-q24",
+      "reference": "state-vs-event",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ถ้า PIRHIGH ค้างจาก moduleholdtime และ code รีเซ็ต timer ทุก HIGHsample ผลใดถูกต้อง?",
+      "explanation": "modulehold เพิ่มระยะก่อนเข้า softwareinactivity ได้ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot07-q24)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "softwareinactivityนับจากlastHIGHobservation ไม่ใช่ยืนยันเวลาคนเคลื่อนสุดท้าย"
+        },
+        {
+          "id": "b",
+          "text": "ไฟต้องดับทันทีครบ10sจากHIGHครั้งแรก"
+        },
+        {
+          "id": "c",
+          "text": "millisหยุดนับเมื่อHIGH"
+        },
+        {
+          "id": "d",
+          "text": "จำนวนคนเพิ่มทุกloopแน่นอน"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "W12 ต้องแสดง Motion Detected เมื่อ observedHIGH และ No Motion เมื่อ LOW แยกจาก Lamp ON ที่อาจค้าง 10s เมื่อ motionLOW แล้ว การนับ risingedges กับนับ HIGHsamples เป็นคนละสถิติและไม่มีอันใดรับรองจำนวนคนถ้าไม่มีหลักฐานเพิ่ม"
+      }
+    },
+    {
+      "id": "iot07-q25",
+      "reference": "state-vs-event",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: การจะนับคนจริงอย่างน่าเชื่อถือต้องมีอะไรเพิ่ม?",
+      "explanation": "ปัญหาคน / occupancy เกินข้ออ้างของ PIRDO ตัวเดียว (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot07-q25)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "แก้ชื่อvariableเป็นpeople"
+        },
+        {
+          "id": "b",
+          "text": "เพิ่มSerialbaudอย่างเดียว"
+        },
+        {
+          "id": "c",
+          "text": "เปลี่ยนสีLED"
+        },
+        {
+          "id": "d",
+          "text": "วิธี/ข้อมูลและvalidationที่รองรับ ไม่ใช่นับDOHIGHเฉยๆ"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "W12 ต้องแสดง Motion Detected เมื่อ observedHIGH และ No Motion เมื่อ LOW แยกจาก Lamp ON ที่อาจค้าง 10s เมื่อ motionLOW แล้ว การนับ risingedges กับนับ HIGHsamples เป็นคนละสถิติและไม่มีอันใดรับรองจำนวนคนถ้าไม่มีหลักฐานเพิ่ม"
+      }
+    },
+    {
+      "id": "iot07-self5",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): ออกแบบ display สองบรรทัดที่แยก sensor กับ lampstate",
+      "reference": "state-vs-event",
+      "explanation": "แสดง observedmotion และ actuatorstate แยกและอธิบาย holdtimer",
+      "rubric": [
+        "แสดง observedmotion และ actuatorstate แยกและอธิบาย holdtimer",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "W12 ต้องแสดง Motion Detected เมื่อ observedHIGH และ No Motion เมื่อ LOW แยกจาก Lamp ON ที่อาจค้าง 10s เมื่อ motionLOW แล้ว การนับ risingedges กับนับ HIGHsamples เป็นคนละสถิติและไม่มีอันใดรับรองจำนวนคนถ้าไม่มีหลักฐานเพิ่ม"
+      }
+    }
+  ]
+}

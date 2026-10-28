@@ -1,0 +1,552 @@
+{
+  "version": 1,
+  "revision": 1,
+  "baseRevision": 1,
+  "lesson": "internet-of-things-final-sensors-gpio-adc",
+  "questions": [
+    {
+      "id": "iot02-q06",
+      "reference": "gpio",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ขาตัวอย่างใดรับ analog ได้แต่ไม่ควรใช้ขับ LED บน classic ESP32?",
+      "explanation": "GPIO34 เป็น input-only; pinout ต้องตรงรุ่น (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot02-q06)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "GPIO26ที่ใช้OUTPUTตามสเปก"
+        },
+        {
+          "id": "b",
+          "text": "GPIO27ที่ใช้OUTPUTตามสเปก"
+        },
+        {
+          "id": "c",
+          "text": "GPIO34"
+        },
+        {
+          "id": "d",
+          "text": "GPIO25ที่ใช้OUTPUTตามสเปก"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pinMode(pin,INPUT) กำหนดรับข้อมูล high impedance; OUTPUT ใช้ขับ logic; INPUT_PULLUP ใช้ได้เฉพาะขาที่รองรับ GPIO34–39 ของ classic ESP32 เป็น input-only และไม่มี software pullup / pulldown ภายใน จึงไม่ใช้ GPIO34 ขับไฟหรือสมมติว่าตั้ง INPUT_PULLUP ได้"
+      }
+    },
+    {
+      "id": "iot02-q07",
+      "reference": "gpio",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: กำหนด INPUT บนขาที่ปลายเปิดโดยไม่มี pull อาจพบอะไร?",
+      "explanation": "highimpedance ต้องมีแหล่งกำหนดระดับที่ชัด (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot02-q07)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "กลายเป็นpoweroutput"
+        },
+        {
+          "id": "b",
+          "text": "ค่าลอย/ไวต่อสัญญาณรบกวน"
+        },
+        {
+          "id": "c",
+          "text": "ได้LOWที่รับประกันทุกสภาพ"
+        },
+        {
+          "id": "d",
+          "text": "ได้4095เสมอ"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pinMode(pin,INPUT) กำหนดรับข้อมูล high impedance; OUTPUT ใช้ขับ logic; INPUT_PULLUP ใช้ได้เฉพาะขาที่รองรับ GPIO34–39 ของ classic ESP32 เป็น input-only และไม่มี software pullup / pulldown ภายใน จึงไม่ใช้ GPIO34 ขับไฟหรือสมมติว่าตั้ง INPUT_PULLUP ได้"
+      }
+    },
+    {
+      "id": "iot02-q08",
+      "reference": "gpio",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ต้องการ pullup บน GPIO34 ของ classic ESP32 ควรทำอย่างไร?",
+      "explanation": "34–39 ไม่มี internalpullup / pulldown บน target นี้ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot02-q08)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ใช้ external bias ที่ออกแบบถูกต้องหรือเลือกขาที่รองรับ"
+        },
+        {
+          "id": "b",
+          "text": "INPUT_PULLUPรับประกันว่ามีinternalpullupบน34"
+        },
+        {
+          "id": "c",
+          "text": "ใช้5Vแทนpullupทุกกรณี"
+        },
+        {
+          "id": "d",
+          "text": "เขียนanalogReadResolution(12)เพื่อเปิดpullup"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pinMode(pin,INPUT) กำหนดรับข้อมูล high impedance; OUTPUT ใช้ขับ logic; INPUT_PULLUP ใช้ได้เฉพาะขาที่รองรับ GPIO34–39 ของ classic ESP32 เป็น input-only และไม่มี software pullup / pulldown ภายใน จึงไม่ใช้ GPIO34 ขับไฟหรือสมมติว่าตั้ง INPUT_PULLUP ได้"
+      }
+    },
+    {
+      "id": "iot02-q09",
+      "reference": "gpio",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: สมมติ bool active=true; int level=active?1:0; ค่า level เท่าใด?",
+      "explanation": "ternary เลือก 1เมื่อ conditiontrue (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot02-q09)",
+      "type": "numeric",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pinMode(pin,INPUT) กำหนดรับข้อมูล high impedance; OUTPUT ใช้ขับ logic; INPUT_PULLUP ใช้ได้เฉพาะขาที่รองรับ GPIO34–39 ของ classic ESP32 เป็น input-only และไม่มี software pullup / pulldown ภายใน จึงไม่ใช้ GPIO34 ขับไฟหรือสมมติว่าตั้ง INPUT_PULLUP ได้"
+      }
+    },
+    {
+      "id": "iot02-q10",
+      "reference": "gpio",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ก่อนใช้ digitalWrite เพื่อควบคุมสถานะ output ต้องทำอะไร?",
+      "explanation": "API / GPIOmode ต้องสอดคล้องกับการใช้งาน (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot02-q10)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ตั้งทุกขาINPUTเท่านั้น"
+        },
+        {
+          "id": "b",
+          "text": "รอanalogReadคืน5V"
+        },
+        {
+          "id": "c",
+          "text": "เลือกขาที่ขับได้และกำหนด OUTPUT"
+        },
+        {
+          "id": "d",
+          "text": "ทำให้pinเป็นGND"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "pinMode(pin,INPUT) กำหนดรับข้อมูล high impedance; OUTPUT ใช้ขับ logic; INPUT_PULLUP ใช้ได้เฉพาะขาที่รองรับ GPIO34–39 ของ classic ESP32 เป็น input-only และไม่มี software pullup / pulldown ภายใน จึงไม่ใช้ GPIO34 ขับไฟหรือสมมติว่าตั้ง INPUT_PULLUP ได้"
+      }
+    },
+    {
+      "id": "iot02-self2",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): วางแผนอ่าน DO ที่มีระดับและ polarity ชัด",
+      "reference": "gpio",
+      "explanation": "เลือกขาที่เหมาะ ระบุ pull / externalbias และ commonreference ก่อนอ่าน",
+      "rubric": [
+        "เลือกขาที่เหมาะ ระบุ pull / externalbias และ commonreference ก่อนอ่าน",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "pinMode(pin,INPUT) กำหนดรับข้อมูล high impedance; OUTPUT ใช้ขับ logic; INPUT_PULLUP ใช้ได้เฉพาะขาที่รองรับ GPIO34–39 ของ classic ESP32 เป็น input-only และไม่มี software pullup / pulldown ภายใน จึงไม่ใช้ GPIO34 ขับไฟหรือสมมติว่าตั้ง INPUT_PULLUP ได้"
+      }
+    },
+    {
+      "id": "iot02-q11",
+      "reference": "adc-resolution",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ADC12bit มีจำนวน code ทั้งหมดเท่าใด?",
+      "explanation": "2^12=4096code ตั้งแต่ 0ถึง 4095 (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot02-q11)",
+      "type": "numeric",
+      "answer": 4096,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตั้ง analogReadResolution(12) ให้ raw range0..4095 อย่างชัดเจน Raw เป็นค่าที่ไม่ calibrate ไม่ใช่ millivolts โดยตรง A10 ใช้ตัวอย่าง 0..1023 แบบ 10bit จึงต้องปรับตามบอร์ด actual attenuation / input range ต่างกันและมี nonlinearity อย่าอ้างว่า 4095 หมายถึง 3.3V อย่างแม่นยำทุกการตั้งค่า"
+      }
+    },
+    {
+      "id": "iot02-q12",
+      "reference": "adc-resolution",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ADC12bit raw สูงสุดตามการตั้งค่าคือเท่าใด?",
+      "explanation": "count4096 แต่ index สูงสุด 4095 (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot02-q12)",
+      "type": "numeric",
+      "answer": 4095,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตั้ง analogReadResolution(12) ให้ raw range0..4095 อย่างชัดเจน Raw เป็นค่าที่ไม่ calibrate ไม่ใช่ millivolts โดยตรง A10 ใช้ตัวอย่าง 0..1023 แบบ 10bit จึงต้องปรับตามบอร์ด actual attenuation / input range ต่างกันและมี nonlinearity อย่าอ้างว่า 4095 หมายถึง 3.3V อย่างแม่นยำทุกการตั้งค่า"
+      }
+    },
+    {
+      "id": "iot02-q13",
+      "reference": "adc-resolution",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ArduinoESP32 ในโหมด ADCOneShot เรียก analogRead ครั้งเดียว ได้ข้อมูลเวลาแบบใด?",
+      "explanation": "oneshotAPI คืนผลการแปลงครั้งที่ร้องขอ;หากต้องการ time-series ต้องอ่านหลายครั้งพร้อมข้อมูลเวลา (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot02-q13)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ประวัติแรงดันทุกเวลาตั้งแต่boot"
+        },
+        {
+          "id": "b",
+          "text": "ค่าเฉลี่ยทุกsampleอนาคตโดยอัตโนมัติ"
+        },
+        {
+          "id": "c",
+          "text": "จำนวนGPIOoutputที่ใช้ได้ทั้งหมด"
+        },
+        {
+          "id": "d",
+          "text": "หนึ่งsampleจากการแปลงที่เรียก ไม่ใช่บันทึกwaveformทั้งหมด"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตั้ง analogReadResolution(12) ให้ raw range0..4095 อย่างชัดเจน Raw เป็นค่าที่ไม่ calibrate ไม่ใช่ millivolts โดยตรง A10 ใช้ตัวอย่าง 0..1023 แบบ 10bit จึงต้องปรับตามบอร์ด actual attenuation / input range ต่างกันและมี nonlinearity อย่าอ้างว่า 4095 หมายถึง 3.3V อย่างแม่นยำทุกการตั้งค่า"
+      }
+    },
+    {
+      "id": "iot02-q14",
+      "reference": "adc-resolution",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: อ่าน raw=2048 จาก 12bit สรุปว่าแรงดันจริงเท่ากับ 1.650000V เสมอได้หรือไม่?",
+      "explanation": "rawcount ไม่ใช่แรงดันที่ calibrate แล้ว (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot02-q14)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ได้เพราะ2048คือหน่วยmV"
+        },
+        {
+          "id": "b",
+          "text": "ได้ถ้าเปลี่ยนชนิดเป็นfloat"
+        },
+        {
+          "id": "c",
+          "text": "ไม่ได้ ต้องรู้attenuation/calibration/ช่วงวัดและข้อคลาดเคลื่อน"
+        },
+        {
+          "id": "d",
+          "text": "ได้เพราะADCไม่มีnonlinearity"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตั้ง analogReadResolution(12) ให้ raw range0..4095 อย่างชัดเจน Raw เป็นค่าที่ไม่ calibrate ไม่ใช่ millivolts โดยตรง A10 ใช้ตัวอย่าง 0..1023 แบบ 10bit จึงต้องปรับตามบอร์ด actual attenuation / input range ต่างกันและมี nonlinearity อย่าอ้างว่า 4095 หมายถึง 3.3V อย่างแม่นยำทุกการตั้งค่า"
+      }
+    },
+    {
+      "id": "iot02-q15",
+      "reference": "adc-resolution",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: API ใดใน Arduino-ESP32 ให้ผลหน่วย millivolts ตามการ calibrate ของ core?",
+      "explanation": "ยังต้องตรวจคุณภาพการวัดและรุ่น SoC ตามเอกสาร ADC (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot02-q15)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Serial.println(pin)"
+        },
+        {
+          "id": "b",
+          "text": "analogReadMilliVolts(pin)"
+        },
+        {
+          "id": "c",
+          "text": "digitalRead(pin)"
+        },
+        {
+          "id": "d",
+          "text": "pinMode(pin,INPUT)"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตั้ง analogReadResolution(12) ให้ raw range0..4095 อย่างชัดเจน Raw เป็นค่าที่ไม่ calibrate ไม่ใช่ millivolts โดยตรง A10 ใช้ตัวอย่าง 0..1023 แบบ 10bit จึงต้องปรับตามบอร์ด actual attenuation / input range ต่างกันและมี nonlinearity อย่าอ้างว่า 4095 หมายถึง 3.3V อย่างแม่นยำทุกการตั้งค่า"
+      }
+    },
+    {
+      "id": "iot02-self3",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): อธิบายความต่าง raw count,resolution,voltage และ calibration",
+      "reference": "adc-resolution",
+      "explanation": "แยก fullscale / codecount / attenuation;ใช้ analogReadMilliVolts เมื่อต้องการ API ผล mV และยังตรวจ actualsensor",
+      "rubric": [
+        "แยก fullscale / codecount / attenuation;ใช้ analogReadMilliVolts เมื่อต้องการ API ผล mV และยังตรวจ actualsensor",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ตั้ง analogReadResolution(12) ให้ raw range0..4095 อย่างชัดเจน Raw เป็นค่าที่ไม่ calibrate ไม่ใช่ millivolts โดยตรง A10 ใช้ตัวอย่าง 0..1023 แบบ 10bit จึงต้องปรับตามบอร์ด actual attenuation / input range ต่างกันและมี nonlinearity อย่าอ้างว่า 4095 หมายถึง 3.3V อย่างแม่นยำทุกการตั้งค่า"
+      }
+    },
+    {
+      "id": "iot02-q16",
+      "reference": "calibration",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: คำนวณแบบจำนวนเต็ม: 512*100 / 1023 ได้เท่าใด?",
+      "explanation": "ผลจำนวนเต็มตัดเศษ ไม่ได้กลายเป็น floating เพียงเพราะ assign ลง float (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot02-q16)",
+      "type": "numeric",
+      "answer": 50,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "map() ของ Arduino คำนวณจำนวนเต็ม จึงอาจตัดเศษแม้เก็บผลใน float ตัวอย่างเปอร์เซ็นต์จาก endpoints เป็น normalized index เท่านั้น หากต้องการ moisture%จริงต้องมีการปรับเทียบกับวิธีอ้างอิงและรู้ว่าเปียกทำให้ raw สูงหรือต่ำ ตรวจ endpoints ไม่เท่ากัน และ clamp ตามนโยบายที่ประกาศ"
+      }
+    },
+    {
+      "id": "iot02-q17",
+      "reference": "calibration",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: กำหนด dry=3000,wet=1000,raw=2000; ดัชนีเปียก=(dry−raw)/(dry−wet)*100 มีค่าเท่าใด?",
+      "explanation": "1000 / 2000×100=50 เป็น authorednormalizedindex ไม่ใช่ physicalmoisture ที่ยืนยันแล้ว (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot02-q17)",
+      "type": "numeric",
+      "answer": 50,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "map() ของ Arduino คำนวณจำนวนเต็ม จึงอาจตัดเศษแม้เก็บผลใน float ตัวอย่างเปอร์เซ็นต์จาก endpoints เป็น normalized index เท่านั้น หากต้องการ moisture%จริงต้องมีการปรับเทียบกับวิธีอ้างอิงและรู้ว่าเปียกทำให้ raw สูงหรือต่ำ ตรวจ endpoints ไม่เท่ากัน และ clamp ตามนโยบายที่ประกาศ"
+      }
+    },
+    {
+      "id": "iot02-q18",
+      "reference": "calibration",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: dry กับ wet ที่อ่านเพื่อ calibration เท่ากัน ควรทำอย่างไร?",
+      "explanation": "ต้องมีช่วง calibration ที่ไม่เป็นศูนย์ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot02-q18)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ถือว่าทุกค่าคือ100%"
+        },
+        {
+          "id": "b",
+          "text": "แก้ด้วยเพิ่มbaudrate"
+        },
+        {
+          "id": "c",
+          "text": "ปฏิเสธcalibrationก่อนหารศูนย์"
+        },
+        {
+          "id": "d",
+          "text": "หารต่อแล้วถือว่าศูนย์เปอร์เซ็นต์"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "map() ของ Arduino คำนวณจำนวนเต็ม จึงอาจตัดเศษแม้เก็บผลใน float ตัวอย่างเปอร์เซ็นต์จาก endpoints เป็น normalized index เท่านั้น หากต้องการ moisture%จริงต้องมีการปรับเทียบกับวิธีอ้างอิงและรู้ว่าเปียกทำให้ raw สูงหรือต่ำ ตรวจ endpoints ไม่เท่ากัน และ clamp ตามนโยบายที่ประกาศ"
+      }
+    },
+    {
+      "id": "iot02-q19",
+      "reference": "calibration",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ทำไมบาง soilmodule ต้องกลับทิศทางการ map?",
+      "explanation": "ต้องทดสอบ dry / wet ไม่เดาทิศ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot02-q19)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เพราะไม่มีGNDใดๆในADC"
+        },
+        {
+          "id": "b",
+          "text": "ทิศของrawต่อความชื้นขึ้นกับโมดูลและการต่อจริง"
+        },
+        {
+          "id": "c",
+          "text": "เพราะทุกADCอ่านค่าติดลบเท่านั้น"
+        },
+        {
+          "id": "d",
+          "text": "เพราะGPIO34เป็นoutput"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "map() ของ Arduino คำนวณจำนวนเต็ม จึงอาจตัดเศษแม้เก็บผลใน float ตัวอย่างเปอร์เซ็นต์จาก endpoints เป็น normalized index เท่านั้น หากต้องการ moisture%จริงต้องมีการปรับเทียบกับวิธีอ้างอิงและรู้ว่าเปียกทำให้ raw สูงหรือต่ำ ตรวจ endpoints ไม่เท่ากัน และ clamp ตามนโยบายที่ประกาศ"
+      }
+    },
+    {
+      "id": "iot02-q20",
+      "reference": "calibration",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ดัชนีไม่ clamp ได้ 120%; หากประกาศ policy clamp0..100 ผลที่แสดงคือเท่าใด?",
+      "explanation": "clamp ตามนโยบายแสดง 100 และควรแจ้ง out-of-calibrationrange ถ้าต้องวิเคราะห์ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot02-q20)",
+      "type": "numeric",
+      "answer": 100,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "map() ของ Arduino คำนวณจำนวนเต็ม จึงอาจตัดเศษแม้เก็บผลใน float ตัวอย่างเปอร์เซ็นต์จาก endpoints เป็น normalized index เท่านั้น หากต้องการ moisture%จริงต้องมีการปรับเทียบกับวิธีอ้างอิงและรู้ว่าเปียกทำให้ raw สูงหรือต่ำ ตรวจ endpoints ไม่เท่ากัน และ clamp ตามนโยบายที่ประกาศ"
+      }
+    },
+    {
+      "id": "iot02-self4",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): ออกแบบ dry / wetcalibration และทดสอบช่วงนอก endpoints",
+      "reference": "calibration",
+      "explanation": "กำหนดทิศทาง,ช่วง,guardzero และ unit ก่อนแปลงข้อมูล",
+      "rubric": [
+        "กำหนดทิศทาง,ช่วง,guardzero และ unit ก่อนแปลงข้อมูล",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "map() ของ Arduino คำนวณจำนวนเต็ม จึงอาจตัดเศษแม้เก็บผลใน float ตัวอย่างเปอร์เซ็นต์จาก endpoints เป็น normalized index เท่านั้น หากต้องการ moisture%จริงต้องมีการปรับเทียบกับวิธีอ้างอิงและรู้ว่าเปียกทำให้ raw สูงหรือต่ำ ตรวจ endpoints ไม่เท่ากัน และ clamp ตามนโยบายที่ประกาศ"
+      }
+    },
+    {
+      "id": "iot02-q21",
+      "reference": "voltage",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: divider Vin=5V,Rtop10kΩ,Rbottom15kΩ ให้ Vout อุดมคติกี่ V?",
+      "explanation": "5×15/(10+15)=3.0V ไม่ใช่การรับรองวงจรจริง (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot02-q21)",
+      "type": "numeric",
+      "answer": 3,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตรวจ VCC,GND,AO / DO,inputlimits และ sensorload ก่อนอ่าน หาก 5V Echo ต้องลดระดับใช้ divider หรือ levelshifter ที่ตรวจแล้ว ตัวอย่าง Rtop10kΩ,Rbottom15kΩให้ Vout=Vin×15/(10+15)=3.0V เมื่อ Vin5V เป็นการคำนวณอุดมคติ ต้องพิจารณา tolerance / logicthreshold และรุ่นจริง ห้ามใช้ divider จ่ายกำลังให้ relay"
+      }
+    },
+    {
+      "id": "iot02-q22",
+      "reference": "voltage",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: divider ตามข้อก่อนมีความต้านทานรวมเท่าใด หน่วย kΩ?",
+      "explanation": "ตัวต้านทานสองตัวต่ออนุกรมรวม 25kΩ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot02-q22)",
+      "type": "numeric",
+      "answer": 25,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตรวจ VCC,GND,AO / DO,inputlimits และ sensorload ก่อนอ่าน หาก 5V Echo ต้องลดระดับใช้ divider หรือ levelshifter ที่ตรวจแล้ว ตัวอย่าง Rtop10kΩ,Rbottom15kΩให้ Vout=Vin×15/(10+15)=3.0V เมื่อ Vin5V เป็นการคำนวณอุดมคติ ต้องพิจารณา tolerance / logicthreshold และรุ่นจริง ห้ามใช้ divider จ่ายกำลังให้ relay"
+      }
+    },
+    {
+      "id": "iot02-q23",
+      "reference": "voltage",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: Vin5V ผ่าน Rtotal25kΩ กระแส divider อุดมคติกี่ mA?",
+      "explanation": "ใช้กฎโอห์ม 5V หาร 25kΩได้ 0.2mA;ค่าอุดมคติของ divider ไม่ใช่กระแสที่ GPIO ควรจ่ายให้ load (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot02-q23)",
+      "type": "numeric",
+      "answer": 0.2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตรวจ VCC,GND,AO / DO,inputlimits และ sensorload ก่อนอ่าน หาก 5V Echo ต้องลดระดับใช้ divider หรือ levelshifter ที่ตรวจแล้ว ตัวอย่าง Rtop10kΩ,Rbottom15kΩให้ Vout=Vin×15/(10+15)=3.0V เมื่อ Vin5V เป็นการคำนวณอุดมคติ ต้องพิจารณา tolerance / logicthreshold และรุ่นจริง ห้ามใช้ divider จ่ายกำลังให้ relay"
+      }
+    },
+    {
+      "id": "iot02-q24",
+      "reference": "voltage",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: raw ค้าง 4095 หลังต่อ sensor5V ควรเริ่มอย่างไร?",
+      "explanation": "อาจเป็น saturation หรือ wiringerror ไม่ควรแปลเป็น physicalmeasurement เงียบๆ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot02-q24)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "หยุดต่อที่เสี่ยง ตรวจsignalvoltage/limits/pin/attenuation"
+        },
+        {
+          "id": "b",
+          "text": "สรุปทันทีว่าความชื้น100%จริง"
+        },
+        {
+          "id": "c",
+          "text": "ต่อcoilrelayเพื่อดึงแรงดันลง"
+        },
+        {
+          "id": "d",
+          "text": "เพิ่มrangeคำนวณให้เป็น65535"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตรวจ VCC,GND,AO / DO,inputlimits และ sensorload ก่อนอ่าน หาก 5V Echo ต้องลดระดับใช้ divider หรือ levelshifter ที่ตรวจแล้ว ตัวอย่าง Rtop10kΩ,Rbottom15kΩให้ Vout=Vin×15/(10+15)=3.0V เมื่อ Vin5V เป็นการคำนวณอุดมคติ ต้องพิจารณา tolerance / logicthreshold และรุ่นจริง ห้ามใช้ divider จ่ายกำลังให้ relay"
+      }
+    },
+    {
+      "id": "iot02-q25",
+      "reference": "voltage",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: วงจร divider อุดมคติที่คำนวณ 3V แล้ว ยังต้องตรวจอะไร?",
+      "explanation": "ค่าคำนวณไม่ครอบคลุมความคลาดเคลื่อนและ dynamicbehavior (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot02-q25)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เพียงสีสายเท่านั้น"
+        },
+        {
+          "id": "b",
+          "text": "ชื่อไฟล์Arduino"
+        },
+        {
+          "id": "c",
+          "text": "ไม่ต้องตรวจอะไรอีก"
+        },
+        {
+          "id": "d",
+          "text": "tolerance,logicthreshold,loading,pulseและโมดูลจริง"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตรวจ VCC,GND,AO / DO,inputlimits และ sensorload ก่อนอ่าน หาก 5V Echo ต้องลดระดับใช้ divider หรือ levelshifter ที่ตรวจแล้ว ตัวอย่าง Rtop10kΩ,Rbottom15kΩให้ Vout=Vin×15/(10+15)=3.0V เมื่อ Vin5V เป็นการคำนวณอุดมคติ ต้องพิจารณา tolerance / logicthreshold และรุ่นจริง ห้ามใช้ divider จ่ายกำลังให้ relay"
+      }
+    },
+    {
+      "id": "iot02-self5",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): ลำดับ debug เมื่อ raw ค้าง 0 / 4095",
+      "reference": "voltage",
+      "explanation": "แยก power / ground / wiring / pin / attenuation / calibration และทดสอบแรงดันอย่างปลอดภัย",
+      "rubric": [
+        "แยก power / ground / wiring / pin / attenuation / calibration และทดสอบแรงดันอย่างปลอดภัย",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ตรวจ VCC,GND,AO / DO,inputlimits และ sensorload ก่อนอ่าน หาก 5V Echo ต้องลดระดับใช้ divider หรือ levelshifter ที่ตรวจแล้ว ตัวอย่าง Rtop10kΩ,Rbottom15kΩให้ Vout=Vin×15/(10+15)=3.0V เมื่อ Vin5V เป็นการคำนวณอุดมคติ ต้องพิจารณา tolerance / logicthreshold และรุ่นจริง ห้ามใช้ divider จ่ายกำลังให้ relay"
+      }
+    }
+  ]
+}

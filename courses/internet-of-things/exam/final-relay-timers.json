@@ -1,0 +1,552 @@
+{
+  "version": 1,
+  "revision": 1,
+  "baseRevision": 1,
+  "lesson": "internet-of-things-final-relay-timers",
+  "questions": [
+    {
+      "id": "iot08-q06",
+      "reference": "polarity",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: สมมติ activeLOW และ lampON=true; physicalHIGHflag=!lampON มีค่า int เท่าใด?",
+      "explanation": "ON จึง INLOW ใน assumption นี้ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot08-q06)",
+      "type": "numeric",
+      "answer": 0,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "บทนี้สมมติ relaymodule ที่ตรวจแล้วรับ logic3.3V และ activeLOW จึง LampON→INLOW และ OFF→INHIGH ไม่ใช่กฎทุก module ตั้ง OFF ใน setup และใช้ hardwarebias ที่เหมาะหากต้องป้องกัน startupglitch; softwareinit อย่างเดียวไม่รับรองช่วง boot / brownout"
+      }
+    },
+    {
+      "id": "iot08-q07",
+      "reference": "polarity",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: activeLOWrelay ต่อ compatibleGPIO แล้ว แต่โค้ดเริ่ม setup สั่ง LOW โดยไม่ตั้ง OFF ก่อน อาจเกิดอะไร?",
+      "explanation": "polarity / boot สภาพจริงต้องตรวจ;software เพียงอย่างเดียวไม่รับรองช่วงก่อน setup (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot08-q07)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่ต้องตรวจbootpinเพราะมีoptocoupler"
+        },
+        {
+          "id": "b",
+          "text": "เผลอเปิดloadในstartup;ตั้งOFFให้เร็วและออกแบบbias/enableช่วงresetพร้อมตรวจpulseจริง"
+        },
+        {
+          "id": "c",
+          "text": "LOWรับประกันOFFทุกmodule"
+        },
+        {
+          "id": "d",
+          "text": "codecompileผ่านจึงไม่มีstartupglitch"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "บทนี้สมมติ relaymodule ที่ตรวจแล้วรับ logic3.3V และ activeLOW จึง LampON→INLOW และ OFF→INHIGH ไม่ใช่กฎทุก module ตั้ง OFF ใน setup และใช้ hardwarebias ที่เหมาะหากต้องป้องกัน startupglitch; softwareinit อย่างเดียวไม่รับรองช่วง boot / brownout"
+      }
+    },
+    {
+      "id": "iot08-q08",
+      "reference": "polarity",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: การตั้ง OFF ใน setup ยืนยันไม่มี glitch ระหว่าง boot ทุกกรณีหรือไม่?",
+      "explanation": "ก่อน setup ขาอาจยังไม่อยู่ใน state ที่ต้องการ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot08-q08)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่ ต้องออกแบบhardwarebiasและตรวจpowersequence"
+        },
+        {
+          "id": "b",
+          "text": "ยืนยันได้จากภาษาC++อย่างเดียว"
+        },
+        {
+          "id": "c",
+          "text": "ยืนยันได้เมื่อใช้OLED128x64"
+        },
+        {
+          "id": "d",
+          "text": "ยืนยันได้เพราะขาVCCสีแดง"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "บทนี้สมมติ relaymodule ที่ตรวจแล้วรับ logic3.3V และ activeLOW จึง LampON→INLOW และ OFF→INHIGH ไม่ใช่กฎทุก module ตั้ง OFF ใน setup และใช้ hardwarebias ที่เหมาะหากต้องป้องกัน startupglitch; softwareinit อย่างเดียวไม่รับรองช่วง boot / brownout"
+      }
+    },
+    {
+      "id": "iot08-q09",
+      "reference": "polarity",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ย้ายไป moduleactiveHIGH ควรแก้อะไรอย่างชัดเจน?",
+      "explanation": "polarity เป็น configuration ของ module (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot08-q09)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เฉพาะชื่อบทเรียน"
+        },
+        {
+          "id": "b",
+          "text": "เปลี่ยนanswerbankเก่าเงียบๆ"
+        },
+        {
+          "id": "c",
+          "text": "ต่อcoilตรงเพราะpolarityต่าง"
+        },
+        {
+          "id": "d",
+          "text": "mappingON/OFFphysicallevelและตรวจelectricalใหม่"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "บทนี้สมมติ relaymodule ที่ตรวจแล้วรับ logic3.3V และ activeLOW จึง LampON→INLOW และ OFF→INHIGH ไม่ใช่กฎทุก module ตั้ง OFF ใน setup และใช้ hardwarebias ที่เหมาะหากต้องป้องกัน startupglitch; softwareinit อย่างเดียวไม่รับรองช่วง boot / brownout"
+      }
+    },
+    {
+      "id": "iot08-q10",
+      "reference": "polarity",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: S12 ใช้ภาพ ESP8266 ควรนำเลขขามา ESP32 อย่างไร?",
+      "explanation": "board ต่างตระกูลมีขา / aliases ต่างกัน (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot08-q10)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ใช้ตามสีเส้นอย่างเดียว"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ต้องดูVCC/GND"
+        },
+        {
+          "id": "c",
+          "text": "ตรวจtargetpinoutและประกาศmappingตัวอย่างใหม่"
+        },
+        {
+          "id": "d",
+          "text": "copyทุกเลขแล้วรับรองเหมือนกัน"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "บทนี้สมมติ relaymodule ที่ตรวจแล้วรับ logic3.3V และ activeLOW จึง LampON→INLOW และ OFF→INHIGH ไม่ใช่กฎทุก module ตั้ง OFF ใน setup และใช้ hardwarebias ที่เหมาะหากต้องป้องกัน startupglitch; softwareinit อย่างเดียวไม่รับรองช่วง boot / brownout"
+      }
+    },
+    {
+      "id": "iot08-self2",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): ออกแบบฟังก์ชัน mappingLampstate ไป physicalIN",
+      "reference": "polarity",
+      "explanation": "กำหนด activelevel สองค่าและทดสอบ ON / OFF / boot โดยแยก simulation จาก hardware",
+      "rubric": [
+        "กำหนด activelevel สองค่าและทดสอบ ON / OFF / boot โดยแยก simulation จาก hardware",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "บทนี้สมมติ relaymodule ที่ตรวจแล้วรับ logic3.3V และ activeLOW จึง LampON→INLOW และ OFF→INHIGH ไม่ใช่กฎทุก module ตั้ง OFF ใน setup และใช้ hardwarebias ที่เหมาะหากต้องป้องกัน startupglitch; softwareinit อย่างเดียวไม่รับรองช่วง boot / brownout"
+      }
+    },
+    {
+      "id": "iot08-q11",
+      "reference": "elapsed",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: lastSeen1000,now10999; elapsed กี่ ms?",
+      "explanation": "10999−1000=9999ms ยังน้อยกว่า 10000 จึงยังไม่ครบ timeout;อย่าปิดก่อนขอบที่กำหนด (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot08-q11)",
+      "type": "numeric",
+      "answer": 9999,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เก็บ uint32_t lastSeen กับ now และทดสอบ uint32_t(now-lastSeen)>=10000U เมื่อ LampON และไม่มี motion ใช้เวลาที่สังเกต PIR จริงใน loop ห้าม delay10000 เพราะจะไม่กลับมาอ่าน retrigger sampling / I2Clatency ทำให้เวลาปิดจริงอาจช้ากว่า deadline ตามรอบ poll"
+      }
+    },
+    {
+      "id": "iot08-q12",
+      "reference": "elapsed",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: เปรียบเทียบ timeout ด้วย>=10000:เวลาพอดี deadline ครั้งแรกให้ผล boolint เท่าใดเมื่อไม่มี motion ใหม่?",
+      "explanation": "ใช้>=รวม boundary ไม่ใช่>ที่รอเลยเวลาอย่างน้อยหนึ่ง tick (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot08-q12)",
+      "type": "numeric",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เก็บ uint32_t lastSeen กับ now และทดสอบ uint32_t(now-lastSeen)>=10000U เมื่อ LampON และไม่มี motion ใช้เวลาที่สังเกต PIR จริงใน loop ห้าม delay10000 เพราะจะไม่กลับมาอ่าน retrigger sampling / I2Clatency ทำให้เวลาปิดจริงอาจช้ากว่า deadline ตามรอบ poll"
+      }
+    },
+    {
+      "id": "iot08-q13",
+      "reference": "elapsed",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: เมื่อ LampON,PIRLOW และ elapsed9999 ตาม trace ควรเป็นอะไร?",
+      "explanation": "รอ>=10000 ตาม policy (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot08-q13)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "OFFเพราะใกล้ครบ"
+        },
+        {
+          "id": "b",
+          "text": "ERRORแน่นอน"
+        },
+        {
+          "id": "c",
+          "text": "เปลี่ยนsensorเป็นanalog"
+        },
+        {
+          "id": "d",
+          "text": "LampยังON"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เก็บ uint32_t lastSeen กับ now และทดสอบ uint32_t(now-lastSeen)>=10000U เมื่อ LampON และไม่มี motion ใช้เวลาที่สังเกต PIR จริงใน loop ห้าม delay10000 เพราะจะไม่กลับมาอ่าน retrigger sampling / I2Clatency ทำให้เวลาปิดจริงอาจช้ากว่า deadline ตามรอบ poll"
+      }
+    },
+    {
+      "id": "iot08-q14",
+      "reference": "elapsed",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ถ้า observedPIRHIGH เข้ามาในรอบที่ elapsed พอดี 10000ms policyretrigger ควรทำอะไรก่อน?",
+      "explanation": "สาขา motion มาก่อน timeout ป้องกัน OFF ชั่วคราวจากลำดับตรวจ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot08-q14)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ลบinputเพราะtimeoutสำคัญกว่า"
+        },
+        {
+          "id": "b",
+          "text": "ไม่เปลี่ยนlastSeenแม้HIGH"
+        },
+        {
+          "id": "c",
+          "text": "คงONและตั้งlastSeen=nowตามmotionbranch"
+        },
+        {
+          "id": "d",
+          "text": "ปิดหนึ่งรอบก่อนเปิดเสมอ"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เก็บ uint32_t lastSeen กับ now และทดสอบ uint32_t(now-lastSeen)>=10000U เมื่อ LampON และไม่มี motion ใช้เวลาที่สังเกต PIR จริงใน loop ห้าม delay10000 เพราะจะไม่กลับมาอ่าน retrigger sampling / I2Clatency ทำให้เวลาปิดจริงอาจช้ากว่า deadline ตามรอบ poll"
+      }
+    },
+    {
+      "id": "iot08-q15",
+      "reference": "elapsed",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: สมมติ poll สม่ำเสมอ 5Hz ไม่รวม jitter / API ความล่าช้ารอ poll ถัดไปมีขอบบนประมาณกี่ ms?",
+      "explanation": "หนึ่งคาบคือ 1000 / 5=200ms อาจตอบสนองทันทีหรือรอเกือบหนึ่งคาบ ไม่ใช่ hardwareguarantee (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot08-q15)",
+      "type": "numeric",
+      "answer": 200,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เก็บ uint32_t lastSeen กับ now และทดสอบ uint32_t(now-lastSeen)>=10000U เมื่อ LampON และไม่มี motion ใช้เวลาที่สังเกต PIR จริงใน loop ห้าม delay10000 เพราะจะไม่กลับมาอ่าน retrigger sampling / I2Clatency ทำให้เวลาปิดจริงอาจช้ากว่า deadline ตามรอบ poll"
+      }
+    },
+    {
+      "id": "iot08-self3",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): อธิบาย state หลัง 9999 และ 10000ms ที่ไม่มี motion",
+      "reference": "elapsed",
+      "explanation": "แยก integerelapsed / ขอบเปรียบเทียบและระบุ pollinglatency",
+      "rubric": [
+        "แยก integerelapsed / ขอบเปรียบเทียบและระบุ pollinglatency",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "เก็บ uint32_t lastSeen กับ now และทดสอบ uint32_t(now-lastSeen)>=10000U เมื่อ LampON และไม่มี motion ใช้เวลาที่สังเกต PIR จริงใน loop ห้าม delay10000 เพราะจะไม่กลับมาอ่าน retrigger sampling / I2Clatency ทำให้เวลาปิดจริงอาจช้ากว่า deadline ตามรอบ poll"
+      }
+    },
+    {
+      "id": "iot08-q16",
+      "reference": "retrigger",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: motion ที่ 1000ms และ 9000ms; deadline ปิดหลังไม่มี HIGH เพิ่มเติมเป็นกี่ ms?",
+      "explanation": "ใช้ lastSeen ล่าสุด 9000 ไม่ใช่ 1000 (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot08-q16)",
+      "type": "numeric",
+      "answer": 19000,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เมื่อ observedmotionHIGH ให้ lampON และ lastSeen=now ทุกครั้ง ถ้า LOW ให้ถือ ON จน elapsed ถึง 10000ms การมี HIGH ใหม่แม้ใกล้ deadline ทำให้ deadline เลื่อนไปตาม observation ล่าสุด ไม่ใช้เวลาตั้งแต่เปิดครั้งแรกเป็น inactivitytimer"
+      }
+    },
+    {
+      "id": "iot08-q17",
+      "reference": "retrigger",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: nextState เริ่ม OFF รับ HIGH ที่ 1000 แล้ว HIGH ที่ 9000ms ค่า seen หลังทั้งสอง event คือเท่าใด?",
+      "explanation": "event หลังต้องเขียนทับ seen เป็น 9000;ถ้าเก็บ 1000 จะปิดก่อนครบ inactivity ล่าสุด (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot08-q17)",
+      "type": "numeric",
+      "answer": 9000,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เมื่อ observedmotionHIGH ให้ lampON และ lastSeen=now ทุกครั้ง ถ้า LOW ให้ถือ ON จน elapsed ถึง 10000ms การมี HIGH ใหม่แม้ใกล้ deadline ทำให้ deadline เลื่อนไปตาม observation ล่าสุด ไม่ใช้เวลาตั้งแต่เปิดครั้งแรกเป็น inactivitytimer"
+      }
+    },
+    {
+      "id": "iot08-q18",
+      "reference": "retrigger",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: โค้ดที่ตั้ง lampON เมื่อ millis>=10000 โดยไม่เคยพบ motion ผิด requirement ใด?",
+      "explanation": "inactivitytimer ใช้กับ ON ที่เกิดจาก motion ไม่ใช่ startupcountdown สำหรับเปิด (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot08-q18)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ต้องเปิดเมื่อOLEDไม่ตอบเท่านั้น"
+        },
+        {
+          "id": "b",
+          "text": "PIRLOWหมายถึงtriggerเปิดตลอด"
+        },
+        {
+          "id": "c",
+          "text": "ควรเริ่มOFFและเปิดเมื่อobservedmotion ไม่ใช่เมื่อuptimeถึง10s"
+        },
+        {
+          "id": "d",
+          "text": "ควรเปิดเมื่อcompileเสร็จ"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เมื่อ observedmotionHIGH ให้ lampON และ lastSeen=now ทุกครั้ง ถ้า LOW ให้ถือ ON จน elapsed ถึง 10000ms การมี HIGH ใหม่แม้ใกล้ deadline ทำให้ deadline เลื่อนไปตาม observation ล่าสุด ไม่ใช้เวลาตั้งแต่เปิดครั้งแรกเป็น inactivitytimer"
+      }
+    },
+    {
+      "id": "iot08-q19",
+      "reference": "retrigger",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: PIRHIGH ค้างหลายรอบจาก holdtime จะมีผลกับ lastSeen อย่างไรใน code นี้?",
+      "explanation": "อธิบาย softwareinactivity กับ modulehold แยก (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot08-q19)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ล้างเป็น0ทุกครั้ง"
+        },
+        {
+          "id": "b",
+          "text": "updateทุกHIGHobservation"
+        },
+        {
+          "id": "c",
+          "text": "เก็บเวลาHIGHครั้งแรกเท่านั้น"
+        },
+        {
+          "id": "d",
+          "text": "ไม่updateเลย"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เมื่อ observedmotionHIGH ให้ lampON และ lastSeen=now ทุกครั้ง ถ้า LOW ให้ถือ ON จน elapsed ถึง 10000ms การมี HIGH ใหม่แม้ใกล้ deadline ทำให้ deadline เลื่อนไปตาม observation ล่าสุด ไม่ใช้เวลาตั้งแต่เปิดครั้งแรกเป็น inactivitytimer"
+      }
+    },
+    {
+      "id": "iot08-q20",
+      "reference": "retrigger",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: No Motion แต่ LampON หลัง HIGH ครั้งล่าสุด 2s เป็นบั๊กเสมอหรือไม่?",
+      "explanation": "sensorstate กับ actuatorholdstate ต่างกัน (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot08-q20)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่ เป็นholdwindowของinactivitytimer"
+        },
+        {
+          "id": "b",
+          "text": "ใช่เพราะสองstateต้องตรงกันเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "ใช่เพราะOLEDเป็นI2C"
+        },
+        {
+          "id": "d",
+          "text": "ใช่เพราะADC12bit"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เมื่อ observedmotionHIGH ให้ lampON และ lastSeen=now ทุกครั้ง ถ้า LOW ให้ถือ ON จน elapsed ถึง 10000ms การมี HIGH ใหม่แม้ใกล้ deadline ทำให้ deadline เลื่อนไปตาม observation ล่าสุด ไม่ใช้เวลาตั้งแต่เปิดครั้งแรกเป็น inactivitytimer"
+      }
+    },
+    {
+      "id": "iot08-self4",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): สร้าง trace ที่ motion กลับมาก่อน timeout และทำนาย state",
+      "reference": "retrigger",
+      "explanation": "คำนวณ lastSeen ทุก event และเปรียบเทียบ deadline ใหม่ ไม่สับสนเวลารวมกับเวลาขาด motion",
+      "rubric": [
+        "คำนวณ lastSeen ทุก event และเปรียบเทียบ deadline ใหม่ ไม่สับสนเวลารวมกับเวลาขาด motion",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "เมื่อ observedmotionHIGH ให้ lampON และ lastSeen=now ทุกครั้ง ถ้า LOW ให้ถือ ON จน elapsed ถึง 10000ms การมี HIGH ใหม่แม้ใกล้ deadline ทำให้ deadline เลื่อนไปตาม observation ล่าสุด ไม่ใช้เวลาตั้งแต่เปิดครั้งแรกเป็น inactivitytimer"
+      }
+    },
+    {
+      "id": "iot08-q21",
+      "reference": "rollover",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: uint32_t last=4294967040U,now=9744U; uint32_t(now-last)เท่าใด?",
+      "explanation": "ผ่าน wrap ด้วย mod2^32 (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot08-q21)",
+      "type": "numeric",
+      "answer": 10000,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "uint32_t ลบแบบ mod2^32 ช่วยผ่าน milliswrap เมื่อ elapsed จริงน้อยกว่าหนึ่งรอบเต็มและ polling ไม่เว้นจนกำกวม ใช้ now-lastSeen ไม่เปรียบ now>=lastSeen+timeout ตรงๆ การไม่ใช้ delay ยาวไม่ได้ทำให้ทุก APIzero-latency ต้องทดสอบ wrap และ startup แยก"
+      }
+    },
+    {
+      "id": "iot08-q22",
+      "reference": "rollover",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: uint32last=4294967040,now=4294967168; naive(now>=uint32(last+10000))ให้ boolint เท่าใดแม้ผ่านเพียง 128ms?",
+      "explanation": "deadline บวก wrap เหลือ 9744 ทำให้เทียบ absolute ผิดก่อน deadline ใช้ elapsedsubtraction (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot08-q22)",
+      "type": "numeric",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "uint32_t ลบแบบ mod2^32 ช่วยผ่าน milliswrap เมื่อ elapsed จริงน้อยกว่าหนึ่งรอบเต็มและ polling ไม่เว้นจนกำกวม ใช้ now-lastSeen ไม่เปรียบ now>=lastSeen+timeout ตรงๆ การไม่ใช้ delay ยาวไม่ได้ทำให้ทุก APIzero-latency ต้องทดสอบ wrap และ startup แยก"
+      }
+    },
+    {
+      "id": "iot08-q23",
+      "reference": "rollover",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: เหตุใด now>=lastSeen+timeout แบบบวกตรงจึงเสี่ยงเมื่อ wrap?",
+      "explanation": "elapsedsubtraction เหมาะกว่าภายใต้ขอบเวลา (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot08-q23)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เพราะOLEDไม่มีGND"
+        },
+        {
+          "id": "b",
+          "text": "ผลบวกdeadlineอาจwrapทำให้ลำดับเชิงตัวเลขผิด"
+        },
+        {
+          "id": "c",
+          "text": "เพราะboolไม่มีค่า"
+        },
+        {
+          "id": "d",
+          "text": "เพราะPIRต้องเป็นSPI"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "uint32_t ลบแบบ mod2^32 ช่วยผ่าน milliswrap เมื่อ elapsed จริงน้อยกว่าหนึ่งรอบเต็มและ polling ไม่เว้นจนกำกวม ใช้ now-lastSeen ไม่เปรียบ now>=lastSeen+timeout ตรงๆ การไม่ใช้ delay ยาวไม่ได้ทำให้ทุก APIzero-latency ต้องทดสอบ wrap และ startup แยก"
+      }
+    },
+    {
+      "id": "iot08-q24",
+      "reference": "rollover",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: uint32_t counter มี modulus เท่าใด (จำนวนค่าทั้งหมด)?",
+      "explanation": "ค่าตั้งแต่ 0ถึง 4294967295;จำนวนทั้งหมด 2^32 (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot08-q24)",
+      "type": "numeric",
+      "answer": 4294967296,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "uint32_t ลบแบบ mod2^32 ช่วยผ่าน milliswrap เมื่อ elapsed จริงน้อยกว่าหนึ่งรอบเต็มและ polling ไม่เว้นจนกำกวม ใช้ now-lastSeen ไม่เปรียบ now>=lastSeen+timeout ตรงๆ การไม่ใช้ delay ยาวไม่ได้ทำให้ทุก APIzero-latency ต้องทดสอบ wrap และ startup แยก"
+      }
+    },
+    {
+      "id": "iot08-q25",
+      "reference": "rollover",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: unsignedelapsed วิธีนี้ใช้โดยไม่ระบุข้อจำกัดการเว้นอ่านนานได้หรือไม่?",
+      "explanation": "modulocounter อย่างเดียวแยกหลาย wrap ไม่ได้ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot08-q25)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ได้แม้เว้น100ปี"
+        },
+        {
+          "id": "b",
+          "text": "ได้เพราะsignedoverflowปลอดภัยเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "ได้เมื่อใส่delay10000เสมอ"
+        },
+        {
+          "id": "d",
+          "text": "ไม่ได้ ต้องไม่ปล่อยelapsedจริงเกินหนึ่งwrapจนกำกวม"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "uint32_t ลบแบบ mod2^32 ช่วยผ่าน milliswrap เมื่อ elapsed จริงน้อยกว่าหนึ่งรอบเต็มและ polling ไม่เว้นจนกำกวม ใช้ now-lastSeen ไม่เปรียบ now>=lastSeen+timeout ตรงๆ การไม่ใช้ delay ยาวไม่ได้ทำให้ทุก APIzero-latency ต้องทดสอบ wrap และ startup แยก"
+      }
+    },
+    {
+      "id": "iot08-self5",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): ออกแบบ test ก่อน / หลัง wrap และตรวจ inputdata ชนิด 32bit",
+      "reference": "rollover",
+      "explanation": "ระบุ modulo,exact10000boundary และข้อจำกัดหนึ่ง wrap พร้อม goldentrace อิสระ",
+      "rubric": [
+        "ระบุ modulo,exact10000boundary และข้อจำกัดหนึ่ง wrap พร้อม goldentrace อิสระ",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "uint32_t ลบแบบ mod2^32 ช่วยผ่าน milliswrap เมื่อ elapsed จริงน้อยกว่าหนึ่งรอบเต็มและ polling ไม่เว้นจนกำกวม ใช้ now-lastSeen ไม่เปรียบ now>=lastSeen+timeout ตรงๆ การไม่ใช้ delay ยาวไม่ได้ทำให้ทุก APIzero-latency ต้องทดสอบ wrap และ startup แยก"
+      }
+    }
+  ]
+}

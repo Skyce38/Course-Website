@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "internet-of-things-final-pir-motion",
+  "title": "FINAL 07 — PIR และการตรวจจับการเคลื่อนไหว",
+  "questions": [
+    {
+      "id": "iot07-q01",
+      "reference": "pir-principle",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: PIR ย่อมาจากหลักการใด?",
+      "explanation": "PIR ไม่ใช่ activeultrasonicsensor (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot07-q01)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "PulseInternetRadarส่งultrasound"
+        },
+        {
+          "id": "b",
+          "text": "ProtocolI2CRelay"
+        },
+        {
+          "id": "c",
+          "text": "PressureInputResistor"
+        },
+        {
+          "id": "d",
+          "text": "Passive Infraredรับการเปลี่ยนแปลงรังสี"
+        }
+      ],
+      "answer": "d"
+    },
+    {
+      "id": "iot07-q02",
+      "reference": "pir-principle",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: คนยืนนิ่งไม่เปลี่ยน zone นานแล้ว PIRLOW ควรสรุปอะไร?",
+      "explanation": "PIR ตอบการเปลี่ยนแปลงไม่รับรอง continuouspresence (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot07-q02)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "มีคนสองคนแน่นอน"
+        },
+        {
+          "id": "b",
+          "text": "ระยะคน0cm"
+        },
+        {
+          "id": "c",
+          "text": "ยังสรุปว่าห้องไม่มีคนไม่ได้"
+        },
+        {
+          "id": "d",
+          "text": "ไม่มีคนแน่นอน"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "id": "iot07-q03",
+      "reference": "pir-principle",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: Fresnellens ในภาพ PIR มีบทบาทใดตามหลักการทั่วไป?",
+      "explanation": "optics สัมพันธ์กับ detectionzones (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot07-q03)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทำหน้าที่relaycoil"
+        },
+        {
+          "id": "b",
+          "text": "จัดopticalzonesของการรับinfrared"
+        },
+        {
+          "id": "c",
+          "text": "แปลง5Vเป็น3.3V"
+        },
+        {
+          "id": "d",
+          "text": "ให้addressI2C"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "id": "iot07-q04",
+      "reference": "pir-principle",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ต้องการวัดระยะ cm ด้วย PIRDO อย่างเดียวทำได้หรือไม่?",
+      "explanation": "ห้ามยืมสูตรต่าง sensor โดยไม่มี measurement (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot07-q04)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่ได้DOไม่ให้time-of-flightสำหรับสูตรultrasonic"
+        },
+        {
+          "id": "b",
+          "text": "ทำได้โดยหาร2ทุกครั้ง"
+        },
+        {
+          "id": "c",
+          "text": "ได้60cmเมื่อHIGHเสมอ"
+        },
+        {
+          "id": "d",
+          "text": "ได้20cmเมื่อLOWเสมอ"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "id": "iot07-q05",
+      "reference": "pir-principle",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: PIR กับ ultrasonic ต่างกันสำคัญอย่างไร?",
+      "explanation": "แยก active / passive และปริมาณวัด (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot07-q05)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทั้งสองคืนระยะcmโดยตรงเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "PIRต้องส่งเสียง40kHz"
+        },
+        {
+          "id": "c",
+          "text": "ultrasonicไม่เกี่ยวกับreflection"
+        },
+        {
+          "id": "d",
+          "text": "PIRรับIRchanges ส่วนultrasonicส่งคลื่นและวัดechoเวลา"
+        }
+      ],
+      "answer": "d"
+    },
+    {
+      "id": "iot07-self1",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): อธิบาย PIR เทียบกับ ultrasonic และข้อจำกัด presence",
+      "reference": "pir-principle",
+      "explanation": "แยก passivereceive / changes จาก activepulse / distance และไม่อ้าง identity",
+      "rubric": [
+        "แยก passivereceive / changes จาก activepulse / distance และไม่อ้าง identity",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    }
+  ]
+}

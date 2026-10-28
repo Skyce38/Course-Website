@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "internet-of-things-final-arduino-cpp",
+  "title": "FINAL 05 — Arduino IDE และ C++",
+  "questions": [
+    {
+      "id": "iot05-q01",
+      "reference": "lifecycle",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: setup ทำงานอย่างไรตาม Arduino lifecycle ปกติ?",
+      "explanation": "core เรียก setup ใหม่หลัง reset (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot05-q01)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทุกครั้งที่Serialพิมพ์"
+        },
+        {
+          "id": "b",
+          "text": "ครั้งเดียวตลอดอายุบอร์ดแม้reset"
+        },
+        {
+          "id": "c",
+          "text": "ไม่เคยเรียกถ้ามีloop"
+        },
+        {
+          "id": "d",
+          "text": "หนึ่งครั้งต่อboot/resetก่อนloop"
+        }
+      ],
+      "answer": "d"
+    },
+    {
+      "id": "iot05-q02",
+      "reference": "lifecycle",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: loop ทำงานซ้ำตามปกติเมื่อใด?",
+      "explanation": "ระยะรอบขึ้นกับคำสั่งที่ทำ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot05-q02)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เฉพาะเมื่อมีInternet"
+        },
+        {
+          "id": "b",
+          "text": "ทุก1msโดยรับประกันแม้มีdelay"
+        },
+        {
+          "id": "c",
+          "text": "หลังsetupและเมื่อรอบloopก่อนคืนการทำงาน"
+        },
+        {
+          "id": "d",
+          "text": "เฉพาะตอนคลิกCompile"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "id": "iot05-q03",
+      "reference": "lifecycle",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: A10 ขอโปรแกรม sensor กี่ชนิด?",
+      "explanation": "จำนวน 10 อ้างจำนวนคำสั่งพื้นฐาน ไม่ใช่จำนวน sensor (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot05-q03)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "10 Sensors"
+        },
+        {
+          "id": "b",
+          "text": "3 Sensors"
+        },
+        {
+          "id": "c",
+          "text": "1 Sensor"
+        },
+        {
+          "id": "d",
+          "text": "2 Sensors"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "id": "iot05-q04",
+      "reference": "lifecycle",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ตรวจ C++compile ผ่านแต่ยังไม่ได้ Upload ควรสรุปอะไร?",
+      "explanation": "จำกัดคำกล่าวตามหลักฐาน (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot05-q04)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "buildสำหรับtargetนั้นสำเร็จ ยังไม่ใช่physicaltest"
+        },
+        {
+          "id": "b",
+          "text": "sensorต่อถูกแล้ว"
+        },
+        {
+          "id": "c",
+          "text": "วิดีโอต้นฉบับผ่านแล้ว"
+        },
+        {
+          "id": "d",
+          "text": "ค่าความชื้นจริงถูกcalibrateแล้ว"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "id": "iot05-q05",
+      "reference": "lifecycle",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: A10 ระบุรูปแบบส่งงานอย่างไรในต้นฉบับ?",
+      "explanation": "เว็บเป็นแหล่งเรียน ไม่เปลี่ยนข้อกำหนดส่งงาน (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot05-q05)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ส่งbankJSONแทนได้อัตโนมัติ"
+        },
+        {
+          "id": "b",
+          "text": "ส่งเพียงคะแนนpractice"
+        },
+        {
+          "id": "c",
+          "text": "ไม่ต้องอธิบายcode"
+        },
+        {
+          "id": "d",
+          "text": "เขียนด้วยลายมือตามคำสั่ง ไม่ใช่พิมพ์เว็บแทน"
+        }
+      ],
+      "answer": "d"
+    },
+    {
+      "id": "iot05-self1",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): อธิบาย lifecycle และขั้นตอน verify ก่อน upload",
+      "reference": "lifecycle",
+      "explanation": "ระบุ setup / loop,target / version และยังต้องตรวจฮาร์ดแวร์จริง",
+      "rubric": [
+        "ระบุ setup / loop,target / version และยังต้องตรวจฮาร์ดแวร์จริง",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    }
+  ]
+}

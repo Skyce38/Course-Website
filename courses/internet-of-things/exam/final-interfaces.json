@@ -1,0 +1,648 @@
+{
+  "version": 1,
+  "revision": 1,
+  "baseRevision": 1,
+  "lesson": "internet-of-things-final-interfaces",
+  "questions": [
+    {
+      "id": "iot06-q06",
+      "reference": "spi",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ขาใดมักใช้เลือก device บน SPIbus?",
+      "explanation": "chipselect เลือก device บน bus ตามการออกแบบ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot06-q06)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "SDAaddress7bit"
+        },
+        {
+          "id": "b",
+          "text": "COMของrelay"
+        },
+        {
+          "id": "c",
+          "text": "CS/SS"
+        },
+        {
+          "id": "d",
+          "text": "GPIOที่เป็นGNDถาวร"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "SPI ทั่วไปใช้ SCLK,MOSI,MISO และ CS ต่อ device ใช้ clockmode / polarity / phase ตาม datasheet อุปกรณ์บางตัวเป็น writeonly ไม่ใช้ MISO จึงไม่บังคับว่าสายข้อมูลต้องครบทุก module sharedbus ต้องจัด CS ไม่ให้ conflict บทนี้ไม่ถือว่า SPI มี 7bitaddress แบบ I2C"
+      }
+    },
+    {
+      "id": "iot06-q07",
+      "reference": "spi",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: MOSI ในชื่อ controller มาตรฐานหมายถึงข้อมูลทางใด?",
+      "explanation": "ดูทิศจากชื่อและ datasheet ของ device (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot06-q07)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เป็นI2CACK"
+        },
+        {
+          "id": "b",
+          "text": "Controllerส่งไปPeripheral"
+        },
+        {
+          "id": "c",
+          "text": "Peripheralส่งมาController"
+        },
+        {
+          "id": "d",
+          "text": "เป็นpower3.3V"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "SPI ทั่วไปใช้ SCLK,MOSI,MISO และ CS ต่อ device ใช้ clockmode / polarity / phase ตาม datasheet อุปกรณ์บางตัวเป็น writeonly ไม่ใช้ MISO จึงไม่บังคับว่าสายข้อมูลต้องครบทุก module sharedbus ต้องจัด CS ไม่ให้ conflict บทนี้ไม่ถือว่า SPI มี 7bitaddress แบบ I2C"
+      }
+    },
+    {
+      "id": "iot06-q08",
+      "reference": "spi",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: SPIdevice ที่รับข้อมูลอย่างเดียวจำเป็นต้องใช้ MISO หรือไม่?",
+      "explanation": "เช่น writeonlydisplay อาจไม่ส่งข้อมูลกลับ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot06-q08)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่เสมอ ดูprotocol/deviceที่ระบุ"
+        },
+        {
+          "id": "b",
+          "text": "ต้องใช้ครบ4เสมอโดยไม่มีข้อยกเว้น"
+        },
+        {
+          "id": "c",
+          "text": "ใช้แทนไฟเลี้ยง"
+        },
+        {
+          "id": "d",
+          "text": "ใช้MISOเป็นgroundเสมอ"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "SPI ทั่วไปใช้ SCLK,MOSI,MISO และ CS ต่อ device ใช้ clockmode / polarity / phase ตาม datasheet อุปกรณ์บางตัวเป็น writeonly ไม่ใช้ MISO จึงไม่บังคับว่าสายข้อมูลต้องครบทุก module sharedbus ต้องจัด CS ไม่ให้ conflict บทนี้ไม่ถือว่า SPI มี 7bitaddress แบบ I2C"
+      }
+    },
+    {
+      "id": "iot06-q09",
+      "reference": "spi",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: SPIclockmode ไม่ตรง device อาจเกิดอะไร?",
+      "explanation": "ต้องตรวจ CPOL / CPHA ตาม device (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot06-q09)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "GPIOกลายเป็น5Vtolerant"
+        },
+        {
+          "id": "b",
+          "text": "แก้เองด้วยชื่อsketch"
+        },
+        {
+          "id": "c",
+          "text": "ADCเพิ่มresolutionอัตโนมัติ"
+        },
+        {
+          "id": "d",
+          "text": "อ่าน/เขียนข้อมูลผิดแม้สายไฟเลี้ยงถูก"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "SPI ทั่วไปใช้ SCLK,MOSI,MISO และ CS ต่อ device ใช้ clockmode / polarity / phase ตาม datasheet อุปกรณ์บางตัวเป็น writeonly ไม่ใช้ MISO จึงไม่บังคับว่าสายข้อมูลต้องครบทุก module sharedbus ต้องจัด CS ไม่ให้ conflict บทนี้ไม่ถือว่า SPI มี 7bitaddress แบบ I2C"
+      }
+    },
+    {
+      "id": "iot06-q10",
+      "reference": "spi",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: สมมติ sharedSPI มี SCLK / MOSI / MISO ร่วม 3เส้นและ CS แยก 2device รวมสาย logic กี่เส้นไม่รวม power / GND?",
+      "explanation": "3shared+2CS=5 ตามสมมติฐาน ไม่ใช่ทุก module ต้องใช้ MISO (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot06-q10)",
+      "type": "numeric",
+      "answer": 5,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "SPI ทั่วไปใช้ SCLK,MOSI,MISO และ CS ต่อ device ใช้ clockmode / polarity / phase ตาม datasheet อุปกรณ์บางตัวเป็น writeonly ไม่ใช้ MISO จึงไม่บังคับว่าสายข้อมูลต้องครบทุก module sharedbus ต้องจัด CS ไม่ให้ conflict บทนี้ไม่ถือว่า SPI มี 7bitaddress แบบ I2C"
+      }
+    },
+    {
+      "id": "iot06-self2",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): วาง wiringtableSPI สำหรับ device ที่ระบุ mode",
+      "reference": "spi",
+      "explanation": "อ้าง datasheet ทั้งสองฝั่ง ระบุ SCLK,data และ CS และไม่ใช้ GPIOflash โดยเดา",
+      "rubric": [
+        "อ้าง datasheet ทั้งสองฝั่ง ระบุ SCLK,data และ CS และไม่ใช้ GPIOflash โดยเดา",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "SPI ทั่วไปใช้ SCLK,MOSI,MISO และ CS ต่อ device ใช้ clockmode / polarity / phase ตาม datasheet อุปกรณ์บางตัวเป็น writeonly ไม่ใช้ MISO จึงไม่บังคับว่าสายข้อมูลต้องครบทุก module sharedbus ต้องจัด CS ไม่ให้ conflict บทนี้ไม่ถือว่า SPI มี 7bitaddress แบบ I2C"
+      }
+    },
+    {
+      "id": "iot06-q11",
+      "reference": "uart",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: UARTTTL สองอุปกรณ์ที่ compatible ควรต่อทิศใด?",
+      "explanation": "ต้องไขว้ผู้ส่งกับผู้รับ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot06-q11)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ต่อเพียงชื่อpinเหมือนกันโดยไม่ดูทิศ"
+        },
+        {
+          "id": "b",
+          "text": "TXของAไปRXของB และTXของBไปRXของA"
+        },
+        {
+          "id": "c",
+          "text": "TXไปTXและRXไปRXเสมอ"
+        },
+        {
+          "id": "d",
+          "text": "TXไปVCCโดยตรง"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "UARTasynchronous ใช้ TX ไป RX ฝั่งตรงข้ามและ RX รับจาก TX ของอีกฝั่ง ต้องมี GNDreference สำหรับ TTL วงจรไม่ isolate baud / data / parity / stop ให้ตรง UARTTTL ไม่ใช่ RS232±voltage;ESP32HardwareSerial เลือก RX / TXpins ได้ตามข้อจำกัด target"
+      }
+    },
+    {
+      "id": "iot06-q12",
+      "reference": "uart",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: Serial ข้อมูลเพี้ยนควรตรวจสิ่งใดนอกจากสาย?",
+      "explanation": "UARTformat ต้องตรงกันทั้งสองฝั่ง (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot06-q12)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "baud,databits,parity,stopbitsให้ตรง"
+        },
+        {
+          "id": "b",
+          "text": "เพียงaddress0x3C"
+        },
+        {
+          "id": "c",
+          "text": "COM/NOของrelayเท่านั้น"
+        },
+        {
+          "id": "d",
+          "text": "ชนิดresistorLEDเพียงอย่างเดียว"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "UARTasynchronous ใช้ TX ไป RX ฝั่งตรงข้ามและ RX รับจาก TX ของอีกฝั่ง ต้องมี GNDreference สำหรับ TTL วงจรไม่ isolate baud / data / parity / stop ให้ตรง UARTTTL ไม่ใช่ RS232±voltage;ESP32HardwareSerial เลือก RX / TXpins ได้ตามข้อจำกัด target"
+      }
+    },
+    {
+      "id": "iot06-q13",
+      "reference": "uart",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: RS232 ต่อ ESP32GPIO ตรงได้หรือไม่?",
+      "explanation": "มาตรฐาน electrical ต่างจาก TTL3.3V (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot06-q13)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ได้เพราะเรียกว่าserialเหมือนกัน"
+        },
+        {
+          "id": "b",
+          "text": "ได้ถ้าbaud9600"
+        },
+        {
+          "id": "c",
+          "text": "ได้ทุกขาถ้าเสียบUSB"
+        },
+        {
+          "id": "d",
+          "text": "ไม่ได้ ต้องมีtransceiver/levelinterfaceที่เหมาะสม"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "UARTasynchronous ใช้ TX ไป RX ฝั่งตรงข้ามและ RX รับจาก TX ของอีกฝั่ง ต้องมี GNDreference สำหรับ TTL วงจรไม่ isolate baud / data / parity / stop ให้ตรง UARTTTL ไม่ใช่ RS232±voltage;ESP32HardwareSerial เลือก RX / TXpins ได้ตามข้อจำกัด target"
+      }
+    },
+    {
+      "id": "iot06-q14",
+      "reference": "uart",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: UART8N1 มี start1,data8,stop1 ไม่ parity รวม bit ต่อหนึ่ง frame กี่ bit?",
+      "explanation": "10bit / frame ไม่ใช่ 8bit รวม overhead (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot06-q14)",
+      "type": "numeric",
+      "answer": 10,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "UARTasynchronous ใช้ TX ไป RX ฝั่งตรงข้ามและ RX รับจาก TX ของอีกฝั่ง ต้องมี GNDreference สำหรับ TTL วงจรไม่ isolate baud / data / parity / stop ให้ตรง UARTTTL ไม่ใช่ RS232±voltage;ESP32HardwareSerial เลือก RX / TXpins ได้ตามข้อจำกัด target"
+      }
+    },
+    {
+      "id": "iot06-q15",
+      "reference": "uart",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ที่ 9600bit / s และ 8N1 ideal throughput ไม่คิด pause กี่ byte / s?",
+      "explanation": "9600 / 10=960 เป็นอุดมคติตาม frameformat ไม่ใช่ measurement (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot06-q15)",
+      "type": "numeric",
+      "answer": 960,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "UARTasynchronous ใช้ TX ไป RX ฝั่งตรงข้ามและ RX รับจาก TX ของอีกฝั่ง ต้องมี GNDreference สำหรับ TTL วงจรไม่ isolate baud / data / parity / stop ให้ตรง UARTTTL ไม่ใช่ RS232±voltage;ESP32HardwareSerial เลือก RX / TXpins ได้ตามข้อจำกัด target"
+      }
+    },
+    {
+      "id": "iot06-self3",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): อธิบายการต่อ UART สองอุปกรณ์ 3.3V อย่างมีเงื่อนไข",
+      "reference": "uart",
+      "explanation": "TX→RX ทั้งสองทิศ ตรวจ GND / logiclevel / format และห้ามต่อ RS232 ตรง",
+      "rubric": [
+        "TX→RX ทั้งสองทิศ ตรวจ GND / logiclevel / format และห้ามต่อ RS232 ตรง",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "UARTasynchronous ใช้ TX ไป RX ฝั่งตรงข้ามและ RX รับจาก TX ของอีกฝั่ง ต้องมี GNDreference สำหรับ TTL วงจรไม่ isolate baud / data / parity / stop ให้ตรง UARTTTL ไม่ใช่ RS232±voltage;ESP32HardwareSerial เลือก RX / TXpins ได้ตามข้อจำกัด target"
+      }
+    },
+    {
+      "id": "iot06-q16",
+      "reference": "select-interface",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: soilAO ควรอยู่กลุ่มใดเมื่ออ่านแรงดันด้วย ESP32?",
+      "explanation": "AO ระบุ analogoutput (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot06-q16)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ADC"
+        },
+        {
+          "id": "b",
+          "text": "I2Cโดยดูแค่ชื่อsoil"
+        },
+        {
+          "id": "c",
+          "text": "SPIเสมอ"
+        },
+        {
+          "id": "d",
+          "text": "Relaycontact"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "A11 ให้จัดกลุ่ม I2C,SPI,UART,GPIO,ADC ไม่ใช่แบ่งตามรูปร่างตัว sensor โมดูลหนึ่งอาจมี AO+DO หรือรุ่น I2C / SPI ต่างกัน;ดู datasheet ขาและ protocol HC-SR04trigger / echo ใช้ GPIOpulse ไม่ใช่ ADC เพื่อวัด Echo width;PIRmoduleDO ใช้ digitalinput"
+      }
+    },
+    {
+      "id": "iot06-q17",
+      "reference": "select-interface",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: soilDO และ PIRDO ที่ให้ logicstate ควรอ่านด้วยอะไร?",
+      "explanation": "ดูชนิด output ไม่ใช่รูปลักษณ์ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot06-q17)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "analogReadเพื่อได้physicalpercentageอัตโนมัติ"
+        },
+        {
+          "id": "b",
+          "text": "I2Caddressของทุกsensor"
+        },
+        {
+          "id": "c",
+          "text": "UARTbaudอย่างเดียว"
+        },
+        {
+          "id": "d",
+          "text": "GPIOdigitalinput"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "A11 ให้จัดกลุ่ม I2C,SPI,UART,GPIO,ADC ไม่ใช่แบ่งตามรูปร่างตัว sensor โมดูลหนึ่งอาจมี AO+DO หรือรุ่น I2C / SPI ต่างกัน;ดู datasheet ขาและ protocol HC-SR04trigger / echo ใช้ GPIOpulse ไม่ใช่ ADC เพื่อวัด Echo width;PIRmoduleDO ใช้ digitalinput"
+      }
+    },
+    {
+      "id": "iot06-q18",
+      "reference": "select-interface",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: HC-SR04Echo width ในตัวอย่างใช้วิธีใด?",
+      "explanation": "Echo เป็น digitalpulse ที่ความกว้างแทนเวลา (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot06-q18)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "I2Caddress0x3Cเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "SPIclock40MHzเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "GPIOกับการวัดpulseเวลา"
+        },
+        {
+          "id": "d",
+          "text": "ADCอ่านDCแล้วได้cmโดยตรง"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "A11 ให้จัดกลุ่ม I2C,SPI,UART,GPIO,ADC ไม่ใช่แบ่งตามรูปร่างตัว sensor โมดูลหนึ่งอาจมี AO+DO หรือรุ่น I2C / SPI ต่างกัน;ดู datasheet ขาและ protocol HC-SR04trigger / echo ใช้ GPIOpulse ไม่ใช่ ADC เพื่อวัด Echo width;PIRmoduleDO ใช้ digitalinput"
+      }
+    },
+    {
+      "id": "iot06-q19",
+      "reference": "select-interface",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: OLED ทุกตัวเป็น I2C หรือไม่?",
+      "explanation": "displaytechnology ไม่เท่ากับ businterface (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot06-q19)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทุกตัวใช้ADCเท่านั้น"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ บางรุ่นเป็นSPIหรือinterfaceอื่น ต้องตรวจรุ่น"
+        },
+        {
+          "id": "c",
+          "text": "ใช่เพราะคำว่าOLEDกำหนดprotocolแล้ว"
+        },
+        {
+          "id": "d",
+          "text": "ทุกตัวเป็นUART8N1"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "A11 ให้จัดกลุ่ม I2C,SPI,UART,GPIO,ADC ไม่ใช่แบ่งตามรูปร่างตัว sensor โมดูลหนึ่งอาจมี AO+DO หรือรุ่น I2C / SPI ต่างกัน;ดู datasheet ขาและ protocol HC-SR04trigger / echo ใช้ GPIOpulse ไม่ใช่ ADC เพื่อวัด Echo width;PIRmoduleDO ใช้ digitalinput"
+      }
+    },
+    {
+      "id": "iot06-q20",
+      "reference": "select-interface",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ตัว sensor วัดอุณหภูมิเหมือนกัน แต่ module หนึ่ง I2C อีก moduleanalog จัดกลุ่มอย่างไร?",
+      "explanation": "A11 ให้ดูหลักการและ interface จริง (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot06-q20)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ตามoutput/protocolของแต่ละmodule"
+        },
+        {
+          "id": "b",
+          "text": "ตามคำว่าtemperatureอย่างเดียว"
+        },
+        {
+          "id": "c",
+          "text": "ทุกตัวใช้GPIO34โดยไม่ดูวงจร"
+        },
+        {
+          "id": "d",
+          "text": "ทุกตัวเป็นrelay"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "A11 ให้จัดกลุ่ม I2C,SPI,UART,GPIO,ADC ไม่ใช่แบ่งตามรูปร่างตัว sensor โมดูลหนึ่งอาจมี AO+DO หรือรุ่น I2C / SPI ต่างกัน;ดู datasheet ขาและ protocol HC-SR04trigger / echo ใช้ GPIOpulse ไม่ใช่ ADC เพื่อวัด Echo width;PIRmoduleDO ใช้ digitalinput"
+      }
+    },
+    {
+      "id": "iot06-self4",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): จัดกลุ่ม soilAO / DO,ultrasonic,PIR และ OLED ที่กำหนด",
+      "reference": "select-interface",
+      "explanation": "แยก outputformat และโปรโตคอลของโมดูลจากปริมาณที่วัด",
+      "rubric": [
+        "แยก outputformat และโปรโตคอลของโมดูลจากปริมาณที่วัด",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "A11 ให้จัดกลุ่ม I2C,SPI,UART,GPIO,ADC ไม่ใช่แบ่งตามรูปร่างตัว sensor โมดูลหนึ่งอาจมี AO+DO หรือรุ่น I2C / SPI ต่างกัน;ดู datasheet ขาและ protocol HC-SR04trigger / echo ใช้ GPIOpulse ไม่ใช่ ADC เพื่อวัด Echo width;PIRmoduleDO ใช้ digitalinput"
+      }
+    },
+    {
+      "id": "iot06-q21",
+      "reference": "bus-debug",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: I2C ไม่มี ACK ควรเริ่มตรวจชุดใด?",
+      "explanation": "แยกความผิดพลาด electrical และ protocol (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot06-q21)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "แก้แค่หน่วยเซนติเมตร"
+        },
+        {
+          "id": "b",
+          "text": "เพิ่มADCmaxเป็น65535"
+        },
+        {
+          "id": "c",
+          "text": "ต่อmainsเข้าบัส"
+        },
+        {
+          "id": "d",
+          "text": "ไฟ/GND/logic/pins/pullups/address"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตรวจ power / GND / voltage ก่อน protocol จากนั้น mapping,pullups / address สำหรับ I2C,CS / mode สำหรับ SPI,baud / crossTXRX สำหรับ UART ACK สำเร็จไม่ยืนยัน display ทั้งจอหรือ sensorcalibration โปรแกรมที่นี่แสดงตัวอย่าง API ที่ compile ได้ ไม่ต่อทุก bus ลง hardware พร้อมกัน"
+      }
+    },
+    {
+      "id": "iot06-q22",
+      "reference": "bus-debug",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: Wire.begin(21,22)ในตัวอย่างยืนยันอะไร?",
+      "explanation": "mapping ต้องตรงบอร์ดและการต่อจริง (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot06-q22)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทำให้ทุกOLEDaddressเหมือนกัน"
+        },
+        {
+          "id": "b",
+          "text": "ทดแทนการตรวจvoltageได้"
+        },
+        {
+          "id": "c",
+          "text": "เลือกSDA21,SCL22ตามtarget/โค้ดนี้"
+        },
+        {
+          "id": "d",
+          "text": "pinทั้งสองเป็นdefaultทุกESP32เสมอ"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตรวจ power / GND / voltage ก่อน protocol จากนั้น mapping,pullups / address สำหรับ I2C,CS / mode สำหรับ SPI,baud / crossTXRX สำหรับ UART ACK สำเร็จไม่ยืนยัน display ทั้งจอหรือ sensorcalibration โปรแกรมที่นี่แสดงตัวอย่าง API ที่ compile ได้ ไม่ต่อทุก bus ลง hardware พร้อมกัน"
+      }
+    },
+    {
+      "id": "iot06-q23",
+      "reference": "bus-debug",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ACK จาก address0x3C ยืนยันอะไรได้โดยตรง?",
+      "explanation": "ACK เป็นหลักฐาน communication จำกัดขอบเขต (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot06-q23)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทุกdeviceบนbusมีaddressเดียวกันได้"
+        },
+        {
+          "id": "b",
+          "text": "มีการตอบบนaddressนั้นในเงื่อนไขทดสอบ"
+        },
+        {
+          "id": "c",
+          "text": "ทุกpixelทำงานและsensorcalibrateแล้ว"
+        },
+        {
+          "id": "d",
+          "text": "เป็นหลักฐานmainsrelayปลอดภัย"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตรวจ power / GND / voltage ก่อน protocol จากนั้น mapping,pullups / address สำหรับ I2C,CS / mode สำหรับ SPI,baud / crossTXRX สำหรับ UART ACK สำเร็จไม่ยืนยัน display ทั้งจอหรือ sensorcalibration โปรแกรมที่นี่แสดงตัวอย่าง API ที่ compile ได้ ไม่ต่อทุก bus ลง hardware พร้อมกัน"
+      }
+    },
+    {
+      "id": "iot06-q24",
+      "reference": "bus-debug",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: UARTTX / RX ต่อถูกแต่ไม่มี groundreference ใน nonisolatedTTL อาจเป็นปัญหาใด?",
+      "explanation": "ต้องตรวจ GND และระดับไฟฟ้าก่อน software (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot06-q24)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "logicไม่มีreferenceร่วมที่แน่นอน"
+        },
+        {
+          "id": "b",
+          "text": "แก้ด้วยOLEDfontอย่างเดียว"
+        },
+        {
+          "id": "c",
+          "text": "addressI2Cชนกันเสมอ"
+        },
+        {
+          "id": "d",
+          "text": "classifierระดับน้ำเปลี่ยนthresholdเอง"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตรวจ power / GND / voltage ก่อน protocol จากนั้น mapping,pullups / address สำหรับ I2C,CS / mode สำหรับ SPI,baud / crossTXRX สำหรับ UART ACK สำเร็จไม่ยืนยัน display ทั้งจอหรือ sensorcalibration โปรแกรมที่นี่แสดงตัวอย่าง API ที่ compile ได้ ไม่ต่อทุก bus ลง hardware พร้อมกัน"
+      }
+    },
+    {
+      "id": "iot06-q25",
+      "reference": "bus-debug",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: จะอ้าง hardwareinterfacePASS ควรมีอะไรเพิ่มจาก compile?",
+      "explanation": "compile ไม่อ่าน physicalbus (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot06-q25)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เพียงไฟล์binary"
+        },
+        {
+          "id": "b",
+          "text": "เพียงชื่อlibrary"
+        },
+        {
+          "id": "c",
+          "text": "เพียง270คำถามในเว็บ"
+        },
+        {
+          "id": "d",
+          "text": "wiring/module/voltageจริงและmeasurement/protocoltest"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตรวจ power / GND / voltage ก่อน protocol จากนั้น mapping,pullups / address สำหรับ I2C,CS / mode สำหรับ SPI,baud / crossTXRX สำหรับ UART ACK สำเร็จไม่ยืนยัน display ทั้งจอหรือ sensorcalibration โปรแกรมที่นี่แสดงตัวอย่าง API ที่ compile ได้ ไม่ต่อทุก bus ลง hardware พร้อมกัน"
+      }
+    },
+    {
+      "id": "iot06-self5",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): ออกแบบ debug เมื่อ I2C ไม่ ACK หรือ Serial อ่านไม่ออก",
+      "reference": "bus-debug",
+      "explanation": "แยกไฟฟ้า / สาย / protocol / software และไม่แปล noresponse เป็น physicalmeasurement0",
+      "rubric": [
+        "แยกไฟฟ้า / สาย / protocol / software และไม่แปล noresponse เป็น physicalmeasurement0",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ตรวจ power / GND / voltage ก่อน protocol จากนั้น mapping,pullups / address สำหรับ I2C,CS / mode สำหรับ SPI,baud / crossTXRX สำหรับ UART ACK สำเร็จไม่ยืนยัน display ทั้งจอหรือ sensorcalibration โปรแกรมที่นี่แสดงตัวอย่าง API ที่ compile ได้ ไม่ต่อทุก bus ลง hardware พร้อมกัน"
+      }
+    }
+  ]
+}

@@ -42,7 +42,7 @@ function inline(text, context) {
   return result+esc(text.slice(last));
 }
 function codeViewer(code, id, language='python') {
-  const label=language==='bash'?'Bash':'Python',key=language==='bash'?'shellCode':'pythonCode';
+  const label=language==='bash'?'Bash':language==='cpp'?'C++':'Python',key=language==='bash'?'shellCode':language==='cpp'?'cppCode':'pythonCode';
   return '<div class="code-viewer" id="'+id+'" role="group" data-i18n-aria-label="'+key+'" aria-label="โค้ด '+label+'"><div class="code-toolbar"><span>'+label+'</span><button type="button" class="icon-button code-copy" data-i18n="copyCode" hidden>คัดลอกโค้ด</button><span class="copy-status" role="status"></span></div><pre tabindex="0" data-i18n-aria-label="'+key+'" aria-label="โค้ด '+label+'"><code>'+code.split('\n').map((line,i)=>'<span class="code-line" data-line="'+(i+1)+'"><span class="line-number" aria-hidden="true">'+(i+1)+'</span><span class="line-source">'+esc(line)+'</span></span>').join('')+'</code></pre></div>';
 }
 function stepper(data) {
@@ -74,6 +74,7 @@ function markdown(body, context) {
       if (i===lines.length) throw Error('Unclosed code fence'); i++;
       const code = block.join('\n');
       if (lang==='study-stepper') { const data = validate(JSON.parse(code)); for (const id of ['demo-','step-title-','step-code-']) addID(id+data.id); result+=stepper(data); interactive=true; }
+      else if (lang==='cpp') { const id='code-block-'+(++codeCount); addID(id); result+=codeViewer(code,id,'cpp'); interactive=true; }
       else if (lang==='bash') { const id='code-block-'+(++codeCount); addID(id); result+=codeViewer(code,id,'bash'); interactive=true; }
       else if (lang==='python') { const id='code-block-'+(++codeCount); addID(id); result+=codeViewer(code,id); interactive=true; }
       else if (lang==='text' || lang==='') result+='<pre><code>'+esc(code)+'</code></pre>';
@@ -145,6 +146,7 @@ function buildLessons(catalog, root = process.cwd()) {
     const template=fs.readFileSync(path.join(root,'templates/lesson.html'),'utf8').replace(/\r\n/g,'\n');
     let html=template.replace(/\{\{([A-Z_]+)\}\}/g,(_,key)=>{ if (!(key in values)) throw Error('Unknown template token'); return values[key]; });
     if(meta.course==='unix-tools')html=html.replace(/(assets\/i18n\.js\?v=)[^" ]+/, '$1phase12-unix-1').replace('class="lesson-reader html-reader"','class="lesson-reader html-reader shell-lesson"').replace('</head>','<link rel="stylesheet" href="../../assets/unix-lessons.css?v=phase12-unix-1"></head>');
+    if(meta.course==='internet-of-things')html=html.replace(/(assets\/i18n\.js\?v=)[^" ]+/, '$1phase13-iot-1').replace('class="lesson-reader html-reader"','class="lesson-reader html-reader iot-lesson"').replace('</head>','<link rel="stylesheet" href="../../assets/iot-lessons.css?v=phase13-iot-1"></head>');
     plans.push({target,html,resource,old});
   }
   // Validate every lesson before any generated file or catalog entry is changed.

@@ -1,0 +1,600 @@
+{
+  "version": 1,
+  "revision": 1,
+  "baseRevision": 1,
+  "lesson": "internet-of-things-final-arduino-cpp",
+  "questions": [
+    {
+      "id": "iot05-q06",
+      "reference": "digital-api",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ต้องการตั้ง pin เป็น output ควรใช้คำสั่งใด?",
+      "explanation": "signaturepinMode รับ pin กับ mode (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot05-q06)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Serial.begin(OUTPUT);"
+        },
+        {
+          "id": "b",
+          "text": "analogReadResolution(pin, OUTPUT);"
+        },
+        {
+          "id": "c",
+          "text": "pinMode(pin, OUTPUT);"
+        },
+        {
+          "id": "d",
+          "text": "digitalRead(pin, OUTPUT);"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "กำหนดโหมดก่อนใช้ input / output อย่างสอดคล้อง อ่าน input ผ่าน digitalRead ให้ HIGH / LOW ส่ง output ด้วย digitalWrite บนขาที่ขับได้ ต้องทราบ polarity จริง INPUT_PULLUP มี pressedLOW เมื่อสวิตช์ต่อลง GND ตามวงจรตัวอย่าง ไม่เหมารวมทุก sensor"
+      }
+    },
+    {
+      "id": "iot05-q07",
+      "reference": "digital-api",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ต้องการอ่านสถานะ logic จาก input ควรใช้คำสั่งใด?",
+      "explanation": "digitalRead คืน logicstate (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot05-q07)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Serial.println(INPUT)"
+        },
+        {
+          "id": "b",
+          "text": "digitalRead(pin)"
+        },
+        {
+          "id": "c",
+          "text": "pinMode(pin)"
+        },
+        {
+          "id": "d",
+          "text": "digitalWrite(pin,INPUT)"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "กำหนดโหมดก่อนใช้ input / output อย่างสอดคล้อง อ่าน input ผ่าน digitalRead ให้ HIGH / LOW ส่ง output ด้วย digitalWrite บนขาที่ขับได้ ต้องทราบ polarity จริง INPUT_PULLUP มี pressedLOW เมื่อสวิตช์ต่อลง GND ตามวงจรตัวอย่าง ไม่เหมารวมทุก sensor"
+      }
+    },
+    {
+      "id": "iot05-q08",
+      "reference": "digital-api",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ต้องใช้ค่า input ตัดสินใจและพิมพ์ log ในรอบเดียว เหตุใดจึงเก็บ digitalRead ลงตัวแปรครั้งเดียว?",
+      "explanation": "ลดความกำกวมคนละ sample ไม่ใช่การรับรอง physicalsignal (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot05-q08)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ให้decisionกับlogอ้างsampleเดียวกันแม้inputเปลี่ยนระหว่างคำสั่ง"
+        },
+        {
+          "id": "b",
+          "text": "ทำให้inputกลายเป็นOUTPUT"
+        },
+        {
+          "id": "c",
+          "text": "รับรองsensorไม่มีnoiseเลย"
+        },
+        {
+          "id": "d",
+          "text": "ทำให้ไม่มีความจำเป็นต้องตรวจlogicvoltage"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "กำหนดโหมดก่อนใช้ input / output อย่างสอดคล้อง อ่าน input ผ่าน digitalRead ให้ HIGH / LOW ส่ง output ด้วย digitalWrite บนขาที่ขับได้ ต้องทราบ polarity จริง INPUT_PULLUP มี pressedLOW เมื่อสวิตช์ต่อลง GND ตามวงจรตัวอย่าง ไม่เหมารวมทุก sensor"
+      }
+    },
+    {
+      "id": "iot05-q09",
+      "reference": "digital-api",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: bool pressed=true; int led=pressed?1:0; led เท่าใด?",
+      "explanation": "activehighLED ตามสมมติฐานใช้ 1เมื่อ pressed (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot05-q09)",
+      "type": "numeric",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "กำหนดโหมดก่อนใช้ input / output อย่างสอดคล้อง อ่าน input ผ่าน digitalRead ให้ HIGH / LOW ส่ง output ด้วย digitalWrite บนขาที่ขับได้ ต้องทราบ polarity จริง INPUT_PULLUP มี pressedLOW เมื่อสวิตช์ต่อลง GND ตามวงจรตัวอย่าง ไม่เหมารวมทุก sensor"
+      }
+    },
+    {
+      "id": "iot05-q10",
+      "reference": "digital-api",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ตัวอย่าง relayactiveLOW เมื่ออยากเปิด coil ผ่านโมดูล compatible ควรเขียน IN อะไร?",
+      "explanation": "ต้องประกาศ activeLOW ไม่ถือว่าทุก relay เหมือนกัน (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot05-q10)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "INPUT"
+        },
+        {
+          "id": "b",
+          "text": "4095"
+        },
+        {
+          "id": "c",
+          "text": "LOW"
+        },
+        {
+          "id": "d",
+          "text": "HIGH"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "กำหนดโหมดก่อนใช้ input / output อย่างสอดคล้อง อ่าน input ผ่าน digitalRead ให้ HIGH / LOW ส่ง output ด้วย digitalWrite บนขาที่ขับได้ ต้องทราบ polarity จริง INPUT_PULLUP มี pressedLOW เมื่อสวิตช์ต่อลง GND ตามวงจรตัวอย่าง ไม่เหมารวมทุก sensor"
+      }
+    },
+    {
+      "id": "iot05-self2",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): อธิบาย polarity และอ่าน code ที่ใช้ ternary ควบคุม LED",
+      "reference": "digital-api",
+      "explanation": "แยกค่าพินกับ meaning และระบุ activehigh / low ให้ครบ",
+      "rubric": [
+        "แยกค่าพินกับ meaning และระบุ activehigh / low ให้ครบ",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "กำหนดโหมดก่อนใช้ input / output อย่างสอดคล้อง อ่าน input ผ่าน digitalRead ให้ HIGH / LOW ส่ง output ด้วย digitalWrite บนขาที่ขับได้ ต้องทราบ polarity จริง INPUT_PULLUP มี pressedLOW เมื่อสวิตช์ต่อลง GND ตามวงจรตัวอย่าง ไม่เหมารวมทุก sensor"
+      }
+    },
+    {
+      "id": "iot05-q11",
+      "reference": "analog-serial",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: Serialprintln(raw)แสดงค่าจาก analogRead; การเพิ่มคำว่า percent หลังตัวเลขทำให้เกิดอะไร?",
+      "explanation": "หน่วยเชิงกายภาพต้องมีการแปลงและหลักฐาน calibration จริง (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot05-q11)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทำให้AOกลายเป็นdigitalDO"
+        },
+        {
+          "id": "b",
+          "text": "เปลี่ยนเพียงlabel ไม่ได้ทำcalibration"
+        },
+        {
+          "id": "c",
+          "text": "เปลี่ยนADCเป็นcalibratedsoilmoistureทันที"
+        },
+        {
+          "id": "d",
+          "text": "เปลี่ยนresolutionจาก12เป็น10bit"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "analogRead ให้ rawcount ตาม resolution;analogReadMilliVolts ให้ผล mV ตาม core Serial.begin ตั้ง baudrate และ Serial.print ไม่เพิ่ม newline ส่วน println เพิ่ม newline Monitor ต้องตรง baud เพื่ออ่านข้อความได้ การส่งตัวเลขทาง Serial ไม่พิสูจน์ว่า sensorcalibrate แล้ว"
+      }
+    },
+    {
+      "id": "iot05-q12",
+      "reference": "analog-serial",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: คำสั่งใดเพิ่ม newline หลังข้อมูลใน Serial?",
+      "explanation": "print กับ println ต่างเรื่อง lineending (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot05-q12)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Serial.println(value);"
+        },
+        {
+          "id": "b",
+          "text": "Serial.print(value);"
+        },
+        {
+          "id": "c",
+          "text": "pinMode(value,OUTPUT);"
+        },
+        {
+          "id": "d",
+          "text": "analogRead(value);"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "analogRead ให้ rawcount ตาม resolution;analogReadMilliVolts ให้ผล mV ตาม core Serial.begin ตั้ง baudrate และ Serial.print ไม่เพิ่ม newline ส่วน println เพิ่ม newline Monitor ต้องตรง baud เพื่ออ่านข้อความได้ การส่งตัวเลขทาง Serial ไม่พิสูจน์ว่า sensorcalibrate แล้ว"
+      }
+    },
+    {
+      "id": "iot05-q13",
+      "reference": "analog-serial",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: Monitor ตั้ง 9600 แต่ code ใช้ 115200 ควรตรวจอะไรก่อนตีความข้อความเพี้ยน?",
+      "explanation": "Serialconfiguration ต้องตรงกัน (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot05-q13)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เพิ่มADCresolution"
+        },
+        {
+          "id": "b",
+          "text": "สลับGNDกับVCC"
+        },
+        {
+          "id": "c",
+          "text": "ถือว่าข้อความเพี้ยนเป็นค่าจริง"
+        },
+        {
+          "id": "d",
+          "text": "ให้baudrateและportตรงกับtargetที่ใช้"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "analogRead ให้ rawcount ตาม resolution;analogReadMilliVolts ให้ผล mV ตาม core Serial.begin ตั้ง baudrate และ Serial.print ไม่เพิ่ม newline ส่วน println เพิ่ม newline Monitor ต้องตรง baud เพื่ออ่านข้อความได้ การส่งตัวเลขทาง Serial ไม่พิสูจน์ว่า sensorcalibrate แล้ว"
+      }
+    },
+    {
+      "id": "iot05-q14",
+      "reference": "analog-serial",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: raw2048 ควร label หน่วยใดหากยังไม่แปลง?",
+      "explanation": "ไม่ตั้ง unitphysical โดยเดา (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot05-q14)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "percentphysicalmoistureแน่นอน"
+        },
+        {
+          "id": "b",
+          "text": "volts2048V"
+        },
+        {
+          "id": "c",
+          "text": "ADC raw count"
+        },
+        {
+          "id": "d",
+          "text": "centimetersแน่นอน"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "analogRead ให้ rawcount ตาม resolution;analogReadMilliVolts ให้ผล mV ตาม core Serial.begin ตั้ง baudrate และ Serial.print ไม่เพิ่ม newline ส่วน println เพิ่ม newline Monitor ต้องตรง baud เพื่ออ่านข้อความได้ การส่งตัวเลขทาง Serial ไม่พิสูจน์ว่า sensorcalibrate แล้ว"
+      }
+    },
+    {
+      "id": "iot05-q15",
+      "reference": "analog-serial",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ข้อใดทำให้ debug อ่านง่ายโดยไม่แต่งผล?",
+      "explanation": "ควรรักษาข้อมูลดิบและสถานะผิดพลาด (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot05-q15)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ใช้ข้อความrandomแทนsensor"
+        },
+        {
+          "id": "b",
+          "text": "พิมพ์raw=...และระบุconversion/unitsแยก"
+        },
+        {
+          "id": "c",
+          "text": "พิมพ์100%เสมอ"
+        },
+        {
+          "id": "d",
+          "text": "ลบinvalidทุกบรรทัดแล้วกล่าวว่าผ่าน"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "analogRead ให้ rawcount ตาม resolution;analogReadMilliVolts ให้ผล mV ตาม core Serial.begin ตั้ง baudrate และ Serial.print ไม่เพิ่ม newline ส่วน println เพิ่ม newline Monitor ต้องตรง baud เพื่ออ่านข้อความได้ การส่งตัวเลขทาง Serial ไม่พิสูจน์ว่า sensorcalibrate แล้ว"
+      }
+    },
+    {
+      "id": "iot05-self3",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): วางแผนข้อความ debugraw กับ convertedvalue ให้ไม่สับสน",
+      "reference": "analog-serial",
+      "explanation": "labelunit / baud ให้ชัดและเก็บ raw ก่อนแปลงเพื่อ debug",
+      "rubric": [
+        "labelunit / baud ให้ชัดและเก็บ raw ก่อนแปลงเพื่อ debug",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "analogRead ให้ rawcount ตาม resolution;analogReadMilliVolts ให้ผล mV ตาม core Serial.begin ตั้ง baudrate และ Serial.print ไม่เพิ่ม newline ส่วน println เพิ่ม newline Monitor ต้องตรง baud เพื่ออ่านข้อความได้ การส่งตัวเลขทาง Serial ไม่พิสูจน์ว่า sensorcalibrate แล้ว"
+      }
+    },
+    {
+      "id": "iot05-q16",
+      "reference": "cpp-semantics",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: C++intresult=7 / 2; result เท่าใด?",
+      "explanation": "integerdivision ตัดเศษ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot05-q16)",
+      "type": "numeric",
+      "answer": 3,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้==เปรียบเทียบและ=กำหนดค่า {}กำหนด block ;ปิด statement ระวัง integerdivision และการ overflow ของ signedinteger ใช้ floatconstant เช่น 0.0343f เมื่อคำนวณ cm และ uint32_t กับ millis; map คำนวณ integer แม้ผลถูกเก็บ float ตัวอย่าง 10 คำสั่งหลักได้แก่ pinMode,digitalRead,digitalWrite,analogRead,Serial.begin,print,println,if / else,delay,millis"
+      }
+    },
+    {
+      "id": "iot05-q17",
+      "reference": "cpp-semantics",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: C++intx=0; if(x=1){x+=2;} ค่า xหลัง branch เท่าใด?",
+      "explanation": "assignment ตั้ง x1 ทำให้ conditiontrue แล้วบวก 2;ต่างจาก x==1 (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot05-q17)",
+      "type": "numeric",
+      "answer": 3,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้==เปรียบเทียบและ=กำหนดค่า {}กำหนด block ;ปิด statement ระวัง integerdivision และการ overflow ของ signedinteger ใช้ floatconstant เช่น 0.0343f เมื่อคำนวณ cm และ uint32_t กับ millis; map คำนวณ integer แม้ผลถูกเก็บ float ตัวอย่าง 10 คำสั่งหลักได้แก่ pinMode,digitalRead,digitalWrite,analogRead,Serial.begin,print,println,if / else,delay,millis"
+      }
+    },
+    {
+      "id": "iot05-q18",
+      "reference": "cpp-semantics",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: intx=0; bool ok=(x=1); แปลง ok เป็น int ได้เท่าใด?",
+      "explanation": "assignment กำหนด 1และ conditiontrue ไม่ใช่ comparison;compiler อาจเตือน (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot05-q18)",
+      "type": "numeric",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้==เปรียบเทียบและ=กำหนดค่า {}กำหนด block ;ปิด statement ระวัง integerdivision และการ overflow ของ signedinteger ใช้ floatconstant เช่น 0.0343f เมื่อคำนวณ cm และ uint32_t กับ millis; map คำนวณ integer แม้ผลถูกเก็บ float ตัวอย่าง 10 คำสั่งหลักได้แก่ pinMode,digitalRead,digitalWrite,analogRead,Serial.begin,print,println,if / else,delay,millis"
+      }
+    },
+    {
+      "id": "iot05-q19",
+      "reference": "cpp-semantics",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: เปรียบเทียบ xกับ 1โดยไม่ assign ควรเขียนอย่างไร?",
+      "explanation": "ใช้ comparisonoperator== (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot05-q19)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "x := 1"
+        },
+        {
+          "id": "b",
+          "text": "x == 1"
+        },
+        {
+          "id": "c",
+          "text": "x = 1"
+        },
+        {
+          "id": "d",
+          "text": "x => 1"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้==เปรียบเทียบและ=กำหนดค่า {}กำหนด block ;ปิด statement ระวัง integerdivision และการ overflow ของ signedinteger ใช้ floatconstant เช่น 0.0343f เมื่อคำนวณ cm และ uint32_t กับ millis; map คำนวณ integer แม้ผลถูกเก็บ float ตัวอย่าง 10 คำสั่งหลักได้แก่ pinMode,digitalRead,digitalWrite,analogRead,Serial.begin,print,println,if / else,delay,millis"
+      }
+    },
+    {
+      "id": "iot05-q20",
+      "reference": "cpp-semantics",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: mapraw ด้วย integer แล้วเก็บ float แก้การตัดเศษใน map อัตโนมัติหรือไม่?",
+      "explanation": "ต้องคำนวณ floating ตั้งแต่ก่อน division ถ้าต้องการเศษ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot05-q20)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่ เศษหายก่อนassignผลลงfloat"
+        },
+        {
+          "id": "b",
+          "text": "ได้precisionเต็มเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "เปลี่ยนADCเป็น16bitเสมอ"
+        },
+        {
+          "id": "d",
+          "text": "เปลี่ยนvoltageinputได้"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้==เปรียบเทียบและ=กำหนดค่า {}กำหนด block ;ปิด statement ระวัง integerdivision และการ overflow ของ signedinteger ใช้ floatconstant เช่น 0.0343f เมื่อคำนวณ cm และ uint32_t กับ millis; map คำนวณ integer แม้ผลถูกเก็บ float ตัวอย่าง 10 คำสั่งหลักได้แก่ pinMode,digitalRead,digitalWrite,analogRead,Serial.begin,print,println,if / else,delay,millis"
+      }
+    },
+    {
+      "id": "iot05-self4",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): อธิบายข้อผิดพลาด assignment ใน if และ integerdivision",
+      "reference": "cpp-semantics",
+      "explanation": "แสดง expectedbehavior ก่อน / หลังแก้พร้อมระบุชนิดและขอบเขต",
+      "rubric": [
+        "แสดง expectedbehavior ก่อน / หลังแก้พร้อมระบุชนิดและขอบเขต",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ใช้==เปรียบเทียบและ=กำหนดค่า {}กำหนด block ;ปิด statement ระวัง integerdivision และการ overflow ของ signedinteger ใช้ floatconstant เช่น 0.0343f เมื่อคำนวณ cm และ uint32_t กับ millis; map คำนวณ integer แม้ผลถูกเก็บ float ตัวอย่าง 10 คำสั่งหลักได้แก่ pinMode,digitalRead,digitalWrite,analogRead,Serial.begin,print,println,if / else,delay,millis"
+      }
+    },
+    {
+      "id": "iot05-q21",
+      "reference": "timing",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: delay(2000) ตั้งเวลารอประมาณกี่วินาที?",
+      "explanation": "delay รับ milliseconds (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot05-q21)",
+      "type": "numeric",
+      "answer": 2,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "delay หยุดการดำเนินต่อของ loop ส่วนนี้ตามช่วงกำหนด จึงไม่เหมาะกับ inactivitytimer ที่ต้องอ่าน motion ซ้ำใช้ millis และ state แทน แต่ I2C / pulseIn ยังอาจรอแบบ bounded ได้ ใช้ inputtrace และ expectedstate ก่อนเสียบ hardware ไม่ใช้ delay10000 แล้วอ้างว่ารับ retrigger ตลอด 10s"
+      }
+    },
+    {
+      "id": "iot05-q22",
+      "reference": "timing",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ทำไม delay(10000)ไม่เหมาะกับการ retrigger ใน loop แบบ polling?",
+      "explanation": "อย่าอ้างว่า delay หยุดทุก interrupt;ปัญหาคือ mainflow ไม่อ่านใหม่ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot05-q22)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เปลี่ยนPIRเป็นanalog"
+        },
+        {
+          "id": "b",
+          "text": "แรงดันGPIOลดครึ่ง"
+        },
+        {
+          "id": "c",
+          "text": "ระหว่างรอไม่กลับมาอ่านPIRในloopส่วนนี้"
+        },
+        {
+          "id": "d",
+          "text": "ทำให้millisหยุดนับเสมอทุกแพลตฟอร์ม"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "delay หยุดการดำเนินต่อของ loop ส่วนนี้ตามช่วงกำหนด จึงไม่เหมาะกับ inactivitytimer ที่ต้องอ่าน motion ซ้ำใช้ millis และ state แทน แต่ I2C / pulseIn ยังอาจรอแบบ bounded ได้ ใช้ inputtrace และ expectedstate ก่อนเสียบ hardware ไม่ใช้ delay10000 แล้วอ้างว่ารับ retrigger ตลอด 10s"
+      }
+    },
+    {
+      "id": "iot05-q23",
+      "reference": "timing",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: uint32_t now=12000,last=3000; elapsed เท่าใดหน่วย ms?",
+      "explanation": "unsignedelapsed เท่ากับ 9000 (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot05-q23)",
+      "type": "numeric",
+      "answer": 9000,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "delay หยุดการดำเนินต่อของ loop ส่วนนี้ตามช่วงกำหนด จึงไม่เหมาะกับ inactivitytimer ที่ต้องอ่าน motion ซ้ำใช้ millis และ state แทน แต่ I2C / pulseIn ยังอาจรอแบบ bounded ได้ ใช้ inputtrace และ expectedstate ก่อนเสียบ hardware ไม่ใช้ delay10000 แล้วอ้างว่ารับ retrigger ตลอด 10s"
+      }
+    },
+    {
+      "id": "iot05-q24",
+      "reference": "timing",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ใช้ millis แต่ยังเรียก pulseIn(timeout)จะเรียกโปรแกรมว่าอะไรแม่นยำ?",
+      "explanation": "ต้องเปิดเผย latency ของ API อื่น (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot05-q24)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "timerใช้elapsedstate แต่บางAPIยังboundedblocking"
+        },
+        {
+          "id": "b",
+          "text": "zero-latencyทั้งระบบ"
+        },
+        {
+          "id": "c",
+          "text": "guaranteedreal-timeทุกกรณี"
+        },
+        {
+          "id": "d",
+          "text": "ผ่านphysicaltestแล้ว"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "delay หยุดการดำเนินต่อของ loop ส่วนนี้ตามช่วงกำหนด จึงไม่เหมาะกับ inactivitytimer ที่ต้องอ่าน motion ซ้ำใช้ millis และ state แทน แต่ I2C / pulseIn ยังอาจรอแบบ bounded ได้ ใช้ inputtrace และ expectedstate ก่อนเสียบ hardware ไม่ใช้ delay10000 แล้วอ้างว่ารับ retrigger ตลอด 10s"
+      }
+    },
+    {
+      "id": "iot05-q25",
+      "reference": "timing",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: พบว่าสถานะ LED ผิดแม้ compile ผ่าน ควรทำอะไรต่อ?",
+      "explanation": "testexpectedbehavior ไม่ใช่ syntax อย่างเดียว (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot05-q25)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ถือว่าcompilerยืนยันanswerแล้ว"
+        },
+        {
+          "id": "b",
+          "text": "แก้ข้อสอบให้ตรงกับบั๊ก"
+        },
+        {
+          "id": "c",
+          "text": "ปิดทุกerrorcheck"
+        },
+        {
+          "id": "d",
+          "text": "ใช้controlledinputtraceตรวจlogicและpolarityก่อนhardwareclaim"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "delay หยุดการดำเนินต่อของ loop ส่วนนี้ตามช่วงกำหนด จึงไม่เหมาะกับ inactivitytimer ที่ต้องอ่าน motion ซ้ำใช้ millis และ state แทน แต่ I2C / pulseIn ยังอาจรอแบบ bounded ได้ ใช้ inputtrace และ expectedstate ก่อนเสียบ hardware ไม่ใช้ delay10000 แล้วอ้างว่ารับ retrigger ตลอด 10s"
+      }
+    },
+    {
+      "id": "iot05-self5",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): ออกแบบ debug แยก compile,logic,protocol และ wiring",
+      "reference": "timing",
+      "explanation": "ใช้ syntax / buildlog,controlledinputs,protocolchecks และ physicalmeasurement โดยไม่สับสนหลักฐาน",
+      "rubric": [
+        "ใช้ syntax / buildlog,controlledinputs,protocolchecks และ physicalmeasurement โดยไม่สับสนหลักฐาน",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "delay หยุดการดำเนินต่อของ loop ส่วนนี้ตามช่วงกำหนด จึงไม่เหมาะกับ inactivitytimer ที่ต้องอ่าน motion ซ้ำใช้ millis และ state แทน แต่ I2C / pulseIn ยังอาจรอแบบ bounded ได้ ใช้ inputtrace และ expectedstate ก่อนเสียบ hardware ไม่ใช้ delay10000 แล้วอ้างว่ารับ retrigger ตลอด 10s"
+      }
+    }
+  ]
+}

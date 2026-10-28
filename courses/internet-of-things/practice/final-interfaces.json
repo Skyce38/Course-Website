@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "internet-of-things-final-interfaces",
+  "title": "FINAL 06 — I2C, SPI, UART, GPIO และ ADC",
+  "questions": [
+    {
+      "id": "iot06-q01",
+      "reference": "i2c",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: สายสัญญาณหลักสองเส้นของ I2C คืออะไร?",
+      "explanation": "ชื่อบอก data และ clock ของ I2C (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot06-q01)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "TX และ RXตามUART"
+        },
+        {
+          "id": "b",
+          "text": "AO และ DOเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "COM และ NO"
+        },
+        {
+          "id": "d",
+          "text": "SDA และ SCL"
+        }
+      ],
+      "answer": "d"
+    },
+    {
+      "id": "iot06-q02",
+      "reference": "i2c",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: I2Cpullup ควรดึงไปแรงดันใด?",
+      "explanation": "3.3VMCU ไม่ควรรับ 5Vpullup โดยอนุมาน (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot06-q02)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไฟmains"
+        },
+        {
+          "id": "b",
+          "text": "GNDโดยตรงเพื่อให้HIGH"
+        },
+        {
+          "id": "c",
+          "text": "ระดับที่เข้ากันได้กับทุกdeviceบนบัส"
+        },
+        {
+          "id": "d",
+          "text": "5Vเสมอไม่ว่าบอร์ดใด"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "id": "iot06-q03",
+      "reference": "i2c",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: address สมมติ 0x3C แปลงเป็นฐานสิบได้เท่าใด?",
+      "explanation": "3×16+12=60;ไม่ใช่ address ที่ยืนยัน hardware จริง (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot06-q03)",
+      "type": "numeric",
+      "answer": 60,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "iot06-q04",
+      "reference": "i2c",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: สอง OLED มี fixedaddress เดียวกันอยู่บนบัสเดียว อาจต้องทำอะไร?",
+      "explanation": "I2Caddress ต้องไม่ชนกันโดยไม่มีวิธีแยกอุปกรณ์ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot06-q04)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เปลี่ยนaddressที่รองรับหรือแยกbus/multiplexerตามการออกแบบ"
+        },
+        {
+          "id": "b",
+          "text": "แก้ด้วยเปลี่ยนbaudUARTอย่างเดียว"
+        },
+        {
+          "id": "c",
+          "text": "ถือว่าไม่มีโอกาสconflict"
+        },
+        {
+          "id": "d",
+          "text": "ต่อ5Vเข้าSDAเพื่อแยกaddress"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "id": "iot06-q05",
+      "reference": "i2c",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: 7bitaddressspace มี 128 รหัส จึงรับรอง 128device ใช้งานจริงได้หรือไม่?",
+      "explanation": "แยกขนาด code space จาก usableaddress และ electricalcapacity (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot06-q05)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ได้ทุกบอร์ดทุกโหลด"
+        },
+        {
+          "id": "b",
+          "text": "ได้ถ้าไม่มีGND"
+        },
+        {
+          "id": "c",
+          "text": "ได้เมื่อใช้GPIO34เป็นSCLเสมอ"
+        },
+        {
+          "id": "d",
+          "text": "ไม่ มีreservedaddressesและข้อจำกัดbus"
+        }
+      ],
+      "answer": "d"
+    },
+    {
+      "id": "iot06-self1",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): ออกแบบตรวจ OLEDI2C ก่อนต่อและก่อนเริ่ม library",
+      "reference": "i2c",
+      "explanation": "ตรวจ pins / voltage / address / pullups และใช้ ACK เป็นหลักฐาน communication ไม่ใช่รับรองทุก pixel",
+      "rubric": [
+        "ตรวจ pins / voltage / address / pullups และใช้ ACK เป็นหลักฐาน communication ไม่ใช่รับรองทุก pixel",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    }
+  ]
+}

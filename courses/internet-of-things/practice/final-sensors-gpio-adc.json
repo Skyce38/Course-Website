@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "internet-of-things-final-sensors-gpio-adc",
+  "title": "FINAL 02 — Sensors, GPIO และ ADC",
+  "questions": [
+    {
+      "id": "iot02-q01",
+      "reference": "signals",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: soil module มี AO และ DO; ต้องการแรงดันที่แปรตามการวัดควรต่อขาใดเข้า ADC?",
+      "explanation": "A11 แยก analog output กับ digital output ชัด (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot02-q01)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "DOโดยสมมติว่าให้จำนวน4095ระดับเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "VCCเป็นข้อมูล"
+        },
+        {
+          "id": "c",
+          "text": "GNDเป็นผลวัด"
+        },
+        {
+          "id": "d",
+          "text": "AO"
+        }
+      ],
+      "answer": "d"
+    },
+    {
+      "id": "iot02-q02",
+      "reference": "signals",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: analogRead(GPIO34) คืน int ข้อใดถูกต้อง?",
+      "explanation": "ชนิดผลหลัง ADC ไม่ใช่ชนิดสัญญาณก่อนแปลง (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot02-q02)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ค่าที่ได้เป็นcmโดยอัตโนมัติ"
+        },
+        {
+          "id": "b",
+          "text": "intทำให้ไม่ต้องตรวจแรงดัน"
+        },
+        {
+          "id": "c",
+          "text": "แรงดัน analog ถูกแปลงเป็น raw digital code"
+        },
+        {
+          "id": "d",
+          "text": "sensorต้องเป็นdigitalเท่านั้น"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "id": "iot02-q03",
+      "reference": "signals",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: DO มี comparator ปรับ sensitivity ได้; จาก HIGH อย่างเดียวทราบค่าความชื้นกี่เปอร์เซ็นต์แน่นอนหรือไม่?",
+      "explanation": "หนึ่ง bit ไม่ให้ปริมาณต่อเนื่องทั้งหมด (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot02-q03)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทราบ4095%เสมอ"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ ทราบเพียงสถานะตาม threshold/polarity ของโมดูล"
+        },
+        {
+          "id": "c",
+          "text": "ทราบ100%เสมอ"
+        },
+        {
+          "id": "d",
+          "text": "ทราบ50%เสมอ"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "id": "iot02-q04",
+      "reference": "signals",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: การอ่าน DO ควรใช้ API ใดเมื่อ logic compatible และกำหนด INPUT แล้ว?",
+      "explanation": "digitalRead รับสถานะ logic จากขา (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot02-q04)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "digitalRead(pin)"
+        },
+        {
+          "id": "b",
+          "text": "digitalWrite(pin,HIGH)เพื่ออ่าน"
+        },
+        {
+          "id": "c",
+          "text": "Serial.begin(pin)แทนการอ่าน"
+        },
+        {
+          "id": "d",
+          "text": "pinMode(pin,OUTPUT)แล้ววัดเอง"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "id": "iot02-q05",
+      "reference": "signals",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ตัวอย่าง sensor ใดเป็น workflow ADC ที่ถูกต้อง?",
+      "explanation": "ต้องอ่านก่อนและมีการแปลงตามสเปก / การปรับเทียบ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot02-q05)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไฟLED→Serialbaud→เปลี่ยนแรงดันVCC"
+        },
+        {
+          "id": "b",
+          "text": "DO→pinModeOUTPUT→ค่าความชื้นอัตโนมัติ"
+        },
+        {
+          "id": "c",
+          "text": "GND→mapโดยไม่อ่านข้อมูล"
+        },
+        {
+          "id": "d",
+          "text": "แรงดัน AO→ADC→raw code→calibration"
+        }
+      ],
+      "answer": "d"
+    },
+    {
+      "id": "iot02-self1",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): อธิบาย AO กับ DO พร้อมเลือก API และข้อจำกัด",
+      "reference": "signals",
+      "explanation": "AO เป็นแรงดันใช้ ADC; DO เป็น logic ต้องตรวจ polarity / level และ threshold ของโมดูล",
+      "rubric": [
+        "AO เป็นแรงดันใช้ ADC; DO เป็น logic ต้องตรวจ polarity / level และ threshold ของโมดูล",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    }
+  ]
+}

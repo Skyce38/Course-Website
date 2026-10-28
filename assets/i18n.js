@@ -112,6 +112,7 @@
     practiceRecovered:['ข้อมูลการฝึกเดิมใช้ไม่ได้ เริ่มชุดนี้ใหม่โดยไม่เปลี่ยนข้อมูลการอ่าน','Saved practice data could not be restored. Starting fresh without changing reading data.'],
     learn: ['เรียน','Learn'], skipContent: ['ข้ามไปเนื้อหา','Skip to content'],
     decreaseFont: ['ลดขนาดตัวอักษร','Decrease font size'], increaseFont: ['เพิ่มขนาดตัวอักษร','Increase font size'], printLesson: ['พิมพ์','Print'],
+    cppCode:['โค้ด C++','C++ code'],
     shellCode: ['โค้ด Bash','Bash code'], pythonCode: ['โค้ด Python','Python code'], copyCode: ['คัดลอกโค้ด','Copy code'], codeCopied: ['คัดลอกแล้ว','Code copied'], copyUnavailable: ['คัดลอกอัตโนมัติไม่ได้ โปรดเลือกและคัดลอกโค้ด','Copy unavailable; select and copy the code'],
     stepDiagram: ['แผนภาพตามลำดับ','Ordered step diagram'], stepLegend: ['กรอบหนา = ตำแหน่งปัจจุบัน · ✓ = ประมวลผลแล้ว','Thick border = current position · ✓ = processed'],
     previousStep: ['ก่อนหน้า','Previous'], nextStep: ['ถัดไป','Next'], resetSteps: ['เริ่มใหม่','Reset'],

@@ -1,0 +1,3334 @@
+{
+  "version": 1,
+  "reviewed": "2026-10-29",
+  "target": "esp32:esp32:esp32",
+  "core": "3.3.11",
+  "cases": [
+    {
+      "question": "iot01-q01",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "ESP32 อ่านระยะแล้วเลือกสี LED",
+      "reason": "การอ่านและจัดประเภทเป็นงานประมวลผลของ Controller",
+      "reference": "iot-chain",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot01-q02",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "LED แสดงสถานะ",
+      "reason": "LED เปลี่ยนข้อมูลเป็นการแสดงผลทางกายภาพ",
+      "reference": "iot-chain",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot01-q03",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "ยืนยัน local control ได้ แต่ยังไม่ยืนยัน Internet connectivity",
+      "reason": "ความสามารถ Wi-Fi ของชิปไม่เท่ากับมีการเชื่อมต่อจริง",
+      "reference": "iot-chain",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot01-q04",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "ที่ Controller ในพื้นที่ และแยก network reporting",
+      "reason": "local control ลดการพึ่งเส้นทางเครือข่าย; ต้องทดสอบนโยบายจริง",
+      "reference": "iot-chain",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot01-q05",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "การสื่อสารข้อมูลระหว่างอุปกรณ์/ผู้ใช้",
+      "reason": "Network เพิ่มเส้นทางสื่อสาร ไม่ได้แก้ข้อจำกัดทางไฟฟ้าหรือการวัด",
+      "reference": "iot-chain",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot01-q06",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "pin map และความสามารถของรุ่น SoC/board",
+      "reason": "รุ่น SoC และบอร์ดมี pin / peripheral ต่างกัน",
+      "reference": "board-module",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot01-q07",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ไม่ ต้องตรวจ pinout/flash/strapping และรุ่นโมดูล",
+      "reason": "จำนวนขา header รวม power / ground และขาที่มีเงื่อนไข",
+      "reference": "board-module",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot01-q08",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "บอร์ดประกอบ SoC/module กับวงจรสนับสนุนและ header",
+      "reason": "SoC เป็นชิป; รูปแบบบอร์ดและโมดูลเพิ่มองค์ประกอบต่างกัน",
+      "reference": "board-module",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot01-q09",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "เลือก classic ESP32-WROOM และ FQBN esp32:esp32:esp32",
+      "reason": "กำหนด target ชัดช่วยไม่สับสนกับบอร์ดอื่น",
+      "reference": "board-module",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot01-q10",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "sensor→34;LEDผ่านresistor→25",
+      "reason": "ตรวจ capability และวงจรโมดูล ไม่เลือกจากเลข pin หรือจำนวน header",
+      "reference": "board-module",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot01-q11",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ยังต้องตรวจ GPIO limits แยก ไม่ต่อ5V Echo โดยอนุมานจาก VIN",
+      "reason": "power input กับ I / O domain ไม่ใช่ข้อกำหนดเดียวกัน",
+      "reference": "electrical",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot01-q12",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "reference GND ร่วมที่ออกแบบถูกต้อง",
+      "reason": "แรงดันสัญญาณต้องอ้าง reference เดียวกัน",
+      "reference": "electrical",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot01-q13",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "difficulty": "medium",
+      "kind": "numeric",
+      "conclusion": 3.939394,
+      "reason": "(3.3−2.0)/330×1000≈3.939394mA ต้องตรวจสเปก LED / ขาเพิ่มเติม",
+      "reference": "electrical",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf",
+      "oracle": {
+        "led": [
+          3.3,
+          2,
+          330
+        ]
+      }
+    },
+    {
+      "question": "iot01-q14",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "อ่านสเปก/วัดอย่างเหมาะสมและใช้ level interface ที่ตรวจแล้ว",
+      "reason": "ความถี่การอ่านหรือ baud rate ไม่ใช่วงจรแปลงระดับ",
+      "reference": "electrical",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot01-q15",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "ขดลวด relay เปล่า",
+      "reason": "coil ต้องใช้ driver และการป้องกันเหมาะสม",
+      "reference": "electrical",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot01-q16",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "รับ analog input ของ classic ESP32",
+      "reason": "อ่าน analogRead บนขา input-only ได้ แต่ไม่ใช้เป็น output",
+      "reference": "workflow",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot01-q17",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "หลีกเลี่ยงและตรวจ schematic เพราะเกี่ยวข้องกับ flash",
+      "reason": "ข้อจำกัดผูกกับโมดูล ไม่ควรใช้ขา flash เป็นขาทดลอง",
+      "reference": "workflow",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot01-q18",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "ช่วยแยกปัญหา software decision ออกจาก wiring/measurement",
+      "reason": "การแยกส่วนทำให้รู้ว่าความผิดพลาดเกิดชั้นไหน",
+      "reference": "workflow",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot01-q19",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ไม่ได้ ต้องใช้ pin mapping ของบอร์ดที่เลือก",
+      "reason": "silkscreen / aliases อาจต่างกัน",
+      "reference": "workflow",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot01-q20",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ความถูกต้องของการต่อสายจริงและ electrical compatibility",
+      "reason": "compile ไม่ได้อ่านวงจรจริง",
+      "reference": "workflow",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot01-q21",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "ผล simulation จาก input ที่กำหนด",
+      "reason": "ห้ามอ้าง simulation เป็นการวัดจริง",
+      "reference": "evidence",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot01-q22",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ไม่ได้ ลิงก์เป็น locator ไม่ใช่หลักฐานเนื้อหา",
+      "reason": "ต้องเปิดต้นฉบับจริง",
+      "reference": "evidence",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot01-q23",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "target/core version,input trace และ expected observations",
+      "reason": "ข้อมูลสภาพแวดล้อมและ input เป็นหลักฐานการทำซ้ำ",
+      "reference": "evidence",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot01-q24",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "เป็นข้ออ้างอิงภายใต้เงื่อนไข ไม่ใช่ผลยืนยันโมดูลจริงทุกตัว",
+      "reason": "ต้องแยก specification จาก measured result",
+      "reference": "evidence",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot01-q25",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ยังไม่ได้ ต้องทดสอบหลายระยะ/ซ้ำและเงื่อนไขติดตั้งพร้อมรายงานความคลาดเคลื่อน",
+      "reason": "หนึ่งจุดทดสอบและจำนวนหลักที่แสดงไม่พิสูจน์ความแม่นยำตลอดช่วง;ต้องแยก resolution / accuracy / evidence",
+      "reference": "evidence",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot02-q01",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "AO",
+      "reason": "A11 แยก analog output กับ digital output ชัด",
+      "reference": "signals",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot02-q02",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "แรงดัน analog ถูกแปลงเป็น raw digital code",
+      "reason": "ชนิดผลหลัง ADC ไม่ใช่ชนิดสัญญาณก่อนแปลง",
+      "reference": "signals",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot02-q03",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "ไม่ ทราบเพียงสถานะตาม threshold/polarity ของโมดูล",
+      "reason": "หนึ่ง bit ไม่ให้ปริมาณต่อเนื่องทั้งหมด",
+      "reference": "signals",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot02-q04",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "digitalRead(pin)",
+      "reason": "digitalRead รับสถานะ logic จากขา",
+      "reference": "signals",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot02-q05",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "แรงดัน AO→ADC→raw code→calibration",
+      "reason": "ต้องอ่านก่อนและมีการแปลงตามสเปก / การปรับเทียบ",
+      "reference": "signals",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot02-q06",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "GPIO34",
+      "reason": "GPIO34 เป็น input-only; pinout ต้องตรงรุ่น",
+      "reference": "gpio",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot02-q07",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ค่าลอย/ไวต่อสัญญาณรบกวน",
+      "reason": "highimpedance ต้องมีแหล่งกำหนดระดับที่ชัด",
+      "reference": "gpio",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot02-q08",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ใช้ external bias ที่ออกแบบถูกต้องหรือเลือกขาที่รองรับ",
+      "reason": "34–39 ไม่มี internalpullup / pulldown บน target นี้",
+      "reference": "gpio",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot02-q09",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 1,
+      "reason": "ternary เลือก 1เมื่อ conditiontrue",
+      "reference": "gpio",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf",
+      "oracle": {
+        "cpp": "(true ? 1 : 0)"
+      }
+    },
+    {
+      "question": "iot02-q10",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "เลือกขาที่ขับได้และกำหนด OUTPUT",
+      "reason": "API / GPIOmode ต้องสอดคล้องกับการใช้งาน",
+      "reference": "gpio",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot02-q11",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 4096,
+      "reason": "2^12=4096code ตั้งแต่ 0ถึง 4095",
+      "reference": "adc-resolution",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/adc.html",
+      "oracle": {
+        "cpp": "(1U << 12)"
+      }
+    },
+    {
+      "question": "iot02-q12",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 4095,
+      "reason": "count4096 แต่ index สูงสุด 4095",
+      "reference": "adc-resolution",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/adc.html",
+      "oracle": {
+        "cpp": "((1U << 12)-1U)"
+      }
+    },
+    {
+      "question": "iot02-q13",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "หนึ่งsampleจากการแปลงที่เรียก ไม่ใช่บันทึกwaveformทั้งหมด",
+      "reason": "oneshotAPI คืนผลการแปลงครั้งที่ร้องขอ;หากต้องการ time-series ต้องอ่านหลายครั้งพร้อมข้อมูลเวลา",
+      "reference": "adc-resolution",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/adc.html"
+    },
+    {
+      "question": "iot02-q14",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ไม่ได้ ต้องรู้attenuation/calibration/ช่วงวัดและข้อคลาดเคลื่อน",
+      "reason": "rawcount ไม่ใช่แรงดันที่ calibrate แล้ว",
+      "reference": "adc-resolution",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/adc.html"
+    },
+    {
+      "question": "iot02-q15",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "analogReadMilliVolts(pin)",
+      "reason": "ยังต้องตรวจคุณภาพการวัดและรุ่น SoC ตามเอกสาร ADC",
+      "reference": "adc-resolution",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/adc.html"
+    },
+    {
+      "question": "iot02-q16",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 50,
+      "reason": "ผลจำนวนเต็มตัดเศษ ไม่ได้กลายเป็น floating เพียงเพราะ assign ลง float",
+      "reference": "calibration",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/adc.html",
+      "oracle": {
+        "cpp": "(512*100/1023)"
+      }
+    },
+    {
+      "question": "iot02-q17",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "difficulty": "medium",
+      "kind": "numeric",
+      "conclusion": 50,
+      "reason": "1000 / 2000×100=50 เป็น authorednormalizedindex ไม่ใช่ physicalmoisture ที่ยืนยันแล้ว",
+      "reference": "calibration",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/adc.html",
+      "oracle": {
+        "ratio": [
+          1000,
+          2000,
+          100
+        ]
+      }
+    },
+    {
+      "question": "iot02-q18",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "ปฏิเสธcalibrationก่อนหารศูนย์",
+      "reason": "ต้องมีช่วง calibration ที่ไม่เป็นศูนย์",
+      "reference": "calibration",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/adc.html"
+    },
+    {
+      "question": "iot02-q19",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ทิศของrawต่อความชื้นขึ้นกับโมดูลและการต่อจริง",
+      "reason": "ต้องทดสอบ dry / wet ไม่เดาทิศ",
+      "reference": "calibration",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/adc.html"
+    },
+    {
+      "question": "iot02-q20",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "difficulty": "medium",
+      "kind": "numeric",
+      "conclusion": 100,
+      "reason": "clamp ตามนโยบายแสดง 100 และควรแจ้ง out-of-calibrationrange ถ้าต้องวิเคราะห์",
+      "reference": "calibration",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/adc.html",
+      "oracle": {
+        "clamp": [
+          120,
+          0,
+          100
+        ]
+      }
+    },
+    {
+      "question": "iot02-q21",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "difficulty": "hard",
+      "kind": "numeric",
+      "conclusion": 3,
+      "reason": "5×15/(10+15)=3.0V ไม่ใช่การรับรองวงจรจริง",
+      "reference": "voltage",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf",
+      "oracle": {
+        "divider": [
+          5,
+          10,
+          15
+        ]
+      }
+    },
+    {
+      "question": "iot02-q22",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "difficulty": "medium",
+      "kind": "numeric",
+      "conclusion": 25,
+      "reason": "ตัวต้านทานสองตัวต่ออนุกรมรวม 25kΩ",
+      "reference": "voltage",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf",
+      "oracle": {
+        "sum": [
+          10,
+          15
+        ]
+      }
+    },
+    {
+      "question": "iot02-q23",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "difficulty": "medium",
+      "kind": "numeric",
+      "conclusion": 0.2,
+      "reason": "ใช้กฎโอห์ม 5V หาร 25kΩได้ 0.2mA;ค่าอุดมคติของ divider ไม่ใช่กระแสที่ GPIO ควรจ่ายให้ load",
+      "reference": "voltage",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf",
+      "oracle": {
+        "ratio": [
+          5,
+          25,
+          1
+        ]
+      }
+    },
+    {
+      "question": "iot02-q24",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "หยุดต่อที่เสี่ยง ตรวจsignalvoltage/limits/pin/attenuation",
+      "reason": "อาจเป็น saturation หรือ wiringerror ไม่ควรแปลเป็น physicalmeasurement เงียบๆ",
+      "reference": "voltage",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot02-q25",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "tolerance,logicthreshold,loading,pulseและโมดูลจริง",
+      "reason": "ค่าคำนวณไม่ครอบคลุมความคลาดเคลื่อนและ dynamicbehavior",
+      "reference": "voltage",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot03-q01",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "ใช้10µsเข้าสูตรdistanceแทนEcho",
+      "reason": "Trigger กระตุ้น sensor แต่ Echo เป็น measurementtime",
+      "reference": "trigger-echo",
+      "source": "W09 slides3–16; A09 requirement2",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot03-q02",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "ความกว้างEcho HIGHที่วัดได้",
+      "reason": "time-of-flight มาจาก Echo ไม่ใช่พัลส์กระตุ้น",
+      "reference": "trigger-echo",
+      "source": "W09 slides3–16; A09 requirement2",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot03-q03",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "สถานะinvalid ไม่ใช่0cmที่ยืนยันแล้ว",
+      "reason": "ต้องรักษาความหมาย missingpulse",
+      "reference": "trigger-echo",
+      "source": "W09 slides3–16; A09 requirement2",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot03-q04",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "difficulty": "easy",
+      "kind": "numeric",
+      "conclusion": 30,
+      "reason": "หน่วย 1000µs เท่ากับ 1ms จึง 30000µs เท่ากับ 30ms;timeout เป็นขอบการรอไม่ใช่ผลวัด",
+      "reference": "trigger-echo",
+      "source": "W09 slides3–16; A09 requirement2",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf",
+      "oracle": {
+        "ratio": [
+          30000,
+          1000,
+          1
+        ]
+      }
+    },
+    {
+      "question": "iot03-q05",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "timerอาจไม่ใช้delayยาว แต่pulseInยังรอแบบboundedblocking",
+      "reason": "แยกการออกแบบ timer จาก behavior ของ API อ่าน sensor",
+      "reference": "trigger-echo",
+      "source": "W09 slides3–16; A09 requirement2",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot03-q06",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "difficulty": "hard",
+      "kind": "numeric",
+      "conclusion": 8.575,
+      "reason": "500×0.0343 / 2=8.575cm ตาม W09slide16",
+      "reference": "time-of-flight",
+      "source": "W09 slides3–16; A09 requirement2",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf",
+      "oracle": {
+        "distance": [
+          500,
+          343
+        ]
+      }
+    },
+    {
+      "question": "iot03-q07",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "difficulty": "medium",
+      "kind": "numeric",
+      "conclusion": 2,
+      "reason": "v*t เป็นระยะไปกลับ จึงมากกว่า one-way2 เท่า",
+      "reference": "time-of-flight",
+      "source": "W09 slides3–16; A09 requirement2",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf",
+      "oracle": {
+        "ratio": [
+          1,
+          0.5,
+          1
+        ]
+      }
+    },
+    {
+      "question": "iot03-q08",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "difficulty": "medium",
+      "kind": "numeric",
+      "conclusion": 34.3,
+      "reason": "v×t=34.3cm เป็น roundtrip ไม่ใช่ระยะถึงวัตถุ",
+      "reference": "time-of-flight",
+      "source": "W09 slides3–16; A09 requirement2",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf",
+      "oracle": {
+        "roundtrip": [
+          1000,
+          343
+        ]
+      }
+    },
+    {
+      "question": "iot03-q09",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "คลื่นเดินทางไปผิวสะท้อนแล้วกลับ",
+      "reason": "หนึ่ง measurement รวมขาไปและขากลับ",
+      "reference": "time-of-flight",
+      "source": "W09 slides3–16; A09 requirement2",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot03-q10",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ตรวจสมมติฐานอุณหภูมิ/approximationก่อนกล่าวว่าคนหนึ่งหาร2ผิด",
+      "reason": "W09 กับ modulereference ใช้คนละ speedconvention;ต้องประกาศและใช้หน่วยให้สอดคล้อง",
+      "reference": "time-of-flight",
+      "source": "W09 slides3–16; A09 requirement2",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot03-q11",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ยังหาค่าที่มีหน่วยcmอย่างน่าเชื่อถือไม่ได้ ต้องตรวจหน่วยและspeedก่อน",
+      "reason": "dimensionalanalysis ต้องมีหน่วยและ speed ที่เข้ากัน;หาร 2แก้ roundtrip ไม่แก้ uniterror",
+      "reference": "units",
+      "source": "W09 slides3–16; A09 requirement2",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot03-q12",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "difficulty": "hard",
+      "kind": "numeric",
+      "conclusion": 2000,
+      "reason": "t=2d / v=0.002s=2000µs",
+      "reference": "units",
+      "source": "W09 slides3–16; A09 requirement2",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf",
+      "oracle": {
+        "echo": [
+          34.3,
+          343
+        ]
+      }
+    },
+    {
+      "question": "iot03-q13",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "difficulty": "medium",
+      "kind": "numeric",
+      "conclusion": 8.58,
+      "reason": "ระบุ decimalhalf-up ให้ชัด ไม่อ้าง floatingprintf ทุกแพลตฟอร์มให้ผลเหมือน exactdecimal",
+      "reference": "units",
+      "source": "W09 slides3–16; A09 requirement2",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf",
+      "oracle": {
+        "round": [
+          "8.575",
+          2
+        ]
+      }
+    },
+    {
+      "question": "iot03-q14",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "difficulty": "medium",
+      "kind": "numeric",
+      "conclusion": 20,
+      "reason": "1m เท่ากับ 100cm จึง 0.2m คูณ 100 ได้ 20cm ต้องแปลงหน่วยก่อนเข้าสูตร",
+      "reference": "units",
+      "source": "W09 slides3–16; A09 requirement2",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf",
+      "oracle": {
+        "multiply": [
+          0.2,
+          100
+        ]
+      }
+    },
+    {
+      "question": "iot03-q15",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "difficulty": "hard",
+      "kind": "numeric",
+      "conclusion": 1166.181,
+      "reason": "2×20 / 0.0343≈1166.180758µs",
+      "reference": "units",
+      "source": "W09 slides3–16; A09 requirement2",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf",
+      "oracle": {
+        "echoRounded": [
+          20,
+          343,
+          3
+        ]
+      }
+    },
+    {
+      "question": "iot03-q16",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "1.5cm",
+      "reason": "1.5 ต่ำกว่าขอบที่ระบุ;นี่คือ policy ตาม reference ที่เลือก",
+      "reference": "invalid",
+      "source": "W09 slides3–16; A09 requirement2",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot03-q17",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 0,
+      "reason": "timeout ไม่ผ่าน validation",
+      "reference": "invalid",
+      "source": "W09 slides3–16; A09 requirement2",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf",
+      "oracle": {
+        "cpp": "(0U > 0U ? 1 : 0)"
+      }
+    },
+    {
+      "question": "iot03-q18",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "difficulty": "hard",
+      "kind": "numeric",
+      "conclusion": 514.5,
+      "reason": "เป็นเพดานจากเวลา ไม่ใช่รับรอง HC-SR04 วัดได้ 514.5cm",
+      "reference": "invalid",
+      "source": "W09 slides3–16; A09 requirement2",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf",
+      "oracle": {
+        "distance": [
+          30000,
+          343
+        ]
+      }
+    },
+    {
+      "question": "iot03-q19",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "รายงานinvalid/out-of-rangeตามpolicy",
+      "reason": "ต้องแยกการคำนวณจาก validity",
+      "reference": "invalid",
+      "source": "W09 slides3–16; A09 requirement2",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot03-q20",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "เทียบreferenceและบันทึกinvalid/varianceภายใต้สภาพติดตั้ง",
+      "reason": "hardwareaccuracy ต้องมี measurement จริง",
+      "reference": "invalid",
+      "source": "W09 slides3–16; A09 requirement2",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot03-q21",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "คลื่นสะท้อนออกจากทิศตัวรับ",
+      "reason": "geometry ของ reflection สำคัญ",
+      "reference": "limitations",
+      "source": "W09 slides3–16; A09 requirement2",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot03-q22",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "Echoอ่อนหรือไม่ถูกตรวจพบ",
+      "reason": "W09slide8 อธิบายข้อจำกัดการสะท้อน",
+      "reference": "limitations",
+      "source": "W09 slides3–16; A09 requirement2",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot03-q23",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ลดลง",
+      "reason": "geometry พื้นฐานต้องอ้างจุดติดตั้งคงที่",
+      "reference": "limitations",
+      "source": "W09 slides3–16; A09 requirement2",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot03-q24",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "difficulty": "hard",
+      "kind": "numeric",
+      "conclusion": 60,
+      "reason": "h=H−d เมื่อ geometry แนวดิ่งและ datum ตามโจทย์",
+      "reference": "limitations",
+      "source": "W09 slides3–16; A09 requirement2",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf",
+      "oracle": {
+        "subtract": [
+          80,
+          20
+        ]
+      }
+    },
+    {
+      "question": "iot03-q25",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "เป็นสมมติฐานที่ขึ้นกับสภาพอากาศ/อุณหภูมิ",
+      "reason": "อย่าอ้าง accuracy เกินสมมติฐาน",
+      "reference": "limitations",
+      "source": "W09 slides3–16; A09 requirement2",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot04-q01",
+      "lesson": "internet-of-things-final-water-level",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "แดง,เหลือง,เขียว",
+      "reason": "สาม sample เป็นข้อกำหนด source โดยไม่กำหนด range ระหว่างจุด",
+      "reference": "requirements",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot04-q02",
+      "lesson": "internet-of-things-final-water-level",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "มีหลายนโยบายช่วงที่ผ่านสามจุดแต่ให้30cmต่างกัน",
+      "reason": "ต้องประกาศ threshold ที่เขียนเสริมและตรวจ boundaries ไม่สวมว่า source กำหนดแล้ว",
+      "reference": "requirements",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot04-q03",
+      "lesson": "internet-of-things-final-water-level",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "ไม่เข้าทั้งสามเงื่อนไข",
+      "reason": "ค่าระหว่าง 100..200 รวมขอบยังไม่มี branch ห้ามคัดเป็น policy ครบถ้วน",
+      "reference": "requirements",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot04-q04",
+      "lesson": "internet-of-things-final-water-level",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "เกณฑ์เสริมที่ประกาศชัดและรักษาsampleต้นฉบับ",
+      "reason": "ไม่อ้าง range ที่ต้นฉบับไม่ได้ให้",
+      "reference": "requirements",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot04-q05",
+      "lesson": "internet-of-things-final-water-level",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "วิดีโอระบบจริงพร้อมflowchart/คำอธิบาย/wiring",
+      "reason": "softwareQA ไม่แทน deliverablehardwarevideo",
+      "reference": "requirements",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot04-q06",
+      "lesson": "internet-of-things-final-water-level",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "RED",
+      "reason": "policy เสริมใช้ d<=30 เป็น RED จึง 30 รวมขอบแดง;ค่าถัดไปมากกว่า 30 จึงเข้าช่วงเหลือง",
+      "reference": "classification",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot04-q07",
+      "lesson": "internet-of-things-final-water-level",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "เลือกYELLOWก่อนจนREDถูกบัง ควรทดสอบขอบต่ำก่อน",
+      "reason": "เงื่อนไขช่วงทับกันต้องเรียงและใช้ exclusivebranches",
+      "reference": "classification",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot04-q08",
+      "lesson": "internet-of-things-final-water-level",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "แสดงREDทั้งที่ไม่มีmeasurement ควรERRORก่อนclassification",
+      "reason": "missingpulse ไม่ใช่ distance0 ที่ใช้ยืนยันระดับน้ำได้",
+      "reference": "classification",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot04-q09",
+      "lesson": "internet-of-things-final-water-level",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 1,
+      "reason": "condition แยกด้วย!red จึงเปิดสีเดียว",
+      "reference": "classification",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf",
+      "oracle": {
+        "cpp": "int(20<=30)+int(!(20<=30) && 20<=50)"
+      }
+    },
+    {
+      "question": "iot04-q10",
+      "lesson": "internet-of-things-final-water-level",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ไม่มีbranchทั้งที่ใกล้sample ต้องออกแบบrangepolicyที่ครบ",
+      "reason": "samplematching ไม่ใช่ rangeclassification และค่าจาก sensor อาจไม่เท่าจุดตัวอย่างพอดี",
+      "reference": "classification",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot04-q11",
+      "lesson": "internet-of-things-final-water-level",
+      "difficulty": "medium",
+      "kind": "numeric",
+      "conclusion": 40,
+      "reason": "h=H−d ตาม datum ที่กำหนด",
+      "reference": "flow",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf",
+      "oracle": {
+        "subtract": [
+          100,
+          60
+        ]
+      }
+    },
+    {
+      "question": "iot04-q12",
+      "lesson": "internet-of-things-final-water-level",
+      "difficulty": "hard",
+      "kind": "numeric",
+      "conclusion": 40,
+      "reason": "ระยะลด 40 จึงความสูงเพิ่ม 40",
+      "reference": "flow",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf",
+      "oracle": {
+        "subtract": [
+          60,
+          20
+        ]
+      }
+    },
+    {
+      "question": "iot04-q13",
+      "lesson": "internet-of-things-final-water-level",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ERROR/invalid branch",
+      "reason": "missingmeasurement ไม่ใช่ physicallevel",
+      "reference": "flow",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot04-q14",
+      "lesson": "internet-of-things-final-water-level",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "validateก่อน แล้วif/else if/else",
+      "reason": "กำหนดทั้ง valid / erroroutput และกลับมาวัดครั้งใหม่",
+      "reference": "flow",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot04-q15",
+      "lesson": "internet-of-things-final-water-level",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 350,
+      "reason": "นี่คือเวลารอรวม ไม่ใช่รับรองเวลาระบบจริงทั้งหมด",
+      "reference": "flow",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf",
+      "oracle": {
+        "cpp": "5U*70U"
+      }
+    },
+    {
+      "question": "iot04-q16",
+      "lesson": "internet-of-things-final-water-level",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ตรวจสเปก/ระดับแล้วใช้levelinterfaceที่เหมาะก่อนต่อ",
+      "reason": "powerdomain กับ GPIOdomain ต่างกัน อย่าถือว่ารูปวงจรย่อเป็นการรับรอง electrical",
+      "reference": "circuit",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot04-q17",
+      "lesson": "internet-of-things-final-water-level",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "resistorอนุกรมแยกดวงและตรวจVf/currentbudget",
+      "reason": "ตรวจกระแสแต่ละ LED / ขาบอร์ด ไม่อนุมานความปลอดภัยจากแรงดันต่ำอย่างเดียว",
+      "reference": "circuit",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot04-q18",
+      "lesson": "internet-of-things-final-water-level",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "เป็นauthoredexampleสำหรับtargetที่ระบุ",
+      "reason": "ต้องตรวจ pinout รุ่นจริง",
+      "reference": "circuit",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot04-q19",
+      "lesson": "internet-of-things-final-water-level",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "LEDกระแสต่ำพร้อมresistorและไฟแรงดันต่ำ",
+      "reason": "สาธิตเฉพาะ lowvoltage",
+      "reference": "circuit",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot04-q20",
+      "lesson": "internet-of-things-final-water-level",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "pinout/ขั้ว/VCC/GND/level/resistorเทียบกับwiringtable",
+      "reason": "ลดความเสี่ยงไฟฟ้าก่อน functionaltest",
+      "reference": "circuit",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot04-q21",
+      "lesson": "internet-of-things-final-water-level",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "ปิดLEDระดับทั้งสามและรายงานERRORตามนโยบายบท",
+      "reason": "เป็น authoredfailstate ไม่อ้างว่า sensor ยังวัดสำเร็จ",
+      "reference": "program",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot04-q22",
+      "lesson": "internet-of-things-final-water-level",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ตรรกะของsamplepointsตามinputนั้น",
+      "reason": "แยก softwarelogic จาก physicalmeasurement",
+      "reference": "program",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot04-q23",
+      "lesson": "internet-of-things-final-water-level",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 8,
+      "reason": "8.575 ถูกตัดเป็น 8ไม่ใช่ปัดเป็น 9;คง float จน format แสดงผล",
+      "reference": "program",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf",
+      "oracle": {
+        "cpp": "int(500*0.0343f/2.0f)"
+      }
+    },
+    {
+      "question": "iot04-q24",
+      "lesson": "internet-of-things-final-water-level",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "ERRORเพราะต่ำกว่าช่วงvalid",
+      "reason": "ตรวจ validity ทั้ง timeout และ outofrange",
+      "reference": "program",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot04-q25",
+      "lesson": "internet-of-things-final-water-level",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ออกแบบhysteresisเป็นส่วนเสริมและทดสอบเกณฑ์ใหม่ชัดเจน",
+      "reason": "นโยบายกรอง / hysteresis ต้องอธิบายต่างจาก simplepolicy นี้",
+      "reference": "program",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "technical": "https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+    },
+    {
+      "question": "iot05-q01",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "หนึ่งครั้งต่อboot/resetก่อนloop",
+      "reason": "core เรียก setup ใหม่หลัง reset",
+      "reference": "lifecycle",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot05-q02",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "หลังsetupและเมื่อรอบloopก่อนคืนการทำงาน",
+      "reason": "ระยะรอบขึ้นกับคำสั่งที่ทำ",
+      "reference": "lifecycle",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot05-q03",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "3 Sensors",
+      "reason": "จำนวน 10 อ้างจำนวนคำสั่งพื้นฐาน ไม่ใช่จำนวน sensor",
+      "reference": "lifecycle",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot05-q04",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "buildสำหรับtargetนั้นสำเร็จ ยังไม่ใช่physicaltest",
+      "reason": "จำกัดคำกล่าวตามหลักฐาน",
+      "reference": "lifecycle",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot05-q05",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "เขียนด้วยลายมือตามคำสั่ง ไม่ใช่พิมพ์เว็บแทน",
+      "reason": "เว็บเป็นแหล่งเรียน ไม่เปลี่ยนข้อกำหนดส่งงาน",
+      "reference": "lifecycle",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot05-q06",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "pinMode(pin, OUTPUT);",
+      "reason": "signaturepinMode รับ pin กับ mode",
+      "reference": "digital-api",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot05-q07",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "digitalRead(pin)",
+      "reason": "digitalRead คืน logicstate",
+      "reference": "digital-api",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot05-q08",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ให้decisionกับlogอ้างsampleเดียวกันแม้inputเปลี่ยนระหว่างคำสั่ง",
+      "reason": "ลดความกำกวมคนละ sample ไม่ใช่การรับรอง physicalsignal",
+      "reference": "digital-api",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot05-q09",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 1,
+      "reason": "activehighLED ตามสมมติฐานใช้ 1เมื่อ pressed",
+      "reference": "digital-api",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html",
+      "oracle": {
+        "cpp": "(true?1:0)"
+      }
+    },
+    {
+      "question": "iot05-q10",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "LOW",
+      "reason": "ต้องประกาศ activeLOW ไม่ถือว่าทุก relay เหมือนกัน",
+      "reference": "digital-api",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot05-q11",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "เปลี่ยนเพียงlabel ไม่ได้ทำcalibration",
+      "reason": "หน่วยเชิงกายภาพต้องมีการแปลงและหลักฐาน calibration จริง",
+      "reference": "analog-serial",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/adc.html"
+    },
+    {
+      "question": "iot05-q12",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "Serial.println(value);",
+      "reason": "print กับ println ต่างเรื่อง lineending",
+      "reference": "analog-serial",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/adc.html"
+    },
+    {
+      "question": "iot05-q13",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ให้baudrateและportตรงกับtargetที่ใช้",
+      "reason": "Serialconfiguration ต้องตรงกัน",
+      "reference": "analog-serial",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/adc.html"
+    },
+    {
+      "question": "iot05-q14",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ADC raw count",
+      "reason": "ไม่ตั้ง unitphysical โดยเดา",
+      "reference": "analog-serial",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/adc.html"
+    },
+    {
+      "question": "iot05-q15",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "พิมพ์raw=...และระบุconversion/unitsแยก",
+      "reason": "ควรรักษาข้อมูลดิบและสถานะผิดพลาด",
+      "reference": "analog-serial",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/adc.html"
+    },
+    {
+      "question": "iot05-q16",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 3,
+      "reason": "integerdivision ตัดเศษ",
+      "reference": "cpp-semantics",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html",
+      "oracle": {
+        "cpp": "(7/2)"
+      }
+    },
+    {
+      "question": "iot05-q17",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 3,
+      "reason": "assignment ตั้ง x1 ทำให้ conditiontrue แล้วบวก 2;ต่างจาก x==1",
+      "reference": "cpp-semantics",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html",
+      "oracle": {
+        "cpp": "([]{int x=0; if((x=1)){x+=2;} return x;})()"
+      }
+    },
+    {
+      "question": "iot05-q18",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 1,
+      "reason": "assignment กำหนด 1และ conditiontrue ไม่ใช่ comparison;compiler อาจเตือน",
+      "reference": "cpp-semantics",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html",
+      "oracle": {
+        "cpp": "int(bool(1))"
+      }
+    },
+    {
+      "question": "iot05-q19",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "x == 1",
+      "reason": "ใช้ comparisonoperator==",
+      "reference": "cpp-semantics",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot05-q20",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ไม่ เศษหายก่อนassignผลลงfloat",
+      "reason": "ต้องคำนวณ floating ตั้งแต่ก่อน division ถ้าต้องการเศษ",
+      "reference": "cpp-semantics",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot05-q21",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "difficulty": "hard",
+      "kind": "numeric",
+      "conclusion": 2,
+      "reason": "delay รับ milliseconds",
+      "reference": "timing",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html",
+      "oracle": {
+        "ratio": [
+          2000,
+          1000,
+          1
+        ]
+      }
+    },
+    {
+      "question": "iot05-q22",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ระหว่างรอไม่กลับมาอ่านPIRในloopส่วนนี้",
+      "reason": "อย่าอ้างว่า delay หยุดทุก interrupt;ปัญหาคือ mainflow ไม่อ่านใหม่",
+      "reference": "timing",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot05-q23",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 9000,
+      "reason": "unsignedelapsed เท่ากับ 9000",
+      "reference": "timing",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html",
+      "oracle": {
+        "cpp": "uint32_t(12000U-3000U)"
+      }
+    },
+    {
+      "question": "iot05-q24",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "timerใช้elapsedstate แต่บางAPIยังboundedblocking",
+      "reason": "ต้องเปิดเผย latency ของ API อื่น",
+      "reference": "timing",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot05-q25",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ใช้controlledinputtraceตรวจlogicและpolarityก่อนhardwareclaim",
+      "reason": "testexpectedbehavior ไม่ใช่ syntax อย่างเดียว",
+      "reference": "timing",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot06-q01",
+      "lesson": "internet-of-things-final-interfaces",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "SDA และ SCL",
+      "reason": "ชื่อบอก data และ clock ของ I2C",
+      "reference": "i2c",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/i2c.html"
+    },
+    {
+      "question": "iot06-q02",
+      "lesson": "internet-of-things-final-interfaces",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "ระดับที่เข้ากันได้กับทุกdeviceบนบัส",
+      "reason": "3.3VMCU ไม่ควรรับ 5Vpullup โดยอนุมาน",
+      "reference": "i2c",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/i2c.html"
+    },
+    {
+      "question": "iot06-q03",
+      "lesson": "internet-of-things-final-interfaces",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 60,
+      "reason": "3×16+12=60;ไม่ใช่ address ที่ยืนยัน hardware จริง",
+      "reference": "i2c",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/i2c.html",
+      "oracle": {
+        "cpp": "0x3C"
+      }
+    },
+    {
+      "question": "iot06-q04",
+      "lesson": "internet-of-things-final-interfaces",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "เปลี่ยนaddressที่รองรับหรือแยกbus/multiplexerตามการออกแบบ",
+      "reason": "I2Caddress ต้องไม่ชนกันโดยไม่มีวิธีแยกอุปกรณ์",
+      "reference": "i2c",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/i2c.html"
+    },
+    {
+      "question": "iot06-q05",
+      "lesson": "internet-of-things-final-interfaces",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "ไม่ มีreservedaddressesและข้อจำกัดbus",
+      "reason": "แยกขนาด code space จาก usableaddress และ electricalcapacity",
+      "reference": "i2c",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/i2c.html"
+    },
+    {
+      "question": "iot06-q06",
+      "lesson": "internet-of-things-final-interfaces",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "CS/SS",
+      "reason": "chipselect เลือก device บน bus ตามการออกแบบ",
+      "reference": "spi",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/spi.html"
+    },
+    {
+      "question": "iot06-q07",
+      "lesson": "internet-of-things-final-interfaces",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "Controllerส่งไปPeripheral",
+      "reason": "ดูทิศจากชื่อและ datasheet ของ device",
+      "reference": "spi",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/spi.html"
+    },
+    {
+      "question": "iot06-q08",
+      "lesson": "internet-of-things-final-interfaces",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ไม่เสมอ ดูprotocol/deviceที่ระบุ",
+      "reason": "เช่น writeonlydisplay อาจไม่ส่งข้อมูลกลับ",
+      "reference": "spi",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/spi.html"
+    },
+    {
+      "question": "iot06-q09",
+      "lesson": "internet-of-things-final-interfaces",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "อ่าน/เขียนข้อมูลผิดแม้สายไฟเลี้ยงถูก",
+      "reason": "ต้องตรวจ CPOL / CPHA ตาม device",
+      "reference": "spi",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/spi.html"
+    },
+    {
+      "question": "iot06-q10",
+      "lesson": "internet-of-things-final-interfaces",
+      "difficulty": "medium",
+      "kind": "numeric",
+      "conclusion": 5,
+      "reason": "3shared+2CS=5 ตามสมมติฐาน ไม่ใช่ทุก module ต้องใช้ MISO",
+      "reference": "spi",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/spi.html",
+      "oracle": {
+        "sum": [
+          3,
+          2
+        ]
+      }
+    },
+    {
+      "question": "iot06-q11",
+      "lesson": "internet-of-things-final-interfaces",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "TXของAไปRXของB และTXของBไปRXของA",
+      "reason": "ต้องไขว้ผู้ส่งกับผู้รับ",
+      "reference": "uart",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/serial.html"
+    },
+    {
+      "question": "iot06-q12",
+      "lesson": "internet-of-things-final-interfaces",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "baud,databits,parity,stopbitsให้ตรง",
+      "reason": "UARTformat ต้องตรงกันทั้งสองฝั่ง",
+      "reference": "uart",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/serial.html"
+    },
+    {
+      "question": "iot06-q13",
+      "lesson": "internet-of-things-final-interfaces",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ไม่ได้ ต้องมีtransceiver/levelinterfaceที่เหมาะสม",
+      "reason": "มาตรฐาน electrical ต่างจาก TTL3.3V",
+      "reference": "uart",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/serial.html"
+    },
+    {
+      "question": "iot06-q14",
+      "lesson": "internet-of-things-final-interfaces",
+      "difficulty": "medium",
+      "kind": "numeric",
+      "conclusion": 10,
+      "reason": "10bit / frame ไม่ใช่ 8bit รวม overhead",
+      "reference": "uart",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/serial.html",
+      "oracle": {
+        "sum": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "question": "iot06-q15",
+      "lesson": "internet-of-things-final-interfaces",
+      "difficulty": "hard",
+      "kind": "numeric",
+      "conclusion": 960,
+      "reason": "9600 / 10=960 เป็นอุดมคติตาม frameformat ไม่ใช่ measurement",
+      "reference": "uart",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/serial.html",
+      "oracle": {
+        "ratio": [
+          9600,
+          10,
+          1
+        ]
+      }
+    },
+    {
+      "question": "iot06-q16",
+      "lesson": "internet-of-things-final-interfaces",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ADC",
+      "reason": "AO ระบุ analogoutput",
+      "reference": "select-interface",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot06-q17",
+      "lesson": "internet-of-things-final-interfaces",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "GPIOdigitalinput",
+      "reason": "ดูชนิด output ไม่ใช่รูปลักษณ์",
+      "reference": "select-interface",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot06-q18",
+      "lesson": "internet-of-things-final-interfaces",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "GPIOกับการวัดpulseเวลา",
+      "reason": "Echo เป็น digitalpulse ที่ความกว้างแทนเวลา",
+      "reference": "select-interface",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot06-q19",
+      "lesson": "internet-of-things-final-interfaces",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ไม่ บางรุ่นเป็นSPIหรือinterfaceอื่น ต้องตรวจรุ่น",
+      "reason": "displaytechnology ไม่เท่ากับ businterface",
+      "reference": "select-interface",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot06-q20",
+      "lesson": "internet-of-things-final-interfaces",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ตามoutput/protocolของแต่ละmodule",
+      "reason": "A11 ให้ดูหลักการและ interface จริง",
+      "reference": "select-interface",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot06-q21",
+      "lesson": "internet-of-things-final-interfaces",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "ไฟ/GND/logic/pins/pullups/address",
+      "reason": "แยกความผิดพลาด electrical และ protocol",
+      "reference": "bus-debug",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot06-q22",
+      "lesson": "internet-of-things-final-interfaces",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "เลือกSDA21,SCL22ตามtarget/โค้ดนี้",
+      "reason": "mapping ต้องตรงบอร์ดและการต่อจริง",
+      "reference": "bus-debug",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot06-q23",
+      "lesson": "internet-of-things-final-interfaces",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "มีการตอบบนaddressนั้นในเงื่อนไขทดสอบ",
+      "reason": "ACK เป็นหลักฐาน communication จำกัดขอบเขต",
+      "reference": "bus-debug",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot06-q24",
+      "lesson": "internet-of-things-final-interfaces",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "logicไม่มีreferenceร่วมที่แน่นอน",
+      "reason": "ต้องตรวจ GND และระดับไฟฟ้าก่อน software",
+      "reference": "bus-debug",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot06-q25",
+      "lesson": "internet-of-things-final-interfaces",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "wiring/module/voltageจริงและmeasurement/protocoltest",
+      "reason": "compile ไม่อ่าน physicalbus",
+      "reference": "bus-debug",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "technical": "https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html"
+    },
+    {
+      "question": "iot07-q01",
+      "lesson": "internet-of-things-final-pir-motion",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "Passive Infraredรับการเปลี่ยนแปลงรังสี",
+      "reason": "PIR ไม่ใช่ activeultrasonicsensor",
+      "reference": "pir-principle",
+      "source": "S12 pp.2–13; W12 functions",
+      "technical": "https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work"
+    },
+    {
+      "question": "iot07-q02",
+      "lesson": "internet-of-things-final-pir-motion",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "ยังสรุปว่าห้องไม่มีคนไม่ได้",
+      "reason": "PIR ตอบการเปลี่ยนแปลงไม่รับรอง continuouspresence",
+      "reference": "pir-principle",
+      "source": "S12 pp.2–13; W12 functions",
+      "technical": "https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work"
+    },
+    {
+      "question": "iot07-q03",
+      "lesson": "internet-of-things-final-pir-motion",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "จัดopticalzonesของการรับinfrared",
+      "reason": "optics สัมพันธ์กับ detectionzones",
+      "reference": "pir-principle",
+      "source": "S12 pp.2–13; W12 functions",
+      "technical": "https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work"
+    },
+    {
+      "question": "iot07-q04",
+      "lesson": "internet-of-things-final-pir-motion",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "ไม่ได้DOไม่ให้time-of-flightสำหรับสูตรultrasonic",
+      "reason": "ห้ามยืมสูตรต่าง sensor โดยไม่มี measurement",
+      "reference": "pir-principle",
+      "source": "S12 pp.2–13; W12 functions",
+      "technical": "https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work"
+    },
+    {
+      "question": "iot07-q05",
+      "lesson": "internet-of-things-final-pir-motion",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "PIRรับIRchanges ส่วนultrasonicส่งคลื่นและวัดechoเวลา",
+      "reason": "แยก active / passive และปริมาณวัด",
+      "reference": "pir-principle",
+      "source": "S12 pp.2–13; W12 functions",
+      "technical": "https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work"
+    },
+    {
+      "question": "iot07-q06",
+      "lesson": "internet-of-things-final-pir-motion",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "ยังนับจำนวนคนไม่ได้",
+      "reason": "จำนวน samples ไม่ใช่จำนวน physicalevents",
+      "reference": "module-output",
+      "source": "S12 pp.2–13; W12 functions",
+      "technical": "https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work"
+    },
+    {
+      "question": "iot07-q07",
+      "lesson": "internet-of-things-final-pir-motion",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 2,
+      "reason": "นี่คือนับ samples ไม่ใช่คน",
+      "reference": "module-output",
+      "source": "S12 pp.2–13; W12 functions",
+      "technical": "https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work",
+      "oracle": {
+        "cpp": "1+1+0+0"
+      }
+    },
+    {
+      "question": "iot07-q08",
+      "lesson": "internet-of-things-final-pir-motion",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "รุ่น/mode/hold/retriggerและเงื่อนไขจริง",
+      "reason": "ต้องตรวจ spec ของ module ตรงรุ่น",
+      "reference": "module-output",
+      "source": "S12 pp.2–13; W12 functions",
+      "technical": "https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work"
+    },
+    {
+      "question": "iot07-q09",
+      "lesson": "internet-of-things-final-pir-motion",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "HIGHถูกตีความเป็นobservedmotionสำหรับexampleนี้",
+      "reason": "เป็น assumption เพื่อ trace ไม่ใช่ certificatehardware",
+      "reference": "module-output",
+      "source": "S12 pp.2–13; W12 functions",
+      "technical": "https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work"
+    },
+    {
+      "question": "iot07-q10",
+      "lesson": "internet-of-things-final-pir-motion",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "datasheet/การตรวจmoduleจริงพร้อมqualification",
+      "reason": "ไม่ระบุเลข warmup เป็น universal โดยไม่มีหลักฐาน",
+      "reference": "module-output",
+      "source": "S12 pp.2–13; W12 functions",
+      "technical": "https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work"
+    },
+    {
+      "question": "iot07-q11",
+      "lesson": "internet-of-things-final-pir-motion",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "bool motion=digitalRead(PIR_PIN)==HIGH;",
+      "reason": "digitalRead ให้ state ไม่ใช่ distance",
+      "reference": "input-handling",
+      "source": "S12 pp.2–13; W12 functions",
+      "technical": "https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work"
+    },
+    {
+      "question": "iot07-q12",
+      "lesson": "internet-of-things-final-pir-motion",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 0,
+      "reason": "สมมติ HIGH1 LOW0 ในการ trace",
+      "reference": "input-handling",
+      "source": "S12 pp.2–13; W12 functions",
+      "technical": "https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work",
+      "oracle": {
+        "cpp": "int(0==1)"
+      }
+    },
+    {
+      "question": "iot07-q13",
+      "lesson": "internet-of-things-final-pir-motion",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ตรวจและแปลงระดับก่อนต่อinput3.3V",
+      "reason": "ประเภทตัวแปรไม่เปลี่ยนแรงดันขา",
+      "reference": "input-handling",
+      "source": "S12 pp.2–13; W12 functions",
+      "technical": "https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work"
+    },
+    {
+      "question": "iot07-q14",
+      "lesson": "internet-of-things-final-pir-motion",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "commonreferenceและสายก่อนตัดสินsoftwareผิด",
+      "reason": "logic ต้องมี reference",
+      "reference": "input-handling",
+      "source": "S12 pp.2–13; W12 functions",
+      "technical": "https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work"
+    },
+    {
+      "question": "iot07-q15",
+      "lesson": "internet-of-things-final-pir-motion",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "observedDOstateภายใต้assumptionที่ระบุ",
+      "reason": "รักษาขอบเขตหลักฐาน",
+      "reference": "input-handling",
+      "source": "S12 pp.2–13; W12 functions",
+      "technical": "https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work"
+    },
+    {
+      "question": "iot07-q16",
+      "lesson": "internet-of-things-final-pir-motion",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "เก็บtraceและเงื่อนไขpower/environment/modulemodeจริง",
+      "reason": "ทดสอบแยกชั้นและไม่แต่งข้อมูล",
+      "reference": "false-triggers",
+      "source": "S12 pp.2–13; W12 functions",
+      "technical": "https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work"
+    },
+    {
+      "question": "iot07-q17",
+      "lesson": "internet-of-things-final-pir-motion",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "simulationผ่านtraceที่กำหนด แต่physicalfalsealarmยังไม่ทดสอบ",
+      "reason": "simulation ไม่วัด environment จริง",
+      "reference": "false-triggers",
+      "source": "S12 pp.2–13; W12 functions",
+      "technical": "https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work"
+    },
+    {
+      "question": "iot07-q18",
+      "lesson": "internet-of-things-final-pir-motion",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "ไม่ ต้องใช้รุ่นและlensspecจริง",
+      "reason": "appearance ไม่ใช่ fullspec",
+      "reference": "false-triggers",
+      "source": "S12 pp.2–13; W12 functions",
+      "technical": "https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work"
+    },
+    {
+      "question": "iot07-q19",
+      "lesson": "internet-of-things-final-pir-motion",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "power/GND/pin/polarity/warmup/field-of-viewตามmodule",
+      "reason": "แยก wiring / configuration จาก detectionlimits",
+      "reference": "false-triggers",
+      "source": "S12 pp.2–13; W12 functions",
+      "technical": "https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work"
+    },
+    {
+      "question": "iot07-q20",
+      "lesson": "internet-of-things-final-pir-motion",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 6,
+      "reason": "นับ observations ตามข้อมูลสมมติ ไม่ใช่ accuracy ที่วัดจริง",
+      "reference": "false-triggers",
+      "source": "S12 pp.2–13; W12 functions",
+      "technical": "https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work",
+      "oracle": {
+        "cpp": "8-2"
+      }
+    },
+    {
+      "question": "iot07-q21",
+      "lesson": "internet-of-things-final-pir-motion",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "No Motion และ Lamp ON",
+      "reason": "observedmotion ต่างจาก holdstate",
+      "reference": "state-vs-event",
+      "source": "S12 pp.2–13; W12 functions",
+      "technical": "https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work"
+    },
+    {
+      "question": "iot07-q22",
+      "lesson": "internet-of-things-final-pir-motion",
+      "difficulty": "medium",
+      "kind": "numeric",
+      "conclusion": 2,
+      "reason": "เกิด 0→1 สองครั้ง ไม่ใช่ HIGHsamples สามครั้ง",
+      "reference": "state-vs-event",
+      "source": "S12 pp.2–13; W12 functions",
+      "technical": "https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work",
+      "oracle": {
+        "rises": [
+          0,
+          1,
+          1,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "question": "iot07-q23",
+      "lesson": "internet-of-things-final-pir-motion",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "สถานะหลอดไฟ",
+      "reason": "แยก Lampstate ออกจาก sensorstate",
+      "reference": "state-vs-event",
+      "source": "S12 pp.2–13; W12 functions",
+      "technical": "https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work"
+    },
+    {
+      "question": "iot07-q24",
+      "lesson": "internet-of-things-final-pir-motion",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "softwareinactivityนับจากlastHIGHobservation ไม่ใช่ยืนยันเวลาคนเคลื่อนสุดท้าย",
+      "reason": "modulehold เพิ่มระยะก่อนเข้า softwareinactivity ได้",
+      "reference": "state-vs-event",
+      "source": "S12 pp.2–13; W12 functions",
+      "technical": "https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work"
+    },
+    {
+      "question": "iot07-q25",
+      "lesson": "internet-of-things-final-pir-motion",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "วิธี/ข้อมูลและvalidationที่รองรับ ไม่ใช่นับDOHIGHเฉยๆ",
+      "reason": "ปัญหาคน / occupancy เกินข้ออ้างของ PIRDO ตัวเดียว",
+      "reference": "state-vs-event",
+      "source": "S12 pp.2–13; W12 functions",
+      "technical": "https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work"
+    },
+    {
+      "question": "iot08-q01",
+      "lesson": "internet-of-things-final-relay-timers",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "relaycoilเปล่า",
+      "reason": "coil ต้องมี driver / powersupply และ protection",
+      "reference": "relay-driver",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot08-q02",
+      "lesson": "internet-of-things-final-relay-timers",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "Normally Open contact",
+      "reason": "NO เป็นชื่อ contactmechanical ไม่ใช่ GPIOstate",
+      "reference": "relay-driver",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot08-q03",
+      "lesson": "internet-of-things-final-relay-timers",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "LED/โหลดlowvoltageที่ออกแบบถูกต้อง",
+      "reason": "ไม่สอนต่อไฟบ้านให้ผู้เริ่มต้น",
+      "reference": "relay-driver",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot08-q04",
+      "lesson": "internet-of-things-final-relay-timers",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "ไม่ได้ ต้องตรวจวงจรjumper/ground/powersupplyจริง",
+      "reason": "ภาพ component ไม่รับรอง systemisolation",
+      "reference": "relay-driver",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot08-q05",
+      "lesson": "internet-of-things-final-relay-timers",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "ไม่ เป็นคนละฝั่งและหน้าที่ของmodule",
+      "reason": "ตรวจ terminal ตามรุ่นก่อนต่อ",
+      "reference": "relay-driver",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot08-q06",
+      "lesson": "internet-of-things-final-relay-timers",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 0,
+      "reason": "ON จึง INLOW ใน assumption นี้",
+      "reference": "polarity",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf",
+      "oracle": {
+        "cpp": "int(!true)"
+      }
+    },
+    {
+      "question": "iot08-q07",
+      "lesson": "internet-of-things-final-relay-timers",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "เผลอเปิดloadในstartup;ตั้งOFFให้เร็วและออกแบบbias/enableช่วงresetพร้อมตรวจpulseจริง",
+      "reason": "polarity / boot สภาพจริงต้องตรวจ;software เพียงอย่างเดียวไม่รับรองช่วงก่อน setup",
+      "reference": "polarity",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot08-q08",
+      "lesson": "internet-of-things-final-relay-timers",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ไม่ ต้องออกแบบhardwarebiasและตรวจpowersequence",
+      "reason": "ก่อน setup ขาอาจยังไม่อยู่ใน state ที่ต้องการ",
+      "reference": "polarity",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot08-q09",
+      "lesson": "internet-of-things-final-relay-timers",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "mappingON/OFFphysicallevelและตรวจelectricalใหม่",
+      "reason": "polarity เป็น configuration ของ module",
+      "reference": "polarity",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot08-q10",
+      "lesson": "internet-of-things-final-relay-timers",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ตรวจtargetpinoutและประกาศmappingตัวอย่างใหม่",
+      "reason": "board ต่างตระกูลมีขา / aliases ต่างกัน",
+      "reference": "polarity",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "technical": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"
+    },
+    {
+      "question": "iot08-q11",
+      "lesson": "internet-of-things-final-relay-timers",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 9999,
+      "reason": "10999−1000=9999ms ยังน้อยกว่า 10000 จึงยังไม่ครบ timeout;อย่าปิดก่อนขอบที่กำหนด",
+      "reference": "elapsed",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "technical": "https://docs.arduino.cc/language-reference/",
+      "oracle": {
+        "cpp": "uint32_t(10999U-1000U)"
+      }
+    },
+    {
+      "question": "iot08-q12",
+      "lesson": "internet-of-things-final-relay-timers",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 1,
+      "reason": "ใช้>=รวม boundary ไม่ใช่>ที่รอเลยเวลาอย่างน้อยหนึ่ง tick",
+      "reference": "elapsed",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "technical": "https://docs.arduino.cc/language-reference/",
+      "oracle": {
+        "cpp": "int(uint32_t(11000U-1000U)>=10000U)"
+      }
+    },
+    {
+      "question": "iot08-q13",
+      "lesson": "internet-of-things-final-relay-timers",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "LampยังON",
+      "reason": "รอ>=10000 ตาม policy",
+      "reference": "elapsed",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "technical": "https://docs.arduino.cc/language-reference/"
+    },
+    {
+      "question": "iot08-q14",
+      "lesson": "internet-of-things-final-relay-timers",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "คงONและตั้งlastSeen=nowตามmotionbranch",
+      "reason": "สาขา motion มาก่อน timeout ป้องกัน OFF ชั่วคราวจากลำดับตรวจ",
+      "reference": "elapsed",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "technical": "https://docs.arduino.cc/language-reference/"
+    },
+    {
+      "question": "iot08-q15",
+      "lesson": "internet-of-things-final-relay-timers",
+      "difficulty": "hard",
+      "kind": "numeric",
+      "conclusion": 200,
+      "reason": "หนึ่งคาบคือ 1000 / 5=200ms อาจตอบสนองทันทีหรือรอเกือบหนึ่งคาบ ไม่ใช่ hardwareguarantee",
+      "reference": "elapsed",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "technical": "https://docs.arduino.cc/language-reference/",
+      "oracle": {
+        "ratio": [
+          1000,
+          5,
+          1
+        ]
+      }
+    },
+    {
+      "question": "iot08-q16",
+      "lesson": "internet-of-things-final-relay-timers",
+      "difficulty": "medium",
+      "kind": "numeric",
+      "conclusion": 19000,
+      "reason": "ใช้ lastSeen ล่าสุด 9000 ไม่ใช่ 1000",
+      "reference": "retrigger",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "technical": "https://docs.arduino.cc/language-reference/",
+      "oracle": {
+        "sum": [
+          9000,
+          10000
+        ]
+      }
+    },
+    {
+      "question": "iot08-q17",
+      "lesson": "internet-of-things-final-relay-timers",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 9000,
+      "reason": "event หลังต้องเขียนทับ seen เป็น 9000;ถ้าเก็บ 1000 จะปิดก่อนครบ inactivity ล่าสุด",
+      "reference": "retrigger",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "technical": "https://docs.arduino.cc/language-reference/",
+      "oracle": {
+        "cpp": "nextState(nextState(LampState{false,0},1000U,true),9000U,true).seen"
+      }
+    },
+    {
+      "question": "iot08-q18",
+      "lesson": "internet-of-things-final-relay-timers",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "ควรเริ่มOFFและเปิดเมื่อobservedmotion ไม่ใช่เมื่อuptimeถึง10s",
+      "reason": "inactivitytimer ใช้กับ ON ที่เกิดจาก motion ไม่ใช่ startupcountdown สำหรับเปิด",
+      "reference": "retrigger",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "technical": "https://docs.arduino.cc/language-reference/"
+    },
+    {
+      "question": "iot08-q19",
+      "lesson": "internet-of-things-final-relay-timers",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "updateทุกHIGHobservation",
+      "reason": "อธิบาย softwareinactivity กับ modulehold แยก",
+      "reference": "retrigger",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "technical": "https://docs.arduino.cc/language-reference/"
+    },
+    {
+      "question": "iot08-q20",
+      "lesson": "internet-of-things-final-relay-timers",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ไม่ เป็นholdwindowของinactivitytimer",
+      "reason": "sensorstate กับ actuatorholdstate ต่างกัน",
+      "reference": "retrigger",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "technical": "https://docs.arduino.cc/language-reference/"
+    },
+    {
+      "question": "iot08-q21",
+      "lesson": "internet-of-things-final-relay-timers",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 10000,
+      "reason": "ผ่าน wrap ด้วย mod2^32",
+      "reference": "rollover",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "technical": "https://docs.arduino.cc/language-reference/",
+      "oracle": {
+        "cpp": "uint32_t(9744U-4294967040U)"
+      }
+    },
+    {
+      "question": "iot08-q22",
+      "lesson": "internet-of-things-final-relay-timers",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 1,
+      "reason": "deadline บวก wrap เหลือ 9744 ทำให้เทียบ absolute ผิดก่อน deadline ใช้ elapsedsubtraction",
+      "reference": "rollover",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "technical": "https://docs.arduino.cc/language-reference/",
+      "oracle": {
+        "cpp": "int(uint32_t(4294967168U)>=uint32_t(4294967040U+10000U))"
+      }
+    },
+    {
+      "question": "iot08-q23",
+      "lesson": "internet-of-things-final-relay-timers",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ผลบวกdeadlineอาจwrapทำให้ลำดับเชิงตัวเลขผิด",
+      "reason": "elapsedsubtraction เหมาะกว่าภายใต้ขอบเวลา",
+      "reference": "rollover",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "technical": "https://docs.arduino.cc/language-reference/"
+    },
+    {
+      "question": "iot08-q24",
+      "lesson": "internet-of-things-final-relay-timers",
+      "difficulty": "hard",
+      "kind": "numeric",
+      "conclusion": 4294967296,
+      "reason": "ค่าตั้งแต่ 0ถึง 4294967295;จำนวนทั้งหมด 2^32",
+      "reference": "rollover",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "technical": "https://docs.arduino.cc/language-reference/",
+      "oracle": {
+        "power": [
+          2,
+          32
+        ]
+      }
+    },
+    {
+      "question": "iot08-q25",
+      "lesson": "internet-of-things-final-relay-timers",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ไม่ได้ ต้องไม่ปล่อยelapsedจริงเกินหนึ่งwrapจนกำกวม",
+      "reason": "modulocounter อย่างเดียวแยกหลาย wrap ไม่ได้",
+      "reference": "rollover",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "technical": "https://docs.arduino.cc/language-reference/"
+    },
+    {
+      "question": "iot09-q01",
+      "lesson": "internet-of-things-final-oled-integration",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "I2C SSD1306 128x64 addressสมมติ0x3C",
+      "reason": "เป็น targetassumption ที่ต้องตรวจ module จริง",
+      "reference": "oled-interface",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "technical": "https://github.com/adafruit/Adafruit_SSD1306"
+    },
+    {
+      "question": "iot09-q02",
+      "lesson": "internet-of-things-final-oled-integration",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "Wire",
+      "reason": "Wire คือ I2CAPI ไม่จำเป็นต้องติด DHT เมื่อไม่ใช้ sensor นั้น",
+      "reference": "oled-interface",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "technical": "https://github.com/adafruit/Adafruit_SSD1306"
+    },
+    {
+      "question": "iot09-q03",
+      "lesson": "internet-of-things-final-oled-integration",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "ตรวจ/แก้levelinterfaceหรือเลือกcompatiblemoduleก่อนต่อ",
+      "reason": "logicvoltage ไม่ขึ้นกับ textsize",
+      "reference": "oled-interface",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "technical": "https://github.com/adafruit/Adafruit_SSD1306"
+    },
+    {
+      "question": "iot09-q04",
+      "lesson": "internet-of-things-final-oled-integration",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 8192,
+      "reason": "นับ pixel ไม่ใช่จำนวน bytebuffer",
+      "reference": "oled-interface",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "technical": "https://github.com/adafruit/Adafruit_SSD1306",
+      "oracle": {
+        "cpp": "128U*64U"
+      }
+    },
+    {
+      "question": "iot09-q05",
+      "lesson": "internet-of-things-final-oled-integration",
+      "difficulty": "easy",
+      "kind": "reference",
+      "conclusion": "addressที่เลือกเป็นสมมติฐานและต้องตรวจACK/module",
+      "reason": "ไม่ใช้ภาพ libraryexample ยืนยัน hardware",
+      "reference": "oled-interface",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "technical": "https://github.com/adafruit/Adafruit_SSD1306"
+    },
+    {
+      "question": "iot09-q06",
+      "lesson": "internet-of-things-final-oled-integration",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 1024,
+      "reason": "8192bits / 8=1024bytes",
+      "reference": "framebuffer",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "technical": "https://github.com/adafruit/Adafruit_SSD1306",
+      "oracle": {
+        "cpp": "(128U*64U)/8U"
+      }
+    },
+    {
+      "question": "iot09-q07",
+      "lesson": "internet-of-things-final-oled-integration",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "display.display()",
+      "reason": "แยก bufferdrawing จาก busflush",
+      "reference": "framebuffer",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "technical": "https://github.com/adafruit/Adafruit_SSD1306"
+    },
+    {
+      "question": "iot09-q08",
+      "lesson": "internet-of-things-final-oled-integration",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 127,
+      "reason": "0..127 ไม่ใช่ 0..128",
+      "reference": "framebuffer",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "technical": "https://github.com/adafruit/Adafruit_SSD1306",
+      "oracle": {
+        "cpp": "128-1"
+      }
+    },
+    {
+      "question": "iot09-q09",
+      "lesson": "internet-of-things-final-oled-integration",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "อยู่พ้นช่วงx0..127;พฤติกรรมclip/wrapขึ้นกับAPI",
+      "reason": "ตรวจ bounds กับ textwrap ของ library ไม่สับสน width กับ lastindex",
+      "reference": "framebuffer",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "technical": "https://github.com/adafruit/Adafruit_SSD1306"
+    },
+    {
+      "question": "iot09-q10",
+      "lesson": "internet-of-things-final-oled-integration",
+      "difficulty": "medium",
+      "kind": "numeric",
+      "conclusion": 90,
+      "reason": "15 รวม space หนึ่งตัว;ภายใต้ fontassumption6px",
+      "reference": "framebuffer",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "technical": "https://github.com/adafruit/Adafruit_SSD1306",
+      "oracle": {
+        "multiply": [
+          15,
+          6
+        ]
+      }
+    },
+    {
+      "question": "iot09-q11",
+      "lesson": "internet-of-things-final-oled-integration",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "Motion Detected / Lamp OFF",
+      "reason": "motionbranch กำหนด ON ก่อน update จอ;ถ้า HIGH / OFF ควรตรวจ mapping หรือ state ผิด ไม่สรุปว่าเป็นปกติ",
+      "reference": "two-states",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "technical": "https://github.com/adafruit/Adafruit_SSD1306"
+    },
+    {
+      "question": "iot09-q12",
+      "lesson": "internet-of-things-final-oled-integration",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "LampONและข้อความMotion Detected",
+      "reason": "motionbranch มาก่อน timeoutbranch",
+      "reference": "two-states",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "technical": "https://github.com/adafruit/Adafruit_SSD1306"
+    },
+    {
+      "question": "iot09-q13",
+      "lesson": "internet-of-things-final-oled-integration",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ไม่ เป็นobservedinputstateภายใต้module/logicที่เลือก",
+      "reason": "PIR ไม่ใช่ continuousoccupancycertificate",
+      "reference": "two-states",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "technical": "https://github.com/adafruit/Adafruit_SSD1306"
+    },
+    {
+      "question": "iot09-q14",
+      "lesson": "internet-of-things-final-oled-integration",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "แจ้งdisplayunavailableและไม่อ้างว่าหน้าจอแสดงถูก",
+      "reason": "รักษาความจริงของแต่ละ subsystem",
+      "reference": "two-states",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "technical": "https://github.com/adafruit/Adafruit_SSD1306"
+    },
+    {
+      "question": "iot09-q15",
+      "lesson": "internet-of-things-final-oled-integration",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "แปลงผ่านpolaritymappingที่ตรวจแล้ว",
+      "reason": "logicalstate ไม่เท่ากับ physicallevel ทุก module",
+      "reference": "two-states",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "technical": "https://github.com/adafruit/Adafruit_SSD1306"
+    },
+    {
+      "question": "iot09-q16",
+      "lesson": "internet-of-things-final-oled-integration",
+      "difficulty": "medium",
+      "kind": "numeric",
+      "conclusion": 2000,
+      "reason": "timer ถูก retrigger เป็น 9000",
+      "reference": "integrated-trace",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "technical": "https://github.com/adafruit/Adafruit_SSD1306",
+      "oracle": {
+        "subtract": [
+          11000,
+          9000
+        ]
+      }
+    },
+    {
+      "question": "iot09-q17",
+      "lesson": "internet-of-things-final-oled-integration",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "No Motion / Lamp ON",
+      "reason": "เพิ่งไม่มี HIGH2000ms ยังไม่ครบ 10000",
+      "reference": "integrated-trace",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "technical": "https://github.com/adafruit/Adafruit_SSD1306"
+    },
+    {
+      "question": "iot09-q18",
+      "lesson": "internet-of-things-final-oled-integration",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "No Motion / Lamp OFF",
+      "reason": "elapsed10000 จึง OFF",
+      "reference": "integrated-trace",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "technical": "https://github.com/adafruit/Adafruit_SSD1306"
+    },
+    {
+      "question": "iot09-q19",
+      "lesson": "internet-of-things-final-oled-integration",
+      "difficulty": "medium",
+      "kind": "cpp",
+      "conclusion": 1,
+      "reason": "ปิด coil ตาม assumptionactiveLOW",
+      "reference": "integrated-trace",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "technical": "https://github.com/adafruit/Adafruit_SSD1306",
+      "oracle": {
+        "cpp": "int(!false)"
+      }
+    },
+    {
+      "question": "iot09-q20",
+      "lesson": "internet-of-things-final-oled-integration",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ONและlastSeen19000",
+      "reason": "ลำดับ decision มีผลและต้องระบุ",
+      "reference": "integrated-trace",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "technical": "https://github.com/adafruit/Adafruit_SSD1306"
+    },
+    {
+      "question": "iot09-q21",
+      "lesson": "internet-of-things-final-oled-integration",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "รายงานNO OLEDและไม่เรียกdisplaydrawingโดยแสร้งสำเร็จ",
+      "reason": "ตรวจ screenReady และแยก diagnostic",
+      "reference": "faults",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "technical": "https://github.com/adafruit/Adafruit_SSD1306"
+    },
+    {
+      "question": "iot09-q22",
+      "lesson": "internet-of-things-final-oled-integration",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "API/syntax/dependenciesผ่านภายใต้target/versionนั้น",
+      "reason": "จำกัดขอบเขตการรับรอง",
+      "reference": "faults",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "technical": "https://github.com/adafruit/Adafruit_SSD1306"
+    },
+    {
+      "question": "iot09-q23",
+      "lesson": "internet-of-things-final-oled-integration",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "มีpolling/API latency ไม่ใช่hardrealtimeที่รับรอง",
+      "reason": "nonblockingtimer ไม่ตัด latency อื่น",
+      "reference": "faults",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "technical": "https://github.com/adafruit/Adafruit_SSD1306"
+    },
+    {
+      "question": "iot09-q24",
+      "lesson": "internet-of-things-final-oled-integration",
+      "difficulty": "hard",
+      "kind": "reference",
+      "conclusion": "Echolevel/relaypolarity/voltageและOLEDaddressของmoduleจริง",
+      "reason": "ฮาร์ดแวร์ไม่ได้อยู่ในการทดสอบคอมไพเลอร์",
+      "reference": "faults",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "technical": "https://github.com/adafruit/Adafruit_SSD1306"
+    },
+    {
+      "question": "iot09-q25",
+      "lesson": "internet-of-things-final-oled-integration",
+      "difficulty": "medium",
+      "kind": "reference",
+      "conclusion": "ส่งframeแรกและเมื่อstateเปลี่ยน ลดงานbusซ้ำ แต่ไม่รับรองhardrealtime",
+      "reason": "เป็นนโยบาย update ของ authoredcode ไม่ใช่หลักฐาน physicaltiming หรือความสามารถ presence",
+      "reference": "faults",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "technical": "https://github.com/adafruit/Adafruit_SSD1306"
+    }
+  ],
+  "selfAssessments": [
+    {
+      "question": "iot01-self1",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "reference": "iot-chain",
+      "difficulty": "hard",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "method": "rubric-review",
+      "rubric": [
+        "ระบุการวัด การตัดสินใจและการแสดงผล แยกเครือข่ายที่ยังไม่ใช้งานจากความสามารถของ ESP32",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot01-self2",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "reference": "board-module",
+      "difficulty": "hard",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "method": "rubric-review",
+      "rubric": [
+        "ตรวจชื่อชิป โมดูล รุ่นบอร์ด schematic และข้อจำกัดขาก่อนต่อสาย",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot01-self3",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "reference": "electrical",
+      "difficulty": "hard",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "method": "rubric-review",
+      "rubric": [
+        "ตรวจ VCC, logic output, input limits, GND และ driver / level shifter โดยไม่ใช้ GPIO จ่ายกำลังให้โหลด",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot01-self4",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "reference": "workflow",
+      "difficulty": "hard",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "method": "rubric-review",
+      "rubric": [
+        "ตรวจไฟเลี้ยงและชนิดขา อ่าน Serial ด้วยข้อมูลสมมติ แล้วแยกทดสอบ sensor / output ก่อนรวมระบบ",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot01-self5",
+      "lesson": "internet-of-things-final-esp32-foundations",
+      "reference": "evidence",
+      "difficulty": "hard",
+      "source": "B pp.5–16,19–27; W09 slides2–3",
+      "method": "rubric-review",
+      "rubric": [
+        "บอกเวอร์ชันและ input ของ simulation แยกภาพ / measurement จากฮาร์ดแวร์ที่ยังไม่มี",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot02-self1",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "reference": "signals",
+      "difficulty": "hard",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "method": "rubric-review",
+      "rubric": [
+        "AO เป็นแรงดันใช้ ADC; DO เป็น logic ต้องตรวจ polarity / level และ threshold ของโมดูล",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot02-self2",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "reference": "gpio",
+      "difficulty": "hard",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "method": "rubric-review",
+      "rubric": [
+        "เลือกขาที่เหมาะ ระบุ pull / externalbias และ commonreference ก่อนอ่าน",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot02-self3",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "reference": "adc-resolution",
+      "difficulty": "hard",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "method": "rubric-review",
+      "rubric": [
+        "แยก fullscale / codecount / attenuation;ใช้ analogReadMilliVolts เมื่อต้องการ API ผล mV และยังตรวจ actualsensor",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot02-self4",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "reference": "calibration",
+      "difficulty": "hard",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "method": "rubric-review",
+      "rubric": [
+        "กำหนดทิศทาง,ช่วง,guardzero และ unit ก่อนแปลงข้อมูล",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot02-self5",
+      "lesson": "internet-of-things-final-sensors-gpio-adc",
+      "reference": "voltage",
+      "difficulty": "hard",
+      "source": "A10 task2; A11 pp.1–3; B pp.15–16,26–27,94–98",
+      "method": "rubric-review",
+      "rubric": [
+        "แยก power / ground / wiring / pin / attenuation / calibration และทดสอบแรงดันอย่างปลอดภัย",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot03-self1",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "reference": "trigger-echo",
+      "difficulty": "hard",
+      "source": "W09 slides3–16; A09 requirement2",
+      "method": "rubric-review",
+      "rubric": [
+        "แยกสิ่งที่เราส่งกับความกว้าง pulse ที่วัดและจัดการ return0 ก่อนคำนวณ",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot03-self2",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "reference": "time-of-flight",
+      "difficulty": "hard",
+      "source": "W09 slides3–16; A09 requirement2",
+      "method": "rubric-review",
+      "rubric": [
+        "34300cm / s หาร 1e6 ได้ 0.0343cm / µs;500×0.0343 / 2=8.575cm",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot03-self3",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "reference": "units",
+      "difficulty": "hard",
+      "source": "W09 slides3–16; A09 requirement2",
+      "method": "rubric-review",
+      "rubric": [
+        "ใช้ t=2d / v ในหน่วยเดียวกันและระบุ precision ที่ต้องการ",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot03-self4",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "reference": "invalid",
+      "difficulty": "hard",
+      "source": "W09 slides3–16; A09 requirement2",
+      "method": "rubric-review",
+      "rubric": [
+        "แยก missing / invalid / outofrange จาก measurement และออกแบบ failstate ชัดเจน",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot03-self5",
+      "lesson": "internet-of-things-final-ultrasonic",
+      "reference": "limitations",
+      "difficulty": "hard",
+      "source": "W09 slides3–16; A09 requirement2",
+      "method": "rubric-review",
+      "rubric": [
+        "ตรวจ fixture / geometry หลายระยะ บันทึก invalid และไม่แต่ง measurement ที่ไม่มี",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot04-self1",
+      "lesson": "internet-of-things-final-water-level",
+      "reference": "requirements",
+      "difficulty": "hard",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "method": "rubric-review",
+      "rubric": [
+        "รักษาสาม sample และติดป้ายช่วง 30 / 50 ว่าเขียนเสริม ทดสอบขอบและ invalid",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot04-self2",
+      "lesson": "internet-of-things-final-water-level",
+      "reference": "classification",
+      "difficulty": "hard",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "method": "rubric-review",
+      "rubric": [
+        "กำหนด inclusivity ครบ ไม่มี gap และ error แยกจาก physicallevel",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot04-self3",
+      "lesson": "internet-of-things-final-water-level",
+      "reference": "flow",
+      "difficulty": "hard",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "method": "rubric-review",
+      "rubric": [
+        "แยก validbranch กับ errorbranch และระบุ output ทุกครั้งไม่ค้างสีเดิมโดยไม่ตั้งใจ",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot04-self4",
+      "lesson": "internet-of-things-final-water-level",
+      "reference": "circuit",
+      "difficulty": "hard",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "method": "rubric-review",
+      "rubric": [
+        "กำหนดรุ่น / แรงดัน / pins;แสดงการลดระดับ Echo และไม่ต่อไฟบ้าน",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot04-self5",
+      "lesson": "internet-of-things-final-water-level",
+      "reference": "program",
+      "difficulty": "hard",
+      "source": "A09 requirement1–2; W09 slides11,14–19",
+      "method": "rubric-review",
+      "rubric": [
+        "ทดสอบสาม sourcepoints ขอบ 30 / 50,outofrange และ duration0 โดยระบุ expectedLED ครบ",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot05-self1",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "reference": "lifecycle",
+      "difficulty": "hard",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "method": "rubric-review",
+      "rubric": [
+        "ระบุ setup / loop,target / version และยังต้องตรวจฮาร์ดแวร์จริง",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot05-self2",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "reference": "digital-api",
+      "difficulty": "hard",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "method": "rubric-review",
+      "rubric": [
+        "แยกค่าพินกับ meaning และระบุ activehigh / low ให้ครบ",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot05-self3",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "reference": "analog-serial",
+      "difficulty": "hard",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "method": "rubric-review",
+      "rubric": [
+        "labelunit / baud ให้ชัดและเก็บ raw ก่อนแปลงเพื่อ debug",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot05-self4",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "reference": "cpp-semantics",
+      "difficulty": "hard",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "method": "rubric-review",
+      "rubric": [
+        "แสดง expectedbehavior ก่อน / หลังแก้พร้อมระบุชนิดและขอบเขต",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot05-self5",
+      "lesson": "internet-of-things-final-arduino-cpp",
+      "reference": "timing",
+      "difficulty": "hard",
+      "source": "A10 tasks1–2; B pp.29–42,75–98",
+      "method": "rubric-review",
+      "rubric": [
+        "ใช้ syntax / buildlog,controlledinputs,protocolchecks และ physicalmeasurement โดยไม่สับสนหลักฐาน",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot06-self1",
+      "lesson": "internet-of-things-final-interfaces",
+      "reference": "i2c",
+      "difficulty": "hard",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "method": "rubric-review",
+      "rubric": [
+        "ตรวจ pins / voltage / address / pullups และใช้ ACK เป็นหลักฐาน communication ไม่ใช่รับรองทุก pixel",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot06-self2",
+      "lesson": "internet-of-things-final-interfaces",
+      "reference": "spi",
+      "difficulty": "hard",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "method": "rubric-review",
+      "rubric": [
+        "อ้าง datasheet ทั้งสองฝั่ง ระบุ SCLK,data และ CS และไม่ใช้ GPIOflash โดยเดา",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot06-self3",
+      "lesson": "internet-of-things-final-interfaces",
+      "reference": "uart",
+      "difficulty": "hard",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "method": "rubric-review",
+      "rubric": [
+        "TX→RX ทั้งสองทิศ ตรวจ GND / logiclevel / format และห้ามต่อ RS232 ตรง",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot06-self4",
+      "lesson": "internet-of-things-final-interfaces",
+      "reference": "select-interface",
+      "difficulty": "hard",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "method": "rubric-review",
+      "rubric": [
+        "แยก outputformat และโปรโตคอลของโมดูลจากปริมาณที่วัด",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot06-self5",
+      "lesson": "internet-of-things-final-interfaces",
+      "reference": "bus-debug",
+      "difficulty": "hard",
+      "source": "A11 pp.1–3; B pp.24–27,81–87; S12 pp.20–23",
+      "method": "rubric-review",
+      "rubric": [
+        "แยกไฟฟ้า / สาย / protocol / software และไม่แปล noresponse เป็น physicalmeasurement0",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot07-self1",
+      "lesson": "internet-of-things-final-pir-motion",
+      "reference": "pir-principle",
+      "difficulty": "hard",
+      "source": "S12 pp.2–13; W12 functions",
+      "method": "rubric-review",
+      "rubric": [
+        "แยก passivereceive / changes จาก activepulse / distance และไม่อ้าง identity",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot07-self2",
+      "lesson": "internet-of-things-final-pir-motion",
+      "reference": "module-output",
+      "difficulty": "hard",
+      "source": "S12 pp.2–13; W12 functions",
+      "method": "rubric-review",
+      "rubric": [
+        "พิจารณา moduleholdtime และ sampling อย่านับทุก HIGH เป็น event ใหม่",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot07-self3",
+      "lesson": "internet-of-things-final-pir-motion",
+      "reference": "input-handling",
+      "difficulty": "hard",
+      "source": "S12 pp.2–13; W12 functions",
+      "method": "rubric-review",
+      "rubric": [
+        "ระบุ pin / mode / activelevel และแยก fault / unknown เมื่อระบบตรวจได้",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot07-self4",
+      "lesson": "internet-of-things-final-pir-motion",
+      "reference": "false-triggers",
+      "difficulty": "hard",
+      "source": "S12 pp.2–13; W12 functions",
+      "method": "rubric-review",
+      "rubric": [
+        "บันทึก inputtrace / แหล่งจ่าย / เงื่อนไข environment โดยไม่แต่งจำนวนทดลอง",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot07-self5",
+      "lesson": "internet-of-things-final-pir-motion",
+      "reference": "state-vs-event",
+      "difficulty": "hard",
+      "source": "S12 pp.2–13; W12 functions",
+      "method": "rubric-review",
+      "rubric": [
+        "แสดง observedmotion และ actuatorstate แยกและอธิบาย holdtimer",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot08-self1",
+      "lesson": "internet-of-things-final-relay-timers",
+      "reference": "relay-driver",
+      "difficulty": "hard",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "method": "rubric-review",
+      "rubric": [
+        "วาด lowvoltagecircuit และระบุ driver / polarity / supply อย่างมีหลักฐาน ไม่สรุป isolation จากรูป",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot08-self2",
+      "lesson": "internet-of-things-final-relay-timers",
+      "reference": "polarity",
+      "difficulty": "hard",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "method": "rubric-review",
+      "rubric": [
+        "กำหนด activelevel สองค่าและทดสอบ ON / OFF / boot โดยแยก simulation จาก hardware",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot08-self3",
+      "lesson": "internet-of-things-final-relay-timers",
+      "reference": "elapsed",
+      "difficulty": "hard",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "method": "rubric-review",
+      "rubric": [
+        "แยก integerelapsed / ขอบเปรียบเทียบและระบุ pollinglatency",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot08-self4",
+      "lesson": "internet-of-things-final-relay-timers",
+      "reference": "retrigger",
+      "difficulty": "hard",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "method": "rubric-review",
+      "rubric": [
+        "คำนวณ lastSeen ทุก event และเปรียบเทียบ deadline ใหม่ ไม่สับสนเวลารวมกับเวลาขาด motion",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot08-self5",
+      "lesson": "internet-of-things-final-relay-timers",
+      "reference": "rollover",
+      "difficulty": "hard",
+      "source": "W12 functions1–3; S12 pp.14–19",
+      "method": "rubric-review",
+      "rubric": [
+        "ระบุ modulo,exact10000boundary และข้อจำกัดหนึ่ง wrap พร้อม goldentrace อิสระ",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot09-self1",
+      "lesson": "internet-of-things-final-oled-integration",
+      "reference": "oled-interface",
+      "difficulty": "hard",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "method": "rubric-review",
+      "rubric": [
+        "ตรวจรุ่น bus / address / power / pins / ACK และห้ามเหมาว่าทุก OLED เป็น I2C0x3C",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot09-self2",
+      "lesson": "internet-of-things-final-oled-integration",
+      "reference": "framebuffer",
+      "difficulty": "hard",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "method": "rubric-review",
+      "rubric": [
+        "แยก buffer กับ physicaldisplay และเลือกขนาด font / pixels ตาม library",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot09-self3",
+      "lesson": "internet-of-things-final-oled-integration",
+      "reference": "two-states",
+      "difficulty": "hard",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "method": "rubric-review",
+      "rubric": [
+        "ระบุสิ่งที่ policy อนุญาตและแยก sensorfault / displayfault อย่างซื่อสัตย์",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot09-self4",
+      "lesson": "internet-of-things-final-oled-integration",
+      "reference": "integrated-trace",
+      "difficulty": "hard",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "method": "rubric-review",
+      "rubric": [
+        "คำนวณ elapsed จาก lastHIGHobservation และทดสอบเหตุการณ์พร้อม deadline",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    },
+    {
+      "question": "iot09-self5",
+      "lesson": "internet-of-things-final-oled-integration",
+      "reference": "faults",
+      "difficulty": "hard",
+      "source": "W12 functions/deliverables; S12 pp.20–27",
+      "method": "rubric-review",
+      "rubric": [
+        "เก็บ input / expected / assertions และระบุ pin / level / polarity / address ที่ยังต้องวัดจริง",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    }
+  ]
+}

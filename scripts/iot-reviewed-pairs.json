@@ -1,0 +1,6 @@
+[
+  {
+    "ids": ["iot05-q06", "iot05-q07"],
+    "reason": "Distinct APIs and skills: pinMode configures an output pin, whereas digitalRead samples an input. Similar Thai wording does not make these configuration and acquisition tasks identical; four distractors differ. Numerical-template repetitions were removed."
+  }
+]

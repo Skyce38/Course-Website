@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "internet-of-things-final-ultrasonic",
+  "title": "FINAL 03 — Ultrasonic และการคำนวณระยะ",
+  "questions": [
+    {
+      "id": "iot03-q01",
+      "reference": "trigger-echo",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: กำหนด Trigger10µs,Echo500µs; วิธีคำนวณใดผิดเพราะเลือกช่วงเวลาผิด?",
+      "explanation": "Trigger กระตุ้น sensor แต่ Echo เป็น measurementtime (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot03-q01)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ใช้500µsและหาร2สำหรับoneway"
+        },
+        {
+          "id": "b",
+          "text": "แปลงv343m/sเป็น0.0343cm/µs"
+        },
+        {
+          "id": "c",
+          "text": "ตรวจtimeoutก่อนยอมรับระยะ"
+        },
+        {
+          "id": "d",
+          "text": "ใช้10µsเข้าสูตรdistanceแทนEcho"
+        }
+      ],
+      "answer": "d"
+    },
+    {
+      "id": "iot03-q02",
+      "reference": "trigger-echo",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ตัวแปรที่ควรนำเข้าสูตรระยะคืออะไร?",
+      "explanation": "time-of-flight มาจาก Echo ไม่ใช่พัลส์กระตุ้น (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot03-q02)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "10µsของTriggerเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "ค่าbaudSerial"
+        },
+        {
+          "id": "c",
+          "text": "ความกว้างEcho HIGHที่วัดได้"
+        },
+        {
+          "id": "d",
+          "text": "ชื่อpinTrigger"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "id": "iot03-q03",
+      "reference": "trigger-echo",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: pulseIn คืน 0ตาม timeout ควรส่งต่อ classifier เป็นค่าใด?",
+      "explanation": "ต้องรักษาความหมาย missingpulse (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot03-q03)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "400cmโดยไม่มีสถานะ"
+        },
+        {
+          "id": "b",
+          "text": "สถานะinvalid ไม่ใช่0cmที่ยืนยันแล้ว"
+        },
+        {
+          "id": "c",
+          "text": "ระยะใกล้สุด0cmที่รับรอง"
+        },
+        {
+          "id": "d",
+          "text": "60cmตามตัวอย่างเสมอ"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "id": "iot03-q04",
+      "reference": "trigger-echo",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: timeout30000µs เท่ากับกี่ ms?",
+      "explanation": "หน่วย 1000µs เท่ากับ 1ms จึง 30000µs เท่ากับ 30ms;timeout เป็นขอบการรอไม่ใช่ผลวัด (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot03-q04)",
+      "type": "numeric",
+      "answer": 30,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "id": "iot03-q05",
+      "reference": "trigger-echo",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ใช้ pulseIn(timeout30000)ร่วมกับ millis จับเวลา อธิบายอย่างไรถูกต้อง?",
+      "explanation": "แยกการออกแบบ timer จาก behavior ของ API อ่าน sensor (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot03-q05)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทั้งโปรแกรมnonblocking100%เสมอ"
+        },
+        {
+          "id": "b",
+          "text": "ไม่มีการรอใดๆเพราะใช้millis"
+        },
+        {
+          "id": "c",
+          "text": "pulseInใช้เวลา0แน่นอน"
+        },
+        {
+          "id": "d",
+          "text": "timerอาจไม่ใช้delayยาว แต่pulseInยังรอแบบboundedblocking"
+        }
+      ],
+      "answer": "d"
+    },
+    {
+      "id": "iot03-self1",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): อธิบายเวลา Trigger เทียบกับ Echo และ timeout",
+      "reference": "trigger-echo",
+      "explanation": "แยกสิ่งที่เราส่งกับความกว้าง pulse ที่วัดและจัดการ return0 ก่อนคำนวณ",
+      "rubric": [
+        "แยกสิ่งที่เราส่งกับความกว้าง pulse ที่วัดและจัดการ return0 ก่อนคำนวณ",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    }
+  ]
+}

@@ -5,7 +5,7 @@ const unix=manifest.lessons.filter(l=>l.course==='unix-tools'),ids=new Set(),evi
 const baseline=require('./unix-preservation.json');for(const [file,expected]of Object.entries(baseline.files)){let bytes=fs.readFileSync(file);if(!file.endsWith('.pdf'))bytes=Buffer.from(bytes.toString().replace(/\r\n/g,'\n'));assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),expected,'Protected baseline: '+file);}
 for(const old of baseline.resources){const current=catalog.resources.find(r=>r.id===old.id);assert.ok(current,old.id);for(const key of ['reader','path','course'])assert.equal(current[key],old[key],old.id+': published URL/identity');}
 assert.equal(Object.keys(baseline.files).filter(f=>f.endsWith('.pdf')).length,15);assert.equal(require('./reading-baseline.json').reduce((n,l)=>n+l.anchors.length,0),370);
-assert.equal(manifest.lessons.length,37);assert.equal(manifest.lessons.flatMap(l=>l.bank.data.questions).length,1110);
+const previous=manifest.lessons.filter(l=>['artificial-intelligence','oop-python','unix-tools'].includes(l.course));assert.equal(previous.length,37);assert.equal(previous.flatMap(l=>l.bank.data.questions).length,1110);
 let auto=0,self=0;for(const l of unix){
  const raw=fs.readFileSync('courses/unix-tools/summaries/'+l.reader.split('/').at(-1).replace('.html','.md'),'utf8'),{body}=B.metadata(raw),html=fs.readFileSync(l.reader,'utf8');
  for(const q of l.bank.data.questions){assert.ok(!ids.has(q.id));ids.add(q.id);assert.ok(html.includes('id="'+q.reference+'"'));assert.match(q.explanation,/[\u0e00-\u0e7f]/);
@@ -18,9 +18,9 @@ let auto=0,self=0;for(const l of unix){
  const literals=B.codeViewer('printf "pythonCode โค้ด Python <script>"','fixture','bash');assert.ok(literals.includes('printf &quot;pythonCode โค้ด Python &lt;script&gt;&quot;'),'Language labels must never replace lesson source literals');
 }
 assert.equal(auto,300);assert.equal(self,60);assert.equal(ids.size,360);
-assert.equal(I.courses(manifest).length,3);assert.ok(I.courses(manifest).some(c=>c.id==='unix-tools'));
+assert.equal(I.courses(manifest).length,new Set(manifest.lessons.map(l=>l.course)).size);assert.ok(I.courses(manifest).some(c=>c.id==='unix-tools'));
 for(const courses of [[{id:'../evil',label:'bad'}],[{id:'unix-tools',label:'Unix'},{id:'unix-tools',label:'dup'}],[],[{id:'unix-tools',label:''}]])assert.throws(()=>I.validate({...manifest,courses}));
-const legacy={version:1,lessons:manifest.lessons.filter(l=>l.course!=='unix-tools')};assert.equal(I.validate(legacy).lessons.length,25,'Old derived manifests remain compatible');
+const legacy={version:1,lessons:manifest.lessons.filter(l=>['artificial-intelligence','oop-python'].includes(l.course))};assert.equal(I.validate(legacy).lessons.length,25,'Old derived manifests remain compatible');
 assert.throws(()=>I.validate({...legacy,lessons:[...legacy.lessons,unix[0]]}),'Unregistered course rejected');
 const l=unix[0],data={...l.bank.data,revision:l.practiceRevision,questions:l.bank.data.questions.filter(q=>l.practiceIds.includes(q.id))},answers=Object.fromEntries(data.questions.map(q=>[q.id,{draft:q.type==='self'?'อธิบาย':String(q.answer),submitted:true,rating:q.type==='self'?'revisit':null}])),state={...C.clean(data,null),responses:answers,attempts:[{at:1,responses:structuredClone(answers)}]},key=I.prefix.practice+l.id,raw=JSON.stringify(state);let reads=0;
 const engine=I.create(manifest,I.reader(k=>{reads++;return k===key?raw:null})),result=engine.refresh(),stats=engine.summarize(result,'unix-tools');assert.deepEqual([stats.correct,stats.incorrect,stats.unique,stats.repeated,stats.self,stats.available],[5,0,5,0,1,12]);assert.equal(JSON.stringify(state),raw);assert.equal(engine.summarize(result,'oop-python').total,0);
