@@ -1,0 +1,616 @@
+{
+  "version": 1,
+  "revision": 1,
+  "baseRevision": 1,
+  "lesson": "internet-of-things-final-water-level",
+  "questions": [
+    {
+      "id": "iot04-q06",
+      "reference": "classification",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ตาม policy เสริมของบท d=30cm valid เลือก state ใด?",
+      "explanation": "policy เสริมใช้ d<=30 เป็น RED จึง 30 รวมขอบแดง;ค่าถัดไปมากกว่า 30 จึงเข้าช่วงเหลือง (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot04-q06)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "GREEN"
+        },
+        {
+          "id": "b",
+          "text": "ERROR"
+        },
+        {
+          "id": "c",
+          "text": "RED"
+        },
+        {
+          "id": "d",
+          "text": "YELLOW"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ if / else if / else ให้ validdistance หนึ่งค่าเลือกสีเดียว ค่า 30 อยู่แดง ค่า 50 อยู่เหลือง แยก ERROR เมื่อไม่มี Echo หรือ outofrange W09slide19 มีช่อง 100..200 ที่ไม่เข้าเงื่อนไขในรูปและหน่วยไม่ชัด จึงไม่คัดเป็น universalclassifier"
+      }
+    },
+    {
+      "id": "iot04-q07",
+      "reference": "classification",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: codeif(d<=50)YELLOW;else if(d<=30)RED;elseGREEN กับ validd20 มีข้อผิดใด?",
+      "explanation": "เงื่อนไขช่วงทับกันต้องเรียงและใช้ exclusivebranches (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot04-q07)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ควรลบvalidationเพื่อให้REDทำงาน"
+        },
+        {
+          "id": "b",
+          "text": "เลือกYELLOWก่อนจนREDถูกบัง ควรทดสอบขอบต่ำก่อน"
+        },
+        {
+          "id": "c",
+          "text": "เลือกREDถูกต้องเพราะelseifถูกประเมินเสมอ"
+        },
+        {
+          "id": "d",
+          "text": "compileไม่ได้เพียงเพราะเปรียบเทียบสองครั้ง"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ if / else if / else ให้ validdistance หนึ่งค่าเลือกสีเดียว ค่า 30 อยู่แดง ค่า 50 อยู่เหลือง แยก ERROR เมื่อไม่มี Echo หรือ outofrange W09slide19 มีช่อง 100..200 ที่ไม่เข้าเงื่อนไขในรูปและหน่วยไม่ชัด จึงไม่คัดเป็น universalclassifier"
+      }
+    },
+    {
+      "id": "iot04-q08",
+      "reference": "classification",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ถ้า Echo หายคืน 0 แต่แปลงเป็น cm0 ก่อนเลือก d<=30 จะผิดอย่างไร?",
+      "explanation": "missingpulse ไม่ใช่ distance0 ที่ใช้ยืนยันระดับน้ำได้ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot04-q08)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "แสดงREDทั้งที่ไม่มีmeasurement ควรERRORก่อนclassification"
+        },
+        {
+          "id": "b",
+          "text": "ได้REDที่ยืนยันhighwaterแน่นอน"
+        },
+        {
+          "id": "c",
+          "text": "timeoutเท่ากับsample20cmเสมอ"
+        },
+        {
+          "id": "d",
+          "text": "ควรเอา0ไปเฉลี่ยกับvalidโดยไม่ติดflag"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ if / else if / else ให้ validdistance หนึ่งค่าเลือกสีเดียว ค่า 30 อยู่แดง ค่า 50 อยู่เหลือง แยก ERROR เมื่อไม่มี Echo หรือ outofrange W09slide19 มีช่อง 100..200 ที่ไม่เข้าเงื่อนไขในรูปและหน่วยไม่ชัด จึงไม่คัดเป็น universalclassifier"
+      }
+    },
+    {
+      "id": "iot04-q09",
+      "reference": "classification",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: สมมติ bool red=(20<=30); bool yellow=(!red && 20<=50); red+yellow เท่าใด?",
+      "explanation": "condition แยกด้วย!red จึงเปิดสีเดียว (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot04-q09)",
+      "type": "numeric",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ if / else if / else ให้ validdistance หนึ่งค่าเลือกสีเดียว ค่า 30 อยู่แดง ค่า 50 อยู่เหลือง แยก ERROR เมื่อไม่มี Echo หรือ outofrange W09slide19 มีช่อง 100..200 ที่ไม่เข้าเงื่อนไขในรูปและหน่วยไม่ชัด จึงไม่คัดเป็น universalclassifier"
+      }
+    },
+    {
+      "id": "iot04-q10",
+      "reference": "classification",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: เก็บ distance เป็น float แต่เผลอใช้ cm==20,cm==40,cm==60 อย่างเดียว ถ้าได้ 20.01cm ปัญหาคืออะไร?",
+      "explanation": "samplematching ไม่ใช่ rangeclassification และค่าจาก sensor อาจไม่เท่าจุดตัวอย่างพอดี (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot04-q10)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เข้า40เพราะเลขมากกว่า20"
+        },
+        {
+          "id": "b",
+          "text": "ใช้baudrateแก้การเปรียบเทียบได้"
+        },
+        {
+          "id": "c",
+          "text": "ไม่มีbranchทั้งที่ใกล้sample ต้องออกแบบrangepolicyที่ครบ"
+        },
+        {
+          "id": "d",
+          "text": "เท่ากับ20เสมอเพราะfloatปัดเป็นinteger"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ if / else if / else ให้ validdistance หนึ่งค่าเลือกสีเดียว ค่า 30 อยู่แดง ค่า 50 อยู่เหลือง แยก ERROR เมื่อไม่มี Echo หรือ outofrange W09slide19 มีช่อง 100..200 ที่ไม่เข้าเงื่อนไขในรูปและหน่วยไม่ชัด จึงไม่คัดเป็น universalclassifier"
+      }
+    },
+    {
+      "id": "iot04-self2",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): สร้างตาราง partition และทดสอบ 29.9,30,30.1,50,50.1",
+      "reference": "classification",
+      "explanation": "กำหนด inclusivity ครบ ไม่มี gap และ error แยกจาก physicallevel",
+      "rubric": [
+        "กำหนด inclusivity ครบ ไม่มี gap และ error แยกจาก physicallevel",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ใช้ if / else if / else ให้ validdistance หนึ่งค่าเลือกสีเดียว ค่า 30 อยู่แดง ค่า 50 อยู่เหลือง แยก ERROR เมื่อไม่มี Echo หรือ outofrange W09slide19 มีช่อง 100..200 ที่ไม่เข้าเงื่อนไขในรูปและหน่วยไม่ชัด จึงไม่คัดเป็น universalclassifier"
+      }
+    },
+    {
+      "id": "iot04-q11",
+      "reference": "flow",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ใช้ H100cm คงที่และ d60cm ความสูงน้ำ hกี่ cm?",
+      "explanation": "h=H−d ตาม datum ที่กำหนด (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot04-q11)",
+      "type": "numeric",
+      "answer": 40,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Start→configure→measure→validate→classify→writeoneLED→report→wait→repeat เมื่อ invalid ให้ปิด LED ระดับทั้งสามและรายงาน ERROR ตาม policy เสริม อย่าให้ 0cm ปลอมเป็น highwater ถ้าต้องการความสูงจริงให้กำหนด Hและใช้ h=H−d พร้อม geometry / หน่วย"
+      }
+    },
+    {
+      "id": "iot04-q12",
+      "reference": "flow",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: น้ำทำให้ระยะเปลี่ยน 60→20cm ใน geometry เดิม ความสูงน้ำเพิ่มกี่ cm?",
+      "explanation": "ระยะลด 40 จึงความสูงเพิ่ม 40 (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot04-q12)",
+      "type": "numeric",
+      "answer": 40,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Start→configure→measure→validate→classify→writeoneLED→report→wait→repeat เมื่อ invalid ให้ปิด LED ระดับทั้งสามและรายงาน ERROR ตาม policy เสริม อย่าให้ 0cm ปลอมเป็น highwater ถ้าต้องการความสูงจริงให้กำหนด Hและใช้ h=H−d พร้อม geometry / หน่วย"
+      }
+    },
+    {
+      "id": "iot04-q13",
+      "reference": "flow",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: duration0 ควรเดินไป branch ใดก่อน classification?",
+      "explanation": "missingmeasurement ไม่ใช่ physicallevel (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot04-q13)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "REDทันทีเพราะ0เล็กสุด"
+        },
+        {
+          "id": "b",
+          "text": "GREENเพราะไม่มีน้ำแน่นอน"
+        },
+        {
+          "id": "c",
+          "text": "เลือกสีสุ่ม"
+        },
+        {
+          "id": "d",
+          "text": "ERROR/invalid branch"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Start→configure→measure→validate→classify→writeoneLED→report→wait→repeat เมื่อ invalid ให้ปิด LED ระดับทั้งสามและรายงาน ERROR ตาม policy เสริม อย่าให้ 0cm ปลอมเป็น highwater ถ้าต้องการความสูงจริงให้กำหนด Hและใช้ h=H−d พร้อม geometry / หน่วย"
+      }
+    },
+    {
+      "id": "iot04-q14",
+      "reference": "flow",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: flowchart ใดรักษา singlevalidstate ได้?",
+      "explanation": "กำหนดทั้ง valid / erroroutput และกลับมาวัดครั้งใหม่ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot04-q14)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "รับtimeoutเป็นcm0แล้วข้ามvalidate"
+        },
+        {
+          "id": "b",
+          "text": "จบloopทันทีเมื่อsensorไม่ตอบตลอดไป"
+        },
+        {
+          "id": "c",
+          "text": "validateก่อน แล้วif/else if/else"
+        },
+        {
+          "id": "d",
+          "text": "เปิดLEDทุกดวงก่อนแล้วไม่ปิด"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Start→configure→measure→validate→classify→writeoneLED→report→wait→repeat เมื่อ invalid ให้ปิด LED ระดับทั้งสามและรายงาน ERROR ตาม policy เสริม อย่าให้ 0cm ปลอมเป็น highwater ถ้าต้องการความสูงจริงให้กำหนด Hและใช้ h=H−d พร้อม geometry / หน่วย"
+      }
+    },
+    {
+      "id": "iot04-q15",
+      "reference": "flow",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ตัวอย่างใช้ cycle รอ 70ms หลัง measurement ถ้าละเลยเวลาวัดชั่วคราว 5 รอบมีเวลารอรวมกี่ ms?",
+      "explanation": "นี่คือเวลารอรวม ไม่ใช่รับรองเวลาระบบจริงทั้งหมด (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot04-q15)",
+      "type": "numeric",
+      "answer": 350,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Start→configure→measure→validate→classify→writeoneLED→report→wait→repeat เมื่อ invalid ให้ปิด LED ระดับทั้งสามและรายงาน ERROR ตาม policy เสริม อย่าให้ 0cm ปลอมเป็น highwater ถ้าต้องการความสูงจริงให้กำหนด Hและใช้ h=H−d พร้อม geometry / หน่วย"
+      }
+    },
+    {
+      "id": "iot04-self3",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): เขียน flowchart ที่รักษา measurementinvalid และวนต่ออย่างชัดเจน",
+      "reference": "flow",
+      "explanation": "แยก validbranch กับ errorbranch และระบุ output ทุกครั้งไม่ค้างสีเดิมโดยไม่ตั้งใจ",
+      "rubric": [
+        "แยก validbranch กับ errorbranch และระบุ output ทุกครั้งไม่ค้างสีเดิมโดยไม่ตั้งใจ",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Start→configure→measure→validate→classify→writeoneLED→report→wait→repeat เมื่อ invalid ให้ปิด LED ระดับทั้งสามและรายงาน ERROR ตาม policy เสริม อย่าให้ 0cm ปลอมเป็น highwater ถ้าต้องการความสูงจริงให้กำหนด Hและใช้ h=H−d พร้อม geometry / หน่วย"
+      }
+    },
+    {
+      "id": "iot04-q16",
+      "reference": "circuit",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: Echo ของ module5V กับ GPIO3.3V ควรเชื่อมอย่างไรเมื่อยังไม่ได้ตรวจ logicoutput?",
+      "explanation": "powerdomain กับ GPIOdomain ต่างกัน อย่าถือว่ารูปวงจรย่อเป็นการรับรอง electrical (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot04-q16)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ตรวจสเปก/ระดับแล้วใช้levelinterfaceที่เหมาะก่อนต่อ"
+        },
+        {
+          "id": "b",
+          "text": "ต่อเข้าตรงเพราะboardมีVIN5V"
+        },
+        {
+          "id": "c",
+          "text": "ต่อLEDเปล่าแทนตัวแบ่งแรงดัน"
+        },
+        {
+          "id": "d",
+          "text": "ลดSerialbaudเพื่อให้voltageลด"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตัวอย่าง classicESP32 ใช้ TRIG32,ECHO33 ผ่าน levelinterface ที่ตรวจแล้ว;LED เขียว 25 เหลือง 26 แดง 27 แต่ละดวงมี 330Ωอนุกรมสู่ GND เลขเหล่านี้เป็น authoredpinassignment ไม่ใช่ยืนยันสายจาก W09slide18 ไฟ 5V ของ HC-SR04classic ไม่ควรเข้าขา GPIO โดยตรง ตรวจ GND / ไฟเลี้ยง / logiccompatibility ก่อนจ่ายไฟ"
+      }
+    },
+    {
+      "id": "iot04-q17",
+      "reference": "circuit",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ต้องการจำกัดกระแส LED หลายสีอย่างตรวจได้ ควรออกแบบอย่างไร?",
+      "explanation": "ตรวจกระแสแต่ละ LED / ขาบอร์ด ไม่อนุมานความปลอดภัยจากแรงดันต่ำอย่างเดียว (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot04-q17)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ต่อทุกLEDตรงGPIOโดยไม่มีresistor"
+        },
+        {
+          "id": "b",
+          "text": "ใช้resistorเส้นเดียวร่วมโดยไม่คำนวณstateที่เปิดพร้อมกัน"
+        },
+        {
+          "id": "c",
+          "text": "ใช้GNDแทนresistorเพราะไฟ3.3V"
+        },
+        {
+          "id": "d",
+          "text": "resistorอนุกรมแยกดวงและตรวจVf/currentbudget"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตัวอย่าง classicESP32 ใช้ TRIG32,ECHO33 ผ่าน levelinterface ที่ตรวจแล้ว;LED เขียว 25 เหลือง 26 แดง 27 แต่ละดวงมี 330Ωอนุกรมสู่ GND เลขเหล่านี้เป็น authoredpinassignment ไม่ใช่ยืนยันสายจาก W09slide18 ไฟ 5V ของ HC-SR04classic ไม่ควรเข้าขา GPIO โดยตรง ตรวจ GND / ไฟเลี้ยง / logiccompatibility ก่อนจ่ายไฟ"
+      }
+    },
+    {
+      "id": "iot04-q18",
+      "reference": "circuit",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: pinTRIG32 / ECHO33 / GREEN25 ในบทนี้ควรอ่านอย่างไร?",
+      "explanation": "ต้องตรวจ pinout รุ่นจริง (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot04-q18)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เป็นหมายเลขตำแหน่งheaderเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "นำไปเสียบESP8266เลขเดียวกันได้ทันที"
+        },
+        {
+          "id": "c",
+          "text": "เป็นauthoredexampleสำหรับtargetที่ระบุ"
+        },
+        {
+          "id": "d",
+          "text": "เป็นmappingทางการของESP32ทุกบอร์ด"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตัวอย่าง classicESP32 ใช้ TRIG32,ECHO33 ผ่าน levelinterface ที่ตรวจแล้ว;LED เขียว 25 เหลือง 26 แดง 27 แต่ละดวงมี 330Ωอนุกรมสู่ GND เลขเหล่านี้เป็น authoredpinassignment ไม่ใช่ยืนยันสายจาก W09slide18 ไฟ 5V ของ HC-SR04classic ไม่ควรเข้าขา GPIO โดยตรง ตรวจ GND / ไฟเลี้ยง / logiccompatibility ก่อนจ่ายไฟ"
+      }
+    },
+    {
+      "id": "iot04-q19",
+      "reference": "circuit",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: โหลดใดเหมาะกับการสาธิตบน breadboard ตามบท?",
+      "explanation": "สาธิตเฉพาะ lowvoltage (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot04-q19)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "โหลดกำลังสูงที่ไม่รู้สเปก"
+        },
+        {
+          "id": "b",
+          "text": "LEDกระแสต่ำพร้อมresistorและไฟแรงดันต่ำ"
+        },
+        {
+          "id": "c",
+          "text": "สายmains220Vเปิดโล่ง"
+        },
+        {
+          "id": "d",
+          "text": "relaycoilเปล่าต่อGPIO"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตัวอย่าง classicESP32 ใช้ TRIG32,ECHO33 ผ่าน levelinterface ที่ตรวจแล้ว;LED เขียว 25 เหลือง 26 แดง 27 แต่ละดวงมี 330Ωอนุกรมสู่ GND เลขเหล่านี้เป็น authoredpinassignment ไม่ใช่ยืนยันสายจาก W09slide18 ไฟ 5V ของ HC-SR04classic ไม่ควรเข้าขา GPIO โดยตรง ตรวจ GND / ไฟเลี้ยง / logiccompatibility ก่อนจ่ายไฟ"
+      }
+    },
+    {
+      "id": "iot04-q20",
+      "reference": "circuit",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ก่อนจ่ายไฟหลังต่อวงจร ควรตรวจข้อใดสำคัญที่สุด?",
+      "explanation": "ลดความเสี่ยงไฟฟ้าก่อน functionaltest (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot04-q20)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "pinout/ขั้ว/VCC/GND/level/resistorเทียบกับwiringtable"
+        },
+        {
+          "id": "b",
+          "text": "เฉพาะชื่อไฟล์"
+        },
+        {
+          "id": "c",
+          "text": "สีthemeของIDE"
+        },
+        {
+          "id": "d",
+          "text": "จำนวนบรรทัดคอมเมนต์"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตัวอย่าง classicESP32 ใช้ TRIG32,ECHO33 ผ่าน levelinterface ที่ตรวจแล้ว;LED เขียว 25 เหลือง 26 แดง 27 แต่ละดวงมี 330Ωอนุกรมสู่ GND เลขเหล่านี้เป็น authoredpinassignment ไม่ใช่ยืนยันสายจาก W09slide18 ไฟ 5V ของ HC-SR04classic ไม่ควรเข้าขา GPIO โดยตรง ตรวจ GND / ไฟเลี้ยง / logiccompatibility ก่อนจ่ายไฟ"
+      }
+    },
+    {
+      "id": "iot04-self4",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): วาด wiringtable ที่แยก VCC,GND,Trigger,Echo และ LEDresistor",
+      "reference": "circuit",
+      "explanation": "กำหนดรุ่น / แรงดัน / pins;แสดงการลดระดับ Echo และไม่ต่อไฟบ้าน",
+      "rubric": [
+        "กำหนดรุ่น / แรงดัน / pins;แสดงการลดระดับ Echo และไม่ต่อไฟบ้าน",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ตัวอย่าง classicESP32 ใช้ TRIG32,ECHO33 ผ่าน levelinterface ที่ตรวจแล้ว;LED เขียว 25 เหลือง 26 แดง 27 แต่ละดวงมี 330Ωอนุกรมสู่ GND เลขเหล่านี้เป็น authoredpinassignment ไม่ใช่ยืนยันสายจาก W09slide18 ไฟ 5V ของ HC-SR04classic ไม่ควรเข้าขา GPIO โดยตรง ตรวจ GND / ไฟเลี้ยง / logiccompatibility ก่อนจ่ายไฟ"
+      }
+    },
+    {
+      "id": "iot04-q21",
+      "reference": "program",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: policyERROR เมื่อ Echo หายควรทำอะไรกับ output เพื่อไม่แอบรายงานสถานะเก่า?",
+      "explanation": "เป็น authoredfailstate ไม่อ้างว่า sensor ยังวัดสำเร็จ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot04-q21)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เก็บสีเดิมโดยไม่แจ้งทุกกรณี"
+        },
+        {
+          "id": "b",
+          "text": "เปิดแดงแล้วเรียกว่า0cmจริง"
+        },
+        {
+          "id": "c",
+          "text": "ใช้GPIOเปลี่ยนVCCเป็น5V"
+        },
+        {
+          "id": "d",
+          "text": "ปิดLEDระดับทั้งสามและรายงานERRORตามนโยบายบท"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "อ่าน pulse โดยมี timeout แล้วคำนวณ cm ตรวจ validity ก่อนเลือกสี ฟังก์ชัน classification บริสุทธิ์สามารถทดสอบด้วยค่าจำลองได้ แต่ไม่ได้พิสูจน์ accuracy ของ hardware ค่า trigger10µs กับ sampling70ms มีคนละหน้าที่ program พิมพ์ state ให้ trace ได้และยังไม่ส่ง network"
+      }
+    },
+    {
+      "id": "iot04-q22",
+      "reference": "program",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ค่าจำลอง 20,40,60 ผ่าน classifier ถูกต้องแล้วพิสูจน์อะไร?",
+      "explanation": "แยก softwarelogic จาก physicalmeasurement (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot04-q22)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "แรงดันEchoปลอดภัยแน่นอน"
+        },
+        {
+          "id": "b",
+          "text": "ระบบผ่านวิดีโอทดลองจริงแล้ว"
+        },
+        {
+          "id": "c",
+          "text": "ตรรกะของsamplepointsตามinputนั้น"
+        },
+        {
+          "id": "d",
+          "text": "ความแม่นยำsensorจริงทั้งหมด"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "อ่าน pulse โดยมี timeout แล้วคำนวณ cm ตรวจ validity ก่อนเลือกสี ฟังก์ชัน classification บริสุทธิ์สามารถทดสอบด้วยค่าจำลองได้ แต่ไม่ได้พิสูจน์ accuracy ของ hardware ค่า trigger10µs กับ sampling70ms มีคนละหน้าที่ program พิมพ์ state ให้ trace ได้และยังไม่ส่ง network"
+      }
+    },
+    {
+      "id": "iot04-q23",
+      "reference": "program",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: C++int cm=500*0.0343f / 2.0f; การเก็บลง int แทน float เหลือค่าเท่าใด?",
+      "explanation": "8.575 ถูกตัดเป็น 8ไม่ใช่ปัดเป็น 9;คง float จน format แสดงผล (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot04-q23)",
+      "type": "numeric",
+      "answer": 8,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "อ่าน pulse โดยมี timeout แล้วคำนวณ cm ตรวจ validity ก่อนเลือกสี ฟังก์ชัน classification บริสุทธิ์สามารถทดสอบด้วยค่าจำลองได้ แต่ไม่ได้พิสูจน์ accuracy ของ hardware ค่า trigger10µs กับ sampling70ms มีคนละหน้าที่ program พิมพ์ state ให้ trace ได้และยังไม่ส่ง network"
+      }
+    },
+    {
+      "id": "iot04-q24",
+      "reference": "program",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: distance1cm จาก pulse ที่ไม่ zero จะทำอย่างไรใน policy2..400?",
+      "explanation": "ตรวจ validity ทั้ง timeout และ outofrange (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot04-q24)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ERRORเพราะต่ำกว่าช่วงvalid"
+        },
+        {
+          "id": "b",
+          "text": "REDโดยไม่ตรวจช่วง"
+        },
+        {
+          "id": "c",
+          "text": "GREENเพราะแม่นยำแน่นอน"
+        },
+        {
+          "id": "d",
+          "text": "YELLOWจากsource40cm"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "อ่าน pulse โดยมี timeout แล้วคำนวณ cm ตรวจ validity ก่อนเลือกสี ฟังก์ชัน classification บริสุทธิ์สามารถทดสอบด้วยค่าจำลองได้ แต่ไม่ได้พิสูจน์ accuracy ของ hardware ค่า trigger10µs กับ sampling70ms มีคนละหน้าที่ program พิมพ์ state ให้ trace ได้และยังไม่ส่ง network"
+      }
+    },
+    {
+      "id": "iot04-q25",
+      "reference": "program",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: การลดการสลับสีใกล้ threshold โดยไม่แก้ข้อสอบ source เงียบๆควรทำอย่างไร?",
+      "explanation": "นโยบายกรอง / hysteresis ต้องอธิบายต่างจาก simplepolicy นี้ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot04-q25)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เปลี่ยน30เป็น40โดยไม่แจ้ง"
+        },
+        {
+          "id": "b",
+          "text": "ถือว่าข้อมูลsensorไม่มีnoise"
+        },
+        {
+          "id": "c",
+          "text": "ปิดทุกvalidation"
+        },
+        {
+          "id": "d",
+          "text": "ออกแบบhysteresisเป็นส่วนเสริมและทดสอบเกณฑ์ใหม่ชัดเจน"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "อ่าน pulse โดยมี timeout แล้วคำนวณ cm ตรวจ validity ก่อนเลือกสี ฟังก์ชัน classification บริสุทธิ์สามารถทดสอบด้วยค่าจำลองได้ แต่ไม่ได้พิสูจน์ accuracy ของ hardware ค่า trigger10µs กับ sampling70ms มีคนละหน้าที่ program พิมพ์ state ให้ trace ได้และยังไม่ส่ง network"
+      }
+    },
+    {
+      "id": "iot04-self5",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): วางแผน test สี่ stateGREEN / YELLOW / RED / ERROR",
+      "reference": "program",
+      "explanation": "ทดสอบสาม sourcepoints ขอบ 30 / 50,outofrange และ duration0 โดยระบุ expectedLED ครบ",
+      "rubric": [
+        "ทดสอบสาม sourcepoints ขอบ 30 / 50,outofrange และ duration0 โดยระบุ expectedLED ครบ",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "อ่าน pulse โดยมี timeout แล้วคำนวณ cm ตรวจ validity ก่อนเลือกสี ฟังก์ชัน classification บริสุทธิ์สามารถทดสอบด้วยค่าจำลองได้ แต่ไม่ได้พิสูจน์ accuracy ของ hardware ค่า trigger10µs กับ sampling70ms มีคนละหน้าที่ program พิมพ์ state ให้ trace ได้และยังไม่ส่ง network"
+      }
+    }
+  ]
+}

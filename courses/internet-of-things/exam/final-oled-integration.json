@@ -1,0 +1,616 @@
+{
+  "version": 1,
+  "revision": 1,
+  "baseRevision": 1,
+  "lesson": "internet-of-things-final-oled-integration",
+  "questions": [
+    {
+      "id": "iot09-q06",
+      "reference": "framebuffer",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: จอ monochrome128x64 ใช้ 1bit / pixel ไม่คิด metadata buffer กี่ bytes?",
+      "explanation": "8192bits / 8=1024bytes (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot09-q06)",
+      "type": "numeric",
+      "answer": 1024,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "AdafruitSSD1306 วาดลง buffer ก่อน display.display ส่งไปจอ clearDisplay ล้าง buffer ไม่เท่ากับกดปิดไฟเลี้ยง setCursor(x,y)ใช้พิกัดที่เลือก ต้องให้ข้อความอยู่ภายใน 128x64 ตั้ง textsize1 เพื่อให้ Motion Detected กับ LampON / OFF อ่านได้และอัปเดตเฉพาะเมื่อ state เปลี่ยน"
+      }
+    },
+    {
+      "id": "iot09-q07",
+      "reference": "framebuffer",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: print ข้อความลง Adafruitbuffer แล้วต้องทำอะไรเพื่อส่งภาพออกจอ?",
+      "explanation": "แยก bufferdrawing จาก busflush (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot09-q07)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "delayMicrosecondsอย่างเดียว"
+        },
+        {
+          "id": "b",
+          "text": "display.display()"
+        },
+        {
+          "id": "c",
+          "text": "Serial.begin(9600)แทนflush"
+        },
+        {
+          "id": "d",
+          "text": "pinMode(34,OUTPUT)"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "AdafruitSSD1306 วาดลง buffer ก่อน display.display ส่งไปจอ clearDisplay ล้าง buffer ไม่เท่ากับกดปิดไฟเลี้ยง setCursor(x,y)ใช้พิกัดที่เลือก ต้องให้ข้อความอยู่ภายใน 128x64 ตั้ง textsize1 เพื่อให้ Motion Detected กับ LampON / OFF อ่านได้และอัปเดตเฉพาะเมื่อ state เปลี่ยน"
+      }
+    },
+    {
+      "id": "iot09-q08",
+      "reference": "framebuffer",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ช่วงพิกัด xของจอกว้าง 128 เริ่ม 0 ค่าสูงสุดเท่าใด?",
+      "explanation": "0..127 ไม่ใช่ 0..128 (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot09-q08)",
+      "type": "numeric",
+      "answer": 127,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "AdafruitSSD1306 วาดลง buffer ก่อน display.display ส่งไปจอ clearDisplay ล้าง buffer ไม่เท่ากับกดปิดไฟเลี้ยง setCursor(x,y)ใช้พิกัดที่เลือก ต้องให้ข้อความอยู่ภายใน 128x64 ตั้ง textsize1 เพื่อให้ Motion Detected กับ LampON / OFF อ่านได้และอัปเดตเฉพาะเมื่อ state เปลี่ยน"
+      }
+    },
+    {
+      "id": "iot09-q09",
+      "reference": "framebuffer",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: เมื่อจอ 128x64 เริ่ม coordinate0 และวาง cursor ที่ x128 การวาดอักษรใหม่ควรคาดอะไรแทนการอ้างว่าอยู่คอลัมน์สุดท้าย?",
+      "explanation": "ตรวจ bounds กับ textwrap ของ library ไม่สับสน width กับ lastindex (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot09-q09)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เป็นpixelสุดท้ายของจอพอดี"
+        },
+        {
+          "id": "b",
+          "text": "เพิ่มจำนวนpixelจริงเป็น129"
+        },
+        {
+          "id": "c",
+          "text": "รับรองข้อความทั้งบรรทัดแสดงครบ"
+        },
+        {
+          "id": "d",
+          "text": "อยู่พ้นช่วงx0..127;พฤติกรรมclip/wrapขึ้นกับAPI"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "AdafruitSSD1306 วาดลง buffer ก่อน display.display ส่งไปจอ clearDisplay ล้าง buffer ไม่เท่ากับกดปิดไฟเลี้ยง setCursor(x,y)ใช้พิกัดที่เลือก ต้องให้ข้อความอยู่ภายใน 128x64 ตั้ง textsize1 เพื่อให้ Motion Detected กับ LampON / OFF อ่านได้และอัปเดตเฉพาะเมื่อ state เปลี่ยน"
+      }
+    },
+    {
+      "id": "iot09-q10",
+      "reference": "framebuffer",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: สมมติ font ตัวอย่างกว้าง 6px / อักขระ ข้อความ Motion Detected15 อักขระกว้างกี่ px?",
+      "explanation": "15 รวม space หนึ่งตัว;ภายใต้ fontassumption6px (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot09-q10)",
+      "type": "numeric",
+      "answer": 90,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "AdafruitSSD1306 วาดลง buffer ก่อน display.display ส่งไปจอ clearDisplay ล้าง buffer ไม่เท่ากับกดปิดไฟเลี้ยง setCursor(x,y)ใช้พิกัดที่เลือก ต้องให้ข้อความอยู่ภายใน 128x64 ตั้ง textsize1 เพื่อให้ Motion Detected กับ LampON / OFF อ่านได้และอัปเดตเฉพาะเมื่อ state เปลี่ยน"
+      }
+    },
+    {
+      "id": "iot09-self2",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): trace ลำดับ clear / cursor / print / display และตรวจข้อความพอดีจอ",
+      "reference": "framebuffer",
+      "explanation": "แยก buffer กับ physicaldisplay และเลือกขนาด font / pixels ตาม library",
+      "rubric": [
+        "แยก buffer กับ physicaldisplay และเลือกขนาด font / pixels ตาม library",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "AdafruitSSD1306 วาดลง buffer ก่อน display.display ส่งไปจอ clearDisplay ล้าง buffer ไม่เท่ากับกดปิดไฟเลี้ยง setCursor(x,y)ใช้พิกัดที่เลือก ต้องให้ข้อความอยู่ภายใน 128x64 ตั้ง textsize1 เพื่อให้ Motion Detected กับ LampON / OFF อ่านได้และอัปเดตเฉพาะเมื่อ state เปลี่ยน"
+      }
+    },
+    {
+      "id": "iot09-q11",
+      "reference": "two-states",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: หลัง nextState ประมวลผลตาม policy ปกติ combination ใดไม่สอดคล้องเมื่อ PIRHIGH ถูกยอมรับ?",
+      "explanation": "motionbranch กำหนด ON ก่อน update จอ;ถ้า HIGH / OFF ควรตรวจ mapping หรือ state ผิด ไม่สรุปว่าเป็นปกติ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot09-q11)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "No Motion / Lamp OFFหลังtimeout"
+        },
+        {
+          "id": "b",
+          "text": "Motion Detected / Lamp OFF"
+        },
+        {
+          "id": "c",
+          "text": "Motion Detected / Lamp ON"
+        },
+        {
+          "id": "d",
+          "text": "No Motion / Lamp ONในholdwindow"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "จอแสดง Motion Detected / No Motion จาก input และ LampON / OFF จาก statecontroller ไม่สรุปจำนวนคนหรือ presence ถ้า motionLOW แต่ยังไม่ครบ timeout ให้ No Motion / LampON ซึ่งเป็น state ที่ถูกต้อง นโยบายกรณี display ไม่ตอบในตัวอย่างยังควบคุม lowvoltageload และแจ้ง Serial ไม่แสร้งว่าจอทำงานแล้ว"
+      }
+    },
+    {
+      "id": "iot09-q12",
+      "reference": "two-states",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: PIRHIGH ใน policy ปกติของ nextState ส่งผลอย่างไร?",
+      "explanation": "motionbranch มาก่อน timeoutbranch (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot09-q12)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "LampONและข้อความMotion Detected"
+        },
+        {
+          "id": "b",
+          "text": "LampOFFเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "ไม่เปลี่ยนlastSeen"
+        },
+        {
+          "id": "d",
+          "text": "แสดงNo Motionเพื่อclearbuffer"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "จอแสดง Motion Detected / No Motion จาก input และ LampON / OFF จาก statecontroller ไม่สรุปจำนวนคนหรือ presence ถ้า motionLOW แต่ยังไม่ครบ timeout ให้ No Motion / LampON ซึ่งเป็น state ที่ถูกต้อง นโยบายกรณี display ไม่ตอบในตัวอย่างยังควบคุม lowvoltageload และแจ้ง Serial ไม่แสร้งว่าจอทำงานแล้ว"
+      }
+    },
+    {
+      "id": "iot09-q13",
+      "reference": "two-states",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: คำว่า No Motion ยืนยันว่าไม่มีคนหรือไม่?",
+      "explanation": "PIR ไม่ใช่ continuousoccupancycertificate (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot09-q13)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ยืนยันแน่นอน100%"
+        },
+        {
+          "id": "b",
+          "text": "ยืนยันเฉพาะเมื่อOLEDสีขาว"
+        },
+        {
+          "id": "c",
+          "text": "ยืนยันถ้าADC12bit"
+        },
+        {
+          "id": "d",
+          "text": "ไม่ เป็นobservedinputstateภายใต้module/logicที่เลือก"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "จอแสดง Motion Detected / No Motion จาก input และ LampON / OFF จาก statecontroller ไม่สรุปจำนวนคนหรือ presence ถ้า motionLOW แต่ยังไม่ครบ timeout ให้ No Motion / LampON ซึ่งเป็น state ที่ถูกต้อง นโยบายกรณี display ไม่ตอบในตัวอย่างยังควบคุม lowvoltageload และแจ้ง Serial ไม่แสร้งว่าจอทำงานแล้ว"
+      }
+    },
+    {
+      "id": "iot09-q14",
+      "reference": "two-states",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: display เสียแต่ logic ยังทำงานตาม authoredpolicy นี้ ควรรายงานอย่างไร?",
+      "explanation": "รักษาความจริงของแต่ละ subsystem (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot09-q14)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "แต่งscreenshotใหม่เป็นผลจริง"
+        },
+        {
+          "id": "b",
+          "text": "รีเซ็ตtimerตลอดเพราะจอไม่ตอบ"
+        },
+        {
+          "id": "c",
+          "text": "แจ้งdisplayunavailableและไม่อ้างว่าหน้าจอแสดงถูก"
+        },
+        {
+          "id": "d",
+          "text": "บอกhardwareผ่านทุกส่วน"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "จอแสดง Motion Detected / No Motion จาก input และ LampON / OFF จาก statecontroller ไม่สรุปจำนวนคนหรือ presence ถ้า motionLOW แต่ยังไม่ครบ timeout ให้ No Motion / LampON ซึ่งเป็น state ที่ถูกต้อง นโยบายกรณี display ไม่ตอบในตัวอย่างยังควบคุม lowvoltageload และแจ้ง Serial ไม่แสร้งว่าจอทำงานแล้ว"
+      }
+    },
+    {
+      "id": "iot09-q15",
+      "reference": "two-states",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: หน้าที่ของ relaylevel กับ lampbool ควรออกแบบอย่างไร?",
+      "explanation": "logicalstate ไม่เท่ากับ physicallevel ทุก module (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot09-q15)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เปลี่ยนINตามthemeเว็บ"
+        },
+        {
+          "id": "b",
+          "text": "แปลงผ่านpolaritymappingที่ตรวจแล้ว"
+        },
+        {
+          "id": "c",
+          "text": "ใช้ค่าboolเป็นแรงดัน5Vโดยตรง"
+        },
+        {
+          "id": "d",
+          "text": "ใช้จำนวนpixelเป็นGPIO"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "จอแสดง Motion Detected / No Motion จาก input และ LampON / OFF จาก statecontroller ไม่สรุปจำนวนคนหรือ presence ถ้า motionLOW แต่ยังไม่ครบ timeout ให้ No Motion / LampON ซึ่งเป็น state ที่ถูกต้อง นโยบายกรณี display ไม่ตอบในตัวอย่างยังควบคุม lowvoltageload และแจ้ง Serial ไม่แสร้งว่าจอทำงานแล้ว"
+      }
+    },
+    {
+      "id": "iot09-self3",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): ออกแบบ outputtable แยกสาม combination ปกติและ HIGH / OFF ที่ผิด policy หลังประมวลผล",
+      "reference": "two-states",
+      "explanation": "ระบุสิ่งที่ policy อนุญาตและแยก sensorfault / displayfault อย่างซื่อสัตย์",
+      "rubric": [
+        "ระบุสิ่งที่ policy อนุญาตและแยก sensorfault / displayfault อย่างซื่อสัตย์",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "จอแสดง Motion Detected / No Motion จาก input และ LampON / OFF จาก statecontroller ไม่สรุปจำนวนคนหรือ presence ถ้า motionLOW แต่ยังไม่ครบ timeout ให้ No Motion / LampON ซึ่งเป็น state ที่ถูกต้อง นโยบายกรณี display ไม่ตอบในตัวอย่างยังควบคุม lowvoltageload และแจ้ง Serial ไม่แสร้งว่าจอทำงานแล้ว"
+      }
+    },
+    {
+      "id": "iot09-q16",
+      "reference": "integrated-trace",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: HIGH ที่ 1000 และ 9000ms ตอน 11000 elapsed จาก lastHIGH เท่าใด ms?",
+      "explanation": "timer ถูก retrigger เป็น 9000 (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot09-q16)",
+      "type": "numeric",
+      "answer": 2000,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ nextState เหมือนบท Relay แล้วสร้าง goldentrace แยกจาก measurement เช่น HIGH ที่ 1000 และ 9000ms ทำให้ 11000ms ยัง ON และ 19000msOFF เมื่อ LOW ต้องตรวจ exactboundary,wrap,startup และ reopenfirmware ต่างจาก savedreadingstate ของเว็บ"
+      }
+    },
+    {
+      "id": "iot09-q17",
+      "reference": "integrated-trace",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: traceHIGH ที่ 1000 / 9000 และ LOW ที่ 11000 ควรเป็น state ใด?",
+      "explanation": "เพิ่งไม่มี HIGH2000ms ยังไม่ครบ 10000 (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot09-q17)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "No Motion / Lamp OFF"
+        },
+        {
+          "id": "b",
+          "text": "Motion Detected / Lamp OFF"
+        },
+        {
+          "id": "c",
+          "text": "ERRORแน่นอน"
+        },
+        {
+          "id": "d",
+          "text": "No Motion / Lamp ON"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ nextState เหมือนบท Relay แล้วสร้าง goldentrace แยกจาก measurement เช่น HIGH ที่ 1000 และ 9000ms ทำให้ 11000ms ยัง ON และ 19000msOFF เมื่อ LOW ต้องตรวจ exactboundary,wrap,startup และ reopenfirmware ต่างจาก savedreadingstate ของเว็บ"
+      }
+    },
+    {
+      "id": "iot09-q18",
+      "reference": "integrated-trace",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: trace เดิม LOW ที่ 19000 พอดี deadline ควรเป็น state ใด?",
+      "explanation": "elapsed10000 จึง OFF (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot09-q18)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Motion Detected / Lamp ON"
+        },
+        {
+          "id": "b",
+          "text": "People=1แน่นอน"
+        },
+        {
+          "id": "c",
+          "text": "No Motion / Lamp OFF"
+        },
+        {
+          "id": "d",
+          "text": "No Motion / Lamp ONต่อเสมอ"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ nextState เหมือนบท Relay แล้วสร้าง goldentrace แยกจาก measurement เช่น HIGH ที่ 1000 และ 9000ms ทำให้ 11000ms ยัง ON และ 19000msOFF เมื่อ LOW ต้องตรวจ exactboundary,wrap,startup และ reopenfirmware ต่างจาก savedreadingstate ของเว็บ"
+      }
+    },
+    {
+      "id": "iot09-q19",
+      "reference": "integrated-trace",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: activeLOW เมื่อ lamp=false physicalHIGHflag เป็น int เท่าใด?",
+      "explanation": "ปิด coil ตาม assumptionactiveLOW (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot09-q19)",
+      "type": "numeric",
+      "answer": 1,
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ nextState เหมือนบท Relay แล้วสร้าง goldentrace แยกจาก measurement เช่น HIGH ที่ 1000 และ 9000ms ทำให้ 11000ms ยัง ON และ 19000msOFF เมื่อ LOW ต้องตรวจ exactboundary,wrap,startup และ reopenfirmware ต่างจาก savedreadingstate ของเว็บ"
+      }
+    },
+    {
+      "id": "iot09-q20",
+      "reference": "integrated-trace",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: HIGH ใหม่ที่ 19000 พอดีซึ่ง motionbranch ถูกตรวจแรก ควรทำอย่างไร?",
+      "explanation": "ลำดับ decision มีผลและต้องระบุ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot09-q20)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ONและlastSeen19000"
+        },
+        {
+          "id": "b",
+          "text": "OFFและทิ้งHIGH"
+        },
+        {
+          "id": "c",
+          "text": "เปลี่ยนresolutionADC"
+        },
+        {
+          "id": "d",
+          "text": "ยืนยันว่าคนออกห้องแล้ว"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใช้ nextState เหมือนบท Relay แล้วสร้าง goldentrace แยกจาก measurement เช่น HIGH ที่ 1000 และ 9000ms ทำให้ 11000ms ยัง ON และ 19000msOFF เมื่อ LOW ต้องตรวจ exactboundary,wrap,startup และ reopenfirmware ต่างจาก savedreadingstate ของเว็บ"
+      }
+    },
+    {
+      "id": "iot09-self4",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): สร้างตาราง now,input,lastSeen,lamp,relaylevel และข้อความ",
+      "reference": "integrated-trace",
+      "explanation": "คำนวณ elapsed จาก lastHIGHobservation และทดสอบเหตุการณ์พร้อม deadline",
+      "rubric": [
+        "คำนวณ elapsed จาก lastHIGHobservation และทดสอบเหตุการณ์พร้อม deadline",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ใช้ nextState เหมือนบท Relay แล้วสร้าง goldentrace แยกจาก measurement เช่น HIGH ที่ 1000 และ 9000ms ทำให้ 11000ms ยัง ON และ 19000msOFF เมื่อ LOW ต้องตรวจ exactboundary,wrap,startup และ reopenfirmware ต่างจาก savedreadingstate ของเว็บ"
+      }
+    },
+    {
+      "id": "iot09-q21",
+      "reference": "faults",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: Wire ไม่มี ACK ควรทำอะไรตามตัวอย่าง?",
+      "explanation": "ตรวจ screenReady และแยก diagnostic (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot09-q21)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ยืนยันทุกpixelทำงาน"
+        },
+        {
+          "id": "b",
+          "text": "ปิดvalidationทุกส่วน"
+        },
+        {
+          "id": "c",
+          "text": "เปลี่ยนPIRเป็นdistance0cm"
+        },
+        {
+          "id": "d",
+          "text": "รายงานNO OLEDและไม่เรียกdisplaydrawingโดยแสร้งสำเร็จ"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตรวจ I2CACK แล้วเช็ค allocation / librarybegin ก่อนวาด หากไม่พร้อมให้ serialdiagnostic และไม่เรียก displaymethods ใน loop branch นั้น การสื่อสาร I2C เองอาจ block ตาม timeout จึงไม่รับรอง hardrealtime คอมไพล์ทุก sketch จริงด้วย target / core ที่บันทึกแต่ไม่มี boardupload หรือ hardwaretest"
+      }
+    },
+    {
+      "id": "iot09-q22",
+      "reference": "faults",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ผล compile สำเร็จยืนยันข้อใด?",
+      "explanation": "จำกัดขอบเขตการรับรอง (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot09-q22)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "sensorอ่านจริงถูกต้องแล้ว"
+        },
+        {
+          "id": "b",
+          "text": "แสดงOLEDจริงทุกpixelแล้ว"
+        },
+        {
+          "id": "c",
+          "text": "API/syntax/dependenciesผ่านภายใต้target/versionนั้น"
+        },
+        {
+          "id": "d",
+          "text": "วงจรจริงปลอดภัยแน่นอน"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตรวจ I2CACK แล้วเช็ค allocation / librarybegin ก่อนวาด หากไม่พร้อมให้ serialdiagnostic และไม่เรียก displaymethods ใน loop branch นั้น การสื่อสาร I2C เองอาจ block ตาม timeout จึงไม่รับรอง hardrealtime คอมไพล์ทุก sketch จริงด้วย target / core ที่บันทึกแต่ไม่มี boardupload หรือ hardwaretest"
+      }
+    },
+    {
+      "id": "iot09-q23",
+      "reference": "faults",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: เมื่อ I2C ส่ง buffer ทำให้ loop ใช้เวลาเพิ่ม timer คำกล่าวใดเหมาะสม?",
+      "explanation": "nonblockingtimer ไม่ตัด latency อื่น (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot09-q23)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ต้องใช้delay10000แทน"
+        },
+        {
+          "id": "b",
+          "text": "มีpolling/API latency ไม่ใช่hardrealtimeที่รับรอง"
+        },
+        {
+          "id": "c",
+          "text": "millisจึงหยุดทุกครั้ง"
+        },
+        {
+          "id": "d",
+          "text": "ไม่ต้องทดสอบdeadline"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตรวจ I2CACK แล้วเช็ค allocation / librarybegin ก่อนวาด หากไม่พร้อมให้ serialdiagnostic และไม่เรียก displaymethods ใน loop branch นั้น การสื่อสาร I2C เองอาจ block ตาม timeout จึงไม่รับรอง hardrealtime คอมไพล์ทุก sketch จริงด้วย target / core ที่บันทึกแต่ไม่มี boardupload หรือ hardwaretest"
+      }
+    },
+    {
+      "id": "iot09-q24",
+      "reference": "faults",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ข้อใดต้องใช้ physicaltest เพิ่ม?",
+      "explanation": "ฮาร์ดแวร์ไม่ได้อยู่ในการทดสอบคอมไพเลอร์ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot09-q24)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Echolevel/relaypolarity/voltageและOLEDaddressของmoduleจริง"
+        },
+        {
+          "id": "b",
+          "text": "ผล2^12จากoracle"
+        },
+        {
+          "id": "c",
+          "text": "ความแตกต่าง==กับ=ในC++"
+        },
+        {
+          "id": "d",
+          "text": "ผลsyntacticcompileในlog"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตรวจ I2CACK แล้วเช็ค allocation / librarybegin ก่อนวาด หากไม่พร้อมให้ serialdiagnostic และไม่เรียก displaymethods ใน loop branch นั้น การสื่อสาร I2C เองอาจ block ตาม timeout จึงไม่รับรอง hardrealtime คอมไพล์ทุก sketch จริงด้วย target / core ที่บันทึกแต่ไม่มี boardupload หรือ hardwaretest"
+      }
+    },
+    {
+      "id": "iot09-q25",
+      "reference": "faults",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: firstFrame||motion!=lastMotion||lamp.on!=lastLamp ก่อนวาด OLED ช่วยอะไรในตัวอย่าง?",
+      "explanation": "เป็นนโยบาย update ของ authoredcode ไม่ใช่หลักฐาน physicaltiming หรือความสามารถ presence (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot09-q25)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "วาดทุกloopโดยไม่ดูstate"
+        },
+        {
+          "id": "b",
+          "text": "พิสูจน์ว่าทุกI2Ctransactionไม่มีlatency"
+        },
+        {
+          "id": "c",
+          "text": "ตรวจพบทุกคนแม้PIRไม่เปลี่ยน"
+        },
+        {
+          "id": "d",
+          "text": "ส่งframeแรกและเมื่อstateเปลี่ยน ลดงานbusซ้ำ แต่ไม่รับรองhardrealtime"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตรวจ I2CACK แล้วเช็ค allocation / librarybegin ก่อนวาด หากไม่พร้อมให้ serialdiagnostic และไม่เรียก displaymethods ใน loop branch นั้น การสื่อสาร I2C เองอาจ block ตาม timeout จึงไม่รับรอง hardrealtime คอมไพล์ทุก sketch จริงด้วย target / core ที่บันทึกแต่ไม่มี boardupload หรือ hardwaretest"
+      }
+    },
+    {
+      "id": "iot09-self5",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): ออกแบบ testreport ที่แยก compile / simulation / actualhardware",
+      "reference": "faults",
+      "explanation": "เก็บ input / expected / assertions และระบุ pin / level / polarity / address ที่ยังต้องวัดจริง",
+      "rubric": [
+        "เก็บ input / expected / assertions และระบุ pin / level / polarity / address ที่ยังต้องวัดจริง",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ตรวจ I2CACK แล้วเช็ค allocation / librarybegin ก่อนวาด หากไม่พร้อมให้ serialdiagnostic และไม่เรียก displaymethods ใน loop branch นั้น การสื่อสาร I2C เองอาจ block ตาม timeout จึงไม่รับรอง hardrealtime คอมไพล์ทุก sketch จริงด้วย target / core ที่บันทึกแต่ไม่มี boardupload หรือ hardwaretest"
+      }
+    }
+  ]
+}

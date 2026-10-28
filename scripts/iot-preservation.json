@@ -1,0 +1,530 @@
+{
+  "base": "ab825ce333e5eac85c7195af4b9725d10a7f316f",
+  "lessons": 37,
+  "questions": 1110,
+  "anchors": 370,
+  "pdfs": 15,
+  "files": {
+    "courses/artificial-intelligence/exam/ai-foundations-agents.json": "c5cfdc8a2e3ec9b829a7b8259eea1eb3a910041907b87688c43723aee4e0f050",
+    "courses/artificial-intelligence/exam/final-backpropagation.json": "30f5e88168731280ddc164119f9379cf89bcf281ff2b99ce537bf39c5bbd7368",
+    "courses/artificial-intelligence/exam/final-cnn.json": "0bea956d1722b4ced46fe6cab4a0a334229e878799e9625f02419e0b71304fc9",
+    "courses/artificial-intelligence/exam/final-decision-tree.json": "c52a0e5acd9f0b7d3853920dde2e61a8c08bd014862c937b1d6319a35afbff03",
+    "courses/artificial-intelligence/exam/final-deep-learning-overview.json": "1c32b3ac4f00ab52ca7521999fa164d1e0a71ff3ecd742299742d2f5476bd080",
+    "courses/artificial-intelligence/exam/final-hierarchical-clustering.json": "7a4ca69db9a839689631bac95475bef2fe2ef1e3491c3848159c65b6aafb33f3",
+    "courses/artificial-intelligence/exam/final-kmeans.json": "da16a924c1a55478e3bea01c3b10ab0762a8e3a6319f855ee33b00fbb8c39060",
+    "courses/artificial-intelligence/exam/final-knn.json": "cd6c80cb7834d0b28a46b8c070cf9895d17c32e493b92d18bd957a9b2758deb6",
+    "courses/artificial-intelligence/exam/final-naive-bayes.json": "586e66ab9424d10b50b87f37d9c3a73d243edeeaf6996ff4e9bb4ecdea836194",
+    "courses/artificial-intelligence/exam/final-perceptron.json": "57c2a171da82b9c2f05149186f19b5d770d991ddb6afee0c638ff141c79ddcbc",
+    "courses/artificial-intelligence/exam/final-regression.json": "020348dd6fdc3e6cedb207ba2816f1e02c6575ce71b85148d96c3ae18f629bbb",
+    "courses/artificial-intelligence/exam/search-models-bfs-dfs.json": "b787550f676097c85b2fe6ca74c83514ed1c62ee4c0772a368f688de0f352889",
+    "courses/artificial-intelligence/practice/ai-foundations-agents.json": "df50398fb77323dc307b2bf7fb8b141747536b0d95f83d5cf32a9a25f23f8fea",
+    "courses/artificial-intelligence/practice/final-backpropagation.json": "9bbdc028351b05778346021a5cf9f335879351f096d3bb29127f92a6beeb166b",
+    "courses/artificial-intelligence/practice/final-cnn.json": "2dadc785f61959dd1c83bfe3845515d007855d0bdad2c63221a3e60903c54784",
+    "courses/artificial-intelligence/practice/final-decision-tree.json": "64eb8f5e954f7fec32f8ab17997cf622314032b0b6b9228a77d449b9611b327f",
+    "courses/artificial-intelligence/practice/final-deep-learning-overview.json": "8b1349e5bfdaa87ab68cba47f68f536d6fb479a1ade637d395bb039812863806",
+    "courses/artificial-intelligence/practice/final-hierarchical-clustering.json": "9d7e132c7f43ecae19c4450a3765367cd0681c023d9466fd057dd4730124ed83",
+    "courses/artificial-intelligence/practice/final-kmeans.json": "c9e7a0eb1df210037e35557126fe37359457dfc60149d93602cf7098bc0a226f",
+    "courses/artificial-intelligence/practice/final-knn.json": "3572078e04e8ba4449cc9ba80096b2ab9a1ad6de5e2d3d907c55800dcb778da1",
+    "courses/artificial-intelligence/practice/final-naive-bayes.json": "9f1d32ae94c02fbeb5fabe56d542f220eda9ecd53934c90f0435bd26f6c18fdf",
+    "courses/artificial-intelligence/practice/final-perceptron.json": "86714021fb44949bd2b71238a96ddcacc0480e0d7d73707d027fb94b54989d92",
+    "courses/artificial-intelligence/practice/final-regression.json": "af0b119c93d797a24f9a8e5a032391471d698915a0daf53b149272ff1bc9326d",
+    "courses/artificial-intelligence/practice/search-models-bfs-dfs.json": "35807b55a608963871902d452ea598c84ccec40a34d5d0940f10d06baf73e823",
+    "courses/artificial-intelligence/slides/01_intro.pdf": "b0a635626e468311926c5d79c25b35fba7030362b9da2ea2b205fbe3179b36ba",
+    "courses/artificial-intelligence/summaries/ai-foundations-agents.md": "bc1ecd4e34033d974e3624f3915200ccbdd6a71d692fb81ffb37f287421c2f9e",
+    "courses/artificial-intelligence/summaries/final-backpropagation.md": "1ddcbd65e06c0d0edcfcc2bbed2ec269f8473a90095c0347dcb219fd0e9e68c9",
+    "courses/artificial-intelligence/summaries/final-cnn.md": "f78967c9b4ebd7f7b37bfd12055233abc105bb11df4905be35fb9a192e409195",
+    "courses/artificial-intelligence/summaries/final-decision-tree.md": "e643f385b772c164576c122ebe22d73348124a681f5dc480e52d3868d1592c57",
+    "courses/artificial-intelligence/summaries/final-deep-learning-overview.md": "e41ac949a64c0e7e25aba0cd424567088d6e9ea31ecd9342b9d36380265b9773",
+    "courses/artificial-intelligence/summaries/final-hierarchical-clustering.md": "fb96609747a641af22ca50ce52ed5293b616fa5458fc50435b7d48a28bf5876f",
+    "courses/artificial-intelligence/summaries/final-kmeans.md": "4c2d78d1bcac47ec7f9d8883c42444eb73abcb987b40e93460509d457d984301",
+    "courses/artificial-intelligence/summaries/final-knn.md": "d981796902cfc8b8c8a1cf5222afea7d28d443f3647c1d6d915ed146e8e8e9c5",
+    "courses/artificial-intelligence/summaries/final-naive-bayes.md": "9b6795e1b5d2db7635683bf61c256f150aa725ef109295cf2ec31a9e03b94cb4",
+    "courses/artificial-intelligence/summaries/final-perceptron.md": "b6a5d86dd9d6620c37872dd920fd7ae5bd0abada8dddf9d02399a69e82cd5562",
+    "courses/artificial-intelligence/summaries/final-regression.md": "a54dbeed4a21b17f5f1a543d70e22ebf22ada4eed42b7b6ff096079971e68135",
+    "courses/artificial-intelligence/summaries/search-models-bfs-dfs.md": "b900abf12dd97311d73788c48f2ec5514a4c2078450ad104c0e61bc8f34c533a",
+    "courses/oop-python/exam/advanced-sorting.json": "9273b882bb0c5d36e8ee0fcb7a076169842fb9062e500dcaa1f39165760b1870",
+    "courses/oop-python/exam/arrays-dynamic-array.json": "9668e1a28332587a110dd0418336a179ee3a4a1b1695948c0ac1307426ba8b81",
+    "courses/oop-python/exam/classes-objects.json": "b8f5d27762b6400cf968774e11ed3abe437d3fabb179a0425b4136ae7d0dbd6f",
+    "courses/oop-python/exam/complexity-basic-sorting.json": "c77aa638fbedfaa2760945859398c30edae6dbcf4a7703448faaa3f1cc02b099",
+    "courses/oop-python/exam/encapsulation-properties.json": "a4565dcc84cf0e234fa48137486994d600c36341b2f8c34157b086b879515394",
+    "courses/oop-python/exam/hash-tables.json": "953ec847e6bffad7b13639cb0e16e71505b7a91d7dd9f143aec031692d53da33",
+    "courses/oop-python/exam/inheritance-mro.json": "ab362d187e10c4ea2abba7c8d7af4549aaf9a5d3359ec9f8ce6a77075864f9da",
+    "courses/oop-python/exam/linked-list.json": "a658521f494e5fc588b5bd2d704066f73dff5489850c8b4aea354a72b6abeaeb",
+    "courses/oop-python/exam/object-relationships.json": "126045307a167e84e4d8854f7b3df0affb3aab5939d5c7ee1bf639151d79b458",
+    "courses/oop-python/exam/polymorphism-abc.json": "62d820f5ae40ad87a332a8ac0c289a15621d2abf1330d0f67c8b6feeafb2dd5e",
+    "courses/oop-python/exam/queue.json": "bc7ef1b72a02b1640f134e67becec48e626562d75165db7dca109ea436ca88e4",
+    "courses/oop-python/exam/stack.json": "9d0a9174ae7219b104a67f63be6e4219290bbc20512d067541ef60a528338cae",
+    "courses/oop-python/exam/uml-solid.json": "c1119d3bff19101a0eabe91722f48faed1b675d74c5de8b2ba652a8740743973",
+    "courses/oop-python/practice/advanced-sorting.json": "5f1638ab9b686d12575ed375246387a1fe30e5342a005fda879eb9160f751af5",
+    "courses/oop-python/practice/arrays-dynamic-array.json": "c11106b849d0e97409dd653d718deef63a98792d89d61691a9688d65d233c823",
+    "courses/oop-python/practice/classes-objects.json": "6408eabe6a972b21d529af96f766e472f92188cc76be8e3992028bedd398057d",
+    "courses/oop-python/practice/complexity-basic-sorting.json": "952e9413596d6bf91eb8c0c1ec5f44ea27bee940559efc2b8da85df7c12a9653",
+    "courses/oop-python/practice/encapsulation-properties.json": "471ff114486ca6d76d256bc9afaf5dce2f1484ff3c4c7909319212e5474e4fc9",
+    "courses/oop-python/practice/hash-tables.json": "d03f8087a92fefaeb427a9a70c4a2dabb256ac64ec5a6b95188d08c4a42289a4",
+    "courses/oop-python/practice/inheritance-mro.json": "0ec69ffcd87c1ddc0deba43a134efb4534fb1a73d132efe3e0fe0e73b78b95b6",
+    "courses/oop-python/practice/linked-list.json": "15fd2dec335bbeb534c48698cad6d71dcc23bae5892e4eb0ae0d154f1f1af30a",
+    "courses/oop-python/practice/object-relationships.json": "fc9eec90d3c63fa2b48030d3301d046baaada8c3f581ee4afcf3dbe79a4880ed",
+    "courses/oop-python/practice/polymorphism-abc.json": "2cc85548fda13b1d52e111527b845fb0b728f75590571000b2053b345d133036",
+    "courses/oop-python/practice/queue.json": "5dd6a661794080d46cd0b250fb01e44872109c7e1621495a23586f9bc13a6957",
+    "courses/oop-python/practice/stack.json": "36746588feb038ec3f5351e08488b685f9c33b6823112f4f9a75d4a5031e7711",
+    "courses/oop-python/practice/uml-solid.json": "deda7833319756327d7796f6d237a1e6e1bda7f4aae4a0268947d1567341a979",
+    "courses/oop-python/slides/Week1.pdf": "fc7af7098ca6dc2f9f693887434507c7a72916e85c98e64da9333606e39a776a",
+    "courses/oop-python/slides/Week10.pdf": "486a05f8c8936e594e227b3fb9c07599ca01f5f3c2442ac16dbc50b096bece89",
+    "courses/oop-python/slides/Week11.pdf": "e041bf29ea0f4eae872d964b398ca0c3cfe13e454b1c4259504e94ea6ed71bc9",
+    "courses/oop-python/slides/Week12.pdf": "9fdb22c4dc82d26dc497ab2acdbc72800e7e6b8da4e1b3a523e7691c0e691cf6",
+    "courses/oop-python/slides/Week13.pdf": "85408908574f8c9743f45acb88621c2ff28cc8e5c6ce089bfd4c9addc31b14e6",
+    "courses/oop-python/slides/Week14.pdf": "8a258ef813f2b4928e9d7addc0536111d5e699204c8090eb63f98dcec846a8d1",
+    "courses/oop-python/slides/Week15.pdf": "ca3d70519e759366f884b80d629774660fb00c2304aa4a9d8488f7aada8bc91e",
+    "courses/oop-python/slides/Week2.pdf": "3ed2bc463dd3a17614f6176c2f50897b1d91fc2ef48f4de6d9cd3049721f04d7",
+    "courses/oop-python/slides/Week3.pdf": "93a48c0b7181273d60bc8cfc49dcc1dcef7d78c77cddc79809cf1f111837caea",
+    "courses/oop-python/slides/Week4.pdf": "370e3b6ff75f7e1b2764c7ca00968a560ab82cdadacbe34b2f85ba72989a9d5d",
+    "courses/oop-python/slides/Week5.pdf": "265131dfca637edbdd8c5e8eefca863d72a617b1965ffd2ad7351ae525e53154",
+    "courses/oop-python/slides/Week6.pdf": "eca6553f1a1c79b57c88b3ac584f94cf07df55cabc1f92370b1d196c22481814",
+    "courses/oop-python/slides/Week7.pdf": "73c43685d4484cd3733d7f88e9688f73f4941af3aef9ca6ef4e35193f7526ef6",
+    "courses/oop-python/slides/Week8.pdf": "7162a41b160a341e368186464b73455ffff6fccfd3db052e0997481469e41e03",
+    "courses/oop-python/summaries/advanced-sorting.md": "b41fca6724ba6d22e091d4b0f5c45896553c97b0300b65cd8b263e3a74c3c3b4",
+    "courses/oop-python/summaries/arrays-dynamic-array.md": "ac317d3666cba7e249b45301f2ddffad190a2b07682880e194cec4c7abdb245c",
+    "courses/oop-python/summaries/classes-objects.md": "14cb51243c8c048644cc23b4ab71fc52a8b80edf93e9e264ab220272d38a6746",
+    "courses/oop-python/summaries/complexity-basic-sorting.md": "0e11f0dcbf8d4544308ff88557dcf8aec812dac0b2391522812792c350cc0dbf",
+    "courses/oop-python/summaries/encapsulation-properties.md": "31592cc7054bb0eb63efc8ed889e50064a5cdbef6254191970b5b2a2e81ec7b4",
+    "courses/oop-python/summaries/hash-tables.md": "ddbba0b0bd1dbe6da067c5e4de1c1167921c424ae58ee6d29a4a1aaf2285507c",
+    "courses/oop-python/summaries/inheritance-mro.md": "0473a600f926ecb69bcf92ae61ac7e19540003d7a4ea320963ed7851da3d3501",
+    "courses/oop-python/summaries/linked-list.md": "47fcf893f1b3d9bb0a125fa49e857d5febb346b0d97b3fabb4d369c8b478bb8e",
+    "courses/oop-python/summaries/object-relationships.md": "9fca844800bf9edc6015322d1023ef5ba8443ffea46bfa2c3057dc7da9d76923",
+    "courses/oop-python/summaries/polymorphism-abc.md": "52d0bd4b8e540e3fe91d538824aeebbdc06ce43c58f7d31276935a873772d262",
+    "courses/oop-python/summaries/queue.md": "599de8a9cd66155ef85b8b1db0fe25fde92f631777b5f1da7d454ab165d35eb6",
+    "courses/oop-python/summaries/stack.md": "da5cf41fd2830a2c7c1f488d81424c41d9c5fb1049ce73cd64d6964993d38b97",
+    "courses/oop-python/summaries/uml-solid.md": "02262b04090a17c1d581afebec941f4abeaca79def47a9fa1cfa263c0791d22a",
+    "courses/unix-tools/exam/final-arguments.json": "53d60bbb5d22b1f632a95405b641bc84ddad3e93d68d703b17748d2d715ae653",
+    "courses/unix-tools/exam/final-arithmetic-status.json": "97fd21786b4253b3d1ff111b178919be632b0a6ebf64df5def441f66261d7589",
+    "courses/unix-tools/exam/final-arrays-statistics.json": "f22e4ad3071f6accb4eac8c9c5f49e0b49ccc02ef156df1080e880682bf4afec",
+    "courses/unix-tools/exam/final-awk-text.json": "3f97dc6de77d87db62d28a302a66b8aa16167cf13a8d7dd4ba492d20185d2ce5",
+    "courses/unix-tools/exam/final-case-heredoc.json": "fb6630d3733f22035b76a055d23c8c80423349e2f0a5bcc77fcff7ad4bbca847",
+    "courses/unix-tools/exam/final-functions-algorithms.json": "8918372f251205d98f53a9d00cfec2444f27d289858c94dc382967a7938e03f3",
+    "courses/unix-tools/exam/final-loops-reading.json": "c6f5b71702008a0dc5533f344f06e1e0c0509023cf43f619b90fc38161b0c377",
+    "courses/unix-tools/exam/final-redirection.json": "009609f402654533b8feaefb41f82f9a17f357144d6d0e712c369ff47561a511",
+    "courses/unix-tools/exam/final-regex-grep-sed.json": "4b79fb270045dca54cb08e61b4f35219c016372be11fd30751dc86835935967f",
+    "courses/unix-tools/exam/final-shell-foundations.json": "163b34be6a841637c4794c910c388613c084b71cdaba7d1b642e84e6cbf0ae6e",
+    "courses/unix-tools/exam/final-tests-conditions.json": "d702d0fadbe935170ec818981d042538575ebdbe9757589fa3778ac2d8c67cd8",
+    "courses/unix-tools/exam/final-variables-expansion.json": "74b3042a9b5c471b596548f190fcff4de523dd9df6896044e4780aacb3d6d2f9",
+    "courses/unix-tools/practice/final-arguments.json": "0b1a8933421f6217568b665df055057ec09deb55c0d86afa9d3a754402d38bb0",
+    "courses/unix-tools/practice/final-arithmetic-status.json": "ebb5c256a308cf442855a4888edb94d1868eb3ae432c6e9e95c58f7f786c23c2",
+    "courses/unix-tools/practice/final-arrays-statistics.json": "411c565159823af09ec79b91a5c779500a3dd36c481402b11b2abb96ca15df03",
+    "courses/unix-tools/practice/final-awk-text.json": "4151fdddf3b352f77d914fa6cf91414ec9c25889a646bdd3df4bc9c08c9eaba5",
+    "courses/unix-tools/practice/final-case-heredoc.json": "c7154aa110d9093a57a089eae5e810fcc208465af79ee45fbae986dacad39a87",
+    "courses/unix-tools/practice/final-functions-algorithms.json": "3a4674148e618983c3ca06b0f8cdb9bef448a8082969420b7892ea6b13f62354",
+    "courses/unix-tools/practice/final-loops-reading.json": "58b680c90bd985ac6bd7a7a0a67275202b63558db58b38b70b4ad9822663f522",
+    "courses/unix-tools/practice/final-redirection.json": "7277dd676675edee11e61a1a187d8e36033912e031a2109ccd6cfb7d3e39fcdb",
+    "courses/unix-tools/practice/final-regex-grep-sed.json": "eacb32c20c9a2e58b1cb3fe65016985d3f3debf484057d916152e2ba43b169ea",
+    "courses/unix-tools/practice/final-shell-foundations.json": "8107371e84d781ca0d21df5d61e1f88a841b39e243f33d2bb1862f2bb34e5764",
+    "courses/unix-tools/practice/final-tests-conditions.json": "668a369cc1293a1848c6618e037f6c77e79180bb97177cde5a21272fc1daba7f",
+    "courses/unix-tools/practice/final-variables-expansion.json": "ad2ce4efaf5d6a17a7006c87dc1bd4778f5b4d7e14d3d4cc4483a3252b769dea",
+    "courses/unix-tools/summaries/final-arguments.md": "06e53ac96bd20bce0a59ac2517483e96540ad1127809b204b1752cf3d30d2c7f",
+    "courses/unix-tools/summaries/final-arithmetic-status.md": "5c396d219155cef61432a6add1b53c0b6350c4144763439561d012e8687ab054",
+    "courses/unix-tools/summaries/final-arrays-statistics.md": "d25f0d31c58f4c88cb41e6b09dd7432008283dfcc9a04029a210a3bfcc13a63e",
+    "courses/unix-tools/summaries/final-awk-text.md": "391a10e410a0cd6baec37ab211ed100d0201c3513d592abc559e07c0434b125c",
+    "courses/unix-tools/summaries/final-case-heredoc.md": "0cec09a5c060c99e2f35550c8822a9df813a99d7224f97982046fd4712b86465",
+    "courses/unix-tools/summaries/final-functions-algorithms.md": "a7a8e55ddfb2c59b0ddfc0d883f7ac4a1ac3bfadb9b963dd1ba1bc84683c59d4",
+    "courses/unix-tools/summaries/final-loops-reading.md": "cc1a147a4cfd9fe4c83ba392b8ec2efdac51087d533e43f04d1c193b50209c28",
+    "courses/unix-tools/summaries/final-redirection.md": "6129051029bde1c4bd5fd7dae9a6d2cc1ddcb5f30ded9827c459ae9d7d73e33e",
+    "courses/unix-tools/summaries/final-regex-grep-sed.md": "05f5e3604f8a3cf0145db0de8070eb1f5e539426b7be9a9028643f57f461bcc4",
+    "courses/unix-tools/summaries/final-shell-foundations.md": "a321db8eef76e3a85fd2f4776b94fe3a51c148c351cd7c35e744587136b52006",
+    "courses/unix-tools/summaries/final-tests-conditions.md": "6e6ab895906f90867b39a12a6178a21c1c2f8e5b320f567cc494f33c7127edce",
+    "courses/unix-tools/summaries/final-variables-expansion.md": "ddd984745e06b2d1f13cb73a411e7a3168b3ff3329d5ed12e12005576ce88b42",
+    "read/artificial-intelligence/ai-foundations-agents.html": "b3741bd90ed1044b4f0acb524655da287215bcad2a674515b46be9cf78ccfeb2",
+    "read/artificial-intelligence/final-backpropagation.html": "ee714c0f6aff7228037fb25e783d0cd2eee831e3e8aa2f387775da0b1b58b010",
+    "read/artificial-intelligence/final-cnn.html": "f398e82c3ce20d2d9c700433665be1e8340196bda0a4d442ab269b4915752500",
+    "read/artificial-intelligence/final-decision-tree.html": "0e63b9a06ed74e9b61d68350b27106c4f8e8ebdbdc64cefe6a45084415fdcdfd",
+    "read/artificial-intelligence/final-deep-learning-overview.html": "40fe2f2f7e2fe56d8e9922f3a71b8647b15e1be31ffdf69c8d6e93b4bd624a46",
+    "read/artificial-intelligence/final-hierarchical-clustering.html": "67f6eceab6e3e7c57374d6421c03fe7f8a4fd20d0650a8eef5d97fbd386735e9",
+    "read/artificial-intelligence/final-kmeans.html": "ca0a3fa06104fbeda670df750010ba8d9019bea861d27cb6cc9ca1cc1390c084",
+    "read/artificial-intelligence/final-knn.html": "1957ee6984754d77829c64e742706419a8f6b30bb027ac9a1ebf0443464e9687",
+    "read/artificial-intelligence/final-naive-bayes.html": "57d2e702a78b3654f0bcc3b18d7a452ed309477a692a6c365f9e8f032d436803",
+    "read/artificial-intelligence/final-perceptron.html": "c4b981a07f5117a43d55a145d1a829e2eb9f6c860e96d6a83e22398e1a9ba47a",
+    "read/artificial-intelligence/final-regression.html": "30b508406e348257be0164af5f1064e70fe15af1fbb39dec717537a9290c51c7",
+    "read/artificial-intelligence/midterm-final.html": "99f3ebe5f0a93bb85dd9fc342d16605f5f1706defeef29c0de0ac50ff10a73db",
+    "read/artificial-intelligence/quick-review.html": "6b108fa17a554cb6a7a8a3ccc5db7a5996cc5a6c56627b718c45e22cb52a1b69",
+    "read/artificial-intelligence/search-models-bfs-dfs.html": "636665d770bdad06e62603e4bb5a84520bfb6581004f6a507237b0e258ac3b9a",
+    "read/oop-python/advanced-sorting.html": "4162ce9d49d0bddbefa325cc196a309e2f4608eaa6da4955b0c1a4496636212c",
+    "read/oop-python/arrays-dynamic-array.html": "8ecfede10a460a14fd73151f220d593fad5118d44130b179560ff13786e1ca15",
+    "read/oop-python/classes-objects.html": "2964df5873076c5f22e9ad0d46fb320d7bafea7f3d6c15da6f141549edc8c685",
+    "read/oop-python/complexity-basic-sorting.html": "26677f9e37e8ca9bf4b232e6ffe278d5d549530622cabf49e006dafd32217307",
+    "read/oop-python/encapsulation-properties.html": "4e31c8d5c0799169521569604cb3fc599c5ded776ccf5b68b487aaeeaac80bd3",
+    "read/oop-python/final-week10-15.html": "71dd07704be1291bea9414c9da716d7aeea3a382cda10fe39fe8cfa88964bf83",
+    "read/oop-python/hash-tables.html": "e0b4d38a397dbdba6999cde1ac11fcc73adc3708e5f1d3fb077ea114bdff6ad3",
+    "read/oop-python/inheritance-mro.html": "96b96655ffde68b2c70ac752ad93b77c55d4f1fe02885f13aba929c82585c619",
+    "read/oop-python/linked-list.html": "934c9a782ba0b08f9809b292cc3fbd6637ddeec2ead42fe0b605aed785ac2d88",
+    "read/oop-python/object-relationships.html": "7e2488b3db4f365eb09a135fcd027c0e0100ca156e6a4ea997f8cd5299f00442",
+    "read/oop-python/polymorphism-abc.html": "f7d6e33e30c8fb3d94f25a7a4209be59a37f5493fb73c4ed3cb59fb398eb9bc7",
+    "read/oop-python/queue.html": "32eae7d6e94ac607cb07ed15ece80a3a4779d2588721af867ea7b576cc021ed5",
+    "read/oop-python/stack.html": "7f315f37b772f8a006af46dc41ad691e3b887a583b9a1b4ed0cee58f47ca1846",
+    "read/oop-python/uml-solid.html": "a1b59cf4f01532fe4b4bc0ed7b1c56da0f29485c705afe604d785ed605957671",
+    "read/unix-tools/final-arguments.html": "f4fb7b3ba169543bea022d431dd8c7c4afafd13675563b676d3f6fde080c0bfb",
+    "read/unix-tools/final-arithmetic-status.html": "2b0ef1ccd924d6143aa274b49848b9d21c863e334aa5e6ef182775d2cde18d65",
+    "read/unix-tools/final-arrays-statistics.html": "bd7ff34567e8a7a6d582c9888e5a932af8f8e6a93df7c6a65420937c8d7311b3",
+    "read/unix-tools/final-awk-text.html": "d52b1fb3ac9986a03c8079b1612b7f6aeb12acd4040c2a4dc07c15aef96ac4ff",
+    "read/unix-tools/final-case-heredoc.html": "ce49e3c50e2621a22530dc7322fe98c96906398f897c49dd470cc53f0a2041c2",
+    "read/unix-tools/final-functions-algorithms.html": "6be6264f2720cdb03218dac29c30295e78dd50f1633b12f77abc385b3db67eb2",
+    "read/unix-tools/final-homework-analysis.html": "e3bafd1d999a370031834d6bf74eddc4936a46bdcf637ea53979345544833fd9",
+    "read/unix-tools/final-loops-reading.html": "fa49ee2b3f2b1cfd363206297688f750444add41ea0cf5c267e35d8c6530eb2b",
+    "read/unix-tools/final-redirection.html": "07f1b5db981bddfeb4103f68ff4ce5a48f8e7627057d8d60bf2956a9a71deb30",
+    "read/unix-tools/final-regex-grep-sed.html": "0818e39e3a02c87cb6ed9636fdee8af2ad139a64ce08badfe001833290281fec",
+    "read/unix-tools/final-shell-foundations.html": "0fcee97601dbcdd7cccc9703b42df33ba82848be6065e439c11fb1c9e45d6a41",
+    "read/unix-tools/final-tests-conditions.html": "88f649ef21b93761c10ad05cdb0d26050046de62061f2bf98f46073285987c0d",
+    "read/unix-tools/final-variables-expansion.html": "225bbf10df6e2d0dfa0727da229d4adc90be14262ecd563b39a9cef96e74ad31",
+    "read/unix-tools/final.html": "2e3d9280bbb59611141f41f2172384722bea70e91faafbb448592581eb7596d6",
+    "read/unix-tools/midterm.html": "c0de02be230cd45f17e0dc355c08bc2ce62337657ca080b39820af0469956db6",
+    "read/unix-tools/practice-40.html": "5e72ada303897366acf939c2943e73fcb8f54bee0ad5d15e7c379e39d732a62d"
+  },
+  "resources": [
+    {
+      "id": "oop-python-final-week10-15",
+      "course": "oop-python",
+      "path": "summaries/final-week10-15.md",
+      "reader": "read/oop-python/final-week10-15.html"
+    },
+    {
+      "id": "oop-python-practice",
+      "course": "oop-python",
+      "path": "exams/practice-20.md"
+    },
+    {
+      "id": "oop-python-web",
+      "course": "oop-python",
+      "path": "tutoring/README.md"
+    },
+    {
+      "id": "artificial-intelligence-midterm-final",
+      "course": "artificial-intelligence",
+      "path": "summaries/midterm-final.md",
+      "reader": "read/artificial-intelligence/midterm-final.html"
+    },
+    {
+      "id": "artificial-intelligence-quick-review",
+      "course": "artificial-intelligence",
+      "path": "tutoring/quick-review.md",
+      "reader": "read/artificial-intelligence/quick-review.html"
+    },
+    {
+      "id": "unix-tools-midterm",
+      "course": "unix-tools",
+      "path": "summaries/midterm.md",
+      "reader": "read/unix-tools/midterm.html"
+    },
+    {
+      "id": "unix-tools-final",
+      "course": "unix-tools",
+      "path": "summaries/final.md",
+      "reader": "read/unix-tools/final.html"
+    },
+    {
+      "id": "unix-tools-final-homework-analysis",
+      "course": "unix-tools",
+      "path": "assignments/final-homework-analysis.md",
+      "reader": "read/unix-tools/final-homework-analysis.html"
+    },
+    {
+      "id": "unix-tools-practice-40",
+      "course": "unix-tools",
+      "path": "exams/practice-40.md",
+      "reader": "read/unix-tools/practice-40.html"
+    },
+    {
+      "id": "oop-python-slides/Week1.pdf",
+      "course": "oop-python",
+      "path": "slides/Week1.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week2.pdf",
+      "course": "oop-python",
+      "path": "slides/Week2.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week3.pdf",
+      "course": "oop-python",
+      "path": "slides/Week3.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week4.pdf",
+      "course": "oop-python",
+      "path": "slides/Week4.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week5.pdf",
+      "course": "oop-python",
+      "path": "slides/Week5.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week6.pdf",
+      "course": "oop-python",
+      "path": "slides/Week6.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week7.pdf",
+      "course": "oop-python",
+      "path": "slides/Week7.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week8.pdf",
+      "course": "oop-python",
+      "path": "slides/Week8.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week10.pdf",
+      "course": "oop-python",
+      "path": "slides/Week10.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week11.pdf",
+      "course": "oop-python",
+      "path": "slides/Week11.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week12.pdf",
+      "course": "oop-python",
+      "path": "slides/Week12.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week13.pdf",
+      "course": "oop-python",
+      "path": "slides/Week13.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week14.pdf",
+      "course": "oop-python",
+      "path": "slides/Week14.pdf"
+    },
+    {
+      "id": "oop-python-slides/Week15.pdf",
+      "course": "oop-python",
+      "path": "slides/Week15.pdf"
+    },
+    {
+      "id": "artificial-intelligence-slides/01_intro.pdf",
+      "course": "artificial-intelligence",
+      "path": "slides/01_intro.pdf"
+    },
+    {
+      "id": "oop-python-linked-list",
+      "course": "oop-python",
+      "path": "summaries/linked-list.md",
+      "reader": "read/oop-python/linked-list.html"
+    },
+    {
+      "id": "artificial-intelligence-ai-foundations-agents",
+      "course": "artificial-intelligence",
+      "path": "summaries/ai-foundations-agents.md",
+      "reader": "read/artificial-intelligence/ai-foundations-agents.html"
+    },
+    {
+      "id": "artificial-intelligence-search-models-bfs-dfs",
+      "course": "artificial-intelligence",
+      "path": "summaries/search-models-bfs-dfs.md",
+      "reader": "read/artificial-intelligence/search-models-bfs-dfs.html"
+    },
+    {
+      "id": "artificial-intelligence-final-regression",
+      "course": "artificial-intelligence",
+      "path": "summaries/final-regression.md",
+      "reader": "read/artificial-intelligence/final-regression.html"
+    },
+    {
+      "id": "artificial-intelligence-final-knn",
+      "course": "artificial-intelligence",
+      "path": "summaries/final-knn.md",
+      "reader": "read/artificial-intelligence/final-knn.html"
+    },
+    {
+      "id": "artificial-intelligence-final-naive-bayes",
+      "course": "artificial-intelligence",
+      "path": "summaries/final-naive-bayes.md",
+      "reader": "read/artificial-intelligence/final-naive-bayes.html"
+    },
+    {
+      "id": "artificial-intelligence-final-decision-tree",
+      "course": "artificial-intelligence",
+      "path": "summaries/final-decision-tree.md",
+      "reader": "read/artificial-intelligence/final-decision-tree.html"
+    },
+    {
+      "id": "artificial-intelligence-final-hierarchical-clustering",
+      "course": "artificial-intelligence",
+      "path": "summaries/final-hierarchical-clustering.md",
+      "reader": "read/artificial-intelligence/final-hierarchical-clustering.html"
+    },
+    {
+      "id": "artificial-intelligence-final-kmeans",
+      "course": "artificial-intelligence",
+      "path": "summaries/final-kmeans.md",
+      "reader": "read/artificial-intelligence/final-kmeans.html"
+    },
+    {
+      "id": "artificial-intelligence-final-perceptron",
+      "course": "artificial-intelligence",
+      "path": "summaries/final-perceptron.md",
+      "reader": "read/artificial-intelligence/final-perceptron.html"
+    },
+    {
+      "id": "artificial-intelligence-final-backpropagation",
+      "course": "artificial-intelligence",
+      "path": "summaries/final-backpropagation.md",
+      "reader": "read/artificial-intelligence/final-backpropagation.html"
+    },
+    {
+      "id": "artificial-intelligence-final-deep-learning-overview",
+      "course": "artificial-intelligence",
+      "path": "summaries/final-deep-learning-overview.md",
+      "reader": "read/artificial-intelligence/final-deep-learning-overview.html"
+    },
+    {
+      "id": "artificial-intelligence-final-cnn",
+      "course": "artificial-intelligence",
+      "path": "summaries/final-cnn.md",
+      "reader": "read/artificial-intelligence/final-cnn.html"
+    },
+    {
+      "id": "oop-python-classes-objects",
+      "course": "oop-python",
+      "path": "summaries/classes-objects.md",
+      "reader": "read/oop-python/classes-objects.html"
+    },
+    {
+      "id": "oop-python-encapsulation-properties",
+      "course": "oop-python",
+      "path": "summaries/encapsulation-properties.md",
+      "reader": "read/oop-python/encapsulation-properties.html"
+    },
+    {
+      "id": "oop-python-inheritance-mro",
+      "course": "oop-python",
+      "path": "summaries/inheritance-mro.md",
+      "reader": "read/oop-python/inheritance-mro.html"
+    },
+    {
+      "id": "oop-python-polymorphism-abc",
+      "course": "oop-python",
+      "path": "summaries/polymorphism-abc.md",
+      "reader": "read/oop-python/polymorphism-abc.html"
+    },
+    {
+      "id": "oop-python-object-relationships",
+      "course": "oop-python",
+      "path": "summaries/object-relationships.md",
+      "reader": "read/oop-python/object-relationships.html"
+    },
+    {
+      "id": "oop-python-uml-solid",
+      "course": "oop-python",
+      "path": "summaries/uml-solid.md",
+      "reader": "read/oop-python/uml-solid.html"
+    },
+    {
+      "id": "oop-python-arrays-dynamic-array",
+      "course": "oop-python",
+      "path": "summaries/arrays-dynamic-array.md",
+      "reader": "read/oop-python/arrays-dynamic-array.html"
+    },
+    {
+      "id": "oop-python-stack",
+      "course": "oop-python",
+      "path": "summaries/stack.md",
+      "reader": "read/oop-python/stack.html"
+    },
+    {
+      "id": "oop-python-queue",
+      "course": "oop-python",
+      "path": "summaries/queue.md",
+      "reader": "read/oop-python/queue.html"
+    },
+    {
+      "id": "oop-python-complexity-basic-sorting",
+      "course": "oop-python",
+      "path": "summaries/complexity-basic-sorting.md",
+      "reader": "read/oop-python/complexity-basic-sorting.html"
+    },
+    {
+      "id": "oop-python-advanced-sorting",
+      "course": "oop-python",
+      "path": "summaries/advanced-sorting.md",
+      "reader": "read/oop-python/advanced-sorting.html"
+    },
+    {
+      "id": "oop-python-hash-tables",
+      "course": "oop-python",
+      "path": "summaries/hash-tables.md",
+      "reader": "read/oop-python/hash-tables.html"
+    },
+    {
+      "id": "unix-tools-final-shell-foundations",
+      "course": "unix-tools",
+      "path": "summaries/final-shell-foundations.md",
+      "reader": "read/unix-tools/final-shell-foundations.html"
+    },
+    {
+      "id": "unix-tools-final-variables-expansion",
+      "course": "unix-tools",
+      "path": "summaries/final-variables-expansion.md",
+      "reader": "read/unix-tools/final-variables-expansion.html"
+    },
+    {
+      "id": "unix-tools-final-arguments",
+      "course": "unix-tools",
+      "path": "summaries/final-arguments.md",
+      "reader": "read/unix-tools/final-arguments.html"
+    },
+    {
+      "id": "unix-tools-final-arithmetic-status",
+      "course": "unix-tools",
+      "path": "summaries/final-arithmetic-status.md",
+      "reader": "read/unix-tools/final-arithmetic-status.html"
+    },
+    {
+      "id": "unix-tools-final-tests-conditions",
+      "course": "unix-tools",
+      "path": "summaries/final-tests-conditions.md",
+      "reader": "read/unix-tools/final-tests-conditions.html"
+    },
+    {
+      "id": "unix-tools-final-redirection",
+      "course": "unix-tools",
+      "path": "summaries/final-redirection.md",
+      "reader": "read/unix-tools/final-redirection.html"
+    },
+    {
+      "id": "unix-tools-final-loops-reading",
+      "course": "unix-tools",
+      "path": "summaries/final-loops-reading.md",
+      "reader": "read/unix-tools/final-loops-reading.html"
+    },
+    {
+      "id": "unix-tools-final-case-heredoc",
+      "course": "unix-tools",
+      "path": "summaries/final-case-heredoc.md",
+      "reader": "read/unix-tools/final-case-heredoc.html"
+    },
+    {
+      "id": "unix-tools-final-functions-algorithms",
+      "course": "unix-tools",
+      "path": "summaries/final-functions-algorithms.md",
+      "reader": "read/unix-tools/final-functions-algorithms.html"
+    },
+    {
+      "id": "unix-tools-final-arrays-statistics",
+      "course": "unix-tools",
+      "path": "summaries/final-arrays-statistics.md",
+      "reader": "read/unix-tools/final-arrays-statistics.html"
+    },
+    {
+      "id": "unix-tools-final-regex-grep-sed",
+      "course": "unix-tools",
+      "path": "summaries/final-regex-grep-sed.md",
+      "reader": "read/unix-tools/final-regex-grep-sed.html"
+    },
+    {
+      "id": "unix-tools-final-awk-text",
+      "course": "unix-tools",
+      "path": "summaries/final-awk-text.md",
+      "reader": "read/unix-tools/final-awk-text.html"
+    }
+  ]
+}

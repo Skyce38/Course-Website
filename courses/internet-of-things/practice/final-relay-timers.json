@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "internet-of-things-final-relay-timers",
+  "title": "FINAL 08 — Relay และ Nonblocking Timers",
+  "questions": [
+    {
+      "id": "iot08-q01",
+      "reference": "relay-driver",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ส่วนใดไม่ควรต่อขับโดยตรงจาก GPIO?",
+      "explanation": "coil ต้องมี driver / powersupply และ protection (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot08-q01)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "inputlogiccompatibleที่ตรวจแล้ว"
+        },
+        {
+          "id": "b",
+          "text": "LEDlowcurrentผ่านresistorตามสเปก"
+        },
+        {
+          "id": "c",
+          "text": "ค่าบูลในโปรแกรม"
+        },
+        {
+          "id": "d",
+          "text": "relaycoilเปล่า"
+        }
+      ],
+      "answer": "d"
+    },
+    {
+      "id": "iot08-q02",
+      "reference": "relay-driver",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: NO ใน relaycontact หมายถึงอะไรในสถานะไม่ energized ตามนิยาม?",
+      "explanation": "NO เป็นชื่อ contactmechanical ไม่ใช่ GPIOstate (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot08-q02)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "NetworkOLEDaddress"
+        },
+        {
+          "id": "b",
+          "text": "pinที่ต้องHIGHเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "Normally Open contact"
+        },
+        {
+          "id": "d",
+          "text": "ขาNegativeOutputของESP32"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "id": "iot08-q03",
+      "reference": "relay-driver",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: โหลดสำหรับการสอนนี้ควรเป็นอะไร?",
+      "explanation": "ไม่สอนต่อไฟบ้านให้ผู้เริ่มต้น (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot08-q03)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "โหลดที่ไม่รู้แรงดันหรือกระแส"
+        },
+        {
+          "id": "b",
+          "text": "LED/โหลดlowvoltageที่ออกแบบถูกต้อง"
+        },
+        {
+          "id": "c",
+          "text": "mains220Vบนbreadboard"
+        },
+        {
+          "id": "d",
+          "text": "ขดลวดไม่มีdriver"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "id": "iot08-q04",
+      "reference": "relay-driver",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: บอร์ดมี optocoupler จึงสรุปว่า isolated ครบทุกกรณีได้หรือไม่?",
+      "explanation": "ภาพ component ไม่รับรอง systemisolation (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot08-q04)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่ได้ ต้องตรวจวงจรjumper/ground/powersupplyจริง"
+        },
+        {
+          "id": "b",
+          "text": "ได้เสมอไม่ต้องตรวจ"
+        },
+        {
+          "id": "c",
+          "text": "ได้เพราะใช้millis"
+        },
+        {
+          "id": "d",
+          "text": "ได้ถ้าcompileผ่าน"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "id": "iot08-q05",
+      "reference": "relay-driver",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: COM / NO / NC ควรสับสนกับ VCC / GND / IN หรือไม่?",
+      "explanation": "ตรวจ terminal ตามรุ่นก่อนต่อ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot08-q05)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ใช่ใช้แทนกันได้ทุกช่อง"
+        },
+        {
+          "id": "b",
+          "text": "COMคือGPIO34เสมอ"
+        },
+        {
+          "id": "c",
+          "text": "NOคือSerialRXเสมอ"
+        },
+        {
+          "id": "d",
+          "text": "ไม่ เป็นคนละฝั่งและหน้าที่ของmodule"
+        }
+      ],
+      "answer": "d"
+    },
+    {
+      "id": "iot08-self1",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): อธิบายความต่าง logicinput,coil และ contact ของ relay",
+      "reference": "relay-driver",
+      "explanation": "วาด lowvoltagecircuit และระบุ driver / polarity / supply อย่างมีหลักฐาน ไม่สรุป isolation จากรูป",
+      "rubric": [
+        "วาด lowvoltagecircuit และระบุ driver / polarity / supply อย่างมีหลักฐาน ไม่สรุป isolation จากรูป",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ]
+    }
+  ]
+}

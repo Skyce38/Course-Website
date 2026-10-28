@@ -1,0 +1,680 @@
+{
+  "version": 1,
+  "revision": 1,
+  "baseRevision": 1,
+  "lesson": "internet-of-things-final-esp32-foundations",
+  "questions": [
+    {
+      "id": "iot01-q06",
+      "reference": "board-module",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: เมื่อย้าย sketch จาก classic ESP32-WROOM ไป ESP32-C3 สิ่งใดต้องตรวจใหม่?",
+      "explanation": "รุ่น SoC และบอร์ดมี pin / peripheral ต่างกัน (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot01-q06)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ถือว่า header ทุกขาตรงกันเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "ถือว่า UART มีจำนวนเท่ากันทุกตัว"
+        },
+        {
+          "id": "c",
+          "text": "pin map และความสามารถของรุ่น SoC/board"
+        },
+        {
+          "id": "d",
+          "text": "เฉพาะชื่อผู้เขียนคอมเมนต์"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ESP32 เป็นตระกูลชิป (SoC) ส่วนโมดูลและบอร์ดพัฒนาประกอบวงจร / อุปกรณ์เพิ่ม รุ่นย่อยมี CPU, GPIO และฟังก์ชันต่างกัน บทนี้เลือก classic ESP32-WROOM development board และ Arduino FQBN esp32:esp32:esp32 เป็นตัวอย่าง ไม่เหมารวม S2 / S3 / C3 หรือบอร์ด 30 / 38 ขาว่าต่อเหมือนกันทุกขา"
+      }
+    },
+    {
+      "id": "iot01-q07",
+      "reference": "board-module",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ภาพ ESP32 แบบ 30 ขาเทียบ 38 ขา พิสูจน์ว่าขาทั้งหมดเป็น GPIO ว่างหรือไม่?",
+      "explanation": "จำนวนขา header รวม power / ground และขาที่มีเงื่อนไข (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot01-q07)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "พิสูจน์ว่าขา GND ใช้ digitalWrite ได้"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ ต้องตรวจ pinout/flash/strapping และรุ่นโมดูล"
+        },
+        {
+          "id": "c",
+          "text": "พิสูจน์ว่า38ขารับ5Vทุกขา"
+        },
+        {
+          "id": "d",
+          "text": "พิสูจน์ว่าทุกขาเป็น ADC"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ESP32 เป็นตระกูลชิป (SoC) ส่วนโมดูลและบอร์ดพัฒนาประกอบวงจร / อุปกรณ์เพิ่ม รุ่นย่อยมี CPU, GPIO และฟังก์ชันต่างกัน บทนี้เลือก classic ESP32-WROOM development board และ Arduino FQBN esp32:esp32:esp32 เป็นตัวอย่าง ไม่เหมารวม S2 / S3 / C3 หรือบอร์ด 30 / 38 ขาว่าต่อเหมือนกันทุกขา"
+      }
+    },
+    {
+      "id": "iot01-q08",
+      "reference": "board-module",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ข้อใดแยก Development Board จาก SoC ได้ถูกต้อง?",
+      "explanation": "SoC เป็นชิป; รูปแบบบอร์ดและโมดูลเพิ่มองค์ประกอบต่างกัน (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot01-q08)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "บอร์ดประกอบ SoC/module กับวงจรสนับสนุนและ header"
+        },
+        {
+          "id": "b",
+          "text": "SoC หมายถึง breadboard เสมอ"
+        },
+        {
+          "id": "c",
+          "text": "บอร์ดทุกตัวไม่มีวงจรจ่ายไฟ"
+        },
+        {
+          "id": "d",
+          "text": "Module กับ GPIO เป็นคำพ้องกัน"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ESP32 เป็นตระกูลชิป (SoC) ส่วนโมดูลและบอร์ดพัฒนาประกอบวงจร / อุปกรณ์เพิ่ม รุ่นย่อยมี CPU, GPIO และฟังก์ชันต่างกัน บทนี้เลือก classic ESP32-WROOM development board และ Arduino FQBN esp32:esp32:esp32 เป็นตัวอย่าง ไม่เหมารวม S2 / S3 / C3 หรือบอร์ด 30 / 38 ขาว่าต่อเหมือนกันทุกขา"
+      }
+    },
+    {
+      "id": "iot01-q09",
+      "reference": "board-module",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ข้อใดเป็นสมมติฐานของตัวอย่างชุดนี้ ไม่ใช่สเปกครอบคลุม ESP32 ทุกตระกูล?",
+      "explanation": "กำหนด target ชัดช่วยไม่สับสนกับบอร์ดอื่น (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot01-q09)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทุก ESP32 มี pin34 ให้ใช้เหมือนกัน"
+        },
+        {
+          "id": "b",
+          "text": "ทุก ESP32 มี CPU สองแกน"
+        },
+        {
+          "id": "c",
+          "text": "ทุกโมดูลมี flash ในตัวชิปแบบเดียวกัน"
+        },
+        {
+          "id": "d",
+          "text": "เลือก classic ESP32-WROOM และ FQBN esp32:esp32:esp32"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ESP32 เป็นตระกูลชิป (SoC) ส่วนโมดูลและบอร์ดพัฒนาประกอบวงจร / อุปกรณ์เพิ่ม รุ่นย่อยมี CPU, GPIO และฟังก์ชันต่างกัน บทนี้เลือก classic ESP32-WROOM development board และ Arduino FQBN esp32:esp32:esp32 เป็นตัวอย่าง ไม่เหมารวม S2 / S3 / C3 หรือบอร์ด 30 / 38 ขาว่าต่อเหมือนกันทุกขา"
+      }
+    },
+    {
+      "id": "iot01-q10",
+      "reference": "board-module",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ต้องต่อ input-only sensor และ externalLED บน classicESP32 คู่ใดเหมาะตามข้อจำกัดที่อธิบาย?",
+      "explanation": "ตรวจ capability และวงจรโมดูล ไม่เลือกจากเลข pin หรือจำนวน header (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot01-q10)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "LED→GPIO6ที่ใช้flashของmodule"
+        },
+        {
+          "id": "b",
+          "text": "ใช้GPIO34เป็นOUTPUTเพราะเลขมากกว่า25"
+        },
+        {
+          "id": "c",
+          "text": "sensor→34;LEDผ่านresistor→25"
+        },
+        {
+          "id": "d",
+          "text": "LED→34;sensor→25โดยไม่ตรวจADC"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ESP32 เป็นตระกูลชิป (SoC) ส่วนโมดูลและบอร์ดพัฒนาประกอบวงจร / อุปกรณ์เพิ่ม รุ่นย่อยมี CPU, GPIO และฟังก์ชันต่างกัน บทนี้เลือก classic ESP32-WROOM development board และ Arduino FQBN esp32:esp32:esp32 เป็นตัวอย่าง ไม่เหมารวม S2 / S3 / C3 หรือบอร์ด 30 / 38 ขาว่าต่อเหมือนกันทุกขา"
+      }
+    },
+    {
+      "id": "iot01-self2",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): อธิบายเหตุที่รูปบอร์ดอย่างเดียวไม่เพียงพอต่อการเลือก pin",
+      "reference": "board-module",
+      "explanation": "ตรวจชื่อชิป โมดูล รุ่นบอร์ด schematic และข้อจำกัดขาก่อนต่อสาย",
+      "rubric": [
+        "ตรวจชื่อชิป โมดูล รุ่นบอร์ด schematic และข้อจำกัดขาก่อนต่อสาย",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ESP32 เป็นตระกูลชิป (SoC) ส่วนโมดูลและบอร์ดพัฒนาประกอบวงจร / อุปกรณ์เพิ่ม รุ่นย่อยมี CPU, GPIO และฟังก์ชันต่างกัน บทนี้เลือก classic ESP32-WROOM development board และ Arduino FQBN esp32:esp32:esp32 เป็นตัวอย่าง ไม่เหมารวม S2 / S3 / C3 หรือบอร์ด 30 / 38 ขาว่าต่อเหมือนกันทุกขา"
+      }
+    },
+    {
+      "id": "iot01-q11",
+      "reference": "electrical",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: VIN รับ 5V ตาม schematic ของบอร์ด ข้อใดตามมาได้อย่างปลอดภัย?",
+      "explanation": "power input กับ I / O domain ไม่ใช่ข้อกำหนดเดียวกัน (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot01-q11)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่จำเป็นต้องใช้ GND reference"
+        },
+        {
+          "id": "b",
+          "text": "ยังต้องตรวจ GPIO limits แยก ไม่ต่อ5V Echo โดยอนุมานจาก VIN"
+        },
+        {
+          "id": "c",
+          "text": "GPIO ทุกขาจึงรับ5Vแน่นอน"
+        },
+        {
+          "id": "d",
+          "text": "GPIO34 กลายเป็น output"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "พอร์ต USB / VIN อาจรับ 5V ตามวงจรบอร์ด แต่ไม่ได้ทำให้ GPIO รับ 5V ได้ GPIO ของ classic ESP32 ใช้ logic ประมาณ 3.3V ต้องตรวจค่าทางไฟฟ้าจาก datasheet และวงจรจริง สาย GND เป็น reference ของสัญญาณในตัวอย่าง nonisolated; ห้ามใช้ข้ออ้างเรื่อง optocoupler เพื่อสรุปว่าทุกโมดูลแยกกราวด์แล้วปลอดภัย"
+      }
+    },
+    {
+      "id": "iot01-q12",
+      "reference": "electrical",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ในวงจร nonisolated ที่ส่ง logic ระหว่าง sensor กับ ESP32 จำเป็นต้องมีสิ่งใด?",
+      "explanation": "แรงดันสัญญาณต้องอ้าง reference เดียวกัน (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot01-q12)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "reference GND ร่วมที่ออกแบบถูกต้อง"
+        },
+        {
+          "id": "b",
+          "text": "นำ5Vต่อเข้า3V3โดยตรง"
+        },
+        {
+          "id": "c",
+          "text": "เชื่อมทุก GPIO เข้าด้วยกัน"
+        },
+        {
+          "id": "d",
+          "text": "ใช้สายสีเดียวแล้วไม่ต้องดู pin"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "พอร์ต USB / VIN อาจรับ 5V ตามวงจรบอร์ด แต่ไม่ได้ทำให้ GPIO รับ 5V ได้ GPIO ของ classic ESP32 ใช้ logic ประมาณ 3.3V ต้องตรวจค่าทางไฟฟ้าจาก datasheet และวงจรจริง สาย GND เป็น reference ของสัญญาณในตัวอย่าง nonisolated; ห้ามใช้ข้ออ้างเรื่อง optocoupler เพื่อสรุปว่าทุกโมดูลแยกกราวด์แล้วปลอดภัย"
+      }
+    },
+    {
+      "id": "iot01-q13",
+      "reference": "electrical",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: LED สมมติ Vf=2.0V ต่ออนุกรม 330Ωจาก 3.3V กระแสอุดมคติประมาณกี่ mA?",
+      "explanation": "(3.3−2.0)/330×1000≈3.939394mA ต้องตรวจสเปก LED / ขาเพิ่มเติม (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot01-q13)",
+      "type": "numeric",
+      "answer": 3.939394,
+      "absoluteTolerance": 1e-06,
+      "relativeTolerance": 0,
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "พอร์ต USB / VIN อาจรับ 5V ตามวงจรบอร์ด แต่ไม่ได้ทำให้ GPIO รับ 5V ได้ GPIO ของ classic ESP32 ใช้ logic ประมาณ 3.3V ต้องตรวจค่าทางไฟฟ้าจาก datasheet และวงจรจริง สาย GND เป็น reference ของสัญญาณในตัวอย่าง nonisolated; ห้ามใช้ข้ออ้างเรื่อง optocoupler เพื่อสรุปว่าทุกโมดูลแยกกราวด์แล้วปลอดภัย"
+      }
+    },
+    {
+      "id": "iot01-q14",
+      "reference": "electrical",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ก่อนเชื่อม output จากโมดูล 5V ที่ยังไม่รู้ระดับ logic ไป GPIO วิธีที่เหมาะสมคืออะไร?",
+      "explanation": "ความถี่การอ่านหรือ baud rate ไม่ใช่วงจรแปลงระดับ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot01-q14)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ลดค่า delay แล้วแรงดันจะลดเอง"
+        },
+        {
+          "id": "b",
+          "text": "ใช้ Serial.begin เปลี่ยน input tolerance"
+        },
+        {
+          "id": "c",
+          "text": "อ่านสเปก/วัดอย่างเหมาะสมและใช้ level interface ที่ตรวจแล้ว"
+        },
+        {
+          "id": "d",
+          "text": "ทดลองเสียบโดยตรงแล้วดูว่าร้อนหรือไม่"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "พอร์ต USB / VIN อาจรับ 5V ตามวงจรบอร์ด แต่ไม่ได้ทำให้ GPIO รับ 5V ได้ GPIO ของ classic ESP32 ใช้ logic ประมาณ 3.3V ต้องตรวจค่าทางไฟฟ้าจาก datasheet และวงจรจริง สาย GND เป็น reference ของสัญญาณในตัวอย่าง nonisolated; ห้ามใช้ข้ออ้างเรื่อง optocoupler เพื่อสรุปว่าทุกโมดูลแยกกราวด์แล้วปลอดภัย"
+      }
+    },
+    {
+      "id": "iot01-q15",
+      "reference": "electrical",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ข้อใดเป็นโหลดที่ไม่ควรขับโดยตรงจาก ESP32 GPIO?",
+      "explanation": "coil ต้องใช้ driver และการป้องกันเหมาะสม (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot01-q15)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ตัวแปร bool ใน RAM"
+        },
+        {
+          "id": "b",
+          "text": "ขดลวด relay เปล่า"
+        },
+        {
+          "id": "c",
+          "text": "ขา input logic ที่ตรวจแล้วและอยู่ในกระแสกำหนด"
+        },
+        {
+          "id": "d",
+          "text": "LED กระแสต่ำผ่านตัวต้านทานตามสเปก"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "พอร์ต USB / VIN อาจรับ 5V ตามวงจรบอร์ด แต่ไม่ได้ทำให้ GPIO รับ 5V ได้ GPIO ของ classic ESP32 ใช้ logic ประมาณ 3.3V ต้องตรวจค่าทางไฟฟ้าจาก datasheet และวงจรจริง สาย GND เป็น reference ของสัญญาณในตัวอย่าง nonisolated; ห้ามใช้ข้ออ้างเรื่อง optocoupler เพื่อสรุปว่าทุกโมดูลแยกกราวด์แล้วปลอดภัย"
+      }
+    },
+    {
+      "id": "iot01-self3",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): วางแผนตรวจความเข้ากันได้ก่อนต่อเซนเซอร์ 5V เข้าบอร์ด 3.3V",
+      "reference": "electrical",
+      "explanation": "ตรวจ VCC, logic output, input limits, GND และ driver / level shifter โดยไม่ใช้ GPIO จ่ายกำลังให้โหลด",
+      "rubric": [
+        "ตรวจ VCC, logic output, input limits, GND และ driver / level shifter โดยไม่ใช้ GPIO จ่ายกำลังให้โหลด",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "พอร์ต USB / VIN อาจรับ 5V ตามวงจรบอร์ด แต่ไม่ได้ทำให้ GPIO รับ 5V ได้ GPIO ของ classic ESP32 ใช้ logic ประมาณ 3.3V ต้องตรวจค่าทางไฟฟ้าจาก datasheet และวงจรจริง สาย GND เป็น reference ของสัญญาณในตัวอย่าง nonisolated; ห้ามใช้ข้ออ้างเรื่อง optocoupler เพื่อสรุปว่าทุกโมดูลแยกกราวด์แล้วปลอดภัย"
+      }
+    },
+    {
+      "id": "iot01-q16",
+      "reference": "workflow",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: A11 ตัวอย่าง soil sensor ใช้ GPIO34 สำหรับหน้าที่ใด?",
+      "explanation": "อ่าน analogRead บนขา input-only ได้ แต่ไม่ใช้เป็น output (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot01-q16)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "รับ analog input ของ classic ESP32"
+        },
+        {
+          "id": "b",
+          "text": "ส่งกำลังขับ relay coil"
+        },
+        {
+          "id": "c",
+          "text": "เป็นขา5Vของบอร์ด"
+        },
+        {
+          "id": "d",
+          "text": "เป็น GPIO output สำหรับ LED"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "อ่าน pinout ของรุ่นที่เลือก ใช้ GPIO34 สำหรับ analog input ตัวอย่างของ A11 แต่ไม่ใช้เป็น LED output เพราะขานี้ input-only บน classic ESP32 หลีกเลี่ยง GPIO6–11 ที่เกี่ยวข้องกับ flash ของโมดูลทั่วไป และตรวจ strapping pins อย่าอนุมานจากเลข D บนบอร์ดต่างรุ่น"
+      }
+    },
+    {
+      "id": "iot01-q17",
+      "reference": "workflow",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: การเลือก GPIO6–11 บน ESP32-WROOM ทั่วไปเป็น LED ที่เสียบเพิ่มควรทำอย่างไร?",
+      "explanation": "ข้อจำกัดผูกกับโมดูล ไม่ควรใช้ขา flash เป็นขาทดลอง (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot01-q17)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ใช้ได้อิสระทุกโมดูลเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "แปลงเป็น GND ด้วย pinMode"
+        },
+        {
+          "id": "c",
+          "text": "เลือกได้ถ้าใช้ baud9600"
+        },
+        {
+          "id": "d",
+          "text": "หลีกเลี่ยงและตรวจ schematic เพราะเกี่ยวข้องกับ flash"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "อ่าน pinout ของรุ่นที่เลือก ใช้ GPIO34 สำหรับ analog input ตัวอย่างของ A11 แต่ไม่ใช้เป็น LED output เพราะขานี้ input-only บน classic ESP32 หลีกเลี่ยง GPIO6–11 ที่เกี่ยวข้องกับ flash ของโมดูลทั่วไป และตรวจ strapping pins อย่าอนุมานจากเลข D บนบอร์ดต่างรุ่น"
+      }
+    },
+    {
+      "id": "iot01-q18",
+      "reference": "workflow",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ทำไมจึงควรทดสอบ Serial input trace ก่อนรวม sensor และ output?",
+      "explanation": "การแยกส่วนทำให้รู้ว่าความผิดพลาดเกิดชั้นไหน (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot01-q18)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "รับรองว่าขาเสียบถูกโดยไม่ดูวงจร"
+        },
+        {
+          "id": "b",
+          "text": "ทำให้ compile ทดแทนการวัดแรงดันได้"
+        },
+        {
+          "id": "c",
+          "text": "ช่วยแยกปัญหา software decision ออกจาก wiring/measurement"
+        },
+        {
+          "id": "d",
+          "text": "ทำให้ sensor ไม่ต้องใช้ไฟ"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "อ่าน pinout ของรุ่นที่เลือก ใช้ GPIO34 สำหรับ analog input ตัวอย่างของ A11 แต่ไม่ใช้เป็น LED output เพราะขานี้ input-only บน classic ESP32 หลีกเลี่ยง GPIO6–11 ที่เกี่ยวข้องกับ flash ของโมดูลทั่วไป และตรวจ strapping pins อย่าอนุมานจากเลข D บนบอร์ดต่างรุ่น"
+      }
+    },
+    {
+      "id": "iot01-q19",
+      "reference": "workflow",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: สายที่เสียบตรงหมายเลข D ของบอร์ดอีกรุ่นใช้ยืนยัน GPIO เดียวกันได้หรือไม่?",
+      "explanation": "silkscreen / aliases อาจต่างกัน (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot01-q19)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ได้ถ้าไฟ USB ติด"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ได้ ต้องใช้ pin mapping ของบอร์ดที่เลือก"
+        },
+        {
+          "id": "c",
+          "text": "ได้ทุกครั้งเพราะ D คือแรงดัน"
+        },
+        {
+          "id": "d",
+          "text": "ได้เมื่อชื่อ sketch ตรงกัน"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "อ่าน pinout ของรุ่นที่เลือก ใช้ GPIO34 สำหรับ analog input ตัวอย่างของ A11 แต่ไม่ใช้เป็น LED output เพราะขานี้ input-only บน classic ESP32 หลีกเลี่ยง GPIO6–11 ที่เกี่ยวข้องกับ flash ของโมดูลทั่วไป และตรวจ strapping pins อย่าอนุมานจากเลข D บนบอร์ดต่างรุ่น"
+      }
+    },
+    {
+      "id": "iot01-q20",
+      "reference": "workflow",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: เมื่อ compiler รายงานสำเร็จ สิ่งใดยังไม่ถูกพิสูจน์?",
+      "explanation": "compile ไม่ได้อ่านวงจรจริง (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot01-q20)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ความถูกต้องของการต่อสายจริงและ electrical compatibility"
+        },
+        {
+          "id": "b",
+          "text": "ไวยากรณ์ที่ compiler ยอมรับใน build นั้น"
+        },
+        {
+          "id": "c",
+          "text": "การหา header ตาม build configuration"
+        },
+        {
+          "id": "d",
+          "text": "การสร้างไฟล์ firmware ตาม target"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "อ่าน pinout ของรุ่นที่เลือก ใช้ GPIO34 สำหรับ analog input ตัวอย่างของ A11 แต่ไม่ใช้เป็น LED output เพราะขานี้ input-only บน classic ESP32 หลีกเลี่ยง GPIO6–11 ที่เกี่ยวข้องกับ flash ของโมดูลทั่วไป และตรวจ strapping pins อย่าอนุมานจากเลข D บนบอร์ดต่างรุ่น"
+      }
+    },
+    {
+      "id": "iot01-self4",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): ออกแบบการทดสอบ sensor→controller→LED ทีละส่วน",
+      "reference": "workflow",
+      "explanation": "ตรวจไฟเลี้ยงและชนิดขา อ่าน Serial ด้วยข้อมูลสมมติ แล้วแยกทดสอบ sensor / output ก่อนรวมระบบ",
+      "rubric": [
+        "ตรวจไฟเลี้ยงและชนิดขา อ่าน Serial ด้วยข้อมูลสมมติ แล้วแยกทดสอบ sensor / output ก่อนรวมระบบ",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "อ่าน pinout ของรุ่นที่เลือก ใช้ GPIO34 สำหรับ analog input ตัวอย่างของ A11 แต่ไม่ใช้เป็น LED output เพราะขานี้ input-only บน classic ESP32 หลีกเลี่ยง GPIO6–11 ที่เกี่ยวข้องกับ flash ของโมดูลทั่วไป และตรวจ strapping pins อย่าอนุมานจากเลข D บนบอร์ดต่างรุ่น"
+      }
+    },
+    {
+      "id": "iot01-q21",
+      "reference": "evidence",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: trace ที่ป้อน distance=20,40,60 จากโปรแกรมทดสอบควรเรียกว่าอะไร?",
+      "explanation": "ห้ามอ้าง simulation เป็นการวัดจริง (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot01-q21)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ค่าที่วัดจริงจากแม่น้ำ"
+        },
+        {
+          "id": "b",
+          "text": "ใบรับรองความปลอดภัยวงจร"
+        },
+        {
+          "id": "c",
+          "text": "ขอบเขตข้อสอบทางการ"
+        },
+        {
+          "id": "d",
+          "text": "ผล simulation จาก input ที่กำหนด"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "B ให้ภาพรวม IoT / ESP32 ส่วน W09 ใช้ ultrasonic เป็นกรณีศึกษา ตัวอย่างโค้ดที่นี่เขียนเสริมและไม่เชื่อม Wi-Fi จริง ค่าที่แสดงใน trace เป็น input ที่กำหนด ไม่ใช่การวัดฮาร์ดแวร์ แยก source review, mathematical oracle, compile, simulation และ physical test ในรายงานเสมอ"
+      }
+    },
+    {
+      "id": "iot01-q22",
+      "reference": "evidence",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: เอกสารรายการไฟล์มีลิงก์ Week12 แต่ยังไม่เปิดเนื้อหา จะอ้างหัวข้อภายในได้หรือไม่?",
+      "explanation": "ต้องเปิดต้นฉบับจริง (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot01-q22)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ได้เพราะมีจำนวนหน้าโดยเดา"
+        },
+        {
+          "id": "b",
+          "text": "ได้ถ้าเปิดไฟล์คนละวิชา"
+        },
+        {
+          "id": "c",
+          "text": "ไม่ได้ ลิงก์เป็น locator ไม่ใช่หลักฐานเนื้อหา"
+        },
+        {
+          "id": "d",
+          "text": "ได้จากชื่อไฟล์ทั้งหมด"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "B ให้ภาพรวม IoT / ESP32 ส่วน W09 ใช้ ultrasonic เป็นกรณีศึกษา ตัวอย่างโค้ดที่นี่เขียนเสริมและไม่เชื่อม Wi-Fi จริง ค่าที่แสดงใน trace เป็น input ที่กำหนด ไม่ใช่การวัดฮาร์ดแวร์ แยก source review, mathematical oracle, compile, simulation และ physical test ในรายงานเสมอ"
+      }
+    },
+    {
+      "id": "iot01-q23",
+      "reference": "evidence",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: ข้อใดควรระบุในรายงานทดสอบที่ทำซ้ำได้?",
+      "explanation": "ข้อมูลสภาพแวดล้อมและ input เป็นหลักฐานการทำซ้ำ (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot01-q23)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ชื่อผู้เรียนทุกคนเพื่อยืนยันวงจร"
+        },
+        {
+          "id": "b",
+          "text": "target/core version,input trace และ expected observations"
+        },
+        {
+          "id": "c",
+          "text": "เฉพาะคำว่า PASS ไม่มีขอบเขต"
+        },
+        {
+          "id": "d",
+          "text": "คะแนนคาดการณ์ข้อสอบจริง"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "B ให้ภาพรวม IoT / ESP32 ส่วน W09 ใช้ ultrasonic เป็นกรณีศึกษา ตัวอย่างโค้ดที่นี่เขียนเสริมและไม่เชื่อม Wi-Fi จริง ค่าที่แสดงใน trace เป็น input ที่กำหนด ไม่ใช่การวัดฮาร์ดแวร์ แยก source review, mathematical oracle, compile, simulation และ physical test ในรายงานเสมอ"
+      }
+    },
+    {
+      "id": "iot01-q24",
+      "reference": "evidence",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: หน่วยความแม่นยำ sensor ที่อ้างจาก datasheet อนุญาตให้สรุปอะไร?",
+      "explanation": "ต้องแยก specification จาก measured result (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot01-q24)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เป็นข้ออ้างอิงภายใต้เงื่อนไข ไม่ใช่ผลยืนยันโมดูลจริงทุกตัว"
+        },
+        {
+          "id": "b",
+          "text": "แม่นยำเท่ากันบนผิวน้ำทุกสภาพ"
+        },
+        {
+          "id": "c",
+          "text": "ไม่ต้องคำนึงอุณหภูมิ"
+        },
+        {
+          "id": "d",
+          "text": "ตัวเลข simulation เท่ากับ calibration"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "B ให้ภาพรวม IoT / ESP32 ส่วน W09 ใช้ ultrasonic เป็นกรณีศึกษา ตัวอย่างโค้ดที่นี่เขียนเสริมและไม่เชื่อม Wi-Fi จริง ค่าที่แสดงใน trace เป็น input ที่กำหนด ไม่ใช่การวัดฮาร์ดแวร์ แยก source review, mathematical oracle, compile, simulation และ physical test ในรายงานเสมอ"
+      }
+    },
+    {
+      "id": "iot01-q25",
+      "reference": "evidence",
+      "prompt": "โจทย์ฝึกเสริม ไม่ใช่ข้อสอบจริง: วัดระยะที่จุดเดียวตรง reference หนึ่งครั้ง ใช้รับรอง accuracy ตลอด 2..400cm ได้หรือไม่?",
+      "explanation": "หนึ่งจุดทดสอบและจำนวนหลักที่แสดงไม่พิสูจน์ความแม่นยำตลอดช่วง;ต้องแยก resolution / accuracy / evidence (ตรวจตามสมมติฐานของโจทย์; ดูหัวข้อและหลักฐาน iot01-q25)",
+      "type": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ได้ทุกพื้นผิวทุกอุณหภูมิ"
+        },
+        {
+          "id": "b",
+          "text": "ได้เพราะSerialprintเป็นทศนิยม3ตำแหน่ง"
+        },
+        {
+          "id": "c",
+          "text": "ได้ถ้าใช้ชื่อsensorตรงdatasheet"
+        },
+        {
+          "id": "d",
+          "text": "ยังไม่ได้ ต้องทดสอบหลายระยะ/ซ้ำและเงื่อนไขติดตั้งพร้อมรายงานความคลาดเคลื่อน"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "B ให้ภาพรวม IoT / ESP32 ส่วน W09 ใช้ ultrasonic เป็นกรณีศึกษา ตัวอย่างโค้ดที่นี่เขียนเสริมและไม่เชื่อม Wi-Fi จริง ค่าที่แสดงใน trace เป็น input ที่กำหนด ไม่ใช่การวัดฮาร์ดแวร์ แยก source review, mathematical oracle, compile, simulation และ physical test ในรายงานเสมอ"
+      }
+    },
+    {
+      "id": "iot01-self5",
+      "type": "self",
+      "prompt": "ประเมินตนเอง (ไม่ตรวจคะแนนอัตโนมัติ): ออกแบบรายงานที่ไม่สับสน simulation กับ hardware PASS",
+      "reference": "evidence",
+      "explanation": "บอกเวอร์ชันและ input ของ simulation แยกภาพ / measurement จากฮาร์ดแวร์ที่ยังไม่มี",
+      "rubric": [
+        "บอกเวอร์ชันและ input ของ simulation แยกภาพ / measurement จากฮาร์ดแวร์ที่ยังไม่มี",
+        "ระบุสมมติฐาน รุ่นอุปกรณ์ แรงดัน หน่วย และเหตุผลที่ตรวจซ้ำได้ ไม่สรุปจากภาพที่ยังไม่ยืนยัน",
+        "อธิบายกรณีขอบและข้อจำกัด แยกต้นฉบับ การคอมไพล์ การจำลอง และฮาร์ดแวร์จริง ใช้เฉพาะโหลดแรงดันต่ำที่ตรวจแล้ว"
+      ],
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "B ให้ภาพรวม IoT / ESP32 ส่วน W09 ใช้ ultrasonic เป็นกรณีศึกษา ตัวอย่างโค้ดที่นี่เขียนเสริมและไม่เชื่อม Wi-Fi จริง ค่าที่แสดงใน trace เป็น input ที่กำหนด ไม่ใช่การวัดฮาร์ดแวร์ แยก source review, mathematical oracle, compile, simulation และ physical test ในรายงานเสมอ"
+      }
+    }
+  ]
+}

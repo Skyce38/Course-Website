@@ -76,7 +76,7 @@
       "thai": "อิเล็กทรอนิกส์พื้นฐานและอินเทอร์เน็ตของสรรพสิ่ง",
       "short": "IoT",
       "repo": "Course-Website",
-      "code": "",
+      "code": "89022567",
       "color": "#96703e",
       "tags": [
         "IoT",
@@ -777,6 +777,105 @@
       "reader": "read/unix-tools/final-awk-text.html",
       "generatedLesson": 1,
       "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/unix-tools/summaries/final-awk-text.md"
+    },
+    {
+      "id": "internet-of-things-final-esp32-foundations",
+      "course": "internet-of-things",
+      "category": "summaries",
+      "title": "FINAL 01 — ESP32 และพื้นฐาน IoT",
+      "path": "summaries/final-esp32-foundations.md",
+      "format": "MD",
+      "reader": "read/internet-of-things/final-esp32-foundations.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/internet-of-things/summaries/final-esp32-foundations.md"
+    },
+    {
+      "id": "internet-of-things-final-sensors-gpio-adc",
+      "course": "internet-of-things",
+      "category": "summaries",
+      "title": "FINAL 02 — Sensors, GPIO และ ADC",
+      "path": "summaries/final-sensors-gpio-adc.md",
+      "format": "MD",
+      "reader": "read/internet-of-things/final-sensors-gpio-adc.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/internet-of-things/summaries/final-sensors-gpio-adc.md"
+    },
+    {
+      "id": "internet-of-things-final-ultrasonic",
+      "course": "internet-of-things",
+      "category": "summaries",
+      "title": "FINAL 03 — Ultrasonic และการคำนวณระยะ",
+      "path": "summaries/final-ultrasonic.md",
+      "format": "MD",
+      "reader": "read/internet-of-things/final-ultrasonic.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/internet-of-things/summaries/final-ultrasonic.md"
+    },
+    {
+      "id": "internet-of-things-final-water-level",
+      "course": "internet-of-things",
+      "category": "summaries",
+      "title": "FINAL 04 — ระบบวัดระดับน้ำด้วย ESP32",
+      "path": "summaries/final-water-level.md",
+      "format": "MD",
+      "reader": "read/internet-of-things/final-water-level.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/internet-of-things/summaries/final-water-level.md"
+    },
+    {
+      "id": "internet-of-things-final-arduino-cpp",
+      "course": "internet-of-things",
+      "category": "summaries",
+      "title": "FINAL 05 — Arduino IDE และ C++",
+      "path": "summaries/final-arduino-cpp.md",
+      "format": "MD",
+      "reader": "read/internet-of-things/final-arduino-cpp.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/internet-of-things/summaries/final-arduino-cpp.md"
+    },
+    {
+      "id": "internet-of-things-final-interfaces",
+      "course": "internet-of-things",
+      "category": "summaries",
+      "title": "FINAL 06 — I2C, SPI, UART, GPIO และ ADC",
+      "path": "summaries/final-interfaces.md",
+      "format": "MD",
+      "reader": "read/internet-of-things/final-interfaces.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/internet-of-things/summaries/final-interfaces.md"
+    },
+    {
+      "id": "internet-of-things-final-pir-motion",
+      "course": "internet-of-things",
+      "category": "summaries",
+      "title": "FINAL 07 — PIR และการตรวจจับการเคลื่อนไหว",
+      "path": "summaries/final-pir-motion.md",
+      "format": "MD",
+      "reader": "read/internet-of-things/final-pir-motion.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/internet-of-things/summaries/final-pir-motion.md"
+    },
+    {
+      "id": "internet-of-things-final-relay-timers",
+      "course": "internet-of-things",
+      "category": "summaries",
+      "title": "FINAL 08 — Relay และ Nonblocking Timers",
+      "path": "summaries/final-relay-timers.md",
+      "format": "MD",
+      "reader": "read/internet-of-things/final-relay-timers.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/internet-of-things/summaries/final-relay-timers.md"
+    },
+    {
+      "id": "internet-of-things-final-oled-integration",
+      "course": "internet-of-things",
+      "category": "summaries",
+      "title": "FINAL 09 — OLED และระบบ IoT แบบรวม",
+      "path": "summaries/final-oled-integration.md",
+      "format": "MD",
+      "reader": "read/internet-of-things/final-oled-integration.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/internet-of-things/summaries/final-oled-integration.md"
     }
   ]
 }
