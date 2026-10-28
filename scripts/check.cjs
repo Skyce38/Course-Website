@@ -126,3 +126,5 @@ require('./check-insights.cjs');
 require('./check-unix.cjs');
 
 require('./check-iot.cjs');
+
+require('./check-iot-visuals.cjs');

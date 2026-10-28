@@ -22,6 +22,21 @@
 
 I2C เป็นบัสข้อมูลอนุกรมมี SDA / SCL ต้องมี pullups ไปแรงดันที่ปลอดภัยกับทุกอุปกรณ์ master เริ่ม transaction และอุปกรณ์ใช้ address ต้องหลีกเลี่ยง address ชนกัน 7bit มี 128 รหัสแต่มี reservedaddresses จึงไม่อ้างว่าเสียบได้ 128devices จริงเสมอ Wire.begin(21,22)เป็นตัวอย่าง classicESP32 ที่ประกาศ ไม่ใช่ pin ทุกบอร์ด
 
+![GPIO21SDAและ22SCLแชร์ไปOLED0x3Cสมมติและอุปกรณ์อื่นถ้ามีที่อยู่ไม่ซ้ำ;เส้นทั้งสองต้องpullupไปlogicที่ทุกdeviceรับได้และGNDร่วม](images/visual-i2c-bus.webp "0x3C และ21/22เป็นสมมติฐานของสเก็ตช์; ตรวจรุ่นจริง")
+ที่มา: [ภาพเขียนเสริม ตรวจตามเอกสารเทคนิค](https://docs.espressif.com/projects/arduino-esp32/en/latest/api/i2c.html)
+
+อ่านภาพ: แต่ละdeviceแชร์SDA/SCLและต้องไม่ชนaddress ตรวจpull-upรวม/แรงดันและข้อจำกัดbus ไม่ต่อpull-up5Vเข้าขา3.3Vโดยอนุมานจากชื่อI2C
+
+**ตารางตรวจสายของภาพนี้ — ไม่ใช่ลำดับขา header**
+
+| จาก | ถึง | ชนิด / เงื่อนไข |
+|---|---|---|
+| ESP32 GPIO21 | OLED SDA / bus SDA | I2C data |
+| ESP32 GPIO22 | OLED SCL / bus SCL | I2C clock |
+| SDA / SCL | pull-upไป3.3Vที่เข้ากันได้ | ตรวจR/bus/deviceจริง |
+| ESP32 / OLED / device | GNDร่วม | Ground |
+| OLED VCC | ไฟตามสเปกmoduleที่ตรวจแล้ว | Power: ไม่สรุปทุกmoduleใช้ไฟเดียวกัน |
+
 ข้อควรระวัง: pullup บน OLEDmodule อาจดึงไป 5V แม้ MCU เป็น 3.3V
 
 ตัวอย่างการให้เหตุผลที่จัดทำเสริม:
@@ -46,6 +61,24 @@ SPI ทั่วไปใช้ SCLK,MOSI,MISO และ CS ต่อ device ใ
 
 UARTasynchronous ใช้ TX ไป RX ฝั่งตรงข้ามและ RX รับจาก TX ของอีกฝั่ง ต้องมี GNDreference สำหรับ TTL วงจรไม่ isolate baud / data / parity / stop ให้ตรง UARTTTL ไม่ใช่ RS232±voltage;ESP32HardwareSerial เลือก RX / TXpins ได้ตามข้อจำกัด target
 
+![UARTTX17ต่อRXอีกฝั่งและRX16ต่อTXอีกฝั่ง;SPI18SCLK23MOSI19MISO27CSตามตัวอย่างclassicESP32 ไม่ใช่ตำแหน่งheader](images/visual-uart-spi.webp "UART ไขว้ TX/RX; SPI ต้องตรงทิศและขาที่ตั้งในโค้ด")
+ที่มา: [ภาพเขียนเสริม ตรวจตามเอกสารเทคนิค](https://docs.espressif.com/projects/arduino-esp32/en/latest/api/serial.html)
+
+อ่านภาพ: ทั้งสองแบบต้องตรวจระดับไฟและGNDร่วม UARTตัวอย่างใช้9600 8N1 ส่วนSPIต้องตรวจCPOL/CPHAของdevice;ไม่ต่อRS-232แรงดันต่างมาตรฐานเข้าขาโดยตรง
+
+**ตารางตรวจสายของภาพนี้ — ไม่ใช่ลำดับขา header**
+
+| จาก | ถึง | ชนิด / เงื่อนไข |
+|---|---|---|
+| ESP32 GPIO17 TX | Device RX | UART Signal |
+| ESP32 GPIO16 RX | Device TX | UART Signal |
+| ESP32 / UARTdevice | GNDร่วม | Ground |
+| ESP32 GPIO18 SCLK | SPIdevice SCLK | SPI Clock |
+| ESP32 GPIO23 MOSI | SPIdevice MOSI | SPI TX |
+| ESP32 GPIO19 MISO | SPIdevice MISO | SPI RX |
+| ESP32 GPIO27 CS | SPIdevice CS | SPI Select |
+| ESP32 / SPIdevice | GNDร่วม | Ground |
+
 ข้อควรระวัง: ชื่อ TX หมายถึงผู้ส่งของแต่ละอุปกรณ์ ไม่ใช่ต้องต่อ TX กับ TX
 
 ตัวอย่างการให้เหตุผลที่จัดทำเสริม:
@@ -57,6 +90,11 @@ UARTTTL สองอุปกรณ์ที่ compatible ควรต่อท
 ## เลือก Interface จากสัญญาณจริง {#select-interface}
 
 A11 ให้จัดกลุ่ม I2C,SPI,UART,GPIO,ADC ไม่ใช่แบ่งตามรูปร่างตัว sensor โมดูลหนึ่งอาจมี AO+DO หรือรุ่น I2C / SPI ต่างกัน;ดู datasheet ขาและ protocol HC-SR04trigger / echo ใช้ GPIOpulse ไม่ใช่ ADC เพื่อวัด Echo width;PIRmoduleDO ใช้ digitalinput
+
+![GPIOอ่านlogic,ADCอ่านanalog,UARTใช้TXRX asynchronous,SPIใช้clock/data/select,I2Cแชร์SDA/SCLพร้อมaddress;ไม่เหมารวมsensorจากรูปลักษณ์](images/visual-interfaces.webp "ชนิด Sensor อย่างเดียวไม่ระบุ protocol ของ module")
+ที่มา: [ภาพเขียนเสริม ตรวจตามเอกสารเทคนิค](https://docs.espressif.com/projects/arduino-esp32/en/latest/api/i2c.html)
+
+อ่านภาพ: อ่านสเปกขาและinterfaceจริง:AOเลือกADC,DOเลือกdigitalGPIO,UARTต้องตรงformat,SPIต้องตรงmode,และI2Cต้องตรวจaddress/pullups
 
 ข้อควรระวัง: ชื่อ sensor ไม่บอก protocol ได้แน่นอนโดยไม่ดูรุ่น
 

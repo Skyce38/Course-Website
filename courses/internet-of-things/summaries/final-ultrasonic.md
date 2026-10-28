@@ -22,6 +22,11 @@
 
 HC-SR04 แบบอ้างอิงรับ triggerHIGH อย่างน้อย 10µs และส่ง burstultrasound Echo width ใช้คำนวณระยะ ไม่ใช้ความยาว trigger แทน time-of-flight `pulseIn(pin,HIGH,timeout)` รอ pulse และคืนหน่วยµs;คืน 0เมื่อไม่ได้ completepulse ภายใน timeout ตาม API ที่เลือก จึงอาจ block แต่มีขอบเวลา
 
+![TriggerHIGHอย่างน้อย10µsเป็นคำสั่งเริ่มวัด;EchoHIGH500µsเป็นตัวอย่างเวลาที่นำไปคิดระยะ;สองแถววาดคนละสเกลไม่อ้าง internal delay](images/visual-trigger-echo.webp "อ่านความกว้าง Echo; รูปย่อคนละสเกล ไม่ใช่เวลาเริ่มที่รับรอง")
+ที่มา: [ภาพเขียนเสริม ตรวจตามเอกสารเทคนิค](https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf)
+
+อ่านภาพ: Trigger กระตุ้นการวัด ส่วน Echo แทนเวลาไปกลับ ในตัวอย่าง500µsต้องใช้500เข้าสูตร ไม่ใช้10; pulseInคืน0ให้จัดการ invalid ก่อน
+
 ข้อควรระวัง: การลด delay ไม่ทำให้ pulseIn กลายเป็น nonblocking
 
 ตัวอย่างการให้เหตุผลที่จัดทำเสริม:
@@ -33,6 +38,11 @@ HC-SR04 แบบอ้างอิงรับ triggerHIGH อย่างน�
 ## สูตร Time-of-Flight และไปกลับ {#time-of-flight}
 
 W09 slides14–16 ใช้เสียง 343m / s ที่ประมาณ 20°C เป็นสมมติฐาน ไม่ใช่ค่าคงที่ทุกสภาพ ระยะทางไปกลับเท่ากับ v×t จึงระยะ sensor ถึงผิวสะท้อน d=v×t / 2 เมื่อ tเป็นµs ใช้ v=0.0343cm / µs เอกสาร HC-SR04 บางฉบับใช้ 340m / s หรือ t / 58 เป็นค่าประมาณ ต้องไม่ผสมโดยไม่บอก
+
+![คลื่นเสียงเดินทางจากSensorถึงผิวสะท้อนระยะdแล้วกลับอีกd รวม2d;เวลาEchoเป็นเวลาไปกลับ](images/visual-sound-round-trip.webp "แยกระยะถึงวัตถุ d ออกจากทางเดินรวม2d")
+ที่มา: [ภาพเขียนเสริม ตรวจตามเอกสารเทคนิค](https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf)
+
+อ่านภาพ: เวลาที่วัดครอบคลุมการไปและกลับ จึงคูณความเร็วด้วยเวลาก่อนได้ระยะรวม แล้วหาร2เพื่อหาระยะจาก Sensor ถึงผิวสะท้อน
 
 ข้อควรระวัง: ลืมหาร 2ทำให้คำตอบเป็นระยะไปกลับ
 
@@ -81,6 +91,11 @@ W09 slides5–11 แสดง reflection,softtargets,angle และ liquidlevel
 ## สูตรพร้อมหน่วย {#formula}
 
 สมมติv343m/s≈0.0343cm/µsตามW09slides14–16:
+
+![ที่v343m/s แปลงเป็น0.0343cm/µs;500คูณ0.0343ได้17.15cmไปกลับ;หาร2ได้8.575cmถึงวัตถุ](images/visual-echo-500.webp "คำนวณตามสมมติฐาน343m/s; ไม่ใช่การวัดจริง")
+ที่มา: [ภาพเขียนเสริม ตรวจตามเอกสารเทคนิค](https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf)
+
+อ่านภาพ: ตรวจหน่วยทุกขั้น:343m/s=0.0343cm/µs แล้ว500×0.0343/2=8.575cm ความเร็วในบางdatasheetใช้340m/sเป็นอีกสมมติฐาน
 
 $$
 d_{cm}=\frac{t_{\mu s}\times0.0343}{2},\quad t_{\mu s}=\frac{2d_{cm}}{0.0343}

@@ -34,6 +34,11 @@ A09 ให้ตัวอย่างเรียงระยะ 20,40,60cm ค�
 
 ใช้ if / else if / else ให้ validdistance หนึ่งค่าเลือกสีเดียว ค่า 30 อยู่แดง ค่า 50 อยู่เหลือง แยก ERROR เมื่อไม่มี Echo หรือ outofrange W09slide19 มีช่อง 100..200 ที่ไม่เข้าเงื่อนไขในรูปและหน่วยไม่ชัด จึงไม่คัดเป็น universalclassifier
 
+![นโยบายที่เขียนเสริม:valid2..30cmRED,มากกว่า30ถึง50YELLOW,มากกว่า50ถึง400GREEN;Echoหายหรือนอก2..400เป็นERRORปิดLED](images/visual-water-states.webp "Threshold30/50เป็นนโยบายเสริม ไม่ใช่ขอบเขตที่A09กำหนด")
+ที่มา: [ภาพเขียนเสริม ตรวจตามเอกสารเทคนิค](https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf)
+
+อ่านภาพ: อ่านขอบ30อยู่REDและ50อยู่YELLOW ตรวจinvalidก่อนจำแนก การหายของEchoไม่ใช่ระยะ0cmที่ยืนยันว่าระดับน้ำสูง
+
 ข้อควรระวัง: ตรวจเงื่อนไขแต่ละสีแยก if อาจทำให้เปิดหลายดวงเมื่อช่วงทับ
 
 ตัวอย่างการให้เหตุผลที่จัดทำเสริม:
@@ -46,6 +51,11 @@ A09 ให้ตัวอย่างเรียงระยะ 20,40,60cm ค�
 
 Start→configure→measure→validate→classify→writeoneLED→report→wait→repeat เมื่อ invalid ให้ปิด LED ระดับทั้งสามและรายงาน ERROR ตาม policy เสริม อย่าให้ 0cm ปลอมเป็น highwater ถ้าต้องการความสูงจริงให้กำหนด Hและใช้ h=H−d พร้อม geometry / หน่วย
 
+![ตัวอย่างH100cmคงที่:วัดd60cmได้h40cm;วัดd20cmได้h80cm;ระยะsensorถึงน้ำลดลงเมื่อผิวน้ำสูงขึ้น](images/visual-water-distance.webp "กำหนดจุดอ้างอิงก่อนใช้ h = H − d")
+ที่มา: [ภาพเขียนเสริม ตรวจตามเอกสารเทคนิค](https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf)
+
+อ่านภาพ: Sensor อยู่ที่เดิมจึงวัดระยะถึงผิวน้ำ ไม่ใช่ความสูงน้ำโดยตรง ภาพใช้H100cmเป็นตัวอย่างเดียวกับแบบฝึกในบท ไม่ใช่ขนาดถังที่ผู้สอนรับรอง
+
 ข้อควรระวัง: ระยะถึงน้ำลดลงเมื่อระดับน้ำสูงขึ้น ไม่ได้เพิ่มตามชื่อ high
 
 ตัวอย่างการให้เหตุผลที่จัดทำเสริม:
@@ -57,6 +67,24 @@ Start→configure→measure→validate→classify→writeoneLED→report→wait�
 ## วงจร Low-Voltage ตัวอย่าง {#circuit}
 
 ตัวอย่าง classicESP32 ใช้ TRIG32,ECHO33 ผ่าน levelinterface ที่ตรวจแล้ว;LED เขียว 25 เหลือง 26 แดง 27 แต่ละดวงมี 330Ωอนุกรมสู่ GND เลขเหล่านี้เป็น authoredpinassignment ไม่ใช่ยืนยันสายจาก W09slide18 ไฟ 5V ของ HC-SR04classic ไม่ควรเข้าขา GPIO โดยตรง ตรวจ GND / ไฟเลี้ยง / logiccompatibility ก่อนจ่ายไฟ
+
+![TRIGจากGPIO32;Echoผ่านRบน10kและRล่าง15kจึงjunctionไปGPIO33;GPIO25/26/27ผ่าน330ΩแยกLED;VCCsensor5VและGNDร่วม แผนผังสมมติยังไม่ตรวจhardware](images/visual-water-wiring.webp "ขาตัวอย่างตรงสเก็ตช์; divider เป็นการคำนวณ nominal ไม่ใช่ใบรับรอง module")
+ที่มา: [ภาพเขียนเสริม ตรวจตามเอกสารเทคนิค](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf)
+
+อ่านภาพ: ตารางต่อสายตรวจแยกจากภาพ:ที่Echo5.0V dividerให้3.0V ต้องตรวจค่าHIGH/LOWจริง tolerance การโหลดและรูปพัลส์ให้อยู่ใน GPIO limits ก่อนต่อ;ตรวจว่าTRIG3.3Vผ่านVIHของmoduleจริง LEDแต่ละดวงมีตัวต้านทานแยก
+
+**ตารางตรวจสายของภาพนี้ — ไม่ใช่ลำดับขา header**
+
+| จาก | ถึง | ชนิด / เงื่อนไข |
+|---|---|---|
+| ESP32 GPIO32 | HC-SR04 TRIG | Signal: ตรวจ VIH ของ module |
+| HC-SR04 ECHO | Rtop10kΩ → junction | Signal: ห้ามเข้าขาGPIOโดยตรง |
+| junction | ESP32 GPIO33 | Signal: nominal3.0V เมื่อEcho5.0V |
+| junction | Rbottom15kΩ → GND | Divider return |
+| GPIO25 / 26 / 27 | 330Ωแยกดวง → LED A | Output: GREEN / YELLOW / RED |
+| LED K ทั้งสาม | GNDร่วม | Ground |
+| HC-SR04 VCC | แหล่ง5Vที่ตรวจแล้ว | Power: ไม่ใช่GPIO |
+| ESP32 / sensor / divider | GNDร่วม | Ground: nonisolated example |
 
 ข้อควรระวัง: ห้ามคัดภาพวงจรที่ไม่แสดง resistor / levelshift มาเป็นใบรับรองความปลอดภัย
 

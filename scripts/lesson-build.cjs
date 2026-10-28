@@ -147,6 +147,7 @@ function buildLessons(catalog, root = process.cwd()) {
     let html=template.replace(/\{\{([A-Z_]+)\}\}/g,(_,key)=>{ if (!(key in values)) throw Error('Unknown template token'); return values[key]; });
     if(meta.course==='unix-tools')html=html.replace(/(assets\/i18n\.js\?v=)[^" ]+/, '$1phase12-unix-1').replace('class="lesson-reader html-reader"','class="lesson-reader html-reader shell-lesson"').replace('</head>','<link rel="stylesheet" href="../../assets/unix-lessons.css?v=phase12-unix-1"></head>');
     if(meta.course==='internet-of-things')html=html.replace(/(assets\/i18n\.js\?v=)[^" ]+/, '$1phase13-iot-1').replace('class="lesson-reader html-reader"','class="lesson-reader html-reader iot-lesson"').replace('</head>','<link rel="stylesheet" href="../../assets/iot-lessons.css?v=phase13-iot-1"></head>');
+    if(meta.course==='internet-of-things' && rendered.html.includes('/images/visual-'))html=html.replace('</head>','<link rel="stylesheet" href="../../assets/iot-visuals.css?v=phase14-iot-visual-1"></head>');
     plans.push({target,html,resource,old});
   }
   // Validate every lesson before any generated file or catalog entry is changed.

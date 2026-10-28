@@ -22,6 +22,16 @@
 
 ระบบ IoT เชื่อมอุปกรณ์ทางกายภาพกับการประมวลผลและการสื่อสาร ไม่ใช่เพียงมีเซนเซอร์หรือเปิด LED เท่านั้น แยกเส้นทาง Sensor → Controller → Decision → Output ออกจากการส่งข้อมูลผ่านเครือข่าย ระบบควบคุมในพื้นที่ยังทำงานได้แม้เครือข่ายล่ม หากออกแบบเช่นนั้น; ตัวอย่างบทเรียนยังไม่ติดตั้งบริการ cloud
 
+![Sensor วัดระยะ ส่งข้อมูลให้ ESP32 ประมวลผลตามเกณฑ์ แล้วขับ output LED ผ่าน resistor](images/visual-sensor-chain.webp "Controller ตัดสินใจ; Sensor ไม่ได้เลือกสี LED เอง")
+ที่มา: [ภาพเขียนเสริม ตรวจตามเอกสารเทคนิค](https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html)
+
+อ่านภาพ: ติดตามข้อมูลจาก Sensor ไปยัง ESP32 แล้วจึงเลือก Output การควบคุมในพื้นที่ยังไม่พิสูจน์ว่าต่อ Internet แล้ว
+
+![ตัวอย่างชั้น Device, Network, Platform, Application; เส้นทางเครือข่ายแยกจาก local control ไม่ได้อ้างว่าสเก็ตช์นี้ติดตั้ง cloud แล้ว](images/visual-iot-architecture.webp "ภาพสถาปัตยกรรมทั่วไป ไม่ใช่บริการที่ติดตั้งในสเก็ตช์")
+ที่มา: [ภาพเขียนเสริม ตรวจตามเอกสารเทคนิค](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf)
+
+อ่านภาพ: Device วัด/ควบคุมในพื้นที่ ส่วน Network ส่งข้อมูลไปยัง Platform และ Application ได้เมื่อมีการออกแบบและเชื่อมต่อจริง
+
 ข้อควรระวัง: การอ่าน GPIO แล้วเปิดไฟยังไม่ยืนยันว่ามีการเชื่อมต่อ Internet
 
 ตัวอย่างการให้เหตุผลที่จัดทำเสริม:
@@ -33,6 +43,11 @@
 ## แยก SoC, Module และ Development Board {#board-module}
 
 ESP32 เป็นตระกูลชิป (SoC) ส่วนโมดูลและบอร์ดพัฒนาประกอบวงจร / อุปกรณ์เพิ่ม รุ่นย่อยมี CPU, GPIO และฟังก์ชันต่างกัน บทนี้เลือก classic ESP32-WROOM development board และ Arduino FQBN esp32:esp32:esp32 เป็นตัวอย่าง ไม่เหมารวม S2 / S3 / C3 หรือบอร์ด 30 / 38 ขาว่าต่อเหมือนกันทุกขา
+
+![ภาพเชิงหน้าที่ของ classic ESP32-WROOM: USB/วงจรไฟ โมดูล และกลุ่ม GPIO34 input-only, GPIO25/26/27 output, GPIO32/33 ตัวอย่าง ไม่ใช่ตำแหน่ง header จริง](images/visual-esp32-anatomy.webp "แยก SoC โมดูล และบอร์ด; หมายเลขในภาพเป็น GPIO ไม่ใช่ตำแหน่ง header")
+ที่มา: [ภาพเขียนเสริม ตรวจตามเอกสารเทคนิค](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf)
+
+อ่านภาพ: ดูภาพแล้วตรวจ pinout ของบอร์ดจริงก่อนเลือกขา GPIO34 รับข้อมูลได้แต่ไม่ใช้ขับ LED; VIN/USB ไม่ทำให้ GPIO รับ5Vได้
 
 ข้อควรระวัง: จำนวนขาบนแถว header ไม่เท่ากับจำนวน GPIO ที่ใช้ได้อย่างอิสระ
 
