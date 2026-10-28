@@ -4,17 +4,17 @@ Selected study scope: Week9–12, **89022567 Basic Electronics and Internet of T
 
 All seven named originals were actually opened locally. The manifest `รายการไฟล์หลังกลางภาค.md` contains links only and is not content evidence. Week12's PDF, previously unverified, is now available and inspected. Original teaching files remain private/read-only; no submissions, student identities or slide copies are published. Original hashes are retained in the private audit snapshot.
 
-| ID | Original/version | Real locator and inspected evidence | Planned lessons | Status |
+| ID | Original/version | Real locator and inspected evidence | Implemented lessons | Status |
 |---|---|---|---|---|
 | W09 | IoT_Week9.pptx,37slides | slides3–13 sensor photos/specs/timing/limitations;14–16 time-of-flight and500µs→8.575cm;17–19 water-level code/circuit/flowchart;20–36 applications/scenario |01–04|Lecturer content verified; hardware specs require module qualification|
-| A09 | Assignments9.docx | requirements1–2; renderedpp.1–2: ESP32/ultrasonic,60cmgreen/40cmyellow/20cmred,flowchart/program/wiring/video,formula explanation |03–04|Verified requirements; sample distances are not general range boundaries|
-| A10 | Assignments10.docx | tasks1–2, renderedpp.1–2; gradingp.3: ten commands and three sensor programs; handwritten submission requirement; genericA0/0..1023/map example |02,05|Verified; adapt ADC assumptions to selected ESP32 rather than universalize10bits|
-| A11 | Assignments11.docx | renderedpp.1–3: principles,groupby I2C/SPI/UART/GPIO/ADC,wiring,annotatedcode; GPIO34soilread onp.3; rubricpp.4–5 |02,06|Verified; AO and DO represent different interfaces on a module|
-| W12 | ใบงานที่12.docx | functions/deliverables renderedpp.1–2, rubricp.3: PIR→relay→LED,10s inactivity,retrigger,Motion Detected/No Motion,OLED lamp status |07–09|Verified requirements; exact module/pins/polarity/display address unspecified|
+| A09 | Assignments 9.docx | requirements1–2; renderedp.1 (p.2blank): ESP32/ultrasonic,60cmgreen/40cmyellow/20cmred,flowchart/program/wiring/video,formula explanation |03–04|Verified requirements; sample distances are not general range boundaries|
+| A10 | Assignments 10.docx | tasks1–2, renderedpp.1–2; gradingpp.2–3: ten commands and three sensor programs; handwritten submission requirement; genericA0/0..1023/map example |02,05|Verified; adapt ADC assumptions to selected ESP32 rather than universalize10bits|
+| A11 | Assignments 11.docx | renderedpp.1–3: principles,groupby I2C/SPI/UART/GPIO/ADC,wiring,annotatedcode; GPIO34soilread onp.3; rubricp.4 (p.5blank) |02,06|Verified; AO and DO represent different interfaces on a module|
+| W12 | ใบงานที่ 12.docx | functions/deliverables renderedpp.1–2, rubricpp.2–3: PIR→relay→LED,10s inactivity,retrigger,Motion Detected/No Motion,OLED lamp status |07–09|Verified requirements; exact module/pins/polarity/display address unspecified|
 | S12 | Slide-Week12.pdf,27physicalpages | pp.2–6 PIR structure/zones;7–13 applications/lenses;14–19 relay/NO/NC/driver/ESP8266 example;20–23 OLED/I2C/coordinates;24–27 AdafruitSSD1306/DHT displaycode |06–09|Verified images and code; circuit is not universal ESP32 wiring|
 | B | IoT_book.pdf,115physicalpages | pp.5–16 IoT/components;19–27 chip/module/board/GPIO;29–42 IDE; selectedelectronics/sensorspp.45–73;75–98 syntax/digital/ADC/Serial;107–115 input-to-output examples |01–02,05–06|Relevant sections verified; historical board/library assumptions qualified|
 
-DOCX pages refer to a private ONLYOFFICE PDF rendering, not immutable native Word page numbers; task/section locators are authoritative. PPTX rendering preserved37slides. Original PowerPoint COM was unavailable, so ONLYOFFICE rendering plus OOXML/media inspection and Poppler images were used. `Slide-Week12(1).pdf` is a byte-identical duplicate, not additional independent evidence. The separate project report and other authored deliverables are **not** substituted for original teaching evidence.
+DOCX pages refer to a private ONLYOFFICE PDF rendering, not immutable native Word page numbers; task/section locators are authoritative. PPTX rendering preserved37slides. Original PowerPoint COM was unavailable, so ONLYOFFICE rendering plus OOXML/media inspection and Poppler images were used. `Slide-Week12 (1).pdf` is a byte-identical duplicate, not additional independent evidence. The separate project report and other authored deliverables are **not** substituted for original teaching evidence.
 
 ## Necessary qualifications and corrections
 
@@ -24,6 +24,8 @@ DOCX pages refer to a private ONLYOFFICE PDF rendering, not immutable native Wor
 - **C04 — W12/S12:**PIR detects changes in infrared radiation; it does not guarantee continuous occupancy or identify a person. HIGH hold/retrigger timing affects when software observes inactivity.
 - **C05 — S12/pp.16–19:**ESP8266 and example relay/driver pictures do not establish ESP32 pin mapping, module polarity, isolation or mains safety. Use only a low-voltage LED/load with a verified compatible driver/module; never drive a relay coil from GPIO.
 - **C06 — S12/pp.21–27:**OLED examples include DHT temperature/humidity; this is not a provided complete PIR+relay firmware or measured test result. The integrated program is authored supplementary code with explicitly chosen display/library/pins.
+
+- **C07 — B/physicalp.96 (printedp.94):** `raw × 3.3 / 4095` is an ideal linear mapping, not proof of calibrated voltage across ESP32 attenuation/nonlinearity. Teach the raw/calibrated distinction and the appropriate API; the original example remains untouched. Visual inspection also confirmed board/header and GPIO distinctions on physicalpp.22,27 and input/output behavior onp.114.
 
 ## Curriculum decision
 
