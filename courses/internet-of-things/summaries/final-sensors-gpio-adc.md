@@ -22,6 +22,11 @@
 
 Analog output แทนปริมาณด้วยแรงดันต่อเนื่อง ส่วน digital output ให้สถานะตามเกณฑ์วงจรโมดูล AO / DO ของ soil module อาจอยู่บนบอร์ดเดียวกันแต่ใช้งานคนละแบบ AO ไป ADC, DO ไป digital input การเรียก analogRead ได้จำนวนเต็มเพราะผ่านการแปลง A / D ไม่ทำให้ input voltage เดิมกลายเป็น digital sensor
 
+![เส้น Analog เปลี่ยนต่อเนื่อง ส่วน Digital มีระดับ LOW/HIGH; ไม่วาด noise หรือเวลาจริงของ sensor](images/visual-analog-digital.webp "ภาพสัญญาณเชิงแนวคิด ไม่ใช่ผลวัด oscilloscope")
+ที่มา: [ภาพเขียนเสริม ตรวจตามเอกสารเทคนิค](https://docs.espressif.com/projects/arduino-esp32/en/latest/api/adc.html)
+
+อ่านภาพ: ADC แปลงแรงดัน Analog เป็นจำนวนเต็ม ส่วน Digital input อ่านสถานะตามระดับและขีดจำกัดของอุปกรณ์ ไม่ใช่ทุกแรงดันจะแปลเป็น0หรือ1ได้อย่างปลอดภัย
+
 ข้อควรระวัง: อย่าสับสนลักษณะสัญญาณกับชนิดตัวแปรที่รับค่าหลัง ADC
 
 ตัวอย่างการให้เหตุผลที่จัดทำเสริม:
@@ -34,6 +39,11 @@ soil module มี AO และ DO; ต้องการแรงดันท�
 
 pinMode(pin,INPUT) กำหนดรับข้อมูล high impedance; OUTPUT ใช้ขับ logic; INPUT_PULLUP ใช้ได้เฉพาะขาที่รองรับ GPIO34–39 ของ classic ESP32 เป็น input-only และไม่มี software pullup / pulldown ภายใน จึงไม่ใช้ GPIO34 ขับไฟหรือสมมติว่าตั้ง INPUT_PULLUP ได้
 
+![บล็อก sensor/module มี VCC GND AO DO เชิงหน้าที่ ไม่รับรองลำดับ physical pins; AOเข้าขาADCที่เหมาะ DOเข้าขาdigitalที่เข้ากันได้](images/visual-sensor-pins.webp "AO กับ DO อาจอยู่บน module เดียวกัน แต่ใช้คนละ API")
+ที่มา: [ภาพเขียนเสริม ตรวจตามเอกสารเทคนิค](https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html)
+
+อ่านภาพ: ชื่อขาในภาพเป็นหน้าที่ ไม่ใช่ลำดับเสียบบนโมดูลจริง AO ใช้ analogRead; DO ใช้ digitalRead หลังตรวจแรงดันและ polarity
+
 ข้อควรระวัง: INPUT ที่ไม่มี bias อาจลอยเมื่อไม่ได้ต่อสัญญาณ
 
 ตัวอย่างการให้เหตุผลที่จัดทำเสริม:
@@ -45,6 +55,11 @@ pinMode(pin,INPUT) กำหนดรับข้อมูล high impedance; OU
 ## ADC Resolution ไม่เท่ากับความแม่นยำ {#adc-resolution}
 
 ตั้ง analogReadResolution(12) ให้ raw range0..4095 อย่างชัดเจน Raw เป็นค่าที่ไม่ calibrate ไม่ใช่ millivolts โดยตรง A10 ใช้ตัวอย่าง 0..1023 แบบ 10bit จึงต้องปรับตามบอร์ด actual attenuation / input range ต่างกันและมี nonlinearity อย่าอ้างว่า 4095 หมายถึง 3.3V อย่างแม่นยำทุกการตั้งค่า
+
+![ตั้ง analogReadResolution12 ทำให้ raw code0ถึง4095 รวม4096ค่า แรงดันกับcalibratedmillivoltsไม่ใช่rawโดยตรง](images/visual-adc-12-bit.webp "Raw count ไม่ใช่แรงดันที่ calibrated แล้ว")
+ที่มา: [ภาพเขียนเสริม ตรวจตามเอกสารเทคนิค](https://docs.espressif.com/projects/arduino-esp32/en/latest/api/adc.html)
+
+อ่านภาพ: จำนวนรหัสคือ2ยกกำลัง12=4096 แต่รหัสสูงสุด4095 ห้ามสรุป4095=3.3Vอย่างแม่นยำทุก attenuation; ตรวจ API และการปรับเทียบ
 
 ข้อควรระวัง: ความละเอียด 12bit ไม่ใช่ใบรับรองความแม่นยำ 12bit
 

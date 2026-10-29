@@ -22,6 +22,11 @@
 
 Arduino core เรียก setup หนึ่งครั้งต่อ boot / reset แล้วเรียก loop ซ้ำหลังคืนจากรอบก่อน A10 ขอคำสั่งพื้นฐานอย่างน้อย 10 และตัวอย่าง 3sensor พร้อมอธิบายด้วยลายมือ ข้อความเว็บใช้สำหรับศึกษา ไม่แทนข้อกำหนดส่งงาน เลือก FQBN / port ให้ถูกและแยก Compile จาก Upload / physicaltest
 
+![Boot/resetแล้วsetupหนึ่งครั้งก่อนloopซ้ำ;resetเริ่มsetupใหม่;ไม่อ้างว่ามีความถี่loopคงที่](images/visual-sketch-loop.webp "setup() ครั้งเดียวต่อ boot/reset; loop() ซ้ำตามงานที่ทำ")
+ที่มา: [ภาพเขียนเสริม ตรวจตามเอกสารเทคนิค](https://docs.arduino.cc/language-reference/)
+
+อ่านภาพ: ลูกศรวนหมายถึงloopถูกเรียกซ้ำหลังรอบก่อนคืนการทำงาน ไม่ได้หมายถึงทำงานพร้อมกันหรือมีคาบเวลาคงที่
+
 ข้อควรระวัง: compile สำเร็จไม่ได้หมายความว่าได้อัปโหลดหรือเสียบวงจรถูก
 
 ตัวอย่างการให้เหตุผลที่จัดทำเสริม:
@@ -33,6 +38,11 @@ setup ทำงานอย่างไรตาม Arduino lifecycle ปกต�
 ## pinMode, digitalRead และ digitalWrite {#digital-api}
 
 กำหนดโหมดก่อนใช้ input / output อย่างสอดคล้อง อ่าน input ผ่าน digitalRead ให้ HIGH / LOW ส่ง output ด้วย digitalWrite บนขาที่ขับได้ ต้องทราบ polarity จริง INPUT_PULLUP มี pressedLOW เมื่อสวิตช์ต่อลง GND ตามวงจรตัวอย่าง ไม่เหมารวมทุก sensor
+
+![pinModeกำหนดmode;digitalReadรับlogic;digitalWriteส่งlogicเมื่อเป็นOUTPUT;HIGHไม่ได้หมายถึงONทุกmodule](images/visual-gpio-actions.webp "แยกการตั้งค่าออกจากการอ่านและการขับสัญญาณ")
+ที่มา: [ภาพเขียนเสริม ตรวจตามเอกสารเทคนิค](https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html)
+
+อ่านภาพ: ใช้GPIOที่รองรับโหมดนั้นก่อนอ่าน/เขียน digitalWriteเปลี่ยนlogic ไม่ได้จ่ายกำลังให้โหลดทุกชนิด และactiveLOWต้องแปลงON/OFFให้ถูก
 
 ข้อควรระวัง: HIGH ไม่ได้หมายถึงเปิดอุปกรณ์ในทุกโมดูล
 
@@ -57,6 +67,11 @@ Serialprintln(raw)แสดงค่าจาก analogRead; การเพิ�
 ## C++ เงื่อนไข ชนิด และ Syntax {#cpp-semantics}
 
 ใช้==เปรียบเทียบและ=กำหนดค่า {}กำหนด block ;ปิด statement ระวัง integerdivision และการ overflow ของ signedinteger ใช้ floatconstant เช่น 0.0343f เมื่อคำนวณ cm และ uint32_t กับ millis; map คำนวณ integer แม้ผลถูกเก็บ float ตัวอย่าง 10 คำสั่งหลักได้แก่ pinMode,digitalRead,digitalWrite,analogRead,Serial.begin,print,println,if / else,delay,millis
+
+![สเก็ตช์อ่านGPIO33เป็นboolactive;HIGHทำให้LEDGPIO25HIGHและพิมพ์input1;LOWทำให้LEDLOWและพิมพ์input0](images/visual-cpp-condition.webp "ตามตัวอย่าง active-HIGH LED เท่านั้น ไม่เหมารวม relay")
+ที่มา: [ภาพเขียนเสริม ตรวจตามเอกสารเทคนิค](https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html)
+
+อ่านภาพ: เส้นทางนี้ใช้sampleเดียวร่วมกันทั้งdecisionและlog ไม่เรียกdigitalReadใหม่ระหว่างสองงาน การเปลี่ยนthemeของเว็บไม่เกี่ยวกับสถานะGPIO
 
 ข้อควรระวัง: ตัวแปร float รับผล integerdivision ไม่ได้ย้อนคืนเศษที่หาย
 

@@ -22,6 +22,23 @@
 
 S12 แสดง AdafruitSSD1306 กับ Wire และจอ 128x64;ภาพประกอบไม่รับรองรุ่น / address จริง ตัวอย่างนี้เลือก I2CSSD1306,128x64,address0x3C,SDA21 / SCL22 อย่างชัดเจน ต้องตรวจ module จริงและ pullups ไป logic ที่ปลอดภัย compile ใช้ library ที่ติดตั้งเดิม ไม่เพิ่ม runtimeframework ให้เว็บ
 
+![ESP32ตัวเดียวรับPIRDOผ่านGPIO33 คุมrelayIN26 และคุยOLEDด้วยGPIO21SDA22SCL,address0x3Cสมมติ ตรวจไฟแต่ละmoduleและGNDร่วม ไม่มีcoilตรงGPIO](images/visual-oled-system.webp "GPIOเลขเดียวกับสเก็ตช์; VCC/polarity/addressต้องตรวจจริง")
+ที่มา: [ภาพเขียนเสริม ตรวจตามเอกสารเทคนิค](https://docs.espressif.com/projects/arduino-esp32/en/latest/api/i2c.html)
+
+อ่านภาพ: ภาพแสดงเส้นทางข้อมูลของESP32ตัวเดียว ไม่ใช่หลายบอร์ด PIRstateกับLampstateแยกกัน จอไม่ตอบให้แจ้งNO OLEDและไม่อ้างว่ามีภาพบนจอ แต่controllerยังใช้policyเดิม
+
+**ตารางตรวจสายของภาพนี้ — ไม่ใช่ลำดับขา header**
+
+| จาก | ถึง | ชนิด / เงื่อนไข |
+|---|---|---|
+| PIR DOที่compatible | ESP32 GPIO33 | Input: activeHIGH assumption |
+| ESP32 GPIO26 | Compatible relay module IN | Output: activeLOW assumption |
+| ESP32 GPIO21 / GPIO22 | OLED SDA / SCL | I2C: pullupscompatible3.3V |
+| OLED address | 0x3Cสมมติ ตรวจACKก่อนใช้ | Not a physical measurement |
+| PIR / relay / OLED VCC | แหล่งไฟตามสเปกแต่ละmodule | Power: verify actual module |
+| ESP32 / PIR / module / OLED | GNDร่วมในตัวอย่างnonisolated | Ground |
+| Relay COM / NO | วงจรLEDแรงดันต่ำแยกจากcoil | Load: use protected driver/module |
+
 ข้อควรระวัง: begin สำเร็จไม่ใช่การรับรองทุก pixel หรือ calibration ของ sensor
 
 ตัวอย่างการให้เหตุผลที่จัดทำเสริม:
@@ -45,6 +62,11 @@ AdafruitSSD1306 วาดลง buffer ก่อน display.display ส่งไ
 ## แยก Observed Motion กับ Lamp {#two-states}
 
 จอแสดง Motion Detected / No Motion จาก input และ LampON / OFF จาก statecontroller ไม่สรุปจำนวนคนหรือ presence ถ้า motionLOW แต่ยังไม่ครบ timeout ให้ No Motion / LampON ซึ่งเป็น state ที่ถูกต้อง นโยบายกรณี display ไม่ตอบในตัวอย่างยังควบคุม lowvoltageload และแจ้ง Serial ไม่แสร้งว่าจอทำงานแล้ว
+
+![จอจำลองสามสถานะ:HIGH1000แสดงMotionDetected/LampON;LOW11000หลังHIGH9000แสดงNoMotion/LampON;LOW19000แสดงNoMotion/LampOFF ไม่ใช่ภาพhardwareจริง](images/visual-oled-states.webp "จอจำลองเชิงข้อความ ไม่ใช่ pixel/font หรือผลทดลองจริง")
+ที่มา: [ภาพเขียนเสริม ตรวจตามเอกสารเทคนิค](https://github.com/adafruit/Adafruit_SSD1306)
+
+อ่านภาพ: PIRLOWไม่ได้ปิดLampทันที เพราะยังมีholdwindowจากHIGHล่าสุด ภาพจึงแสดงNo Motionพร้อมLamp ONได้อย่างถูกต้อง;ข้อความจอเป็นอังกฤษตามrequirementและมีคำอธิบายไทย
 
 ข้อควรระวัง: อย่าให้เงื่อนไข display ทำให้ timer หยุดอ่าน motion
 

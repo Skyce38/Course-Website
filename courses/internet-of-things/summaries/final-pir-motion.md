@@ -22,6 +22,11 @@
 
 PIR รับการเปลี่ยนแปลงรังสี infrared ในบริเวณรับ ไม่ส่งคลื่น ultrasound เพื่อหา time-of-flight จึงไม่วัด cm หรือระบุจำนวนคนโดยตรง S12 แสดง dual-element และ Fresnellens ช่วยแบ่ง zone; การเคลื่อนผ่าน zone ทำให้ signal เปลี่ยน การยืนนิ่งอาจไม่ถูกตรวจต่อเนื่อง
 
+![แนวรับเชิงแนวคิดหลายโซนจากFresnellens ผู้เคลื่อนผ่านโซนทำให้IRที่รับเปลี่ยน ไม่ใช่ลำแสงที่PIRยิงออก และไม่รับรองpresenceเมื่ออยู่นิ่ง](images/visual-pir-zones.webp "เส้นแรเงาเป็นโซนรับ IR ไม่ใช่คลื่นที่ส่งออก")
+ที่มา: [ภาพเขียนเสริม ตรวจตามเอกสารเทคนิค](https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work)
+
+อ่านภาพ: PIRเป็นpassive sensor เลนส์จัดโซนรับรังสี การข้ามโซนช่วยให้เกิดการเปลี่ยนแปลง แต่HIGH/LOWของmoduleไม่ใช่จำนวนคนหรือการรับรองว่าห้องว่าง
+
 ข้อควรระวัง: No Motion ไม่ได้แปลว่าไม่มีคนอย่างแน่นอน
 
 ตัวอย่างการให้เหตุผลที่จัดทำเสริม:
@@ -33,6 +38,11 @@ PIR ย่อมาจากหลักการใด?
 ## Digital Module และ Hold Time {#module-output}
 
 PIRmodule นำ signal ไปประมวลผลแล้วให้ DO ตามวงจร output อาจ HIGH ค้างหรือ retrigger ตาม mode ต้องตรวจรุ่น / polarity / warmup / holdtime จริง S12 ภาพแพร่หลายไม่บอกรุ่นที่ผู้เรียนถืออยู่ครบ บทนี้สมมติ 3.3VcompatibleactiveHIGH เพื่อ trace เท่านั้น
+
+![PIRตัวอย่างactiveHIGHให้HIGHในช่วงสมมติ2–5และ9–11วินาที;hold/retriggerของmoduleมีผล ไม่ใช่เวลาการเคลื่อนของคนที่ยืนยันแล้ว](images/visual-pir-timeline.webp "รูปเวลาเป็นสัญญาณตัวอย่าง ไม่ใช่ผลทดลองจริง")
+ที่มา: [ภาพเขียนเสริม ตรวจตามเอกสารเทคนิค](https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work)
+
+อ่านภาพ: ช่วงHIGHอาจค้างตามhold timeของmodule จึงไม่ใช่การนับคนและไม่ยืนยันว่าคนเคลื่อนตลอดHIGH;ตรวจpolarity/modeจริงก่อนใช้กับtimer
 
 ข้อควรระวัง: หนึ่งครั้งที่อ่าน HIGH ไม่ใช่หนึ่ง person หรือหนึ่ง movement เสมอ
 

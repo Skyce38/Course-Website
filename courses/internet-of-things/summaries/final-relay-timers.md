@@ -22,6 +22,20 @@
 
 relaycoil เป็นโหลดกำลังต้องใช้ driver / module ที่เหมาะและป้องกัน inductivekick ตามการออกแบบ GPIO ส่ง logic ไป input ที่ compatible เท่านั้น COM / NO / NC เป็นฝั่ง contact ไม่ใช่ VCC / GND ของ logic NO หมายถึงเปิดเมื่อ coil ไม่ energized ตามกลไกที่ระบุ ภาพ ESP8266 ใน S12 ไม่ใช่ pinoutESP32
 
+![GPIO26เข้าขาINของdriver/moduleที่รับlogic3.3VและactiveLOWสมมติ;moduleมีไฟตามสเปก;contactsCOM/NOต่อLEDแรงดันต่ำผ่าน330ΩไปLOADreturn ไม่ใช้mains](images/visual-relay-driver.webp "รูปสวิตช์อยู่สถานะOFF; ขาควบคุมกับขาโหลดเป็นคนละหน้าที่")
+ที่มา: [ภาพเขียนเสริม ตรวจตามเอกสารเทคนิค](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf)
+
+อ่านภาพ: ตรวจmoduleVCC/input/polarityจริง GPIOคุมINเท่านั้น driverในmoduleขับcoil ส่วนCOM/NOเป็นcontactของวงจรLEDแรงดันต่ำ ภาพไม่รับรองisolationหรือbootstateของmoduleจริง
+
+**ตารางตรวจสายของภาพนี้ — ไม่ใช่ลำดับขา header**
+
+| จาก | ถึง | ชนิด / เงื่อนไข |
+|---|---|---|
+| ESP32 GPIO26 | Relay module IN | Signal: input3.3V-compatible,activeLOW assumption |
+| Relay module VCC / GND | แหล่งไฟตามสเปก / GNDร่วมESP32 | Power / Ground: ตรวจmoduleจริง |
+| LOAD+3.3V | COM → NO → R330Ω → LED A | Low-voltage contact circuit; symbol shows OFF |
+| LED K | LOAD− | Load return; not a coil connection |
+
 ข้อควรระวัง: ห้ามต่อ coil เปล่าหรือไฟบ้านบน breadboard สำหรับบทเรียนนี้
 
 ตัวอย่างการให้เหตุผลที่จัดทำเสริม:
@@ -46,6 +60,11 @@ relaycoil เป็นโหลดกำลังต้องใช้ driver / 
 
 เก็บ uint32_t lastSeen กับ now และทดสอบ uint32_t(now-lastSeen)>=10000U เมื่อ LampON และไม่มี motion ใช้เวลาที่สังเกต PIR จริงใน loop ห้าม delay10000 เพราะจะไม่กลับมาอ่าน retrigger sampling / I2Clatency ทำให้เวลาปิดจริงอาจช้ากว่า deadline ตามรอบ poll
 
+![กรณีHIGHsampleที่1000msแล้วไม่มีHIGHใหม่:ตอน10999ยังON ตอน11000OFF;เริ่มOFF;เวลาคิดจากobservedHIGHล่าสุด ไม่ใช่การวัดคนหยุดจริง](images/visual-inactivity-timer.webp "จุด HIGH เป็นsampleเดียว ไม่ใช่การรับรองช่วงเคลื่อนของคน")
+ที่มา: [ภาพเขียนเสริม ตรวจตามเอกสารเทคนิค](https://docs.arduino.cc/language-reference/)
+
+อ่านภาพ: หลังพบHIGHที่1000ms ตัวอย่างใช้elapsed=now−lastSeen;10999−1000=9999จึงยังON และ11000−1000=10000จึงOFFเมื่อไม่มีHIGHใหม่ การpolling/APIอาจเพิ่มlatencyจริง
+
 ข้อควรระวัง: >=รวม exactboundary แต่>จะช้ากว่าเมื่อเวลาเท่าพอดี
 
 ตัวอย่างการให้เหตุผลที่จัดทำเสริม:
@@ -57,6 +76,11 @@ lastSeen1000,now10999; elapsed กี่ ms?
 ## Motion ใหม่รีเซ็ต Inactivity {#retrigger}
 
 เมื่อ observedmotionHIGH ให้ lampON และ lastSeen=now ทุกครั้ง ถ้า LOW ให้ถือ ON จน elapsed ถึง 10000ms การมี HIGH ใหม่แม้ใกล้ deadline ทำให้ deadline เลื่อนไปตาม observation ล่าสุด ไม่ใช้เวลาตั้งแต่เปิดครั้งแรกเป็น inactivitytimer
+
+![HIGHที่1000และ9000msทำให้lastSeen9000 เดิมจะครบ11000แต่ถูกแทนด้วย19000;LOW11000ยังONและLOW19000OFF;HIGHที่deadlineมีสิทธิก่อนtimeoutตามcode](images/visual-motion-retrigger.webp "1000→9000 เป็นสอง observed HIGH samples ไม่ใช่การวัดคนสองคน")
+ที่มา: [ภาพเขียนเสริม ตรวจตามเอกสารเทคนิค](https://docs.arduino.cc/language-reference/)
+
+อ่านภาพ: ติดตามlastSeenที่ถูกเขียนทับ:9,000+10,000=19,000ms จึงไม่ปิดที่11,000ms ถ้าHIGHเข้ารอบพอดีdeadline สาขาmotionจะคงONและเริ่มนับใหม่
 
 ข้อควรระวัง: motiontextLOW ได้แต่ lamp ยัง ON ใน holdwindow
 
