@@ -1,0 +1,254 @@
+{
+  "version": 1,
+  "id": "campus-hw-v1",
+  "source": "DB-D01 + DB-H01 explicitly simulated teaching dataset;no private student records",
+  "sourceSha256": "99807dfe63e044fa6535d8794fdbb18476ad3b4fc8eca0a87d76b1d0d9cebe91",
+  "tables": {
+    "students": [
+      {
+        "student_id": 101,
+        "student_name": "มีนา",
+        "faculty": "Informatics"
+      },
+      {
+        "student_id": 102,
+        "student_name": "ต้น",
+        "faculty": "Science"
+      },
+      {
+        "student_id": 103,
+        "student_name": "ปอนด์",
+        "faculty": "Logistics"
+      },
+      {
+        "student_id": 104,
+        "student_name": "ฟ้า",
+        "faculty": "Nursing"
+      },
+      {
+        "student_id": 105,
+        "student_name": "บีม",
+        "faculty": "Engineering"
+      },
+      {
+        "student_id": 106,
+        "student_name": "นิว",
+        "faculty": "Informatics"
+      },
+      {
+        "student_id": 107,
+        "student_name": "ไอซ์",
+        "faculty": "Humanities"
+      },
+      {
+        "student_id": 108,
+        "student_name": "เจ",
+        "faculty": "Science"
+      }
+    ],
+    "restaurants": [
+      {
+        "restaurant_id": 201,
+        "restaurant_name": "ครัวนมสด",
+        "category": "Thai"
+      },
+      {
+        "restaurant_id": 202,
+        "restaurant_name": "Curry Lab",
+        "category": "Japanese"
+      },
+      {
+        "restaurant_id": 203,
+        "restaurant_name": "หมูปิ้ง AI",
+        "category": "Street Food"
+      },
+      {
+        "restaurant_id": 204,
+        "restaurant_name": "Green Bowl",
+        "category": "Healthy"
+      },
+      {
+        "restaurant_id": 205,
+        "restaurant_name": "Midnight Toast",
+        "category": "Dessert"
+      },
+      {
+        "restaurant_id": 206,
+        "restaurant_name": "NULL Cafe",
+        "category": "Cafe"
+      }
+    ],
+    "orders": [
+      {
+        "order_id": 5001,
+        "student_id": 101,
+        "order_date": "2026-09-14",
+        "total_amount": "159.00",
+        "status": "delivered"
+      },
+      {
+        "order_id": 5002,
+        "student_id": 102,
+        "order_date": "2026-09-15",
+        "total_amount": "89.00",
+        "status": "preparing"
+      },
+      {
+        "order_id": 5003,
+        "student_id": 101,
+        "order_date": "2026-09-17",
+        "total_amount": "120.00",
+        "status": "cancelled"
+      },
+      {
+        "order_id": 5004,
+        "student_id": 103,
+        "order_date": "2026-09-18",
+        "total_amount": "220.00",
+        "status": "delivered"
+      },
+      {
+        "order_id": 5005,
+        "student_id": 104,
+        "order_date": "2026-09-18",
+        "total_amount": "75.00",
+        "status": "delivered"
+      },
+      {
+        "order_id": 5006,
+        "student_id": 105,
+        "order_date": "2026-09-19",
+        "total_amount": "310.00",
+        "status": "delivered"
+      },
+      {
+        "order_id": 5007,
+        "student_id": 102,
+        "order_date": "2026-09-20",
+        "total_amount": "145.00",
+        "status": "delivered"
+      },
+      {
+        "order_id": 5008,
+        "student_id": 103,
+        "order_date": "2026-09-21",
+        "total_amount": "99.00",
+        "status": "cancelled"
+      },
+      {
+        "order_id": 5009,
+        "student_id": 104,
+        "order_date": "2026-09-22",
+        "total_amount": "180.00",
+        "status": "delivered"
+      },
+      {
+        "order_id": 5010,
+        "student_id": 105,
+        "order_date": "2026-09-22",
+        "total_amount": "60.00",
+        "status": "preparing"
+      }
+    ],
+    "order_items": [
+      {
+        "item_id": 7001,
+        "order_id": 5001,
+        "restaurant_id": 201,
+        "menu_name": "ข้าวกะเพรา",
+        "qty": 1
+      },
+      {
+        "item_id": 7002,
+        "order_id": 5001,
+        "restaurant_id": 205,
+        "menu_name": "โทสต์โกโก้",
+        "qty": 1
+      },
+      {
+        "item_id": 7003,
+        "order_id": 5002,
+        "restaurant_id": 203,
+        "menu_name": "หมูปิ้ง",
+        "qty": 2
+      },
+      {
+        "item_id": 7004,
+        "order_id": 5003,
+        "restaurant_id": 204,
+        "menu_name": "ซีซาร์สลัด",
+        "qty": 1
+      },
+      {
+        "item_id": 7005,
+        "order_id": 5004,
+        "restaurant_id": 202,
+        "menu_name": "แกงกะหรี่ญี่ปุ่น",
+        "qty": 2
+      },
+      {
+        "item_id": 7006,
+        "order_id": 5004,
+        "restaurant_id": 205,
+        "menu_name": "โทสต์นมสด",
+        "qty": 1
+      },
+      {
+        "item_id": 7007,
+        "order_id": 5005,
+        "restaurant_id": 201,
+        "menu_name": "ข้าวผัด",
+        "qty": 1
+      },
+      {
+        "item_id": 7008,
+        "order_id": 5006,
+        "restaurant_id": 203,
+        "menu_name": "หมูปิ้ง",
+        "qty": 4
+      },
+      {
+        "item_id": 7009,
+        "order_id": 5006,
+        "restaurant_id": 204,
+        "menu_name": "เบอร์รีสมูทตี",
+        "qty": 2
+      },
+      {
+        "item_id": 7010,
+        "order_id": 5007,
+        "restaurant_id": 202,
+        "menu_name": "ข้าวแกงกะหรี่กะเพรา",
+        "qty": 1
+      },
+      {
+        "item_id": 7011,
+        "order_id": 5008,
+        "restaurant_id": 201,
+        "menu_name": "ก๋วยเตี๋ยว",
+        "qty": 1
+      },
+      {
+        "item_id": 7012,
+        "order_id": 5009,
+        "restaurant_id": 204,
+        "menu_name": "สลัดทูน่า",
+        "qty": 2
+      },
+      {
+        "item_id": 7013,
+        "order_id": 5009,
+        "restaurant_id": 205,
+        "menu_name": "นมสด",
+        "qty": 1
+      },
+      {
+        "item_id": 7014,
+        "order_id": 5010,
+        "restaurant_id": 203,
+        "menu_name": "หมูปิ้ง",
+        "qty": 1
+      }
+    ]
+  }
+}

@@ -1,6 +1,8 @@
 /* Authoring-only: installed Chrome/Playwright + existing Python/Pillow. No site dependency. */
 const fs=require('fs'),path=require('path'),os=require('os'),cp=require('child_process'),assert=require('assert/strict'),crypto=require('crypto');
-const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright'),root=path.resolve(__dirname,'..'),spec=require('./ai-oop-visuals.json'),temp=fs.mkdtempSync(path.join(os.tmpdir(),'study-ai-oop-visual-'));
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright'),root=path.resolve(__dirname,'..'),manifest=process.argv.find(a=>a.startsWith('--manifest='))?.slice(11)||'scripts/ai-oop-visuals.json',manifestFile=path.resolve(root,manifest);
+assert.ok(manifestFile.startsWith(root+path.sep)&&manifest.endsWith('.json'),'Repository-local authoring manifest');
+const spec=JSON.parse(fs.readFileSync(manifestFile)),temp=fs.mkdtempSync(path.join(os.tmpdir(),'study-ai-oop-visual-'));
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
 (async()=>{const b=await chromium.launch({channel:'chrome',headless:true}),p=await b.newPage({viewport:{width:1120,height:1000},deviceScaleFactor:1}),issues=[];
 try{for(const d of spec.assets){
@@ -15,5 +17,5 @@ try{for(const d of spec.assets){
  cp.execFileSync(process.env.STUDY_PYTHON||'python',['-c','from PIL import Image;import sys;im=Image.open(sys.argv[1]).convert("RGB");im.save(sys.argv[2],"WEBP",lossless=True,method=6)',png,webp]);
  const bytes=fs.readFileSync(webp);if(process.argv.includes('--verify'))assert.equal(sha(fs.readFileSync(path.join(root,d.file))),sha(bytes),d.name+': deterministic raster');else{fs.mkdirSync(path.dirname(path.join(root,d.file)),{recursive:true});fs.writeFileSync(path.join(root,d.file),bytes);}
  d.bytes=bytes.length;d.sha256=sha(bytes);d.svgSha256=sha(Buffer.from(svg));d.labelCount=labels.length;
-}if(issues.length)throw Error(issues.join('\n'));if(!process.argv.includes('--verify'))fs.writeFileSync(path.join(root,'scripts/ai-oop-visuals.json'),JSON.stringify(spec,null,2)+'\n');console.log('PASS:'+spec.assets.length+' original diagrams,Thai-shaped fonts,all label bounds/no collisions,lossless WebP;'+spec.assets.reduce((n,d)=>n+d.bytes,0)+' total bytes'+(process.argv.includes('--verify')?' deterministic verified':' exported'));
+}if(issues.length)throw Error(issues.join('\n'));if(!process.argv.includes('--verify'))fs.writeFileSync(manifestFile,JSON.stringify(spec,null,2)+'\n');console.log('PASS:'+spec.assets.length+' original diagrams,Thai-shaped fonts,all label bounds/no collisions,lossless WebP;'+spec.assets.reduce((n,d)=>n+d.bytes,0)+' total bytes'+(process.argv.includes('--verify')?' deterministic verified':' exported'));
 }finally{await b.close();assert.equal(path.dirname(temp),path.resolve(os.tmpdir()));fs.rmSync(temp,{recursive:true,force:true});}})().catch(e=>{console.error(e.stack);process.exit(1)});

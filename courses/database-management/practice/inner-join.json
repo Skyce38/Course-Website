@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "database-management-inner-join",
+  "title": "DB 05 — INNER JOIN และจำนวนแถว",
+  "questions": [
+    {
+      "type": "choice",
+      "reference": "source-data",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: สไลด์JOIN4students/3ordersกับCampus8/10ควรใช้ปนกันหรือไม่?",
+      "explanation": "slidefixtureและhomeworkfixtureเป็นคนละชุด",
+      "id": "db05-q01",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ใช้ได้เพราะชื่อtableเหมือนกัน"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ ต้องระบุdatasetก่อนนับ"
+        },
+        {
+          "id": "c",
+          "text": "ใช้ได้ถ้าINNERJOIN"
+        },
+        {
+          "id": "d",
+          "text": "ทุกdatasetต้องมีแถวเท่ากัน"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "type": "choice",
+      "reference": "matching",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เงื่อนไขJOINCampusstudentsกับordersที่ถูกคืออะไร?",
+      "explanation": "FKstudent_idในordersอ้างPKstudents",
+      "id": "db05-q02",
+      "choices": [
+        {
+          "id": "a",
+          "text": "s.student_id=o.order_id"
+        },
+        {
+          "id": "b",
+          "text": "s.faculty=o.status"
+        },
+        {
+          "id": "c",
+          "text": "s.student_id=o.student_id"
+        },
+        {
+          "id": "d",
+          "text": "s.student_name=o.total_amount"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "type": "numeric",
+      "reference": "multiplicity",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Campus INNERstudents→ordersที่ONstudent_idถูกต้องคืนกี่rows?",
+      "answer": 10,
+      "explanation": "ทุกorderมีstudentที่อ้างได้ จึง10matches แม้มี5คนที่สั่ง",
+      "id": "db05-q03",
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "type": "choice",
+      "reference": "matching",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: INNERJOINจะคืนstudentที่ไม่มีorderหรือไม่?",
+      "explanation": "ถ้าต้องรักษาฝั่งstudentsให้พิจารณาLEFT",
+      "id": "db05-q04",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่ เมื่อไม่มีคู่ตรงON"
+        },
+        {
+          "id": "b",
+          "text": "คืนพร้อมNULLเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "สร้างorderให้เอง"
+        },
+        {
+          "id": "d",
+          "text": "คืนครบทุกstudentเสมอ"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "reference": "multiplicity",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Campusมีนิสิตที่มีorderแตกต่างกันกี่คน และเหตุใดไม่เท่าrowcount?",
+      "explanation": "IDs101–105มีordersหลายแถว;DISTINCTidentityต่างจำนวนmatches",
+      "id": "db05-q05",
+      "choices": [
+        {
+          "id": "a",
+          "text": "10คน เพราะ10rows"
+        },
+        {
+          "id": "b",
+          "text": "5คน เพราะบางคนมีหลายorders"
+        },
+        {
+          "id": "c",
+          "text": "8คน เพราะมีstudents8"
+        },
+        {
+          "id": "d",
+          "text": "3คน เพราะมีNULL3"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "type": "self",
+      "reference": "matching",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เขียนINNERแสดงชื่อและorder_idจากCampus",
+      "rubric": [
+        "FKตรง",
+        "aliasesชัด",
+        "ORDERBYเพื่อผลซ้ำได้"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db05-q06"
+    }
+  ]
+}

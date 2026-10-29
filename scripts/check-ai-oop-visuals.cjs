@@ -28,11 +28,12 @@ for(const [file,hash]of Object.entries(baseline.files)){
  if(expected.includes(file))bytes=Buffer.from(V.strip(read(file)));
  else if(/^read\/(?:artificial-intelligence|oop-python)\//.test(file))bytes=Buffer.from(V.stripHTML(read(file),file,B));
  else bytes=/\.(?:pdf|png|webp|jpe?g|woff2?|ttf|eot)$/i.test(file)?fs.readFileSync(file):Buffer.from(read(file));
+ bytes=require('./database-preservation.cjs').normalize(file,bytes);
  assert.equal(sha(bytes),hash,'Preserved original: '+file);
 }
 for(const source of require('./lessons.json')){
  const meta=B.metadata(read(source)).meta,file='read/'+meta.course+'/'+meta.slug+'.html';
  assert.equal(read(file).includes('assets/ai-oop-visuals.css'),expected.includes(source),'Load visual CSS only in the 25 illustrated readers');
 }
-assert.equal(require('./lessons.json').length,46);assert.equal(require('../assets/insights-banks.json').lessons.flatMap(l=>l.bank.data.questions).length,1380);assert.equal(require('./reading-baseline.json').reduce((n,l)=>n+l.anchors.length,0),370);
+assert.equal(require('./lessons.json').filter(s=>!s.startsWith('courses/database-management/')).length,46);assert.equal(require('../assets/insights-banks.json').lessons.filter(l=>l.course!=='database-management').flatMap(l=>l.bank.data.questions).length,1380);assert.equal(require('./reading-baseline.json').reduce((n,l)=>n+l.anchors.length,0),370);
 console.log('PASS:50 AI/OOP WebPs+SVGs/two per lesson,all hashes/intrinsic sizes/alt/captions/ratios;'+total+' bytes;271 original files preserved after removing only exact figure blocks/styles;46 identities/1380 questions/370 historical anchors/15PDFs/IoT assets/storage unchanged');

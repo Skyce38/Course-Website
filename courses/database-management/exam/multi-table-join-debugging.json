@@ -1,0 +1,680 @@
+{
+  "version": 1,
+  "revision": 1,
+  "baseRevision": 1,
+  "lesson": "database-management-multi-table-join-debugging",
+  "questions": [
+    {
+      "type": "numeric",
+      "reference": "cardinality",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Campusdeliveredfourtable10rowsมีquantityรวมเท่าใด?",
+      "answer": 16,
+      "explanation": "SUMquantityจากitemrowsได้16 ไม่เท่าCOUNTrows10",
+      "id": "db07-q07",
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "COUNT(*) นับแถวผลลัพธ์ COUNT(column) ไม่นับNULL และ COUNT(DISTINCT key) นับidentityที่ต่างกัน การเลือกฟังก์ชันต้องตรงคำถาม มิฉะนั้นได้ตัวเลขจริงแต่ตอบผิดหน่วย"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "cardinality",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: จำนวนdistinctordersในdeliveredfourtableคือเท่าใด?",
+      "explanation": "6orderIDsต่างกันแม้มี10itemrows",
+      "id": "db07-q08",
+      "choices": [
+        {
+          "id": "a",
+          "text": "10"
+        },
+        {
+          "id": "b",
+          "text": "16"
+        },
+        {
+          "id": "c",
+          "text": "6"
+        },
+        {
+          "id": "d",
+          "text": "8"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "COUNT(*) นับแถวผลลัพธ์ COUNT(column) ไม่นับNULL และ COUNT(DISTINCT key) นับidentityที่ต่างกัน การเลือกฟังก์ชันต้องตรงคำถาม มิฉะนั้นได้ตัวเลขจริงแต่ตอบผิดหน่วย"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "debugging",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Ambiguousstudent_idควรแก้อย่างไร?",
+      "explanation": "ทั้งสองtableมีcolumnชื่อนี้จึงต้องqualify",
+      "id": "db07-q09",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ลบWHEREทั้งหมด"
+        },
+        {
+          "id": "b",
+          "text": "renameไฟล์PHP"
+        },
+        {
+          "id": "c",
+          "text": "เปลี่ยนDarkmode"
+        },
+        {
+          "id": "d",
+          "text": "ระบุs.student_idหรือo.student_idตามความหมาย"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ก่อนแก้ query ให้ระบุหน่วยผลลัพธ์ ตรวจ PK/FK ดูตัวอย่างแถว และต่อJOINทีละตัว Wrong key s.student_id=o.order_id เปรียบเทียบ101–108กับ5001–5010จึงไม่จับคู่เลย แม้ชนิดข้อมูลเป็นเลขเหมือนกันก็ไม่ได้หมายถึงสิ่งเดียวกัน ละ ON ใน CROSS JOIN จะได้8×10=80แถว ไม่ใช่10ออเดอร์"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "debugging",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: EXPLAINเป็นหลักฐานใด?",
+      "explanation": "planขึ้นกับversion/index/statisticsและoptimizer",
+      "id": "db07-q10",
+      "choices": [
+        {
+          "id": "a",
+          "text": "แผนที่engineประมาณ ไม่ใช่เวลาที่รันจริง"
+        },
+        {
+          "id": "b",
+          "text": "ผลคะแนนExam"
+        },
+        {
+          "id": "c",
+          "text": "เวลารันแน่นอนทุกเครื่อง"
+        },
+        {
+          "id": "d",
+          "text": "คำรับรองว่าต้องJOINตามข้อความซ้ายไปขวา"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ก่อนแก้ query ให้ระบุหน่วยผลลัพธ์ ตรวจ PK/FK ดูตัวอย่างแถว และต่อJOINทีละตัว Wrong key s.student_id=o.order_id เปรียบเทียบ101–108กับ5001–5010จึงไม่จับคู่เลย แม้ชนิดข้อมูลเป็นเลขเหมือนกันก็ไม่ได้หมายถึงสิ่งเดียวกัน ละ ON ใน CROSS JOIN จะได้8×10=80แถว ไม่ใช่10ออเดอร์"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "relations",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: restaurantหนึ่งอาจมีหลายitemrowsจากต่างordersหรือไม่?",
+      "explanation": "uniqueparentไม่ได้ห้ามchildหลายrows",
+      "id": "db07-q11",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่ได้เพราะrestaurantPKunique"
+        },
+        {
+          "id": "b",
+          "text": "ได้ตาม1:Nของrestaurant→items"
+        },
+        {
+          "id": "c",
+          "text": "ต้องมีrestaurantต่อคนเท่านั้น"
+        },
+        {
+          "id": "d",
+          "text": "ทำให้FKผิดเสมอ"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Campus Delivery เชื่อม students.student_id → orders.student_id, orders.order_id → order_items.order_id และ restaurants.restaurant_id → order_items.restaurant_id ร้านอาหารไม่ได้ผูกโดยตรงกับ orders ใน schema นี้ ออเดอร์เดียวจึงอาจมีรายการจากหลายร้าน ต้องอ่าน schema จริงก่อนสมมติความสัมพันธ์"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "homework",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: restaurantsLEFTitemsครบทุกstatusได้กี่rowsในCampus?",
+      "explanation": "14itemmatches+1unmatchedrestaurant206",
+      "id": "db07-q12",
+      "choices": [
+        {
+          "id": "a",
+          "text": "6"
+        },
+        {
+          "id": "b",
+          "text": "14"
+        },
+        {
+          "id": "c",
+          "text": "15"
+        },
+        {
+          "id": "d",
+          "text": "10"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตารางนี้ชี้ไปยังคำสั่งที่ทดสอบใน scripts/database-queries.json และผลที่แสดงในบทDB05–07 นักศึกษาควรเขียนและอธิบายเอง ไม่คัดลอกเป็นคำตอบส่งงานโดยไม่เข้าใจ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "cardinality",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: COUNT(*)หลังstudentsLEFTordersเทียบCOUNT(order_id)ต่างเท่าใดในfixture?",
+      "explanation": "สามunmatchedrowsมีorder_idNULL",
+      "id": "db07-q13",
+      "choices": [
+        {
+          "id": "a",
+          "text": "8กับ8"
+        },
+        {
+          "id": "b",
+          "text": "10กับ13"
+        },
+        {
+          "id": "c",
+          "text": "0กับ3"
+        },
+        {
+          "id": "d",
+          "text": "13กับ10"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "COUNT(*) นับแถวผลลัพธ์ COUNT(column) ไม่นับNULL และ COUNT(DISTINCT key) นับidentityที่ต่างกัน การเลือกฟังก์ชันต้องตรงคำถาม มิฉะนั้นได้ตัวเลขจริงแต่ตอบผิดหน่วย"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "debugging",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: CROSSJOIN8students10ordersได้กี่คู่?",
+      "explanation": "Cartesianproduct8×10;ไม่ใช่FKmatching",
+      "id": "db07-q14",
+      "choices": [
+        {
+          "id": "a",
+          "text": "80"
+        },
+        {
+          "id": "b",
+          "text": "18"
+        },
+        {
+          "id": "c",
+          "text": "10"
+        },
+        {
+          "id": "d",
+          "text": "8"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ก่อนแก้ query ให้ระบุหน่วยผลลัพธ์ ตรวจ PK/FK ดูตัวอย่างแถว และต่อJOINทีละตัว Wrong key s.student_id=o.order_id เปรียบเทียบ101–108กับ5001–5010จึงไม่จับคู่เลย แม้ชนิดข้อมูลเป็นเลขเหมือนกันก็ไม่ได้หมายถึงสิ่งเดียวกัน ละ ON ใน CROSS JOIN จะได้8×10=80แถว ไม่ใช่10ออเดอร์"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "cardinality",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: SUM(DISTINCTtotal_amount)แก้ยอดซ้ำจากJOINได้ทั่วไปหรือไม่?",
+      "explanation": "DISTINCTvalueไม่ใช่DISTINCTorderidentity",
+      "id": "db07-q15",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ได้ทุกdataset"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ ordersต่างกันอาจมียอดเท่ากัน"
+        },
+        {
+          "id": "c",
+          "text": "ทำให้COUNTitemsถูกเอง"
+        },
+        {
+          "id": "d",
+          "text": "เท่ากับSUMระดับorderเสมอ"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "COUNT(*) นับแถวผลลัพธ์ COUNT(column) ไม่นับNULL และ COUNT(DISTINCT key) นับidentityที่ต่างกัน การเลือกฟังก์ชันต้องตรงคำถาม มิฉะนั้นได้ตัวเลขจริงแต่ตอบผิดหน่วย"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "debugging",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: IndexบนFKอาจมีข้อแลกเปลี่ยนใด?",
+      "explanation": "indexไม่ใช่คำรับรองperformanceทุกขนาดข้อมูล",
+      "id": "db07-q16",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่ใช้พื้นที่เลย"
+        },
+        {
+          "id": "b",
+          "text": "ทำให้ทุกqueryเร็วขึ้นแน่นอน"
+        },
+        {
+          "id": "c",
+          "text": "ช่วยค้นหาแต่ใช้พื้นที่และค่าเขียนเพิ่มเติม"
+        },
+        {
+          "id": "d",
+          "text": "แทนAuthorization"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ก่อนแก้ query ให้ระบุหน่วยผลลัพธ์ ตรวจ PK/FK ดูตัวอย่างแถว และต่อJOINทีละตัว Wrong key s.student_id=o.order_id เปรียบเทียบ101–108กับ5001–5010จึงไม่จับคู่เลย แม้ชนิดข้อมูลเป็นเลขเหมือนกันก็ไม่ได้หมายถึงสิ่งเดียวกัน ละ ON ใน CROSS JOIN จะได้8×10=80แถว ไม่ใช่10ออเดอร์"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "debugging",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ตารางเล็กEXPLAINเป็นALLต้องแก้เป็นindexscanเสมอหรือไม่?",
+      "explanation": "optimizercostและขนาดtableสำคัญ",
+      "id": "db07-q17",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ต้องเสมอทุกquery"
+        },
+        {
+          "id": "b",
+          "text": "แปลว่าsyntaxผิด"
+        },
+        {
+          "id": "c",
+          "text": "แปลว่าFKไม่มีทุกครั้ง"
+        },
+        {
+          "id": "d",
+          "text": "ไม่ fullscanอาจเหมาะสม ต้องวัดบริบท"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ก่อนแก้ query ให้ระบุหน่วยผลลัพธ์ ตรวจ PK/FK ดูตัวอย่างแถว และต่อJOINทีละตัว Wrong key s.student_id=o.order_id เปรียบเทียบ101–108กับ5001–5010จึงไม่จับคู่เลย แม้ชนิดข้อมูลเป็นเลขเหมือนกันก็ไม่ได้หมายถึงสิ่งเดียวกัน ละ ON ใน CROSS JOIN จะได้8×10=80แถว ไม่ใช่10ออเดอร์"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "relations",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: orderเดียวดึงอาหารจากหลายร้านได้ตามschemaนี้หรือไม่?",
+      "explanation": "อย่าสมมติbusinessconstraintที่schema/sourceไม่ได้ระบุ",
+      "id": "db07-q18",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ได้ ร้านถูกอ้างที่item"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ได้เพราะorderมีFKrestaurantโดยตรงเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "ได้เฉพาะNULLCafe"
+        },
+        {
+          "id": "d",
+          "text": "FKห้ามทั้งหมด"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Campus Delivery เชื่อม students.student_id → orders.student_id, orders.order_id → order_items.order_id และ restaurants.restaurant_id → order_items.restaurant_id ร้านอาหารไม่ได้ผูกโดยตรงกับ orders ใน schema นี้ ออเดอร์เดียวจึงอาจมีรายการจากหลายร้าน ต้องอ่าน schema จริงก่อนสมมติความสัมพันธ์"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "four-table",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ถ้าต้องการuniqueorderidsควรเลือกอะไร?",
+      "explanation": "เลือกidentityตรงหน่วยที่ถาม",
+      "id": "db07-q19",
+      "choices": [
+        {
+          "id": "a",
+          "text": "DISTINCTmenu_nameเพื่อแทนorder"
+        },
+        {
+          "id": "b",
+          "text": "DISTINCTo.order_id"
+        },
+        {
+          "id": "c",
+          "text": "COUNTrestaurantอย่างเดียว"
+        },
+        {
+          "id": "d",
+          "text": "ทุกitem_idแล้วเรียกorderlist"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เริ่มจากสองตารางแล้วเพิ่มตารางลูกทีละตัว จำนวนแถวของผลสุดท้ายเป็นจำนวนการจับคู่ ไม่ใช่จำนวนออเดอร์ distinct เมื่อเลือกเฉพาะ delivered จะได้10แถวจาก6ออเดอร์ รวม quantity16หน่วย การมีสองรายการในออเดอร์เดียวทำให้ order_id ซ้ำอย่างถูกต้อง"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "homework",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: การบ้าน13ข้อถูกใช้ในบทเรียนอย่างไร?",
+      "explanation": "ข้อจำกัดหลักฐานต้องชัด",
+      "id": "db07-q20",
+      "choices": [
+        {
+          "id": "a",
+          "text": "อ้างว่าเป็นFinalexamจริงทั้งหมด"
+        },
+        {
+          "id": "b",
+          "text": "อ้างน้ำหนักคะแนนแน่นอน"
+        },
+        {
+          "id": "c",
+          "text": "อ้างโจทย์และให้การคำนวณอิสระ ไม่อ้างofficialexamkey"
+        },
+        {
+          "id": "d",
+          "text": "คัดsourcePDFขึ้นpublic"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตารางนี้ชี้ไปยังคำสั่งที่ทดสอบใน scripts/database-queries.json และผลที่แสดงในบทDB05–07 นักศึกษาควรเขียนและอธิบายเอง ไม่คัดลอกเป็นคำตอบส่งงานโดยไม่เข้าใจ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "debugging",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ควรเริ่มdebugmultiJOINด้วยวิธีใด?",
+      "explanation": "incrementalverificationช่วยพบจุดขยาย/หาย",
+      "id": "db07-q21",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ใส่DISTINCTจนตัวเลขพอดี"
+        },
+        {
+          "id": "b",
+          "text": "เปลี่ยนทุกJOINเป็นCROSS"
+        },
+        {
+          "id": "c",
+          "text": "ลบconstraints"
+        },
+        {
+          "id": "d",
+          "text": "ต่อทีละtableและตรวจkey/ตัวอย่างrows/จำนวน"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ก่อนแก้ query ให้ระบุหน่วยผลลัพธ์ ตรวจ PK/FK ดูตัวอย่างแถว และต่อJOINทีละตัว Wrong key s.student_id=o.order_id เปรียบเทียบ101–108กับ5001–5010จึงไม่จับคู่เลย แม้ชนิดข้อมูลเป็นเลขเหมือนกันก็ไม่ได้หมายถึงสิ่งเดียวกัน ละ ON ใน CROSS JOIN จะได้8×10=80แถว ไม่ใช่10ออเดอร์"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "cardinality",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: COUNT(DISTINCTstudent_id)ในLEFTทั้งชุดตอบอะไร?",
+      "explanation": "countidentityต่างcountrow",
+      "id": "db07-q22",
+      "choices": [
+        {
+          "id": "a",
+          "text": "จำนวนนิสิตต่างกันที่ถูกรักษา8"
+        },
+        {
+          "id": "b",
+          "text": "จำนวนorders10"
+        },
+        {
+          "id": "c",
+          "text": "quantity21"
+        },
+        {
+          "id": "d",
+          "text": "จำนวนitems14"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "COUNT(*) นับแถวผลลัพธ์ COUNT(column) ไม่นับNULL และ COUNT(DISTINCT key) นับidentityที่ต่างกัน การเลือกฟังก์ชันต้องตรงคำถาม มิฉะนั้นได้ตัวเลขจริงแต่ตอบผิดหน่วย"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "debugging",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เพิ่มWHEREright.statusหลังLEFTโดยไม่ตรวจผลเสี่ยงอะไร?",
+      "explanation": "ดูONvsWHEREตามความต้องการจริง",
+      "id": "db07-q23",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทำให้เป็นRIGHTทุกกรณี"
+        },
+        {
+          "id": "b",
+          "text": "ตัดnull-extendedrowsที่ควรอยู่"
+        },
+        {
+          "id": "c",
+          "text": "เข้ารหัสpassword"
+        },
+        {
+          "id": "d",
+          "text": "เพิ่มrestaurantอัตโนมัติ"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ก่อนแก้ query ให้ระบุหน่วยผลลัพธ์ ตรวจ PK/FK ดูตัวอย่างแถว และต่อJOINทีละตัว Wrong key s.student_id=o.order_id เปรียบเทียบ101–108กับ5001–5010จึงไม่จับคู่เลย แม้ชนิดข้อมูลเป็นเลขเหมือนกันก็ไม่ได้หมายถึงสิ่งเดียวกัน ละ ON ใน CROSS JOIN จะได้8×10=80แถว ไม่ใช่10ออเดอร์"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "homework",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: หา206ที่ไม่มีitemควรเช็กอะไรหลังrestaurantsLEFTitems?",
+      "explanation": "itemPKnonnullบอกmissingrelatedrowได้",
+      "id": "db07-q24",
+      "choices": [
+        {
+          "id": "a",
+          "text": "r.restaurant_nameISNULL"
+        },
+        {
+          "id": "b",
+          "text": "r.restaurant_idISNULL"
+        },
+        {
+          "id": "c",
+          "text": "i.item_idISNULL"
+        },
+        {
+          "id": "d",
+          "text": "i.quantity=0"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตารางนี้ชี้ไปยังคำสั่งที่ทดสอบใน scripts/database-queries.json และผลที่แสดงในบทDB05–07 นักศึกษาควรเขียนและอธิบายเอง ไม่คัดลอกเป็นคำตอบส่งงานโดยไม่เข้าใจ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "four-table",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: qtyรวม16กับdeliveredorders6เป็นข้อมูลขัดกันหรือไม่?",
+      "explanation": "แจกแจงระดับorder/item/quantity",
+      "id": "db07-q25",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ขัดเพราะต้องเท่ากัน"
+        },
+        {
+          "id": "b",
+          "text": "ขัดเพราะqtyต้อง1เสมอ"
+        },
+        {
+          "id": "c",
+          "text": "แปลว่าSQLfailed"
+        },
+        {
+          "id": "d",
+          "text": "ไม่ หน่วยต่างและorderมีหลายitems/qty"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เริ่มจากสองตารางแล้วเพิ่มตารางลูกทีละตัว จำนวนแถวของผลสุดท้ายเป็นจำนวนการจับคู่ ไม่ใช่จำนวนออเดอร์ distinct เมื่อเลือกเฉพาะ delivered จะได้10แถวจาก6ออเดอร์ รวม quantity16หน่วย การมีสองรายการในออเดอร์เดียวทำให้ order_id ซ้ำอย่างถูกต้อง"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "debugging",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: มี10rowsตามexpectedแต่ชื่อร้านผิดทั้งหมด จะถือqueryผ่านหรือไม่?",
+      "explanation": "oracleควรตรวจrowvaluesและkeysนอกเหนือจำนวน",
+      "id": "db07-q26",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่ ต้องเทียบค่าทุกfield"
+        },
+        {
+          "id": "b",
+          "text": "ผ่านเพราะcountตรง"
+        },
+        {
+          "id": "c",
+          "text": "ผ่านถ้าEXPLAINมีindex"
+        },
+        {
+          "id": "d",
+          "text": "ผ่านถ้าCSSไม่มีoverflow"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ก่อนแก้ query ให้ระบุหน่วยผลลัพธ์ ตรวจ PK/FK ดูตัวอย่างแถว และต่อJOINทีละตัว Wrong key s.student_id=o.order_id เปรียบเทียบ101–108กับ5001–5010จึงไม่จับคู่เลย แม้ชนิดข้อมูลเป็นเลขเหมือนกันก็ไม่ได้หมายถึงสิ่งเดียวกัน ละ ON ใน CROSS JOIN จะได้8×10=80แถว ไม่ใช่10ออเดอร์"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "cardinality",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: แก้ปัญหาSUMยอดorderซ้ำโดยไม่ใช้SUMDISTINCTแบบผิดหน่วย",
+      "rubric": [
+        "ระบุเหตุซ้ำ",
+        "รวมต่อorderก่อน",
+        "ยกกรณียอดเท่ากันต่างorder"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db07-q27",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "COUNT(*) นับแถวผลลัพธ์ COUNT(column) ไม่นับNULL และ COUNT(DISTINCT key) นับidentityที่ต่างกัน การเลือกฟังก์ชันต้องตรงคำถาม มิฉะนั้นได้ตัวเลขจริงแต่ตอบผิดหน่วย"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "debugging",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: อธิบายwrongkeyและambiguouscolumnพร้อมแนวแก้",
+      "rubric": [
+        "คีย์คนละmeaning",
+        "qualifyalias",
+        "ตรวจsampleก่อนนับ"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db07-q28",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ก่อนแก้ query ให้ระบุหน่วยผลลัพธ์ ตรวจ PK/FK ดูตัวอย่างแถว และต่อJOINทีละตัว Wrong key s.student_id=o.order_id เปรียบเทียบ101–108กับ5001–5010จึงไม่จับคู่เลย แม้ชนิดข้อมูลเป็นเลขเหมือนกันก็ไม่ได้หมายถึงสิ่งเดียวกัน ละ ON ใน CROSS JOIN จะได้8×10=80แถว ไม่ใช่10ออเดอร์"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "homework",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ออกแบบtestร้านไม่มีรายการโดยไม่ปนNULLCafeกับNULL",
+      "rubric": [
+        "LEFTจากrestaurants",
+        "PKitemISNULL",
+        "ผลrestaurant206"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db07-q29",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ตารางนี้ชี้ไปยังคำสั่งที่ทดสอบใน scripts/database-queries.json และผลที่แสดงในบทDB05–07 นักศึกษาควรเขียนและอธิบายเอง ไม่คัดลอกเป็นคำตอบส่งงานโดยไม่เข้าใจ"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "debugging",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เขียนข้อจำกัดการอ่านEXPLAINและIndex",
+      "rubric": [
+        "version/statisticsมีผล",
+        "planไม่ใช่เวลา",
+        "วัดperformanceจริงก่อนสรุป"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db07-q30",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ก่อนแก้ query ให้ระบุหน่วยผลลัพธ์ ตรวจ PK/FK ดูตัวอย่างแถว และต่อJOINทีละตัว Wrong key s.student_id=o.order_id เปรียบเทียบ101–108กับ5001–5010จึงไม่จับคู่เลย แม้ชนิดข้อมูลเป็นเลขเหมือนกันก็ไม่ได้หมายถึงสิ่งเดียวกัน ละ ON ใน CROSS JOIN จะได้8×10=80แถว ไม่ใช่10ออเดอร์"
+      }
+    }
+  ]
+}

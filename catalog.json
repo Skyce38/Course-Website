@@ -60,7 +60,7 @@
       "thai": "การจัดการฐานข้อมูล",
       "short": "DB",
       "repo": "Course-Website",
-      "code": "",
+      "code": "89022167",
       "color": "#795d71",
       "tags": [
         "Database",
@@ -876,6 +876,116 @@
       "reader": "read/internet-of-things/final-oled-integration.html",
       "generatedLesson": 1,
       "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/internet-of-things/summaries/final-oled-integration.md"
+    },
+    {
+      "id": "database-management-web-database-architecture",
+      "course": "database-management",
+      "category": "summaries",
+      "title": "DB 01 — เว็บ เซิร์ฟเวอร์ และฐานข้อมูล",
+      "path": "summaries/web-database-architecture.md",
+      "format": "MD",
+      "reader": "read/database-management/web-database-architecture.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/database-management/summaries/web-database-architecture.md"
+    },
+    {
+      "id": "database-management-schema-relationships",
+      "course": "database-management",
+      "category": "summaries",
+      "title": "DB 02 — ตาราง คีย์ และความสัมพันธ์",
+      "path": "summaries/schema-relationships.md",
+      "format": "MD",
+      "reader": "read/database-management/schema-relationships.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/database-management/summaries/schema-relationships.md"
+    },
+    {
+      "id": "database-management-select-php-rendering",
+      "course": "database-management",
+      "category": "summaries",
+      "title": "DB 03 — SELECT, mysqli และการแสดงข้อมูล",
+      "path": "summaries/select-php-rendering.md",
+      "format": "MD",
+      "reader": "read/database-management/select-php-rendering.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/database-management/summaries/select-php-rendering.md"
+    },
+    {
+      "id": "database-management-crud-prepared-statements",
+      "course": "database-management",
+      "category": "summaries",
+      "title": "DB 04 — CRUD และ Prepared Statements",
+      "path": "summaries/crud-prepared-statements.md",
+      "format": "MD",
+      "reader": "read/database-management/crud-prepared-statements.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/database-management/summaries/crud-prepared-statements.md"
+    },
+    {
+      "id": "database-management-inner-join",
+      "course": "database-management",
+      "category": "summaries",
+      "title": "DB 05 — INNER JOIN และจำนวนแถว",
+      "path": "summaries/inner-join.md",
+      "format": "MD",
+      "reader": "read/database-management/inner-join.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/database-management/summaries/inner-join.md"
+    },
+    {
+      "id": "database-management-outer-join-null",
+      "course": "database-management",
+      "category": "summaries",
+      "title": "DB 06 — LEFT JOIN, RIGHT JOIN และ NULL",
+      "path": "summaries/outer-join-null.md",
+      "format": "MD",
+      "reader": "read/database-management/outer-join-null.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/database-management/summaries/outer-join-null.md"
+    },
+    {
+      "id": "database-management-multi-table-join-debugging",
+      "course": "database-management",
+      "category": "summaries",
+      "title": "DB 07 — เชื่อมหลายตารางและแก้ข้อผิดพลาด",
+      "path": "summaries/multi-table-join-debugging.md",
+      "format": "MD",
+      "reader": "read/database-management/multi-table-join-debugging.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/database-management/summaries/multi-table-join-debugging.md"
+    },
+    {
+      "id": "database-management-authentication-authorization",
+      "course": "database-management",
+      "category": "summaries",
+      "title": "DB 08 — ยืนยันตัวตนและกำหนดสิทธิ์",
+      "path": "summaries/authentication-authorization.md",
+      "format": "MD",
+      "reader": "read/database-management/authentication-authorization.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/database-management/summaries/authentication-authorization.md"
+    },
+    {
+      "id": "database-management-git-version-control",
+      "course": "database-management",
+      "category": "summaries",
+      "title": "DB 09 — Git GitHub และการทำงานร่วมกัน",
+      "path": "summaries/git-version-control.md",
+      "format": "MD",
+      "reader": "read/database-management/git-version-control.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/database-management/summaries/git-version-control.md"
+    },
+    {
+      "id": "database-management-integrated-project",
+      "course": "database-management",
+      "category": "summaries",
+      "title": "DB 10 — โครงงานฐานข้อมูลแบบบูรณาการ",
+      "path": "summaries/integrated-project.md",
+      "format": "MD",
+      "reader": "read/database-management/integrated-project.html",
+      "generatedLesson": 1,
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/database-management/summaries/integrated-project.md"
     }
   ]
 }

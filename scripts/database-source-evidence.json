@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "baseline": "795152c2361a1f9c57309555a7383e7980b269df",
+  "sources": [
+    {
+      "name": "campus_delivery_homework.sql",
+      "bytes": 3736,
+      "sha256": "99807dfe63e044fa6535d8794fdbb18476ad3b4fc8eca0a87d76b1d0d9cebe91",
+      "id": "DB-D01",
+      "availability": "User-supplied local-only source;not published or linked as a public file"
+    },
+    {
+      "name": "Database_JOIN_Homework_Student.docx",
+      "bytes": 37388,
+      "sha256": "6cdd5d1ee145012ef0d30147f6f168732fcdd0d0f3b0483fc5482e70dcaa74f8",
+      "paragraphs": 54,
+      "tables": 5,
+      "id": "DB-H01",
+      "availability": "User-supplied local-only source;not published or linked as a public file"
+    },
+    {
+      "name": "httpsgithub.comwyookwan69-database.txt",
+      "bytes": 94,
+      "sha256": "258c86af383964b8dc7ce486da241a67f92666a0115a121b59d7b0148f1e6625",
+      "id": "DB-R01",
+      "availability": "User-supplied local-only source;not published or linked as a public file"
+    },
+    {
+      "name": "CRUD-and-VERSION-CONTROL.pdf",
+      "bytes": 283102,
+      "sha256": "66fa495351667c7a84a9bf0f12b2359f7cd22ad46543a0604f24b7adc2996ea6",
+      "pages": 36,
+      "id": "DB-S01",
+      "availability": "User-supplied local-only source;not published or linked as a public file"
+    },
+    {
+      "name": "Data-base-join.pdf",
+      "bytes": 466687,
+      "sha256": "4756ae00f2f3331e20e365dbc05c16b3df2d73a8b895c8828b3cc527ce2ae64a",
+      "pages": 32,
+      "id": "DB-S02",
+      "availability": "User-supplied local-only source;not published or linked as a public file"
+    },
+    {
+      "name": "Database-authen.pdf",
+      "bytes": 347970,
+      "sha256": "d4fe127c884ef8bb0da82fa0de542c5a444efb23bd8356f5fd77b9ab7a80503a",
+      "pages": 37,
+      "id": "DB-S03",
+      "availability": "User-supplied local-only source;not published or linked as a public file"
+    },
+    {
+      "name": "Archive.zip",
+      "bytes": 19214,
+      "sha256": "45e61869275feb993dc214647ae5e026c1aeabb60a55b96dcc4042344f260b9a",
+      "id": "DB-Z01",
+      "availability": "User-supplied local-only source;not published or linked as a public file",
+      "zipEntries": 24,
+      "excludedSensitiveNames": [],
+      "unsafeEntries": 0
+    },
+    {
+      "name": "student.zip",
+      "bytes": 19350,
+      "sha256": "ad120e8b06dc4870a470d49c3033aa093db7fd12e638ae900a6330fa918ff9ba",
+      "id": "DB-Z02",
+      "availability": "User-supplied local-only source;not published or linked as a public file",
+      "zipEntries": 22,
+      "excludedSensitiveNames": [
+        "student/.env",
+        "student/secret/",
+        "student/secret/config.php"
+      ],
+      "unsafeEntries": 0
+    }
+  ],
+  "publicRepository": {
+    "repository": "https://github.com/wyookwan/69-database",
+    "commit": "3d37dd32001b7132478c64092ed93009421146cd",
+    "accessed": "2026-10-29T14:25:18.677Z"
+  },
+  "courseCode": {
+    "value": "89022167",
+    "reference": "https://www.buu.ac.th/web-course/detail.php?key=MTA1MQ&lang=en",
+    "verified": "2026-10-29"
+  },
+  "remoteResource": {
+    "url": "https://angsila.cs.buu.ac.th/~watcharaphong.yk/myphp/",
+    "availability": "Fetch failed during this audit;no server credentials/version/deployment inferred"
+  }
+}

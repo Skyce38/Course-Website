@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "database-management-outer-join-null",
+  "title": "DB 06 — LEFT JOIN, RIGHT JOIN และ NULL",
+  "questions": [
+    {
+      "type": "choice",
+      "reference": "preserved",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: students s LEFTJOINorders oรักษาฝั่งใด?",
+      "explanation": "LEFTอ้างoperandซ้ายของคำสั่งจริง ไม่ดูVennlabelที่จำมา",
+      "id": "db06-q01",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ordersเท่านั้น"
+        },
+        {
+          "id": "b",
+          "text": "ฝั่งที่มีrowsมากกว่าเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "students"
+        },
+        {
+          "id": "d",
+          "text": "ฝั่งที่มีชื่อสั้นกว่า"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "type": "numeric",
+      "reference": "preserved",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: CampusstudentsLEFTorders ONstudent_idถูกต้องได้กี่resultrows?",
+      "answer": 13,
+      "explanation": "10matchingorders+3unmatchedstudentsที่เติมNULL",
+      "id": "db06-q02",
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "type": "choice",
+      "reference": "null",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เงื่อนไขหานิสิตไม่มีorderที่เหมาะสมคืออะไร?",
+      "explanation": "เลือกPKฝั่งorderที่ไม่NULLเพื่อบอกmissingrow",
+      "id": "db06-q03",
+      "choices": [
+        {
+          "id": "a",
+          "text": "o.order_id IS NULLหลังLEFT"
+        },
+        {
+          "id": "b",
+          "text": "o.order_id=NULL"
+        },
+        {
+          "id": "c",
+          "text": "s.student_id IS NULL"
+        },
+        {
+          "id": "d",
+          "text": "o.total_amount=0เสมอ"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "reference": "anti-join",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: นิสิตCampusที่ไม่มีordersคือชุดใด?",
+      "explanation": "ตรวจstudentIDsที่ไม่ปรากฏในordersFK",
+      "id": "db06-q04",
+      "choices": [
+        {
+          "id": "a",
+          "text": "101,102,103"
+        },
+        {
+          "id": "b",
+          "text": "106,107,108"
+        },
+        {
+          "id": "c",
+          "text": "104,105,106"
+        },
+        {
+          "id": "d",
+          "text": "201,202,203"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "type": "choice",
+      "reference": "right-left",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: orders RIGHTJOINstudentsรักษาอะไร?",
+      "explanation": "RIGHTรักษาoperandขวาซึ่งคือstudentsในคำสั่งนี้",
+      "id": "db06-q05",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ordersเท่านั้น"
+        },
+        {
+          "id": "b",
+          "text": "ไม่มีตารางใด"
+        },
+        {
+          "id": "c",
+          "text": "students"
+        },
+        {
+          "id": "d",
+          "text": "restaurantเสมอ"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "type": "self",
+      "reference": "on-where",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เปรียบเทียบLEFTONdeliveredกับLEFTWHEREdelivered",
+      "rubric": [
+        "คำนวณ9vs6",
+        "อธิบายnull-extension",
+        "ระบุต้องการรักษาคนหรือไม่"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db06-q06"
+    }
+  ]
+}

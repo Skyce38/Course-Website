@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "database-management-select-php-rendering",
+  "title": "DB 03 — SELECT, mysqli และการแสดงข้อมูล",
+  "questions": [
+    {
+      "type": "choice",
+      "reference": "select",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: SELECTที่ต้องการเฉพาะskillของownerควรมีอะไร?",
+      "explanation": "จำกัดข้อมูลฝั่งDB ไม่ส่งของคนอื่นให้client",
+      "id": "db03-q01",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ORDER BY password"
+        },
+        {
+          "id": "b",
+          "text": "WHERE 1=1แทนowner"
+        },
+        {
+          "id": "c",
+          "text": "SELECTทุกคนแล้วซ่อนด้วยCSS"
+        },
+        {
+          "id": "d",
+          "text": "WHERE profile_id=? ที่bindจากsessionowner"
+        }
+      ],
+      "answer": "d"
+    },
+    {
+      "type": "choice",
+      "reference": "fetch",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: mysqli_queryกับmysqli_fetch_assocต่างกันอย่างไร?",
+      "explanation": "queryสำเร็จไม่เท่ากับดึงครบทุกrow",
+      "id": "db03-q02",
+      "choices": [
+        {
+          "id": "a",
+          "text": "queryส่งSQL;fetchอ่านrowจากresultทีละแถว"
+        },
+        {
+          "id": "b",
+          "text": "ทั้งคู่ทำINSERTเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "fetchเปิดBrowser"
+        },
+        {
+          "id": "d",
+          "text": "queryescapeHTMLให้แล้ว"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "reference": "escaping",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ค่าskillชื่อ<script>ควรแสดงเป็นtextอย่างไรในHTML?",
+      "explanation": "escapingoutputกันtagถูกตีความ ไม่ใช่parameterbinding",
+      "id": "db03-q03",
+      "choices": [
+        {
+          "id": "a",
+          "text": "นำไปechoดิบ"
+        },
+        {
+          "id": "b",
+          "text": "htmlspecialcharsตามบริบท"
+        },
+        {
+          "id": "c",
+          "text": "ลบWHERE"
+        },
+        {
+          "id": "d",
+          "text": "ใช้gitadd"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "type": "choice",
+      "reference": "select",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ถ้าต้องการลำดับrowsที่แน่นอนควรทำอะไร?",
+      "explanation": "SQLไม่รับรองลำดับเมื่อไม่มีORDERBY",
+      "id": "db03-q04",
+      "choices": [
+        {
+          "id": "a",
+          "text": "อาศัยลำดับINSERTเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "อาศัยPKโดยไม่ORDERBYทุกกรณี"
+        },
+        {
+          "id": "c",
+          "text": "ORDER BYพร้อมtiekeyที่กำหนดชัด"
+        },
+        {
+          "id": "d",
+          "text": "เรียงตามCSS"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "type": "choice",
+      "reference": "fetch",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: fetch_assocครั้งเดียวเพียงพอสำหรับหลายskillsหรือไม่?",
+      "explanation": "หนึ่งfetchคืนหนึ่งrowหรือend ต้องloop",
+      "id": "db03-q05",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เพียงพอเพราะได้ทุกrowsอัตโนมัติ"
+        },
+        {
+          "id": "b",
+          "text": "ต้องเรียกDROPก่อน"
+        },
+        {
+          "id": "c",
+          "text": "ได้arrayของทุกtable"
+        },
+        {
+          "id": "d",
+          "text": "ไม่ ต้องวนอ่านจนหมด"
+        }
+      ],
+      "answer": "d"
+    },
+    {
+      "type": "self",
+      "reference": "fetch",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เขียนpseudocodeอ่านทุกskillแล้วจัดempty state",
+      "rubric": [
+        "queryownerชัด",
+        "loopfetchจนหมด",
+        "แยกemptyกับerror"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db03-q06"
+    }
+  ]
+}

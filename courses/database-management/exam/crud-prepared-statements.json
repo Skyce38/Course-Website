@@ -1,0 +1,696 @@
+{
+  "version": 1,
+  "revision": 1,
+  "baseRevision": 1,
+  "lesson": "database-management-crud-prepared-statements",
+  "questions": [
+    {
+      "type": "choice",
+      "reference": "binding",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Preparedstatementแยกส่วนใด?",
+      "explanation": "ทำให้inputไม่กลายเป็นSQLoperator",
+      "id": "db04-q07",
+      "choices": [
+        {
+          "id": "a",
+          "text": "HTMLกับCSSเท่านั้น"
+        },
+        {
+          "id": "b",
+          "text": "LoginกับLogoutโดยอัตโนมัติ"
+        },
+        {
+          "id": "c",
+          "text": "โครงสร้างSQLกับค่าข้อมูลที่bind"
+        },
+        {
+          "id": "d",
+          "text": "branchกับcommit"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Prepared Statement ส่งโครงสร้าง SQL แยกจากค่าข้อมูล `?` เป็น placeholder สำหรับค่า ไม่ใส่ quote ครอบ และไม่ใช้แทนชื่อตาราง ชื่อคอลัมน์ หรือคำว่า ASC/DESC แบบตรง ๆ ถ้าต้องเลือก identifier ให้เลือกจาก allowlist ฝั่งโปรแกรม"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "crud",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: คำสั่งใดสร้างrecordใหม่?",
+      "explanation": "INSERTเป็นCของCRUDในบริบทrows",
+      "id": "db04-q08",
+      "choices": [
+        {
+          "id": "a",
+          "text": "SELECT skill_name FROM skill"
+        },
+        {
+          "id": "b",
+          "text": "ORDER BY id"
+        },
+        {
+          "id": "c",
+          "text": "EXPLAIN SELECT 1"
+        },
+        {
+          "id": "d",
+          "text": "INSERT INTO skill(...) VALUES (...)"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Create/Read/Update/Delete เป็นงานข้อมูล ในแลปนี้ใช้ INSERT/SELECT/UPDATE/DELETE ตามลำดับ คำว่า Create ใน CRUD ไม่ได้หมายความว่าต้อง CREATE TABLE ทุกครั้งที่ผู้ใช้เพิ่ม skill; CREATE TABLE เป็นการกำหนดโครงสร้าง schema ต่างหาก"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "ownership",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: DELETEskillต้องใส่ทั้งidและprofile_idเพราะอะไร?",
+      "explanation": "idระบุrow;ownerpredicateตรวจขอบเขตสิทธิ์",
+      "id": "db04-q09",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เลือกresourceและบังคับowner"
+        },
+        {
+          "id": "b",
+          "text": "เพื่อเรียงHTML"
+        },
+        {
+          "id": "c",
+          "text": "เพื่อเข้ารหัสpassword"
+        },
+        {
+          "id": "d",
+          "text": "เพราะidไม่uniqueเสมอในPK"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "WHERE `id=? AND profile_id=?` ป้องกันการเปลี่ยนแถวของคนอื่นได้เมื่อ profile_id มาจาก session ที่ตรวจแล้ว ตัวเลขจาก hidden input หรือ GET ของผู้ใช้ไม่ใช่หลักฐานสิทธิ์ ห้ามย้ายการตรวจ owner ออกเพียงเพราะ query ใช้ prepared statement"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "validation",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: $_POSTidเป็นarrayควรจัดการอย่างไร?",
+      "explanation": "helperpositiveIdรับเฉพาะint/stringscalar",
+      "id": "db04-q10",
+      "choices": [
+        {
+          "id": "a",
+          "text": "castเป็น1แล้วเชื่อ"
+        },
+        {
+          "id": "b",
+          "text": "ปฏิเสธก่อนแปลงเป็นpositiveinteger"
+        },
+        {
+          "id": "c",
+          "text": "ส่งarrayเข้าSQLดิบ"
+        },
+        {
+          "id": "d",
+          "text": "ถือเป็นLoginสำเร็จ"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตัวอย่างต่อยอดรับ ID ที่เป็น scalar integerบวก, ชื่อ UTF-8 ยาว1–120อักขระหลัง trim และ level จากชุดที่กำหนด นี่คือนโยบายฟอร์มที่เขียนเสริม ไม่ใช่ CHECK constraint ที่มีอยู่แล้วในทุกตารางต้นฉบับ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "binding",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: UPDATEhelperใช้ssiiสัมพันธ์กับplaceholderอย่างไร?",
+      "explanation": "ลำดับbindต้องตรงตำแหน่ง?จริง",
+      "id": "db04-q11",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทุกตัวเป็นfloat"
+        },
+        {
+          "id": "b",
+          "text": "สองตัวแรกเป็นownerid"
+        },
+        {
+          "id": "c",
+          "text": "name,levelเป็นstrings แล้วid,ownerเป็นintegers"
+        },
+        {
+          "id": "d",
+          "text": "เป็นจำนวนaffectedrows"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Prepared Statement ส่งโครงสร้าง SQL แยกจากค่าข้อมูล `?` เป็น placeholder สำหรับค่า ไม่ใส่ quote ครอบ และไม่ใช้แทนชื่อตาราง ชื่อคอลัมน์ หรือคำว่า ASC/DESC แบบตรง ๆ ถ้าต้องเลือก identifier ให้เลือกจาก allowlist ฝั่งโปรแกรม"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "csrf",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ใช้POSTอย่างเดียวกันCSRFครบหรือไม่?",
+      "explanation": "เว็บภายนอกอาจส่งstatechangingrequest;POSTไม่ใช่token",
+      "id": "db04-q12",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ครบเพราะBrowserส่งPOSTไม่ได้"
+        },
+        {
+          "id": "b",
+          "text": "ครบถ้าurlยาว"
+        },
+        {
+          "id": "c",
+          "text": "ครบถ้าSQLprepared"
+        },
+        {
+          "id": "d",
+          "text": "ไม่ ต้องตรวจtoken/กลไกที่เหมาะสม"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "CSRF เป็นการชักให้ Browser ของผู้ใช้ที่มีสิทธิ์ส่ง state-changing request โดยผู้ใช้ไม่ตั้งใจ ควรใช้ POST และตรวจ token ที่ผูกกับ session ฝั่งเซิร์ฟเวอร์ก่อนทำงาน แต่ POST อย่างเดียวและ hidden field ที่ไม่ได้ตรวจไม่ใช่การป้องกันที่พอ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "ownership",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: affected_rows=0หลังUPDATEสรุปว่าwrongownerแน่นอนหรือไม่?",
+      "explanation": "helperระบุ0ทั้งnochange/no matchingrows ต้องไม่อนุมานเกินข้อมูล",
+      "id": "db04-q13",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่ ค่าเดิมอาจไม่เปลี่ยนด้วย"
+        },
+        {
+          "id": "b",
+          "text": "แน่นอนทุกversion/config"
+        },
+        {
+          "id": "c",
+          "text": "แปลว่าลบสำเร็จเสมอ"
+        },
+        {
+          "id": "d",
+          "text": "แปลว่าCSRFถูกเสมอ"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "WHERE `id=? AND profile_id=?` ป้องกันการเปลี่ยนแถวของคนอื่นได้เมื่อ profile_id มาจาก session ที่ตรวจแล้ว ตัวเลขจาก hidden input หรือ GET ของผู้ใช้ไม่ใช่หลักฐานสิทธิ์ ห้ามย้ายการตรวจ owner ออกเพียงเพราะ query ใช้ prepared statement"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "validation",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: skill_levelต้องเป็นหนึ่งในสามค่าตามpolicy ควรตรวจอย่างไร?",
+      "explanation": "businessenumต้องตรวจแยกจากSQLbinding",
+      "id": "db04-q14",
+      "choices": [
+        {
+          "id": "a",
+          "text": "รับทุกข้อความเพราะVARCHAR"
+        },
+        {
+          "id": "b",
+          "text": "strictallowlist"
+        },
+        {
+          "id": "c",
+          "text": "ลบquotesอย่างเดียว"
+        },
+        {
+          "id": "d",
+          "text": "เปลี่ยนทุกค่าเป็นAdvanced"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตัวอย่างต่อยอดรับ ID ที่เป็น scalar integerบวก, ชื่อ UTF-8 ยาว1–120อักขระหลัง trim และ level จากชุดที่กำหนด นี่คือนโยบายฟอร์มที่เขียนเสริม ไม่ใช่ CHECK constraint ที่มีอยู่แล้วในทุกตารางต้นฉบับ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "crud",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: SELECTใช้เปลี่ยนskill_nameหรือไม่?",
+      "explanation": "READไม่ใช่UPDATE",
+      "id": "db04-q15",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เปลี่ยนทุกrow"
+        },
+        {
+          "id": "b",
+          "text": "เท่ากับINSERT"
+        },
+        {
+          "id": "c",
+          "text": "ไม่ เป็นการอ่านข้อมูล"
+        },
+        {
+          "id": "d",
+          "text": "สร้างsession"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Create/Read/Update/Delete เป็นงานข้อมูล ในแลปนี้ใช้ INSERT/SELECT/UPDATE/DELETE ตามลำดับ คำว่า Create ใน CRUD ไม่ได้หมายความว่าต้อง CREATE TABLE ทุกครั้งที่ผู้ใช้เพิ่ม skill; CREATE TABLE เป็นการกำหนดโครงสร้าง schema ต่างหาก"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "binding",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ชื่อtableที่ผู้ใช้ส่งควรจัดการอย่างไร?",
+      "explanation": "placeholderรองรับdataไม่ใช่tableidentifier",
+      "id": "db04-q16",
+      "choices": [
+        {
+          "id": "a",
+          "text": "bind?แทนtableได้เสมอ"
+        },
+        {
+          "id": "b",
+          "text": "ต่อrawทุกค่า"
+        },
+        {
+          "id": "c",
+          "text": "ใช้htmlspecialcharsแทนSQLstructurevalidation"
+        },
+        {
+          "id": "d",
+          "text": "เลือกจากallowlistidentifierที่อนุญาต"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Prepared Statement ส่งโครงสร้าง SQL แยกจากค่าข้อมูล `?` เป็น placeholder สำหรับค่า ไม่ใส่ quote ครอบ และไม่ใช้แทนชื่อตาราง ชื่อคอลัมน์ หรือคำว่า ASC/DESC แบบตรง ๆ ถ้าต้องเลือก identifier ให้เลือกจาก allowlist ฝั่งโปรแกรม"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "ownership",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: owneridควรมาจากที่ใดในprotectedapplication?",
+      "explanation": "กำหนดownerจากserver ไม่ให้clientเลือกเจ้าของ",
+      "id": "db04-q17",
+      "choices": [
+        {
+          "id": "a",
+          "text": "sessionidentityที่ผ่านguard"
+        },
+        {
+          "id": "b",
+          "text": "hiddenfieldที่แก้ได้"
+        },
+        {
+          "id": "c",
+          "text": "ชื่อปุ่มที่translate"
+        },
+        {
+          "id": "d",
+          "text": "querystringโดยไม่ตรวจ"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "WHERE `id=? AND profile_id=?` ป้องกันการเปลี่ยนแถวของคนอื่นได้เมื่อ profile_id มาจาก session ที่ตรวจแล้ว ตัวเลขจาก hidden input หรือ GET ของผู้ใช้ไม่ใช่หลักฐานสิทธิ์ ห้ามย้ายการตรวจ owner ออกเพียงเพราะ query ใช้ prepared statement"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "validation",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ชื่อskillไทย120charactersควรใช้strlenเช็กเท่ากับ120เสมอหรือไม่?",
+      "explanation": "UTF8หลายbytesต่อcharacter ต้องตรงหน่วยvalidation",
+      "id": "db04-q18",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ใช่ภาษาไทยใช้หนึ่งbyteทุกตัว"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ strlenนับbytes ควรใช้mb_strlenตามpolicy"
+        },
+        {
+          "id": "c",
+          "text": "ต้องลบไทยออก"
+        },
+        {
+          "id": "d",
+          "text": "VARCHARนับrows"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตัวอย่างต่อยอดรับ ID ที่เป็น scalar integerบวก, ชื่อ UTF-8 ยาว1–120อักขระหลัง trim และ level จากชุดที่กำหนด นี่คือนโยบายฟอร์มที่เขียนเสริม ไม่ใช่ CHECK constraint ที่มีอยู่แล้วในทุกตารางต้นฉบับ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "csrf",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: tokenว่างทั้งrequestและsessionควรผ่านhashcheckหรือไม่?",
+      "explanation": "helperตรวจsessiontokenไม่ว่างก่อนhash_equals",
+      "id": "db04-q19",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ผ่านเพราะเท่ากัน"
+        },
+        {
+          "id": "b",
+          "text": "ผ่านถ้าGET"
+        },
+        {
+          "id": "c",
+          "text": "ไม่ guardต้องปฏิเสธemptytoken"
+        },
+        {
+          "id": "d",
+          "text": "ผ่านเพราะowneridเป็นint"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "CSRF เป็นการชักให้ Browser ของผู้ใช้ที่มีสิทธิ์ส่ง state-changing request โดยผู้ใช้ไม่ตั้งใจ ควรใช้ POST และตรวจ token ที่ผูกกับ session ฝั่งเซิร์ฟเวอร์ก่อนทำงาน แต่ POST อย่างเดียวและ hidden field ที่ไม่ได้ตรวจไม่ใช่การป้องกันที่พอ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "crud",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: student.zipมีSQLplaceholderSELECT1ครบงานCRUDแล้วหรือไม่?",
+      "explanation": "แยกlocalstarterกับpublicrepoที่CRUDSQLใส่แล้ว",
+      "id": "db04-q20",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ครบเพราะ1หมายถึงtrue"
+        },
+        {
+          "id": "b",
+          "text": "ครบเพราะมีREADME"
+        },
+        {
+          "id": "c",
+          "text": "ครบทุกTODOในpublicrepoเหมือนกัน"
+        },
+        {
+          "id": "d",
+          "text": "ไม่ สี่จุดยังต้องเติมคำสั่งจริง"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Create/Read/Update/Delete เป็นงานข้อมูล ในแลปนี้ใช้ INSERT/SELECT/UPDATE/DELETE ตามลำดับ คำว่า Create ใน CRUD ไม่ได้หมายความว่าต้อง CREATE TABLE ทุกครั้งที่ผู้ใช้เพิ่ม skill; CREATE TABLE เป็นการกำหนดโครงสร้าง schema ต่างหาก"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "binding",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Inputมีquoteและคำว่าOR1=1 เมื่อbindเป็นค่า skill_name ควรถูกตีความอย่างไร?",
+      "explanation": "preparedแยกvaluesจากsyntaxและยังต้องvalidateความหมาย",
+      "id": "db04-q21",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เป็นค่าข้อมูลไม่ใช่SQLoperator"
+        },
+        {
+          "id": "b",
+          "text": "ลบทุกprofile"
+        },
+        {
+          "id": "c",
+          "text": "เปิดสิทธิ์root"
+        },
+        {
+          "id": "d",
+          "text": "กลายเป็นORDERBY"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Prepared Statement ส่งโครงสร้าง SQL แยกจากค่าข้อมูล `?` เป็น placeholder สำหรับค่า ไม่ใส่ quote ครอบ และไม่ใช้แทนชื่อตาราง ชื่อคอลัมน์ หรือคำว่า ASC/DESC แบบตรง ๆ ถ้าต้องเลือก identifier ให้เลือกจาก allowlist ฝั่งโปรแกรม"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "ownership",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: มีFKprofile_idแล้วตัดownerWHEREได้หรือไม่?",
+      "explanation": "referentialintegrityต่างauthorization",
+      "id": "db04-q22",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ได้เพราะFKคือLogin"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ได้ FKไม่เช็กว่าใครร้องขอ"
+        },
+        {
+          "id": "c",
+          "text": "ได้ถ้าใช้Dark"
+        },
+        {
+          "id": "d",
+          "text": "ได้ถ้าidมีสามหลัก"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "WHERE `id=? AND profile_id=?` ป้องกันการเปลี่ยนแถวของคนอื่นได้เมื่อ profile_id มาจาก session ที่ตรวจแล้ว ตัวเลขจาก hidden input หรือ GET ของผู้ใช้ไม่ใช่หลักฐานสิทธิ์ ห้ามย้ายการตรวจ owner ออกเพียงเพราะ query ใช้ prepared statement"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "validation",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: validationกับescapingต่างกันอย่างไร?",
+      "explanation": "รับvalidbusinessinputแล้วก็ยังต้องescapeตอนแสดง",
+      "id": "db04-q23",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทั้งสองแค่เปลี่ยนสี"
+        },
+        {
+          "id": "b",
+          "text": "validationแทนpasswordhash"
+        },
+        {
+          "id": "c",
+          "text": "validationตรวจค่าที่รับได้ escapingแปลงตามoutputcontext"
+        },
+        {
+          "id": "d",
+          "text": "escapingสร้างFK"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตัวอย่างต่อยอดรับ ID ที่เป็น scalar integerบวก, ชื่อ UTF-8 ยาว1–120อักขระหลัง trim และ level จากชุดที่กำหนด นี่คือนโยบายฟอร์มที่เขียนเสริม ไม่ใช่ CHECK constraint ที่มีอยู่แล้วในทุกตารางต้นฉบับ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "csrf",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: CSRFtokenผ่านแต่resourceเป็นของคนอื่น ควรทำอย่างไร?",
+      "explanation": "requestoriginและpermissionคนละชั้น",
+      "id": "db04-q24",
+      "choices": [
+        {
+          "id": "a",
+          "text": "อนุญาตเพราะtokenผ่าน"
+        },
+        {
+          "id": "b",
+          "text": "เปลี่ยนownerเป็นผู้ร้องขอ"
+        },
+        {
+          "id": "c",
+          "text": "ลบtokenแล้วทำต่อ"
+        },
+        {
+          "id": "d",
+          "text": "ปฏิเสธตามownership"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "CSRF เป็นการชักให้ Browser ของผู้ใช้ที่มีสิทธิ์ส่ง state-changing request โดยผู้ใช้ไม่ตั้งใจ ควรใช้ POST และตรวจ token ที่ผูกกับ session ฝั่งเซิร์ฟเวอร์ก่อนทำงาน แต่ POST อย่างเดียวและ hidden field ที่ไม่ได้ตรวจไม่ใช่การป้องกันที่พอ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "crud",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ลบskillแล้วrefreshด้วยPOSTซ้ำมีความเสี่ยงใดควรจัดการในcontroller?",
+      "explanation": "controllerควรมีPostRedirectGetเมื่อเหมาะสมและไม่ถือSQLtestแทนHTTPtest",
+      "id": "db04-q25",
+      "choices": [
+        {
+          "id": "a",
+          "text": "อาจส่งคำขอซ้ำ ควรออกแบบredirect/responseและidempotenthandling"
+        },
+        {
+          "id": "b",
+          "text": "MySQLป้องกันHTTPซ้ำทุกแบบเอง"
+        },
+        {
+          "id": "c",
+          "text": "CSSทำให้POSTไม่ซ้ำ"
+        },
+        {
+          "id": "d",
+          "text": "sessionหมดอายุถาวรทุกครั้ง"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Create/Read/Update/Delete เป็นงานข้อมูล ในแลปนี้ใช้ INSERT/SELECT/UPDATE/DELETE ตามลำดับ คำว่า Create ใน CRUD ไม่ได้หมายความว่าต้อง CREATE TABLE ทุกครั้งที่ผู้ใช้เพิ่ม skill; CREATE TABLE เป็นการกำหนดโครงสร้าง schema ต่างหาก"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "ownership",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: profile_id()เลือกprofileแรกในclassroomstarterเป็นauthenticownerหรือไม่?",
+      "explanation": "ต้องยกระดับเป็นsession-scopedownerก่อนใช้งานหลายผู้ใช้",
+      "id": "db04-q26",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เป็นLoginโดยอัตโนมัติ"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ เป็นdemoที่ยังไม่มีidentityจากLogin"
+        },
+        {
+          "id": "c",
+          "text": "เป็นสิทธิ์ของทุกคนเสมอ"
+        },
+        {
+          "id": "d",
+          "text": "เป็นpasswordhash"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "WHERE `id=? AND profile_id=?` ป้องกันการเปลี่ยนแถวของคนอื่นได้เมื่อ profile_id มาจาก session ที่ตรวจแล้ว ตัวเลขจาก hidden input หรือ GET ของผู้ใช้ไม่ใช่หลักฐานสิทธิ์ ห้ามย้ายการตรวจ owner ออกเพียงเพราะ query ใช้ prepared statement"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "ownership",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ออกแบบUPDATEหนึ่งskillให้กันแก้ข้ามowner",
+      "rubric": [
+        "WHEREidและprofile_id",
+        "ไม่เชื่อclientowner",
+        "แยก0affectedจากสาเหตุที่ยังไม่ทราบ"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db04-q27",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "WHERE `id=? AND profile_id=?` ป้องกันการเปลี่ยนแถวของคนอื่นได้เมื่อ profile_id มาจาก session ที่ตรวจแล้ว ตัวเลขจาก hidden input หรือ GET ของผู้ใช้ไม่ใช่หลักฐานสิทธิ์ ห้ามย้ายการตรวจ owner ออกเพียงเพราะ query ใช้ prepared statement"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "csrf",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ออกแบบPOSTdeleteguardโดยไม่รันบนระบบจริง",
+      "rubric": [
+        "ตรวจsessionidentity",
+        "POSTและCSRF",
+        "scopedDELETEในfixture"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db04-q28",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "CSRF เป็นการชักให้ Browser ของผู้ใช้ที่มีสิทธิ์ส่ง state-changing request โดยผู้ใช้ไม่ตั้งใจ ควรใช้ POST และตรวจ token ที่ผูกกับ session ฝั่งเซิร์ฟเวอร์ก่อนทำงาน แต่ POST อย่างเดียวและ hidden field ที่ไม่ได้ตรวจไม่ใช่การป้องกันที่พอ"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "validation",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: อธิบายvalidationชื่อไทยและlevelallowlist",
+      "rubric": [
+        "หน่วยcharactersไม่ใช่bytes",
+        "trimและemptycheck",
+        "enumstrict"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db04-q29",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ตัวอย่างต่อยอดรับ ID ที่เป็น scalar integerบวก, ชื่อ UTF-8 ยาว1–120อักขระหลัง trim และ level จากชุดที่กำหนด นี่คือนโยบายฟอร์มที่เขียนเสริม ไม่ใช่ CHECK constraint ที่มีอยู่แล้วในทุกตารางต้นฉบับ"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "crud",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เปรียบเทียบstarterunauthenticatedกับprotectedCRUD",
+      "rubric": [
+        "ระบุfirstprofiledemo",
+        "เพิ่มsessionowner",
+        "prepared/CSRFไม่แทนauthorization"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db04-q30",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Create/Read/Update/Delete เป็นงานข้อมูล ในแลปนี้ใช้ INSERT/SELECT/UPDATE/DELETE ตามลำดับ คำว่า Create ใน CRUD ไม่ได้หมายความว่าต้อง CREATE TABLE ทุกครั้งที่ผู้ใช้เพิ่ม skill; CREATE TABLE เป็นการกำหนดโครงสร้าง schema ต่างหาก"
+      }
+    }
+  ]
+}

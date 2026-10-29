@@ -1,0 +1,23 @@
+/* Database figures only: reserve intrinsic space before lazy decode. */
+.lesson-reader .lesson-figure img[src*="/images/db16-"]{display:block;width:min(100%,560px);max-width:100%;height:auto;background:#fff}
+.lesson-reader .lesson-figure img[src$="/db16-web-flow.webp"]{aspect-ratio:1120/1728}
+.lesson-reader .lesson-figure img[src$="/db16-localhost.webp"]{aspect-ratio:1120/1728}
+.lesson-reader .lesson-figure img[src$="/db16-campus-keys.webp"]{aspect-ratio:1120/2132}
+.lesson-reader .lesson-figure img[src$="/db16-resume-keys.webp"]{aspect-ratio:1120/1868}
+.lesson-reader .lesson-figure img[src$="/db16-fetch-loop.webp"]{aspect-ratio:1120/1728}
+.lesson-reader .lesson-figure img[src$="/db16-safe-output.webp"]{aspect-ratio:1120/1728}
+.lesson-reader .lesson-figure img[src$="/db16-prepared.webp"]{aspect-ratio:1120/1728}
+.lesson-reader .lesson-figure img[src$="/db16-owner-write.webp"]{aspect-ratio:1120/1728}
+.lesson-reader .lesson-figure img[src$="/db16-inner-matches.webp"]{aspect-ratio:1120/1728}
+.lesson-reader .lesson-figure img[src$="/db16-filter-orders.webp"]{aspect-ratio:1120/1728}
+.lesson-reader .lesson-figure img[src$="/db16-left-preserved.webp"]{aspect-ratio:1120/1728}
+.lesson-reader .lesson-figure img[src$="/db16-outer-filter.webp"]{aspect-ratio:1120/1728}
+.lesson-reader .lesson-figure img[src$="/db16-four-path.webp"]{aspect-ratio:1120/1728}
+.lesson-reader .lesson-figure img[src$="/db16-count-units.webp"]{aspect-ratio:1120/1728}
+.lesson-reader .lesson-figure img[src$="/db16-password.webp"]{aspect-ratio:1120/1728}
+.lesson-reader .lesson-figure img[src$="/db16-session.webp"]{aspect-ratio:1120/1728}
+.lesson-reader .lesson-figure img[src$="/db16-git-states.webp"]{aspect-ratio:1120/1728}
+.lesson-reader .lesson-figure img[src$="/db16-branch-merge.webp"]{aspect-ratio:1120/1728}
+.lesson-reader .lesson-figure img[src$="/db16-project-trace.webp"]{aspect-ratio:1120/1728}
+.lesson-reader .lesson-figure img[src$="/db16-test-layers.webp"]{aspect-ratio:1120/1728}
+@media print{.lesson-reader .lesson-figure img[src*="/images/db16-"]{max-height:200mm;object-fit:contain}}

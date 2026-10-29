@@ -3,9 +3,9 @@ const fs=require('fs'),assert=require('assert/strict'),crypto=require('crypto');
 const visuals=require('./ai-oop-visual-markdown.cjs');
 const B=require('./lesson-build.cjs'),C=require('../assets/practice-contract.js'),I=require('../assets/insights-contract.js'),manifest=I.validate(require('../assets/insights-banks.json')),catalog=require('../catalog.json'),ledger=require('./iot-verification.json');
 const lessons=manifest.lessons.filter(l=>l.course==='internet-of-things'),evidence=new Map(ledger.cases.map(c=>[c.question,c])),ids=new Set(),counts={choice:0,numeric:0,self:0};
-assert.equal(lessons.length,9);assert.equal(evidence.size,225);assert.equal(ledger.selfAssessments.length,45);assert.equal(manifest.lessons.length,46);assert.equal(manifest.lessons.flatMap(l=>l.bank.data.questions).length,1380);
+assert.equal(lessons.length,9);assert.equal(evidence.size,225);assert.equal(ledger.selfAssessments.length,45);assert.equal(manifest.lessons.filter(l=>l.course!=='database-management').length,46);assert.equal(manifest.lessons.filter(l=>l.course!=='database-management').flatMap(l=>l.bank.data.questions).length,1380);
 const baseline=require('./iot-preservation.json');
-for(const [file,expected]of Object.entries(baseline.files)){const bytes=visuals.preservedBytes(file,B);assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),expected,'Protected37-lesson baseline: '+file);}
+for(const [file,expected]of Object.entries(baseline.files)){const bytes=require('./database-preservation.cjs').normalize(file,visuals.preservedBytes(file,B));assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),expected,'Protected37-lesson baseline: '+file);}
 for(const old of baseline.resources){const current=catalog.resources.find(r=>r.id===old.id);assert.ok(current,old.id);for(const key of ['reader','path','course'])assert.equal(current[key],old[key],old.id+': stable published identity');}
 assert.equal(Object.keys(baseline.files).filter(f=>f.endsWith('.pdf')).length,15);
 assert.equal(require('./reading-baseline.json').reduce((n,l)=>n+l.anchors.length,0),370);
@@ -26,7 +26,7 @@ for(const l of lessons){
 assert.equal(ids.size,270);assert.equal(counts.self,45);assert.equal(counts.choice+counts.numeric,225);
 const fixture=B.markdown('## Safe {#safe}\n```cpp\nconst char* s="<script> pythonCode โค้ด Python";\n```',{root:process.cwd(),source:'courses/internet-of-things/summaries/final-arduino-cpp.md',output:lessons[4].reader,catalog});
 assert.match(fixture.html,/&lt;script&gt; pythonCode โค้ด Python/);assert.ok(!fixture.html.includes('<script>'));assert.match(fixture.html,/cppCode/);assert.equal(fixture.interactive,true);
-assert.equal(I.courses(manifest).length,4);
+assert.equal(I.courses(manifest).length,5);
 const l=lessons[0],data={...l.bank.data,revision:l.practiceRevision,questions:l.bank.data.questions.filter(q=>l.practiceIds.includes(q.id))},answers=Object.fromEntries(data.questions.map(q=>[q.id,{draft:q.type==='self'?'เหตุผล':String(q.answer),submitted:true,rating:q.type==='self'?'revisit':null}])),state={...C.clean(data,null),responses:answers,attempts:[{at:1,responses:structuredClone(answers)}]},raw=JSON.stringify(state),key=I.prefix.practice+l.id;
 const engine=I.create(manifest,I.reader(k=>k===key?raw:null)),result=engine.refresh(),stats=engine.summarize(result,'internet-of-things');assert.deepEqual([stats.correct,stats.incorrect,stats.unique,stats.repeated,stats.self,stats.available],[5,0,5,0,1,9]);assert.equal(JSON.stringify(state),raw);assert.equal(engine.summarize(result,'unix-tools').total,0);
 console.log('PASS: IoT9/270 ('+counts.choice+' four-choice,'+counts.numeric+' numeric,45 self),225 evidence entries; original37/1110/370 anchors/15PDF preserved; safe C++ viewers, catalog/anchors/cache and fourth-course readonly Insights');

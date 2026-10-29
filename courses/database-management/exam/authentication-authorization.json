@@ -1,0 +1,696 @@
+{
+  "version": 1,
+  "revision": 1,
+  "baseRevision": 1,
+  "lesson": "database-management-authentication-authorization",
+  "questions": [
+    {
+      "type": "choice",
+      "reference": "passwords",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: password_hashเดิมสองครั้งได้hashต่างกัน แปลว่าอะไร?",
+      "explanation": "password_verifyตรวจpasswordเดิมกับhashทั้งสองได้",
+      "id": "db08-q07",
+      "choices": [
+        {
+          "id": "a",
+          "text": "hashใช้ไม่ได้ทั้งหมด"
+        },
+        {
+          "id": "b",
+          "text": "ต้องเก็บplaintextแทน"
+        },
+        {
+          "id": "c",
+          "text": "เป็นไปได้จากsalt ไม่ได้แปลว่าpasswordต่าง"
+        },
+        {
+          "id": "d",
+          "text": "ต้องปิดsalt"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "password_hashสร้างhashแบบทางเดียวพร้อมsaltตามalgorithm; password_verifyตรวจรหัสผ่านกับhash ไม่ใช่ถอดรหัส และhashใหม่ของpasswordเดิมอาจไม่เท่ากัน ไม่เก็บplaintextหรือเปรียบเทียบpasswordกับhashด้วย=="
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "passwords",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ทำไมhelperใช้emailไม่เกิน150แม้usersรองรับ190?",
+      "explanation": "ต้องผ่านข้อจำกัดทั้งสองtableของtransaction",
+      "id": "db08-q08",
+      "choices": [
+        {
+          "id": "a",
+          "text": "mysqliห้ามemailยาวเกิน10เสมอ"
+        },
+        {
+          "id": "b",
+          "text": "เพราะhashใช้150เท่านั้น"
+        },
+        {
+          "id": "c",
+          "text": "เป็นข้อกำหนดทุกมหาวิทยาลัย"
+        },
+        {
+          "id": "d",
+          "text": "profile.emailที่insertด้วยรองรับ150"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "password_hashสร้างhashแบบทางเดียวพร้อมsaltตามalgorithm; password_verifyตรวจรหัสผ่านกับhash ไม่ใช่ถอดรหัส และhashใหม่ของpasswordเดิมอาจไม่เท่ากัน ไม่เก็บplaintextหรือเปรียบเทียบpasswordกับhashด้วย=="
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "passwords",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ในPHP8.4ที่ใช้bcrypt เหตุใดระบุนโยบาย72bytesชัด?",
+      "explanation": "versionและalgorithmสำคัญ;นโยบายแลปไม่ใช่universalstrength",
+      "id": "db08-q09",
+      "choices": [
+        {
+          "id": "a",
+          "text": "algorithmจำกัดinputเป็นbytes ไม่ใช่อักขระไทย72ตัว"
+        },
+        {
+          "id": "b",
+          "text": "เพราะpasswordต้อง72ตัวเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "เพราะUTF8หนึ่งตัวมีหนึ่งbyteเสมอ"
+        },
+        {
+          "id": "d",
+          "text": "เพราะDEFAULTไม่มีวันเปลี่ยน"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "password_hashสร้างhashแบบทางเดียวพร้อมsaltตามalgorithm; password_verifyตรวจรหัสผ่านกับhash ไม่ใช่ถอดรหัส และhashใหม่ของpasswordเดิมอาจไม่เท่ากัน ไม่เก็บplaintextหรือเปรียบเทียบpasswordกับhashด้วย=="
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "sessions",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: sessioncookieโดยทั่วไปส่งอะไรในแบบPHPsessionนี้?",
+      "explanation": "ไม่ควรให้Browserประกาศpermissionsที่serverเชื่อโดยตรง",
+      "id": "db08-q10",
+      "choices": [
+        {
+          "id": "a",
+          "text": "passwordจริงทุกrequest"
+        },
+        {
+          "id": "b",
+          "text": "identifierที่อ้างsessiondataฝั่งserver"
+        },
+        {
+          "id": "c",
+          "text": "profiletableทั้งหมด"
+        },
+        {
+          "id": "d",
+          "text": "DBrootcredential"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Browserเก็บsession cookieที่มีidentifier;PHPเชื่อมidentifierกับข้อมูลฝั่งserver ไม่ส่งpassword_hashหรือสิทธิ์ทั้งหมดให้Browserเชื่อเอง"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "sessions",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: HttpOnlyช่วยสิ่งใดและมีข้อจำกัดอะไร?",
+      "explanation": "XSSยังอาจทำคำขอในsession จึงต้องป้องกันอื่นร่วมด้วย",
+      "id": "db08-q11",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ปิดXSSทุกแบบถาวร"
+        },
+        {
+          "id": "b",
+          "text": "แทนHTTPSทั้งหมด"
+        },
+        {
+          "id": "c",
+          "text": "ลดJSอ่านcookie แต่ไม่แก้XSSทุกแบบ"
+        },
+        {
+          "id": "d",
+          "text": "แทนownerWHERE"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Browserเก็บsession cookieที่มีidentifier;PHPเชื่อมidentifierกับข้อมูลฝั่งserver ไม่ส่งpassword_hashหรือสิทธิ์ทั้งหมดให้Browserเชื่อเอง"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "sessions",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Secureflagควรสัมพันธ์กับอะไร?",
+      "explanation": "flagควบคุมการส่งcookieผ่านsecuretransport ไม่เลือกตามtheme",
+      "id": "db08-q12",
+      "choices": [
+        {
+          "id": "a",
+          "text": "จำนวนtable"
+        },
+        {
+          "id": "b",
+          "text": "ชื่อbranch"
+        },
+        {
+          "id": "c",
+          "text": "ภาษาTH/EN"
+        },
+        {
+          "id": "d",
+          "text": "HTTPSที่ใช้งานจริง"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Browserเก็บsession cookieที่มีidentifier;PHPเชื่อมidentifierกับข้อมูลฝั่งserver ไม่ส่งpassword_hashหรือสิทธิ์ทั้งหมดให้Browserเชื่อเอง"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "security",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: SameSiteทำให้ตัดCSRFtokenในตัวอย่างได้แน่นอนหรือไม่?",
+      "explanation": "ไม่ถือcookiepolicyแทนCSRFguardทั้งหมด",
+      "id": "db08-q13",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่ เป็นชั้นเสริมที่ต้องดูบริบท"
+        },
+        {
+          "id": "b",
+          "text": "ได้ทุกBrowserทุกกรณี"
+        },
+        {
+          "id": "c",
+          "text": "ได้ถ้ามีSQLFK"
+        },
+        {
+          "id": "d",
+          "text": "ได้ถ้าใช้GETdelete"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Prepared statementsกันค่าปะปนโครงสร้างSQL แต่ไม่แทนAuthorization; HTMLescapingกันบริบทoutput ไม่แทนCSRF; CSRFtokenไม่แทนLogin"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "identity",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: publicloginTODO1–5กับCRUDTODOcommentมีสถานะอย่างไร?",
+      "explanation": "อ่านโค้ดpinnedcommitและแยกlocalstudentzip",
+      "id": "db08-q14",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทุกTODOเป็นSQLว่างหมด"
+        },
+        {
+          "id": "b",
+          "text": "Loginยังไม่เสร็จจริง แต่CRUDSQLในpublicใส่แล้ว"
+        },
+        {
+          "id": "c",
+          "text": "Logincompleteแล้วทุกbranch"
+        },
+        {
+          "id": "d",
+          "text": "ไม่มีTODOใดในsource"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Authentication ตอบว่าเป็นใครจากหลักฐานการเข้าสู่ระบบ Authorization ตอบว่าผู้ใช้นั้นทำอะไรกับresourceนี้ได้ Loginสำเร็จไม่ให้สิทธิ์แก้Resumeของคนอื่น การซ่อนปุ่มในBrowserไม่แทนการตรวจบนServer และprofile_idจากhidden fieldยังแก้ได้"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "passwords",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: สมัครprofileสำเร็จแต่usersINSERTล้มเพราะemailซ้ำ ควรทำอย่างไร?",
+      "explanation": "atomicregistrationในhelperถูกintegrationtest",
+      "id": "db08-q15",
+      "choices": [
+        {
+          "id": "a",
+          "text": "commitครึ่งหนึ่งเงียบๆ"
+        },
+        {
+          "id": "b",
+          "text": "ลบผู้ใช้เดิมทุกคน"
+        },
+        {
+          "id": "c",
+          "text": "rollbacktransactionไม่ทิ้งprofileกำพร้า"
+        },
+        {
+          "id": "d",
+          "text": "แสดงDBpasswordในerror"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "password_hashสร้างhashแบบทางเดียวพร้อมsaltตามalgorithm; password_verifyตรวจรหัสผ่านกับhash ไม่ใช่ถอดรหัส และhashใหม่ของpasswordเดิมอาจไม่เท่ากัน ไม่เก็บplaintextหรือเปรียบเทียบpasswordกับhashด้วย=="
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "sessions",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: startSessionควรเรียกช่วงใดของHTTPresponse?",
+      "explanation": "session/cookieheadersต้องจัดก่อนoutput",
+      "id": "db08-q16",
+      "choices": [
+        {
+          "id": "a",
+          "text": "หลังechoHTMLทั้งหมดเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "ในCSSเท่านั้น"
+        },
+        {
+          "id": "c",
+          "text": "หลังBrowserdecodeimage"
+        },
+        {
+          "id": "d",
+          "text": "ก่อนส่งoutputที่ทำให้headersถูกส่ง"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Browserเก็บsession cookieที่มีidentifier;PHPเชื่อมidentifierกับข้อมูลฝั่งserver ไม่ส่งpassword_hashหรือสิทธิ์ทั้งหมดให้Browserเชื่อเอง"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "ownership",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: users.profile_idUNIQUEFKรับรองอะไรในschemaภายหลัง?",
+      "explanation": "constraintไม่แทนpermissionของผู้ร้องขอ",
+      "id": "db08-q17",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เชื่อมหนึ่งaccountต่อprofileและreferenceมีจริง"
+        },
+        {
+          "id": "b",
+          "text": "อนุญาตทุกaccountแก้ทุกprofile"
+        },
+        {
+          "id": "c",
+          "text": "เข้ารหัสemail"
+        },
+        {
+          "id": "d",
+          "text": "แทนpassword_verify"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตัวอย่างพื้นฐาน: ผู้ใช้Aเข้าสู่ระบบได้profile1และอ่านskillของ1 ตัวอย่างท้าทาย: Aแก้URLส่งidของskillที่เป็นของprofile2 ต้องไม่แก้ได้ แม้เป็นidจริงและผ่านCSRFแล้ว ใช้session-ownerร่วมกับresource-idในWHERE"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "security",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ข้อความLoginผิดควรบอกว่าemailนี้มีอยู่หรือไม่เสมอหรือไม่?",
+      "explanation": "policyresponseและratelimitingเป็นส่วนserverจริงที่ต้องออกแบบ",
+      "id": "db08-q18",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ควรส่งpasswordhashให้ลอง"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ ควรใช้ข้อความทั่วไปและลดaccountenumeration"
+        },
+        {
+          "id": "c",
+          "text": "ควรบอกDBroot"
+        },
+        {
+          "id": "d",
+          "text": "ควรแสดงทุกuser"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Prepared statementsกันค่าปะปนโครงสร้างSQL แต่ไม่แทนAuthorization; HTMLescapingกันบริบทoutput ไม่แทนCSRF; CSRFtokenไม่แทนLogin"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "sessions",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Logoutครบวงจรในhelperควรทำอะไร?",
+      "explanation": "logoutไม่ลบบัญชี;จัดsessiondata/cookieให้เหมาะสม",
+      "id": "db08-q19",
+      "choices": [
+        {
+          "id": "a",
+          "text": "unsetuser_idอย่างเดียวเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "DELETEusersrow"
+        },
+        {
+          "id": "c",
+          "text": "clearSESSION,expirecookieตามparamsเดิม,destroy"
+        },
+        {
+          "id": "d",
+          "text": "DROPdatabase"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Browserเก็บsession cookieที่มีidentifier;PHPเชื่อมidentifierกับข้อมูลฝั่งserver ไม่ส่งpassword_hashหรือสิทธิ์ทั้งหมดให้Browserเชื่อเอง"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "security",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Logoutเป็นGETไม่มีtokenมีข้อกังวลใด?",
+      "explanation": "statechanginglogoutควรผ่านguardก่อนhelper",
+      "id": "db08-q20",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทำให้passwordhashหายเอง"
+        },
+        {
+          "id": "b",
+          "text": "ทำให้FKเสียทุกครั้ง"
+        },
+        {
+          "id": "c",
+          "text": "ไม่มีข้อกังวลใดเสมอ"
+        },
+        {
+          "id": "d",
+          "text": "อาจถูกกระตุ้นข้ามเว็บ ควรPOSTและCSRFตามpolicy"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Prepared statementsกันค่าปะปนโครงสร้างSQL แต่ไม่แทนAuthorization; HTMLescapingกันบริบทoutput ไม่แทนCSRF; CSRFtokenไม่แทนLogin"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "identity",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: minimalusersสไลด์หน้า12มีprofile_idUNIQUEFKแล้วหรือไม่?",
+      "explanation": "แยกหลักฐานต่างระยะไม่เติมcolumnเข้าslideโดยอ้างผิด",
+      "id": "db08-q21",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่ เป็นschemaที่เพิ่มในpublicmigrationภายหลัง"
+        },
+        {
+          "id": "b",
+          "text": "มีครบเหมือนกันทุกfile"
+        },
+        {
+          "id": "c",
+          "text": "เป็นtableorder_items"
+        },
+        {
+          "id": "d",
+          "text": "ไม่มีusersในสไลด์ใด"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Authentication ตอบว่าเป็นใครจากหลักฐานการเข้าสู่ระบบ Authorization ตอบว่าผู้ใช้นั้นทำอะไรกับresourceนี้ได้ Loginสำเร็จไม่ให้สิทธิ์แก้Resumeของคนอื่น การซ่อนปุ่มในBrowserไม่แทนการตรวจบนServer และprofile_idจากhidden fieldยังแก้ได้"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "sessions",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: finishLoginรับuserarrayจากrequestโดยไม่verifypasswordได้หรือไม่?",
+      "explanation": "shapevalidationไม่พิสูจน์credentials",
+      "id": "db08-q22",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ได้ถ้าarrayมีเลขบวก"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ได้ ต้องเป็นidentityที่ตรวจสำเร็จฝั่งserver"
+        },
+        {
+          "id": "c",
+          "text": "ได้ถ้าชื่อkeyถูก"
+        },
+        {
+          "id": "d",
+          "text": "ได้ถ้าJSซ่อนform"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Browserเก็บsession cookieที่มีidentifier;PHPเชื่อมidentifierกับข้อมูลฝั่งserver ไม่ส่งpassword_hashหรือสิทธิ์ทั้งหมดให้Browserเชื่อเอง"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "ownership",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: CSRFผ่าน+idเป็นpositiveintegerพอให้UPDATEหรือไม่?",
+      "explanation": "validinputและoriginไม่ใช่permission",
+      "id": "db08-q23",
+      "choices": [
+        {
+          "id": "a",
+          "text": "พอเพราะintegerทุกตัวปลอดสิทธิ์"
+        },
+        {
+          "id": "b",
+          "text": "พอเพราะPOST"
+        },
+        {
+          "id": "c",
+          "text": "ไม่ ยังต้องscopeownerจากsession"
+        },
+        {
+          "id": "d",
+          "text": "พอถ้าใช้CSSModern"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตัวอย่างพื้นฐาน: ผู้ใช้Aเข้าสู่ระบบได้profile1และอ่านskillของ1 ตัวอย่างท้าทาย: Aแก้URLส่งidของskillที่เป็นของprofile2 ต้องไม่แก้ได้ แม้เป็นidจริงและผ่านCSRFแล้ว ใช้session-ownerร่วมกับresource-idในWHERE"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "passwords",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ควรเก็บhashในcolumnที่เผื่อalgorithmเปลี่ยนเพราะอะไร?",
+      "explanation": "ใช้ความยาวเหมาะสมเช่นVARCHAR255และดูversion",
+      "id": "db08-q24",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เพื่อเก็บplaintextคู่กัน"
+        },
+        {
+          "id": "b",
+          "text": "เพื่อให้ทุกhashเป็นเลข4หลัก"
+        },
+        {
+          "id": "c",
+          "text": "เพื่อให้Browserแก้password"
+        },
+        {
+          "id": "d",
+          "text": "PASSWORD_DEFAULTอาจเปลี่ยนความยาว/algorithmตามversion"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "password_hashสร้างhashแบบทางเดียวพร้อมsaltตามalgorithm; password_verifyตรวจรหัสผ่านกับhash ไม่ใช่ถอดรหัส และhashใหม่ของpasswordเดิมอาจไม่เท่ากัน ไม่เก็บplaintextหรือเปรียบเทียบpasswordกับhashด้วย=="
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "security",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: PHPCLIrotationtestผ่านพิสูจน์อะไร?",
+      "explanation": "รายงานขอบเขตไม่ขยายเกินexecutionจริง",
+      "id": "db08-q25",
+      "choices": [
+        {
+          "id": "a",
+          "text": "การทำงานhelper/sessionในruntimeทดสอบ ไม่ใช่HTTPบนAngsila"
+        },
+        {
+          "id": "b",
+          "text": "HTTPSproductionครบทุกflag"
+        },
+        {
+          "id": "c",
+          "text": "rate limitผ่านแล้ว"
+        },
+        {
+          "id": "d",
+          "text": "Safaricookieผ่านแล้ว"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Prepared statementsกันค่าปะปนโครงสร้างSQL แต่ไม่แทนAuthorization; HTMLescapingกันบริบทoutput ไม่แทนCSRF; CSRFtokenไม่แทนLogin"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "sessions",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: sessionuse_strict_modeมีจุดมุ่งหมายใด?",
+      "explanation": "strictsessionเป็นหนึ่งชั้นร่วมrotation/onlycookies",
+      "id": "db08-q26",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทำให้CSRFไม่ต้องตรวจ"
+        },
+        {
+          "id": "b",
+          "text": "ลดการยอมรับsessionIDที่ไม่ได้initializeตามpolicy"
+        },
+        {
+          "id": "c",
+          "text": "ให้clientสร้างownerเอง"
+        },
+        {
+          "id": "d",
+          "text": "แทนTLS"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Browserเก็บsession cookieที่มีidentifier;PHPเชื่อมidentifierกับข้อมูลฝั่งserver ไม่ส่งpassword_hashหรือสิทธิ์ทั้งหมดให้Browserเชื่อเอง"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "passwords",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ออกแบบregistertransactionพร้อมข้อจำกัดemail/password",
+      "rubric": [
+        "hashไม่plaintext",
+        "atomicprofile/users",
+        "ระบุversion/bytepolicy"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db08-q27",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "password_hashสร้างhashแบบทางเดียวพร้อมsaltตามalgorithm; password_verifyตรวจรหัสผ่านกับhash ไม่ใช่ถอดรหัส และhashใหม่ของpasswordเดิมอาจไม่เท่ากัน ไม่เก็บplaintextหรือเปรียบเทียบpasswordกับhashด้วย=="
+      }
+    },
+    {
+      "type": "self",
+      "reference": "sessions",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: อธิบายวงจรLoginจนLogout",
+      "rubric": [
+        "startก่อนoutput",
+        "rotateID/newCSRF",
+        "clear/expire/destroy"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db08-q28",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Browserเก็บsession cookieที่มีidentifier;PHPเชื่อมidentifierกับข้อมูลฝั่งserver ไม่ส่งpassword_hashหรือสิทธิ์ทั้งหมดให้Browserเชื่อเอง"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "security",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: reviewระบบที่มีpreparedแต่ไม่มีCSRF/ownerchecks",
+      "rubric": [
+        "ระบุสิ่งที่preparedกัน",
+        "เพิ่มCSRFแยก",
+        "เพิ่มownerqueryทุกwrite/readที่จำกัด"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db08-q29",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Prepared statementsกันค่าปะปนโครงสร้างSQL แต่ไม่แทนAuthorization; HTMLescapingกันบริบทoutput ไม่แทนCSRF; CSRFtokenไม่แทนLogin"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "sessions",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เขียนแผนทดสอบcookieHTTPที่ยังไม่ได้ทำ",
+      "rubric": [
+        "แยกCLIจากHTTP",
+        "ใช้isolatedauthorizedserver",
+        "ไม่อ้างผลAngsilaโดยไม่มีหลักฐาน"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db08-q30",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Browserเก็บsession cookieที่มีidentifier;PHPเชื่อมidentifierกับข้อมูลฝั่งserver ไม่ส่งpassword_hashหรือสิทธิ์ทั้งหมดให้Browserเชื่อเอง"
+      }
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "database-management-crud-prepared-statements",
+  "title": "DB 04 — CRUD และ Prepared Statements",
+  "questions": [
+    {
+      "type": "choice",
+      "reference": "crud",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: CRUDตัวUหมายถึงอะไร?",
+      "explanation": "Create/Read/Update/Deleteเป็นการกระทำต่อข้อมูล",
+      "id": "db04-q01",
+      "choices": [
+        {
+          "id": "a",
+          "text": "UPDATEข้อมูลเดิม"
+        },
+        {
+          "id": "b",
+          "text": "Uploadรูปเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "UNIONทุกตาราง"
+        },
+        {
+          "id": "d",
+          "text": "UserLogin"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "reference": "binding",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: INSERTskill(profile_id,skill_name,skill_level)VALUES(?,?,?) bindtypesใดตรงhelper?",
+      "explanation": "ownerเป็นintสองค่าถัดไปเป็นstringตามSQLhelper",
+      "id": "db04-q02",
+      "choices": [
+        {
+          "id": "a",
+          "text": "sssที่อ้างว่าทุกค่าคือint"
+        },
+        {
+          "id": "b",
+          "text": "iss"
+        },
+        {
+          "id": "c",
+          "text": "iii"
+        },
+        {
+          "id": "d",
+          "text": "ssii"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "type": "choice",
+      "reference": "ownership",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: UPDATEที่ไม่มีWHEREเหมาะกับแก้skillหนึ่งรายการหรือไม่?",
+      "explanation": "DBไม่รู้เป้าหมายหนึ่งรายการถ้าไม่กำหนดpredicate",
+      "id": "db04-q03",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เหมาะเพราะPKเลือกเอง"
+        },
+        {
+          "id": "b",
+          "text": "เหมาะถ้ามีCSSซ่อน"
+        },
+        {
+          "id": "c",
+          "text": "ไม่ อาจเปลี่ยนทุกrow"
+        },
+        {
+          "id": "d",
+          "text": "เหมาะเพราะPOSTจำกัดหนึ่งrow"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "type": "choice",
+      "reference": "csrf",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: CSRFguardควรตรวจอะไรสำหรับเปลี่ยนข้อมูล?",
+      "explanation": "tokenจากsessionและmethodทำงานร่วมกัน ไม่ใช้translationเป็นidentity",
+      "id": "db04-q04",
+      "choices": [
+        {
+          "id": "a",
+          "text": "GETอย่างเดียว"
+        },
+        {
+          "id": "b",
+          "text": "ชื่อปุ่มภาษาไทย"
+        },
+        {
+          "id": "c",
+          "text": "สีthemeตรง"
+        },
+        {
+          "id": "d",
+          "text": "POSTและtokenตรงsessionด้วยhash_equals"
+        }
+      ],
+      "answer": "d"
+    },
+    {
+      "type": "choice",
+      "reference": "validation",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: skill_nameว่างหลังtrimควรรับหรือไม่ในpolicyนี้?",
+      "explanation": "preparedไม่ได้ตรวจbusinessvalidity",
+      "id": "db04-q05",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ปฏิเสธ"
+        },
+        {
+          "id": "b",
+          "text": "รับเพราะpreparedแล้ว"
+        },
+        {
+          "id": "c",
+          "text": "แทนด้วยowneridเสมอ"
+        },
+        {
+          "id": "d",
+          "text": "ลบprofile"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "self",
+      "reference": "binding",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: อธิบายINSERTpreparedและลำดับbindทั้งสามค่า",
+      "rubric": [
+        "SQLใช้?ครบ",
+        "typesissตรงค่า",
+        "ownerมาจากsession"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db04-q06"
+    }
+  ]
+}

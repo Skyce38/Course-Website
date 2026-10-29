@@ -1,0 +1,195 @@
+{
+  "version": 1,
+  "dataset": "campus-hw-v1",
+  "cases": [
+    {
+      "id": "inner",
+      "homework": [
+        1,
+        4
+      ],
+      "sql": "SELECT s.student_id,o.order_id,o.total_amount,o.status FROM students s INNER JOIN orders o ON o.student_id=s.student_id ORDER BY o.order_id"
+    },
+    {
+      "id": "large-delivered",
+      "homework": [
+        5
+      ],
+      "sql": "SELECT o.order_id,o.total_amount FROM students s JOIN orders o ON o.student_id=s.student_id WHERE o.status='delivered' AND o.total_amount>=150 ORDER BY o.total_amount DESC,o.order_id"
+    },
+    {
+      "id": "left",
+      "homework": [
+        3,
+        6
+      ],
+      "sql": "SELECT s.student_id,o.order_id FROM students s LEFT JOIN orders o ON o.student_id=s.student_id ORDER BY s.student_id,o.order_id"
+    },
+    {
+      "id": "anti",
+      "homework": [
+        2,
+        7
+      ],
+      "sql": "SELECT s.student_id,s.student_name,s.faculty FROM students s LEFT JOIN orders o ON o.student_id=s.student_id WHERE o.order_id IS NULL ORDER BY s.student_id"
+    },
+    {
+      "id": "right-equivalent",
+      "homework": [
+        8,
+        9
+      ],
+      "sql": "SELECT s.student_id,o.order_id FROM orders o RIGHT JOIN students s ON o.student_id=s.student_id ORDER BY s.student_id,o.order_id"
+    },
+    {
+      "id": "right-orders",
+      "homework": [],
+      "sql": "SELECT s.student_id,o.order_id FROM students s RIGHT JOIN orders o ON o.student_id=s.student_id ORDER BY o.order_id"
+    },
+    {
+      "id": "multi",
+      "homework": [
+        10
+      ],
+      "sql": "SELECT s.student_name,o.order_id,oi.menu_name,r.restaurant_name,oi.qty,o.status FROM students s JOIN orders o ON o.student_id=s.student_id JOIN order_items oi ON oi.order_id=o.order_id JOIN restaurants r ON r.restaurant_id=oi.restaurant_id WHERE o.status='delivered' ORDER BY o.order_id,oi.item_id"
+    },
+    {
+      "id": "restaurants-left",
+      "homework": [
+        11
+      ],
+      "sql": "SELECT r.restaurant_id,oi.item_id,oi.menu_name FROM restaurants r LEFT JOIN order_items oi ON oi.restaurant_id=r.restaurant_id ORDER BY r.restaurant_id,oi.item_id"
+    },
+    {
+      "id": "where-delivered",
+      "homework": [
+        12
+      ],
+      "sql": "SELECT s.student_id,o.order_id FROM students s LEFT JOIN orders o ON o.student_id=s.student_id WHERE o.status='delivered' ORDER BY s.student_id,o.order_id"
+    },
+    {
+      "id": "on-delivered",
+      "homework": [
+        12
+      ],
+      "sql": "SELECT s.student_id,o.order_id FROM students s LEFT JOIN orders o ON o.student_id=s.student_id AND o.status='delivered' ORDER BY s.student_id,o.order_id"
+    },
+    {
+      "id": "wrong-key",
+      "homework": [
+        13
+      ],
+      "sql": "SELECT s.student_id,o.order_id FROM students s JOIN orders o ON s.student_id=o.order_id ORDER BY s.student_id,o.order_id"
+    },
+    {
+      "id": "cross-count",
+      "homework": [],
+      "sql": "SELECT COUNT(*) AS n FROM students s CROSS JOIN orders o"
+    },
+    {
+      "id": "left-counts",
+      "homework": [],
+      "sql": "SELECT COUNT(*) AS result_rows,COUNT(o.order_id) AS matched_orders,COUNT(DISTINCT s.student_id) AS students FROM students s LEFT JOIN orders o ON o.student_id=s.student_id"
+    },
+    {
+      "id": "per-student",
+      "homework": [],
+      "sql": "SELECT s.student_id,COUNT(o.order_id) AS orders_n FROM students s LEFT JOIN orders o ON o.student_id=s.student_id GROUP BY s.student_id ORDER BY s.student_id"
+    },
+    {
+      "id": "all-items",
+      "homework": [],
+      "sql": "SELECT o.order_id,oi.item_id FROM orders o JOIN order_items oi ON oi.order_id=o.order_id ORDER BY o.order_id,oi.item_id"
+    },
+    {
+      "id": "multi-counts",
+      "homework": [],
+      "sql": "SELECT COUNT(*) AS rows_n,COUNT(DISTINCT o.order_id) AS orders_n,SUM(oi.qty) AS quantity FROM orders o JOIN order_items oi ON oi.order_id=o.order_id WHERE o.status='delivered'"
+    },
+    {
+      "id": "missing-restaurants",
+      "homework": [],
+      "sql": "SELECT r.restaurant_id,r.restaurant_name FROM restaurants r LEFT JOIN order_items oi ON oi.restaurant_id=r.restaurant_id WHERE oi.item_id IS NULL ORDER BY r.restaurant_id"
+    },
+    {
+      "id": "literal-null-name",
+      "homework": [],
+      "sql": "SELECT restaurant_id,restaurant_name FROM restaurants WHERE restaurant_name='NULL Cafe' ORDER BY restaurant_id"
+    },
+    {
+      "id": "equals-null",
+      "homework": [],
+      "sql": "SELECT s.student_id FROM students s LEFT JOIN orders o ON o.student_id=s.student_id WHERE o.order_id=NULL ORDER BY s.student_id"
+    },
+    {
+      "id": "all-orders",
+      "homework": [],
+      "sql": "SELECT order_id,total_amount FROM orders ORDER BY total_amount DESC,order_id"
+    },
+    {
+      "id": "delivered-total",
+      "homework": [],
+      "sql": "SELECT COUNT(*) AS n,SUM(total_amount) AS amount FROM orders WHERE status='delivered'"
+    },
+    {
+      "id": "slide-inner",
+      "homework": [],
+      "sql": "SELECT s.student_id,o.order_id FROM slide_students s JOIN slide_orders o ON o.student_id=s.student_id ORDER BY s.student_id,o.order_id"
+    },
+    {
+      "id": "slide-left",
+      "homework": [],
+      "sql": "SELECT s.student_id,o.order_id FROM slide_students s LEFT JOIN slide_orders o ON o.student_id=s.student_id ORDER BY s.student_id,o.order_id"
+    },
+    {
+      "id": "slide-distinct",
+      "homework": [],
+      "sql": "SELECT COUNT(DISTINCT s.student_id) AS n FROM slide_students s JOIN slide_orders o ON o.student_id=s.student_id"
+    },
+    {
+      "id": "null-truth",
+      "homework": [],
+      "sql": "SELECT NULL=NULL AS equality_result,NULL IS NULL AS is_null_result"
+    },
+    {
+      "id": "explain",
+      "homework": [],
+      "sql": "EXPLAIN SELECT s.student_id,o.order_id FROM students s JOIN orders o ON o.student_id=s.student_id"
+    },
+    {
+      "id": "homework4",
+      "homework": [
+        4
+      ],
+      "sql": "SELECT s.student_name,s.faculty,o.order_id,o.order_date,o.total_amount,o.status FROM students s JOIN orders o ON o.student_id=s.student_id ORDER BY o.order_id"
+    },
+    {
+      "id": "homework5",
+      "homework": [
+        5
+      ],
+      "sql": "SELECT s.student_name,s.faculty,o.order_id,o.order_date,o.total_amount,o.status FROM students s JOIN orders o ON o.student_id=s.student_id WHERE o.status='delivered' AND o.total_amount>=150 ORDER BY o.total_amount DESC,o.order_id"
+    },
+    {
+      "id": "homework6",
+      "homework": [
+        6
+      ],
+      "sql": "SELECT s.student_id,s.student_name,o.order_id,o.total_amount FROM students s LEFT JOIN orders o ON o.student_id=s.student_id ORDER BY s.student_id,o.order_id"
+    },
+    {
+      "id": "homework12",
+      "homework": [
+        12
+      ],
+      "sql": "SELECT s.student_name,o.order_id,o.status FROM students s LEFT JOIN orders o ON o.student_id=s.student_id AND o.status='delivered' ORDER BY s.student_id,o.order_id"
+    },
+    {
+      "id": "homework13",
+      "homework": [
+        13
+      ],
+      "sql": "SELECT s.student_name,o.order_id FROM students s JOIN orders o ON s.student_id=o.student_id ORDER BY o.order_id"
+    }
+  ]
+}
