@@ -24,8 +24,9 @@ for(const [file,expected]of Object.entries(baseline.files)){
   html=html.replace('<link rel="stylesheet" href="../../assets/iot-visuals.css?v=phase14-iot-visual-2">','');
   if(!B.markdown(B.metadata(strip(read(source))).body,context).features.length)html=html.replace('<link rel="stylesheet" href="../../assets/lesson-rich.css?v=rich-lesson-1">','');value=Buffer.from(html);
  }else value=/\.(?:pdf|png)$/.test(file)?fs.readFileSync(file):Buffer.from(read(file));
+ value=require('./database-preservation.cjs').normalize(file,value);
  assert.equal(sha(value),expected,'Original content/banks/runtime unchanged: '+file);
 }
-assert.equal(require('./lessons.json').length,46);assert.equal(require('../assets/insights-banks.json').lessons.flatMap(l=>l.bank.data.questions).length,1380);
+assert.equal(require('./lessons.json').filter(s=>!s.startsWith('courses/database-management/')).length,46);assert.equal(require('../assets/insights-banks.json').lessons.filter(l=>l.course!=='database-management').flatMap(l=>l.bank.data.questions).length,1380);
 assert.equal(require('./reading-baseline.json').reduce((n,l)=>n+l.anchors.length,0),370);
 console.log('PASS:25 local images/source SVGs/alt/captions/connection tables,dimensions/hashes/space reservation; all46 original lesson prose/code/headings/readers preserved outside additive blocks,1380 immutable questions,370 old anchors,15PDFs and storage/grading contracts;'+bytes+' raster bytes');

@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "database-management-authentication-authorization",
+  "title": "DB 08 — ยืนยันตัวตนและกำหนดสิทธิ์",
+  "questions": [
+    {
+      "type": "choice",
+      "reference": "identity",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: AuthenticationกับAuthorizationต่างกันอย่างไร?",
+      "explanation": "Loginผ่านไม่ให้สิทธิ์ข้ามowner",
+      "id": "db08-q01",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ยืนยันว่าเป็นใคร กับตรวจว่าทำอะไรได้"
+        },
+        {
+          "id": "b",
+          "text": "ทั้งคู่คือescapeHTML"
+        },
+        {
+          "id": "c",
+          "text": "ทั้งคู่คือCOUNTrows"
+        },
+        {
+          "id": "d",
+          "text": "Authorizationคือการเข้ารหัสpassword"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "reference": "passwords",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ตรวจpasswordกับhashควรใช้ฟังก์ชันใด?",
+      "explanation": "saltทำให้hashใหม่ต่างกันได้ ต้องverifyกับstoredhash",
+      "id": "db08-q02",
+      "choices": [
+        {
+          "id": "a",
+          "text": "password_hashแล้ว==ทุกครั้ง"
+        },
+        {
+          "id": "b",
+          "text": "password_verify"
+        },
+        {
+          "id": "c",
+          "text": "htmlspecialchars"
+        },
+        {
+          "id": "d",
+          "text": "mysqli_fetch_assoc"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "type": "choice",
+      "reference": "sessions",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: หลังLoginสำเร็จควรจัดการsessionIDอย่างไร?",
+      "explanation": "ลดsessionfixationและผูกsessionกับidentityที่ตรวจแล้ว",
+      "id": "db08-q03",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ส่งpasswordhashให้Browserเก็บ"
+        },
+        {
+          "id": "b",
+          "text": "เชื่อIDจากquerystringโดยไม่ตรวจ"
+        },
+        {
+          "id": "c",
+          "text": "regenerateIDและตั้งCSRFtokenใหม่"
+        },
+        {
+          "id": "d",
+          "text": "ย้ายownerไปhiddenfield"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "type": "choice",
+      "reference": "ownership",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Aมีsessionที่ถูกต้องแต่ขอแก้skillของB ควรทำอย่างไร?",
+      "explanation": "AuthenticationและCSRFไม่แทนAuthorization",
+      "id": "db08-q04",
+      "choices": [
+        {
+          "id": "a",
+          "text": "อนุญาตเพราะLoginผ่าน"
+        },
+        {
+          "id": "b",
+          "text": "อนุญาตเพราะCSRFผ่าน"
+        },
+        {
+          "id": "c",
+          "text": "เปลี่ยนownerเป็นAเอง"
+        },
+        {
+          "id": "d",
+          "text": "ปฏิเสธด้วยowner-scopedquery"
+        }
+      ],
+      "answer": "d"
+    },
+    {
+      "type": "choice",
+      "reference": "security",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Preparedstatementsป้องกันสิ่งใดโดยตรง?",
+      "explanation": "ป้องกันแต่ละชั้นต้องใช้กลไกต่างกัน",
+      "id": "db08-q05",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ค่าinputเปลี่ยนโครงสร้างSQL"
+        },
+        {
+          "id": "b",
+          "text": "ทุกIDORโดยไม่WHEREowner"
+        },
+        {
+          "id": "c",
+          "text": "ทุกXSSโดยไม่escape"
+        },
+        {
+          "id": "d",
+          "text": "ทุกCSRFโดยไม่token"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "self",
+      "reference": "identity",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: อธิบายLoginผ่านแต่ยังแก้ของเพื่อนไม่ได้ด้วยตัวอย่าง",
+      "rubric": [
+        "แยกauthN/authZ",
+        "ใช้sessionowner",
+        "WHEREresourceและowner"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db08-q06"
+    }
+  ]
+}

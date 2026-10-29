@@ -73,7 +73,8 @@ try {
 
     mysqli_query($conn,"INSERT INTO profile(full_name,email) VALUES('Study Demo A','a@example.invalid'),('Study Demo B','b@example.invalid')");
     mysqli_query($conn,"INSERT INTO skill(profile_id,skill_name,skill_level) VALUES(1,'PHP','Intermediate'),(1,'MySQL','Intermediate'),(1,'Git','Beginner'),(2,'Other owner','Advanced')");
-    ensure(array_column(skills($conn,1),'skill_name')===['PHP','MySQL','Git'],'Ordered associative row fetch');
+    $initialSkills=skills($conn,1);
+    ensure(array_column($initialSkills,'skill_name')===['PHP','MySQL','Git'],'Ordered associative row fetch');
     ensure(skills($conn,999)===[],'Empty read');
     ensure(h("<img src=x> & '\"")==='&lt;img src=x&gt; &amp; &#039;&quot;','HTML escaping');
     ensure(h(null)==='' && str_contains(h("\xFF"),"\u{FFFD}"),'Substitute invalid UTF8');
@@ -117,6 +118,7 @@ try {
     logout();ensure($_SESSION===[] && session_status()!==PHP_SESSION_ACTIVE,'Logout clears session');
     rejects(RuntimeException::class,fn()=>actorProfile($_SESSION));
     $report['checks'][]='real PHP CLI session rotation,POST+CSRF,registered-owner isolation and logout';
+    $report['helperObservations']=['owner-skills'=>count($initialSkills)];
     $report['limits']='MariaDB11.4,not native MySQL;PHP CLI+mysqli integration,not Apache/HTTPS/Angsila deployment';
 } finally {
     // Only this process's fresh random database on the guarded temporary server is removed.

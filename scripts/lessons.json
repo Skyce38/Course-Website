@@ -44,5 +44,15 @@
   "courses/internet-of-things/summaries/final-interfaces.md",
   "courses/internet-of-things/summaries/final-pir-motion.md",
   "courses/internet-of-things/summaries/final-relay-timers.md",
-  "courses/internet-of-things/summaries/final-oled-integration.md"
+  "courses/internet-of-things/summaries/final-oled-integration.md",
+  "courses/database-management/summaries/web-database-architecture.md",
+  "courses/database-management/summaries/schema-relationships.md",
+  "courses/database-management/summaries/select-php-rendering.md",
+  "courses/database-management/summaries/crud-prepared-statements.md",
+  "courses/database-management/summaries/inner-join.md",
+  "courses/database-management/summaries/outer-join-null.md",
+  "courses/database-management/summaries/multi-table-join-debugging.md",
+  "courses/database-management/summaries/authentication-authorization.md",
+  "courses/database-management/summaries/git-version-control.md",
+  "courses/database-management/summaries/integrated-project.md"
 ]

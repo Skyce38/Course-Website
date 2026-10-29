@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "database-management-schema-relationships",
+  "title": "DB 02 — ตาราง คีย์ และความสัมพันธ์",
+  "questions": [
+    {
+      "type": "choice",
+      "reference": "tables-keys",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: PKมีหน้าที่ใดในหนึ่งtable?",
+      "explanation": "PKเป็นidentityของrow ไม่ใช่authorization",
+      "id": "db02-q01",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เข้ารหัสpassword"
+        },
+        {
+          "id": "b",
+          "text": "ทำให้ทุกคอลัมน์unique"
+        },
+        {
+          "id": "c",
+          "text": "ระบุrowให้ไม่ซ้ำและไม่เป็นNULL"
+        },
+        {
+          "id": "d",
+          "text": "รับรองว่าผู้ร้องขอเป็นowner"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "type": "choice",
+      "reference": "campus-schema",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: คีย์ใดเชื่อมordersกับstudentsในCampus?",
+      "explanation": "ตรวจFKจากschemaจริง ไม่เทียบเพราะทั้งคู่เป็นเลข",
+      "id": "db02-q02",
+      "choices": [
+        {
+          "id": "a",
+          "text": "orders.order_id → students.student_id"
+        },
+        {
+          "id": "b",
+          "text": "orders.total_amount → students.student_name"
+        },
+        {
+          "id": "c",
+          "text": "order_items.item_id → students.faculty"
+        },
+        {
+          "id": "d",
+          "text": "orders.student_id → students.student_id"
+        }
+      ],
+      "answer": "d"
+    },
+    {
+      "type": "choice",
+      "reference": "resume-schema",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: profileหนึ่งคนมีหลายskills เป็นความสัมพันธ์ใด?",
+      "explanation": "skillเก็บprofile_idหลายแถวอ้างprofileเดียวได้",
+      "id": "db02-q03",
+      "choices": [
+        {
+          "id": "a",
+          "text": "1:N"
+        },
+        {
+          "id": "b",
+          "text": "1:1ที่บังคับเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "N:Nโดยไม่มีตารางเชื่อม"
+        },
+        {
+          "id": "d",
+          "text": "ไม่มีreference"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "numeric",
+      "reference": "campus-schema",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ในDB-D01 Campus fixtureต้นฉบับ ตารางstudentsมีกี่rows?",
+      "answer": 8,
+      "explanation": "อ่านINSERTและfixtureจริง มีID101–108 ไม่ใช่slide4คน",
+      "id": "db02-q04",
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "type": "choice",
+      "reference": "integrity",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: insertorderอ้างstudent999ที่ไม่มีอยู่เมื่อFKทำงาน ควรเกิดอะไร?",
+      "explanation": "FKรักษาreference ไม่สร้างentityปลายทางให้",
+      "id": "db02-q05",
+      "choices": [
+        {
+          "id": "a",
+          "text": "สร้างstudentให้เอง"
+        },
+        {
+          "id": "b",
+          "text": "เปลี่ยน999เป็นNULLเองเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "constraintปฏิเสธ"
+        },
+        {
+          "id": "d",
+          "text": "ปิดFKถาวรโดยอัตโนมัติ"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "type": "self",
+      "reference": "campus-schema",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: วาดFKของCampusทั้งสี่tablesพร้อมcardinality",
+      "rubric": [
+        "ระบุ3เส้นFKถูก",
+        "แยกorderจากitem",
+        "ไม่เชื่อมstudent_idกับorder_id"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db02-q06"
+    }
+  ]
+}

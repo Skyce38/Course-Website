@@ -1,0 +1,696 @@
+{
+  "version": 1,
+  "revision": 1,
+  "baseRevision": 1,
+  "lesson": "database-management-web-database-architecture",
+  "questions": [
+    {
+      "type": "choice",
+      "reference": "roles",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ApacheกับMySQLต่างกันอย่างไร?",
+      "explanation": "คนละบทบาท แม้ติดตั้งเครื่องเดียวกันได้",
+      "id": "db01-q07",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทั้งสองเป็นชื่อเดียวกัน"
+        },
+        {
+          "id": "b",
+          "text": "MySQLrenderCSS ส่วนApacheเก็บตาราง"
+        },
+        {
+          "id": "c",
+          "text": "ApacheแทนPK/FK"
+        },
+        {
+          "id": "d",
+          "text": "ApacheรับHTTP ส่วนMySQLจัดเก็บและqueryข้อมูล"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Browser เป็นโปรแกรมฝั่งผู้ใช้ (Client) ที่ร้องขอ URL และแสดง HTML ส่วน Apache เป็น Web Server ที่รับ HTTP และส่งงาน PHP ไปประมวลผลฝั่ง Server ในการติดตั้งตามแลป MySQL เป็น Database Server ที่รับคำสั่ง SQL ผ่านการเชื่อมต่อของ PHP ไม่ใช่ JavaScript ใน Browser ที่เปิดการเชื่อมต่อ MySQL โดยตรง"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "http-flow",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: PHP echoข้อความแล้วBrowserใช้View Source จะเห็นอะไรเมื่อตั้งserverถูกต้อง?",
+      "explanation": "serverประมวลผลPHPก่อนส่งผล แต่ไฟล์configที่publicยังเสี่ยงแยกกัน",
+      "id": "db01-q08",
+      "choices": [
+        {
+          "id": "a",
+          "text": "HTMLที่PHPส่งกลับ"
+        },
+        {
+          "id": "b",
+          "text": "PHPsourceพร้อมDBpasswordเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "SQLconnectionobjectจริง"
+        },
+        {
+          "id": "d",
+          "text": "sessiondataทั้งหมดโดยอัตโนมัติ"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตัวอย่างพื้นฐานคือการเปิดหน้า Resume: Browser ส่ง GET → Apache เลือก PHP → PHP ส่ง SELECT ไป MySQL → MySQL คืน rows → PHP escape และประกอบ HTML → HTTP Response กลับ Browser การเชื่อมต่อนี้มีสองช่วง คือ HTTP ระหว่าง Browser/เว็บเซิร์ฟเวอร์ และ protocol ของ MySQL ระหว่าง PHP/ฐานข้อมูล"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "environment",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เหตุใด127.0.0.1กับlocalhostในmysqliอาจให้ผลต่างบนบางระบบ?",
+      "explanation": "ตรวจtransport/port/socketตามระบบ ไม่ถือว่าเหมือนกันทุกOS",
+      "id": "db01-q09",
+      "choices": [
+        {
+          "id": "a",
+          "text": "127.0.0.1เป็นIPของBrowserเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "อาจเลือกTCPกับUnixsocketต่างกัน"
+        },
+        {
+          "id": "c",
+          "text": "localhostปิดauthentication"
+        },
+        {
+          "id": "d",
+          "text": "เป็นชื่อtableที่ต่างกัน"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "localhost ในการตั้งค่าฐานข้อมูลของ PHP หมายถึงเครื่องหรือ network namespace ที่ PHP process ทำงาน ถ้า PHP อยู่บนเครื่องนิสิตก็ชี้สภาพแวดล้อมท้องถิ่น ถ้าอยู่บน Angsila ก็อ้างอิงฝั่งเซิร์ฟเวอร์ตามการตั้งค่าของผู้ดูแล ไม่ได้หมายถึง Browser ของผู้ใช้ทุกคน และ container อาจมี namespace แยกต่างหาก"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "roles",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Client/Serverบังคับต้องเป็นเครื่องจริงคนละเครื่องหรือไม่?",
+      "explanation": "เครื่องแลปอาจมีBrowser,Apache,PHP,MySQLร่วมกัน",
+      "id": "db01-q10",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ต้องแยกอย่างน้อยสามเครื่อง"
+        },
+        {
+          "id": "b",
+          "text": "ต้องใช้Cloudเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "ไม่ เป็นบทบาทที่อยู่เครื่องเดียวกันได้"
+        },
+        {
+          "id": "d",
+          "text": "ใช้localไม่ได้"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Browser เป็นโปรแกรมฝั่งผู้ใช้ (Client) ที่ร้องขอ URL และแสดง HTML ส่วน Apache เป็น Web Server ที่รับ HTTP และส่งงาน PHP ไปประมวลผลฝั่ง Server ในการติดตั้งตามแลป MySQL เป็น Database Server ที่รับคำสั่ง SQL ผ่านการเชื่อมต่อของ PHP ไม่ใช่ JavaScript ใน Browser ที่เปิดการเชื่อมต่อ MySQL โดยตรง"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "http-flow",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ถ้าMySQLคืน3rows งานใดควรเกิดก่อนส่งHTMLที่มีข้อมูลผู้ใช้?",
+      "explanation": "queryresultยังเป็นข้อมูลที่ต้องescapeก่อนแสดง",
+      "id": "db01-q11",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Browserแก้SQLก่อนquery"
+        },
+        {
+          "id": "b",
+          "text": "ลบPKทุกแถว"
+        },
+        {
+          "id": "c",
+          "text": "ส่งconnectionpasswordให้ผู้ใช้"
+        },
+        {
+          "id": "d",
+          "text": "PHPescapeค่าให้ถูกบริบทoutput"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตัวอย่างพื้นฐานคือการเปิดหน้า Resume: Browser ส่ง GET → Apache เลือก PHP → PHP ส่ง SELECT ไป MySQL → MySQL คืน rows → PHP escape และประกอบ HTML → HTTP Response กลับ Browser การเชื่อมต่อนี้มีสองช่วง คือ HTTP ระหว่าง Browser/เว็บเซิร์ฟเวอร์ และ protocol ของ MySQL ระหว่าง PHP/ฐานข้อมูล"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "environment",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: GitHubPagesเหมาะกับส่วนใดของStudy?",
+      "explanation": "Pagesไม่ใช่PHP/MySQLhosting; lessonexamplesไม่ใช่livebackend",
+      "id": "db01-q12",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เสิร์ฟHTML/CSS/JSและตัวอย่างstatic"
+        },
+        {
+          "id": "b",
+          "text": "รันPHPmysqliบนPagesเอง"
+        },
+        {
+          "id": "c",
+          "text": "สร้างบัญชีMySQLบนPages"
+        },
+        {
+          "id": "d",
+          "text": "ให้Apachemoduleตาม.env"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "localhost ในการตั้งค่าฐานข้อมูลของ PHP หมายถึงเครื่องหรือ network namespace ที่ PHP process ทำงาน ถ้า PHP อยู่บนเครื่องนิสิตก็ชี้สภาพแวดล้อมท้องถิ่น ถ้าอยู่บน Angsila ก็อ้างอิงฝั่งเซิร์ฟเวอร์ตามการตั้งค่าของผู้ดูแล ไม่ได้หมายถึง Browser ของผู้ใช้ทุกคน และ container อาจมี namespace แยกต่างหาก"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "security",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เปิดหน้าconfigในpublicrepositoryแม้serverรันPHPถูกต้อง มีความเสี่ยงใด?",
+      "explanation": "การป้องกันHTTPresponseไม่เท่ากับป้องกันไฟล์ที่เผยแพร่",
+      "id": "db01-q13",
+      "choices": [
+        {
+          "id": "a",
+          "text": "PHPจะซ่อนGit historyเอง"
+        },
+        {
+          "id": "b",
+          "text": "secretยังถูกอ่านจากrepositoryได้"
+        },
+        {
+          "id": "c",
+          "text": "ไม่มีความเสี่ยงเพราะนามสกุลphp"
+        },
+        {
+          "id": "d",
+          "text": "READMEลบsecretให้อัตโนมัติ"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "จัดเก็บ secret นอก source ที่เผยแพร่ ตั้งสิทธิ์ไฟล์และบัญชีให้เหมาะสม ใช้ HTTPS ตามบริการจริง และตรวจ input ฝั่งเซิร์ฟเวอร์ `phpMyAdmin` มีไว้บริหารฐานข้อมูล ไม่ควรเอาบัญชีผู้ดูแลไปใช้เป็นสิทธิ์ปกติของแอป"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "examples",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เมื่อHTTPเปิดได้แต่DBconnectionล้ม ควรตรวจชั้นใดก่อน?",
+      "explanation": "แยกปัญหาเว็บserverจากการเชื่อมDB ไม่เดาว่าระบบทั้งหมดเสีย",
+      "id": "db01-q14",
+      "choices": [
+        {
+          "id": "a",
+          "text": "แก้สีCSSอย่างเดียว"
+        },
+        {
+          "id": "b",
+          "text": "เพิ่มVenn diagram"
+        },
+        {
+          "id": "c",
+          "text": "host/port/สิทธิ์DBและconfigฝั่งPHP"
+        },
+        {
+          "id": "d",
+          "text": "เปลี่ยนชื่อBrowser"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ถ้าเปิด HTML ได้แต่ไม่มีรายการ ให้แยกตรวจทีละช่วง: HTTP status ถูกหรือไม่, PHP รันหรือแสดงเป็นข้อความ, mysqli ต่อฐานข้อมูลที่ตั้งใจหรือไม่, SELECT คืน0แถวหรือเกิด exception, และ HTML loop ใช้ rows ถูกชุดหรือไม่ อย่าแก้ด้วยการฝัง array แล้วสรุปว่าฐานข้อมูลทำงานแล้ว"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "http-flow",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ResponseกับRequestต่างกันอย่างไรในGETResume?",
+      "explanation": "HTTPมีทิศทางร้องขอและตอบกลับ ผลหน้าเว็บไม่ใช่DBprotocol",
+      "id": "db01-q15",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Requestเก็บrowsถาวรในDB"
+        },
+        {
+          "id": "b",
+          "text": "Responseเป็นคำสั่งGitpush"
+        },
+        {
+          "id": "c",
+          "text": "ทั้งคู่ต้องเป็นSQL"
+        },
+        {
+          "id": "d",
+          "text": "Requestร้องขอหน้า ส่วนResponseส่งผลกลับ"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตัวอย่างพื้นฐานคือการเปิดหน้า Resume: Browser ส่ง GET → Apache เลือก PHP → PHP ส่ง SELECT ไป MySQL → MySQL คืน rows → PHP escape และประกอบ HTML → HTTP Response กลับ Browser การเชื่อมต่อนี้มีสองช่วง คือ HTTP ระหว่าง Browser/เว็บเซิร์ฟเวอร์ และ protocol ของ MySQL ระหว่าง PHP/ฐานข้อมูล"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "environment",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: นำค่าroot/passwordว่างจากแลปไปsharedserver ควรทำหรือไม่?",
+      "explanation": "การตั้งค่าสาธิตไม่เป็นpolicyของsharedhosting",
+      "id": "db01-q16",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่ ตรวจบัญชีและสิทธิ์ที่ผู้ดูแลอนุมัติ"
+        },
+        {
+          "id": "b",
+          "text": "ทำได้ทุกserverโดยไม่ขอสิทธิ์"
+        },
+        {
+          "id": "c",
+          "text": "จำเป็นเพราะmysqliรับได้แค่root"
+        },
+        {
+          "id": "d",
+          "text": "ทำให้HTTPSเร็วขึ้น"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "localhost ในการตั้งค่าฐานข้อมูลของ PHP หมายถึงเครื่องหรือ network namespace ที่ PHP process ทำงาน ถ้า PHP อยู่บนเครื่องนิสิตก็ชี้สภาพแวดล้อมท้องถิ่น ถ้าอยู่บน Angsila ก็อ้างอิงฝั่งเซิร์ฟเวอร์ตามการตั้งค่าของผู้ดูแล ไม่ได้หมายถึง Browser ของผู้ใช้ทุกคน และ container อาจมี namespace แยกต่างหาก"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "security",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ข้อความDBerrorละเอียดควรส่งให้ผู้ใช้ทุกคนหรือไม่?",
+      "explanation": "ลดการเปิดเผยรายละเอียดระบบ; debugต้องอยู่ช่องทางเหมาะสม",
+      "id": "db01-q17",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ควรส่งsecretเพื่อdebugง่าย"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ ใช้ข้อความทั่วไปและlogที่ควบคุมสิทธิ์"
+        },
+        {
+          "id": "c",
+          "text": "ควรใส่.envในHTMLcomment"
+        },
+        {
+          "id": "d",
+          "text": "ควรส่งstacktraceและpassword"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "จัดเก็บ secret นอก source ที่เผยแพร่ ตั้งสิทธิ์ไฟล์และบัญชีให้เหมาะสม ใช้ HTTPS ตามบริการจริง และตรวจ input ฝั่งเซิร์ฟเวอร์ `phpMyAdmin` มีไว้บริหารฐานข้อมูล ไม่ควรเอาบัญชีผู้ดูแลไปใช้เป็นสิทธิ์ปกติของแอป"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "roles",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Browserต้องเชื่อมMySQLโดยตรงเพื่อแสดงResumeหรือไม่?",
+      "explanation": "ในarchitectureนี้BrowserพูดHTTPกับapp",
+      "id": "db01-q18",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ต้องรู้DBrootpassword"
+        },
+        {
+          "id": "b",
+          "text": "ต้องติดตั้งphpMyAdminในBrowserทุกคน"
+        },
+        {
+          "id": "c",
+          "text": "ไม่ PHPqueryแล้วประกอบHTMLได้"
+        },
+        {
+          "id": "d",
+          "text": "ต้องมีSQLsocketในCSS"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Browser เป็นโปรแกรมฝั่งผู้ใช้ (Client) ที่ร้องขอ URL และแสดง HTML ส่วน Apache เป็น Web Server ที่รับ HTTP และส่งงาน PHP ไปประมวลผลฝั่ง Server ในการติดตั้งตามแลป MySQL เป็น Database Server ที่รับคำสั่ง SQL ผ่านการเชื่อมต่อของ PHP ไม่ใช่ JavaScript ใน Browser ที่เปิดการเชื่อมต่อ MySQL โดยตรง"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "environment",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: PHPในcontainerตั้งlocalhostแต่DBอยู่อีกcontainer สรุปใดเหมาะสม?",
+      "explanation": "namespaceแยกทำให้localhostไม่หมายถึงเครื่องhostหรือserviceอื่นเสมอ",
+      "id": "db01-q19",
+      "choices": [
+        {
+          "id": "a",
+          "text": "localhostชี้DBcontainerทุกตัว"
+        },
+        {
+          "id": "b",
+          "text": "เปลี่ยนCSSแล้วต่อได้"
+        },
+        {
+          "id": "c",
+          "text": "BrowserเลือกDBcontainerให้"
+        },
+        {
+          "id": "d",
+          "text": "ต้องตรวจnetworknamespaceและชื่อserviceจริง"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "localhost ในการตั้งค่าฐานข้อมูลของ PHP หมายถึงเครื่องหรือ network namespace ที่ PHP process ทำงาน ถ้า PHP อยู่บนเครื่องนิสิตก็ชี้สภาพแวดล้อมท้องถิ่น ถ้าอยู่บน Angsila ก็อ้างอิงฝั่งเซิร์ฟเวอร์ตามการตั้งค่าของผู้ดูแล ไม่ได้หมายถึง Browser ของผู้ใช้ทุกคน และ container อาจมี namespace แยกต่างหาก"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "examples",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ตัวอย่างechoจำนวน3โดยกำหนดตัวแปรเอง พิสูจน์ว่าqueryDBผ่านหรือไม่?",
+      "explanation": "แยกค่าจำลองกับผลintegrationที่รันจริง",
+      "id": "db01-q20",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่ สาธิตoutputเท่านั้น"
+        },
+        {
+          "id": "b",
+          "text": "พิสูจน์ทั้งDBและAngsilaแล้ว"
+        },
+        {
+          "id": "c",
+          "text": "พิสูจน์ว่าทุกprofileมี3skills"
+        },
+        {
+          "id": "d",
+          "text": "พิสูจน์authorizationครบ"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ถ้าเปิด HTML ได้แต่ไม่มีรายการ ให้แยกตรวจทีละช่วง: HTTP status ถูกหรือไม่, PHP รันหรือแสดงเป็นข้อความ, mysqli ต่อฐานข้อมูลที่ตั้งใจหรือไม่, SELECT คืน0แถวหรือเกิด exception, และ HTML loop ใช้ rows ถูกชุดหรือไม่ อย่าแก้ด้วยการฝัง array แล้วสรุปว่าฐานข้อมูลทำงานแล้ว"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "security",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ไฟล์.envที่มีค่าเชื่อมต่อควรอยู่ที่ใด?",
+      "explanation": "sourceZIPมี.envจึงต้องกั้นไม่ให้เข้าคลังpublic",
+      "id": "db01-q21",
+      "choices": [
+        {
+          "id": "a",
+          "text": "publicJavaScript"
+        },
+        {
+          "id": "b",
+          "text": "ช่องทางconfigฝั่งServerที่ไม่publicและไม่commit"
+        },
+        {
+          "id": "c",
+          "text": "รูปภาพfavicon"
+        },
+        {
+          "id": "d",
+          "text": "captionของบทเรียน"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "จัดเก็บ secret นอก source ที่เผยแพร่ ตั้งสิทธิ์ไฟล์และบัญชีให้เหมาะสม ใช้ HTTPS ตามบริการจริง และตรวจ input ฝั่งเซิร์ฟเวอร์ `phpMyAdmin` มีไว้บริหารฐานข้อมูล ไม่ควรเอาบัญชีผู้ดูแลไปใช้เป็นสิทธิ์ปกติของแอป"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "roles",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: MySQLคืนrowsให้PHPแล้วใครจัดรูปแบบการ์ดResume?",
+      "explanation": "databaseและpresentationเป็นคนละชั้น",
+      "id": "db01-q22",
+      "choices": [
+        {
+          "id": "a",
+          "text": "FKวาดการ์ดให้"
+        },
+        {
+          "id": "b",
+          "text": "MySQLวาดCSSเอง"
+        },
+        {
+          "id": "c",
+          "text": "PHPประกอบHTMLและBrowserวาดผล"
+        },
+        {
+          "id": "d",
+          "text": "Gitสร้างDOMจากcommit"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Browser เป็นโปรแกรมฝั่งผู้ใช้ (Client) ที่ร้องขอ URL และแสดง HTML ส่วน Apache เป็น Web Server ที่รับ HTTP และส่งงาน PHP ไปประมวลผลฝั่ง Server ในการติดตั้งตามแลป MySQL เป็น Database Server ที่รับคำสั่ง SQL ผ่านการเชื่อมต่อของ PHP ไม่ใช่ JavaScript ใน Browser ที่เปิดการเชื่อมต่อ MySQL โดยตรง"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "http-flow",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: HTTPresponseมีHTMLถูกต้องแต่ตัวอักษรไทยเพี้ยน ควรตรวจอะไร?",
+      "explanation": "encodingต้องสอดคล้องตั้งแต่DBถึงoutput; ไม่ใช่เหตุให้ขยายสิทธิ์",
+      "id": "db01-q23",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เปลี่ยนJOINเป็นCROSS"
+        },
+        {
+          "id": "b",
+          "text": "ถอดWHEREทุกตัว"
+        },
+        {
+          "id": "c",
+          "text": "เพิ่มDBrootสิทธิ์ทุกอย่าง"
+        },
+        {
+          "id": "d",
+          "text": "encodingทั้งconnectionและHTTP/HTMLUTF-8"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตัวอย่างพื้นฐานคือการเปิดหน้า Resume: Browser ส่ง GET → Apache เลือก PHP → PHP ส่ง SELECT ไป MySQL → MySQL คืน rows → PHP escape และประกอบ HTML → HTTP Response กลับ Browser การเชื่อมต่อนี้มีสองช่วง คือ HTTP ระหว่าง Browser/เว็บเซิร์ฟเวอร์ และ protocol ของ MySQL ระหว่าง PHP/ฐานข้อมูล"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "environment",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: คำกล่าวว่าได้deployAngsilaแล้วต้องมีหลักฐานใด?",
+      "explanation": "Static/CLI/browsermockไม่เท่ากับrealdeployment",
+      "id": "db01-q24",
+      "choices": [
+        {
+          "id": "a",
+          "text": "การทดสอบบนhostingจริงที่ได้รับอนุญาต"
+        },
+        {
+          "id": "b",
+          "text": "แค่PHPCLI lintผ่าน"
+        },
+        {
+          "id": "c",
+          "text": "มีภาพarchitecture"
+        },
+        {
+          "id": "d",
+          "text": "มีURLในREADMEอย่างเดียว"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "localhost ในการตั้งค่าฐานข้อมูลของ PHP หมายถึงเครื่องหรือ network namespace ที่ PHP process ทำงาน ถ้า PHP อยู่บนเครื่องนิสิตก็ชี้สภาพแวดล้อมท้องถิ่น ถ้าอยู่บน Angsila ก็อ้างอิงฝั่งเซิร์ฟเวอร์ตามการตั้งค่าของผู้ดูแล ไม่ได้หมายถึง Browser ของผู้ใช้ทุกคน และ container อาจมี namespace แยกต่างหาก"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "examples",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: โค้ดSQLในreaderของStudyทำงานแบบใด?",
+      "explanation": "GitHubPagesแสดงเนื้อหาและquizฝั่งclient",
+      "id": "db01-q25",
+      "choices": [
+        {
+          "id": "a",
+          "text": "รันDROPบนserverอัตโนมัติ"
+        },
+        {
+          "id": "b",
+          "text": "เป็นตัวอย่างอ่าน/คัดลอก ไม่รันDBจากหน้าเว็บ"
+        },
+        {
+          "id": "c",
+          "text": "ส่งpasswordมหาวิทยาลัย"
+        },
+        {
+          "id": "d",
+          "text": "ทำlivePHPlogin"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ถ้าเปิด HTML ได้แต่ไม่มีรายการ ให้แยกตรวจทีละช่วง: HTTP status ถูกหรือไม่, PHP รันหรือแสดงเป็นข้อความ, mysqli ต่อฐานข้อมูลที่ตั้งใจหรือไม่, SELECT คืน0แถวหรือเกิด exception, และ HTML loop ใช้ rows ถูกชุดหรือไม่ อย่าแก้ด้วยการฝัง array แล้วสรุปว่าฐานข้อมูลทำงานแล้ว"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "security",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: แผนภาพBrowser→PHP→MySQLรับรองความปลอดภัยครบหรือไม่?",
+      "explanation": "architectureสื่อบทบาท ไม่ใช่ผลsecurityauditทั้งหมด",
+      "id": "db01-q26",
+      "choices": [
+        {
+          "id": "a",
+          "text": "รับรองเพราะมีลูกศร"
+        },
+        {
+          "id": "b",
+          "text": "แทนCSRFได้"
+        },
+        {
+          "id": "c",
+          "text": "ไม่ ยังต้องvalidation,escapingและpermissions"
+        },
+        {
+          "id": "d",
+          "text": "แทนHTTPSและsessionได้"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "จัดเก็บ secret นอก source ที่เผยแพร่ ตั้งสิทธิ์ไฟล์และบัญชีให้เหมาะสม ใช้ HTTPS ตามบริการจริง และตรวจ input ฝั่งเซิร์ฟเวอร์ `phpMyAdmin` มีไว้บริหารฐานข้อมูล ไม่ควรเอาบัญชีผู้ดูแลไปใช้เป็นสิทธิ์ปกติของแอป"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "environment",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: วิเคราะห์localhostเมื่อBrowserอยู่บ้านแต่PHPอยู่Angsila",
+      "rubric": [
+        "อ้างprocessฝั่งPHP",
+        "แยกBrowserจากserver",
+        "ไม่เดาcredentialหรือpolicyมหาวิทยาลัย"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db01-q27",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "localhost ในการตั้งค่าฐานข้อมูลของ PHP หมายถึงเครื่องหรือ network namespace ที่ PHP process ทำงาน ถ้า PHP อยู่บนเครื่องนิสิตก็ชี้สภาพแวดล้อมท้องถิ่น ถ้าอยู่บน Angsila ก็อ้างอิงฝั่งเซิร์ฟเวอร์ตามการตั้งค่าของผู้ดูแล ไม่ได้หมายถึง Browser ของผู้ใช้ทุกคน และ container อาจมี namespace แยกต่างหาก"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "roles",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: อธิบายApache/PHP/MySQL/phpMyAdminให้เพื่อนเริ่มเรียน",
+      "rubric": [
+        "ระบุหน้าที่แต่ละตัว",
+        "ไม่เรียกphpMyAdminว่าengine",
+        "ยอมให้หลายบทบาทอยู่เครื่องเดียว"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db01-q28",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Browser เป็นโปรแกรมฝั่งผู้ใช้ (Client) ที่ร้องขอ URL และแสดง HTML ส่วน Apache เป็น Web Server ที่รับ HTTP และส่งงาน PHP ไปประมวลผลฝั่ง Server ในการติดตั้งตามแลป MySQL เป็น Database Server ที่รับคำสั่ง SQL ผ่านการเชื่อมต่อของ PHP ไม่ใช่ JavaScript ใน Browser ที่เปิดการเชื่อมต่อ MySQL โดยตรง"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "security",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: วางแนวทางconfigและerrorhandlingโดยไม่เปิดเผยsecret",
+      "rubric": [
+        "ไม่commit.env",
+        "ไม่ส่งpasswordไปclient",
+        "ใช้errorทั่วไปและlogควบคุมสิทธิ์"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db01-q29",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "จัดเก็บ secret นอก source ที่เผยแพร่ ตั้งสิทธิ์ไฟล์และบัญชีให้เหมาะสม ใช้ HTTPS ตามบริการจริง และตรวจ input ฝั่งเซิร์ฟเวอร์ `phpMyAdmin` มีไว้บริหารฐานข้อมูล ไม่ควรเอาบัญชีผู้ดูแลไปใช้เป็นสิทธิ์ปกติของแอป"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "examples",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เสนอวิธีแยกการทดสอบstaticPHPตัวอย่างกับDBintegrationจริง",
+      "rubric": [
+        "ระบุสิ่งที่รันจริง",
+        "ใช้databaseจำลองแยก",
+        "ไม่อ้างว่าทดสอบAngsilaแล้ว"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db01-q30",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ถ้าเปิด HTML ได้แต่ไม่มีรายการ ให้แยกตรวจทีละช่วง: HTTP status ถูกหรือไม่, PHP รันหรือแสดงเป็นข้อความ, mysqli ต่อฐานข้อมูลที่ตั้งใจหรือไม่, SELECT คืน0แถวหรือเกิด exception, และ HTML loop ใช้ rows ถูกชุดหรือไม่ อย่าแก้ด้วยการฝัง array แล้วสรุปว่าฐานข้อมูลทำงานแล้ว"
+      }
+    }
+  ]
+}

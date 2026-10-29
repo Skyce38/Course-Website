@@ -134,8 +134,29 @@ def run():
         assert canonical(observed)==target,(c['id'],'SQLite disagrees with independent nested-loop oracle')
         if actual_maria:assert canonical(actual_maria['queries'][c['id']])==target,(c['id'],'MariaDB disagrees with independent row oracle')
         results[c['id']]=target
+    # Question oracles use independently computed rows, never the bank's own grader.
+    entries=json.loads((ROOT/'scripts/database-verification.json').read_text(encoding='utf8'))['questions']
+    questions={q['id']:q for folder in ('practice','exam') for file in
+               (ROOT/f'courses/database-management/{folder}').glob('*.json')
+               for q in json.loads(file.read_text(encoding='utf8'))['questions']}
+    checked=0
+    for entry in entries:
+        model=entry.get('model')
+        if not model:continue
+        q=questions[entry['id']];kind=model['kind']
+        if kind=='table-count':value=len(t[model['table']])
+        elif kind in ('query-count','query-count-choice'):value=len(expected[model['case']])
+        elif kind=='query-ids':value=[r[model['index']] for r in expected[model['case']]]
+        elif kind in ('query-cell','query-cell-choice'):value=expected[model['case']][model['row']][model['column']]
+        elif kind=='php':
+            if not actual_maria:continue # explicitly not claimed without PHP output
+            value=actual_maria['helperObservations'][model['key']]
+        else:raise AssertionError(kind)
+        if kind.endswith('-choice') or kind=='query-ids':assert value==model['value'],entry['id']
+        else:assert canonical(value)==canonical(q['answer']),entry['id']
+        checked+=1
     report={'sqlite':sqlite3.sqlite_version,'mariadb':actual_maria['engine'] if actual_maria else 'NOT RUN',
-            'resultCases':30,'explainPlans':'executed;physical shape not prescribed','results':results,
+            'resultCases':30,'questionModels':checked,'explainPlans':'executed;physical shape not prescribed','results':results,
             'limits':'MariaDB is MySQL-compatible for these checked statements;native MySQL,Angsila and arbitrary dialect equivalence are not claimed'}
     if args.report:args.report.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
     print('PASS:30 exact ordered SQL results versus independent row models;SQLite'+sqlite3.sqlite_version+

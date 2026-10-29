@@ -1,0 +1,696 @@
+{
+  "version": 1,
+  "revision": 1,
+  "baseRevision": 1,
+  "lesson": "database-management-integrated-project",
+  "questions": [
+    {
+      "type": "choice",
+      "reference": "requirements",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: UseCaseเพิ่มskillควรระบุfailurecaseใด?",
+      "explanation": "success/failureช่วยออกแบบtestและsecurity",
+      "id": "db10-q07",
+      "choices": [
+        {
+          "id": "a",
+          "text": "CSRFผิดต้องไม่เขียนข้อมูล"
+        },
+        {
+          "id": "b",
+          "text": "ทุกinputต้องผ่าน"
+        },
+        {
+          "id": "c",
+          "text": "ถ้าownerผิดให้แก้ของคนอื่น"
+        },
+        {
+          "id": "d",
+          "text": "ถ้าข้อมูลว่างให้DROP"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ProblemStatementต้องระบุผู้ใช้และปัญหาที่พบ ไม่เริ่มจากรายการเทคโนโลยีอย่างเดียว ตัวอย่างเสริมคือผู้สมัครต้องอัปเดตทักษะResumeของตนโดยไม่แก้ข้อมูลคนอื่น UseCaseระบุactor/precondition/action/success/failure เช่นเจ้าของLoginแล้วเพิ่มskillที่ผ่านvalidation;ถ้าCSRFผิดต้องไม่เกิดการเขียน"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "schema",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ER/Schema/DataDictionaryควรสัมพันธ์กันอย่างไร?",
+      "explanation": "traceabilityช่วยพบช่องว่างระหว่างแบบกับimplementation",
+      "id": "db10-q08",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เป็นเอกสารแยกไม่ต้องตรง"
+        },
+        {
+          "id": "b",
+          "text": "entity/key/cardinality/typeต้องสอดคล้อง"
+        },
+        {
+          "id": "c",
+          "text": "ERแทนruntimeทุกอย่าง"
+        },
+        {
+          "id": "d",
+          "text": "dictionaryใช้แทนFKconstraint"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ERDiagramแสดงentity/key/cardinality Schemaทำข้อจำกัดจริง และDataDictionaryอธิบายความหมาย/type/nullable/constraint แต่ละfield ทั้งสามต้องสอดคล้องกัน ตัวอย่างสอนต่อยอดpublicschema ไม่ได้แก้ไฟล์ต้นฉบับ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "implementation",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: placeholder?ในSQLตัวอย่างนำไปpastephpMyAdminได้เลยหรือไม่?",
+      "explanation": "?เป็นparameterplaceholderของstatementAPI ไม่ใช่ค่าที่serverรู้เอง",
+      "id": "db10-q09",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ได้ทุกinterfaceโดยไม่bind"
+        },
+        {
+          "id": "b",
+          "text": "ทำให้sessionเปิดเอง"
+        },
+        {
+          "id": "c",
+          "text": "ไม่ ต้องbindผ่านpreparedAPIหรือแทนค่าทดสอบอย่างถูกบริบท"
+        },
+        {
+          "id": "d",
+          "text": "คือwildcardแทนทุกrow"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ลำดับฝึกที่แนะนำ: schema+fixture → SELECT/render → validation+preparedCRUD → Login/Session → ownership+CSRF → errorhandling+tests ลำดับนี้เป็นคำแนะนำเสริม ไม่อ้างว่าเป็นตารางสอนที่ยืนยัน"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "testing",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: wrongownerdeleteควรตรวจอะไรนอกจากaffectedrows0?",
+      "explanation": "ตรวจstateหลังปฏิเสธ ไม่พอแค่returncode",
+      "id": "db10-q10",
+      "choices": [
+        {
+          "id": "a",
+          "text": "สีbuttonเปลี่ยน"
+        },
+        {
+          "id": "b",
+          "text": "ชื่อbranchตรง"
+        },
+        {
+          "id": "c",
+          "text": "faviconโหลด"
+        },
+        {
+          "id": "d",
+          "text": "ข้อมูลของเจ้าของจริงยังอยู่ไม่เปลี่ยน"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "TestCaseควรมีinput/precondition/expected/actual/evidence ไม่เขียนPASSก่อนรัน ตัวอย่างตารางต่อไปเป็นexpectedของระบบเสริม โดยส่วนhelper/SQLทดสอบอัตโนมัติในfixtureแล้ว ส่วนHTTPบนhostingจริงยังไม่ทำ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "delivery",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: StudyChecklistกับProjectChecklistต่างกันอย่างไร?",
+      "explanation": "แยกการเตรียมเรียนกับdeliverablesและตรวจคำสั่งจริง",
+      "id": "db10-q11",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทบทวนความเข้าใจ กับหลักฐานงานที่ต้องส่ง"
+        },
+        {
+          "id": "b",
+          "text": "ทั้งคู่เป็นofficialexamkey"
+        },
+        {
+          "id": "c",
+          "text": "StudyChecklistมีsecret"
+        },
+        {
+          "id": "d",
+          "text": "ProjectChecklistแทนผู้สอนทุกประกาศ"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "**StudyChecklist:** อธิบายrequestflow,PK/FK,JOIN/NULL,CRUD/scopedWHERE,hash/session/CSRF,Gitstates และคำนวณresultrowsเองได้ แก้โจทย์ฝึกก่อนเปิดเฉลย ไม่ถือคะแนนPracticeเป็นคำทำนายสอบ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "requirements",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: การตั้งวันสอบFinalเองจากวันส่งproposalเหมาะหรือไม่?",
+      "explanation": "ไม่อนุมานexamdate/weightจากprojectmilestone",
+      "id": "db10-q12",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เหมาะเพราะใกล้กัน"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ ต้องมีหลักฐานประกาศวันสอบ"
+        },
+        {
+          "id": "c",
+          "text": "เหมาะถ้าทุกคนเดาตรง"
+        },
+        {
+          "id": "d",
+          "text": "เหมาะเพราะGitcommitมีdate"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ProblemStatementต้องระบุผู้ใช้และปัญหาที่พบ ไม่เริ่มจากรายการเทคโนโลยีอย่างเดียว ตัวอย่างเสริมคือผู้สมัครต้องอัปเดตทักษะResumeของตนโดยไม่แก้ข้อมูลคนอื่น UseCaseระบุactor/precondition/action/success/failure เช่นเจ้าของLoginแล้วเพิ่มskillที่ผ่านvalidation;ถ้าCSRFผิดต้องไม่เกิดการเขียน"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "schema",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: FKมีจริงแต่Aแก้ของBได้ แปลว่าอะไร?",
+      "explanation": "constraintไม่ทราบactoridentity",
+      "id": "db10-q13",
+      "choices": [
+        {
+          "id": "a",
+          "text": "FKป้องกันทุกอย่างแล้วจึงไม่มีbug"
+        },
+        {
+          "id": "b",
+          "text": "ต้องลบFK"
+        },
+        {
+          "id": "c",
+          "text": "applicationauthorizationยังผิดแม้integrityผ่าน"
+        },
+        {
+          "id": "d",
+          "text": "ต้องเพิ่มCSS"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ERDiagramแสดงentity/key/cardinality Schemaทำข้อจำกัดจริง และDataDictionaryอธิบายความหมาย/type/nullable/constraint แต่ละfield ทั้งสามต้องสอดคล้องกัน ตัวอย่างสอนต่อยอดpublicschema ไม่ได้แก้ไฟล์ต้นฉบับ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "implementation",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ลำดับฝึกschema→SELECT→CRUD→authที่เสนอเป็นอะไร?",
+      "explanation": "ต้องแยกrecommendationจากsource",
+      "id": "db10-q14",
+      "choices": [
+        {
+          "id": "a",
+          "text": "officialteachingorderทุกสัปดาห์"
+        },
+        {
+          "id": "b",
+          "text": "ข้อสอบFinalลำดับจริง"
+        },
+        {
+          "id": "c",
+          "text": "หลักฐานว่าAngsilaผ่าน"
+        },
+        {
+          "id": "d",
+          "text": "คำแนะนำการเรียนเสริม ไม่ใช่ตารางสอนยืนยัน"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ลำดับฝึกที่แนะนำ: schema+fixture → SELECT/render → validation+preparedCRUD → Login/Session → ownership+CSRF → errorhandling+tests ลำดับนี้เป็นคำแนะนำเสริม ไม่อ้างว่าเป็นตารางสอนที่ยืนยัน"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "testing",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: PHPCLItestsผ่านควรรายงานHTTPcookieบนAngsilaอย่างไร?",
+      "explanation": "ขอบเขตCLIไม่ครอบคลุมhosting/browsertransport",
+      "id": "db10-q15",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ยังไม่ทดสอบจริง"
+        },
+        {
+          "id": "b",
+          "text": "PASSทั้งหมดทุกdevice"
+        },
+        {
+          "id": "c",
+          "text": "ไม่มีข้อจำกัด"
+        },
+        {
+          "id": "d",
+          "text": "ทดสอบแล้วเพราะมีURL"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "TestCaseควรมีinput/precondition/expected/actual/evidence ไม่เขียนPASSก่อนรัน ตัวอย่างตารางต่อไปเป็นexpectedของระบบเสริม โดยส่วนhelper/SQLทดสอบอัตโนมัติในfixtureแล้ว ส่วนHTTPบนhostingจริงยังไม่ทำ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "delivery",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ก่อนdeployAngsilaควรมีอะไร?",
+      "explanation": "ไม่แตะsharedserverโดยไม่ได้รับอนุญาต",
+      "id": "db10-q16",
+      "choices": [
+        {
+          "id": "a",
+          "text": "rootpasswordที่เดา"
+        },
+        {
+          "id": "b",
+          "text": "สิทธิ์และคำแนะนำhostingที่ผู้สอน/ผู้ดูแลอนุมัติ"
+        },
+        {
+          "id": "c",
+          "text": "การpush.envpublic"
+        },
+        {
+          "id": "d",
+          "text": "การรันDROPในDBเดิม"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "**StudyChecklist:** อธิบายrequestflow,PK/FK,JOIN/NULL,CRUD/scopedWHERE,hash/session/CSRF,Gitstates และคำนวณresultrowsเองได้ แก้โจทย์ฝึกก่อนเปิดเฉลย ไม่ถือคะแนนPracticeเป็นคำทำนายสอบ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "requirements",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ResumePainPointตัวอย่างเสริมควรถูกอ้างอย่างไร?",
+      "explanation": "authoredexampleไม่ใช่officialquotation",
+      "id": "db10-q17",
+      "choices": [
+        {
+          "id": "a",
+          "text": "คำพูดผู้สอนตรงทุกคำ"
+        },
+        {
+          "id": "b",
+          "text": "โจทย์Finalจริง"
+        },
+        {
+          "id": "c",
+          "text": "ตัวอย่างที่ผู้เขียนเรียบเรียงจากบริบทแลป"
+        },
+        {
+          "id": "d",
+          "text": "งานที่ผู้สอนให้คะแนนแล้ว"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ProblemStatementต้องระบุผู้ใช้และปัญหาที่พบ ไม่เริ่มจากรายการเทคโนโลยีอย่างเดียว ตัวอย่างเสริมคือผู้สมัครต้องอัปเดตทักษะResumeของตนโดยไม่แก้ข้อมูลคนอื่น UseCaseระบุactor/precondition/action/success/failure เช่นเจ้าของLoginแล้วเพิ่มskillที่ผ่านvalidation;ถ้าCSRFผิดต้องไม่เกิดการเขียน"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "schema",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: skill_levelNULLในdictionaryควรอธิบายว่าอะไร?",
+      "explanation": "nullablefieldต้องแยกabsenceของrow",
+      "id": "db10-q18",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่มีskillrowเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "passwordว่าง"
+        },
+        {
+          "id": "c",
+          "text": "FKไม่ทำงาน"
+        },
+        {
+          "id": "d",
+          "text": "ยังไม่ระบุระดับในrowที่มีได้"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ERDiagramแสดงentity/key/cardinality Schemaทำข้อจำกัดจริง และDataDictionaryอธิบายความหมาย/type/nullable/constraint แต่ละfield ทั้งสามต้องสอดคล้องกัน ตัวอย่างสอนต่อยอดpublicschema ไม่ได้แก้ไฟล์ต้นฉบับ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "implementation",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ผลdeleteครั้งแรก1ครั้งซ้ำ0ควรสรุปอย่างไร?",
+      "explanation": "อ่านผลตามqueryและprecondition ไม่ขยายความเกินจริง",
+      "id": "db10-q19",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ครั้งแรกเปลี่ยน1row ครั้งถัดไปไม่มีrowตรงในfixture"
+        },
+        {
+          "id": "b",
+          "text": "ครั้งซ้ำต้องลบprofileเอง"
+        },
+        {
+          "id": "c",
+          "text": "0แปลว่าDBล่มเสมอ"
+        },
+        {
+          "id": "d",
+          "text": "1แปลว่าทุกrowถูกลบ"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ลำดับฝึกที่แนะนำ: schema+fixture → SELECT/render → validation+preparedCRUD → Login/Session → ownership+CSRF → errorhandling+tests ลำดับนี้เป็นคำแนะนำเสริม ไม่อ้างว่าเป็นตารางสอนที่ยืนยัน"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "testing",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: สร้างprofileแล้วusersinsertล้ม กรณีทดสอบควรตรวจอะไร?",
+      "explanation": "ตรวจatomicstateจริงหลังfailure",
+      "id": "db10-q20",
+      "choices": [
+        {
+          "id": "a",
+          "text": "HTMLมีสีเขียว"
+        },
+        {
+          "id": "b",
+          "text": "transactionrollbackไม่ทิ้งprofileกำพร้า"
+        },
+        {
+          "id": "c",
+          "text": "ทุกpasswordเท่ากัน"
+        },
+        {
+          "id": "d",
+          "text": "Gitbranchชื่อmain"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "TestCaseควรมีinput/precondition/expected/actual/evidence ไม่เขียนPASSก่อนรัน ตัวอย่างตารางต่อไปเป็นexpectedของระบบเสริม โดยส่วนhelper/SQLทดสอบอัตโนมัติในfixtureแล้ว ส่วนHTTPบนhostingจริงยังไม่ทำ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "delivery",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: รายงานโครงงานควรแสดงข้อจำกัดหรือไม่?",
+      "explanation": "ความซื่อสัตย์ของevidenceสำคัญกว่าคำว่าPASS",
+      "id": "db10-q21",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่ควรเพื่อให้ดูครบ"
+        },
+        {
+          "id": "b",
+          "text": "ควรแต่งmeasurementแทน"
+        },
+        {
+          "id": "c",
+          "text": "ควร ระบุส่วนที่ยังไม่ทดสอบและเงื่อนไขruntime"
+        },
+        {
+          "id": "d",
+          "text": "ควรอ้างmockupเป็นserverจริง"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "**StudyChecklist:** อธิบายrequestflow,PK/FK,JOIN/NULL,CRUD/scopedWHERE,hash/session/CSRF,Gitstates และคำนวณresultrowsเองได้ แก้โจทย์ฝึกก่อนเปิดเฉลย ไม่ถือคะแนนPracticeเป็นคำทำนายสอบ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "testing",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: MariaDB11.4.9ผ่านรับรองMySQLทุกversionหรือไม่?",
+      "explanation": "engine/version/libraryassumptionsต้องชัด",
+      "id": "db10-q22",
+      "choices": [
+        {
+          "id": "a",
+          "text": "รับรองทุกSQLdialect"
+        },
+        {
+          "id": "b",
+          "text": "รับรองSQLiteเท่ากันหมด"
+        },
+        {
+          "id": "c",
+          "text": "รับรองOracleทุกquery"
+        },
+        {
+          "id": "d",
+          "text": "ไม่ ต้องทดสอบส่วนต่างตามversionจริง"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "TestCaseควรมีinput/precondition/expected/actual/evidence ไม่เขียนPASSก่อนรัน ตัวอย่างตารางต่อไปเป็นexpectedของระบบเสริม โดยส่วนhelper/SQLทดสอบอัตโนมัติในfixtureแล้ว ส่วนHTTPบนhostingจริงยังไม่ทำ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "schema",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: users.password_hashควรส่งในหน้าResumepublicหรือไม่?",
+      "explanation": "เลือกprojectionและoutputอย่างจำกัด",
+      "id": "db10-q23",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่ เป็นข้อมูลภายในที่ไม่จำเป็นต่อpresentation"
+        },
+        {
+          "id": "b",
+          "text": "ควรแสดงเพื่อdebugทุกคน"
+        },
+        {
+          "id": "c",
+          "text": "ควรใช้เป็นaltภาพ"
+        },
+        {
+          "id": "d",
+          "text": "ควรใส่ในURL"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ERDiagramแสดงentity/key/cardinality Schemaทำข้อจำกัดจริง และDataDictionaryอธิบายความหมาย/type/nullable/constraint แต่ละfield ทั้งสามต้องสอดคล้องกัน ตัวอย่างสอนต่อยอดpublicschema ไม่ได้แก้ไฟล์ต้นฉบับ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "delivery",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Repoสำหรับส่งควรรวมอะไรแทนphotos/privateDBdump?",
+      "explanation": "ส่งงานได้โดยไม่เผยprivateoperationaldata",
+      "id": "db10-q24",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ข้อมูลผู้ใช้จริงเพื่อให้ครบ"
+        },
+        {
+          "id": "b",
+          "text": "โค้ด/schema/fixtureจำลอง/READMEและtestevidenceที่reviewแล้ว"
+        },
+        {
+          "id": "c",
+          "text": ".envค่าจริง"
+        },
+        {
+          "id": "d",
+          "text": "sessioncookieของผู้สอน"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "**StudyChecklist:** อธิบายrequestflow,PK/FK,JOIN/NULL,CRUD/scopedWHERE,hash/session/CSRF,Gitstates และคำนวณresultrowsเองได้ แก้โจทย์ฝึกก่อนเปิดเฉลย ไม่ถือคะแนนPracticeเป็นคำทำนายสอบ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "implementation",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ตัวcontrollerย่อที่แสดงguardบางส่วนเป็นแอปพร้อมproductionหรือไม่?",
+      "explanation": "teachingfragmentระบุpreconditionsและขอบเขต",
+      "id": "db10-q25",
+      "choices": [
+        {
+          "id": "a",
+          "text": "พร้อมทุกhostingทันที"
+        },
+        {
+          "id": "b",
+          "text": "พร้อมเมื่อrename.php"
+        },
+        {
+          "id": "c",
+          "text": "ไม่ ยังต้องHTTPerrorhandling/config/transportและtests"
+        },
+        {
+          "id": "d",
+          "text": "พร้อมถ้าquizได้เต็ม"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ลำดับฝึกที่แนะนำ: schema+fixture → SELECT/render → validation+preparedCRUD → Login/Session → ownership+CSRF → errorhandling+tests ลำดับนี้เป็นคำแนะนำเสริม ไม่อ้างว่าเป็นตารางสอนที่ยืนยัน"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "testing",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Practiceคะแนนสูงพิสูจน์อะไรเกี่ยวกับFinalexam?",
+      "explanation": "ไม่สร้างmasterypredictionหรือexamguaranteeจากquiz",
+      "id": "db10-q26",
+      "choices": [
+        {
+          "id": "a",
+          "text": "รับรองได้A"
+        },
+        {
+          "id": "b",
+          "text": "บอกข้อสอบจริงทั้งหมด"
+        },
+        {
+          "id": "c",
+          "text": "แทนการอ่านแหล่งสอน"
+        },
+        {
+          "id": "d",
+          "text": "เป็นผลโจทย์ฝึกที่ทำ ไม่ใช่คำทำนายคะแนนสอบ"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "TestCaseควรมีinput/precondition/expected/actual/evidence ไม่เขียนPASSก่อนรัน ตัวอย่างตารางต่อไปเป็นexpectedของระบบเสริม โดยส่วนhelper/SQLทดสอบอัตโนมัติในfixtureแล้ว ส่วนHTTPบนhostingจริงยังไม่ทำ"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "schema",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เชื่อมERschemaDataDictionaryของResume",
+      "rubric": [
+        "keys/cardinalityตรง",
+        "nullable/typeชัด",
+        "usersmigrationแยกระยะ"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db10-q27",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ERDiagramแสดงentity/key/cardinality Schemaทำข้อจำกัดจริง และDataDictionaryอธิบายความหมาย/type/nullable/constraint แต่ละfield ทั้งสามต้องสอดคล้องกัน ตัวอย่างสอนต่อยอดpublicschema ไม่ได้แก้ไฟล์ต้นฉบับ"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "testing",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เขียนtestmatrixownerA/Bรวมrollbackและemptyresult",
+      "rubric": [
+        "expected/actualแยก",
+        "ตรวจstateไม่ใช่แค่status",
+        "ใช้fixtureแยก"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db10-q28",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "TestCaseควรมีinput/precondition/expected/actual/evidence ไม่เขียนPASSก่อนรัน ตัวอย่างตารางต่อไปเป็นexpectedของระบบเสริม โดยส่วนhelper/SQLทดสอบอัตโนมัติในfixtureแล้ว ส่วนHTTPบนhostingจริงยังไม่ทำ"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "delivery",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: จัดStudyChecklistกับProjectChecklistคนละรายการ",
+      "rubric": [
+        "ความเข้าใจไม่ปนsubmission",
+        "วันที่sourceเป็นmilestone",
+        "ตรวจคำสั่งผู้สอนจริง"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db10-q29",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "**StudyChecklist:** อธิบายrequestflow,PK/FK,JOIN/NULL,CRUD/scopedWHERE,hash/session/CSRF,Gitstates และคำนวณresultrowsเองได้ แก้โจทย์ฝึกก่อนเปิดเฉลย ไม่ถือคะแนนPracticeเป็นคำทำนายสอบ"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "testing",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เขียนรายงานขอบเขตverificationที่ไม่อ้างเกินหลักฐาน",
+      "rubric": [
+        "SQLengine/versionจริง",
+        "PHPCLIvsHTTP",
+        "Angsilaและdeviceที่ไม่ทดสอบ"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db10-q30",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "TestCaseควรมีinput/precondition/expected/actual/evidence ไม่เขียนPASSก่อนรัน ตัวอย่างตารางต่อไปเป็นexpectedของระบบเสริม โดยส่วนhelper/SQLทดสอบอัตโนมัติในfixtureแล้ว ส่วนHTTPบนhostingจริงยังไม่ทำ"
+      }
+    }
+  ]
+}

@@ -1,0 +1,680 @@
+{
+  "version": 1,
+  "revision": 1,
+  "baseRevision": 1,
+  "lesson": "database-management-inner-join",
+  "questions": [
+    {
+      "type": "choice",
+      "reference": "filter-sort",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: WHEREstatus=delivered ANDtotal_amount>=150ควรใช้เครื่องหมายใดกับ150?",
+      "explanation": "อย่างน้อยรวมค่า150 แม้fixtureนี้ไม่มี150พอดี",
+      "id": "db05-q07",
+      "choices": [
+        {
+          "id": "a",
+          "text": ">"
+        },
+        {
+          "id": "b",
+          "text": "=เท่านั้น"
+        },
+        {
+          "id": "c",
+          "text": "<"
+        },
+        {
+          "id": "d",
+          "text": ">="
+        }
+      ],
+      "answer": "d",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "WHEREกรองผลmatching rowsตามเงื่อนไข และORDER BYกำหนดลำดับที่ตรวจได้ ใช้aliasให้ระบุที่มาคอลัมน์ได้ชัด เช่นs.student_nameและo.order_id ในINNER JOIN เงื่อนไขกรองที่เหมาะสมอาจย้ายระหว่างON/WHEREได้โดยยังได้ผลเดียวกัน แต่ห้ามเหมารวมไปยังOUTER JOIN"
+      }
+    },
+    {
+      "type": "numeric",
+      "reference": "filter-sort",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Campus deliveredยอดอย่างน้อย150 มีorder5006,5004,5009,5001 รวมกี่orders?",
+      "answer": 4,
+      "explanation": "filterจาก10ordersได้4 ไม่รวมcancelled5003/5008หรือpreparing",
+      "id": "db05-q08",
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "WHEREกรองผลmatching rowsตามเงื่อนไข และORDER BYกำหนดลำดับที่ตรวจได้ ใช้aliasให้ระบุที่มาคอลัมน์ได้ชัด เช่นs.student_nameและo.order_id ในINNER JOIN เงื่อนไขกรองที่เหมาะสมอาจย้ายระหว่างON/WHEREได้โดยยังได้ผลเดียวกัน แต่ห้ามเหมารวมไปยังOUTER JOIN"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "filter-sort",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ผลยอดมากไปน้อยในlarge-deliveredเรียงorder_idอย่างไร?",
+      "explanation": "ยอด310,220,180,159ตามDESCและtiekeyorder_id",
+      "id": "db05-q09",
+      "choices": [
+        {
+          "id": "a",
+          "text": "5001,5004,5009,5006"
+        },
+        {
+          "id": "b",
+          "text": "5006,5004,5009,5001"
+        },
+        {
+          "id": "c",
+          "text": "5006,5003,5002,5001"
+        },
+        {
+          "id": "d",
+          "text": "5004,5004,5004,5004"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "WHEREกรองผลmatching rowsตามเงื่อนไข และORDER BYกำหนดลำดับที่ตรวจได้ ใช้aliasให้ระบุที่มาคอลัมน์ได้ชัด เช่นs.student_nameและo.order_id ในINNER JOIN เงื่อนไขกรองที่เหมาะสมอาจย้ายระหว่างON/WHEREได้โดยยังได้ผลเดียวกัน แต่ห้ามเหมารวมไปยังOUTER JOIN"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "matching",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Alias s และoมีประโยชน์อย่างไร?",
+      "explanation": "โดยเฉพาะคีย์ชื่อstudent_idที่ซ้ำสองtable",
+      "id": "db05-q10",
+      "choices": [
+        {
+          "id": "a",
+          "text": "สร้างtablecopyถาวร"
+        },
+        {
+          "id": "b",
+          "text": "เปลี่ยนPKเอง"
+        },
+        {
+          "id": "c",
+          "text": "ทำให้คอลัมน์และแหล่งที่มาชัด"
+        },
+        {
+          "id": "d",
+          "text": "เปิดsession"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "INNER JOIN เก็บคู่แถวที่เงื่อนไข ON เป็น TRUE `students.student_id=orders.student_id` สอดคล้องกับ FK ของออเดอร์ ไม่ใช่การเทียบแถวตำแหน่งเดียวกันและไม่ใช่เทียบ student_idกับorder_idเพราะทั้งคู่เป็นINT"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "multiplicity",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: student101มีสองorders INNERJOINควรได้กี่แถวสำหรับ101?",
+      "explanation": "uniquePKในparentไม่ได้ห้ามหลายchildmatches",
+      "id": "db05-q11",
+      "choices": [
+        {
+          "id": "a",
+          "text": "1เพราะPKunique"
+        },
+        {
+          "id": "b",
+          "text": "0เพราะซ้ำ"
+        },
+        {
+          "id": "c",
+          "text": "8เพราะstudents8"
+        },
+        {
+          "id": "d",
+          "text": "2แถว"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "SQLปกติไม่ลบแถวซ้ำให้อัตโนมัติและหนึ่งแถวซ้ายจับได้หลายแถวขวา จึงไม่ควรใช้พื้นที่ทับกันของVennเป็นสูตรนับผล JOIN สำหรับCampusHW ออเดอร์ทั้ง10มีFKถูกต้อง จึงได้10matching rowsแต่มีนิสิต5คน ส่วน106,107,108หายไปเพราะไม่มีคู่"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "examples",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เติมDISTINCTชื่อคนเพื่อให้เหลือ5แถวตอบคำถามจำนวนordersถูกหรือไม่?",
+      "explanation": "ใช้DISTINCTเมื่อโจทย์ต้องการidentityคน ไม่กลบmultiplicity",
+      "id": "db05-q12",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่ เปลี่ยนหน่วยจากordersเป็นคน"
+        },
+        {
+          "id": "b",
+          "text": "ถูกทุกกรณี"
+        },
+        {
+          "id": "c",
+          "text": "ทำให้10ordersยังอยู่ครบทุกcolumn"
+        },
+        {
+          "id": "d",
+          "text": "ทำให้มีorderเพิ่ม"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เฉลยที่เขียนเสริมสำหรับhomeworkข้อ4ใช้projectionตามโจทย์และเรียงorder_id ไม่มีการอ้างว่าเป็นofficial answer key ผลครบ10แถวสามารถตามจากตารางต้นทางด้านบนได้ทุกแถว"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "matching",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ONอาจใช้คอลัมน์ไม่ใช่FKได้ทางSQL แต่เหตุใดควรอ่านschema?",
+      "explanation": "เลือกconditionตามrelationshipจริง",
+      "id": "db05-q13",
+      "choices": [
+        {
+          "id": "a",
+          "text": "SQLบังคับทุกJOINต้องFKเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "SQLsyntaxผ่านไม่ได้รับรองความหมายของการจับคู่"
+        },
+        {
+          "id": "c",
+          "text": "ONใส่อะไรก็ให้คำตอบเดียว"
+        },
+        {
+          "id": "d",
+          "text": "columnเลขทุกตัวเหมือนกัน"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "INNER JOIN เก็บคู่แถวที่เงื่อนไข ON เป็น TRUE `students.student_id=orders.student_id` สอดคล้องกับ FK ของออเดอร์ ไม่ใช่การเทียบแถวตำแหน่งเดียวกันและไม่ใช่เทียบ student_idกับorder_idเพราะทั้งคู่เป็นINT"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "filter-sort",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ORDER BY total_amount DESC,order_idทำอะไรเมื่อยอดเท่ากัน?",
+      "explanation": "ให้ผลdeterministicโดยไม่เปลี่ยนจำนวนrows",
+      "id": "db05-q14",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ลบแถวที่ยอดเท่ากัน"
+        },
+        {
+          "id": "b",
+          "text": "แปลงยอดเป็นNULL"
+        },
+        {
+          "id": "c",
+          "text": "เรียงorder_idเป็นtiekey"
+        },
+        {
+          "id": "d",
+          "text": "รวมordersให้เหลือ1"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "WHEREกรองผลmatching rowsตามเงื่อนไข และORDER BYกำหนดลำดับที่ตรวจได้ ใช้aliasให้ระบุที่มาคอลัมน์ได้ชัด เช่นs.student_nameและo.order_id ในINNER JOIN เงื่อนไขกรองที่เหมาะสมอาจย้ายระหว่างON/WHEREได้โดยยังได้ผลเดียวกัน แต่ห้ามเหมารวมไปยังOUTER JOIN"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "source-data",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: นิสิต106,107,108หายจากINNERแปลว่าไม่มีrecordstudentsหรือไม่?",
+      "explanation": "INNERไม่รักษาunmatchedparent",
+      "id": "db05-q15",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ใช่ถูกลบแล้ว"
+        },
+        {
+          "id": "b",
+          "text": "แปลว่าPKผิดเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "แปลว่าXSS"
+        },
+        {
+          "id": "d",
+          "text": "ไม่ มีstudentแต่ไม่มีmatchingorder"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Campus HWเป็นข้อมูลจำลองตาม DB-D01 มี8studentsและ10orders ด้านล่างครบทุกแถวที่ต้องใช้ในบทนี้ จึงสามารถตรวจคู่คีย์และคำตอบได้โดยไม่ต้องเดาข้อมูลที่ไม่ได้ให้ จำนวนร้าน6/รายการ14จะใช้ในบทmulti-tableต่อไป"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "multiplicity",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: COUNT(*)กับCOUNT(DISTINCTstudent_id)ในINNERCampusต่างกันอย่างไร?",
+      "explanation": "ต้องระบุหน่วยการนับ",
+      "id": "db05-q16",
+      "choices": [
+        {
+          "id": "a",
+          "text": "10matchesกับ5people"
+        },
+        {
+          "id": "b",
+          "text": "5matchesกับ10people"
+        },
+        {
+          "id": "c",
+          "text": "ทั้งคู่8เสมอ"
+        },
+        {
+          "id": "d",
+          "text": "ทั้งคู่0เพราะFK"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "SQLปกติไม่ลบแถวซ้ำให้อัตโนมัติและหนึ่งแถวซ้ายจับได้หลายแถวขวา จึงไม่ควรใช้พื้นที่ทับกันของVennเป็นสูตรนับผล JOIN สำหรับCampusHW ออเดอร์ทั้ง10มีFKถูกต้อง จึงได้10matching rowsแต่มีนิสิต5คน ส่วน106,107,108หายไปเพราะไม่มีคู่"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "matching",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ถ้าละONและทำCROSSของ8students10ordersจะเกิดอะไร?",
+      "explanation": "CROSSคือCartesianproduct ไม่ใช่matchingrelationship",
+      "id": "db05-q17",
+      "choices": [
+        {
+          "id": "a",
+          "text": "10คู่เหมือนINNERเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "80คู่โดยไม่อิงFK"
+        },
+        {
+          "id": "c",
+          "text": "8คู่ตามPK"
+        },
+        {
+          "id": "d",
+          "text": "ไม่มีแถวเพราะSQLบังคับFK"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "INNER JOIN เก็บคู่แถวที่เงื่อนไข ON เป็น TRUE `students.student_id=orders.student_id` สอดคล้องกับ FK ของออเดอร์ ไม่ใช่การเทียบแถวตำแหน่งเดียวกันและไม่ใช่เทียบ student_idกับorder_idเพราะทั้งคู่เป็นINT"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "filter-sort",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ต้องการยอดสูงเฉพาะdeliveredแต่เขียนORแทนAND ส่งผลใด?",
+      "explanation": "operatorตรรกะเปลี่ยนผลfilter ต้องตรงข้อความโจทย์",
+      "id": "db05-q18",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เหมือนANDทุกdataset"
+        },
+        {
+          "id": "b",
+          "text": "ลบorders"
+        },
+        {
+          "id": "c",
+          "text": "รับแถวที่ผ่านเพียงเงื่อนไขหนึ่ง ทำให้กว้างขึ้น"
+        },
+        {
+          "id": "d",
+          "text": "เรียงยอดเอง"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "WHEREกรองผลmatching rowsตามเงื่อนไข และORDER BYกำหนดลำดับที่ตรวจได้ ใช้aliasให้ระบุที่มาคอลัมน์ได้ชัด เช่นs.student_nameและo.order_id ในINNER JOIN เงื่อนไขกรองที่เหมาะสมอาจย้ายระหว่างON/WHEREได้โดยยังได้ผลเดียวกัน แต่ห้ามเหมารวมไปยังOUTER JOIN"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "source-data",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: NULL Cafeที่ไม่เคยมีitemบอกว่าrestauranttableมีเพียง5ร้านหรือไม่?",
+      "explanation": "inventoryกับjoinedparticipationต่างกัน",
+      "id": "db05-q19",
+      "choices": [
+        {
+          "id": "a",
+          "text": "มี5เพราะINNERมองไม่เห็น"
+        },
+        {
+          "id": "b",
+          "text": "มี0เพราะชื่อNULL"
+        },
+        {
+          "id": "c",
+          "text": "มี14ตามitems"
+        },
+        {
+          "id": "d",
+          "text": "ไม่ มี6recordรวมร้านนั้น"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Campus HWเป็นข้อมูลจำลองตาม DB-D01 มี8studentsและ10orders ด้านล่างครบทุกแถวที่ต้องใช้ในบทนี้ จึงสามารถตรวจคู่คีย์และคำตอบได้โดยไม่ต้องเดาข้อมูลที่ไม่ได้ให้ จำนวนร้าน6/รายการ14จะใช้ในบทmulti-tableต่อไป"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "matching",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: WHEREs.student_id=o.student_idในINNERแบบcommaเทียบexplicitJOINควรสอนอย่างไร?",
+      "explanation": "สำคัญที่predicateและsemantics ไม่ใช่เดาว่าทุกรูปแบบเหมือนouterjoin",
+      "id": "db05-q20",
+      "choices": [
+        {
+          "id": "a",
+          "text": "อาจเทียบผลได้แต่explicitJOINชี้relationshipชัดกว่า"
+        },
+        {
+          "id": "b",
+          "text": "commaบังคับLEFTเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "explicitJOINรันPHP"
+        },
+        {
+          "id": "d",
+          "text": "WHEREห้ามเปรียบเทียบcolumns"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "INNER JOIN เก็บคู่แถวที่เงื่อนไข ON เป็น TRUE `students.student_id=orders.student_id` สอดคล้องกับ FK ของออเดอร์ ไม่ใช่การเทียบแถวตำแหน่งเดียวกันและไม่ใช่เทียบ student_idกับorder_idเพราะทั้งคู่เป็นINT"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "examples",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ต้องการรายชื่อคนที่เคยสั่งไม่ซ้ำควรprojectionใด?",
+      "explanation": "identityควรมีkey ไม่สมมติว่าชื่อคนunique",
+      "id": "db05-q21",
+      "choices": [
+        {
+          "id": "a",
+          "text": "DISTINCTtotal_amountอย่างเดียว"
+        },
+        {
+          "id": "b",
+          "text": "DISTINCTs.student_id,s.student_name"
+        },
+        {
+          "id": "c",
+          "text": "ทุกitem_idแล้วคาดว่าเหลือคนละ1"
+        },
+        {
+          "id": "d",
+          "text": "COUNT(*)อย่างเดียวเป็นชื่อ"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เฉลยที่เขียนเสริมสำหรับhomeworkข้อ4ใช้projectionตามโจทย์และเรียงorder_id ไม่มีการอ้างว่าเป็นofficial answer key ผลครบ10แถวสามารถตามจากตารางต้นทางด้านบนได้ทุกแถว"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "filter-sort",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: queryเงินคืน5006ยอด310 อ้างหน่วยใดตามsource?",
+      "explanation": "รักษาหน่วยจากdataset ไม่ตั้งหน่วยใหม่",
+      "id": "db05-q22",
+      "choices": [
+        {
+          "id": "a",
+          "text": "จำนวนitems310ชิ้น"
+        },
+        {
+          "id": "b",
+          "text": "หน่วยเวลา310ms"
+        },
+        {
+          "id": "c",
+          "text": "บาทตามtotal_amountของออเดอร์"
+        },
+        {
+          "id": "d",
+          "text": "accuracy310เปอร์เซ็นต์"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "WHEREกรองผลmatching rowsตามเงื่อนไข และORDER BYกำหนดลำดับที่ตรวจได้ ใช้aliasให้ระบุที่มาคอลัมน์ได้ชัด เช่นs.student_nameและo.order_id ในINNER JOIN เงื่อนไขกรองที่เหมาะสมอาจย้ายระหว่างON/WHEREได้โดยยังได้ผลเดียวกัน แต่ห้ามเหมารวมไปยังOUTER JOIN"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "multiplicity",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ถ้าorderของ101เพิ่มอีกหนึ่งโดยอ้างFKถูก INNERmatchesของ101จะเป็นอย่างไร?",
+      "explanation": "1:Nขยายผลตามchildจำนวนจริง;นี่คือสมมติเสริมไม่ใช่sourceเพิ่ม",
+      "id": "db05-q23",
+      "choices": [
+        {
+          "id": "a",
+          "text": "studentrecordเพิ่มเอง"
+        },
+        {
+          "id": "b",
+          "text": "matchesลดหนึ่ง"
+        },
+        {
+          "id": "c",
+          "text": "FKห้ามมีorderเพิ่ม"
+        },
+        {
+          "id": "d",
+          "text": "เพิ่มหนึ่งแถวสำหรับorderนั้น"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "SQLปกติไม่ลบแถวซ้ำให้อัตโนมัติและหนึ่งแถวซ้ายจับได้หลายแถวขวา จึงไม่ควรใช้พื้นที่ทับกันของVennเป็นสูตรนับผล JOIN สำหรับCampusHW ออเดอร์ทั้ง10มีFKถูกต้อง จึงได้10matching rowsแต่มีนิสิต5คน ส่วน106,107,108หายไปเพราะไม่มีคู่"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "matching",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: INNERJOINหมายถึงจุดตัดของรายชื่อคนอย่างเดียวหรือไม่?",
+      "explanation": "Vennsetไม่สื่อbagmultiplicityครบ",
+      "id": "db05-q24",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่ ผลSQLมีหนึ่งแถวต่อคู่ที่ตรงและอาจซ้ำคน"
+        },
+        {
+          "id": "b",
+          "text": "ใช่ไม่คืนduplicateใดเลย"
+        },
+        {
+          "id": "c",
+          "text": "เท่ากับLEFTทุกครั้ง"
+        },
+        {
+          "id": "d",
+          "text": "คือการUNIONของทุกrow"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "INNER JOIN เก็บคู่แถวที่เงื่อนไข ON เป็น TRUE `students.student_id=orders.student_id` สอดคล้องกับ FK ของออเดอร์ ไม่ใช่การเทียบแถวตำแหน่งเดียวกันและไม่ใช่เทียบ student_idกับorder_idเพราะทั้งคู่เป็นINT"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "examples",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: การตรวจexpected10rowsอย่างเดียวเพียงพอยืนยันONถูกหรือไม่?",
+      "explanation": "queryผิดอาจบังเอิญมีcountเท่ากัน ต้องเทียบorderedresult",
+      "id": "db05-q25",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เพียงพอทุกschema"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ ต้องตรวจคีย์และค่าของแต่ละrowด้วย"
+        },
+        {
+          "id": "c",
+          "text": "เพียงพอถ้าCSSถูก"
+        },
+        {
+          "id": "d",
+          "text": "ไม่ต้องตรวจsource"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เฉลยที่เขียนเสริมสำหรับhomeworkข้อ4ใช้projectionตามโจทย์และเรียงorder_id ไม่มีการอ้างว่าเป็นofficial answer key ผลครบ10แถวสามารถตามจากตารางต้นทางด้านบนได้ทุกแถว"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "source-data",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: โจทย์/เฉลยในบทนี้ควรถูกเรียกอย่างไร?",
+      "explanation": "sourcehomeworkไม่เท่ากับofficialexamkey",
+      "id": "db05-q26",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ข้อสอบFinalจริง"
+        },
+        {
+          "id": "b",
+          "text": "เฉลยทางการผู้สอน"
+        },
+        {
+          "id": "c",
+          "text": "แบบฝึกที่ผู้เขียนตรวจอิสระ อ้างการบ้านเป็นหลักฐาน"
+        },
+        {
+          "id": "d",
+          "text": "การคาดการณ์น้ำหนักสอบ"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Campus HWเป็นข้อมูลจำลองตาม DB-D01 มี8studentsและ10orders ด้านล่างครบทุกแถวที่ต้องใช้ในบทนี้ จึงสามารถตรวจคู่คีย์และคำตอบได้โดยไม่ต้องเดาข้อมูลที่ไม่ได้ให้ จำนวนร้าน6/รายการ14จะใช้ในบทmulti-tableต่อไป"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "multiplicity",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: อธิบาย10rowsแต่5peopleด้วยstudent101",
+      "rubric": [
+        "ยกสองordersของ101",
+        "แยกcountrow/identity",
+        "ไม่ใช้Vennแทนทุกอย่าง"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db05-q27",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "SQLปกติไม่ลบแถวซ้ำให้อัตโนมัติและหนึ่งแถวซ้ายจับได้หลายแถวขวา จึงไม่ควรใช้พื้นที่ทับกันของVennเป็นสูตรนับผล JOIN สำหรับCampusHW ออเดอร์ทั้ง10มีFKถูกต้อง จึงได้10matching rowsแต่มีนิสิต5คน ส่วน106,107,108หายไปเพราะไม่มีคู่"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "filter-sort",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ออกแบบquerydeliveredยอด>=150เรียงยอดมากก่อน",
+      "rubric": [
+        "ANDถูก",
+        ">=รวมthreshold",
+        "DESCและtiekey"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db05-q28",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "WHEREกรองผลmatching rowsตามเงื่อนไข และORDER BYกำหนดลำดับที่ตรวจได้ ใช้aliasให้ระบุที่มาคอลัมน์ได้ชัด เช่นs.student_nameและo.order_id ในINNER JOIN เงื่อนไขกรองที่เหมาะสมอาจย้ายระหว่างON/WHEREได้โดยยังได้ผลเดียวกัน แต่ห้ามเหมารวมไปยังOUTER JOIN"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "source-data",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เปรียบเทียบslidefixtureกับhomeworkfixture",
+      "rubric": [
+        "4/3กับ8/10",
+        "ไม่ปนผลนับ",
+        "ระบุแหล่งเลขชัด"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db05-q29",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Campus HWเป็นข้อมูลจำลองตาม DB-D01 มี8studentsและ10orders ด้านล่างครบทุกแถวที่ต้องใช้ในบทนี้ จึงสามารถตรวจคู่คีย์และคำตอบได้โดยไม่ต้องเดาข้อมูลที่ไม่ได้ให้ จำนวนร้าน6/รายการ14จะใช้ในบทmulti-tableต่อไป"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "examples",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เสนอoracleตรวจINNERที่ไม่คัดSQLalgorithmซ้ำ",
+      "rubric": [
+        "nestedloopตามFK",
+        "เทียบแต่ละrow",
+        "กำหนดsortก่อนเทียบ"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db05-q30",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "เฉลยที่เขียนเสริมสำหรับhomeworkข้อ4ใช้projectionตามโจทย์และเรียงorder_id ไม่มีการอ้างว่าเป็นofficial answer key ผลครบ10แถวสามารถตามจากตารางต้นทางด้านบนได้ทุกแถว"
+      }
+    }
+  ]
+}

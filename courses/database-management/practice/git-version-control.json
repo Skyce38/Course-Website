@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "database-management-git-version-control",
+  "title": "DB 09 — Git GitHub และการทำงานร่วมกัน",
+  "questions": [
+    {
+      "type": "choice",
+      "reference": "states",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: GitกับGitHubต่างกันอย่างไร?",
+      "explanation": "Gitทำlocalhistoryได้โดยไม่ใช้GitHub",
+      "id": "db09-q01",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทั้งคู่คือMySQLengine"
+        },
+        {
+          "id": "b",
+          "text": "Gitเป็นVCS GitHubเป็นhosting/collaborationservice"
+        },
+        {
+          "id": "c",
+          "text": "GitคือPHPframework"
+        },
+        {
+          "id": "d",
+          "text": "GitHubจำเป็นต่อทุกlocalcommit"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "type": "choice",
+      "reference": "states",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: gitaddทำอะไร?",
+      "explanation": "stageไม่เท่ากับcommit/push/deploy",
+      "id": "db09-q02",
+      "choices": [
+        {
+          "id": "a",
+          "text": "pushขึ้นremoteทันที"
+        },
+        {
+          "id": "b",
+          "text": "deployPHPทันที"
+        },
+        {
+          "id": "c",
+          "text": "เลือกเนื้อหาเข้าIndexสำหรับcommitถัดไป"
+        },
+        {
+          "id": "d",
+          "text": "backupMySQLทุกtable"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "type": "choice",
+      "reference": "states",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: stageREADMEแล้วแก้READMEอีกโดยไม่addใหม่ commitจะใช้ส่วนใด?",
+      "explanation": "Indexเก็บสิ่งที่เลือก;แก้workingtreeต่อไม่updateIndexเอง",
+      "id": "db09-q03",
+      "choices": [
+        {
+          "id": "a",
+          "text": "workingversionใหม่ทั้งหมดเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "remoteversionเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "ไม่มีไฟล์ใดcommitได้"
+        },
+        {
+          "id": "d",
+          "text": "snapshotที่stageไว้"
+        }
+      ],
+      "answer": "d"
+    },
+    {
+      "type": "choice",
+      "reference": "secrets",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: .gitignoreป้องกัน.envที่เคยtrackedแล้วอย่างไร?",
+      "explanation": "ต้องจัดtrackingและsecretrotationอย่างได้รับอนุญาต",
+      "id": "db09-q04",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่ยกเลิกtrackingหรือhistoryเอง"
+        },
+        {
+          "id": "b",
+          "text": "ลบsecretจากทุกcloneทันที"
+        },
+        {
+          "id": "c",
+          "text": "rotatepasswordให้อัตโนมัติ"
+        },
+        {
+          "id": "d",
+          "text": "เข้ารหัสcommitเก่า"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "reference": "remotes",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Commitที่localโดยไม่push เพื่อนบนGitHubเห็นแล้วหรือไม่?",
+      "explanation": "localhistoryยังไม่เผยแพร่ไปremote",
+      "id": "db09-q05",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เห็นทันทีทุกกรณี"
+        },
+        {
+          "id": "b",
+          "text": "ยังไม่"
+        },
+        {
+          "id": "c",
+          "text": "เห็นถ้าใช้Dark"
+        },
+        {
+          "id": "d",
+          "text": "เห็นเมื่อCSSโหลด"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "type": "self",
+      "reference": "states",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: อธิบายworking/index/commitเมื่อแก้หลังstage",
+      "rubric": [
+        "แยกสามsnapshot",
+        "diffกับcachedถูก",
+        "commitใช้Index"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db09-q06"
+    }
+  ]
+}

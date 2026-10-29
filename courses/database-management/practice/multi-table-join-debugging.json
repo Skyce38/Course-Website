@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "database-management-multi-table-join-debugging",
+  "title": "DB 07 — เชื่อมหลายตารางและแก้ข้อผิดพลาด",
+  "questions": [
+    {
+      "type": "choice",
+      "reference": "relations",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เส้นทางJOINสี่ตารางCampusที่ตรงschemaคืออะไร?",
+      "explanation": "restaurantFKอยู่ในitemsจึงต้องผ่านitems",
+      "id": "db07-q01",
+      "choices": [
+        {
+          "id": "a",
+          "text": "students→restaurants→orders→users"
+        },
+        {
+          "id": "b",
+          "text": "orders→profile→skill→students"
+        },
+        {
+          "id": "c",
+          "text": "students→orders→restaurantsโดยเดาคีย์ตรง"
+        },
+        {
+          "id": "d",
+          "text": "students→orders→order_items→restaurants"
+        }
+      ],
+      "answer": "d"
+    },
+    {
+      "type": "choice",
+      "reference": "four-table",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ทำไมorder5001ซ้ำสองrowในผลสี่ตาราง?",
+      "explanation": "แถวผลอยู่ระดับitem ไม่ใช่orderอย่างเดียว",
+      "id": "db07-q02",
+      "choices": [
+        {
+          "id": "a",
+          "text": "มีสองitemmatches"
+        },
+        {
+          "id": "b",
+          "text": "PKordersซ้ำผิดconstraint"
+        },
+        {
+          "id": "c",
+          "text": "JOINต้องลบซ้ำเสมอ"
+        },
+        {
+          "id": "d",
+          "text": "มีstudent5001สองคน"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "numeric",
+      "reference": "cardinality",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Campusfourtableเฉพาะdeliveredได้กี่joineditemrows?",
+      "answer": 10,
+      "explanation": "นับitemsของ6deliveredordersได้10matches",
+      "id": "db07-q03",
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0
+    },
+    {
+      "type": "choice",
+      "reference": "debugging",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ONs.student_id=o.order_idให้0matchesในfixtureเพราะอะไร?",
+      "explanation": "ชนิดเหมือนกันไม่ทำให้คีย์มีความหมายเดียวกัน",
+      "id": "db07-q04",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เพราะINNERห้ามINT"
+        },
+        {
+          "id": "b",
+          "text": "เพราะUTF8ผิดเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "เทียบidentityคน101–108กับorder5001–5010คนละความหมาย"
+        },
+        {
+          "id": "d",
+          "text": "เพราะWHEREไม่มีstatus"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "type": "choice",
+      "reference": "cardinality",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: SUMtotal_amountหลังJOINitemsตรงๆอาจผิดเพราะอะไร?",
+      "explanation": "ต้องaggregateระดับorderที่ถูกก่อน",
+      "id": "db07-q05",
+      "choices": [
+        {
+          "id": "a",
+          "text": "SUMไม่รองรับDECIMAL"
+        },
+        {
+          "id": "b",
+          "text": "MySQLบังคับเงินเป็น0"
+        },
+        {
+          "id": "c",
+          "text": "FKทำให้เงินหายทุกครั้ง"
+        },
+        {
+          "id": "d",
+          "text": "ยอดorderถูกซ้ำตามหลายitems"
+        }
+      ],
+      "answer": "d"
+    },
+    {
+      "type": "self",
+      "reference": "four-table",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เขียนสี่JOINสำหรับdeliveredพร้อมหน่วยผลลัพธ์",
+      "rubric": [
+        "3FKถูก",
+        "WHEREstatusถูก",
+        "อธิบาย10itemrows/6orders"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db07-q06"
+    }
+  ]
+}

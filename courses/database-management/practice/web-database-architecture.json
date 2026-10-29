@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "database-management-web-database-architecture",
+  "title": "DB 01 — เว็บ เซิร์ฟเวอร์ และฐานข้อมูล",
+  "questions": [
+    {
+      "type": "choice",
+      "reference": "roles",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ส่วนใดประมวลผล PHP ในระบบResumeตามแลป?",
+      "explanation": "ApacheรับHTTPและส่งPHPให้runtime; BrowserรับผลHTML",
+      "id": "db01-q01",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Browser HTML parser"
+        },
+        {
+          "id": "b",
+          "text": "PHP runtime ฝั่งServer"
+        },
+        {
+          "id": "c",
+          "text": "MySQL storage engine"
+        },
+        {
+          "id": "d",
+          "text": "CSS renderer"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "type": "choice",
+      "reference": "http-flow",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: BrowserเปิดResumeที่ใช้MySQL เส้นทางใดถูกต้อง?",
+      "explanation": "HTTPและprotocolDBเป็นคนละช่วง; PHPเป็นตัวเชื่อม",
+      "id": "db01-q02",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Browserส่งSQLด้วยHTTPตรงเข้าMySQL"
+        },
+        {
+          "id": "b",
+          "text": "phpMyAdminต้องสร้างทุกresponse"
+        },
+        {
+          "id": "c",
+          "text": "HTTPไปเว็บserver แล้วPHPqueryMySQLและคืนHTML"
+        },
+        {
+          "id": "d",
+          "text": "GitHubประมวลผลPHPก่อนทุกrequest"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "type": "choice",
+      "reference": "roles",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: phpMyAdminทำหน้าที่ใด?",
+      "explanation": "เป็นแอปจัดการDB ไม่ใช่engineและไม่จำเป็นต่อทุกrequestของResume",
+      "id": "db01-q03",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Database engineแทนMySQL"
+        },
+        {
+          "id": "b",
+          "text": "ตัวรันPHPในBrowser"
+        },
+        {
+          "id": "c",
+          "text": "ระบบbackupอัตโนมัติทุกcommit"
+        },
+        {
+          "id": "d",
+          "text": "Web UI สำหรับจัดการMySQL"
+        }
+      ],
+      "answer": "d"
+    },
+    {
+      "type": "choice",
+      "reference": "environment",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: PHPบนserverมหาวิทยาลัยตั้งDB host=localhost โดยทั่วไปอ้างเครื่องใด?",
+      "explanation": "localhostสัมพันธ์กับprocess/networknamespace ไม่ใช่ผู้เปิดหน้าเว็บ",
+      "id": "db01-q04",
+      "choices": [
+        {
+          "id": "a",
+          "text": "สิ่งแวดล้อมของPHP processบนserverนั้น"
+        },
+        {
+          "id": "b",
+          "text": "เครื่องBrowserนิสิตทุกคน"
+        },
+        {
+          "id": "c",
+          "text": "GitHubrepository"
+        },
+        {
+          "id": "d",
+          "text": "เครื่องที่เคยcommitล่าสุด"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "reference": "security",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เหตุใดไม่ใส่DB passwordในJavaScriptหน้าเว็บ?",
+      "explanation": "secretต้องอยู่ฝั่งServerและไม่ส่งเข้าpublicasset",
+      "id": "db01-q05",
+      "choices": [
+        {
+          "id": "a",
+          "text": "JavaScriptเข้ารหัสsecretให้อัตโนมัติ"
+        },
+        {
+          "id": "b",
+          "text": "Clientอ่านโค้ดและค่าที่ส่งมาถึงBrowserได้"
+        },
+        {
+          "id": "c",
+          "text": "HTMLทำให้secretใช้ได้ครั้งเดียว"
+        },
+        {
+          "id": "d",
+          "text": "CSSซ่อนpasswordจากnetwork"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "type": "self",
+      "reference": "http-flow",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: อธิบายการเปิดResumeตั้งแต่GETถึงHTML โดยระบุprotocolสองช่วง",
+      "rubric": [
+        "แยกHTTPกับDBprotocol",
+        "ระบุPHPqueryและrender",
+        "อธิบายBrowserไม่ได้รันPHP"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db01-q06"
+    }
+  ]
+}

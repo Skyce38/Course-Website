@@ -1,0 +1,664 @@
+{
+  "version": 1,
+  "revision": 1,
+  "baseRevision": 1,
+  "lesson": "database-management-schema-relationships",
+  "questions": [
+    {
+      "type": "choice",
+      "reference": "tables-keys",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: RowกับColumnต่างกันอย่างไร?",
+      "explanation": "tableมีหลายrecordsตามschemafieldเดียวกัน",
+      "id": "db02-q07",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Rowเป็นrecord;Columnเป็นfieldชนิดเดียวกัน"
+        },
+        {
+          "id": "b",
+          "text": "Columnคือผู้ใช้ที่Login"
+        },
+        {
+          "id": "c",
+          "text": "Rowคือdatabaseengine"
+        },
+        {
+          "id": "d",
+          "text": "ทั้งคู่หมายถึงPKเท่านั้น"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตาราง (Table) ประกอบด้วยแถวข้อมูล (Row) และคอลัมน์ (Column) ภายใต้ข้อกำหนด schema Primary Key ระบุแถวได้ไม่ซ้ำและไม่เป็น NULL; Foreign Key กำหนดความสัมพันธ์การอ้างอิงกับคีย์ของตารางที่เกี่ยวข้อง ไม่ได้ทำให้ข้อมูลจากสองตารางแสดงรวมกันโดยอัตโนมัติ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "campus-schema",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: รายการอาหารเชื่อมrestaurantอย่างไร?",
+      "explanation": "schemaนี้ร้านอยู่ที่item ไม่ใช่ordersโดยตรง",
+      "id": "db02-q08",
+      "choices": [
+        {
+          "id": "a",
+          "text": "orders.student_id → restaurants.restaurant_id"
+        },
+        {
+          "id": "b",
+          "text": "order_items.restaurant_id → restaurants.restaurant_id"
+        },
+        {
+          "id": "c",
+          "text": "students.faculty → restaurants.category"
+        },
+        {
+          "id": "d",
+          "text": "restaurants.name → orders.status"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ชุด homework DB-D01 มี8students,6restaurants,10orders,14order_items ทุกออเดอร์อ้างนิสิตที่มีจริงและทุกรายการอ้างออเดอร์/ร้านที่มีจริง ข้อกำหนดไม่ได้บังคับว่านิสิตทุกคนต้องมีออเดอร์หรือร้านทุกแห่งต้องเคยขาย"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "resume-schema",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Archive starterกับstudentCRUDschemaต่างกันอย่างไร?",
+      "explanation": "ต้องแยกระยะของsource ไม่ถือว่าsolutionที่กล่าวถึงถูกแนบครบ",
+      "id": "db02-q09",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทั้งคู่มีusersprofileFKครบเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "Archiveมี30ตาราง"
+        },
+        {
+          "id": "c",
+          "text": "starterเริ่ม2ตาราง ส่วนCRUDsetupมี4"
+        },
+        {
+          "id": "d",
+          "text": "studentไม่มีprofile"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "DB-Z01 เริ่มด้วย profile และ education; skill/training เป็นงานออกแบบเพิ่ม ขณะที่ DB-Z02 มี DDL ครบ4ตารางและ skill ตัวอย่าง3แถว อย่าอ้างว่า starter แรกมีคำตอบครบแล้วหรือเพิ่มตารางขึ้นในไฟล์ต้นฉบับโดยไม่แจ้ง"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "tables-keys",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: FKสามารถซ้ำในหลายrowsลูกได้หรือไม่?",
+      "explanation": "หลายskillsอ้างprofileเดียวกันเป็นตัวอย่างปกติ",
+      "id": "db02-q10",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่ได้เพราะFKคือPKเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "ได้เฉพาะNULLเท่านั้น"
+        },
+        {
+          "id": "c",
+          "text": "ทำให้databaseเสียหายเสมอ"
+        },
+        {
+          "id": "d",
+          "text": "ได้ เมื่อเป็น1:Nและไม่มีUNIQUEห้ามไว้"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตาราง (Table) ประกอบด้วยแถวข้อมูล (Row) และคอลัมน์ (Column) ภายใต้ข้อกำหนด schema Primary Key ระบุแถวได้ไม่ซ้ำและไม่เป็น NULL; Foreign Key กำหนดความสัมพันธ์การอ้างอิงกับคีย์ของตารางที่เกี่ยวข้อง ไม่ได้ทำให้ข้อมูลจากสองตารางแสดงรวมกันโดยอัตโนมัติ"
+      }
+    },
+    {
+      "type": "numeric",
+      "reference": "campus-schema",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Campusมี10ordersและ14order_items แต่restaurantrecordsจริงมีกี่rows?",
+      "answer": 6,
+      "explanation": "restaurantIDs201–206มี6 ไม่ใช่นับเฉพาะร้านที่มีรายการ",
+      "id": "db02-q11",
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ชุด homework DB-D01 มี8students,6restaurants,10orders,14order_items ทุกออเดอร์อ้างนิสิตที่มีจริงและทุกรายการอ้างออเดอร์/ร้านที่มีจริง ข้อกำหนดไม่ได้บังคับว่านิสิตทุกคนต้องมีออเดอร์หรือร้านทุกแห่งต้องเคยขาย"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "integrity",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เหตุใดชนิดFKควรสอดคล้องคีย์ที่อ้าง?",
+      "explanation": "ชนิดและsignedness/collationที่เกี่ยวข้องต้องตามข้อกำหนดengine",
+      "id": "db02-q12",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เพราะข้อความไม่มีวันเป็นPK"
+        },
+        {
+          "id": "b",
+          "text": "engineต้องตรวจreferenceด้วยชนิด/ข้อกำหนดที่เข้ากัน"
+        },
+        {
+          "id": "c",
+          "text": "เพราะทุกcolumnต้องINTเท่านั้น"
+        },
+        {
+          "id": "d",
+          "text": "เพื่อให้BrowserรันPHP"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใน fixture ที่เปิดใช้ Foreign Key การเพิ่มออเดอร์ที่อ้าง student999ซึ่งไม่มีอยู่ต้องถูกปฏิเสธ และการเพิ่ม student101ซ้ำต้องผิด PK การป้องกันนี้ทำงานที่ฐานข้อมูล แต่ยังต้องตรวจ input/สิทธิ์ใน PHP เพื่อให้ผู้ใช้ได้รับพฤติกรรมที่เหมาะสม"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "tables-keys",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เลือกDECIMALสำหรับจำนวนเงินเพราะอะไร?",
+      "explanation": "DECIMALช่วยprecision แต่validation/constraintหน่วยยังต้องออกแบบ",
+      "id": "db02-q13",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เก็บรูปภาพได้"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ต้องกำหนดหน่วยเงิน"
+        },
+        {
+          "id": "c",
+          "text": "เก็บค่าทศนิยมแบบexactตามprecision/scale"
+        },
+        {
+          "id": "d",
+          "text": "ทำให้ทุกยอดไม่ติดลบเอง"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตาราง (Table) ประกอบด้วยแถวข้อมูล (Row) และคอลัมน์ (Column) ภายใต้ข้อกำหนด schema Primary Key ระบุแถวได้ไม่ซ้ำและไม่เป็น NULL; Foreign Key กำหนดความสัมพันธ์การอ้างอิงกับคีย์ของตารางที่เกี่ยวข้อง ไม่ได้ทำให้ข้อมูลจากสองตารางแสดงรวมกันโดยอัตโนมัติ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "resume-schema",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: skill_levelNULLยืนยันว่าไม่มีskillrowหรือไม่?",
+      "explanation": "nullablefieldกับmissingrelatedrowคนละเรื่อง",
+      "id": "db02-q14",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ยืนยันเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "NULLแปลว่าชื่อskillเป็นเลข0"
+        },
+        {
+          "id": "c",
+          "text": "เป็นFKผิดแน่นอน"
+        },
+        {
+          "id": "d",
+          "text": "ไม่ rowอาจมีแต่ยังไม่ระบุlevel"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "DB-Z01 เริ่มด้วย profile และ education; skill/training เป็นงานออกแบบเพิ่ม ขณะที่ DB-Z02 มี DDL ครบ4ตารางและ skill ตัวอย่าง3แถว อย่าอ้างว่า starter แรกมีคำตอบครบแล้วหรือเพิ่มตารางขึ้นในไฟล์ต้นฉบับโดยไม่แจ้ง"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "campus-schema",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: one-to-many orders→itemsบอกอะไร?",
+      "explanation": "cardinalityทำให้JOINขยายrowได้",
+      "id": "db02-q15",
+      "choices": [
+        {
+          "id": "a",
+          "text": "orderหนึ่งมีหลายitemrowsที่อ้างorder_idเดียว"
+        },
+        {
+          "id": "b",
+          "text": "ทุกorderมีหนึ่งitemเท่านั้น"
+        },
+        {
+          "id": "c",
+          "text": "itemหนึ่งต้องมีทุกrestaurant"
+        },
+        {
+          "id": "d",
+          "text": "student_idเท่ากับitem_id"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ชุด homework DB-D01 มี8students,6restaurants,10orders,14order_items ทุกออเดอร์อ้างนิสิตที่มีจริงและทุกรายการอ้างออเดอร์/ร้านที่มีจริง ข้อกำหนดไม่ได้บังคับว่านิสิตทุกคนต้องมีออเดอร์หรือร้านทุกแห่งต้องเคยขาย"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "integrity",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: FKป้องกันผู้ใช้Aแก้skillของBได้เองหรือไม่?",
+      "explanation": "FKเช็กว่ามีprofile ไม่ตรวจactor",
+      "id": "db02-q16",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ได้เพราะAมีLoginแล้ว"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ ต้องตรวจสิทธิ์ในapplication"
+        },
+        {
+          "id": "c",
+          "text": "ได้ถ้าใช้INT"
+        },
+        {
+          "id": "d",
+          "text": "ได้ถ้าใส่index"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใน fixture ที่เปิดใช้ Foreign Key การเพิ่มออเดอร์ที่อ้าง student999ซึ่งไม่มีอยู่ต้องถูกปฏิเสธ และการเพิ่ม student101ซ้ำต้องผิด PK การป้องกันนี้ทำงานที่ฐานข้อมูล แต่ยังต้องตรวจ input/สิทธิ์ใน PHP เพื่อให้ผู้ใช้ได้รับพฤติกรรมที่เหมาะสม"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "tables-keys",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: CREATE TABLEทำอะไร?",
+      "explanation": "DDLกำหนดโครงสร้าง ต่างจากSELECTอ่านข้อมูล",
+      "id": "db02-q17",
+      "choices": [
+        {
+          "id": "a",
+          "text": "อ่านrowsทุกแถว"
+        },
+        {
+          "id": "b",
+          "text": "สร้างHTMLtableในBrowser"
+        },
+        {
+          "id": "c",
+          "text": "กำหนดschemaและconstraintsของtable"
+        },
+        {
+          "id": "d",
+          "text": "เป็นคำสั่งGitbranch"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตาราง (Table) ประกอบด้วยแถวข้อมูล (Row) และคอลัมน์ (Column) ภายใต้ข้อกำหนด schema Primary Key ระบุแถวได้ไม่ซ้ำและไม่เป็น NULL; Foreign Key กำหนดความสัมพันธ์การอ้างอิงกับคีย์ของตารางที่เกี่ยวข้อง ไม่ได้ทำให้ข้อมูลจากสองตารางแสดงรวมกันโดยอัตโนมัติ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "resume-schema",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: users.profile_idในmigrationภายหลังมีUNIQUEเพื่ออะไร?",
+      "explanation": "UNIQUEFKกำหนดcardinalityเพิ่มเติม ไม่ใช่มีในminimalusersslideแล้ว",
+      "id": "db02-q18",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ให้profileมีuserซ้ำไม่จำกัด"
+        },
+        {
+          "id": "b",
+          "text": "เข้ารหัสprofile_id"
+        },
+        {
+          "id": "c",
+          "text": "ทำให้passwordแสดงในHTML"
+        },
+        {
+          "id": "d",
+          "text": "จำกัดหนึ่งaccountต่อprofileตามschemaนี้"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "DB-Z01 เริ่มด้วย profile และ education; skill/training เป็นงานออกแบบเพิ่ม ขณะที่ DB-Z02 มี DDL ครบ4ตารางและ skill ตัวอย่าง3แถว อย่าอ้างว่า starter แรกมีคำตอบครบแล้วหรือเพิ่มตารางขึ้นในไฟล์ต้นฉบับโดยไม่แจ้ง"
+      }
+    },
+    {
+      "type": "numeric",
+      "reference": "campus-schema",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: นับorder_itemsของCampusต้นฉบับทั้งหมดได้เท่าใด?",
+      "answer": 14,
+      "explanation": "ตรวจINSERT14itemrecords;จำนวนquantityรวม21เป็นคนละหน่วย",
+      "id": "db02-q19",
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ชุด homework DB-D01 มี8students,6restaurants,10orders,14order_items ทุกออเดอร์อ้างนิสิตที่มีจริงและทุกรายการอ้างออเดอร์/ร้านที่มีจริง ข้อกำหนดไม่ได้บังคับว่านิสิตทุกคนต้องมีออเดอร์หรือร้านทุกแห่งต้องเคยขาย"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "integrity",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: หากDELETEparentที่มีchildและไม่มีcascadeที่อนุญาต ควรตรวจอะไร?",
+      "explanation": "ห้ามเดาcascade ต้องดูONDELETEและengine",
+      "id": "db02-q20",
+      "choices": [
+        {
+          "id": "a",
+          "text": "คาดว่าchildถูกลบเสมอทุกDB"
+        },
+        {
+          "id": "b",
+          "text": "FKdeleteactionที่schemaกำหนด"
+        },
+        {
+          "id": "c",
+          "text": "เปลี่ยนสีtable"
+        },
+        {
+          "id": "d",
+          "text": "gitignoreของBrowser"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใน fixture ที่เปิดใช้ Foreign Key การเพิ่มออเดอร์ที่อ้าง student999ซึ่งไม่มีอยู่ต้องถูกปฏิเสธ และการเพิ่ม student101ซ้ำต้องผิด PK การป้องกันนี้ทำงานที่ฐานข้อมูล แต่ยังต้องตรวจ input/สิทธิ์ใน PHP เพื่อให้ผู้ใช้ได้รับพฤติกรรมที่เหมาะสม"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "tables-keys",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: VARCHAR(120)ในskill_nameหมายความว่าอะไร?",
+      "explanation": "ขนาดcolumnไม่ใช่rowcount;PHPvalidationควรสอดคล้อง",
+      "id": "db02-q21",
+      "choices": [
+        {
+          "id": "a",
+          "text": "จำกัด120rowsทั้งtable"
+        },
+        {
+          "id": "b",
+          "text": "เป็นจำนวนออเดอร์"
+        },
+        {
+          "id": "c",
+          "text": "จำกัดความยาวข้อความตามข้อกำหนดcharset/engine"
+        },
+        {
+          "id": "d",
+          "text": "เป็นportของMySQL"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตาราง (Table) ประกอบด้วยแถวข้อมูล (Row) และคอลัมน์ (Column) ภายใต้ข้อกำหนด schema Primary Key ระบุแถวได้ไม่ซ้ำและไม่เป็น NULL; Foreign Key กำหนดความสัมพันธ์การอ้างอิงกับคีย์ของตารางที่เกี่ยวข้อง ไม่ได้ทำให้ข้อมูลจากสองตารางแสดงรวมกันโดยอัตโนมัติ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "examples",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: นิสิตไม่มีorderควรถูกลบจากstudentsหรือไม่?",
+      "explanation": "ตัวอย่าง106107108เป็นunmatchedที่ใช้สอนLEFT",
+      "id": "db02-q22",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ต้องลบทันที"
+        },
+        {
+          "id": "b",
+          "text": "ต้องเพิ่มorderปลอม"
+        },
+        {
+          "id": "c",
+          "text": "ต้องเปลี่ยนPKเป็นNULL"
+        },
+        {
+          "id": "d",
+          "text": "ไม่ การไม่มีchildเป็นสถานะข้อมูลที่ถูกต้องได้"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Data Dictionary ควรระบุชื่อคอลัมน์ ชนิด ความหมาย nullability คีย์และข้อจำกัด ไม่ใช่รายการชื่อฟิลด์อย่างเดียว เช่น total_amount มีหน่วยบาท, qty คือจำนวนรายการอาหาร ไม่ใช่ราคา และ schema ของ Campus ไม่มีราคาต่อชิ้นให้คำนวณใบเสร็จใหม่จาก qty ได้"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "campus-schema",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: NULL Cafeในrestaurantsหมายถึงอะไร?",
+      "explanation": "quoteข้อความกับNULLmarkerคนละอย่าง",
+      "id": "db02-q23",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ข้อความชื่อร้านจริง"
+        },
+        {
+          "id": "b",
+          "text": "SQLNULLvalue"
+        },
+        {
+          "id": "c",
+          "text": "tableที่ไม่มีชื่อ"
+        },
+        {
+          "id": "d",
+          "text": "คำสั่งลบrestaurant"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ชุด homework DB-D01 มี8students,6restaurants,10orders,14order_items ทุกออเดอร์อ้างนิสิตที่มีจริงและทุกรายการอ้างออเดอร์/ร้านที่มีจริง ข้อกำหนดไม่ได้บังคับว่านิสิตทุกคนต้องมีออเดอร์หรือร้านทุกแห่งต้องเคยขาย"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "integrity",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: PKรับค่าซ้ำได้หรือไม่ถ้าชื่อคนต่างกัน?",
+      "explanation": "constraintตรวจPK ไม่ใช้ชื่อช่วยแยก",
+      "id": "db02-q24",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ได้เพราะชื่อต่าง"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ได้ PKidentityต้องunique"
+        },
+        {
+          "id": "c",
+          "text": "ได้ถ้าเงินเท่ากัน"
+        },
+        {
+          "id": "d",
+          "text": "ได้เมื่อมีCSS"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ใน fixture ที่เปิดใช้ Foreign Key การเพิ่มออเดอร์ที่อ้าง student999ซึ่งไม่มีอยู่ต้องถูกปฏิเสธ และการเพิ่ม student101ซ้ำต้องผิด PK การป้องกันนี้ทำงานที่ฐานข้อมูล แต่ยังต้องตรวจ input/สิทธิ์ใน PHP เพื่อให้ผู้ใช้ได้รับพฤติกรรมที่เหมาะสม"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "resume-schema",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: DataDictionaryช่วยสิ่งใด?",
+      "explanation": "ทำให้schemaและความหมายตรงกันแต่ไม่แทนการทดสอบ",
+      "id": "db02-q25",
+      "choices": [
+        {
+          "id": "a",
+          "text": "แทนทุกquerytest"
+        },
+        {
+          "id": "b",
+          "text": "รับรองวันสอบ"
+        },
+        {
+          "id": "c",
+          "text": "อธิบายfield,type,meaning,nullable,constraints"
+        },
+        {
+          "id": "d",
+          "text": "เก็บpasswordจริงของทุกคน"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "DB-Z01 เริ่มด้วย profile และ education; skill/training เป็นงานออกแบบเพิ่ม ขณะที่ DB-Z02 มี DDL ครบ4ตารางและ skill ตัวอย่าง3แถว อย่าอ้างว่า starter แรกมีคำตอบครบแล้วหรือเพิ่มตารางขึ้นในไฟล์ต้นฉบับโดยไม่แจ้ง"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "examples",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ควรอ้างnormalizationขั้นสูงเป็นข้อสอบจากsourcesนี้หรือไม่?",
+      "explanation": "officialcurriculumกว้างกว่าsourceที่ได้มา ต้องไม่แต่งexamrequirements",
+      "id": "db02-q26",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ควรเพราะทุกDBต้องสอบเหมือนกัน"
+        },
+        {
+          "id": "b",
+          "text": "ควรเดาน้ำหนักเอง"
+        },
+        {
+          "id": "c",
+          "text": "ควรสร้างslideอ้างอิง"
+        },
+        {
+          "id": "d",
+          "text": "ไม่ ถ้าไม่มีหลักฐานให้ระบุเสริม"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Data Dictionary ควรระบุชื่อคอลัมน์ ชนิด ความหมาย nullability คีย์และข้อจำกัด ไม่ใช่รายการชื่อฟิลด์อย่างเดียว เช่น total_amount มีหน่วยบาท, qty คือจำนวนรายการอาหาร ไม่ใช่ราคา และ schema ของ Campus ไม่มีราคาต่อชิ้นให้คำนวณใบเสร็จใหม่จาก qty ได้"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "resume-schema",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เปรียบเทียบResumeสองระยะและusersmigration",
+      "rubric": [
+        "แยกstarter2tableกับCRUD4",
+        "ระบุusers.profile_idเป็นภายหลัง",
+        "ไม่อ้างว่าต้นฉบับทุกชุดครบเหมือนกัน"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db02-q27",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "DB-Z01 เริ่มด้วย profile และ education; skill/training เป็นงานออกแบบเพิ่ม ขณะที่ DB-Z02 มี DDL ครบ4ตารางและ skill ตัวอย่าง3แถว อย่าอ้างว่า starter แรกมีคำตอบครบแล้วหรือเพิ่มตารางขึ้นในไฟล์ต้นฉบับโดยไม่แจ้ง"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "integrity",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ออกแบบtestduplicatePKและmissingFKโดยไม่แตะDBจริง",
+      "rubric": [
+        "ใช้fixtureแยก",
+        "ระบุexpectedconstraintfailure",
+        "ไม่รันDROPจากsource"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db02-q28",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ใน fixture ที่เปิดใช้ Foreign Key การเพิ่มออเดอร์ที่อ้าง student999ซึ่งไม่มีอยู่ต้องถูกปฏิเสธ และการเพิ่ม student101ซ้ำต้องผิด PK การป้องกันนี้ทำงานที่ฐานข้อมูล แต่ยังต้องตรวจ input/สิทธิ์ใน PHP เพื่อให้ผู้ใช้ได้รับพฤติกรรมที่เหมาะสม"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "tables-keys",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ทำDataDictionaryของskillสามfieldสำคัญ",
+      "rubric": [
+        "ระบุname/type",
+        "ระบุnullable/constraint",
+        "อธิบายหน่วยและowner"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db02-q29",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ตาราง (Table) ประกอบด้วยแถวข้อมูล (Row) และคอลัมน์ (Column) ภายใต้ข้อกำหนด schema Primary Key ระบุแถวได้ไม่ซ้ำและไม่เป็น NULL; Foreign Key กำหนดความสัมพันธ์การอ้างอิงกับคีย์ของตารางที่เกี่ยวข้อง ไม่ได้ทำให้ข้อมูลจากสองตารางแสดงรวมกันโดยอัตโนมัติ"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "examples",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: อธิบายทำไม14itemrowsไม่เท่ากับ14ordersหรือ14ชิ้นเสมอ",
+      "rubric": [
+        "แยกPKitemกับorderFK",
+        "quantityอาจมากกว่า1",
+        "ตรวจผลจากrowsจริง"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db02-q30",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Data Dictionary ควรระบุชื่อคอลัมน์ ชนิด ความหมาย nullability คีย์และข้อจำกัด ไม่ใช่รายการชื่อฟิลด์อย่างเดียว เช่น total_amount มีหน่วยบาท, qty คือจำนวนรายการอาหาร ไม่ใช่ราคา และ schema ของ Campus ไม่มีราคาต่อชิ้นให้คำนวณใบเสร็จใหม่จาก qty ได้"
+      }
+    }
+  ]
+}

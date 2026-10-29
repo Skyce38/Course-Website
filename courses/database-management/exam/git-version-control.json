@@ -1,0 +1,696 @@
+{
+  "version": 1,
+  "revision": 1,
+  "baseRevision": 1,
+  "lesson": "database-management-git-version-control",
+  "questions": [
+    {
+      "type": "choice",
+      "reference": "branches",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Branchเป็นอะไรในGit?",
+      "explanation": "branchจัดcodehistory ไม่ย้ายDBstateเอง",
+      "id": "db09-q07",
+      "choices": [
+        {
+          "id": "a",
+          "text": "สำเนาMySQLสด"
+        },
+        {
+          "id": "b",
+          "text": "ไฟล์.envสำรอง"
+        },
+        {
+          "id": "c",
+          "text": "บัญชีAngsila"
+        },
+        {
+          "id": "d",
+          "text": "referenceไปcommitที่เลื่อนตามงาน"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Branchเป็นreferenceที่เลื่อนไปตามcommit ไม่ใช่สำเนาฐานข้อมูลสด การเปลี่ยนbranchไม่ย้อนข้อมูลMySQLโดยอัตโนมัติ ใช้migrationและbackupตามกระบวนการที่ทดสอบแยก"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "remotes",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Fetchต่างจากPullอย่างไรตามหลักทั่วไป?",
+      "explanation": "integrationอาจmerge/rebaseตามconfiguration",
+      "id": "db09-q08",
+      "choices": [
+        {
+          "id": "a",
+          "text": "fetchรับobjects/refs;pullfetchแล้วintegrateตามconfig"
+        },
+        {
+          "id": "b",
+          "text": "fetchลบlocalทุกไฟล์"
+        },
+        {
+          "id": "c",
+          "text": "pullไม่ติดต่อremote"
+        },
+        {
+          "id": "d",
+          "text": "ทั้งคู่deployPHPเสมอ"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Cloneสร้างlocalrepositoryจากremote Fetchนำobjects/refsมาโดยไม่บังคับmergeเข้าbranchปัจจุบัน Pullโดยทั่วไปfetchแล้วintegrateตามconfiguration ส่วนPushส่งcommits/refsไปremoteที่มีสิทธิ์ PullRequestเป็นคำขอreviewบนplatform ไม่ใช่คำสั่งGitที่mergeให้อัตโนมัติ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "states",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: gitdiffเทียบgitdiff--cachedบอกอะไร?",
+      "explanation": "ใช้reviewสิ่งที่แก้กับสิ่งที่จะcommitแยกกัน",
+      "id": "db09-q09",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทั้งคู่คือDBquery"
+        },
+        {
+          "id": "b",
+          "text": "working-index เทียบกับindex-HEAD"
+        },
+        {
+          "id": "c",
+          "text": "ทั้งคู่บอกHTTPSflag"
+        },
+        {
+          "id": "d",
+          "text": "cachedแสดงpasswordhashทุกคน"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Gitเป็นระบบควบคุมเวอร์ชันแบบกระจาย ส่วนGitHubเป็นบริการhosting/collaborationที่ใช้Git Commitบันทึกsnapshotที่อยู่ในstagingในlocalrepository ไม่ได้ส่งขึ้นGitHubโดยอัตโนมัติ และไม่ได้สำรองข้อมูลMySQLที่กำลังเปลี่ยนอยู่"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "secrets",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: secretเคยpushpublicแล้ว เพิ่มignoreอย่างเดียวพอหรือไม่?",
+      "explanation": "ข้อมูลอาจถูกอ่านไปแล้ว ไม่แก้ด้วยการซ่อนไฟล์ปัจจุบันอย่างเดียว",
+      "id": "db09-q10",
+      "choices": [
+        {
+          "id": "a",
+          "text": "พอเพราะGitลืมอัตโนมัติ"
+        },
+        {
+          "id": "b",
+          "text": "พอเมื่อrename.env"
+        },
+        {
+          "id": "c",
+          "text": "ไม่ ต้องrotate/revokeและประสานจัดประวัติ"
+        },
+        {
+          "id": "d",
+          "text": "พอถ้าbranchprivateภายหลัง"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": ".gitignoreช่วยกันuntrackedfilesเข้าstageโดยไม่ตั้งใจ แต่ไม่ลบไฟล์ที่เคยtracked ไม่ลบข้อมูลจากประวัติ และไม่เพิกถอนpasswordที่รั่ว หากsecretถูกเผยแพร่ต้องrotate/revokeและประสานผู้ดูแลก่อนจัดการประวัติอย่างได้รับอนุญาต"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "branches",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เปลี่ยนbranchย้อนschemaMySQLโดยอัตโนมัติหรือไม่?",
+      "explanation": "codeversionและlivedataเป็นคนละstate",
+      "id": "db09-q11",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ย้อนทุกtableเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "ย้อนเฉพาะpassword"
+        },
+        {
+          "id": "c",
+          "text": "ทำให้DBว่างเสมอ"
+        },
+        {
+          "id": "d",
+          "text": "ไม่ ต้องมีกระบวนการmigrationแยก"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Branchเป็นreferenceที่เลื่อนไปตามcommit ไม่ใช่สำเนาฐานข้อมูลสด การเปลี่ยนbranchไม่ย้อนข้อมูลMySQLโดยอัตโนมัติ ใช้migrationและbackupตามกระบวนการที่ทดสอบแยก"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "remotes",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: PullRequestเป็นอะไร?",
+      "explanation": "PRไม่เท่ากับautomaticmergeและต้องreview",
+      "id": "db09-q12",
+      "choices": [
+        {
+          "id": "a",
+          "text": "คำขอreview/integrateบนplatform"
+        },
+        {
+          "id": "b",
+          "text": "SQLJOINชนิดหนึ่ง"
+        },
+        {
+          "id": "c",
+          "text": "คำสั่งGitที่mergeทันทีเสมอ"
+        },
+        {
+          "id": "d",
+          "text": "MySQLbackup"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Cloneสร้างlocalrepositoryจากremote Fetchนำobjects/refsมาโดยไม่บังคับmergeเข้าbranchปัจจุบัน Pullโดยทั่วไปfetchแล้วintegrateตามconfiguration ส่วนPushส่งcommits/refsไปremoteที่มีสิทธิ์ PullRequestเป็นคำขอreviewบนplatform ไม่ใช่คำสั่งGitที่mergeให้อัตโนมัติ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "collaboration",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ไฟล์ใดเหมาะกับversioncontrolหลังreview?",
+      "explanation": "แยกโครงสร้างโค้ดจากprivateoperationaldata",
+      "id": "db09-q13",
+      "choices": [
+        {
+          "id": "a",
+          "text": "DBdumpที่มีข้อมูลผู้ใช้จริง"
+        },
+        {
+          "id": "b",
+          "text": "sanitizedschema/migrationและREADME"
+        },
+        {
+          "id": "c",
+          "text": ".envรหัสผ่านจริง"
+        },
+        {
+          "id": "d",
+          "text": "photosส่วนตัวจากZIP"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "READMEควรบอกวิธีตั้งค่าruntime/schema/seedแบบข้อมูลจำลอง วิธีรันทดสอบและข้อจำกัด ไม่ใส่passwordจริง แยกmigrationที่reviewได้จากdumpจริงที่มีข้อมูลส่วนตัว และตรวจSQLก่อนรันเสมอ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "branches",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Fastforwardmergeจำเป็นต้องมีmergecommitใหม่หรือไม่?",
+      "explanation": "mergebehaviorขึ้นกับhistoryและoptions",
+      "id": "db09-q14",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ต้องทุกครั้ง"
+        },
+        {
+          "id": "b",
+          "text": "ไม่เคยเปลี่ยนbranchref"
+        },
+        {
+          "id": "c",
+          "text": "ไม่ ถ้าประวัติเลื่อนไปข้างหน้าได้ตามpolicy"
+        },
+        {
+          "id": "d",
+          "text": "ต้องลบfeaturebranchก่อน"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Branchเป็นreferenceที่เลื่อนไปตามcommit ไม่ใช่สำเนาฐานข้อมูลสด การเปลี่ยนbranchไม่ย้อนข้อมูลMySQLโดยอัตโนมัติ ใช้migrationและbackupตามกระบวนการที่ทดสอบแยก"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "branches",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เกิดconflictควรทำอะไร?",
+      "explanation": "conflictเป็นงานsemanticreview ไม่ใช่แค่ลบข้อความ",
+      "id": "db09-q15",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เลือกoursทุกกรณีไม่อ่าน"
+        },
+        {
+          "id": "b",
+          "text": "ลบtestเพื่อให้ผ่าน"
+        },
+        {
+          "id": "c",
+          "text": "forcepushทุกbranch"
+        },
+        {
+          "id": "d",
+          "text": "อ่านเจตนาสองด้านแก้markerแล้วทดสอบ"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Branchเป็นreferenceที่เลื่อนไปตามcommit ไม่ใช่สำเนาฐานข้อมูลสด การเปลี่ยนbranchไม่ย้อนข้อมูลMySQLโดยอัตโนมัติ ใช้migrationและbackupตามกระบวนการที่ทดสอบแยก"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "remotes",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Cloneทำอะไร?",
+      "explanation": "cloneไม่เท่ากับdeployหรือDBmigration",
+      "id": "db09-q16",
+      "choices": [
+        {
+          "id": "a",
+          "text": "สร้างlocalrepositoryจากremoteและhistoryที่รับมา"
+        },
+        {
+          "id": "b",
+          "text": "รันPHPแอปบนAngsila"
+        },
+        {
+          "id": "c",
+          "text": "ลบremote"
+        },
+        {
+          "id": "d",
+          "text": "สร้างMySQLdatabaseอัตโนมัติ"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Cloneสร้างlocalrepositoryจากremote Fetchนำobjects/refsมาโดยไม่บังคับmergeเข้าbranchปัจจุบัน Pullโดยทั่วไปfetchแล้วintegrateตามconfiguration ส่วนPushส่งcommits/refsไปremoteที่มีสิทธิ์ PullRequestเป็นคำขอreviewบนplatform ไม่ใช่คำสั่งGitที่mergeให้อัตโนมัติ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "states",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เหตุใดใช้explicitgitaddชื่อไฟล์ในDBproject?",
+      "explanation": "ยังต้องดูstageddiffและsecretchecks",
+      "id": "db09-q17",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทำให้ไม่ต้องreviewdiff"
+        },
+        {
+          "id": "b",
+          "text": "ลดการstage.env/privateuploadsโดยไม่ตั้งใจ"
+        },
+        {
+          "id": "c",
+          "text": "ทำให้SQLถูกทุกquery"
+        },
+        {
+          "id": "d",
+          "text": "แทนignoreทุกกรณี"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Gitเป็นระบบควบคุมเวอร์ชันแบบกระจาย ส่วนGitHubเป็นบริการhosting/collaborationที่ใช้Git Commitบันทึกsnapshotที่อยู่ในstagingในlocalrepository ไม่ได้ส่งขึ้นGitHubโดยอัตโนมัติ และไม่ได้สำรองข้อมูลMySQLที่กำลังเปลี่ยนอยู่"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "secrets",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ถ้าignore*.sqlทั้งหมดมีข้อเสียใด?",
+      "explanation": "ignoreควรแยกpublicschemaกับprivatedump",
+      "id": "db09-q18",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ป้องกันsecretได้ครบทุกไฟล์"
+        },
+        {
+          "id": "b",
+          "text": "ทำให้DBไม่ต้องbackup"
+        },
+        {
+          "id": "c",
+          "text": "schema/migrationที่ควรreviewอาจหายจากhistory"
+        },
+        {
+          "id": "d",
+          "text": "ทำให้MySQLรันเร็วขึ้น"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": ".gitignoreช่วยกันuntrackedfilesเข้าstageโดยไม่ตั้งใจ แต่ไม่ลบไฟล์ที่เคยtracked ไม่ลบข้อมูลจากประวัติ และไม่เพิกถอนpasswordที่รั่ว หากsecretถูกเผยแพร่ต้องrotate/revokeและประสานผู้ดูแลก่อนจัดการประวัติอย่างได้รับอนุญาต"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "collaboration",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: READMEควรระบุอะไรแทนDBpasswordจริง?",
+      "explanation": "READMEช่วยreproduceโดยไม่เผยcredential",
+      "id": "db09-q19",
+      "choices": [
+        {
+          "id": "a",
+          "text": "rootpasswordของมหาวิทยาลัย"
+        },
+        {
+          "id": "b",
+          "text": "cookieผู้ใช้จริง"
+        },
+        {
+          "id": "c",
+          "text": "ภาพ.envเต็มหน้า"
+        },
+        {
+          "id": "d",
+          "text": "runtime/setup/configkeysและวิธีตั้งค่าผ่านช่องทางปลอดภัย"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "READMEควรบอกวิธีตั้งค่าruntime/schema/seedแบบข้อมูลจำลอง วิธีรันทดสอบและข้อจำกัด ไม่ใส่passwordจริง แยกmigrationที่reviewได้จากdumpจริงที่มีข้อมูลส่วนตัว และตรวจSQLก่อนรันเสมอ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "remotes",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ก่อนpushควรตรวจอะไร?",
+      "explanation": "ลดส่งผิดrepoหรือเผยprivatefiles",
+      "id": "db09-q20",
+      "choices": [
+        {
+          "id": "a",
+          "text": "remoteURL,branch,สิทธิ์และstaged/committeddiff"
+        },
+        {
+          "id": "b",
+          "text": "สีsidebarอย่างเดียว"
+        },
+        {
+          "id": "c",
+          "text": "จำนวนNULLในJOIN"
+        },
+        {
+          "id": "d",
+          "text": "ขนาดfavicon"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Cloneสร้างlocalrepositoryจากremote Fetchนำobjects/refsมาโดยไม่บังคับmergeเข้าbranchปัจจุบัน Pullโดยทั่วไปfetchแล้วintegrateตามconfiguration ส่วนPushส่งcommits/refsไปremoteที่มีสิทธิ์ PullRequestเป็นคำขอreviewบนplatform ไม่ใช่คำสั่งGitที่mergeให้อัตโนมัติ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "branches",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: การmergeผ่านแปลว่าโค้ดทำงานถูกแน่นอนหรือไม่?",
+      "explanation": "textmergeไม่พิสูจน์runtimecorrectness",
+      "id": "db09-q21",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ใช่GitตรวจSQLsemanticsทุกตัว"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ ต้องรันทดสอบที่เกี่ยวข้อง"
+        },
+        {
+          "id": "c",
+          "text": "ใช่Gitตรวจauthorization"
+        },
+        {
+          "id": "d",
+          "text": "ใช่ถ้าไม่มีconflict"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Branchเป็นreferenceที่เลื่อนไปตามcommit ไม่ใช่สำเนาฐานข้อมูลสด การเปลี่ยนbranchไม่ย้อนข้อมูลMySQLโดยอัตโนมัติ ใช้migrationและbackupตามกระบวนการที่ทดสอบแยก"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "collaboration",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Gitเป็นbackupของrowsที่ผู้ใช้เพิ่มในMySQLเองหรือไม่?",
+      "explanation": "versioncodeไม่ติดตามlivedataอัตโนมัติ",
+      "id": "db09-q22",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เป็นเสมอทุกcommit"
+        },
+        {
+          "id": "b",
+          "text": "เป็นเมื่อREADMEมีSQL"
+        },
+        {
+          "id": "c",
+          "text": "ไม่ ถ้าไม่ได้มีbackupdataแยกที่ออกแบบ"
+        },
+        {
+          "id": "d",
+          "text": "เป็นเมื่อใช้GitHubPages"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "READMEควรบอกวิธีตั้งค่าruntime/schema/seedแบบข้อมูลจำลอง วิธีรันทดสอบและข้อจำกัด ไม่ใส่passwordจริง แยกmigrationที่reviewได้จากdumpจริงที่มีข้อมูลส่วนตัว และตรวจSQLก่อนรันเสมอ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "secrets",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: envexampleที่เหมาะสมควรมีอะไร?",
+      "explanation": "templateช่วยsetupได้โดยไม่เปิดเผยค่าใช้งาน",
+      "id": "db09-q23",
+      "choices": [
+        {
+          "id": "a",
+          "text": "passwordจริงเพื่อทำตามง่าย"
+        },
+        {
+          "id": "b",
+          "text": "sessionIDsจริง"
+        },
+        {
+          "id": "c",
+          "text": "privateuserphotos"
+        },
+        {
+          "id": "d",
+          "text": "ชื่อkeysกับplaceholderไม่ใช่secretจริง"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": ".gitignoreช่วยกันuntrackedfilesเข้าstageโดยไม่ตั้งใจ แต่ไม่ลบไฟล์ที่เคยtracked ไม่ลบข้อมูลจากประวัติ และไม่เพิกถอนpasswordที่รั่ว หากsecretถูกเผยแพร่ต้องrotate/revokeและประสานผู้ดูแลก่อนจัดการประวัติอย่างได้รับอนุญาต"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "remotes",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: PushกับDeployเหมือนกันทุกhostingหรือไม่?",
+      "explanation": "บางCIต่อกันได้แต่ไม่ใช่ข้อรับรองจากGitcommand",
+      "id": "db09-q24",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่ deploymentเป็นกระบวนการต่างหากตามconfig"
+        },
+        {
+          "id": "b",
+          "text": "เหมือนเสมอGitpushรันPHPเอง"
+        },
+        {
+          "id": "c",
+          "text": "pushสร้างApacheทุกครั้ง"
+        },
+        {
+          "id": "d",
+          "text": "deployไม่เกี่ยวกับserver"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Cloneสร้างlocalrepositoryจากremote Fetchนำobjects/refsมาโดยไม่บังคับmergeเข้าbranchปัจจุบัน Pullโดยทั่วไปfetchแล้วintegrateตามconfiguration ส่วนPushส่งcommits/refsไปremoteที่มีสิทธิ์ PullRequestเป็นคำขอreviewบนplatform ไม่ใช่คำสั่งGitที่mergeให้อัตโนมัติ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "branches",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: Forcepushบนbranchงานร่วมกันมีความเสี่ยงใด?",
+      "explanation": "บทนี้ไม่สอนให้forcepushโดยไม่review/permission",
+      "id": "db09-q25",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ทำให้FKปลอดภัยขึ้น"
+        },
+        {
+          "id": "b",
+          "text": "เขียนrefsใหม่จนกระทบประวัติที่คนอื่นใช้"
+        },
+        {
+          "id": "c",
+          "text": "ทำให้private.envถูกลบทุกclone"
+        },
+        {
+          "id": "d",
+          "text": "ไม่มีผลต่อผู้อื่น"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "Branchเป็นreferenceที่เลื่อนไปตามcommit ไม่ใช่สำเนาฐานข้อมูลสด การเปลี่ยนbranchไม่ย้อนข้อมูลMySQLโดยอัตโนมัติ ใช้migrationและbackupตามกระบวนการที่ทดสอบแยก"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "collaboration",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เมื่อschemaกับPHPใช้fieldไม่ตรงหลังmerge ควรทำอย่างไร?",
+      "explanation": "ต้องtracecontractระหว่างDBและapp",
+      "id": "db09-q26",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เปลี่ยนthemeเพื่อแก้"
+        },
+        {
+          "id": "b",
+          "text": "ลบDBจริงทันที"
+        },
+        {
+          "id": "c",
+          "text": "reviewและทดสอบmigrationกับcodeร่วมกัน"
+        },
+        {
+          "id": "d",
+          "text": "commitsecretเพื่อdebug"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "READMEควรบอกวิธีตั้งค่าruntime/schema/seedแบบข้อมูลจำลอง วิธีรันทดสอบและข้อจำกัด ไม่ใส่passwordจริง แยกmigrationที่reviewได้จากdumpจริงที่มีข้อมูลส่วนตัว และตรวจSQLก่อนรันเสมอ"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "secrets",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: วางincidentresponseเมื่อ.envเคยpublic",
+      "rubric": [
+        "rotate/revoke",
+        "ไม่อ้างignoreลบhistory",
+        "ประสานเจ้าของก่อนrewrite"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db09-q27",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": ".gitignoreช่วยกันuntrackedfilesเข้าstageโดยไม่ตั้งใจ แต่ไม่ลบไฟล์ที่เคยtracked ไม่ลบข้อมูลจากประวัติ และไม่เพิกถอนpasswordที่รั่ว หากsecretถูกเผยแพร่ต้องrotate/revokeและประสานผู้ดูแลก่อนจัดการประวัติอย่างได้รับอนุญาต"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "branches",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: วางbranchreviewmergeworkflowที่ไม่แตะDBจริง",
+      "rubric": [
+        "explicitstage",
+        "testก่อน/หลังmerge",
+        "migrationแยกจากbranch"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db09-q28",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Branchเป็นreferenceที่เลื่อนไปตามcommit ไม่ใช่สำเนาฐานข้อมูลสด การเปลี่ยนbranchไม่ย้อนข้อมูลMySQLโดยอัตโนมัติ ใช้migrationและbackupตามกระบวนการที่ทดสอบแยก"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "remotes",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: แยกclone/fetch/pull/push/PRด้วยคำอธิบายของตน",
+      "rubric": [
+        "ทิศทางข้อมูลถูก",
+        "pullมีintegrationตามconfig",
+        "PRไม่autoapprove"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db09-q29",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "Cloneสร้างlocalrepositoryจากremote Fetchนำobjects/refsมาโดยไม่บังคับmergeเข้าbranchปัจจุบัน Pullโดยทั่วไปfetchแล้วintegrateตามconfiguration ส่วนPushส่งcommits/refsไปremoteที่มีสิทธิ์ PullRequestเป็นคำขอreviewบนplatform ไม่ใช่คำสั่งGitที่mergeให้อัตโนมัติ"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "collaboration",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เขียนoutlineREADMEสำหรับเพื่อนทำDBlabอย่างปลอดภัย",
+      "rubric": [
+        "version/setupชัด",
+        "sanitizedfixture/tests",
+        "ไม่ใส่privatecredential"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db09-q30",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "READMEควรบอกวิธีตั้งค่าruntime/schema/seedแบบข้อมูลจำลอง วิธีรันทดสอบและข้อจำกัด ไม่ใส่passwordจริง แยกmigrationที่reviewได้จากdumpจริงที่มีข้อมูลส่วนตัว และตรวจSQLก่อนรันเสมอ"
+      }
+    }
+  ]
+}

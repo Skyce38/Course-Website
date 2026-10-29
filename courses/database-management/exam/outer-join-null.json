@@ -1,0 +1,680 @@
+{
+  "version": 1,
+  "revision": 1,
+  "baseRevision": 1,
+  "lesson": "database-management-outer-join-null",
+  "questions": [
+    {
+      "type": "choice",
+      "reference": "null",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: SQLNULL=NULLให้TRUEหรือไม่?",
+      "explanation": "ใช้IS NULLสำหรับตรวจunknownvalue",
+      "id": "db06-q07",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่ ได้UNKNOWN/NULLในexpressionนี้"
+        },
+        {
+          "id": "b",
+          "text": "TRUEเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "FALSEเป็น0แน่นอนทุกcontext"
+        },
+        {
+          "id": "d",
+          "text": "เป็นข้อความNULL Cafe"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "SQL NULLหมายถึงไม่มีค่าตามบริบท การเทียบด้วย `= NULL` ไม่ให้TRUEแม้ซ้ายเป็นNULL ต้องใช้IS NULL/IS NOT NULL การแสดงข้อความว่าNULLในหน้าจอไม่ใช่string `'NULL'` และร้านชื่อ `NULL Cafe` เป็นstringจริงหนึ่งชื่อในข้อมูลจำลอง"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "on-where",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: LEFTแล้วWHEREo.status=deliveredจะรักษาคนไม่มีdeliveredครบหรือไม่?",
+      "explanation": "predicateหลังJOINกรองnull-extendedrowsออก",
+      "id": "db06-q08",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ครบเพราะLEFTลบไม่ได้"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ NULLrowsไม่ผ่านWHERE"
+        },
+        {
+          "id": "c",
+          "text": "เปลี่ยนNULLเป็นdelivered"
+        },
+        {
+          "id": "d",
+          "text": "สร้างorderให้ครบ"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "CampusHWมีdelivered6orders เมื่อใช้ `WHERE o.status='delivered'` หลังLEFT JOIN แถวที่เติมNULLถูกกรองออก เหลือ6แถว หากต้องการทุกนิสิตแต่เฉพาะออเดอร์deliveredเมื่อมี ให้ย้ายเงื่อนไขนี้เข้ากับON ได้9แถวจาก6matchesและ3นิสิตที่ไม่มีคู่ตามเงื่อนไข"
+      }
+    },
+    {
+      "type": "numeric",
+      "reference": "on-where",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: CampusLEFTโดยใส่status=deliveredในON คืนกี่rowsและยังรักษา8คน?",
+      "answer": 9,
+      "explanation": "6deliveredmatches+3คนที่ไม่มีdelivered;คน101มีหนึ่งdelivered",
+      "id": "db06-q09",
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "CampusHWมีdelivered6orders เมื่อใช้ `WHERE o.status='delivered'` หลังLEFT JOIN แถวที่เติมNULLถูกกรองออก เหลือ6แถว หากต้องการทุกนิสิตแต่เฉพาะออเดอร์deliveredเมื่อมี ให้ย้ายเงื่อนไขนี้เข้ากับON ได้9แถวจาก6matchesและ3นิสิตที่ไม่มีคู่ตามเงื่อนไข"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "on-where",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: WHEREstatusdeliveredหลังLEFTCampusให้กี่rows?",
+      "explanation": "เฉพาะ6ordersdeliveredผ่าน;ไม่รักษาunmatched",
+      "id": "db06-q10",
+      "choices": [
+        {
+          "id": "a",
+          "text": "9แถว"
+        },
+        {
+          "id": "b",
+          "text": "13แถว"
+        },
+        {
+          "id": "c",
+          "text": "80แถว"
+        },
+        {
+          "id": "d",
+          "text": "6แถว"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "CampusHWมีdelivered6orders เมื่อใช้ `WHERE o.status='delivered'` หลังLEFT JOIN แถวที่เติมNULLถูกกรองออก เหลือ6แถว หากต้องการทุกนิสิตแต่เฉพาะออเดอร์deliveredเมื่อมี ให้ย้ายเงื่อนไขนี้เข้ากับON ได้9แถวจาก6matchesและ3นิสิตที่ไม่มีคู่ตามเงื่อนไข"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "null",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: skillมีrowแต่skill_levelNULLต่างจากไม่มีskillอย่างไร?",
+      "explanation": "nullabledataไม่พอพิสูจน์absence",
+      "id": "db06-q11",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ต้องดูPKskillเพื่อแยกmissingrow"
+        },
+        {
+          "id": "b",
+          "text": "ไม่มีความต่างทุกกรณี"
+        },
+        {
+          "id": "c",
+          "text": "NULLlevelแปลว่าPKNULLเสมอ"
+        },
+        {
+          "id": "d",
+          "text": "levelเป็นNULLCafe"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "SQL NULLหมายถึงไม่มีค่าตามบริบท การเทียบด้วย `= NULL` ไม่ให้TRUEแม้ซ้ายเป็นNULL ต้องใช้IS NULL/IS NOT NULL การแสดงข้อความว่าNULLในหน้าจอไม่ใช่string `'NULL'` และร้านชื่อ `NULL Cafe` เป็นstringจริงหนึ่งชื่อในข้อมูลจำลอง"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "right-left",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: แปลงA RIGHTJOINBให้เทียบผลอย่างไร?",
+      "explanation": "สลับoperandเพื่อรักษาตารางเดิม;sortเมื่อเทียบorderedrows",
+      "id": "db06-q12",
+      "choices": [
+        {
+          "id": "a",
+          "text": "A LEFTJOINBโดยไม่เปลี่ยนอะไร"
+        },
+        {
+          "id": "b",
+          "text": "B LEFTJOINAโดยคงONและprojectionความหมายเดิม"
+        },
+        {
+          "id": "c",
+          "text": "ลบON"
+        },
+        {
+          "id": "d",
+          "text": "เปลี่ยนเป็นCROSS"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`orders RIGHT JOIN students` รักษาstudentsเหมือน `students LEFT JOIN orders` เมื่อตรึงSELECTคอลัมน์และONสัมพันธ์เดิม ผลที่เรียงด้วยs.student_id,o.order_idเหมือนกัน13แถว ส่วน `students RIGHT JOIN orders` รักษาordersและในCampusHWนี้ได้10แถว จึงสลับโดยดูแค่คำว่าRIGHTไม่ได้"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "preserved",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: LEFTJOINให้หนึ่งrowต่อstudentเสมอหรือไม่?",
+      "explanation": "preservationไม่ห้ามmultiplicity",
+      "id": "db06-q13",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เสมอเพราะLEFT"
+        },
+        {
+          "id": "b",
+          "text": "เสมอถ้ามีFK"
+        },
+        {
+          "id": "c",
+          "text": "ไม่ มีหลายmatchingordersก็หลายrows"
+        },
+        {
+          "id": "d",
+          "text": "ไม่เคยคืนstudentซ้ำ"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "LEFT JOIN รักษาแถวของตารางซ้าย ส่วนRIGHT JOINรักษาแถวของตารางขวา ถ้าแถวหนึ่งไม่มีคู่ จะมีแถวผลลัพธ์ที่เติมNULLให้คอลัมน์ฝั่งที่ไม่มีคู่ แต่ถ้ามีหลายคู่ก็ยังออกหลายแถว ไม่ได้บังคับให้ได้จำนวนแถวเท่าฝั่งที่รักษา"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "null",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: NULL Cafeควรหาnameด้วยเงื่อนไขใด?",
+      "explanation": "เป็นliteralชื่อร้านในsource ไม่ใช่NULLmarker",
+      "id": "db06-q14",
+      "choices": [
+        {
+          "id": "a",
+          "text": "restaurant_name IS NULL"
+        },
+        {
+          "id": "b",
+          "text": "restaurant_name = NULL"
+        },
+        {
+          "id": "c",
+          "text": "DROP NULL"
+        },
+        {
+          "id": "d",
+          "text": "restaurant_name = 'NULL Cafe'"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "SQL NULLหมายถึงไม่มีค่าตามบริบท การเทียบด้วย `= NULL` ไม่ให้TRUEแม้ซ้ายเป็นNULL ต้องใช้IS NULL/IS NOT NULL การแสดงข้อความว่าNULLในหน้าจอไม่ใช่string `'NULL'` และร้านชื่อ `NULL Cafe` เป็นstringจริงหนึ่งชื่อในข้อมูลจำลอง"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "anti-join",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ทำantiqueryแล้วเลือกs.student_nameพร้อมs.student_idเพราะอะไร?",
+      "explanation": "stableIDเป็นตัวชี้record ชื่ออาจซ้ำในข้อมูลทั่วไป",
+      "id": "db06-q15",
+      "choices": [
+        {
+          "id": "a",
+          "text": "แสดงidentityและชื่อโดยไม่สมมติชื่อunique"
+        },
+        {
+          "id": "b",
+          "text": "ชื่อแทนPKได้ทุกคน"
+        },
+        {
+          "id": "c",
+          "text": "เพื่อเพิ่มorderปลอม"
+        },
+        {
+          "id": "d",
+          "text": "เพื่อเปลี่ยนISNULLเป็นTRUE"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตัวอย่างต่อยอดใช้CampusHWและตรวจ `o.order_id IS NULL` หลังstudents LEFT JOIN orders ได้106,107,108อย่างชัดเจน เป็นคำตอบที่เรียบเรียงสำหรับhomeworkข้อ7จากข้อมูลจำลอง ไม่ใช่การลบหรือแก้orders"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "right-left",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: students RIGHTJOINordersกับorders RIGHTJOINstudentsเหมือนกันหรือไม่?",
+      "explanation": "ต้องอ่านFROM/operandจริง",
+      "id": "db06-q16",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เหมือนเพราะRIGHTคำเดียว"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ ตารางที่ถูกรักษาต่างกัน"
+        },
+        {
+          "id": "c",
+          "text": "เหมือนทุกdataset"
+        },
+        {
+          "id": "d",
+          "text": "ทั้งคู่รักษาร้าน"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`orders RIGHT JOIN students` รักษาstudentsเหมือน `students LEFT JOIN orders` เมื่อตรึงSELECTคอลัมน์และONสัมพันธ์เดิม ผลที่เรียงด้วยs.student_id,o.order_idเหมือนกัน13แถว ส่วน `students RIGHT JOIN orders` รักษาordersและในCampusHWนี้ได้10แถว จึงสลับโดยดูแค่คำว่าRIGHTไม่ได้"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "on-where",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ต้องการทุกstudentพร้อมเฉพาะdeliveredordersควรวางstatusที่ใด?",
+      "explanation": "ONกรองคู่แต่ยังรักษาคนที่ไม่มีคู่ตามเงื่อนไข",
+      "id": "db06-q17",
+      "choices": [
+        {
+          "id": "a",
+          "text": "WHEREo.status=deliveredอย่างเดียว"
+        },
+        {
+          "id": "b",
+          "text": "ORDERBYแทนON"
+        },
+        {
+          "id": "c",
+          "text": "ONของLEFTjoin"
+        },
+        {
+          "id": "d",
+          "text": "SELECTDISTINCTอย่างเดียว"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "CampusHWมีdelivered6orders เมื่อใช้ `WHERE o.status='delivered'` หลังLEFT JOIN แถวที่เติมNULLถูกกรองออก เหลือ6แถว หากต้องการทุกนิสิตแต่เฉพาะออเดอร์deliveredเมื่อมี ให้ย้ายเงื่อนไขนี้เข้ากับON ได้9แถวจาก6matchesและ3นิสิตที่ไม่มีคู่ตามเงื่อนไข"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "null",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: COUNT(o.order_id)นับunmatchedNULLrowหรือไม่?",
+      "explanation": "COUNT(column)ข้ามNULL ต่างCOUNT(*)",
+      "id": "db06-q18",
+      "choices": [
+        {
+          "id": "a",
+          "text": "นับ1เสมอ"
+        },
+        {
+          "id": "b",
+          "text": "นับเป็น8"
+        },
+        {
+          "id": "c",
+          "text": "เปลี่ยนNULLเป็น0ก่อนนับทุกengine"
+        },
+        {
+          "id": "d",
+          "text": "ไม่"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "SQL NULLหมายถึงไม่มีค่าตามบริบท การเทียบด้วย `= NULL` ไม่ให้TRUEแม้ซ้ายเป็นNULL ต้องใช้IS NULL/IS NOT NULL การแสดงข้อความว่าNULLในหน้าจอไม่ใช่string `'NULL'` และร้านชื่อ `NULL Cafe` เป็นstringจริงหนึ่งชื่อในข้อมูลจำลอง"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "preserved",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: LEFTtableว่างแต่rightมีrows ผลLEFTเป็นอย่างไร?",
+      "explanation": "preservedsideว่าง ไม่มีrowเริ่มให้รักษา",
+      "id": "db06-q19",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่มีresultrows"
+        },
+        {
+          "id": "b",
+          "text": "คืนrightครบเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "สร้างleftNULLหนึ่งrow"
+        },
+        {
+          "id": "d",
+          "text": "เป็นCROSSทุกครั้ง"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "LEFT JOIN รักษาแถวของตารางซ้าย ส่วนRIGHT JOINรักษาแถวของตารางขวา ถ้าแถวหนึ่งไม่มีคู่ จะมีแถวผลลัพธ์ที่เติมNULLให้คอลัมน์ฝั่งที่ไม่มีคู่ แต่ถ้ามีหลายคู่ก็ยังออกหลายแถว ไม่ได้บังคับให้ได้จำนวนแถวเท่าฝั่งที่รักษา"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "null",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: กรองo.total_amount=0หาไม่มีorderเหมาะหรือไม่?",
+      "explanation": "ใช้nonnullkey ISNULLเมื่อหาabsence",
+      "id": "db06-q20",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เหมาะทุกschema"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ เพราะ0เป็นค่าข้อมูลไม่ใช่missingrow"
+        },
+        {
+          "id": "c",
+          "text": "เหมาะเพราะNULL=0"
+        },
+        {
+          "id": "d",
+          "text": "เหมาะเมื่อCSSซ่อนNULL"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "SQL NULLหมายถึงไม่มีค่าตามบริบท การเทียบด้วย `= NULL` ไม่ให้TRUEแม้ซ้ายเป็นNULL ต้องใช้IS NULL/IS NOT NULL การแสดงข้อความว่าNULLในหน้าจอไม่ใช่string `'NULL'` และร้านชื่อ `NULL Cafe` เป็นstringจริงหนึ่งชื่อในข้อมูลจำลอง"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "right-left",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เหตุใดต้องระบุprojectionเมื่อเทียบRIGHTกับLEFTที่สลับ?",
+      "explanation": "เปรียบเทียบfield/aliases/sortเดียวกันให้ชัด",
+      "id": "db06-q21",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เพราะRIGHTลบPK"
+        },
+        {
+          "id": "b",
+          "text": "เพราะLEFTไม่ให้เลือกcolumn"
+        },
+        {
+          "id": "c",
+          "text": "SELECT*อาจเปลี่ยนลำดับcolumnแม้relationshipเท่ากัน"
+        },
+        {
+          "id": "d",
+          "text": "เพราะprojectionคือLogin"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`orders RIGHT JOIN students` รักษาstudentsเหมือน `students LEFT JOIN orders` เมื่อตรึงSELECTคอลัมน์และONสัมพันธ์เดิม ผลที่เรียงด้วยs.student_id,o.order_idเหมือนกัน13แถว ส่วน `students RIGHT JOIN orders` รักษาordersและในCampusHWนี้ได้10แถว จึงสลับโดยดูแค่คำว่าRIGHTไม่ได้"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "on-where",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ONกับWHEREของINNERบางเงื่อนไขอาจเทียบผลได้ จึงย้ายในouterได้เสมอหรือไม่?",
+      "explanation": "qualificationสำคัญเฉพาะouterpreservation",
+      "id": "db06-q22",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ได้ทุกpredicate"
+        },
+        {
+          "id": "b",
+          "text": "ได้เมื่อtableชื่อไทย"
+        },
+        {
+          "id": "c",
+          "text": "ได้เพราะEXPLAIN"
+        },
+        {
+          "id": "d",
+          "text": "ไม่ได้ null-extensionทำให้ผลต่าง"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "CampusHWมีdelivered6orders เมื่อใช้ `WHERE o.status='delivered'` หลังLEFT JOIN แถวที่เติมNULLถูกกรองออก เหลือ6แถว หากต้องการทุกนิสิตแต่เฉพาะออเดอร์deliveredเมื่อมี ให้ย้ายเงื่อนไขนี้เข้ากับON ได้9แถวจาก6matchesและ3นิสิตที่ไม่มีคู่ตามเงื่อนไข"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "anti-join",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ใช้INNERแล้วWHEREo.order_id ISNULLหาmissingordersจะได้หรือไม่ในschemaนี้?",
+      "explanation": "ต้องคงunmatchedก่อนจึงตรวจNULL",
+      "id": "db06-q23",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่ได้ เพราะINNERคงแต่matchednonnullPK"
+        },
+        {
+          "id": "b",
+          "text": "ได้3คนเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "ได้8คน"
+        },
+        {
+          "id": "d",
+          "text": "ได้NULLCafe"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ตัวอย่างต่อยอดใช้CampusHWและตรวจ `o.order_id IS NULL` หลังstudents LEFT JOIN orders ได้106,107,108อย่างชัดเจน เป็นคำตอบที่เรียบเรียงสำหรับhomeworkข้อ7จากข้อมูลจำลอง ไม่ใช่การลบหรือแก้orders"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "preserved",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: กรณีCampusLEFT13rowsกับstudents8ขัดFKหรือไม่?",
+      "explanation": "resultrowไม่เท่าจำนวนparentเสมอ",
+      "id": "db06-q24",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ขัดเพราะ13เกิน8"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ 1:Nขยายmatchesและเติมunmatched"
+        },
+        {
+          "id": "c",
+          "text": "ขัดเพราะLEFTห้ามduplicate"
+        },
+        {
+          "id": "d",
+          "text": "ขัดเพราะNULLเป็นPK"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "LEFT JOIN รักษาแถวของตารางซ้าย ส่วนRIGHT JOINรักษาแถวของตารางขวา ถ้าแถวหนึ่งไม่มีคู่ จะมีแถวผลลัพธ์ที่เติมNULLให้คอลัมน์ฝั่งที่ไม่มีคู่ แต่ถ้ามีหลายคู่ก็ยังออกหลายแถว ไม่ได้บังคับให้ได้จำนวนแถวเท่าฝั่งที่รักษา"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "null",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: COALESCEเพื่อแสดงข้อความไม่มีออเดอร์เปลี่ยนDBต้นทางหรือไม่?",
+      "explanation": "presentationexpressionไม่ได้เปลี่ยนstoredrecords",
+      "id": "db06-q25",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ลบNULLจากทุกtable"
+        },
+        {
+          "id": "b",
+          "text": "เพิ่มorderถาวร"
+        },
+        {
+          "id": "c",
+          "text": "ไม่ เป็นexpressionในresult"
+        },
+        {
+          "id": "d",
+          "text": "แก้PK"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "SQL NULLหมายถึงไม่มีค่าตามบริบท การเทียบด้วย `= NULL` ไม่ให้TRUEแม้ซ้ายเป็นNULL ต้องใช้IS NULL/IS NOT NULL การแสดงข้อความว่าNULLในหน้าจอไม่ใช่string `'NULL'` และร้านชื่อ `NULL Cafe` เป็นstringจริงหนึ่งชื่อในข้อมูลจำลอง"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "right-left",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ข้อสังเกตภาพสไลด์หน้า22ควรสรุปอย่างไร?",
+      "explanation": "บันทึกความคลุมเครืออย่างเป็นกลางและสอนsemanticsที่ถูก",
+      "id": "db06-q26",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ผู้สอนไม่รู้ทุกเรื่อง"
+        },
+        {
+          "id": "b",
+          "text": "RIGHTรักษาซ้ายเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "Vennareaบอกrowmultiplicityครบ"
+        },
+        {
+          "id": "d",
+          "text": "ใช้SQLoperandตัดสินpreservedsideแทนlabelภาพที่สลับไม่ตาม"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "`orders RIGHT JOIN students` รักษาstudentsเหมือน `students LEFT JOIN orders` เมื่อตรึงSELECTคอลัมน์และONสัมพันธ์เดิม ผลที่เรียงด้วยs.student_id,o.order_idเหมือนกัน13แถว ส่วน `students RIGHT JOIN orders` รักษาordersและในCampusHWนี้ได้10แถว จึงสลับโดยดูแค่คำว่าRIGHTไม่ได้"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "anti-join",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เขียนqueryหานิสิตไม่มีorderและอธิบายkeyที่ตรวจNULL",
+      "rubric": [
+        "LEFTstudents",
+        "o.order_idISNULL",
+        "ผล106107108"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db06-q27",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ตัวอย่างต่อยอดใช้CampusHWและตรวจ `o.order_id IS NULL` หลังstudents LEFT JOIN orders ได้106,107,108อย่างชัดเจน เป็นคำตอบที่เรียบเรียงสำหรับhomeworkข้อ7จากข้อมูลจำลอง ไม่ใช่การลบหรือแก้orders"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "right-left",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: แปลงRIGHTเป็นLEFTโดยคงผลและลำดับcolumn",
+      "rubric": [
+        "สลับoperand",
+        "คงpredicate/projection",
+        "sortเพื่อเทียบ"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db06-q28",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "`orders RIGHT JOIN students` รักษาstudentsเหมือน `students LEFT JOIN orders` เมื่อตรึงSELECTคอลัมน์และONสัมพันธ์เดิม ผลที่เรียงด้วยs.student_id,o.order_idเหมือนกัน13แถว ส่วน `students RIGHT JOIN orders` รักษาordersและในCampusHWนี้ได้10แถว จึงสลับโดยดูแค่คำว่าRIGHTไม่ได้"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "null",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: อธิบายNULLlevel,missingrowและNULLCafe",
+      "rubric": [
+        "แยกสามความหมาย",
+        "ใช้PKตรวจabsence",
+        "stringเทียบด้วยquotedliteral"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db06-q29",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "SQL NULLหมายถึงไม่มีค่าตามบริบท การเทียบด้วย `= NULL` ไม่ให้TRUEแม้ซ้ายเป็นNULL ต้องใช้IS NULL/IS NOT NULL การแสดงข้อความว่าNULLในหน้าจอไม่ใช่string `'NULL'` และร้านชื่อ `NULL Cafe` เป็นstringจริงหนึ่งชื่อในข้อมูลจำลอง"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "preserved",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: อธิบาย13rowsจาก8studentsโดยแจกแจงmatches",
+      "rubric": [
+        "10matchingorders",
+        "3unmatched",
+        "หนึ่งคนหลายrowได้"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db06-q30",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "LEFT JOIN รักษาแถวของตารางซ้าย ส่วนRIGHT JOINรักษาแถวของตารางขวา ถ้าแถวหนึ่งไม่มีคู่ จะมีแถวผลลัพธ์ที่เติมNULLให้คอลัมน์ฝั่งที่ไม่มีคู่ แต่ถ้ามีหลายคู่ก็ยังออกหลายแถว ไม่ได้บังคับให้ได้จำนวนแถวเท่าฝั่งที่รักษา"
+      }
+    }
+  ]
+}

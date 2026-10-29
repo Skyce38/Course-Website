@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "revision": 1,
+  "lesson": "database-management-integrated-project",
+  "title": "DB 10 — โครงงานฐานข้อมูลแบบบูรณาการ",
+  "questions": [
+    {
+      "type": "choice",
+      "reference": "requirements",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ProblemStatementควรเริ่มจากอะไร?",
+      "explanation": "requirementsต้องสัมพันธ์ปัญหา ไม่เริ่มจากtechnologylistล้วน",
+      "id": "db10-q01",
+      "choices": [
+        {
+          "id": "a",
+          "text": "รายชื่อframeworkอย่างเดียว"
+        },
+        {
+          "id": "b",
+          "text": "วันสอบที่เดาเอง"
+        },
+        {
+          "id": "c",
+          "text": "ผู้ใช้และPainPointที่ต้องแก้"
+        },
+        {
+          "id": "d",
+          "text": "passwordDB"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "type": "choice",
+      "reference": "schema",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: DataDictionaryควรมีอะไร?",
+      "explanation": "อธิบายข้อมูลและข้อจำกัดโดยไม่เก็บsecret",
+      "id": "db10-q02",
+      "choices": [
+        {
+          "id": "a",
+          "text": "passwordจริงของทุกaccount"
+        },
+        {
+          "id": "b",
+          "text": "คะแนนExamที่เดา"
+        },
+        {
+          "id": "c",
+          "text": "GitHubtoken"
+        },
+        {
+          "id": "d",
+          "text": "field,type,meaning,nullable,constraints"
+        }
+      ],
+      "answer": "d"
+    },
+    {
+      "type": "choice",
+      "reference": "implementation",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: guardลำดับใดเหมาะกับdeleteหนึ่งskill?",
+      "explanation": "ต้องป้องกันก่อนstatechange",
+      "id": "db10-q03",
+      "choices": [
+        {
+          "id": "a",
+          "text": "sessionidentity→POST/CSRF→validateid→owner-scopedDELETE"
+        },
+        {
+          "id": "b",
+          "text": "DELETEก่อนแล้วค่อยตรวจLogin"
+        },
+        {
+          "id": "c",
+          "text": "เชื่อhiddenownerแล้วDELETE"
+        },
+        {
+          "id": "d",
+          "text": "echoDBpasswordก่อนguard"
+        }
+      ],
+      "answer": "a"
+    },
+    {
+      "type": "choice",
+      "reference": "testing",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: TestCaseที่น่าเชื่อถือควรมีอะไร?",
+      "explanation": "แยกสิ่งที่คาดจากสิ่งที่สังเกตจริง",
+      "id": "db10-q04",
+      "choices": [
+        {
+          "id": "a",
+          "text": "คำว่าPASSโดยไม่รัน"
+        },
+        {
+          "id": "b",
+          "text": "precondition,input,expected,actual,evidence"
+        },
+        {
+          "id": "c",
+          "text": "ภาพmockupอย่างเดียว"
+        },
+        {
+          "id": "d",
+          "text": "คำอ้างว่าทุกBrowserเหมือนกัน"
+        }
+      ],
+      "answer": "b"
+    },
+    {
+      "type": "choice",
+      "reference": "delivery",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: 10พฤศจิกายน2026ในหลักฐานหมายถึงอะไร?",
+      "explanation": "sourceระบุprojectmilestoneเท่านั้น",
+      "id": "db10-q05",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Finalexamแน่นอน"
+        },
+        {
+          "id": "b",
+          "text": "วันหมดอายุMySQL"
+        },
+        {
+          "id": "c",
+          "text": "กำหนดส่งโครงงาน ไม่ใช่วันสอบที่ยืนยัน"
+        },
+        {
+          "id": "d",
+          "text": "วันหยุดทุกวิชา"
+        }
+      ],
+      "answer": "c"
+    },
+    {
+      "type": "self",
+      "reference": "requirements",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: เขียนPainPointและUseCaseเพิ่มskillพร้อมfailureconditions",
+      "rubric": [
+        "ระบุactor/ปัญหา",
+        "pre/postconditions",
+        "CSRF/owner/validationfail"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db10-q06"
+    }
+  ]
+}

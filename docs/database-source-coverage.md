@@ -41,4 +41,4 @@ All eight actual user files were located. Their names omit the `(1)` suffixes in
 - The extra Angsila resource could not be fetched. Its current instructions, account details, server versions and deployment permissions remain unverified. University hosting is not accessed with credentials.
 - Supplemental defensive examples (strict validation, deterministic tie ordering, CSRF/session options and owner-scoped operations) will be marked as authored teaching code and checked against official PHP/MySQL/Git references. Authored worked solutions are not official instructor answer keys or examination questions.
 
-Checkpoint A/B complete: original sources and starter limits reviewed; implementation and executed verification status are recorded separately as work progresses.
+Checkpoints complete: ten lessons,300 authored questions and20 original diagrams are integrated. Executed SQL/PHP verification, browser outcomes and remaining limitations are recorded in [academic verification](database-academic-verification.md), [exam verification](database-exam-verification.md) and [final QA](database-qa.md). This updates implementation status, not the original source evidence.

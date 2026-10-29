@@ -1,0 +1,680 @@
+{
+  "version": 1,
+  "revision": 1,
+  "baseRevision": 1,
+  "lesson": "database-management-select-php-rendering",
+  "questions": [
+    {
+      "type": "choice",
+      "reference": "owner-read",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: profile_idจากsessionต่างจากquerystringอย่างไร?",
+      "explanation": "identityownerไม่ควรรับจากclientที่ไม่ตรวจ",
+      "id": "db03-q07",
+      "choices": [
+        {
+          "id": "a",
+          "text": "querystringเชื่อถือได้มากกว่า"
+        },
+        {
+          "id": "b",
+          "text": "sessionownerผ่านguardฝั่งserver ส่วนquerystringแก้ได้"
+        },
+        {
+          "id": "c",
+          "text": "เป็นpasswordทั้งคู่"
+        },
+        {
+          "id": "d",
+          "text": "sessionแทนvalidationทั้งหมด"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เมื่อมีหลายบัญชี ต้องใช้ profile_id ที่ตรวจจาก session ฝั่งเซิร์ฟเวอร์ ไม่ใช่ใช้ค่า1เสมอหรือเชื่อ hidden input ของผู้ใช้ ฟังก์ชันต่อไปนี้ใช้ prepared SELECT และแสดงวิธีอ่านหลายแถว; ผู้เรียกต้องตรวจ actor ก่อนเรียก"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "escaping",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: preparedstatementแทนHTMLescapingได้หรือไม่?",
+      "explanation": "SQLbindingกันโครงสร้างSQL;HTMLescapingกันmarkup",
+      "id": "db03-q08",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ได้เพราะ?ทำให้HTMLปลอดภัย"
+        },
+        {
+          "id": "b",
+          "text": "ได้เฉพาะDarkmode"
+        },
+        {
+          "id": "c",
+          "text": "ไม่ได้ เป็นคนละบริบท"
+        },
+        {
+          "id": "d",
+          "text": "ได้ถ้าใช้INT"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HTML escaping เปลี่ยนตัวอักษรพิเศษให้ Browser แสดงเป็นข้อความ ชื่อ skill เช่น `<b>SQL</b>` ต้องไม่กลายเป็นแท็กเมื่อแสดงเป็นชื่อธรรมดา การ escape HTML ไม่ได้ป้องกัน SQL injection และ prepared statements ไม่ได้ทำหน้าที่ escape HTML แทนกัน"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "fetch",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: resultไม่มีrowsควรแสดงอย่างไร?",
+      "explanation": "ศูนย์rowเป็นผลที่ถูกต้องได้ เช่นprofile2ยังว่าง",
+      "id": "db03-q09",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ถือว่าSQLsyntaxผิดเสมอ"
+        },
+        {
+          "id": "b",
+          "text": "เพิ่มข้อมูลownerคนอื่น"
+        },
+        {
+          "id": "c",
+          "text": "echoPHPsource"
+        },
+        {
+          "id": "d",
+          "text": "empty stateที่อธิบายได้ ไม่สร้างrowปลอม"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "mysqli_query ส่ง SQL ไปยังการเชื่อมต่อ สำหรับ SELECT จะได้ result object เมื่อสำเร็จ ส่วน mysqli_fetch_assoc อ่านหนึ่งแถวเป็น associative array โดยชื่อคอลัมน์เป็น key เมื่ออ่านจนครบจะไม่คืนแถวให้วนต่อ จึงต้องมี loop ถ้าต้องการมากกว่าหนึ่งรายการ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "select",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: SELECT skill_nameเทียบSELECT * ควรพิจารณาอะไร?",
+      "explanation": "projectionเลือกfield ไม่ใช่securitypolicyครบระบบ",
+      "id": "db03-q10",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เลือกcolumnsที่ต้องใช้เพื่อลดข้อมูลและcoupling"
+        },
+        {
+          "id": "b",
+          "text": "SELECT*ป้องกันXSSเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "SELECTcolumnลบข้อมูล"
+        },
+        {
+          "id": "d",
+          "text": "ไม่มีผลต่อข้อมูลที่ส่งมา"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "SELECT เลือกคอลัมน์และแถวตามเงื่อนไข WHERE; ORDER BY กำหนดลำดับที่ต้องการ ถ้าไม่ระบุ ORDER BY ห้ามถือว่าฐานข้อมูลต้องคืนตามลำดับที่ INSERT หรือ PK เสมอ เมื่อค่าสำหรับ sort เท่ากัน ควรเพิ่มคีย์ที่ไม่ซ้ำเป็น tie-breaker ให้การทดสอบ deterministic"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "escaping",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ENT_QUOTESในhtmlspecialcharsมีประโยชน์อย่างไร?",
+      "explanation": "สำคัญเมื่อแสดงในquotedHTMLattribute;ยังต้องดูcontext",
+      "id": "db03-q11",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เข้ารหัสDBpassword"
+        },
+        {
+          "id": "b",
+          "text": "encodeทั้งsingleและdoublequotes"
+        },
+        {
+          "id": "c",
+          "text": "เปิดsession"
+        },
+        {
+          "id": "d",
+          "text": "ทำให้อักขระไทยทุกตัวหาย"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HTML escaping เปลี่ยนตัวอักษรพิเศษให้ Browser แสดงเป็นข้อความ ชื่อ skill เช่น `<b>SQL</b>` ต้องไม่กลายเป็นแท็กเมื่อแสดงเป็นชื่อธรรมดา การ escape HTML ไม่ได้ป้องกัน SQL injection และ prepared statements ไม่ได้ทำหน้าที่ escape HTML แทนกัน"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "fetch",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: mysqli_stmt_get_resultในhelperนี้มีข้อกำหนดใด?",
+      "explanation": "ทดสอบbuildนี้มีmysqlnd;ไม่รับรองทุกhostingติดตั้งเหมือนกัน",
+      "id": "db03-q12",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ต้องมีTailwind"
+        },
+        {
+          "id": "b",
+          "text": "ต้องเปิดGitHubLogin"
+        },
+        {
+          "id": "c",
+          "text": "ต้องมีmysqlndตามPHPbuildที่ใช้"
+        },
+        {
+          "id": "d",
+          "text": "ต้องใช้SQLiteเสมอ"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "mysqli_query ส่ง SQL ไปยังการเชื่อมต่อ สำหรับ SELECT จะได้ result object เมื่อสำเร็จ ส่วน mysqli_fetch_assoc อ่านหนึ่งแถวเป็น associative array โดยชื่อคอลัมน์เป็น key เมื่ออ่านจนครบจะไม่คืนแถวให้วนต่อ จึงต้องมี loop ถ้าต้องการมากกว่าหนึ่งรายการ"
+      }
+    },
+    {
+      "type": "numeric",
+      "reference": "examples",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: fixtureResumeสำหรับhelperมีprofile1และskills3แถวที่เป็นของ1 ฟังก์ชันskills(conn,1)คืนกี่แถว?",
+      "answer": 3,
+      "explanation": "SELECT WHEREprofile_id=1อ่านสามskillrowsเรียงidในPHPintegration",
+      "id": "db03-q13",
+      "absoluteTolerance": 0,
+      "relativeTolerance": 0,
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ทำให้การอ่านข้อมูลพิสูจน์ได้: ตรวจ SQL ในฐานข้อมูลทดลอง ใช้ profile ที่ทราบ จำนวน/ชื่อรายการต้องตรงและเรียงตาม id ทดสอบ profile ที่ไม่มีรายการให้คืน array ว่าง แล้วทดสอบ string ที่มีเครื่องหมายพิเศษเพื่อแยกปัญหา SQL ออกจาก HTML"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "owner-read",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: อ่านskillตามidอย่างเดียวมีปัญหาใดหากเป็นหลายผู้ใช้?",
+      "explanation": "ต้องเพิ่มownerpredicateแม้เป็นreadถ้าข้อมูลไม่public",
+      "id": "db03-q14",
+      "choices": [
+        {
+          "id": "a",
+          "text": "อาจอ่านresourceของownerอื่น"
+        },
+        {
+          "id": "b",
+          "text": "อ่านไม่ได้เพราะidเป็นPK"
+        },
+        {
+          "id": "c",
+          "text": "CSRFแทนownerให้แล้ว"
+        },
+        {
+          "id": "d",
+          "text": "SELECTทำให้skillถูกลบ"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เมื่อมีหลายบัญชี ต้องใช้ profile_id ที่ตรวจจาก session ฝั่งเซิร์ฟเวอร์ ไม่ใช่ใช้ค่า1เสมอหรือเชื่อ hidden input ของผู้ใช้ ฟังก์ชันต่อไปนี้ใช้ prepared SELECT และแสดงวิธีอ่านหลายแถว; ผู้เรียกต้องตรวจ actor ก่อนเรียก"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "escaping",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: h(NULL)ในhelperที่caststringมีผลอย่างไร?",
+      "explanation": "castNULLเป็นemptystringตามhelper;ไม่เท่ากับขาดrow",
+      "id": "db03-q15",
+      "choices": [
+        {
+          "id": "a",
+          "text": "คืนSQLNULLเป็นคำสั่ง"
+        },
+        {
+          "id": "b",
+          "text": "คืนข้อความว่างสำหรับHTML"
+        },
+        {
+          "id": "c",
+          "text": "ลบrowต้นทาง"
+        },
+        {
+          "id": "d",
+          "text": "เปิดJavaScript"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HTML escaping เปลี่ยนตัวอักษรพิเศษให้ Browser แสดงเป็นข้อความ ชื่อ skill เช่น `<b>SQL</b>` ต้องไม่กลายเป็นแท็กเมื่อแสดงเป็นชื่อธรรมดา การ escape HTML ไม่ได้ป้องกัน SQL injection และ prepared statements ไม่ได้ทำหน้าที่ escape HTML แทนกัน"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "select",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: WHEREกับORDER BYรับผิดชอบต่างกันอย่างไร?",
+      "explanation": "คัดข้อมูลก่อนกำหนดลำดับในlogicalquery",
+      "id": "db03-q16",
+      "choices": [
+        {
+          "id": "a",
+          "text": "WHEREจัดCSS ORDERBYLogin"
+        },
+        {
+          "id": "b",
+          "text": "ทั้งคู่เขียนข้อมูล"
+        },
+        {
+          "id": "c",
+          "text": "WHEREคัดrows ORDERBYจัดลำดับ"
+        },
+        {
+          "id": "d",
+          "text": "ORDERBYแทนWHEREได้"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "SELECT เลือกคอลัมน์และแถวตามเงื่อนไข WHERE; ORDER BY กำหนดลำดับที่ต้องการ ถ้าไม่ระบุ ORDER BY ห้ามถือว่าฐานข้อมูลต้องคืนตามลำดับที่ INSERT หรือ PK เสมอ เมื่อค่าสำหรับ sort เท่ากัน ควรเพิ่มคีย์ที่ไม่ซ้ำเป็น tie-breaker ให้การทดสอบ deterministic"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "fetch",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: while($row=mysqli_fetch_assoc($result))ใช้เพื่ออะไร?",
+      "explanation": "resultcursorเดินทีละrow ไม่ต้องqueryซ้ำแต่ละrow",
+      "id": "db03-q17",
+      "choices": [
+        {
+          "id": "a",
+          "text": "สร้างschemaใหม่ทุกloop"
+        },
+        {
+          "id": "b",
+          "text": "เปลี่ยนpassword"
+        },
+        {
+          "id": "c",
+          "text": "รันPHPในBrowser"
+        },
+        {
+          "id": "d",
+          "text": "รวบรวมทุกrowจนไม่มีrowถัดไป"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "mysqli_query ส่ง SQL ไปยังการเชื่อมต่อ สำหรับ SELECT จะได้ result object เมื่อสำเร็จ ส่วน mysqli_fetch_assoc อ่านหนึ่งแถวเป็น associative array โดยชื่อคอลัมน์เป็น key เมื่ออ่านจนครบจะไม่คืนแถวให้วนต่อ จึงต้องมี loop ถ้าต้องการมากกว่าหนึ่งรายการ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "escaping",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: HTMLescapingเหมาะกับJavaScriptstringทุกกรณีโดยตรงหรือไม่?",
+      "explanation": "helperสอนHTMLtext/quotedattribute ไม่ใช่universalencoder",
+      "id": "db03-q18",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ไม่ ต้องencodeตามบริบทปลายทาง"
+        },
+        {
+          "id": "b",
+          "text": "เหมาะทุกlanguage"
+        },
+        {
+          "id": "c",
+          "text": "ทำให้SQLปลอดภัยทุกแบบ"
+        },
+        {
+          "id": "d",
+          "text": "แทนURLvalidation"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HTML escaping เปลี่ยนตัวอักษรพิเศษให้ Browser แสดงเป็นข้อความ ชื่อ skill เช่น `<b>SQL</b>` ต้องไม่กลายเป็นแท็กเมื่อแสดงเป็นชื่อธรรมดา การ escape HTML ไม่ได้ป้องกัน SQL injection และ prepared statements ไม่ได้ทำหน้าที่ escape HTML แทนกัน"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "examples",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ตัวอย่างarrayplaceholderในstarterถือเป็นข้อมูลDBแล้วหรือไม่?",
+      "explanation": "ไม่อ้างplaceholderเป็นSQLexecution",
+      "id": "db03-q19",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ถือเป็นผลintegrationทุกครั้ง"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ ต้องเปลี่ยนเป็นqueryและตรวจผล"
+        },
+        {
+          "id": "c",
+          "text": "ต้องมีจำนวนเท่ากันทุกowner"
+        },
+        {
+          "id": "d",
+          "text": "เป็นFKอัตโนมัติ"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ทำให้การอ่านข้อมูลพิสูจน์ได้: ตรวจ SQL ในฐานข้อมูลทดลอง ใช้ profile ที่ทราบ จำนวน/ชื่อรายการต้องตรงและเรียงตาม id ทดสอบ profile ที่ไม่มีรายการให้คืน array ว่าง แล้วทดสอบ string ที่มีเครื่องหมายพิเศษเพื่อแยกปัญหา SQL ออกจาก HTML"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "select",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: bind ? แทนชื่อตารางโดยตรงได้ตามmysqliหรือไม่?",
+      "explanation": "placeholderใช้ค่าข้อมูล ไม่ใช่SQLstructure",
+      "id": "db03-q20",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ได้ทุกidentifier"
+        },
+        {
+          "id": "b",
+          "text": "ทำให้?เลือกทุกตาราง"
+        },
+        {
+          "id": "c",
+          "text": "ไม่ได้ identifierต้องallowlistที่review"
+        },
+        {
+          "id": "d",
+          "text": "ได้เพราะเป็นstring"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "SELECT เลือกคอลัมน์และแถวตามเงื่อนไข WHERE; ORDER BY กำหนดลำดับที่ต้องการ ถ้าไม่ระบุ ORDER BY ห้ามถือว่าฐานข้อมูลต้องคืนตามลำดับที่ INSERT หรือ PK เสมอ เมื่อค่าสำหรับ sort เท่ากัน ควรเพิ่มคีย์ที่ไม่ซ้ำเป็น tie-breaker ให้การทดสอบ deterministic"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "escaping",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ข้อมูลปลอดSQLinjectionแล้วแต่มีHTMLtag ยังต้องทำอะไร?",
+      "explanation": "ไม่สับสนinputSQLกับoutputHTML",
+      "id": "db03-q21",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ยกเลิกvalidation"
+        },
+        {
+          "id": "b",
+          "text": "เพิ่มDBroot"
+        },
+        {
+          "id": "c",
+          "text": "commit.env"
+        },
+        {
+          "id": "d",
+          "text": "escapeตอนแสดงHTML"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HTML escaping เปลี่ยนตัวอักษรพิเศษให้ Browser แสดงเป็นข้อความ ชื่อ skill เช่น `<b>SQL</b>` ต้องไม่กลายเป็นแท็กเมื่อแสดงเป็นชื่อธรรมดา การ escape HTML ไม่ได้ป้องกัน SQL injection และ prepared statements ไม่ได้ทำหน้าที่ escape HTML แทนกัน"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "fetch",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: mysqli_fetch_assocให้keyแบบใด?",
+      "explanation": "aliasช่วยเลี่ยงชื่อซ้ำและทำให้อ่านfieldชัด",
+      "id": "db03-q22",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ชื่อcolumnหรือaliasในresult"
+        },
+        {
+          "id": "b",
+          "text": "เลขlinenoของPHPเท่านั้น"
+        },
+        {
+          "id": "c",
+          "text": "ชื่อbranch"
+        },
+        {
+          "id": "d",
+          "text": "passwordhashทุกครั้ง"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "easy",
+      "verification": {
+        "method": "source-review",
+        "evidence": "mysqli_query ส่ง SQL ไปยังการเชื่อมต่อ สำหรับ SELECT จะได้ result object เมื่อสำเร็จ ส่วน mysqli_fetch_assoc อ่านหนึ่งแถวเป็น associative array โดยชื่อคอลัมน์เป็น key เมื่ออ่านจนครบจะไม่คืนแถวให้วนต่อ จึงต้องมี loop ถ้าต้องการมากกว่าหนึ่งรายการ"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "owner-read",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: WHEREprofile_id1คืน0rowsแปลว่าconnectionล้มแน่นอนหรือไม่?",
+      "explanation": "แยกemptyresultจากexception",
+      "id": "db03-q23",
+      "choices": [
+        {
+          "id": "a",
+          "text": "แน่นอนทุกกรณี"
+        },
+        {
+          "id": "b",
+          "text": "ไม่ อาจไม่มีskillที่ตรงเงื่อนไข"
+        },
+        {
+          "id": "c",
+          "text": "แปลว่ามีXSSเสมอ"
+        },
+        {
+          "id": "d",
+          "text": "แปลว่าPRIMARYKEYหาย"
+        }
+      ],
+      "answer": "b",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "เมื่อมีหลายบัญชี ต้องใช้ profile_id ที่ตรวจจาก session ฝั่งเซิร์ฟเวอร์ ไม่ใช่ใช้ค่า1เสมอหรือเชื่อ hidden input ของผู้ใช้ ฟังก์ชันต่อไปนี้ใช้ prepared SELECT และแสดงวิธีอ่านหลายแถว; ผู้เรียกต้องตรวจ actor ก่อนเรียก"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "select",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ใช้ORDER BY skill_levelอย่างเดียวเมื่อหลายrowsมีค่าเท่ากัน ควรเพิ่มอะไรเพื่อorderแน่นอน?",
+      "explanation": "กำหนดtotalorderingตามความต้องการ ไม่เดาtie",
+      "id": "db03-q24",
+      "choices": [
+        {
+          "id": "a",
+          "text": "DBpassword"
+        },
+        {
+          "id": "b",
+          "text": "CSRFtoken"
+        },
+        {
+          "id": "c",
+          "text": "tiekeyเช่นid"
+        },
+        {
+          "id": "d",
+          "text": "HTMLstyle"
+        }
+      ],
+      "answer": "c",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "SELECT เลือกคอลัมน์และแถวตามเงื่อนไข WHERE; ORDER BY กำหนดลำดับที่ต้องการ ถ้าไม่ระบุ ORDER BY ห้ามถือว่าฐานข้อมูลต้องคืนตามลำดับที่ INSERT หรือ PK เสมอ เมื่อค่าสำหรับ sort เท่ากัน ควรเพิ่มคีย์ที่ไม่ซ้ำเป็น tie-breaker ให้การทดสอบ deterministic"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "examples",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: PHPCLIintegrationกับBrowserrenderพิสูจน์สิ่งเดียวกันทั้งหมดหรือไม่?",
+      "explanation": "รายงานขอบเขตที่รันจริง",
+      "id": "db03-q25",
+      "choices": [
+        {
+          "id": "a",
+          "text": "เหมือนกันทุกcookie"
+        },
+        {
+          "id": "b",
+          "text": "CLIรับรองAngsila"
+        },
+        {
+          "id": "c",
+          "text": "BrowsermockรับรองMySQLทุกversion"
+        },
+        {
+          "id": "d",
+          "text": "ไม่ ต้องแยกexecutionกับpresentation/HTTP"
+        }
+      ],
+      "answer": "d",
+      "difficulty": "hard",
+      "verification": {
+        "method": "source-review",
+        "evidence": "ทำให้การอ่านข้อมูลพิสูจน์ได้: ตรวจ SQL ในฐานข้อมูลทดลอง ใช้ profile ที่ทราบ จำนวน/ชื่อรายการต้องตรงและเรียงตาม id ทดสอบ profile ที่ไม่มีรายการให้คืน array ว่าง แล้วทดสอบ string ที่มีเครื่องหมายพิเศษเพื่อแยกปัญหา SQL ออกจาก HTML"
+      }
+    },
+    {
+      "type": "choice",
+      "reference": "escaping",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ในHTMLattributeควรทำอะไรนอกจากescapingที่เหมาะสม?",
+      "explanation": "escapingต้องอยู่ในบริบทที่ออกแบบถูก",
+      "id": "db03-q26",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ใส่quoteรอบattributeและตรวจบริบท"
+        },
+        {
+          "id": "b",
+          "text": "ตัดquoteออกเสมอ"
+        },
+        {
+          "id": "c",
+          "text": "ใช้SQLJOINแทน"
+        },
+        {
+          "id": "d",
+          "text": "เอาpasswordใส่title"
+        }
+      ],
+      "answer": "a",
+      "difficulty": "medium",
+      "verification": {
+        "method": "source-review",
+        "evidence": "HTML escaping เปลี่ยนตัวอักษรพิเศษให้ Browser แสดงเป็นข้อความ ชื่อ skill เช่น `<b>SQL</b>` ต้องไม่กลายเป็นแท็กเมื่อแสดงเป็นชื่อธรรมดา การ escape HTML ไม่ได้ป้องกัน SQL injection และ prepared statements ไม่ได้ทำหน้าที่ escape HTML แทนกัน"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "escaping",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: อธิบายทำไมSQLbindingกับHTMLescapingต้องใช้ร่วมกัน",
+      "rubric": [
+        "แยกSQL/HTMLcontext",
+        "ตัวอย่างข้อมูลมีtag",
+        "ไม่กล่าวว่าอย่างหนึ่งแทนอีกอย่าง"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db03-q27",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "HTML escaping เปลี่ยนตัวอักษรพิเศษให้ Browser แสดงเป็นข้อความ ชื่อ skill เช่น `<b>SQL</b>` ต้องไม่กลายเป็นแท็กเมื่อแสดงเป็นชื่อธรรมดา การ escape HTML ไม่ได้ป้องกัน SQL injection และ prepared statements ไม่ได้ทำหน้าที่ escape HTML แทนกัน"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "owner-read",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: reviewqueryอ่านidของskillเพื่อกันอ่านข้ามผู้ใช้",
+      "rubric": [
+        "guardidentity",
+        "WHEREidและowner",
+        "ไม่เชื่อhiddenfield"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db03-q28",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "เมื่อมีหลายบัญชี ต้องใช้ profile_id ที่ตรวจจาก session ฝั่งเซิร์ฟเวอร์ ไม่ใช่ใช้ค่า1เสมอหรือเชื่อ hidden input ของผู้ใช้ ฟังก์ชันต่อไปนี้ใช้ prepared SELECT และแสดงวิธีอ่านหลายแถว; ผู้เรียกต้องตรวจ actor ก่อนเรียก"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "select",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: กำหนดsortให้ผลทดสอบซ้ำได้แม้ค่าซ้ำ",
+      "rubric": [
+        "ORDERBYหลัก",
+        "tiekeyunique",
+        "ระบุทิศsort"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db03-q29",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "SELECT เลือกคอลัมน์และแถวตามเงื่อนไข WHERE; ORDER BY กำหนดลำดับที่ต้องการ ถ้าไม่ระบุ ORDER BY ห้ามถือว่าฐานข้อมูลต้องคืนตามลำดับที่ INSERT หรือ PK เสมอ เมื่อค่าสำหรับ sort เท่ากัน ควรเพิ่มคีย์ที่ไม่ซ้ำเป็น tie-breaker ให้การทดสอบ deterministic"
+      }
+    },
+    {
+      "type": "self",
+      "reference": "examples",
+      "prompt": "โจทย์ฝึกที่ผู้เขียนจัดทำ ไม่ใช่ข้อสอบจริง: ออกแบบtestมี0/1/หลายskillsและชื่อไทยมีquotes",
+      "rubric": [
+        "ตรวจจำนวนครบ",
+        "ลำดับแน่นอน",
+        "escapeและUTF8ถูก"
+      ],
+      "explanation": "ประเมินคำอธิบายตามเกณฑ์ทีละข้อ; โจทย์นี้ไม่มีคะแนนอัตโนมัติ",
+      "id": "db03-q30",
+      "difficulty": "hard",
+      "verification": {
+        "method": "rubric-review",
+        "evidence": "ทำให้การอ่านข้อมูลพิสูจน์ได้: ตรวจ SQL ในฐานข้อมูลทดลอง ใช้ profile ที่ทราบ จำนวน/ชื่อรายการต้องตรงและเรียงตาม id ทดสอบ profile ที่ไม่มีรายการให้คืน array ว่าง แล้วทดสอบ string ที่มีเครื่องหมายพิเศษเพื่อแยกปัญหา SQL ออกจาก HTML"
+      }
+    }
+  ]
+}
