@@ -12,6 +12,12 @@
 ## อ่าน UML อย่างเป็นขั้นตอน {#uml}
 Week6 pp.10–26:ดูชื่อ class→attributes/types→operations→visibility→เส้นสัมพันธ์→multiplicity `+`public,`-`private,`#`protected เป็น notation ออกแบบ;Pythonunderscore/mangling ไม่ได้ enforce แบบ Java ทุกอย่าง abstractclass/operation ใช้ตัวเอียงหรือ annotation ให้เข้าใจว่าเป็น contract
 
+
+![Generalizationใช้เส้นทึบหัวสามเหลี่ยมโปร่งชี้Base Realizationใช้เส้นประหัวสามเหลี่ยมโปร่งชี้Interface Associationเป็นเส้นทั่วไป Aggregationมีเพชรโปร่งและCompositionมีเพชรทึบที่Whole ไม่ได้สร้างruntime validationหรือบังคับPythonlifetimeเอง](images/visual15-uml-symbols.webp "ภาพเขียนเสริม: อ่านหัวลูกศรกับเพชร อยู่ฝั่งใดมีความหมาย — สัญลักษณ์สื่อแบบจำลอง ไม่ใช่ Runtime enforcement")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://www.omg.org/spec/UML/2.5.1)
+
+อ่านภาพ: Generalizationใช้เส้นทึบหัวสามเหลี่ยมโปร่งชี้Base Realizationใช้เส้นประหัวสามเหลี่ยมโปร่งชี้Interface Associationเป็นเส้นทั่วไป Aggregationมีเพชรโปร่งและCompositionมีเพชรทึบที่Whole ไม่ได้สร้างruntime validationหรือบังคับPythonlifetimeเอง
+
 แผนภาพตัวอักษรต่อไปนี้ผู้เขียนสร้างใหม่จากตัวอย่าง source ไม่ใช่รูป UML ต้นฉบับ:
 ```text
 NotificationService
@@ -30,6 +36,12 @@ SRP ไม่ใช่มี method เดียวต่อ class และไ�
 
 ## OCP: เปิดให้ขยายผ่านจุดที่ออกแบบไว้ {#ocp}
 pp.37–43 และ Week7 pp.14–23:ถ้าต้องเพิ่ม output/channel ใหม่แล้วกลับไปแก้ ifemail/sms/...ทุกครั้ง อาจแยก interface ให้เพิ่ม implementation ใหม่ โดย client ไม่ต้องรู้ชนิด OCP ไม่ใช่ห้ามแก้โค้ดใดตลอดกาล:การแก้ bug หรือเปลี่ยนสัญญาฐานยังทำได้หลังประเมินผลกระทบ จุด compositionroot ที่เลือก channel ย่อมต้องรับ configuration ใหม่
+
+
+![NotificationServiceใช้Channel.formatสร้างข้อความแล้วส่งMemoryLog.record ผู้เขียนจำลองในmemoryไม่ส่งemailจริง เพิ่มPushที่ทำformatตามinterfaceแล้วใช้notifyเดิมได้ แต่จุดcompositionเลือกChannelใหม่ยังต้องปรับ ไม่อ้างว่าOCPห้ามแก้bugทุกกรณี](images/visual15-solid-service.webp "ภาพเขียนเสริม: แยกหน้าที่ใน Service ขยาย Channel ผ่าน Interface — จำลองใน Memory; ไม่ส่งข้อความหรือเขียนไฟล์")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.python.org/3.12/tutorial/classes.html)
+
+อ่านภาพ: NotificationServiceใช้Channel.formatสร้างข้อความแล้วส่งMemoryLog.record ผู้เขียนจำลองในmemoryไม่ส่งemailจริง เพิ่มPushที่ทำformatตามinterfaceแล้วใช้notifyเดิมได้ แต่จุดcompositionเลือกChannelใหม่ยังต้องปรับ ไม่อ้างว่าOCPห้ามแก้bugทุกกรณี
 
 ## LSP: ทดแทนแล้วรักษา Contract {#lsp}
 Week7 pp.3–13:การสืบทอดที่ถูก syntax ยังละเมิดความคาดหวัง client ได้ Square ทางคณิตศาสตร์เป็น rectangle แต่ mutableRectangle ที่ width/height แก้แยกกันมี contract ต่างจาก Square ที่ผูกสองค่า วิธีแก้คือแยกชนิดผ่าน Shape ร่วมและไม่ให้ Square รับสัญญา set อิสระที่ทำไม่ได้ เช่นเดียวกับ Bird ที่ไม่ควรรับรอง fly ถ้ามี Penguin ที่บินไม่ได้

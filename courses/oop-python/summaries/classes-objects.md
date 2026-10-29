@@ -12,6 +12,12 @@
 ## แนวคิดสำคัญ: จากตัวแปรสู่ Object {#concepts}
 Week1 pp.3–13 ยกปัญหาบัญชีจำนวนมาก: owner/balance แยกจากฟังก์ชันจนจับคู่ผิดได้
 
+
+![BankAccountเป็นclassและเป็นobjectของtypeด้วย ส่วนaและbอ้างinstancesคนละตัว Aliceเริ่มbalance1000 Bobเริ่ม300 การเรียกa.depositเปลี่ยนเฉพาะสถานะAliceตามตัวอย่าง ไม่คัดลอกบัญชีแม่และไม่สรุปว่าทุกattributeเป็นอิสระเมื่อเก็บmutableobjectร่วมกัน](images/visual15-class-instances.webp "ภาพเขียนเสริม: Class สร้างหลาย Instance สถานะแยกกันได้ — Class เองก็เป็น object; arrows แสดงการสร้าง instance")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.python.org/3.12/tutorial/classes.html)
+
+อ่านภาพ: BankAccountเป็นclassและเป็นobjectของtypeด้วย ส่วนaและbอ้างinstancesคนละตัว Aliceเริ่มbalance1000 Bobเริ่ม300 การเรียกa.depositเปลี่ยนเฉพาะสถานะAliceตามตัวอย่าง ไม่คัดลอกบัญชีแม่และไม่สรุปว่าทุกattributeเป็นอิสระเมื่อเก็บmutableobjectร่วมกัน
+
 Class คือแบบแปลนที่รวมข้อมูลและพฤติกรรม; instance คือ object ที่สร้างจากแบบแปลนนั้น เช่น BankAccount หนึ่งคลาสสร้างบัญชีหลายตัว แต่ละตัวมีสถานะของตนเอง Data attributes เช่น owner/balance ใช้เก็บสถานะ; methods เช่น deposit/withdraw/get_balance กำหนดพฤติกรรม ไม่ใช่ผลลัพธ์ของการเรียก
 
 **ข้อควรแยกใน Python:** ตัว class เองก็เป็น object เช่น `isinstance(BankAccount, type)` เป็น True ส่วน `BankAccount("A")` เป็น instance ของ BankAccount การแยก class กับ instance จึงไม่ได้แปลว่า class ไม่ใช่ object และ method ที่เข้าถึงด้วยจุดก็เป็น attribute ชนิดหนึ่ง คำว่า data attribute กับ method ในบทแยกตามบทบาท ไม่ใช่บอกว่า attribute ทุกตัวเป็นข้อมูลที่เรียกไม่ได้
@@ -69,6 +75,12 @@ print(alias is a, a is b)                 # True False
 
 ## Reference, อายุ และ Class vs Dictionary {#references}
 pp.18–24 และ 30 แยก instance independence ออกจาก aliasing: object ใหม่เป็นอิสระ แต่สองชื่อที่อ้าง object เดิมย่อมเห็น mutation เดียวกัน ถ้า attributes เก็บ list ร่วมกันก็ยังแชร์ได้ด้วย การเขียน `del a` ลบชื่ออ้างอิง ไม่ได้บังคับทำลาย object ถ้ายังมี alias; การเก็บกวาดหน่วยความจำขึ้นกับการเข้าถึงได้/implementation ไม่ควรพึ่งเวลาทำลายที่แน่นอน
+
+
+![หลังฝาก500และถอน200 a.balance=1300 เมื่อalias=a ทั้งสองชื่ออ้างobjectเดิม แล้วalias.deposit(100)ทำให้a.balanceและalias.balanceเป็น1400พร้อมกัน Bobยัง300 การdel aลบชื่อหนึ่งไม่รับรองทำลายobjectเมื่อaliasยังอ้างอยู่](images/visual15-object-alias.webp "ภาพเขียนเสริม: สองชื่อ อ้าง Object เดียว Alias ไม่เรียก Init ใหม่ — การ assign อ้างอิง ไม่ใช่ copy/deepcopy")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.python.org/3.12/tutorial/classes.html)
+
+อ่านภาพ: หลังฝาก500และถอน200 a.balance=1300 เมื่อalias=a ทั้งสองชื่ออ้างobjectเดิม แล้วalias.deposit(100)ทำให้a.balanceและalias.balanceเป็น1400พร้อมกัน Bobยัง300 การdel aลบชื่อหนึ่งไม่รับรองทำลายobjectเมื่อaliasยังอ้างอยู่
 
 Dictionary เหมาะข้อมูล key/value ที่ยืดหยุ่น Class ช่วยกำหนด interface/invariants/พฤติกรรม แต่ไม่ได้เร็วกว่า dict ทุกกรณี และ public balance ของบทนี้ยังตั้งเป็นค่าผิดจากภายนอกได้ นั่นคือแรงจูงใจของบท encapsulation ไม่ใช่การรับรองว่ามี class แล้วข้อมูลปลอดภัยทันที
 

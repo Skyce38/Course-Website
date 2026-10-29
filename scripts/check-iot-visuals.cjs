@@ -1,6 +1,7 @@
 /* Exact additive-content preservation and new visual asset contracts. No browser dependency. */
 const fs=require('fs'),crypto=require('crypto'),assert=require('assert/strict'),B=require('./lesson-build.cjs'),{block,strip}=require('./iot-visual-markdown.cjs'),spec=require('./iot-visuals.json'),catalog=require('../catalog.json'),baseline=require('./iot-visual-preservation.json');
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex'),read=p=>fs.readFileSync(p,'utf8').replace(/\r\n/g,'\n');
+const V15=require('./ai-oop-visual-markdown.cjs');
 const water=fs.readFileSync('courses/internet-of-things/summaries/images/water-flow.png');
 assert.deepEqual([water.readUInt32BE(16),water.readUInt32BE(20)],[900,820]);
 assert.ok(read('assets/iot-visuals.css').includes('.iot-lesson .lesson-figure img[src$="/images/water-flow.png"]{width:min(100%,900px);aspect-ratio:900/820;height:auto}'),'Reserve the original PNG without changing the shared rich renderer');
@@ -14,7 +15,9 @@ for(const d of spec.assets){
 }
 assert.ok(bytes<1500000,'Authoring size budget:1.5MB across25 lossless diagrams');
 for(const [file,expected]of Object.entries(baseline.files)){
- let value;if(file.startsWith('courses/internet-of-things/summaries/')&&file.endsWith('.md'))value=Buffer.from(strip(read(file)));
+ let value;if(/^courses\/(?:artificial-intelligence|oop-python)\/summaries\/.*\.md$/.test(file))value=Buffer.from(V15.strip(read(file)));
+ else if(/^read\/(?:artificial-intelligence|oop-python)\//.test(file))value=Buffer.from(V15.stripHTML(read(file),file,B));
+ else if(file.startsWith('courses/internet-of-things/summaries/')&&file.endsWith('.md'))value=Buffer.from(strip(read(file)));
  else if(file.startsWith('read/internet-of-things/')){
   const lesson=file.split('/').at(-1).replace('.html',''),source='courses/internet-of-things/summaries/'+lesson+'.md',context={root:process.cwd(),source,output:file,catalog};let html=read(file);
   for(const d of spec.assets.filter(d=>d.lesson===lesson)){const addition=B.markdown(block(d),context).html;assert.ok(html.includes(addition));html=html.replace(addition,'');}

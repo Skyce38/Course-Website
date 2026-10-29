@@ -21,7 +21,7 @@ class Draw:
                       explanation=explanation, source=source, reference=reference, assumptions=assumptions,
                       verification='Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py',
                       copyright='Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.',
-                      review='Pending model and rendered review', model=model, width=1120, logicalWidth=560, bodyFont=32)
+                      review='PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md', model=model, width=1120, logicalWidth=560, bodyFont=32)
         items.append(self.d)
         self.s, self.y = [], 120+48*len(title.split('|'))
         self.text(28, 38, 'STUDY / '+('AI' if course=='artificial-intelligence' else 'OOP')+' '+str(number).zfill(2), 26, BLUE)
@@ -42,8 +42,10 @@ class Draw:
 
     def card(self, lines, color=INK, fill=SOFT):
         y, h = self.y, 32+44*len(lines)
+        self.s.append('<g data-card="true">')
         self.rect(28, y, 504, h, fill)
         for i, line in enumerate(lines): self.text(280, y+43+i*44, line, 32, color, 'middle', 600 if i==0 else 400)
+        self.s.append('</g>')
         self.y += h+28
 
     def flow(self, blocks):
@@ -61,8 +63,9 @@ class Draw:
 
     def node(self, x, y, label, id=None, color=BLUE, width=160):
         self.s.append('<g'+(' data-node="'+html.escape(id)+'"' if id else '')+'>')
-        self.rect(x,y,width,68,'#ffffff',color)
-        self.text(x+width/2,y+44,label,32,anchor='middle',weight=600)
+        lines=label if isinstance(label,list) else [label]
+        self.rect(x,y,width,24+44*len(lines),'#ffffff',color)
+        for i,line in enumerate(lines):self.text(x+width/2,y+44+44*i,line,32,anchor='middle',weight=600)
         self.s.append('</g>')
 
     def matrix(self, rows, label, highlight=None):
@@ -130,8 +133,9 @@ def make_ai():
     a=ai('search-models-bfs-dfs','example-graph','search-directed','กราฟกำหนดทิศทาง|อ่านเพื่อนบ้านตาม tuple','กราฟตัวอย่างที่ผู้เขียนบทสร้างมี S→A,B; A→C; B→G; C→D; D→S,G และ G ไม่มีลูก ต้องคงวงจร D→S แต่ข้ามสถานะที่เคยค้นพบแล้วในการค้นหาแบบกราฟ ไม่วาดขอบย้อนทุกเส้นเอง','Current lesson #example-graph and #python-search; authored graph, not a traced slide figure','search','ทุกขอบ cost=1; S: A ก่อน B; D: S ก่อน G',{'kind':'search-graph','graph':graph})
     y=a.y;positions={'S':(190,y),'A':(48,y+150),'B':(350,y+150),'C':(48,y+300),'D':(48,y+450),'G':(350,y+450)}
     for n,(x,yy) in positions.items():a.node(x,yy,n,n,width=100)
-    for u,v in [('S','A'),('S','B'),('A','C'),('B','G'),('C','D'),('D','G')]:
+    for u,v in [('S','A'),('S','B'),('A','C'),('B','G'),('C','D')]:
         x1,y1=positions[u];x2,y2=positions[v];a.line([(x1+50,y1+68),(x2+50,y2)],BLUE,True,edge=u+':'+v)
+    a.line([(148,y+484),(350,y+484)],BLUE,True,edge='D:G')
     a.line([(48,y+484),(15,y+484),(15,y+34),(190,y+34)],TEAL,True,True,'D:S')
     a.y=y+560;a.card(['D → S ยังอยู่ในกราฟ','discovered ช่วยกันการวนซ้ำ']);a.finish()
     a=ai('search-models-bfs-dfs','bfs-trace','bfs-dfs-frontier','BFS กับ DFS|Visit ไม่ใช่ Path','BFS dequeue ตามลำดับ S A B C G แต่เส้นทางคำตอบ S B G มีสองขอบ; DFS แบบ frame ตาม tuple เข้า S A C D G และคำตอบมีสี่ขอบ ขณะ BFS จบยังมี D ใน queue จึงห้ามใช้ discovered แทน visit','Current lesson #bfs-trace / #dfs-trace; exact authored graph and stop convention','search','BFS ตรวจ goal เมื่อ dequeue; DFS ใช้ frame',{'kind':'search-trace','bfs':['S','A','B','C','G'],'dfs':['S','A','C','D','G'],'paths':[['S','B','G'],['S','A','C','D','G']]})
@@ -170,7 +174,7 @@ def make_ai():
     a.card(['H หลังแบ่ง = (4/8)×1 = 0.5','IG = 0.954434 − 0.5','= 0.454434 bit']);a.finish()
     a=ai('final-decision-tree','rules','tree-sunburn','เดินตามกิ่ง|หนึ่ง Path คือเงื่อนไข AND','ต้นไม้ Sunburn ใช้ HairColor เป็น root: redให้+ brownให้− ส่วน blonde ต้องตรวจ Lotion ต่อโดย noให้+ และyesให้− เส้นทาง blonde AND Lotion=no จึงให้+ และไม่ต้องตรวจ attribute ที่ไม่มีใน path ไม่อ้างเป็นกฎทางการแพทย์สากล','Current lesson #sunburn / #rules; S08 physical pp.8–9,16–17','tree','ต้นไม้ fit ชุด Sunburn; ไม่ใช่ test accuracy',{'kind':'decision-tree','edges':['hair:red','hair:lotion','hair:brown','lotion:no','lotion:yes']})
     y=a.y;a.node(180,y,'HairColor','hair',width=200)
-    for id,label,x in [('red','Red → +',28),('lotion','Lotion',208),('brown','Brown → −',388)]:
+    for id,label,x in [('red',['Red','+'],28),('lotion','Lotion',208),('brown',['Brown','−'],388)]:
         a.node(x,y+175,label,id,width=144);a.line([(280,y+68),(x+72,y+175)],BLUE,True,edge='hair:'+id)
     a.text(280,y+136,'Blonde',30,anchor='middle');
     for id,label,x in [('no','No → +',100),('yes','Yes → −',320)]:a.node(x,y+350,label,id,width=150);a.line([(280,y+243),(x+75,y+350)],TEAL,True,edge='lotion:'+id)
@@ -270,9 +274,9 @@ def make_oop():
     a=oop('inheritance-mro','trace','savings-dispatch','Override แล้วเรียกฐาน|ขั้นต่ำเป็น Contract ที่ต้องตรวจ','Savingsเริ่ม10000/rate0.03 apply_interestได้300แล้วdepositผ่านฐานทำให้ยอด10300/count1; withdraw9800ตรวจขั้นต่ำ500ก่อนเรียกwithdrawฐาน เหลือ500/count2 แต่withdraw1ถูกrejectที่child ไม่เรียกฐานและstateไม่เปลี่ยน สัญญาฐานที่ถอนหมดได้จึงไม่ถูกทดแทนทุกกรณี','Current lesson #trace / #contracts; Week3 p.30 interest; authored withdrawal boundary','python','ขั้นต่ำ500เพิ่ม precondition; ระวัง LSP',{'kind':'savings','initial':10000,'rate':.03,'interest':300,'withdraw':9800,'balance':500,'count':2})
     a.flow([['10000 × 0.03 = 300','Deposit ฐาน → ยอด10300'],['Savings.withdraw(9800)','ตรวจยอดหลังถอน ≥500'],['BankAccount.withdraw','ผ่าน Setter → ยอด500 / Count2']]);a.card(['Withdraw อีก 1 → Reject','คงยอด500 / Count2']);a.card(['Syntax สืบทอดได้ ≠ LSP เสมอ','ต้องตรวจสัญญาที่ Client คาดหวัง']);a.finish()
     a=oop('polymorphism-abc','trace','polymorphic-area','เรียก area() เหมือนกัน|Dispatch ตาม Object ผู้รับ','Clientเรียกs.area()สำหรับแต่ละobject Circleรัศมี2ให้4π≈12.566371 ส่วนRectangle3×4ให้12 แต่ละobjectมีสูตรของตนเองผ่านinterfaceเดียว การปัดสองตำแหน่งเป็นformatตอนแสดงไม่ใช้เป็นค่ากลางคำนวณ','Current lesson #python / #trace; Week4 Shape; authored dimensions2,3,4','abc','หนึ่งการเรียกต่อ Object; สูตร arithmetic คงที่',{'kind':'polymorphism','radius':2,'rectangle':[3,4],'areas':[4*math.pi,12]})
-    y=a.y;a.node(105,y,'Client: s.area()','client',width=350);a.node(28,y+185,'Circle(2)','circle',width=230);a.node(302,y+185,'Rectangle(3,4)','rect',width=230);a.line([(280,y+68),(143,y+185)],BLUE,True,edge='client:circle');a.line([(280,y+68),(417,y+185)],BLUE,True,edge='client:rect');a.text(143,y+310,'4π ≈ 12.566371',28,anchor='middle');a.text(417,y+310,'3×4 = 12',32,anchor='middle');a.y=y+370;a.card(['เลือกตาม Object ที่กำลังเรียก','ไม่ต้องเพิ่ม if ชื่อ Class ทุกตัว']);a.finish()
+    y=a.y;a.node(105,y,'Client: s.area()','client',width=350);a.node(28,y+185,'Circle(2)','circle',width=230);a.node(302,y+185,'Rectangle','rect',width=230);a.line([(280,y+68),(143,y+185)],BLUE,True,edge='client:circle');a.line([(280,y+68),(417,y+185)],BLUE,True,edge='client:rect');a.text(143,y+310,'4π ≈ 12.566371',28,anchor='middle');a.text(417,y+310,'3×4 = 12',32,anchor='middle');a.y=y+370;a.card(['เลือกตาม Object ที่กำลังเรียก','ไม่ต้องเพิ่ม if ชื่อ Class ทุกตัว']);a.finish()
     a=oop('polymorphism-abc','abc','abc-duck','ABC กับ Duck Typing|ตรวจคนละเงื่อนไข','Shapeมีabstract areaและperimeter จึงสร้างShapeหรือMissingที่ยังทำperimeterไม่ครบไม่ได้ ส่วนBadgeมีareaคืน1จึงใช้total_areaร่วมกับRectangle2×2ได้5 แม้Badgeไม่สืบทอดShapeและไม่จำเป็นต้องมีperimeter การมีmethodชื่อเดียวไม่รับรองพฤติกรรมถูก','Current lesson #abc / #python / #types; Week4; authored Badge','abc','ABCMeta บังคับเฉพาะ abstract methods ที่ค้าง',{'kind':'abc','abstract':['area','perimeter'],'badgeArea':1,'rectangleArea':4,'total':5})
-    a.card(['Shape (ABC)','area() + perimeter() ยัง Abstract']);a.card(['Missing มีแค่ area()','สร้าง Instance → TypeError']);a.card(['Badge มี area() → 1','isinstance(Badge(),Shape) → False']);a.row([4,1,5],'total_area รวม Rectangle + Badge');a.card(['Duck Typing ใช้พฤติกรรมที่ต้องการ','ต้องตรวจผลตาม Contract ด้วย']);a.finish()
+    a.card(['Shape (ABC)','area() + perimeter() ยัง Abstract']);a.card(['Missing มีแค่ area()','สร้าง Instance → TypeError']);a.card(['Badge มี area() → 1','isinstance(Badge(),Shape) → False']);a.row([4,1,5],'total_area รวม Rectangle + Badge');a.card(['Duck Typing ใช้พฤติกรรมร่วม','ต้องตรวจผลตาม Contract ด้วย']);a.finish()
     a=oop('object-relationships','trace','team-player','ย้ายทีม แต่ Player เดิม|Identity และประวัติยังอยู่','TeamAรับreferenceของPlayerpเดิม เมื่อp.score goalsเป็น1 ก่อนremoveจากAแล้วaddเข้าB ไม่สร้างPlayerใหม่ จึงb.players[0] is pและgoalsยัง1 Snapshotของcontainerยังอ้างPlayerเดิมได้แม้Aเอาออกแล้ว ไม่ใช่deepcopy','Current lesson #python / #trace; Week5 Team/Player; no copied private lab code','python','Aggregation ตามกฎ domain; snapshot ไม่ deep copy',{'kind':'team-player','goals':1,'identityPreserved':True,'edges':['teamA:player','teamB:player']})
     y=a.y;a.node(28,y,'Team A','teamA',width=210);a.node(322,y,'Team B','teamB',width=210);a.node(105,y+220,'Player p • goals=1','player',width=350)
     a.line([(133,y+68),(230,y+220)],LINE,True,True,'teamA:player');a.line([(427,y+68),(330,y+220)],TEAL,True,edge='teamB:player');a.text(60,y+140,'เอาออก',32);a.text(350,y+140,'เพิ่มเข้า',32)
@@ -311,7 +315,7 @@ def make_oop():
     a.row([8,16],'n ตัวอย่าง');a.card(['Loop n รอบ','8 → 16 Operations']);a.card(['หารครึ่งจนถึง1','log₂8=3 → log₂16=4 ขั้น']);a.card(['Loop สามเหลี่ยม n(n−1)/2','28 → 120 Comparisons']);a.card(['ระบุ Best / Worst / Amortized','ก่อนสรุป Bound ของกรณีนั้น']);a.finish()
     states=[[5,3,8,1,2],[3,5,1,2,8],[3,1,2,5,8],[1,2,3,5,8],[1,2,3,5,8]]
     a=oop('complexity-basic-sorting','bubble','bubble-passes','Bubble Sort ทีละ Pass|ค่ามากสุดลอยเข้าท้าย','ใช้[5,3,8,1,2]และstrict>เทียบคู่ติดกัน pass1ได้[3,5,1,2,8] pass2ได้[3,1,2,5,8] pass3เรียงครบแล้วแต่ยังมีswapจึงpass4ยืนยันไม่swap รวม10keycomparisonsและ7swaps ไม่ใช้ข้อมูลหกค่าจากsourceอีกหน้าแทน','Current lesson #bubble / #python; Week13 source-derived five-value example','sort','สีเขียวคือ Sorted suffix; strict > ทำให้ Stable',{'kind':'bubble','states':states,'comparisons':10,'swaps':7})
-    for i,state in enumerate(states):a.row(state,'Input' if i==0 else 'Pass '+str(i),['#dceee7' if j>=5-i and i else SOFT for j in range(5)])
+    for i,state in enumerate(states):a.row(state,'Input' if i==0 else 'Pass '+str(i),['#dceee7' if i and (i==4 or j>=5-i) else SOFT for j in range(5)])
     a.card(['10 Key comparisons / 7 Swaps','Pass4 ไม่ Swap → หยุด']);a.finish()
     a=oop('advanced-sorting','merge','merge-final','Merge สองส่วนที่เรียงแล้ว|ฝั่งซ้ายหมดก่อน ไม่ใช่ขวา','Finalmergeของบทใช้left[1,3,5,8]และright[2,4,7,9] เลือก1,2,3,4,5,7,8ด้วย7comparisonsแล้วleftหมดจึงappend9จากright คงcaptionที่บทแก้ไว้ไม่คัดsourcecaptionที่บอกrightหมดก่อน ใช้≤เลือกซ้ายก่อนเมื่อkeyเท่ากัน','Current lesson #merge; Week14 physical pp.14–15 source-caption qualification retained','sort','Merge ใช้ ≤ ให้ Left มาก่อนเมื่อ Tie',{'kind':'merge','left':[1,3,5,8],'right':[2,4,7,9],'selected':[1,2,3,4,5,7,8],'tail':[9],'comparisons':7})
     a.row([1,3,5,8],'Left');a.row([2,4,7,9],'Right');a.row([1,2,3,4,5,7,8],'เลือกด้วย 7 Comparisons');a.card(['Left หมดแล้ว','Right ยังเหลือ 9 → Append']);a.row([1,2,3,4,5,7,8,9],'ผล Merge');a.finish()

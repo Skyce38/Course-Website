@@ -1,5 +1,6 @@
 const fs=require('fs'),crypto=require('crypto'),assert=require('assert/strict');
 const B=require('./lesson-build.cjs'),catalog=require('../catalog.json'),baseline=require('./reading-baseline.json');
+const visuals=require('./ai-oop-visual-markdown.cjs');
 const hash=s=>crypto.createHash('sha256').update(s).digest('hex');
 let advisory=0;
 for(const original of baseline){
@@ -9,7 +10,9 @@ for(const original of baseline){
  assert.equal(hash((body.match(/\$\$[\s\S]*?\$\$|\\\(.+?\\\)/g)||[]).join('\n')),original.math,'Verified formula tokens preserved');
  assert.equal(hash(body.split('\n').filter(s=>s.startsWith('|')).join('\n')),original.tables,'Source data tables preserved');
  assert.equal(hash(body.match(/## [^\n]*\{#practice\}[\s\S]*?(?=\n## |$)/)?.[0]||''),original.solutions,'Existing solved exercises preserved');
- const rendered=B.markdown(body,{root:process.cwd(),source:original.source,output:'read/'+meta.course+'/'+meta.slug+'.html',catalog});
+ // Keep the historical no-image guard strict for original content. New exact figure blocks
+ // are separately checked against their local-image whitelist, hashes and rich renderer.
+ const rendered=B.markdown(visuals.strip(body),{root:process.cwd(),source:original.source,output:'read/'+meta.course+'/'+meta.slug+'.html',catalog});
  assert.ok(!/<p>\s*<\/p>/.test(rendered.html));assert.ok(!/<(?:script|iframe|img)[ >]/.test(rendered.html.replace(/<script type="application\/json"[\s\S]*?<\/script>/g,'')),'No unexpected executable HTML');
  const prose=body.replace(/```[\s\S]*?```|\$\$[\s\S]*?\$\$|`[^`]*`/g,'');
  assert.ok(!/storageimplementation|tracepush\/pop\/peek|Week11 pp\.3–17:ข้อมูล/.test(prose));

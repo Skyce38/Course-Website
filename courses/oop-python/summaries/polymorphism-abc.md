@@ -19,6 +19,12 @@ Ducktyping ต้องการพฤติกรรมที่ใช้จร
 ## ABC และขอบเขตการบังคับ {#abc}
 pp.13–24: Shape สืบทอด ABC เพื่อใช้ ABCMeta และทำเครื่องหมาย area/perimeter ด้วย abstractmethod จึงสร้าง Shape หรือ subclass ที่ยังไม่ทำครบไม่ได้ (TypeError) method ธรรมดา describe ใช้ร่วมกันได้
 
+
+![Shapeมีabstract areaและperimeter จึงสร้างShapeหรือMissingที่ยังทำperimeterไม่ครบไม่ได้ ส่วนBadgeมีareaคืน1จึงใช้total_areaร่วมกับRectangle2×2ได้5 แม้Badgeไม่สืบทอดShapeและไม่จำเป็นต้องมีperimeter การมีmethodชื่อเดียวไม่รับรองพฤติกรรมถูก](images/visual15-abc-duck.webp "ภาพเขียนเสริม: ABC กับ Duck Typing ตรวจคนละเงื่อนไข — ABCMeta บังคับเฉพาะ abstract methods ที่ค้าง")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.python.org/3.12/library/abc.html)
+
+อ่านภาพ: Shapeมีabstract areaและperimeter จึงสร้างShapeหรือMissingที่ยังทำperimeterไม่ครบไม่ได้ ส่วนBadgeมีareaคืน1จึงใช้total_areaร่วมกับRectangle2×2ได้5 แม้Badgeไม่สืบทอดShapeและไม่จำเป็นต้องมีperimeter การมีmethodชื่อเดียวไม่รับรองพฤติกรรมถูก
+
 `ABC`โดยไม่มี abstractmethod ที่ค้างอยู่ยังสร้าง instance ได้ การตกแต่ง abstractmethod เพียงอย่างเดียวบน class ที่ไม่ใช้ ABCMeta ไม่ใช่การบังคับโดยอัตโนมัติ Abstractmethod มี body ได้และ child อาจเรียก super เพื่อ reusebody แต่ยังต้อง override หากค้างสถานะ abstract ชี้ให้แยกจากคำอธิบายย่อในบางหน้า ไม่สรุปว่ามี body แล้วหมดความเป็น abstract ทันที
 
 ## Python: Interface เดียว หลายสูตร {#python}
@@ -86,6 +92,12 @@ print(total_area([Rectangle(2, 2), Badge()]))  # 5
 |---|---|---:|---:|
 | Circle(2) | Circle.area/perimeter | π×2²=4π≈12.566371 | 2π×2=4π |
 | Rectangle(3,4) | Rectangle.area/perimeter | 3×4=12 | 2(3+4)=14 |
+
+
+![Clientเรียกs.area()สำหรับแต่ละobject Circleรัศมี2ให้4π≈12.566371 ส่วนRectangle3×4ให้12 แต่ละobjectมีสูตรของตนเองผ่านinterfaceเดียว การปัดสองตำแหน่งเป็นformatตอนแสดงไม่ใช้เป็นค่ากลางคำนวณ](images/visual15-polymorphic-area.webp "ภาพเขียนเสริม: เรียก area() เหมือนกัน Dispatch ตาม Object ผู้รับ — หนึ่งการเรียกต่อ Object; สูตร arithmetic คงที่")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.python.org/3.12/library/abc.html)
+
+อ่านภาพ: Clientเรียกs.area()สำหรับแต่ละobject Circleรัศมี2ให้4π≈12.566371 ส่วนRectangle3×4ให้12 แต่ละobjectมีสูตรของตนเองผ่านinterfaceเดียว การปัดสองตำแหน่งเป็นformatตอนแสดงไม่ใช้เป็นค่ากลางคำนวณ
 
 การแสดง 2 ตำแหน่งได้ 12.57 แต่คำนวณเก็บ pi เต็ม ไม่ใช้ 12.57 เป็นค่าจริงก่อนรวมพื้นที่ `total_area([Rectangle(2,2),Badge()])` ได้ 4+1=5 แม้ Badge ไม่ใช่ Shape
 

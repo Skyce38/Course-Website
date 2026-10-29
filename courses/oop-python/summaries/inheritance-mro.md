@@ -12,6 +12,12 @@
 ## Inheritance และการออกแบบสัญญา {#concepts}
 Week3 pp.3–16 แก้ copy-paste ด้วย subclass: `class SavingsAccount(BankAccount)` สืบทอด method/property ที่ค้นพบตาม MRO แต่ instance ยังมี object identity ของมันเอง ไม่ได้คัดลอก instance บัญชีแม่อีกตัวขึ้นมา `isinstance(s,BankAccount)`เป็น True และ `issubclass(SavingsAccount,BankAccount)`เป็น True แต่ชนิดอย่างเดียวไม่พิสูจน์ LSP
 
+
+![DสืบทอดB,Cซึ่งสืบทอดAเหมือนกัน Pythonให้MRO D,B,C,A,object สำหรับhierarchyนี้ super()ภายในBบนinstanceDจึงไปCไม่ใช่Aโดยตรง ลูกศรสืบทอดชี้ฐาน ไม่ใช่ลำดับเรียกmethod; ลำดับMROแสดงแยกด้านล่าง](images/visual15-diamond-mro.webp "ภาพเขียนเสริม: Diamond กับ MRO super() เดินตามลำดับจริง — ลำดับฐาน D(B,C); แต่ละ chain เรียก super()")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.python.org/3.12/tutorial/classes.html)
+
+อ่านภาพ: DสืบทอดB,Cซึ่งสืบทอดAเหมือนกัน Pythonให้MRO D,B,C,A,object สำหรับhierarchyนี้ super()ภายในBบนinstanceDจึงไปCไม่ใช่Aโดยตรง ลูกศรสืบทอดชี้ฐาน ไม่ใช่ลำดับเรียกmethod; ลำดับMROแสดงแยกด้านล่าง
+
 Override คือนิยามชื่อ method เดิมใน child อาจแทนทั้งหมดหรือขยายด้วย super เช่น source ให้ withdraw ตรวจขั้นต่ำก่อนใช้ logic ฐาน และ apply_interest เรียก deposit เพื่อนับธุรกรรม
 
 ไม่ควรอ้างว่าทุก override ต้องเรียก super เสมอ ขึ้นกับสัญญาของ operation
@@ -112,6 +118,12 @@ print(D().chain())                                        # ['D', 'B', 'C', 'A']
 | apply_interest | 10300 | .03 | 1 | interest300→deposit จากฐาน→setter |
 | withdraw9800 | 500 | .03 | 2 | child ตรวจขั้นต่ำแล้วเรียกฐาน |
 | withdraw1 | 500 | .03 | 2 | childraise ก่อนหักเงินจริง |
+
+
+![Savingsเริ่ม10000/rate0.03 apply_interestได้300แล้วdepositผ่านฐานทำให้ยอด10300/count1; withdraw9800ตรวจขั้นต่ำ500ก่อนเรียกwithdrawฐาน เหลือ500/count2 แต่withdraw1ถูกrejectที่child ไม่เรียกฐานและstateไม่เปลี่ยน สัญญาฐานที่ถอนหมดได้จึงไม่ถูกทดแทนทุกกรณี](images/visual15-savings-dispatch.webp "ภาพเขียนเสริม: Override แล้วเรียกฐาน ขั้นต่ำเป็น Contract ที่ต้องตรวจ — ขั้นต่ำ500เพิ่ม precondition; ระวัง LSP")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.python.org/3.12/tutorial/classes.html)
+
+อ่านภาพ: Savingsเริ่ม10000/rate0.03 apply_interestได้300แล้วdepositผ่านฐานทำให้ยอด10300/count1; withdraw9800ตรวจขั้นต่ำ500ก่อนเรียกwithdrawฐาน เหลือ500/count2 แต่withdraw1ถูกrejectที่child ไม่เรียกฐานและstateไม่เปลี่ยน สัญญาฐานที่ถอนหมดได้จึงไม่ถูกทดแทนทุกกรณี
 
 ค่า 300/10300 มาจากชุด Nana10000,.03 ใน physicalp.30;การถอน 9800 และ diamond เป็นตัวอย่างเสริมสำหรับ boundary/MRO ไม่อ้างว่าเป็นเฉลย lab
 

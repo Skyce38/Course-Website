@@ -34,6 +34,11 @@ const temp=fs.mkdtempSync(path.join(os.tmpdir(),'study-lesson-check-'));
 assert.equal(path.dirname(path.resolve(temp)),path.resolve(os.tmpdir()),'Scratch cleanup must stay inside the OS temp directory');
 try {
   for(const file of ['scripts/lessons.json','templates/lesson.html',source]) { fs.mkdirSync(path.dirname(path.join(temp,file)),{recursive:true});fs.copyFileSync(file,path.join(temp,file)); }
+  // The real Linked List source now includes local figures; carry its resources into the isolated fixture.
+  for(const [,image]of raw.matchAll(/^!\[[^\]]*\]\((\S+?)(?: "[^"]*")?\)$/gm)){
+    const resource=path.resolve(path.dirname(source),decodeURIComponent(image));assert.ok(resource.startsWith(process.cwd()+path.sep),'Fixture images remain repository-local');
+    const file=path.relative(process.cwd(),resource);fs.mkdirSync(path.dirname(path.join(temp,file)),{recursive:true});fs.copyFileSync(resource,path.join(temp,file));
+  }
   fs.writeFileSync(path.join(temp,'scripts/lessons.json'),JSON.stringify([source])); // Keep this isolated fixture independent of other registered lessons.
   const practice='courses/oop-python/practice/linked-list.json';
   if(fs.existsSync(practice)){fs.mkdirSync(path.dirname(path.join(temp,practice)),{recursive:true});fs.copyFileSync(practice,path.join(temp,practice));}

@@ -53,6 +53,12 @@ $$
 ### Buy: One-hot ของ X03/C01 {#buy-encoding}
 X03 KNN!G:O ใช้ 9 ตัวเลข ตามลำดับนี้ ไม่ทิ้ง dummy column ใด
 
+
+![Buy ใช้ full one-hot โดย Type เรียง Sport,General: query General คือ (0,1) แต่ R1 Sport คือ (1,0) จึงต่างสองช่องและเพิ่ม d²=2 ไม่ใช่ 1 ส่วน feature blocks อื่นเหมือนกัน ตัวเลขรหัส ordinal ของ Drug เป็นคนละ representation](images/visual15-knn-one-hot.webp "ภาพเขียนเสริม: เปลี่ยนหนึ่งหมวดหมู่ One-hot ต่างสองช่อง — ใช้ full one-hot ไม่ drop คอลัมน์; ไม่ scale")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://scikit-learn.org/1.7/modules/neighbors.html)
+
+อ่านภาพ: Buy ใช้ full one-hot โดย Type เรียง Sport,General: query General คือ [0,1] แต่ R1 Sport คือ [1,0] จึงต่างสองช่องและเพิ่ม d²=2 ไม่ใช่ 1 ส่วน feature blocks อื่นเหมือนกัน ตัวเลขรหัส ordinal ของ Drug เป็นคนละ representation
+
 ```text
 Model_A, Model_B, Red, Yellow, Sport, General, Thailand, Japan, China
 Query A/Red/General/Thailand = [1,0,1,0,0,1,1,0,0]
@@ -82,6 +88,12 @@ k เล็กไวต่อข้อมูลใกล้จุดเดีย
 
 ## ตัวอย่าง Drug: ทุกระยะและอันดับ {#drug-worked}
 Query ใน S07 หน้า 3/X04 row 13 คือ Age=36, Sex=F, BP=LOW, Cholesterol=HIGH, Na=0.697, K=0.069 เวกเตอร์ที่เข้ารหัสคือ `[36,1,0,1,3,0.697,0.069]` เรียง Age, Sex_F, Sex_M, BP, Cholesterol, Na, K
+
+
+![Drug ใช้ query และ encoding ตาม X04 โดยไม่ scale: อันดับห้าแรก R8,R10,R4,R3,R2 ให้ labels drugC,drugY,drugX,drugC,drugC จึงเลือก drugC ด้วย 3 เสียง ระยะในภาพปัดหลังจัดอันดับ ไม่สลับ R3/R2 และไม่อ้างผลทางการแพทย์](images/visual15-knn-neighbors.webp "ภาพเขียนเสริม: เพื่อนบ้านห้าตัว โหวตจากอันดับ ไม่ใช่ทุกแถว — k=5; Euclidean 7 มิติของ X04; แถวเดิมแก้ tie")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://scikit-learn.org/1.7/modules/neighbors.html)
+
+อ่านภาพ: Drug ใช้ query และ encoding ตาม X04 โดยไม่ scale: อันดับห้าแรก R8,R10,R4,R3,R2 ให้ labels drugC,drugY,drugX,drugC,drugC จึงเลือก drugC ด้วย 3 เสียง ระยะในภาพปัดหลังจัดอันดับ ไม่สลับ R3/R2 และไม่อ้างผลทางการแพทย์
 
 กำหนด R1..R10 = แถวข้อมูล X04 rows 2..11 ตามลำดับ ข้อมูลครบทั้ง 10 เวกเตอร์และ labels แสดงใน Python ด้านล่าง ตารางนี้คำนวณระยะทุกแถวใหม่ ไม่เชื่อคำตอบที่เก็บไว้เพียงอย่างเดียว
 

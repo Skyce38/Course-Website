@@ -128,3 +128,4 @@ require('./check-unix.cjs');
 require('./check-iot.cjs');
 
 require('./check-iot-visuals.cjs');
+require('./check-ai-oop-visuals.cjs');

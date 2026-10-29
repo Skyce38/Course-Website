@@ -19,7 +19,7 @@
       "assumptions": "แนวคิด ไม่อ้างผลทดลองหรือระบบควบคุมจริง",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "agent-cycle",
         "edges": [
@@ -35,7 +35,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-agent-cycle.svg",
       "bytes": 45380,
       "sha256": "a6941bf10e005ef416d147d90d0daf6f62844fd3e031c61daaf781d0910780ae",
-      "svgSha256": "df3ffb0465e337bcd161b431e5126c896809c311d1cfd020138eaca24f5b1915",
+      "svgSha256": "10d0b598b6406e492f4e39a53a5f1f7a893e45726825a8512b1c6f5c9e774bff",
       "labelCount": 13
     },
     {
@@ -55,7 +55,7 @@
       "assumptions": "ขนาดกรอบไม่ใช่สัดส่วนเชิงสถิติ",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "subsets",
         "sets": [
@@ -72,7 +72,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-ai-subsets.svg",
       "bytes": 40614,
       "sha256": "deb95d2f4c18c6f215357ec3ffe70873e42b78f773295222310b9a562c5d404a",
-      "svgSha256": "6c9895e36f5c8c222a06acb2e6f4c78331e41bb3ad9d7bb737a1749363da348b",
+      "svgSha256": "1c09999a72873ca3d9c1c8404e5e49860bc70be3bc17e7570be5afb6230913be",
       "labelCount": 12
     },
     {
@@ -92,7 +92,7 @@
       "assumptions": "ทุกขอบ cost=1; S: A ก่อน B; D: S ก่อน G",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "search-graph",
         "graph": {
@@ -122,9 +122,9 @@
       "height": 1960,
       "file": "courses/artificial-intelligence/summaries/images/visual15-search-directed.webp",
       "svg": "docs/diagrams/ai-oop/visual15-search-directed.svg",
-      "bytes": 38832,
-      "sha256": "4e30bad5cbe195bafe633778774941e3dee092baf5483ec9c6c1cae7518ee6e5",
-      "svgSha256": "7e75433a165e4ae34fe515a611a7c9893199fa122fcfd61748b8174e2c89ef66",
+      "bytes": 34854,
+      "sha256": "35130e0b4fe9054a94c37fbcd910dccc9d4ca8a21c8d68d4f43f0065f318d39e",
+      "svgSha256": "d45af8462563a83f6e41607d2e901a46d2fa72c6a2e9c30d4c72c046d8749215",
       "labelCount": 12
     },
     {
@@ -144,7 +144,7 @@
       "assumptions": "BFS ตรวจ goal เมื่อ dequeue; DFS ใช้ frame",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "search-trace",
         "bfs": [
@@ -184,7 +184,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-bfs-dfs-frontier.svg",
       "bytes": 50154,
       "sha256": "e4133d543febfab7adfda70c8b05326c150de1a9dcddc8525b7b01a5a7b9598b",
-      "svgSha256": "9cb2a19607ad093ee747acbe98501db34a6f0e6843e02db147e182a7fb0a951a",
+      "svgSha256": "f2956c4ccec2e3d46827bc25a76fca5ab5f5605731153191e90cb5fcb5053524",
       "labelCount": 22
     },
     {
@@ -204,7 +204,7 @@
       "assumptions": "fit ทั้ง 8 จุดพร้อม intercept; ไม่อ้างเหตุและผล",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "regression",
         "x": [
@@ -239,7 +239,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-regression-residual.svg",
       "bytes": 43054,
       "sha256": "b6458618c92252d16823f7269bb4d819c173b62c22ea71b73aaf387f4ae3f3b4",
-      "svgSha256": "8ebc33192a85c366834aab240e36f756e108a9a520ac960e3d39b2ae1164954f",
+      "svgSha256": "1112ab6f9ef8bc898e1999b63654b13c388f51e3bbdfd58b3ddd353cad54dcc7",
       "labelCount": 16
     },
     {
@@ -259,7 +259,7 @@
       "assumptions": "หาร n=3; residual=actual−predicted",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "errors",
         "actual": [
@@ -283,7 +283,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-regression-error-metrics.svg",
       "bytes": 42856,
       "sha256": "a62824fbd3c1e8ee5fea47af4a64d6b4705781da4e3ac7cf176d2d2846b931af",
-      "svgSha256": "fd4b1a114e473bb28b06634edfe8b602a82e2790074bb186b1eb9a76f611f707",
+      "svgSha256": "f6b1315e822605a4829e7d7660e30d3336624efc2eef7bfa225e391c49cf35f7",
       "labelCount": 27
     },
     {
@@ -303,7 +303,7 @@
       "assumptions": "ใช้ full one-hot ไม่ drop คอลัมน์; ไม่ scale",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "one-hot",
         "query": [
@@ -324,7 +324,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-knn-one-hot.svg",
       "bytes": 47558,
       "sha256": "b8152fb0cfcf8631b9e3badda53537295f9a1346a6631fa07ca57ebeee33d189",
-      "svgSha256": "9a8cc269c4a5405403a9f07067a042d0b3206b6d151feb00b01c284349922599",
+      "svgSha256": "a76147c32b2d67dbca013abd76dc750b2497319f153a1639d676a1f14fc01457",
       "labelCount": 20
     },
     {
@@ -344,7 +344,7 @@
       "assumptions": "k=5; Euclidean 7 มิติของ X04; แถวเดิมแก้ tie",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "knn",
         "rank": [
@@ -378,7 +378,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-knn-neighbors.svg",
       "bytes": 57450,
       "sha256": "38afa163ebdad30d347a0ee171c998df4ecbe923b24741070ddaee5821df1b18",
-      "svgSha256": "78e5f1b89426d55a070bb4c2501fc7486b5b50d127096232140eccb1241e2287",
+      "svgSha256": "3bcfefad69448fcab247b57b5e6d58c5c83ae25d9258ae835e09db6596c689cf",
       "labelCount": 22
     },
     {
@@ -398,7 +398,7 @@
       "assumptions": "Categorical; α=0; conditional independence",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "nb-judy",
         "counts": [
@@ -434,7 +434,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-nb-judy.svg",
       "bytes": 47704,
       "sha256": "d617100db02e6117f8c134276f07aa8ad60374d9271457f861aa9b19e769c932",
-      "svgSha256": "a17c613dd50f4d5eb329b965f63e6a5f15d9281beb4bbcd5f0fca25d3bb97324",
+      "svgSha256": "c84af6e5071908cf46c6408ba0ac03e078b1c786aabae411a17665b959b873d1",
       "labelCount": 15
     },
     {
@@ -454,7 +454,7 @@
       "assumptions": "คง prior class-frequency; ไม่ใช้ Gaussian density",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "nb-smoothing",
         "classCount": 5,
@@ -482,7 +482,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-nb-smoothing.svg",
       "bytes": 55918,
       "sha256": "aa411eba468a7320a275dcb27f568745a7ab3108272fd5b19a312a19b2a4a1fe",
-      "svgSha256": "0df9279a5c2d15a8cc16da2e1d32745f931293f63f63c8fa937edcb0f22d7bc9",
+      "svgSha256": "bf136f6f54a1b225f1a5d7967c5b686eeac56629db19e57a872cd96fbf23cab2",
       "labelCount": 22
     },
     {
@@ -502,7 +502,7 @@
       "assumptions": "log ฐาน2; 0 log 0 ใช้ลิมิตเป็น0",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "entropy",
         "parent": [
@@ -535,7 +535,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-tree-entropy.svg",
       "bytes": 39058,
       "sha256": "68c6e825e85676699d1cfa49fce9d4f1fa174ee13154bd351137bcb78be9be0c",
-      "svgSha256": "8d9c83385ff8789954e903b97e9b632bd4410449cbb523e245d2aa8d8cbfc3e9",
+      "svgSha256": "8c45a71e96a4d0b3f61956e1c40de0b66e9d33c6c16e6bd225c6fcebe4e25ecc",
       "labelCount": 12
     },
     {
@@ -555,7 +555,7 @@
       "assumptions": "ต้นไม้ fit ชุด Sunburn; ไม่ใช่ test accuracy",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "decision-tree",
         "edges": [
@@ -572,10 +572,10 @@
       "height": 1760,
       "file": "courses/artificial-intelligence/summaries/images/visual15-tree-sunburn.webp",
       "svg": "docs/diagrams/ai-oop/visual15-tree-sunburn.svg",
-      "bytes": 43452,
-      "sha256": "d2652f01f78ee9066492e0dab0fb3c03cf5592a81439751317b3db23794bda82",
-      "svgSha256": "9fe1467df9b01668f4a95d99bea51d1bdbebd490e2db7169f1316ae84c4c7ed4",
-      "labelCount": 13
+      "bytes": 43436,
+      "sha256": "91dd0673572bee66ec60fe33fedeb27323138006b67890b44bfe699b23f0416a",
+      "svgSha256": "1ad93288f2dfb1053dfd54f2302a2d9aec2dbf322d88193fc1d62f75a1dc5278",
+      "labelCount": 15
     },
     {
       "number": 13,
@@ -594,7 +594,7 @@
       "assumptions": "Single=min ของ cross-pairs; ไม่ใช่ probability",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "single-linkage",
         "matrix": [
@@ -650,7 +650,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-single-dendrogram.svg",
       "bytes": 32014,
       "sha256": "7e9b21fed0bbdf1e9ad1d0d6f4e711a9dc4b5380658b1eb38d3caa2908b161d7",
-      "svgSha256": "8709f3b940aadbd60340383a1beac899db9b75f962aefe8aa47364510ca0229f",
+      "svgSha256": "debb392b76fe4c74765ff27f0636be2a37d515f484866112562f896309bd2e7b",
       "labelCount": 17
     },
     {
@@ -670,7 +670,7 @@
       "assumptions": "ใช้ matrix หน้า22เดิม; Average ทุก cross-pair",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "cross-pairs",
         "pair": [
@@ -698,7 +698,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-linkage-cross-pairs.svg",
       "bytes": 51568,
       "sha256": "8cbcc8e174a6f521fb10f57a8b76a8e350dea289d4e7fc67260aa50c750a9c83",
-      "svgSha256": "ec216b064e9a8b13cebbef4cba1bd9e206fa31495754832c985c3dbf899ae79a",
+      "svgSha256": "a4cc58726aee762e570114911a755fcf9bda884aa1e407494ec07b8cbd65fa72",
       "labelCount": 20
     },
     {
@@ -718,7 +718,7 @@
       "assumptions": "Euclidean; tie เลือกเลขกลุ่มต่ำ; ไม่ scale",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "kmeans",
         "points": [
@@ -802,7 +802,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-kmeans-assign.svg",
       "bytes": 56088,
       "sha256": "b303e8680a31b1e240f170efc7f67cc6317705d9e39ad8242fb90cd3e4181668",
-      "svgSha256": "682f15357f37bd7b5616ab205371d6ef29abd192e461943ccdb4334144ed19a3",
+      "svgSha256": "1404d125c4443eed1f3de8490fd77691afc459d1e514b0d0792242f54d07949b",
       "labelCount": 33
     },
     {
@@ -822,7 +822,7 @@
       "assumptions": "SSE ใช้ศูนย์กลางหลัง Update รอบ1เท่านั้น",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "kmeans-update",
         "members": [
@@ -851,7 +851,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-kmeans-update.svg",
       "bytes": 48648,
       "sha256": "e7ff7b79d35eb03ff82acfb046fa8a4a62f3f021c3b0fb3060b2b897ccedc881",
-      "svgSha256": "fc51618028aec2e67d580ede4ac7c152c0eddbbab3e469c64e33f70597c8b53e",
+      "svgSha256": "72f0529d582e811cd2bb50b0bbbc3a05281313c07270cdae4c131d2698f37715",
       "labelCount": 13
     },
     {
@@ -871,7 +871,7 @@
       "assumptions": "X06: y=1 เมื่อ z>0; z=0 ให้0",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "perceptron",
         "weights": [
@@ -895,7 +895,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-perceptron-neuron.svg",
       "bytes": 41612,
       "sha256": "bea6b1832a2dab66fe3c0d031b43d20696d96091997a52a72393ad5de4ae602f",
-      "svgSha256": "db79c1d52131b368ae73a2878f8c66d553c1315b865dd88f206d9c2612353223",
+      "svgSha256": "bd2467f84ebe8bc9a648f135bef3ba75877e35071b07afae798487feb96e601d",
       "labelCount": 15
     },
     {
@@ -915,7 +915,7 @@
       "assumptions": "Sequential; error=t−y; bias input=1",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "perceptron-update",
         "before": [
@@ -944,7 +944,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-perceptron-update.svg",
       "bytes": 40906,
       "sha256": "582bebd0a54c4f79c4fd78931bca500ebc2823b5b04429500ede674ffce26bff",
-      "svgSha256": "3f6e8c39e9325a3884dc84807e578254513cf533b23fdec91afcb757c2b631d7",
+      "svgSha256": "fd1483c95fac09f4ccc4fabadf7478215125d215a29d4894e1e22e507c03d8e7",
       "labelCount": 22
     },
     {
@@ -964,7 +964,7 @@
       "assumptions": "2–2–1 sigmoid; L=½(y−t)²; ไม่ใช่ XOR weights",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "backprop-forward",
         "theta": [
@@ -998,7 +998,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-backprop-forward.svg",
       "bytes": 44136,
       "sha256": "b70f68902fd2ad64a20a7d2e6cf55f22f89e99522698ddf1cffd9c26f2a2acd0",
-      "svgSha256": "928b615634c6a97c2994ee5995461ec8849e2f0ee19405b8f574e3b7d788eb14",
+      "svgSha256": "994eb9be87f447ae4eee15638bb6809c3ab53f083221faf68ffc875147594c10",
       "labelCount": 12
     },
     {
@@ -1018,7 +1018,7 @@
       "assumptions": "Gradient g=∂L/∂z; ใช้ v เก่าทั้งสองกิ่ง",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "backprop-gradient",
         "theta": [
@@ -1053,7 +1053,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-backprop-gradient.svg",
       "bytes": 60846,
       "sha256": "08791b1893afd21efa96dedf71956cde945ed1ff6bd0e0866d9d7987634d2bdb",
-      "svgSha256": "3167b0979e4b8067f1bb816438190006071f93e9e2d4491447ac14adc2836c87",
+      "svgSha256": "d2eb6de5e8b5d279c2a0dfc489e036e66b649d80d4cc80073f2d9133efae4758",
       "labelCount": 18
     },
     {
@@ -1073,7 +1073,7 @@
       "assumptions": "ภาพแนวคิด; ไม่กำหนด loss หรือจำนวน epochs",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "rnn",
         "steps": 3,
@@ -1094,7 +1094,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-rnn-unrolled.svg",
       "bytes": 40478,
       "sha256": "4881dace79b4f4cd6481053dc68a3c0f52dd9485cf1b34e906b7df17f0a38dca",
-      "svgSha256": "f69cd9050710e08e1950fb7d209127a1898b3afdfafde6a747d4eb105fc713bc",
+      "svgSha256": "5e8059fe93ea43ce4a92b34c4e858b24a34b0060b8aadb0ddb3e70c7eca8fa54",
       "labelCount": 15
     },
     {
@@ -1114,7 +1114,7 @@
       "assumptions": "แสดงทางข้อมูลระหว่าง Train ไม่ใช่ผลทดลอง",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "gan",
         "edges": [
@@ -1132,7 +1132,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-gan-roles.svg",
       "bytes": 44220,
       "sha256": "0e95083d6d7d943a505cee071aeb1a295fb87fb6b7175d9760fc4f4e911de31c",
-      "svgSha256": "225379105352d152ab64b22d24597673b745a6ac74732c8b63ac355a92e006e8",
+      "svgSha256": "2c362b13aff68c2031d5726dd7b5b76bb443c9db400050e6a3191e627de42120",
       "labelCount": 11
     },
     {
@@ -1152,7 +1152,7 @@
       "assumptions": "ไม่กลับ Kernel; stride1, padding0, bias0",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "cnn-correlation",
         "input": [
@@ -1217,7 +1217,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-cnn-no-flip.svg",
       "bytes": 47102,
       "sha256": "b05a680bb759f35d2a1ecf4236bbe6633e7ce2cf7d8ebe26377a8dd6a4702578",
-      "svgSha256": "40607be46c897d7a60053a51d9a3875a628eff3c3e524252356685a1b6dbcd53",
+      "svgSha256": "73aa754214ed9b5344bb8423411adc0743cae0c677111b3f5715c2cce8322cda",
       "labelCount": 38
     },
     {
@@ -1237,7 +1237,7 @@
       "assumptions": "window2, stride2, padding0; เก็บค่าเฉลี่ยก่อนปัด",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "pooling",
         "input": [
@@ -1295,7 +1295,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-cnn-pooling.svg",
       "bytes": 39622,
       "sha256": "18c2c5ae7763be7e96b6ff1871fe1adf98028621333b2cdf09dd6904799ce2ed",
-      "svgSha256": "0a6f4f1c08810294ffddd886edf7e6421f6848d1f52fb8fdf62e49f01e34bc0e",
+      "svgSha256": "47700aa872b50eb847c7f365c28db865cc87f01807fdb683bce617e9e6724875",
       "labelCount": 33
     },
     {
@@ -1315,7 +1315,7 @@
       "assumptions": "Singly linked list ไม่มี cycle; ไม่อ้างตำแหน่ง RAM",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "linked-references",
         "values": [
@@ -1340,7 +1340,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-linked-references.svg",
       "bytes": 39046,
       "sha256": "20d3d302562fe78d674924e416084ef9d7a67f2778352736d0251b8228d8d8e3",
-      "svgSha256": "5a9eed19790f65811bcd4085c0ef79674cb448261567e2e942dd4175a35dcaae",
+      "svgSha256": "7a24acb8c0a6edd4afe9e7b61ed01aae7e4172ab8d4d1069e1403b543d37d26d",
       "labelCount": 13
     },
     {
@@ -1360,7 +1360,7 @@
       "assumptions": "มี reference ไป Node20แล้ว; tailยังอ้าง30",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "linked-insert",
         "before": [
@@ -1393,7 +1393,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-linked-insert.svg",
       "bytes": 54656,
       "sha256": "f4837983ac2069e57f2b4630bde782e315f9ddf07c51f02b9319c3af1f01d13c",
-      "svgSha256": "5599f9477a1fbf9183ab1936125de99101414c1960cba1e2a56fd76237cb9ce3",
+      "svgSha256": "6d82d71b848bfd03a3c91705e063d2491750c570ed8dff09adfbf5047445271c",
       "labelCount": 21
     },
     {
@@ -1413,7 +1413,7 @@
       "assumptions": "Class เองก็เป็น object; arrows แสดงการสร้าง instance",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "class-instances",
         "balances": [
@@ -1433,7 +1433,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-class-instances.svg",
       "bytes": 53562,
       "sha256": "9dc79f3e9b76816c0eacecd24d362d6c1cef29a4c79c0aa24e32803937583880",
-      "svgSha256": "319287853bd2f044da56b970259fe700b98ec45f35ceb1b54b1b34918ed6d090",
+      "svgSha256": "c57a4662aac1ccb736c060b7d0b17056a18fd674a6aa11ab8913818e170cf5de",
       "labelCount": 13
     },
     {
@@ -1453,7 +1453,7 @@
       "assumptions": "การ assign อ้างอิง ไม่ใช่ copy/deepcopy",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "alias",
         "before": 1300,
@@ -1473,7 +1473,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-object-alias.svg",
       "bytes": 50030,
       "sha256": "049ebd5d0c30b9545f555382a98373a83355487410dfbb45955fcc070d6f6fd3",
-      "svgSha256": "56d65486b15ba78234eb88b3764486fe4156a877dbb21690e85541298973b997",
+      "svgSha256": "e07a26e05d62607769f5232b30fe978193010d7bba92cc6a92e88a010ad09acd",
       "labelCount": 13
     },
     {
@@ -1493,7 +1493,7 @@
       "assumptions": "ตาม policy ของ Account ในบท ไม่ใช่ค่าทุก domain",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "property",
         "valid": 500,
@@ -1508,7 +1508,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-property-validation.svg",
       "bytes": 56118,
       "sha256": "c66eccdd7d8ac6e7a36aea8c2070292144cfb6e97d721dd2e6aeb17743eaebee",
-      "svgSha256": "89131af941534c5ba6d2e28d7f001083368d4fac3aa3d610ebc8b91aab160f55",
+      "svgSha256": "788cb56d72a9ad173439e2f40fb356703a8f7429cc596a69da23eec6d2641ac8",
       "labelCount": 14
     },
     {
@@ -1528,7 +1528,7 @@
       "assumptions": "Count เพิ่มเฉพาะ Deposit/Withdraw ที่สำเร็จ",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "account-trace",
         "balances": [
@@ -1554,7 +1554,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-property-state.svg",
       "bytes": 38452,
       "sha256": "7c0aa166bf5a143eff6df497e1977b6d611e79d07b0626cc5af02edddd0fe475",
-      "svgSha256": "a3b6b0f49503aa4a0e16e42a7513fd2fadcd20a6459b89dae3731aefb41d8ba8",
+      "svgSha256": "c3317d590117d305e59bacc6071f1f79a5b7677c1cd4105f7580de1d5504b4fb",
       "labelCount": 14
     },
     {
@@ -1574,7 +1574,7 @@
       "assumptions": "ลำดับฐาน D(B,C); แต่ละ chain เรียก super()",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "mro",
         "order": [
@@ -1599,7 +1599,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-diamond-mro.svg",
       "bytes": 44904,
       "sha256": "cd2e407629427b035cb7956f45a5a340eeed04a030c653b434be137c0dd28ae1",
-      "svgSha256": "8bb5b598d793d7608b209acea97cee66f5320709e8bfd88bbf0b4135de114e65",
+      "svgSha256": "d18b307d1e997f82b5b21a78cb638e924708b4ff24c91fdd715bd3eae6a1fa7c",
       "labelCount": 15
     },
     {
@@ -1619,7 +1619,7 @@
       "assumptions": "ขั้นต่ำ500เพิ่ม precondition; ระวัง LSP",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "savings",
         "initial": 10000,
@@ -1637,7 +1637,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-savings-dispatch.svg",
       "bytes": 63520,
       "sha256": "7a7ad9bff05b9d6635a595d58b997128d9c37b24d78e311f99304e4a1f63dfb4",
-      "svgSha256": "f92b9510357e1935c6ced632729e7204b63a0b562937188fc15fff40e6bb7be6",
+      "svgSha256": "be55a4be7bc3c465511e55b8997e7a33c9c44374acd40210a86b12232f9fb75b",
       "labelCount": 14
     },
     {
@@ -1657,7 +1657,7 @@
       "assumptions": "หนึ่งการเรียกต่อ Object; สูตร arithmetic คงที่",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "polymorphism",
         "radius": 2,
@@ -1676,9 +1676,9 @@
       "height": 1580,
       "file": "courses/oop-python/summaries/images/visual15-polymorphic-area.webp",
       "svg": "docs/diagrams/ai-oop/visual15-polymorphic-area.svg",
-      "bytes": 47066,
-      "sha256": "d647e4aeeaadee9b2adc9b851a5eba30779e0b4408aec391d90941efd354a69e",
-      "svgSha256": "cc58029f1fe03c8d16d4aeac7b347ef2e4ce08419d8f07d5230440baa051309a",
+      "bytes": 45882,
+      "sha256": "d1e939dae1024b5c38fe8026b5d208277fe0bd07d2b5aee12d1a2796cbf8bb37",
+      "svgSha256": "dd215448428609b0b8f41e36459374aa45bef5e6fda2f1dd3d618c1952d52fd6",
       "labelCount": 11
     },
     {
@@ -1698,7 +1698,7 @@
       "assumptions": "ABCMeta บังคับเฉพาะ abstract methods ที่ค้าง",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "abc",
         "abstract": [
@@ -1715,9 +1715,9 @@
       "height": 1996,
       "file": "courses/oop-python/summaries/images/visual15-abc-duck.webp",
       "svg": "docs/diagrams/ai-oop/visual15-abc-duck.svg",
-      "bytes": 60946,
-      "sha256": "504a3484820d996a2b7d652d3b07570ee1b9beb2b135c1559901f568670f5f68",
-      "svgSha256": "587f44ca6190631912bc85e5afe60e6da65b9fc3c5e9909a7f783d8b5db5ad07",
+      "bytes": 59972,
+      "sha256": "bae3c9221d0d14dae3172142b8ea68c1f94d9524ec6eb455a34b6fa347a3f86b",
+      "svgSha256": "3838a0ea6d94d9c977513d1618264e011c6999cda0f0c65140309ad89481ef8e",
       "labelCount": 16
     },
     {
@@ -1737,7 +1737,7 @@
       "assumptions": "Aggregation ตามกฎ domain; snapshot ไม่ deep copy",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "team-player",
         "goals": 1,
@@ -1755,7 +1755,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-team-player.svg",
       "bytes": 49698,
       "sha256": "5594b5deebe2ea7e9a1b866cb0c2b4762776d325844c2a00cffb4681cfafd5a8",
-      "svgSha256": "2de9d12eac8237f6b77964caecc01b54f9088f76abf6d86e74457f22c15342ee",
+      "svgSha256": "e59717b4812016c950fa94c2b92c16da3e250d3c1155117b5f8f3ebc77e8920e",
       "labelCount": 13
     },
     {
@@ -1775,7 +1775,7 @@
       "assumptions": "พื้นที่เป็นข้อมูลที่ให้ ไม่สมมติรูปทรงห้อง",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "composition",
         "areas": [
@@ -1796,7 +1796,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-house-composition.svg",
       "bytes": 50516,
       "sha256": "7a60fbfa0e2a0d7977cf1bcb537ad1a45fe9101f71c83b520dcbbbefccae637d",
-      "svgSha256": "77cd60ac2748d2e07aba808c16c440d1b1f00081fc2e7328d21af24426d1bcea",
+      "svgSha256": "012ed16ee99a294a323b5fe192301774cf09c046b5bcd84fd4caa3e730caac46",
       "labelCount": 14
     },
     {
@@ -1816,7 +1816,7 @@
       "assumptions": "สัญลักษณ์สื่อแบบจำลอง ไม่ใช่ Runtime enforcement",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "uml",
         "types": [
@@ -1835,7 +1835,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-uml-symbols.svg",
       "bytes": 50638,
       "sha256": "56e60751b1483dfbef8ba31942ddbf2e15d877f3ed25d4e42836f59254341972",
-      "svgSha256": "947794141a34a4b31bd23be46138b46bcafd7bbdc41336e4b138543f7962cef5",
+      "svgSha256": "f411d7d678215828fae5b3c35f26c44a5d1d608d3326bb994b9b52144aa70bce",
       "labelCount": 21
     },
     {
@@ -1855,7 +1855,7 @@
       "assumptions": "จำลองใน Memory; ไม่ส่งข้อความหรือเขียนไฟล์",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "solid-service",
         "channels": [
@@ -1874,7 +1874,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-solid-service.svg",
       "bytes": 57076,
       "sha256": "da9558d42efd36a8f8a20fcd7f5c8b9b89cf63a37d03cd919e172db6116eb455",
-      "svgSha256": "39a431f14147eb834977fbf649ea68f5262f51e5a4e83d62a783b14e16043d72",
+      "svgSha256": "bb75ae611bd778028f3bfc88286366a305d12ddf59db114da7614412d436dc2a",
       "labelCount": 16
     },
     {
@@ -1894,7 +1894,7 @@
       "assumptions": "Abstract doubling; คัดลอก References ไม่ใช่ Object Graph",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "array-resize",
         "before": [
@@ -1925,7 +1925,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-array-resize.svg",
       "bytes": 60432,
       "sha256": "806d4eb4904bad3c35d35b84a432aaa5e4ba5982ad6434b4712eade9368cdb6d",
-      "svgSha256": "6f74d969e793f3e6e3c920a4e2d382eaaa4ed18b596906e22b51c8bb158c6bad",
+      "svgSha256": "54832d0f4b21e6554a0dffccea1f5d0c35e57e0725b9ee7a57ef7142221ae7f6",
       "labelCount": 27
     },
     {
@@ -1945,7 +1945,7 @@
       "assumptions": "นับ New writes + Copies; ไม่รวมเวลา Wall-clock",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "amortized",
         "costs": [
@@ -1979,7 +1979,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-array-amortized.svg",
       "bytes": 44872,
       "sha256": "32b4ba7f52ede6afd7fb411818886fb116fba79e3bd7ae1d3b2a9856203c5d09",
-      "svgSha256": "287cdfe625c4f9c065c4a3668933a41a2607dda048496bf41b8eccf89bc801ed",
+      "svgSha256": "e4a4095138fbcc13a301afb645a8fab38482f36f809f91c614a9321555f19032",
       "labelCount": 24
     },
     {
@@ -1999,7 +1999,7 @@
       "assumptions": "Top ด้านเดียว; Peek ไม่ลบข้อมูล",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "stack",
         "pushes": [
@@ -2022,7 +2022,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-stack-lifo.svg",
       "bytes": 37104,
       "sha256": "b782dcb6005344e4ec960759e64557cab4cc085bb49f0654e15430c6445c847a",
-      "svgSha256": "191729551eb3b087aaa7b99601b00dd19ae6ea354ccdf136ecea8bdb8055af49",
+      "svgSha256": "81c567246ae0479e637b04086120643c91967ad86f9cbddf4a3a102a76ab3066",
       "labelCount": 15
     },
     {
@@ -2042,7 +2042,7 @@
       "assumptions": "Token คั่นด้วย space; ผลสำเร็จเหลือหนึ่งค่า",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "postfix",
         "tokens": [
@@ -2081,7 +2081,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-postfix-operands.svg",
       "bytes": 43918,
       "sha256": "cb762b757e76509295132e2ca421ea4bac873fa784894758dd5705af42292a34",
-      "svgSha256": "c173c44d8647fb73a829ed95ae90b52ac96ab9d89d05c509abf07cabd60142a0",
+      "svgSha256": "421d40e58e30700212a6cd8bcf79bdc7c3719ae51308b6c22cb00c96f38263ce",
       "labelCount": 20
     },
     {
@@ -2101,7 +2101,7 @@
       "assumptions": "มี Head/Tail และ Size; Core operation ตามโมเดล",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "queue",
         "initial": [
@@ -2127,7 +2127,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-queue-fifo.svg",
       "bytes": 48474,
       "sha256": "2a048a7523717356bd8be3bf242ff1352ee228f975d0b6af96b4525ad3b3f8be",
-      "svgSha256": "d050a13cb127bd2c6ee77132bd9b42137e07ff0f437e2c6d3aae8554c47981be",
+      "svgSha256": "2dee5769628cba3a93dc6d7c79f02f299652aebe2c87cd7b76de9bd9205092fd",
       "labelCount": 17
     },
     {
@@ -2147,7 +2147,7 @@
       "assumptions": "Rear = ช่องใส่ถัดไป; Size แยก Full/Empty",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "circular",
         "capacity": 5,
@@ -2176,7 +2176,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-queue-circular.svg",
       "bytes": 52840,
       "sha256": "15564f49de23482be036c337ea58712a656a1585918f034821000ef6699f0758",
-      "svgSha256": "38eb3e582595e245622bc520d44f370e4db8749f62ca2d7a81c5c6bea182ee32",
+      "svgSha256": "765d76763ac3b01c90110105084e59bb53bb127669024810a50ebc260101039b",
       "labelCount": 26
     },
     {
@@ -2196,7 +2196,7 @@
       "assumptions": "สมมติแต่ละ Operation มีต้นทุนคงที่",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "growth",
         "n": [
@@ -2224,7 +2224,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-operation-growth.svg",
       "bytes": 53014,
       "sha256": "650526ac197f5664859bd49a6c5661f31e509dfb4adfda7b1cac5a3bd28e8e48",
-      "svgSha256": "23bcfd7d9795d667fa8bad6825ec0794cff65777b661f94f16f14e04985375db",
+      "svgSha256": "01308436e17585e5afb23af9fafc036d0403060943332ff7e712578e3f1296bd",
       "labelCount": 15
     },
     {
@@ -2244,7 +2244,7 @@
       "assumptions": "สีเขียวคือ Sorted suffix; strict > ทำให้ Stable",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "bubble",
         "states": [
@@ -2293,9 +2293,9 @@
       "height": 2180,
       "file": "courses/oop-python/summaries/images/visual15-bubble-passes.webp",
       "svg": "docs/diagrams/ai-oop/visual15-bubble-passes.svg",
-      "bytes": 42902,
-      "sha256": "85dc56381da7eefd5b86c41fd5586b89125934ceae2cdc71ac379660ac3de73b",
-      "svgSha256": "af0907170e4fb421884fe6c5a8ecd9b5b7a3ce6ac452b6b950f9ab0df0bbbd91",
+      "bytes": 43194,
+      "sha256": "e80be6f7ee0702bcf10b95a302b3916264d1227d8d1f19cebb37d66806491e35",
+      "svgSha256": "dca55d4f4f2f8d38a7d9c3716602904211a0ab28f28ce28cf6da2696d319703e",
       "labelCount": 36
     },
     {
@@ -2315,7 +2315,7 @@
       "assumptions": "Merge ใช้ ≤ ให้ Left มาก่อนเมื่อ Tie",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "merge",
         "left": [
@@ -2352,7 +2352,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-merge-final.svg",
       "bytes": 44542,
       "sha256": "b76eb49ac42ce2146a860c822b20c897952e129d276d0b7f09189252e61f22c1",
-      "svgSha256": "14858becdcdb653c37d4081a0fc15f66c86f21370fd5747ece3f075bb107d77a",
+      "svgSha256": "db343706025035d82db48ead24ce4659189792910e9cc6e07efcd50a32d493e1",
       "labelCount": 33
     },
     {
@@ -2372,7 +2372,7 @@
       "assumptions": "Pivot ท้าย; ≤; ไม่รวม Pivot ใน recursion ถัดไป",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "partition",
         "input": [
@@ -2413,7 +2413,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-quick-partition.svg",
       "bytes": 48538,
       "sha256": "63aa16bbb87df8face40e0edb0fafd30b2a96f61fb3e1f883fb180b136652388",
-      "svgSha256": "3b7c269f10c0eb71d738b7044d646d8cdbb08ae0fe1aeeb81d54a73057da9c80",
+      "svgSha256": "a10a241b7e4d821e24ae7c2a949e6ac3544d070adcdbb5949e3ef066211bcfb9",
       "labelCount": 32
     },
     {
@@ -2433,7 +2433,7 @@
       "assumptions": "Hash สมมติที่ประกาศ; Modulus=8",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "collision",
         "hashes": [
@@ -2458,7 +2458,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-hash-collision.svg",
       "bytes": 51608,
       "sha256": "efcf2d79404c11d4f7fb28887f8227a6fe494d6be29107d79b7be591e7a5af91",
-      "svgSha256": "ce93d308cf29538f3eed08939f29c199049260cc2feeeabde06cecbcfb5eb53a",
+      "svgSha256": "3a3dc0e1d3fe433ea2a067b960982bbca541cdde1a3b757d2d886026a1c98ea1",
       "labelCount": 16
     },
     {
@@ -2478,7 +2478,7 @@
       "assumptions": "Sentinel ใช้ is; ค้นต่อผ่าน Tombstone",
       "verification": "Independent model checks plus original SVG topology/label review; see check-ai-oop-visual-models.py",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
-      "review": "Pending model and rendered review",
+      "review": "PASS: scoped model, SVG topology, detailed raster and rendered-reader review; docs/ai-oop-final-visuals.md",
       "model": {
         "kind": "tombstone",
         "capacity": 5,
@@ -2507,7 +2507,7 @@
       "svg": "docs/diagrams/ai-oop/visual15-hash-tombstone.svg",
       "bytes": 54314,
       "sha256": "8d486d348f01e67f3abc31f4f195dca9dd4932e79f9e6dd4e37160dfe1b09ebe",
-      "svgSha256": "6f7f45c7d421dee8e81050f0988941de26d07ed0b86492907a3153fe1ae0d09c",
+      "svgSha256": "061f830ffdb52606453221c5264a9ed9c0fbccfee1a6abd10bddcfed1bad38a0",
       "labelCount": 24
     }
   ]

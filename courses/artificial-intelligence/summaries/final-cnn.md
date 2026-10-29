@@ -21,6 +21,12 @@ S11 pp.12–14 ยก CNN สำหรับข้อมูลเชิงพื
 ## Kernel และ convention {#kernel}
 S11 pp.15–18,21–22 ใช้ kernel/filter เลื่อนไปคูณตำแหน่งตรงกันแล้วรวม (dotproduct) เรียก convolution ตามการใช้ชื่อใน CNN แต่การคำนวณแบบ **ไม่กลับ kernel** นี้คือ cross-correlation บทนี้ใช้ bias0,dilation1 และสูตร
 
+
+![ตัวอย่างหน้า16ใช้input4×4และkernel(9,8,7;6,5,4;3,2,1) ไม่กลับkernel แล้วรวมเก้าผลคูณได้228 ส่วน312เป็นผลเมื่อกลับkernel180องศา ไม่ใช่sumเดิม ในภาพนี้stride1 padding0 bias0 จึงได้output2×2](images/visual15-cnn-no-flip.webp "ภาพเขียนเสริม: เลื่อน Kernel โดยไม่กลับ Cross-correlation ช่องแรก — ไม่กลับ Kernel; stride1, padding0, bias0")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://cs231n.github.io/convolutional-networks/)
+
+อ่านภาพ: ตัวอย่างหน้า16ใช้input4×4และkernel[9,8,7;6,5,4;3,2,1] ไม่กลับkernel แล้วรวมเก้าผลคูณได้228 ส่วน312เป็นผลเมื่อกลับkernel180องศา ไม่ใช่sumเดิม ในภาพนี้stride1 padding0 bias0 จึงได้output2×2
+
 $$
 Y_{ij}=\sum_{u=0}^{K_h-1}\sum_{v=0}^{K_w-1}X_{is+u-p,js+v-p}K_{uv}
 $$
@@ -144,6 +150,12 @@ PaddedF3:
 
 ## Max/Average Pooling {#pooling}
 S11 pp.24–26 ใช้หน้าต่างเลือกค่าสูงสุดเพื่อลด spatialsize ไม่เรียน weights ใน pooling มาตรฐาน ต้องระบุ size/stride และ padding แยกจาก convolution
+
+
+![จากinputหน้า25ขนาด4×4 ใช้window2×2 stride2 และไม่padding: maxได้(6,8;3,4) แต่averageได้(3.25,4.75;2,2.5) ช่องขวาบนใช้(1,3;8,7)รวม19หาร4=4.75 ไม่ใช้ค่าสูงสุดทั้งภาพแทนทุกwindow](images/visual15-cnn-pooling.webp "ภาพเขียนเสริม: Pooling ทีละหน้าต่าง Max ไม่ใช่ Average — window2, stride2, padding0; เก็บค่าเฉลี่ยก่อนปัด")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://cs231n.github.io/convolutional-networks/)
+
+อ่านภาพ: จากinputหน้า25ขนาด4×4 ใช้window2×2 stride2 และไม่padding: maxได้[6,8;3,4] แต่averageได้[3.25,4.75;2,2.5] ช่องขวาบนใช้[1,3;8,7]รวม19หาร4=4.75 ไม่ใช้ค่าสูงสุดทั้งภาพแทนทุกwindow
 
 p.25 ให้ input4×4,size2,stride2:
 ```text

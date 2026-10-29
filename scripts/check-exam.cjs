@@ -1,5 +1,6 @@
 const fs=require('fs'),crypto=require('crypto'),assert=require('assert/strict');
 const C=require('../assets/practice-contract.js'),E=require('../assets/exam-contract.js'),B=require('./lesson-build.cjs'),R=require('./exam-build.cjs'),catalog=require('../catalog.json');
+const visuals=require('./ai-oop-visual-markdown.cjs');
 const registry=require('./lessons.json'),seen=new Set(),totals={choice:0,numeric:0,self:0},courses={},difficulty={easy:0,medium:0,hard:0};
 const normalized=s=>s.toLowerCase().replace(/\d+(?:\.\d+)?/g,'#').replace(/[\s\p{P}]+/gu,'');
 const segmenter=new Intl.Segmenter('th',{granularity:'word'}),tokens=s=>new Set([...segmenter.segment(s.toLowerCase().replace(/[0-9]+/g,'#'))].filter(v=>v.isWordLike).map(v=>v.segment));
@@ -7,6 +8,7 @@ const reviewedPairs=[...require('./exam-reviewed-pairs.json'),...require('./unix
 let verified=0;
 for(const source of registry){
  const {meta,body}=B.metadata(fs.readFileSync(source,'utf8')),baseFile=`courses/${meta.course}/practice/${meta.slug}.json`,file=`courses/${meta.course}/exam/${meta.slug}.json`;
+ const evidenceBody=visuals.strip(body); // Preserve literal pre-illustration evidence and every original answer key.
  const baseRaw=fs.readFileSync(baseFile,'utf8').replace(/\r\n/g,'\n'),original=require('./reading-baseline.json').find(l=>l.id===meta.id);if(original)assert.equal(crypto.createHash('sha256').update(baseRaw).digest('hex'),original.practice,'Original practice bank stays unchanged');else assert.ok(['unix-tools','internet-of-things'].includes(meta.course),'New banks explicitly audited by course suites');
  const base=JSON.parse(baseRaw),extra=JSON.parse(fs.readFileSync(file)),headings=B.markdown(body,{root:process.cwd(),source,output:`read/${meta.course}/${meta.slug}.html`,catalog}).headings,bank=E.prepare(base,extra,headings);
  for(let i=0;i<bank.data.questions.length;i++)for(let j=i+1;j<bank.data.questions.length;j++){const a=bank.data.questions[i],b=bank.data.questions[j],substance=q=>meta.course==='unix-tools'?q.prompt.split('ตัวเลขตอบเป็นค่า: ').at(-1):q.prompt,x=tokens(substance(a)),y=tokens(substance(b)),common=[...x].filter(v=>y.has(v)).length,overlap=common/(x.size+y.size-common);if(overlap>.68)assert.ok(reviewedPairs.some(p=>p.ids.includes(a.id)&&p.ids.includes(b.id)&&p.reason.length>30),'Review near-duplicate pair: '+a.id+' / '+b.id)}
@@ -16,7 +18,7 @@ for(const source of registry){
   if(q.choices)assert.equal(new Set(q.choices.map(c=>c.text)).size,q.choices.length,'Distinct distractor text');
   if(q.type==='self'){assert.equal(C.grade(q,'ungraded'),null);continue}assert.equal(C.grade(q,''),null);assert.equal(C.grade(q,String(q.answer)),true);if(q.type==='numeric'){const t=q.absoluteTolerance+q.relativeTolerance*Math.abs(q.answer);assert.equal(C.grade(q,String(q.answer+Math.max(t*2,1))),false);if(t){assert.equal(C.grade(q,String(q.answer+t)),true);assert.equal(C.grade(q,String(q.answer-t)),true)}}
  }
- for(const q of extra.questions){difficulty[q.difficulty]++;const section=body.split(new RegExp('^#{2,4} .*\\{#'+q.reference+'\\}\\n','m'))[1]?.split(/^## /m)[0];assert.ok(section);assert.ok(section.replace(/```[\s\S]*?```|\$\$[\s\S]*?\$\$/g,'').trim().startsWith(q.verification.evidence),'Literal reviewed evidence is traceable: '+q.id);verified++;}
+ for(const q of extra.questions){difficulty[q.difficulty]++;const section=evidenceBody.split(new RegExp('^#{2,4} .*\\{#'+q.reference+'\\}\\n','m'))[1]?.split(/^## /m)[0];assert.ok(section);assert.ok(section.replace(/```[\s\S]*?```|\$\$[\s\S]*?\$\$/g,'').trim().startsWith(q.verification.evidence),'Literal reviewed evidence is traceable: '+q.id);verified++;}
  for(const count of [10,20,30,'full']){const ids=E.choose(bank,'mock','all',count,()=>.31);assert.equal(ids.length,count==='full'?30:count);assert.equal(new Set(ids).size,ids.length);assert.equal(E.subset(bank,ids).questions.length,ids.length)}
  for(const t of bank.topics){assert.deepEqual(E.choose(bank,'topic',t.id,'full'),t.ids);assert.ok(t.ids.every(id=>bank.data.questions.find(q=>q.id===id).reference===t.id))}
  assert.throws(()=>E.choose(bank,'mock','all',11));assert.throws(()=>E.choose(bank,'topic','missing','full'));assert.throws(()=>E.choose(bank,'mock','all',10,()=>1));assert.throws(()=>E.subset(bank,[bank.data.questions[0].id,bank.data.questions[0].id]));

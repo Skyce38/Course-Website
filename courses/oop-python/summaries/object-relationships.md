@@ -81,12 +81,24 @@ print(h.room_count, h.total_area)  # 3 38
 ## Trace Identity และ Container Copy {#trace}
 เริ่ม p(goals0)→เพิ่มเข้า A ยัง objectp เดิม→p.score ทำ goals1 ซึ่ง A เห็นด้วย→remove ออก A→เพิ่มเข้า B ยัง is p และ goals1 ไม่มีการสร้าง Player ใหม่ระหว่างย้าย การทำ `Player(p.name)`แทนจะเริ่ม goals0 และทำประวัติหาย
 
+
+![TeamAรับreferenceของPlayerpเดิม เมื่อp.score goalsเป็น1 ก่อนremoveจากAแล้วaddเข้าB ไม่สร้างPlayerใหม่ จึงb.players(0) is pและgoalsยัง1 Snapshotของcontainerยังอ้างPlayerเดิมได้แม้Aเอาออกแล้ว ไม่ใช่deepcopy](images/visual15-team-player.webp "ภาพเขียนเสริม: ย้ายทีม แต่ Player เดิม Identity และประวัติยังอยู่ — Aggregation ตามกฎ domain; snapshot ไม่ deep copy")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.python.org/3.12/tutorial/classes.html)
+
+อ่านภาพ: TeamAรับreferenceของPlayerpเดิม เมื่อp.score goalsเป็น1 ก่อนremoveจากAแล้วaddเข้าB ไม่สร้างPlayerใหม่ จึงb.players[0] is pและgoalsยัง1 Snapshotของcontainerยังอ้างPlayerเดิมได้แม้Aเอาออกแล้ว ไม่ใช่deepcopy
+
 House สร้าง 3rooms พื้นที่ 20,12,6 ตาม sourcepp.37–38 รวม 38 การสร้าง room สี่เหลี่ยม?source ไม่ได้ให้รูปทรง จึงไม่แต่ง width/height เพื่อคำนวณพื้นที่ใหม่ `total_area`รวมข้อมูล area ที่มีอยู่
 
 `team.players`เป็น tuple ใหม่ที่ป้องกัน append ลง container ภายในโดยตรง แต่สมาชิกยังเป็น reference เดิม การเรียก team.players[0].score() ยังแก้ Player ได้ Copycontainer ไม่ใช่ deepcopy;ถ้าต้องการ immutableview ต้องออกแบบให้คืนข้อมูลค่าเช่น room_summaries
 
 ## Composition ไม่ใช่ Garbage-Collection Command {#lifetime}
 pp.39–41 เน้นว่าไม่มี external reference ใน interface ตัวอย่างจึงหมดการเข้าถึง room เมื่อ house หมดไป แต่ Python ไม่ห้ามสร้าง Room ลอยๆหรือเก็บ alias ถ้าโค้ดเปิดทาง `del house`ลบ reference หนึ่งชื่อ ไม่รับรอง part ถูกทำลายทันทีเมื่อยังมี alias อยู่ แยกความเป็นเจ้าของเชิง domain ออกจากการจัดสรร/เก็บกวาดหน่วยความจำ และอย่าใช้ private เป็นเหตุผลว่าบังคับ ownership ได้ 100%
+
+
+![Houseสร้างRoomภายในจากข้อมูลชื่อ/พื้นที่ Living20 Kitchen12 Bath6 รวม38ตามตัวอย่าง การควบคุมRoomผ่านinterfaceแสดงcompositionเชิงdomain เพชรอยู่ฝั่งHouse ไม่ได้บังคับว่าdel houseทำลายทุกRoomทันทีหากมีaliasหรือเปลี่ยนinterface](images/visual15-house-composition.webp "ภาพเขียนเสริม: House กับ Room Ownership ไม่ใช่คำสั่ง GC — พื้นที่เป็นข้อมูลที่ให้ ไม่สมมติรูปทรงห้อง")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.python.org/3.12/tutorial/classes.html)
+
+อ่านภาพ: Houseสร้างRoomภายในจากข้อมูลชื่อ/พื้นที่ Living20 Kitchen12 Bath6 รวม38ตามตัวอย่าง การควบคุมRoomผ่านinterfaceแสดงcompositionเชิงdomain เพชรอยู่ฝั่งHouse ไม่ได้บังคับว่าdel houseทำลายทุกRoomทันทีหากมีaliasหรือเปลี่ยนinterface
 
 ## ต้นทุนและการประยุกต์ {#complexity}
 Team การตรวจซ้ำ/ลบด้วย list ต้อง O(n),สร้าง tuplesnapshotO(n);การเข้าถึง object ที่รู้อยู่แล้ว O(1) ภายใต้แบบจำลองนี้ House.total_area เป็น O(r) สำหรับ r ห้อง ไม่ใช่ O(1) เพียงเพราะเป็น property LabLibrary/Gym/Clinic มีหลายความสัมพันธ์พร้อมกัน:หนังสือ/สมาชิกอาจ aggregate แต่ record ที่ระบบสร้างมี composition ตามโจทย์ ต้องดูสัญญาแต่ละ task ไม่ใช้คำว่า has-a แล้วตัดสินทั้งหมด

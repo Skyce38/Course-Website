@@ -20,6 +20,12 @@ Hash ที่ใช้งานได้ต้องคงที่ระหว
 ## Chaining และ Linear Probing {#resolution}
 pp.12–16:chaining เก็บหลาย(key,value) ใน bucket เดียว แยกแต่ละ list ด้วย comprehension ไม่ใช้ `[[]]*capacity`ซึ่งแชร์ list เดียวทั่วตาราง เมื่อ key มีอยู่ insert คือ update ไม่เพิ่ม size;key ต่างที่ hash ชนกันต้องอยู่ร่วมกันได้
 
+
+![hashสมมติ10และ18ที่capacity8ให้index2ทั้งคู่ แต่keysต่างกันยังต้องเก็บร่วมกัน Chainingเก็บหลายentriesในbucket2 ส่วนLinearProbingลอง2แล้ว3เมื่อชน ไม่ทิ้งentryเก่าและไม่ใช้hashเท่ากันแทนequality](images/visual15-hash-collision.webp "ภาพเขียนเสริม: Collision ไม่ใช่ Key เท่ากัน ต้องตรวจ Equality ต่อ — Hash สมมติที่ประกาศ; Modulus=8")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.python.org/3.12/glossary.html#term-hashable)
+
+อ่านภาพ: hashสมมติ10และ18ที่capacity8ให้index2ทั้งคู่ แต่keysต่างกันยังต้องเก็บร่วมกัน Chainingเก็บหลายentriesในbucket2 ส่วนLinearProbingลอง2แล้ว3เมื่อชน ไม่ทิ้งentryเก่าและไม่ใช้hashเท่ากันแทนequality
+
 Linear probing สำรวจ(index+step)%capacity ใน array เดียว None แปลไม่เคยใช้จึงหยุดค้นได้ แต่ตำแหน่งที่เคยมี key แล้วลบต้องใช้ TOMBSTONE ไม่ใช่ None เพราะมี keys ที่ถูกเลื่อนไปด้านหลังยังอาศัย probechain นี้อยู่
 
 **ขยายความจาก source:**insert ต้องค้นต่อผ่าน tombstone เพื่อหา key เดิมก่อน มิฉะนั้น update อาจกลายเป็น duplicate key และทุก probe ต้องมีขอบเขต capacity ครั้งเพื่อไม่วนไม่จบเมื่อตารางเต็ม/มีแต่ tombstones ใช้`is`กับ sentinel เพื่อไม่ให้ custom equality เปลี่ยนความหมายของ marker
@@ -129,6 +135,12 @@ print(list(order),order.popitem(last=False)) # ['B','A'] ('B',2)
 
 ## Trace Probe และ Tombstone {#trace}
 cap5,A/B/C ต่าง key แต่ hash2 ทั้งหมด:
+
+
+![ForcedKey A,B,Cมีhash2และcapacity5 จึงอยู่slot2,3,4 ลบAต้องใส่TOMBSTONEที่2 แล้วupdateB42ต้องเดินผ่านmarkerจนพบBที่3และsizeยัง2 ไม่reuse2ทันทีจนเกิดduplicateB และทุกprobeต้องจบภายในcapacityครั้ง](images/visual15-hash-tombstone.webp "ภาพเขียนเสริม: Tombstone รักษาทางค้น Update ต้องหา Key เดิมก่อน — Sentinel ใช้ is; ค้นต่อผ่าน Tombstone")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.python.org/3.12/glossary.html#term-hashable)
+
+อ่านภาพ: ForcedKey A,B,Cมีhash2และcapacity5 จึงอยู่slot2,3,4 ลบAต้องใส่TOMBSTONEที่2 แล้วupdateB42ต้องเดินผ่านmarkerจนพบBที่3และsizeยัง2 ไม่reuse2ทันทีจนเกิดduplicateB และทุกprobeต้องจบภายในcapacityครั้ง
 
 | ขั้น | slot2 | slot3 | slot4 | size |
 |---|---|---|---|---:|

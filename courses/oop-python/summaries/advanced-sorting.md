@@ -77,6 +77,12 @@ print(copy.sort(key=lambda r:r[1]),copy) # None, sorted list
 ## Merge ทุกระดับ {#merge}
 Week14 pp.13–18,31 ใช้ input[8,3,5,1,9,2,7,4]:แบ่งซ้าย[8,3,5,1]และขวา[9,2,7,4] แบ่งจน singleton แล้วรวม
 
+
+![Finalmergeของบทใช้left(1,3,5,8)และright(2,4,7,9) เลือก1,2,3,4,5,7,8ด้วย7comparisonsแล้วleftหมดจึงappend9จากright คงcaptionที่บทแก้ไว้ไม่คัดsourcecaptionที่บอกrightหมดก่อน ใช้≤เลือกซ้ายก่อนเมื่อkeyเท่ากัน](images/visual15-merge-final.webp "ภาพเขียนเสริม: Merge สองส่วนที่เรียงแล้ว ฝั่งซ้ายหมดก่อน ไม่ใช่ขวา — Merge ใช้ ≤ ให้ Left มาก่อนเมื่อ Tie")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.python.org/3.12/howto/sorting.html)
+
+อ่านภาพ: Finalmergeของบทใช้left[1,3,5,8]และright[2,4,7,9] เลือก1,2,3,4,5,7,8ด้วย7comparisonsแล้วleftหมดจึงappend9จากright คงcaptionที่บทแก้ไว้ไม่คัดsourcecaptionที่บอกrightหมดก่อน ใช้≤เลือกซ้ายก่อนเมื่อkeyเท่ากัน
+
 | left ที่เรียงแล้ว | right ที่เรียงแล้ว | merge result |
 |---|---|---|
 | [8] | [3] | [3, 8] |
@@ -93,6 +99,12 @@ Invariant:ผลลัพธ์ที่สร้างเรียงแล้�
 
 ## Quick Sort และ Lomuto ทีละขั้น {#quick}
 Week14 pp.20–22:array[3,6,8,10,1,2,1],lo0,hi6,pivot1,i เริ่ม−1
+
+
+![Input(3,6,8,10,1,2,1)เลือกpivotท้าย1และ≤ จนj4สลับ1ไปindex0 จากนั้นวางpivotที่split1 ได้(1,1,8,10,3,2,6) ซ้าย≤1และขวา>1 แต่ขวายังต้องrecursion ไม่เรียกpartitionเดียวว่าfullsortหรือstable](images/visual15-quick-partition.webp "ภาพเขียนเสริม: Lomuto Partition แรก Pivot เข้าที่ แต่ยังไม่เรียงทั้งหมด — Pivot ท้าย; ≤; ไม่รวม Pivot ใน recursion ถัดไป")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.python.org/3.12/howto/sorting.html)
+
+อ่านภาพ: Input[3,6,8,10,1,2,1]เลือกpivotท้าย1และ≤ จนj4สลับ1ไปindex0 จากนั้นวางpivotที่split1 ได้[1,1,8,10,3,2,6] ซ้าย≤1และขวา>1 แต่ขวายังต้องrecursion ไม่เรียกpartitionเดียวว่าfullsortหรือstable
 
 | ขั้น | การตัดสิน | สถานะสำคัญ |
 |---|---|---|

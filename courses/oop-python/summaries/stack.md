@@ -13,6 +13,12 @@
 ## LIFO และ Stack ADT {#concepts}
 Week11 pp.3–17: ข้อมูลที่เข้าทีหลังออกก่อน (Last In, First Out: LIFO) เข้าถึงข้อมูลจากด้าน top โดย push เพิ่มค่า, pop คืนค่าและนำออก และ peek อ่านค่าโดยไม่ลบ ส่วน is_empty และ len ใช้ตรวจสถานะ
 
+
+![Push10,20,30ทำให้30อยู่Top จากนั้นpopคืน30และนำออก ส่วนpeekอ่าน20โดยไม่ลบจึงsizeยัง2 StackADTกำหนดLIFOแต่ไม่ได้บังคับต้องใช้linkedlistหรือPythonlist ทุกimplementationต้องตกลงempty policyในบทใช้IndexError](images/visual15-stack-lifo.webp "ภาพเขียนเสริม: Push / Pop / Peek เปลี่ยนที่ Top ด้านเดียว — Top ด้านเดียว; Peek ไม่ลบข้อมูล")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.python.org/3.12/library/collections.html)
+
+อ่านภาพ: Push10,20,30ทำให้30อยู่Top จากนั้นpopคืน30และนำออก ส่วนpeekอ่าน20โดยไม่ลบจึงsizeยัง2 StackADTกำหนดLIFOแต่ไม่ได้บังคับต้องใช้linkedlistหรือPythonlist ทุกimplementationต้องตกลงempty policyในบทใช้IndexError
+
 Stack ADT กำหนดพฤติกรรม ไม่ได้บังคับรูปแบบจัดเก็บ Python list ใช้ท้ายลิสต์เป็น top ส่วน linked stack ใช้ head เป็น top เพื่อให้ push และ pop ไม่ต้องค้นหาโหนดก่อน tail
 
 ตัวอย่างเพิ่มค่า 10, 20, 30 ตามลำดับ จะได้ top เป็น 30 เมื่อ pop จะคืน 30 แล้ว peek อ่าน 20 โดยไม่ลบ ดังนั้น size ยังเป็น 2
@@ -151,6 +157,12 @@ Week11 pp.22–25, 37–41: อ่านอักขระทุกตัว เ
 
 ## Postfix: ลำดับตัวถูกดำเนินการ {#postfix}
 Lab11-1 ระบุ token คั่นด้วย space,+−*/และ stack ใหม่ต่อ expression ตัวอย่าง source3 4 + 2 *:
+
+
+![นิพจน์3 4 + 2 *เริ่มstackใหม่ อ่าน3,4แล้วpopright4,left3เพื่อบวกเป็น7 จากนั้นอ่าน2แล้วpopright2,left7คูณได้14 ต้องจบเหลือผลเดียว ส่วน10 3 −ต้อง10−3=7ไม่ใช่−7 ทุกขั้นเป็นข้อมูลคำนวณล่วงหน้าไม่ได้executecodeในเว็บ](images/visual15-postfix-operands.webp "ภาพเขียนเสริม: Postfix ใช้ Stack Pop ขวาก่อนซ้าย — Token คั่นด้วย space; ผลสำเร็จเหลือหนึ่งค่า")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.python.org/3.12/library/collections.html)
+
+อ่านภาพ: นิพจน์3 4 + 2 *เริ่มstackใหม่ อ่าน3,4แล้วpopright4,left3เพื่อบวกเป็น7 จากนั้นอ่าน2แล้วpopright2,left7คูณได้14 ต้องจบเหลือผลเดียว ส่วน10 3 −ต้อง10−3=7ไม่ใช่−7 ทุกขั้นเป็นข้อมูลคำนวณล่วงหน้าไม่ได้executecodeในเว็บ
 
 | token | การทำงาน | stack |
 |---|---|---|

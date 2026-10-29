@@ -9,6 +9,8 @@ try{for(const d of spec.assets){
  assert.ok(labels.length>=5,d.name+': SVG must render real labelled content');
  for(const t of labels)if(t.x<4||t.y<0||t.x+t.w>556||t.y+t.h>d.height/2)issues.push(d.name+': outside '+JSON.stringify(t));
  for(let i=0;i<labels.length;i++)for(let j=i+1;j<labels.length;j++){const x=labels[i],y=labels[j];if(Math.min(x.x+x.w,y.x+y.w)-Math.max(x.x,y.x)>3&&Math.min(x.y+x.h,y.y+y.h)-Math.max(x.y,y.y)>3)issues.push(d.name+': overlapping labels '+x.text+' / '+y.text);}
+ const tight=await p.locator('g').evaluateAll(ns=>ns.flatMap(n=>{const rs=[...n.children].filter(c=>c.tagName==='rect'),ts=[...n.children].filter(c=>c.tagName==='text');if(rs.length!==1||!ts.length)return [];const r=rs[0].getBBox();return ts.filter(t=>{const b=t.getBBox();return b.x<r.x+4||b.x+b.width>r.x+r.width-4||b.y<r.y+4||b.y+b.height>r.y+r.height-4}).map(t=>t.textContent)}));
+ for(const text of tight)issues.push(d.name+': label exceeds its own card/node padding: '+text);
  const png=path.join(temp,d.name+'.png');await p.screenshot({path:png});const webp=path.join(temp,d.name+'.webp');
  cp.execFileSync(process.env.STUDY_PYTHON||'python',['-c','from PIL import Image;import sys;im=Image.open(sys.argv[1]).convert("RGB");im.save(sys.argv[2],"WEBP",lossless=True,method=6)',png,webp]);
  const bytes=fs.readFileSync(webp);if(process.argv.includes('--verify'))assert.equal(sha(fs.readFileSync(path.join(root,d.file))),sha(bytes),d.name+': deterministic raster');else{fs.mkdirSync(path.dirname(path.join(root,d.file)),{recursive:true});fs.writeFileSync(path.join(root,d.file),bytes);}
