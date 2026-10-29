@@ -56,7 +56,7 @@ Accessed2026-10-29. These support the independently authored technical explanati
 - [PHP htmlspecialchars](https://www.php.net/manual/en/function.htmlspecialchars.php), context-specific output encoding.
 - [PHP password_hash](https://www.php.net/manual/en/function.password-hash.php), [password_verify](https://www.php.net/manual/en/function.password-verify.php), algorithm/version and verification.
 - [PHP session management](https://www.php.net/manual/en/features.session.security.management.php), strict mode, ID lifecycle and cookie precautions.
-- [Git basics](https://git-scm.com/book/en/v2/Getting-Started-Git-Basics), [gitignore](https://git-scm.com/docs/gitignore), [pull](https://git-scm.com/docs/git-pull), local snapshots, tracking and integration behavior.
+- [Git basics](https://git-scm.com/docs/gittutorial), [gitignore](https://git-scm.com/docs/gitignore), [pull](https://git-scm.com/docs/git-pull), local snapshots, tracking and integration behavior.
 - [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages), static hosting boundary.
 
 ## Limits

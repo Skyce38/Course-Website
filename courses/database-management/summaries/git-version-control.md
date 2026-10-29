@@ -14,7 +14,7 @@ Gitเป็นระบบควบคุมเวอร์ชันแบบ�
 
 
 ![Working Tree คือไฟล์ที่แก้ Indexคือ snapshotที่stage Commitบันทึก localhistory แล้ว Pushจึงส่งremote Gitไม่backupMySQLสดและไม่deployPHPให้อัตโนมัติ](images/db16-git-states.webp "ภาพเขียนเสริม: Commit ไม่ใช่ Push Review ก่อนส่งงาน — ห้าม stage secret หรือ private dump")
-ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://git-scm.com/book/en/v2/Getting-Started-Git-Basics)
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://git-scm.com/docs/gittutorial)
 
 อ่านภาพ: Working Tree คือไฟล์ที่แก้ Indexคือ snapshotที่stage Commitบันทึก localhistory แล้ว Pushจึงส่งremote Gitไม่backupMySQLสดและไม่deployPHPให้อัตโนมัติ
 
@@ -115,6 +115,6 @@ echo '<p>พบ ' . count($rows) . ' ทักษะ</p>';
 
 
 ## แหล่งข้อมูลและขอบเขต {#sources}
-DB-S01 หน้า22–34,36; DB-S03 หน้า19–28. อ้างอิงเสริม [Git basics](https://git-scm.com/book/en/v2/Getting-Started-Git-Basics), [gitignore](https://git-scm.com/docs/gitignore), [git-pull](https://git-scm.com/docs/git-pull), [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages).
+DB-S01 หน้า22–34,36; DB-S03 หน้า19–28. อ้างอิงเสริม [Git basics](https://git-scm.com/docs/gittutorial), [gitignore](https://git-scm.com/docs/gitignore), [git-pull](https://git-scm.com/docs/git-pull), [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages).
 
 [บัญชีแหล่งข้อมูลและข้อจำกัด](../../../docs/database-source-coverage.md) ระบุเลขหน้ากายภาพของ PDF ทุกครั้ง เอกสารต้นฉบับที่ผู้ใช้ให้เป็นไฟล์ local-only และไม่ได้เผยแพร่ซ้ำ ภาพและโจทย์ฝึกเป็นงานเขียนเสริมที่แยกจากต้นฉบับ
