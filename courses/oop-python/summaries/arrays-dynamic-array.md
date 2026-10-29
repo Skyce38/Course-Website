@@ -22,6 +22,12 @@ FixedArray กำหนด capacity ตอนสร้างและปฏิ�
 ## Doubling และ Amortized Analysis {#amortized}
 Week7 pp.40–47,Week8 pp.3–8:เริ่ม capacity1 ถ้าเต็มให้ allocate2 เท่า คัดลอกค่าจริงแล้ว append ใหม่ ตารางต่อไปนับ **การเขียนค่าใหม่+copy live cells** ตามแบบจำลอง source ไม่ใช่ทุก allocation instruction หรือเวลา wall-clock
 
+
+![ในโมเดลเริ่มcapacity1และdoubling ต้นทุนwriteใหม่บวกcopyแต่ละappendคือ1,2,3,1,5,1,1,1 รวม15เฉลี่ย15/8=1.875 หน่วย; รอบที่5แพง5หน่วยจึงไม่ใช่เวลาคงที่ทุกcall การพิสูจน์ทั้งลำดับไม่ต้องสมมติinputสุ่มและไม่ใช่เวลาจริงของCPython](images/visual15-array-amortized.webp "ภาพเขียนเสริม: แปด Appends มีต้นทุน15 Amortized ไม่ใช่ทุกครั้ง O(1) — นับ New writes + Copies; ไม่รวมเวลา Wall-clock")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.python.org/3.12/tutorial/classes.html)
+
+อ่านภาพ: ในโมเดลเริ่มcapacity1และdoubling ต้นทุนwriteใหม่บวกcopyแต่ละappendคือ1,2,3,1,5,1,1,1 รวม15เฉลี่ย15/8=1.875 หน่วย; รอบที่5แพง5หน่วยจึงไม่ใช่เวลาคงที่ทุกcall การพิสูจน์ทั้งลำดับไม่ต้องสมมติinputสุ่มและไม่ใช่เวลาจริงของCPython
+
 | append ครั้ง | size | capacity หลัง | copies รอบนี้ | cost รอบนี้ | cost สะสม |
 |---|---:|---:|---:|---:|---:|
 |1|1|1|0|1|1|
@@ -140,6 +146,12 @@ print(m._index((1,2)), m[1,2])  # 6 7
 99: ลงindex1     [10,99,20,30,40,...], size5
 ```
 ถ้าเลื่อนซ้ายไปขวาค่าที่จะคัดลอกจะถูกทับ เช่นได้ 20 ซ้ำแทน 30/40 Removeindex1 เก็บ 99 ไว้ก่อน→เลื่อน index2→1,3→2,4→3→ลด size→clear ช่องท้าย ได้[10,20,30,40]และคืน 99 ตรงแนว Week8 pp.18–24
+
+
+![โมเดลDynamicArrayเริ่ม(10,20,30,40) size4capacity4 เมื่อappend50ให้สร้างbuffer8ช่อง copyสมาชิกเดิม4ตัวแล้วเขียน50 ได้size5capacity8 ช่องว่างหลังsizeไม่ใช่ข้อมูลจริง และPythonlistไม่ได้รับรองการโตสองเท่าเป๊ะ](images/visual15-array-resize.webp "ภาพเขียนเสริม: Size ไม่ใช่ Capacity ขยายก่อนเขียนสมาชิกใหม่ — Abstract doubling; คัดลอก References ไม่ใช่ Object Graph")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.python.org/3.12/tutorial/classes.html)
+
+อ่านภาพ: โมเดลDynamicArrayเริ่ม[10,20,30,40] size4capacity4 เมื่อappend50ให้สร้างbuffer8ช่อง copyสมาชิกเดิม4ตัวแล้วเขียน50 ได้size5capacity8 ช่องว่างหลังsizeไม่ใช่ข้อมูลจริง และPythonlistไม่ได้รับรองการโตสองเท่าเป๊ะ
 
 Invariant:liveelements อยู่ _data[0:size],ว่างหลัง size;pop ที่ท้ายไม่ต้องเลื่อนและไม่ shrink ในโมเดลนี้ จึง O(1) การคืนค่า removed ไม่ได้คัดลอก graph ของ object ถ้าเก็บ reference ก็คืน reference เดิม
 

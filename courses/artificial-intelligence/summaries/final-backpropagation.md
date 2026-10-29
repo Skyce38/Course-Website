@@ -39,6 +39,12 @@ $$
 ## Loss, Sign และ Backpropagation {#backprop}
 S10 p.23 ใช้ squared error รวมข้อมูล/outputs พร้อมตัวคูณ 1/2; ตัวอย่างนี้ใช้หนึ่ง sample/หนึ่ง output จึง
 
+
+![จากตัวอย่างเดิม go=(y−t)y(1−y)=−0.055864594; hidden ใช้ output weightsเก่าv1=0.7,v2=−0.5 จึงg1=−0.009559595,g2=0.006828282 แล้วใช้θnew=θold−0.2gradientพร้อมกันทุกตัว bias outputใหม่0.111172919 ไม่เปลี่ยนvก่อนหาhidden gradient](images/visual15-backprop-gradient.webp "ภาพเขียนเสริม: Backward คือ Chain Rule Update หลังเก็บ Gradient ครบ — Gradient g=∂L/∂z; ใช้ v เก่าทั้งสองกิ่ง")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://cs231n.github.io/optimization-2/)
+
+อ่านภาพ: จากตัวอย่างเดิม go=(y−t)y(1−y)=−0.055864594; hidden ใช้ output weightsเก่าv1=0.7,v2=−0.5 จึงg1=−0.009559595,g2=0.006828282 แล้วใช้θnew=θold−0.2gradientพร้อมกันทุกตัว bias outputใหม่0.111172919 ไม่เปลี่ยนvก่อนหาhidden gradient
+
 $$
 L=\frac12(y-t)^2,\quad g_o=\frac{\partial L}{\partial z_o}=(y-t)y(1-y)
 $$
@@ -59,6 +65,12 @@ Gradient descent: θnew=θold−η∂L/∂θ สำหรับทุก paramet
 - residual y−t=−.228167652; L=.5(−.228167652)²=.026030239
 - go=(y−t)y(1−y)=−.055864594
 - g1=h1(1−h1)(.7)go=−.009559595; g2=h2(1−h2)(−.5)go=.006828282
+
+
+![ตัวอย่างผู้เขียนใช้ x=(1,0.5),target0.8: z1=0.3,z2=−0.3 ผ่านsigmoidได้h1=0.574442517,h2=0.425557483 แล้วzo=0.7h1−0.5h2+0.1=0.289331020 จึงy=0.571832348และhalf-squared loss0.026030239 ไม่ใช่threshold XOR network](images/visual15-backprop-forward.webp "ภาพเขียนเสริม: Forward ผ่าน Sigmoid คำนวณด้วย Weights เก่า — 2–2–1 sigmoid; L=½(y−t)²; ไม่ใช่ XOR weights")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://cs231n.github.io/optimization-2/)
+
+อ่านภาพ: ตัวอย่างผู้เขียนใช้ x=(1,0.5),target0.8: z1=0.3,z2=−0.3 ผ่านsigmoidได้h1=0.574442517,h2=0.425557483 แล้วzo=0.7h1−0.5h2+0.1=0.289331020 จึงy=0.571832348และhalf-squared loss0.026030239 ไม่ใช่threshold XOR network
 
 | Parameter | ค่าเก่า | Gradient | ค่าใหม่ θ−.2g |
 |---|---:|---:|---:|

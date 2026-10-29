@@ -13,6 +13,12 @@
 ## FIFO และ Linked Queue {#concepts}
 Week12 pp.3–18:เข้าก่อนออกก่อน (First In, First Out) enqueue เพิ่ม rear, dequeue คืนและนำ front ออก,peek อ่าน front มี head/tail ทำให้ linkedqueue เพิ่มท้าย/ลบต้น O(1) โดยไม่เดินหาแต่ละตำแหน่ง ต่างจาก stack ที่ push/pop ที่ head เดียวกัน
 
+
+![enqueueAแล้วBแล้วCให้headอ้างAและtailอ้างC dequeueคืนAและย้ายheadไปBโดยtailยังC ถ้าเหลือsingletonแล้วdequeueต้องตั้งทั้งheadและtailเป็นNone เพื่อให้enqueueครั้งถัดไปเริ่มใหม่ถูกต้อง ไม่ใช้list.pop(0)แล้วอ้างO(1)](images/visual15-queue-fifo.webp "ภาพเขียนเสริม: Linked Queue แบบ FIFO เพิ่มท้าย นำออกหน้า — มี Head/Tail และ Size; Core operation ตามโมเดล")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.python.org/3.12/library/collections.html)
+
+อ่านภาพ: enqueueAแล้วBแล้วCให้headอ้างAและtailอ้างC dequeueคืนAและย้ายheadไปBโดยtailยังC ถ้าเหลือsingletonแล้วdequeueต้องตั้งทั้งheadและtailเป็นNone เพื่อให้enqueueครั้งถัดไปเริ่มใหม่ถูกต้อง ไม่ใช้list.pop(0)แล้วอ้างO(1)
+
 Python list.append ท้าย amortizedO(1) แต่ pop(0) ต้องเลื่อนสมาชิก O(n) การเปลี่ยนชื่อ method เป็น dequeue ไม่ได้เปลี่ยนกลไกนี้ ข้อมูลเมื่อเหลือหนึ่งตัวแล้ว dequeue ต้องตั้งทั้ง head และ tail เป็น None มิฉะนั้น enqueue ใหม่อาจต่อท้าย node ที่ไม่ได้อยู่ใน queue แล้ว
 
 ## Circular Queue และตัวชี้ {#circular}
@@ -111,6 +117,12 @@ print(d.popleft(),d.pop(),list(d))       # VIP C ['A','B']
 
 ## Trace Circular จาก Source {#trace}
 Week12 pp.20–22 เริ่ม cap5 A,B,C,D,E เต็ม;dequeue สามครั้งนำ A,B,C ออก จากนั้น enqueueF,G
+
+
+![Capacity5ใส่ABCDEเต็มแล้วdequeue3ครั้งเหลือD,E จากนั้นenqueueF,Gให้raw(F,G,None,D,E) front3 rear2 size4 แต่FIFOคือD,E,F,G ต้องอ่าน(front+i)%5เพียงsizeครั้ง และrearหมายถึงช่องที่จะใส่ถัดไปตามโค้ดบท](images/visual15-queue-circular.webp "ภาพเขียนเสริม: Circular Queue วนช่อง Raw Buffer ไม่ใช่ลำดับ FIFO — Rear = ช่องใส่ถัดไป; Size แยก Full/Empty")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.python.org/3.12/library/collections.html)
+
+อ่านภาพ: Capacity5ใส่ABCDEเต็มแล้วdequeue3ครั้งเหลือD,E จากนั้นenqueueF,Gให้raw[F,G,None,D,E] front3 rear2 size4 แต่FIFOคือD,E,F,G ต้องอ่าน(front+i)%5เพียงsizeครั้ง และrearหมายถึงช่องที่จะใส่ถัดไปตามโค้ดบท
 
 | ขั้น | buffer กายภาพ | front | rear(ช่องถัดไป) | size | ลำดับ FIFO |
 |---|---|---:|---:|---:|---|

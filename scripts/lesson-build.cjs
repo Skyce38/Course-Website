@@ -148,6 +148,7 @@ function buildLessons(catalog, root = process.cwd()) {
     if(meta.course==='unix-tools')html=html.replace(/(assets\/i18n\.js\?v=)[^" ]+/, '$1phase12-unix-1').replace('class="lesson-reader html-reader"','class="lesson-reader html-reader shell-lesson"').replace('</head>','<link rel="stylesheet" href="../../assets/unix-lessons.css?v=phase12-unix-1"></head>');
     if(meta.course==='internet-of-things')html=html.replace(/(assets\/i18n\.js\?v=)[^" ]+/, '$1phase13-iot-1').replace('class="lesson-reader html-reader"','class="lesson-reader html-reader iot-lesson"').replace('</head>','<link rel="stylesheet" href="../../assets/iot-lessons.css?v=phase13-iot-1"></head>');
     if(meta.course==='internet-of-things' && rendered.html.includes('/images/visual-'))html=html.replace('</head>','<link rel="stylesheet" href="../../assets/iot-visuals.css?v=phase14-iot-visual-2"></head>');
+    if(['artificial-intelligence','oop-python'].includes(meta.course) && rendered.html.includes('/images/visual15-'))html=html.replace('</head>','<link rel="stylesheet" href="../../assets/ai-oop-visuals.css?v=phase15-visual-1"></head>');
     plans.push({target,html,resource,old});
   }
   // Validate every lesson before any generated file or catalog entry is changed.

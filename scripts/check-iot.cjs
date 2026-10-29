@@ -1,10 +1,11 @@
 /* Structural evidence/identity checks; independent math and ESP32 compilation run separately. */
 const fs=require('fs'),assert=require('assert/strict'),crypto=require('crypto');
+const visuals=require('./ai-oop-visual-markdown.cjs');
 const B=require('./lesson-build.cjs'),C=require('../assets/practice-contract.js'),I=require('../assets/insights-contract.js'),manifest=I.validate(require('../assets/insights-banks.json')),catalog=require('../catalog.json'),ledger=require('./iot-verification.json');
 const lessons=manifest.lessons.filter(l=>l.course==='internet-of-things'),evidence=new Map(ledger.cases.map(c=>[c.question,c])),ids=new Set(),counts={choice:0,numeric:0,self:0};
 assert.equal(lessons.length,9);assert.equal(evidence.size,225);assert.equal(ledger.selfAssessments.length,45);assert.equal(manifest.lessons.length,46);assert.equal(manifest.lessons.flatMap(l=>l.bank.data.questions).length,1380);
 const baseline=require('./iot-preservation.json');
-for(const [file,expected]of Object.entries(baseline.files)){let bytes=fs.readFileSync(file);if(!file.endsWith('.pdf'))bytes=Buffer.from(bytes.toString().replace(/\r\n/g,'\n'));assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),expected,'Protected37-lesson baseline: '+file);}
+for(const [file,expected]of Object.entries(baseline.files)){const bytes=visuals.preservedBytes(file,B);assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),expected,'Protected37-lesson baseline: '+file);}
 for(const old of baseline.resources){const current=catalog.resources.find(r=>r.id===old.id);assert.ok(current,old.id);for(const key of ['reader','path','course'])assert.equal(current[key],old[key],old.id+': stable published identity');}
 assert.equal(Object.keys(baseline.files).filter(f=>f.endsWith('.pdf')).length,15);
 assert.equal(require('./reading-baseline.json').reduce((n,l)=>n+l.anchors.length,0),370);

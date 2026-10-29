@@ -23,6 +23,12 @@
 ## อธิบายโครงสร้างและ Reference {#explanation}
 Node แต่ละตัวไม่จำเป็นต้องอยู่ติดกันในหน่วยความจำ
 
+
+![headและcurrentอ้างNode10ตัวเดียวกัน จากนั้นnextเชื่อม10→20→30→Noneและtailอ้างNode30 การเลื่อนcurrent=current.nextย้ายเพียงreferencecurrentไป20 ไม่เปลี่ยนheadหรือlinksและไม่คัดลอกNode](images/visual15-linked-references.webp "ภาพเขียนเสริม: Node กับ Reference current ไม่ใช่สำเนา Node — Singly linked list ไม่มี cycle; ไม่อ้างตำแหน่ง RAM")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.python.org/3.12/tutorial/classes.html)
+
+อ่านภาพ: headและcurrentอ้างNode10ตัวเดียวกัน จากนั้นnextเชื่อม10→20→30→Noneและtailอ้างNode30 การเลื่อนcurrent=current.nextย้ายเพียงreferencecurrentไป20 ไม่เปลี่ยนheadหรือlinksและไม่คัดลอกNode
+
 การเข้าถึงตัวถัดไปต้องตาม next จึงไม่สามารถกระโดดไป index ใด ๆ ใน O(1) เหมือน array ได้
 
 ```text
@@ -54,6 +60,12 @@ while current is not None:
 
 ### แทรกหลัง Node ที่รู้ตำแหน่งแล้ว {#insertion}
 สมมติ current ชี้ Node 20 และต้องการแทรก Node 25 ระหว่าง 20 กับ 30 ต้องเก็บทางไป Node 30 ก่อนเปลี่ยน link ของ Node 20
+
+
+![ก่อนแทรก20.nextอ้าง30 ขั้นแรกnew_node.next=current.nextเชื่อม25ไป30 แล้วcurrent.next=new_nodeจึงเชื่อม20ไป25 ได้10→20→25→30→None; ถ้าสลับสองคำสั่งจะเสี่ยง25ชี้ตัวเองและเสียทางไป30 ตามตัวอย่างบทเดิม ไม่เพิ่ม deletion algorithm ใหม่](images/visual15-linked-insert.webp "ภาพเขียนเสริม: แทรก 25 หลัง 20 เก็บทางไป 30 ก่อน — มี reference ไป Node20แล้ว; tailยังอ้าง30")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.python.org/3.12/tutorial/classes.html)
+
+อ่านภาพ: ก่อนแทรก20.nextอ้าง30 ขั้นแรกnew_node.next=current.nextเชื่อม25ไป30 แล้วcurrent.next=new_nodeจึงเชื่อม20ไป25 ได้10→20→25→30→None; ถ้าสลับสองคำสั่งจะเสี่ยง25ชี้ตัวเองและเสียทางไป30 ตามตัวอย่างบทเดิม ไม่เพิ่ม deletion algorithm ใหม่
 
 ```python
 current = head.next  # ตัวอย่างนี้เลือก Node 20 ก่อนแทรก

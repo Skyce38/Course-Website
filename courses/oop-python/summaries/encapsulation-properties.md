@@ -17,6 +17,12 @@ Week2 pp.3–7: public `balance` เข้าถึงตรง; `_balance` เ�
 ## Property เป็นช่องทางของ Invariant {#properties}
 pp.9–19: `@property` ทำ method ให้เรียกอ่านด้วย syntax attribute; `@balance.setter` ต้องใช้ชื่อ property ที่ประกาศแล้ว เมื่อเขียน `a.balance=500` Python ส่ง 500 ให้ setter ไม่ต้องเรียก `a.balance()` หากไม่มี setter การ assign ชื่อ property นั้นจะ AttributeError แต่ object ไม่ได้ deep-immutable และ backing attribute ยังเปลี่ยนได้จากโค้ดที่ฝ่าฝืน interface
 
+
+![การassign a.balance=valueเรียกsetterซึ่งตรวจชนิดและช่วงค่าก่อนเก็บ__balance ถ้าไม่ผ่านให้raiseแล้วbalanceเดิมไม่เปลี่ยน ตัวอย่างผู้เขียนปฏิเสธbool,NaN,infinityอย่างเปิดเผย ไม่อ้างว่าunderscoreหรือname manglingเป็นระบบsecurity](images/visual15-property-validation.webp "ภาพเขียนเสริม: Property เป็นทางผ่าน ตรวจให้ผ่านก่อนแก้ State — ตาม policy ของ Account ในบท ไม่ใช่ค่าทุก domain")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.python.org/3.12/tutorial/classes.html)
+
+อ่านภาพ: การassign a.balance=valueเรียกsetterซึ่งตรวจชนิดและช่วงค่าก่อนเก็บ__balance ถ้าไม่ผ่านให้raiseแล้วbalanceเดิมไม่เปลี่ยน ตัวอย่างผู้เขียนปฏิเสธbool,NaN,infinityอย่างเปิดเผย ไม่อ้างว่าunderscoreหรือname manglingเป็นระบบsecurity
+
 สัญญาบัญชี pp.21–33: account_number/owner/transaction_count อ่านอย่างเดียว; balance ต้องไม่ติดลบ;constructor ใช้ setter;deposit/withdraw ตรวจ amount ก่อนแก้ยอด และเพิ่ม count เฉพาะธุรกรรมสำเร็จ การตั้ง balance ผ่าน setter ตรงๆไม่ได้เป็น deposit และไม่เพิ่ม count โดยนิยามนี้ ถ้างานจริงต้องห้ามเปลี่ยน balance ตรงๆ ให้ออกแบบ interface ต่างออกไปอย่างชัดเจน
 
 ## Python ที่รวม Validation {#python}
@@ -81,6 +87,12 @@ except ValueError: print("rejected", a.balance)  # rejected 1300
 | balance=−1 | 1300 | 2 | ValueError ก่อนเขียน |
 | withdraw1400 | 1300 | 2 | ยอดไม่พอ จึงไม่เพิ่ม count |
 | owner="B" | 1300 | 2 | AttributeError ไม่มี setter |
+
+
+![Accountเริ่ม1000/count0 ฝาก500ได้1500/count1 ถอน200ได้1300/count2 แล้วbalance=−1หรือwithdraw1400ถูกปฏิเสธก่อนแก้state จึงยัง1300/count2 การตั้งbalanceผ่านsetterโดยตรงที่ผ่านกฎไม่ใช่depositและไม่เพิ่มcountตามนิยามบท](images/visual15-property-state.webp "ภาพเขียนเสริม: คำสั่งล้มเหลว ต้องคง Balance และ Count — Count เพิ่มเฉพาะ Deposit/Withdraw ที่สำเร็จ")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.python.org/3.12/tutorial/classes.html)
+
+อ่านภาพ: Accountเริ่ม1000/count0 ฝาก500ได้1500/count1 ถอน200ได้1300/count2 แล้วbalance=−1หรือwithdraw1400ถูกปฏิเสธก่อนแก้state จึงยัง1300/count2 การตั้งbalanceผ่านsetterโดยตรงที่ผ่านกฎไม่ใช่depositและไม่เพิ่มcountตามนิยามบท
 
 TypeError ใช้เมื่อชนิดไม่เข้าเงื่อนไข;ValueError เมื่อชนิดถูกแต่ช่วงผิด;AttributeError เกี่ยวกับ property/attribute ที่เข้าถึงไม่ได้ อย่าใช้ print+return แทน raise แล้วปล่อยให้ constructor สร้าง object ที่ขาด __balance
 

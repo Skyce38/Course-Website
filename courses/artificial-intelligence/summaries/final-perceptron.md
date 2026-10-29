@@ -24,6 +24,12 @@ Bias หรือ w0 เทียบได้กับน้ำหนักข�
 ## Perceptron และ conventions {#perceptron}
 S10 pp.10–13 มี bipolar ±1 และภาพ binary ต้องเลือกให้ชัด บทคำนวณใช้ **X06 output 0/1 และเงื่อนไข z>0** เท่านั้น: z=0 ให้ 0 ไม่ใช้ ≥0
 
+
+![Perceptron ของ X06 ใช้ z=b+w1x1+w2x2 และให้y=1เฉพาะz>0; ที่z=0ให้0 ตาม strict convention ของบท ไม่สลับกับbipolar±1หรือsigmoid และไม่ตีความlearning rateเป็นaccuracy](images/visual15-perceptron-neuron.webp "ภาพเขียนเสริม: Weighted Sum กับ Bias ต้องประกาศ Threshold — X06: y=1 เมื่อ z>0; z=0 ให้0")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://cs231n.github.io/optimization-2/)
+
+อ่านภาพ: Perceptron ของ X06 ใช้ z=b+w1x1+w2x2 และให้y=1เฉพาะz>0; ที่z=0ให้0 ตาม strict convention ของบท ไม่สลับกับbipolar±1หรือsigmoid และไม่ตีความlearning rateเป็นaccuracy
+
 $$
 y=\begin{cases}1&z>0\\0&z\leq0\end{cases},\quad e=t-y,\quad w_j^{new}=w_j^{old}+\alpha e x_j\quad(x_0=1)
 $$
@@ -32,6 +38,12 @@ S10 pp.14–15 แสดงการปรับ weights ตาม error; α>0 �
 
 ## X06: AND ทุกขั้น {#and}
 Sheet1!B1 α=.5, G3:I3 initial(w0,w1,w2)=(.1,.1,.1); A4:C27 เป็น AND 00→0,01→0,10→0,11→1 เรียงซ้ำ 6epochs แถวแรก z=.1, y=1,e=−1 จึง w0=.1−.5=−.4, w1=.1,w2=.1; แถว x1=x2=1 ของ epoch1 z=−.2 จึง y=0,e=1 และบวก .5 ทั้งสาม weights
+
+
+![X06 เริ่ม(w0,w1,w2)=(0.1,0.1,0.1) α=0.5 แถวAND00target0ได้z0.1,y1,error−1 จึงΔw=αe(1,0,0)=(−0.5,0,0)และน้ำหนักใหม่(−0.4,0.1,0.1) ตัวอย่างนี้เป็นแถวแรกไม่ใช่ผลฝึกทั้งepoch](images/visual15-perceptron-update.webp "ภาพเขียนเสริม: อัปเดต X06 แถวแรก x เป็นศูนย์ แต่ Bias ยังเปลี่ยน — Sequential; error=t−y; bias input=1")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://cs231n.github.io/optimization-2/)
+
+อ่านภาพ: X06 เริ่ม(w0,w1,w2)=(0.1,0.1,0.1) α=0.5 แถวAND00target0ได้z0.1,y1,error−1 จึงΔw=αe[1,0,0]=[−0.5,0,0]และน้ำหนักใหม่(−0.4,0.1,0.1) ตัวอย่างนี้เป็นแถวแรกไม่ใช่ผลฝึกทั้งepoch
 
 ตารางแสดงค่าก่อน/หลังทุก sample; ไม่มี batch averaging หรือ shuffle ใช้เศษส่วนในการตรวจ ไม่ปัดกลางรอบ
 

@@ -94,6 +94,12 @@ Katie  Blonde  Short    Light    Yes    -
 ### คำนวณ Score และ Posterior {#judy-calculation}
 ไม่ใช้ smoothing เพื่อทำซ้ำตัวเลขในหน้า 7
 
+
+![Judy ใช้ Blonde/Average/Heavy/No และไม่ smooth: prior +3/8 กับ −5/8 คูณ conditional likelihoods ได้ scores 1/18 และ 1/125 แล้วหารผลรวม 143/2250 จึง posterior +125/143 และ −18/143 ค่าที่ normalize เป็นโมเดล ไม่ใช่ความถี่ร่วมที่สังเกต](images/visual15-nb-judy.webp "ภาพเขียนเสริม: จาก Prior × Likelihood สู่ Posterior ของ Judy — Categorical; α=0; conditional independence")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://scikit-learn.org/1.7/modules/naive_bayes.html)
+
+อ่านภาพ: Judy ใช้ Blonde/Average/Heavy/No และไม่ smooth: prior +3/8 กับ −5/8 คูณ conditional likelihoods ได้ scores 1/18 และ 1/125 แล้วหารผลรวม 143/2250 จึง posterior +125/143 และ −18/143 ค่าที่ normalize เป็นโมเดล ไม่ใช่ความถี่ร่วมที่สังเกต
+
 $$
 s_+=\frac38\cdot\frac23\cdot\frac23\cdot\frac13\cdot\frac33=\frac1{18},\qquad s_-=\frac58\cdot\frac25\cdot\frac15\cdot\frac25\cdot\frac25=\frac1{125}
 $$
@@ -134,6 +140,12 @@ $$
 
 ## Zero Counts และ Smoothing {#smoothing}
 คำอธิบายเสริมที่จำเป็นเพื่อเทียบกับ C01: ใช้ additive smoothing กับ **conditional probabilities** โดย category universe ของ feature j มี Kj ค่าที่ประกาศไว้
+
+
+![Buy มี Y=N=5 และ category counts (2,2,2,3); raw Red ใน N มี count ศูนย์จึง scoreN=0 แต่ alpha=1 ใช้ตัวหาร (7,7,7,8) และ prior ยัง 1/2 ทำให้ scores225/5488 และ30/5488 แล้ว posterior Y=15/17 ไม่ใช่1](images/visual15-nb-smoothing.webp "ภาพเขียนเสริม: Zero count กับ Smoothing เป็นคนละแบบจำลอง — คง prior class-frequency; ไม่ใช้ Gaussian density")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://scikit-learn.org/1.7/modules/naive_bayes.html)
+
+อ่านภาพ: Buy มี Y=N=5 และ category counts [2,2,2,3]; raw Red ใน N มี count ศูนย์จึง scoreN=0 แต่ alpha=1 ใช้ตัวหาร [7,7,7,8] และ prior ยัง 1/2 ทำให้ scores225/5488 และ30/5488 แล้ว posterior Y=15/17 ไม่ใช่1
 
 $$
 P(x_j=v\mid C)=\frac{N_{C,j,v}+\alpha}{N_C+\alpha K_j}

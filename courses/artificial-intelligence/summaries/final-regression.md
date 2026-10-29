@@ -90,6 +90,12 @@ $$
 ## เกณฑ์กำลังสองน้อยที่สุด (Least Squares) {#least-squares}
 หน้า 12 เลือก b₀,b₁ ให้ผลรวมกำลังสอง residual น้อยที่สุด ไม่ใช่แค่ทำให้ผลรวม error บวก/ลบหักล้างเป็นศูนย์ หน้า 13 ให้สูตร slope/intercept
 
+
+![จุดแปดต้นจาก S06 ใช้ x=เส้นผ่านศูนย์กลางและ y=ความสูงในหน่วยเดิมที่ไม่ระบุชื่อ เส้น OLS ที่ผู้เขียนบทคำนวณเพิ่มมี slope 1703/375 และ intercept −493/375; เส้นตั้งที่ x=9 เชื่อมค่าทำนาย 39.557333 กับค่าจริง 49 ไม่ใช่ระยะตั้งฉากกับเส้น](images/visual15-regression-residual.webp "ภาพเขียนเสริม: เส้น OLS กับ Residual วัดแนวตั้งที่ x เดิม — fit ทั้ง 8 จุดพร้อม intercept; ไม่อ้างเหตุและผล")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://scikit-learn.org/1.7/modules/linear_model.html#ordinary-least-squares)
+
+อ่านภาพ: จุดแปดต้นจาก S06 ใช้ x=เส้นผ่านศูนย์กลางและ y=ความสูงในหน่วยเดิมที่ไม่ระบุชื่อ เส้น OLS ที่ผู้เขียนบทคำนวณเพิ่มมี slope 1703/375 และ intercept −493/375; เส้นตั้งที่ x=9 เชื่อมค่าทำนาย 39.557333 กับค่าจริง 49 ไม่ใช่ระยะตั้งฉากกับเส้น
+
 $$
 SSE=\sum_i e_i^2=\sum_i\left[y_i-(b_0+b_1x_i)\right]^2
 $$
@@ -153,6 +159,12 @@ X07 `C14:C15` คำนวณ slope/intercept เต็มความละเ�
 
 ## MAE, MSE และ RMSE {#errors}
 ส่วนนี้อ้าง X07 แทนการอ้างว่ามีบน S06: sheet `err!A2:B4` ให้ Actual = [2,2,0], Predicted = [2,0,2] สูตร C2:C4 เป็น actual−predicted, D เป็นค่าสัมบูรณ์ และ E เป็นกำลังสอง D5/E5 หาค่าเฉลี่ย ส่วน E9 = SQRT(E5)
+
+
+![ตัวอย่าง X07 sheet err มี actual (2,2,0) และ predicted (2,0,2) จึง residual (0,2,−2) ผลรวมเป็นศูนย์แต่ absolute รวม 4 และ squared รวม 8: MAE=4/3 MSE=8/3 และ RMSE=√(8/3) ไม่เติมหน่วยที่แหล่งไม่ได้ระบุ](images/visual15-regression-error-metrics.webp "ภาพเขียนเสริม: Error หักล้างได้ แต่ความคลาดเคลื่อนไม่หาย — หาร n=3; residual=actual−predicted")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://scikit-learn.org/1.7/modules/linear_model.html#ordinary-least-squares)
+
+อ่านภาพ: ตัวอย่าง X07 sheet err มี actual [2,2,0] และ predicted [2,0,2] จึง residual [0,2,−2] ผลรวมเป็นศูนย์แต่ absolute รวม 4 และ squared รวม 8: MAE=4/3 MSE=8/3 และ RMSE=√(8/3) ไม่เติมหน่วยที่แหล่งไม่ได้ระบุ
 
 $$
 MAE=\frac{1}{n}\sum_i\lvert y_i-\hat y_i\rvert,\qquad MSE=\frac{1}{n}\sum_i(y_i-\hat y_i)^2,\qquad RMSE=\sqrt{MSE}

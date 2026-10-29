@@ -13,6 +13,12 @@
 ## Time, Space และ Cases {#complexity}
 Week13 pp.3–13:O(1),O(log n),O(n),O(n log n),O(n²) บอกอัตราการโตไม่ใช่วินาที
 
+
+![เมื่อนับงานคงที่ต่อรอบ loopnให้nครั้ง หารช่วงครึ่งจากnที่เป็นกำลังสองให้log2nขั้น และloopสามเหลี่ยมให้n(n−1)/2 comparisons ที่n8เป็น8,3,28และn16เป็น16,4,120 Big-Oเป็นupperboundไม่ใช่คำว่าworstcaseโดยตัวมันเอง](images/visual15-operation-growth.webp "ภาพเขียนเสริม: Operation Model ก่อน Big-O ตัวเลขไม่ใช่เวลาเป็นวินาที — สมมติแต่ละ Operation มีต้นทุนคงที่")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.python.org/3.12/howto/sorting.html)
+
+อ่านภาพ: เมื่อนับงานคงที่ต่อรอบ loopnให้nครั้ง หารช่วงครึ่งจากnที่เป็นกำลังสองให้log2nขั้น และloopสามเหลี่ยมให้n(n−1)/2 comparisons ที่n8เป็น8,3,28และn16เป็น16,4,120 Big-Oเป็นupperboundไม่ใช่คำว่าworstcaseโดยตัวมันเอง
+
 Big-O เป็น upperbound ไม่ได้มีความหมายว่า worst case โดยตัวมันเอง ต้องระบุว่าเรากำลัง boundbest/average/worst หรือ amortized แม้ 3n+2 เป็น O(n²) ได้แต่ใช้ tightboundΘ(n) อธิบายได้แม่นกว่า
 
 loopn รอบทำงานคงที่ให้Θ(n);สามเหลี่ยม(n−1)+(n−2)+...+1=n(n−1)/2 ให้Θ(n²);การหารช่วงลงครึ่งทุกครั้งให้ logn เมื่อมีเงื่อนไขครบ ไม่ท่องว่าทุก nestedloop ต้อง n² เพราะขอบเขต loop อาจต่างกัน ตัวอย่าง comparison จำนวนมากไม่ใช่เวลาจริงหากต้นทุนเปรียบเทียบต่างกัน
@@ -93,6 +99,12 @@ print(selection_sort(inventory,key=lambda x:days_left(x[1],x[2]))[0])
 
 ## Bubble Sort: Invariant และทุก Pass {#bubble}
 Week13 pp.15–19: เปรียบเทียบคู่ติดกันจากซ้ายไปขวา ค่ามากสุดของส่วนที่ยังไม่เรียงจะลอยไปท้าย หลัง pass ที่ i จะได้ suffix ที่อยู่ถูกตำแหน่ง จึงลดขอบเขตของลูปด้านในได้
+
+
+![ใช้(5,3,8,1,2)และstrict>เทียบคู่ติดกัน pass1ได้(3,5,1,2,8) pass2ได้(3,1,2,5,8) pass3เรียงครบแล้วแต่ยังมีswapจึงpass4ยืนยันไม่swap รวม10keycomparisonsและ7swaps ไม่ใช้ข้อมูลหกค่าจากsourceอีกหน้าแทน](images/visual15-bubble-passes.webp "ภาพเขียนเสริม: Bubble Sort ทีละ Pass ค่ามากสุดลอยเข้าท้าย — สีเขียวคือ Sorted suffix; strict > ทำให้ Stable")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.python.org/3.12/howto/sorting.html)
+
+อ่านภาพ: ใช้[5,3,8,1,2]และstrict>เทียบคู่ติดกัน pass1ได้[3,5,1,2,8] pass2ได้[3,1,2,5,8] pass3เรียงครบแล้วแต่ยังมีswapจึงpass4ยืนยันไม่swap รวม10keycomparisonsและ7swaps ไม่ใช้ข้อมูลหกค่าจากsourceอีกหน้าแทน
 
 ถ้าตรวจครบหนึ่ง pass แล้วไม่มี swap จึงหยุดได้ การเห็นเพียงสองตัวแรกเรียงกันยังไม่เพียงพอให้หยุด
 

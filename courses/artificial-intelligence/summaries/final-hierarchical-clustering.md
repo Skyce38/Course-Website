@@ -40,6 +40,12 @@ pp.12–18: agglomerative เริ่มหนึ่งจุดต่อ clust
 ## Linkage ระหว่างกลุ่ม {#linkage}
 ให้ A,B เป็นกลุ่มไม่ทับกัน ใช้ระยะคู่สมาชิกเดิมตาม pp.19–21
 
+
+![หลังรวม{1,2} ระยะไป3ใน matrix เดิมคือ6และ3 จึง single=min=3 complete=max=6 average=(6+3)/2=4.5 ส่วน average รอบสุดท้ายของ{1,2,3}กับ{4,5}ต้องเฉลี่ย cross-pairs ทั้งหกคือ10,9,9,8,7,5 ไม่ให้น้ำหนักกลุ่มย่อยเท่ากันโดยไม่ดูสมาชิก](images/visual15-linkage-cross-pairs.webp "ภาพเขียนเสริม: ระยะระหว่างกลุ่ม ไม่ใช่ระหว่าง Centroid — ใช้ matrix หน้า22เดิม; Average ทุก cross-pair")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.scipy.org/doc/scipy-1.16.0/reference/generated/scipy.cluster.hierarchy.linkage.html)
+
+อ่านภาพ: หลังรวม{1,2} ระยะไป3ใน matrix เดิมคือ6และ3 จึง single=min=3 complete=max=6 average=(6+3)/2=4.5 ส่วน average รอบสุดท้ายของ{1,2,3}กับ{4,5}ต้องเฉลี่ย cross-pairs ทั้งหกคือ10,9,9,8,7,5 ไม่ให้น้ำหนักกลุ่มย่อยเท่ากันโดยไม่ดูสมาชิก
+
 $$
 d_{single}(A,B)=\min_{a\in A,b\in B}d(a,b),\quad d_{complete}(A,B)=\max_{a\in A,b\in B}d(a,b)
 $$
@@ -57,6 +63,12 @@ Single อาจเกิด chaining/กลุ่มยาว Complete ใช�
 
 ## Worked Example หน้า22–25 {#worked}
 ใช้ matrix อีกชุดซึ่งมีชื่อ 1..5 ตามสไลด์ ไม่สลับกับตัวเลขหน้า 14
+
+
+![จาก matrix หมายเลข1–5 หน้า22 รวม1กับ2ที่ระยะ2 แล้วรวม3ที่3; รวม4กับ5ที่4 และรวมสองกลุ่มที่5 เส้นตัด4.5จึงเหลือ{1,2,3}กับ{4,5} ตามกฎรวม height≤threshold ตำแหน่งแนวนอนไม่ได้แทนระยะ](images/visual15-single-dendrogram.webp "ภาพเขียนเสริม: Dendrogram แบบ Single ความสูงคือระยะ Linkage — Single=min ของ cross-pairs; ไม่ใช่ probability")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://docs.scipy.org/doc/scipy-1.16.0/reference/generated/scipy.cluster.hierarchy.linkage.html)
+
+อ่านภาพ: จาก matrix หมายเลข1–5 หน้า22 รวม1กับ2ที่ระยะ2 แล้วรวม3ที่3; รวม4กับ5ที่4 และรวมสองกลุ่มที่5 เส้นตัด4.5จึงเหลือ{1,2,3}กับ{4,5} ตามกฎรวม height≤threshold ตำแหน่งแนวนอนไม่ได้แทนระยะ
 
 ```text
       1  2  3  4  5

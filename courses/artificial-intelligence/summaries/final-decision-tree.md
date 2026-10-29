@@ -33,6 +33,12 @@ $$
 ### Sunburn: ทำทุกขั้นจากข้อมูลจริง {#sunburn}
 8 แถวตาม S08 p.6 อยู่ใน Python ด้านล่าง counts +3/−5 จึง H=−(3/8)log₂(3/8)−(5/8)log₂(5/8)=0.954434 HairColor แยก blonde 4 แถว (+2/−2), red 1 (+1), brown 3 (−3) จึง weighted H=(4/8)×1+(1/8)×0+(3/8)×0=0.5 และ IG=0.454434
 
+
+![Sunburn parent มี +3/−5 รวม8และ entropy0.954434bit; HairColor แบ่ง blonde(+2/−2)4แถว red(+1)1แถว brown(−3)3แถว จึง weighted entropy4/8×1+1/8×0+3/8×0=0.5 และ gain0.454434 ไม่เฉลี่ย entropy เท่ากันทั้งสามกิ่ง](images/visual15-tree-entropy.webp "ภาพเขียนเสริม: แยก HairColor ต้องถ่วงขนาดแต่ละกิ่ง — log ฐาน2; 0 log 0 ใช้ลิมิตเป็น0")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://scikit-learn.org/1.7/modules/tree.html#mathematical-formulation)
+
+อ่านภาพ: Sunburn parent มี +3/−5 รวม8และ entropy0.954434bit; HairColor แบ่ง blonde(+2/−2)4แถว red(+1)1แถว brown(−3)3แถว จึง weighted entropy4/8×1+1/8×0+3/8×0=0.5 และ gain0.454434 ไม่เฉลี่ย entropy เท่ากันทั้งสามกิ่ง
+
 | Feature | Gain คำนวณเต็ม |
 |---|---|
 | HairColor | 0.454434 |
@@ -138,6 +144,12 @@ for name, rows in [('sunburn',sunburn),('tennis',tennis)]:
 
 ## Tree-to-Rules และข้อควรระวัง {#rules}
 S08 pp.16–17 ให้หนึ่ง IF–THEN ต่อ root-to-leaf path ของ Sunburn: (blonde AND lotion=yes)→none; (blonde AND lotion=no)→sunburned; red→sunburned; brown→none ตัวอย่าง PlayTennis เขียนได้ 5 กฎตาม 5 leaves ข้างบน แต่ละ path ใช้ AND และคนละ path รวมความเป็นไปได้ด้วย OR
+
+
+![ต้นไม้ Sunburn ใช้ HairColor เป็น root: redให้+ brownให้− ส่วน blonde ต้องตรวจ Lotion ต่อโดย noให้+ และyesให้− เส้นทาง blonde AND Lotion=no จึงให้+ และไม่ต้องตรวจ attribute ที่ไม่มีใน path ไม่อ้างเป็นกฎทางการแพทย์สากล](images/visual15-tree-sunburn.webp "ภาพเขียนเสริม: เดินตามกิ่ง หนึ่ง Path คือเงื่อนไข AND — ต้นไม้ fit ชุด Sunburn; ไม่ใช่ test accuracy")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://scikit-learn.org/1.7/modules/tree.html#mathematical-formulation)
+
+อ่านภาพ: ต้นไม้ Sunburn ใช้ HairColor เป็น root: redให้+ brownให้− ส่วน blonde ต้องตรวจ Lotion ต่อโดย noให้+ และyesให้− เส้นทาง blonde AND Lotion=no จึงให้+ และไม่ต้องตรวจ attribute ที่ไม่มีใน path ไม่อ้างเป็นกฎทางการแพทย์สากล
 
 ข้อผิดพลาด: ใช้ Name/Day เป็น feature, ลืม weights ของ branch, ใช้ ln แล้วเรียกว่า bits โดยไม่แปลงฐาน, ใส่ log(0) ลงเครื่องคิดเลข, เลือก subtree จากข้อมูลทั้งชุดแทนแถวที่ผ่าน root, หรือถือว่า tree ที่ fit แปลว่าพิสูจน์เหตุและผล/ความแม่นยำใหม่
 

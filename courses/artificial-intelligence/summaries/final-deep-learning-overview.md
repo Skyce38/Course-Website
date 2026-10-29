@@ -31,6 +31,12 @@ S11 p.5 เรียกภาพซ้าย One-layer ซึ่งมี hidden
 ## RNN และข้อมูลลำดับ {#rnn}
 S11 p.7 กล่าวถึง RecurrentNeuralNetwork สำหรับ text,audio และข้อมูลตามเวลา; อันดับมีความหมาย ต่างจากการมองแต่ละแถวอิสระ
 
+
+![ตัวอย่างmany-to-oneที่บทเขียนเพิ่มมีinput3tokenและoutputsentimentเดียว hidden stateส่งจากh1ไปh2ไปh3และทุกเวลามีW,U,bร่วมกัน ไม่ได้สร้างparametersอิสระใหม่ทุกtoken ภาพเป็นโครงสร้างแนวคิด ไม่ใช่ผลฝึกหรือการรับรองความจำไม่จำกัด](images/visual15-rnn-unrolled.webp "ภาพเขียนเสริม: RNN กับลำดับข้อมูล ใช้ Parameters ร่วมตามเวลา — ภาพแนวคิด; ไม่กำหนด loss หรือจำนวน epochs")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://cs231n.github.io/optimization-2/)
+
+อ่านภาพ: ตัวอย่างmany-to-oneที่บทเขียนเพิ่มมีinput3tokenและoutputsentimentเดียว hidden stateส่งจากh1ไปh2ไปh3และทุกเวลามีW,U,bร่วมกัน ไม่ได้สร้างparametersอิสระใหม่ทุกtoken ภาพเป็นโครงสร้างแนวคิด ไม่ใช่ผลฝึกหรือการรับรองความจำไม่จำกัด
+
 state ส่งข้อมูลจากขั้นก่อนสู่ขั้นถัดไป แนวคิดเสริมแบบย่อคือ h_t=f(Wx_t+Uh_{t−1}+b) ใช้น้ำหนักร่วมตามเวลา ไม่ใช่สำเนา parameters ใหม่อิสระทุก t บทนี้ไม่กำหนด loss/training/truncation ที่สไลด์ไม่ได้ให้
 
 S11 p.8 (ภาพที่อ้าง StanfordCS230) แยก configuration ตามความยาว input/output:
@@ -47,6 +53,12 @@ S11 p.8 (ภาพที่อ้าง StanfordCS230) แยก configuration �
 
 ## GAN: Generator และ Discriminator {#gan}
 S11 pp.9–10 อธิบาย GenerativeAdversarialNetwork เป็นกรอบ generativelearning เรียนโครงสร้างข้อมูลเพื่อสร้างตัวอย่างคล้าย distribution เดิม ภาพหน้า 10:noise→Generator→ภาพสร้าง; ภาพจริงจาก dataset และภาพสร้างป้อน Discriminator ซึ่งแยก real/fake ระหว่าง train มีวัตถุประสงค์แข่งขันกัน Generator ต้องสร้างให้หลอกได้ดีขึ้น Discriminator ต้องแยกให้ดีขึ้น
+
+
+![Noiseเข้าGeneratorเพื่อสร้างตัวอย่าง ส่วนDiscriminatorรับทั้งข้อมูลจริงและข้อมูลสร้างเพื่อแยกreal/fake ระหว่างtraining สัญญาณreal/fakeมาจากแหล่งตัวอย่าง แม้ไม่ได้ใช้human class labelsภายนอก ไม่ใช่ภาพโมเดลที่ฝึกสำเร็จแล้วและไม่ได้รับประกันว่าทุกstyle transferใช้GAN](images/visual15-gan-roles.webp "ภาพเขียนเสริม: GAN แยกสองบทบาท Generator กับ Discriminator — แสดงทางข้อมูลระหว่าง Train ไม่ใช่ผลทดลอง")
+ที่มา: [ภาพเขียนเสริม ตรวจตามบทเรียนและเอกสารเทคนิค](https://cs231n.github.io/optimization-2/)
+
+อ่านภาพ: Noiseเข้าGeneratorเพื่อสร้างตัวอย่าง ส่วนDiscriminatorรับทั้งข้อมูลจริงและข้อมูลสร้างเพื่อแยกreal/fake ระหว่างtraining สัญญาณreal/fakeมาจากแหล่งตัวอย่าง แม้ไม่ได้ใช้human class labelsภายนอก ไม่ใช่ภาพโมเดลที่ฝึกสำเร็จแล้วและไม่ได้รับประกันว่าทุกstyle transferใช้GAN
 
 คำว่า unsupervised ใน p.9 หมายถึงไม่มี classlabels ของงานภายนอกเป็นตัวกำกับหลัก แต่ D ยังได้รับ real/fake สัญญาณที่สร้างจากแหล่งภาพ ไม่ใช่ไม่มี target ใดเลย Noise ไม่ใช่รูปจริง; D ไม่ได้วาดภาพ; G ไม่ได้เป็นตัวตัดสิน real/fake ผล realistic ไม่พิสูจน์ว่าไม่ได้จำ trainingimages หรือไม่มี bias ข้อควรระวังนี้เป็นคำอธิบายผู้เขียน
 
