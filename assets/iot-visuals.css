@@ -1,4 +1,5 @@
 /* Original raster diagrams: reserve exact space before lazy loading; IoT only. */
+.iot-lesson .lesson-figure img[src$="/images/water-flow.png"]{width:min(100%,900px);aspect-ratio:900/820;height:auto}
 .iot-lesson .lesson-figure img[src*="/images/visual-"]{width:min(100%,560px);background:#fff}
 .iot-lesson .lesson-figure img[src$="/visual-esp32-anatomy.webp"]{aspect-ratio:1120/2332}
 .iot-lesson .lesson-figure img[src$="/visual-sensor-chain.webp"]{aspect-ratio:1120/1396}
