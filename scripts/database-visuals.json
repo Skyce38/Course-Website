@@ -605,7 +605,7 @@
       "caption": "ภาพเขียนเสริม: Commit ไม่ใช่ Push Review ก่อนส่งงาน — ห้าม stage secret หรือ private dump",
       "explanation": "Working Tree คือไฟล์ที่แก้ Indexคือ snapshotที่stage Commitบันทึก localhistory แล้ว Pushจึงส่งremote Gitไม่backupMySQLสดและไม่deployPHPให้อัตโนมัติ",
       "source": "DB-S01 pp.22–34;DB-S03 pp.19–28;Git docs",
-      "reference": "https://git-scm.com/book/en/v2/Getting-Started-Git-Basics",
+      "reference": "https://git-scm.com/docs/gittutorial",
       "assumptions": "ห้าม stage secret หรือ private dump",
       "verification": "Independent SQL row models, PHP helper tests, and diagram-specific checks in check-database.cjs; source/technical review is recorded separately.",
       "copyright": "Original programmatic artwork; no copied slide/textbook artwork. Linked lesson attribution retained.",
