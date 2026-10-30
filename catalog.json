@@ -171,6 +171,17 @@
       "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/tutoring/README.md"
     },
     {
+      "id": "oop-python-complete-23-chapters",
+      "course": "oop-python",
+      "category": "tutoring",
+      "title": "สมุดเตรียมสอบ OOP และ Data Structures ครบ 23 บท",
+      "scope": "Final",
+      "path": "tutoring/OOP_Complete_23_Chapters.html",
+      "format": "HTML",
+      "url": "./courses/oop-python/tutoring/OOP_Complete_23_Chapters.html",
+      "github": "https://github.com/Skyce38/Course-Website/blob/main/courses/oop-python/tutoring/OOP_Complete_23_Chapters.html"
+    },
+    {
       "id": "artificial-intelligence-midterm-final",
       "course": "artificial-intelligence",
       "category": "summaries",
