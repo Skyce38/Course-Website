@@ -131,6 +131,14 @@ All 25 registered lessons now also provide Topic Practice and 10/20/30/full mock
 
 Modern now uses compact course tiles, divider-based document lists, flatter readers and Practice/Exam presentation, with direct links to the existing lesson activities. Classic remains the default and visually unchanged. `assets/modern.css` isolates the redesign; shared preferences, study records, grading, revision archives and lesson content keep their existing contracts. See [design boundaries, validation and browser limitations](docs/phase10-ui-redesign.md). Run the usual build/check commands; the optional `scripts/check-modern-ui-browser.cjs` uses `PLAYWRIGHT_MODULE` and `STUDY_BASE_URL` with an isolated Chrome profile.
 
+### Library polish
+
+The home page keeps the document index in a collapsed **เอกสารพร้อมอ่าน** panel, so subjects stay near the top (mobile home height dropped from about 37,000 px to about 2,100 px). Search matches every word in any order; `/` or `Ctrl/Cmd+K` focuses it and `Esc` clears it. Classic small-screen layouts use a one-row header, compact course cards and document rows, and HTML readers show a scroll progress bar in browsers with scroll-driven animations. `404.html` handles unknown GitHub Pages URLs.
+
+GitHub sync no longer lists lesson diagrams under `images/` folders as documents, so course counts and progress reflect real documents (81, not 177). The file list is reused for 15 minutes to stay under GitHub's limit of 60 anonymous requests per hour per IP; the ↻ button still forces a check.
+
+`.github/workflows/check.yml` runs the build and checks on every push to `main` and every pull request, so a `catalog.json` edit without a rebuild fails visibly. Run `node scripts/build.cjs` after changing the catalog. When you deliberately change a file pinned by `scripts/database-preservation.json`, record it by name: `node scripts/repin-baseline.cjs <file>`.
+
 ### Phase 11 — Study Insights
 
 Open `insights.html` from Modern navigation to inspect actual local Practice/Exam results, review priorities, course accuracy and ungraded Revisit ratings. Completed results are validated/recomputed; repeated observations, unique questions, excluded records and archived revisions remain distinct. The dashboard never writes browser storage, and its theme/language controls are temporary. All statistics are descriptive, with explicit sample limitations. See [formulas, privacy and validation](docs/study-insights.md). The standard build derives the dashboard-only public bank manifest; existing lessons/questions and saved-data formats remain authoritative.

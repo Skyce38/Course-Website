@@ -108,16 +108,16 @@ async function session(browser,preferences={},cached=[]){
       assert.equal(await p.locator(action('complete',fixture)).count(),0);assert.equal(await p.evaluate(()=>document.activeElement===document.body),true);assert.deepEqual(await s.saved(),before);await s.close();
     }
     // Same resource appears in Recently Opened and in the full catalog; keep its context.
-    for(const context of ['.recent-reading','#view > .resource-list'])for(const kind of ['complete','bookmark','study-open']){
+    for(const context of ['.recent-reading','#all-documents > .resource-list'])for(const kind of ['complete','bookmark','study-open']){
       const s=await session(browser),p=s.page;await p.goto(base);const request=await s.next();
-      await p.evaluate(id=>LearningStudy.open(LearningStudy.resources.find(r=>r.id===id)),resource);
+      await p.evaluate(id=>{allDocumentsOpen=true;LearningStudy.open(LearningStudy.resources.find(r=>r.id===id))},resource);
       const selector=context+' .resource-buttons '+action(kind);await p.locator(selector).focus();const before=await s.saved();await s.finish(request);
       assert.equal(await p.locator(selector).evaluate(node=>node===document.activeElement),true,'duplicate resource context/action');assert.deepEqual(await s.saved(),before);await s.close();
     }
     {
       const s=await session(browser),p=s.page;await p.goto(base);const request=await s.next();
-      await p.evaluate(id=>{allResources.push({...allResources.find(r=>r.id===id)});render()},resource);
-      const second=p.locator('#view > .resource-list .resource-buttons '+action('complete')).nth(1);await second.focus();await s.finish(request);assert.equal(await second.evaluate(node=>node===document.activeElement),true,'same-context occurrence');await s.close();
+      await p.evaluate(id=>{allDocumentsOpen=true;allResources.push({...allResources.find(r=>r.id===id)});render()},resource);
+      const second=p.locator('#all-documents > .resource-list .resource-buttons '+action('complete')).nth(1);await second.focus();await s.finish(request);assert.equal(await second.evaluate(node=>node===document.activeElement),true,'same-context occurrence');await s.close();
     }
     // Unavailable replacement controls and unavailable old controls must not be forced into focus.
     for(const unavailable of ['disabled','hidden','aria-hidden','aria-disabled','inert','display','visibility','tabindex','parent-hidden']){

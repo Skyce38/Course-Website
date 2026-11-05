@@ -180,7 +180,7 @@
     ['หนึ่งคลังกลาง เชื่อมทุกวิชา','One library for every subject'],['เลือกหมวดแล้วเริ่มอ่านได้เลย','Choose a category and start reading'],['วิธีเพิ่มวิชาและไฟล์ ↗','How to add courses and files ↗'],
     ['ค้นหาวิชาหรือเอกสาร','Search courses or documents'],['ค้นหาวิชา หรือเอกสาร เช่น AI, Shell, Final…','Search courses or documents: AI, Shell, Final…'],['ล้าง','Clear'],['ล้างการค้นหา','Clear search'],
     ['วิชาไหนก็หาเจอ','Find every subject'],['เริ่มเรียนจากที่เดียว.','Start learning in one place.'],['คลังเรียนของ Skyce38 รวมรายวิชา สรุป และไฟล์ติว','Skyce38’s library of courses, notes and reviews'],['เลือกวิชา แล้วค้นเอกสารในหมวดที่ต้องการได้เลย','Choose a course and find the documents you need'],
-    ['5 หมวดต่อวิชา','5 categories per course'],['เชื่อม GitHub รายวิชา','Connected to GitHub'],['รายวิชาของฉัน','My courses'],['ผลค้นหารายวิชา','Matching courses'],['เอกสารพร้อมอ่าน','Ready to read'],['เอกสารที่ตรงกับคำค้น','Matching documents'],
+    ['5 หมวดต่อวิชา','5 categories per course'],['เชื่อม GitHub รายวิชา','Connected to GitHub'],['ไม่พบเอกสารที่ตรงกับคำค้น','No matching documents'],['ลองใช้คำที่สั้นลง หรือค้นด้วยชื่อวิชาและหัวข้อ เช่น Stack, SQL, Final','Try a shorter word, or search by course or topic: Stack, SQL, Final'],['รายวิชาของฉัน','My courses'],['ผลค้นหารายวิชา','Matching courses'],['เอกสารพร้อมอ่าน','Ready to read'],['เอกสารที่ตรงกับคำค้น','Matching documents'],
     ['เตรียมหมวดแล้ว','Categories ready'],['เปิดวิชา ↗','Open course ↗'],['อ่าน ↗','Read ↗'],['กดดาวข้างเอกสารเพื่อเก็บไว้อ่านต่อ บันทึกแยกตามเบราว์เซอร์','Star a document to read later. Saved in this browser.'],
     ['ยังไม่มีรายการในหมวดนี้','No documents here yet'],['โครงสร้างพร้อมแล้ว เพิ่มไฟล์ลงโฟลเดอร์ของวิชาได้ เมื่ออัปโหลดแล้วกดรีเฟรชรายการเพื่อแสดงไฟล์ใหม่','Upload files to the course folder, then refresh the list to see new documents.'],['เปิดโฟลเดอร์บน GitHub ↗','Open folder on GitHub ↗'],
     ['การบ้าน','Assignments'],['สไลด์เรียน','Slides'],['สรุป','Summaries'],['ไฟล์ติว','Review sheets'],['ข้อสอบและแบบฝึก','Exams & practice'],['ทั้งหมด','All'],['เอกสารรายวิชา','Course document'],['ไฟล์จาก GitHub','File from GitHub'],
@@ -211,8 +211,8 @@
     const english = englishLabels.find(p => p[0] === clean);
     if (english) return text.replace(clean, english[lang === 'en' ? 0 : 1]);
     if (lang !== 'en') return text;
-    const count = clean.match(/^(\d+) (รายวิชา|วิชา|รายการพร้อมอ่าน|รายการ)$/);
-    if (count) return text.replace(clean, count[1] + ' ' + ({รายวิชา:'courses',วิชา:'courses',รายการพร้อมอ่าน:'ready to read',รายการ:'documents'}[count[2]]));
+    const count = clean.match(/^(\d+) (รายวิชา|วิชา|รายการพร้อมอ่าน|รายการ|บทเรียนพร้อมข้อฝึก)$/);
+    if (count) return text.replace(clean, count[1] + ' ' + ({รายวิชา:'courses',วิชา:'courses',รายการพร้อมอ่าน:'ready to read',รายการ:'documents',บทเรียนพร้อมข้อฝึก:'lessons with practice'}[count[2]]));
     const category = clean.match(/^([✎▤≡◇✓]\s*)(.+)$/);
     if (category) return text.replace(clean, category[1] + translate(category[2], lang));
     const read = clean.match(/^([✓○]\s*)(อ่านแล้ว · กดเพื่อยกเลิก|อ่านบทนี้แล้ว)$/);

@@ -1,0 +1,24 @@
+name: Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Build catalog and readers
+        run: node scripts/build.cjs
+      - name: Generated files are committed
+        run: git diff --exit-code
+      - name: Run checks
+        run: node scripts/check.cjs
