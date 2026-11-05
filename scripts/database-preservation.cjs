@@ -2,7 +2,9 @@
  * Existing answer banks/readers/runtime are never normalized or exempted here.
  */
 const course='database-management';
-function catalog(data){data=structuredClone(data);data.resources=data.resources.filter(r=>!(r.course===course&&r.generatedLesson===1));data.courses.find(c=>c.id===course).code='';return data}
+// Reviewed standalone document added to the catalog after the older baselines were recorded.
+const reviewedResources=new Set(['oop-python-complete-23-chapters']);
+function catalog(data){data=structuredClone(data);data.resources=data.resources.filter(r=>!(r.course===course&&r.generatedLesson===1)&&!reviewedResources.has(r.id));data.courses.find(c=>c.id===course).code='';return data}
 function normalize(file,bytes){
  let text=bytes.toString('utf8').replace(/\r\n/g,'\n');
  if(file==='catalog.json')text=JSON.stringify(catalog(JSON.parse(text)),null,2)+'\n';
